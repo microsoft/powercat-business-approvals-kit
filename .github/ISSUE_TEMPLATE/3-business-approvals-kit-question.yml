@@ -1,0 +1,24 @@
+name: ❓[Business Approvals Kit] Question
+description: Ask a question about the Business Approvals Kit
+title: "[Business Approvals Kit - QUESTION] QUESTION"
+labels: ["question"]
+assignees: taiki-yoshida
+body:
+- type: textarea
+  attributes:
+    label: What is your question?
+    description: A concise description of what you need to know. Please provide as much related information as possible including screenshots, documents, links etc.
+  validations:
+    required: true
+- type: input
+  id: version
+  attributes:
+    label: What solution version are you using?
+    placeholder: "1.70"
+  validations:
+    required: false
+- type: input
+  id: app
+  attributes:
+    label: What app or flow are you having the issue with?
+    placeholder: "BACore | Approval Time-out"

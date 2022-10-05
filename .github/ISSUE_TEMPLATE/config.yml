@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+   - name: [Business Approvals Kit] Ideas
+     url: https://github.com/microsoft/powercat-business-approvals-kit/discussions/categories/ideas
+     about: Please suggest ideas to improve the Business Approvals Kit here.
+   - name: [Business Approvals Kit] Questions
+     url: https://github.com/microsoft/powercat-business-approvals-kit/discussions/categories/q-a
+     about: Please ask and answer questions about the Business Approvals Kit here.
+   - name: Report a security vulnerability
+     url: https://github.com/microsoft/powercat-business-approvals-kit/security/policy
+     about: Please review our security policy for more details.
