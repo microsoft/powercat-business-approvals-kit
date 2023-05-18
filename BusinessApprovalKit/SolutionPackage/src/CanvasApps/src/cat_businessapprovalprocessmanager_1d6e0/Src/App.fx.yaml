@@ -1,0 +1,42 @@
+App As appinfo:
+    BackEnabled: =false
+    OnError: |-
+        =Error(Filter(AllErrors, Not ": Canceled" in Message))
+    OnStart: |-
+        =Set(_appConfig, { Title: "Business Approval Process Configurator (Preview)" });
+        Set(_menu, 
+            Table(
+                /*{
+                    Icon: Icon.Home, Image: Blank(), Text: "Home", Tooltip: "Home",
+                    ActiveScreens: [ scrHome ], Navigate: scrHome 
+                },*/
+                {
+                    Icon: Icon.Items, Image: Blank(), Text: "Processes", Tooltip: "Designer",
+                    ActiveScreens: 
+                    [ 
+                        scrProcesses, scrProcessEditor, scrWorkflowEditor, scrStageEditor, scrNodeEditor, 
+                        scrNodeRule, scrPublishProcess, scrProcessVersion
+                    ],
+                    Navigate: scrProcesses 
+                },
+                {
+                    Icon: Icon.Publish, Image: Blank(), Text: "My Processes", Tooltip: "My Processes",
+                    ActiveScreens: 
+                    [ 
+                        scrPublishedProcesses, scrRuntimeWorkflowView, scrRuntimeProcessView, scrRuntimeStageView, scrRuntimeNodeView, 
+                        scrRuntimeNodeRuleView 
+                    ], 
+                    Navigate: scrPublishedProcesses 
+                },
+                /*{
+                    Icon: Icon.Trending, Image: Blank(), Text: "Reports", Tooltip: "Reports",
+                    ActiveScreens: [ scrReports ], Navigate: scrReports 
+                },*/
+                {
+                    Icon: Icon.Settings, Image: Blank(),  Text: "Settings", Tooltip: "Settings",
+                    ActiveScreens: [ scrSettings ], Navigate: scrSettings 
+                }
+            )
+        )
+    StartScreen: =scrProcesses
+

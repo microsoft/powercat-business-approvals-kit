@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{84ef4cd4-38b7-460b-9685-770650048c1b}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls" shownavigationbar="true" showImage="false" maxWidth="1920">
+      <tabs>
+        <tab verticallayout="true" id="{e3cc897a-2178-4bc4-bfce-16dda0d174ae}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{9c036b0c-8e1e-4a59-8e20-c2e0ea6f8e25}" columns="11">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{74f04a88-d5a2-4b79-acd8-294543dd4e2d}">
+                        <labels>
+                          <label description="Workflow Number" languagecode="1033" />
+                        </labels>
+                        <control id="cat_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cat_name" disabled="true" />
+                      </cell>
+                      <cell locklevel="0" id="{fc346024-5188-45b5-8cf9-f19bc52199de}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="New QV control 1653275077572" languagecode="1033" />
+                        </labels>
+                        <control id="QuickviewControl1653275077572" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="cat_processversion" disabled="false">
+                          <parameters>
+                            <DisplayAsCustomer360Tile>false</DisplayAsCustomer360Tile>
+                            <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="cat_businessapprovalversion"&gt;cba4630c-86bd-4dc9-9d26-71baea682a6f&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e043b93e-7608-48d5-9418-8cae5c9172d4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Workflow Process" languagecode="1033" />
+                        </labels>
+                        <control id="cat_processversion" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_processversion" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell locklevel="0" id="{9060e310-99b9-453d-9f2f-8e7bc5271b74}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1d600309-c1c2-475c-a064-b68a94980756}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Instance Status" languagecode="1033" />
+                        </labels>
+                        <control id="cat_instancestatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_instancestatus" disabled="true" />
+                      </cell>
+                      <cell locklevel="0" id="{34161913-3615-4e33-a64f-b50cd100a003}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1b6e93ca-cf0f-423d-976e-2ed6cac1c1e6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Additional Information" languagecode="1033" />
+                        </labels>
+                        <control id="cat_additionalinformation" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_additionalinformation" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{dec8fa4c-4306-484c-9af4-088811dcbd38}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e104c10b-f5ab-43ab-95d0-aa252bd61c29}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                      <cell locklevel="0" id="{607f8aa0-ec54-44f9-b02a-253f2bb8ac3d}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="null_section_3" id="42862b66-4cd0-4a21-b439-45fdff37670b" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{17d5b7d5-ef74-4af5-9f1b-acb3d7705a30}" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="Application Data" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_4" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>cat_businessapprovaldatainstance</TargetEntityType>
+                            <RelationshipName>cat_BusinessApprovalDataInstance_Workflow</RelationshipName>
+                            <ViewId>{75EFFFE0-3B78-4441-87E1-E94143A719F4}</ViewId>
+                            <ViewIds>{75EFFFE0-3B78-4441-87E1-E94143A719F4}</ViewIds>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <RecordsPerPage>10</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_2" id="46752b1e-cc71-491d-8f8d-63f85e096c98" IsUserDefined="0" locklevel="0" showlabel="true">
+          <labels>
+            <label description="Stages &amp; Nodes" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_2_section_1" id="e18f8737-9ee3-46f8-a5ac-e238988ce20d" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{8e663576-709e-4318-b7d7-65df85523b05}" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="Stage Instances" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>cat_businessapprovalruntimestageinstance</TargetEntityType>
+                            <RelationshipName>cat_BusinessApprovalRuntimeStageInstance_</RelationshipName>
+                            <ViewId>{CD138EC7-CB28-4F25-A70B-A18B98A91BB9}</ViewId>
+                            <ViewIds>{CD138EC7-CB28-4F25-A70B-A18B98A91BB9}</ViewIds>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <RecordsPerPage>5</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{7833e892-7060-478a-83bd-a118df2887b1}" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="New SG control 1644839146736" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_2" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>bulkdeletefailure</TargetEntityType>
+                            <RelationshipName>cat_businessapprovalworkflow_BulkDeleteFailures</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{eeac8161-2c2a-4b08-bdc1-a801041c784b}" rowspan="1" colspan="1" auto="false">
+                        <labels>
+                          <label description="Node Instances" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_5" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <RecordsPerPage>5</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>cat_businessapprovalruntimenodeinstance</TargetEntityType>
+                            <ViewId>{2E82FCCB-6674-495A-88EA-E15C8673158B}</ViewId>
+                            <ViewIds>{2E82FCCB-6674-495A-88EA-E15C8673158B}</ViewIds>
+                            <RelationshipName>cat_BusinessApprovalRuntimeNodeInstance_W</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_2_section_4" id="8d1fcbfc-6b05-4b15-9e69-ee1bcbae4cf5" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{1c1d1b4d-f3b4-43a6-a2f6-e6127add9f70}" rowspan="1" colspan="1" auto="true">
+                        <labels>
+                          <label description="Approval Instances" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_3" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>cat_businessapprovalinstance</TargetEntityType>
+                            <RelationshipName>cat_BusinessApprovalInstance_WorkflowInst</RelationshipName>
+                            <ViewId>{2EB10C0A-620E-4889-B93C-C211469B36FC}</ViewId>
+                            <ViewIds>{2EB10C0A-620E-4889-B93C-C211469B36FC}</ViewIds>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <RecordsPerPage>10</RecordsPerPage>
+                            <AutoExpand>Auto</AutoExpand>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row height="auto" />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{a8b07543-1674-4036-afd1-c9ab0887d0fc}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{0cf8d848-0d37-4292-b6be-5cae5f5fe014}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{81fff4ec-3c34-459b-af22-5454582b0ce7}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{c4c48bc1-6228-4cfb-bdaf-57c354bcd1a6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{98c02473-f1fe-45c1-be68-16cd8cf95bfe}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{e24bd0c2-f110-464d-b144-f89b81e84234}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{5ef2f0d0-250e-4a72-acad-2746c7d05538}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{11cb8dc7-6153-47c4-8c66-521b91a95435}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <Navigation>
+        <NavBar />
+        <NavBarAreas>
+          <NavBarArea Id="Info">
+            <Titles>
+              <Title LCID="1033" Text="Common" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Sales">
+            <Titles>
+              <Title LCID="1033" Text="Sales" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Service">
+            <Titles>
+              <Title LCID="1033" Text="Service" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Marketing">
+            <Titles>
+              <Title LCID="1033" Text="Marketing" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="ProcessCenter">
+            <Titles>
+              <Title LCID="1033" Text="Process Sessions" />
+            </Titles>
+          </NavBarArea>
+        </NavBarAreas>
+      </Navigation>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

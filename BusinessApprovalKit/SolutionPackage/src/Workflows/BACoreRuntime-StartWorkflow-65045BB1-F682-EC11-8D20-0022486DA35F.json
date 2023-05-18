@@ -1,0 +1,170 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_new_workflow_item_is_added": {
+          "metadata": {
+            "operationMetadataId": "b5a7b3ac-c94c-43b3-82fb-9b8724f713cf"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "cat_businessapprovalworkflow",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/runas": 1,
+              "subscriptionRequest/name": "65045bb1-f682-ec11-8d20-0022486da35f"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_First_Stage": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "dc57fdeb-b395-4f15-b741-0ffc3c57f7a6"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimestages",
+              "$select": "cat_businessapprovalruntimestageid",
+              "$filter": "cat_order eq 1 and cat_ProcessVersion/cat_businessapprovalversionid eq '@{triggerOutputs()?['body/_cat_processversion_value']}' and statuscode eq 1",
+              "$expand": "cat_ProcessVersion($select=cat_businessapprovalversionid)"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "If_exactly_1_stage_found": {
+          "actions": {
+            "Initialize_Stage_Instance": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "9cd52041-4f8a-4177-b4a7-d67644038f2c"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "CreateRecord"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalruntimestageinstances",
+                  "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{first(body('Get_First_Stage')['value'])['cat_businessapprovalruntimestageid']})",
+                  "item/cat_start": "@utcNow()",
+                  "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/cat_businessapprovalworkflowid']})",
+                  "item/cat_instancestatus": 809060000,
+                  "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{triggerOutputs()?['body/_cat_processversion_value']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Get_First_Stage": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Update_Workflow_Instance_Error": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "bf00fcc7-4548-496f-8c76-c61c01761886"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                    "connectionName": "shared_commondataserviceforapps_1",
+                    "operationId": "UpdateRecord"
+                  },
+                  "parameters": {
+                    "entityName": "cat_businessapprovalworkflows",
+                    "recordId": "@triggerOutputs()?['body/cat_businessapprovalworkflowid']",
+                    "item/cat_additionalinformation": "Error - expected exactly 1 Runtime Stage for this Workflow instance. Found @{length(outputs('Get_First_Stage')?['body/value'])}.",
+                    "item/cat_instancestatus": 809060006
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@length(outputs('Get_First_Stage')?['body/value'])",
+              1
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c0fecf12-54f9-4895-86d3-d560b74f7ca7"
+          },
+          "type": "If"
+        },
+        "Log_History": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "fbfcbfbe-6cd4-4b94-931c-4d63f270503e"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+            },
+            "body": {
+              "text": "Workflow | @{triggerOutputs()?['body/cat_name']}",
+              "text_1": "@triggerOutputs()?['body/cat_businessapprovalworkflowid']",
+              "text_2": "@triggerOutputs()?['body/cat_businessapprovalworkflowid']",
+              "text_3": "Information",
+              "text_5": "@workflow()['tags']['flowDisplayName']",
+              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/@{workflow()['run/name']}"
+            },
+            "retryPolicy": {
+              "type": "none"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

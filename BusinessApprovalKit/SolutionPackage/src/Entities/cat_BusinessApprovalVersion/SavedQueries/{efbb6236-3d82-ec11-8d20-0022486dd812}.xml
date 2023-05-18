@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{efbb6236-3d82-ec11-8d20-0022486dd812}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalversionid">
+          <cell name="cat_name" width="200" />
+          <cell name="cat_version" width="100" />
+          <cell name="modifiedon" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="cat_businessapprovalversion">
+          <attribute name="cat_name" />
+          <attribute name="cat_businessapprovalversionid" />
+          <attribute name="modifiedon" />
+          <attribute name="cat_version" />
+          <order attribute="cat_name" descending="false" />
+          <order attribute="cat_version" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.6</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="All Versions" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

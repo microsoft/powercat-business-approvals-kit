@@ -1,0 +1,602 @@
+scrRuntimeStageView As screen:
+    LoadingSpinnerColor: =RGBA(105, 121, 126, 1)
+    OnHidden: =
+    OnVisible: =
+
+    Container1_7 As groupContainer:
+        Height: =Parent.Height - Self.Y
+        Width: =Parent.Width - Self.X
+        X: =Menu_15.Width
+        Y: =Menu_15.Y
+        ZIndex: =1
+
+        bcProcessStage_3 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =Semibold
+            Height: =30
+            PaddingLeft: =0
+            Size: =10
+            Text: =_selectedProcessVersion.Name & " > " & Coalesce(_selectedRuntimeStage.Name, "(New Stage)")
+            Width: =Parent.Width - Self.X - 20
+            Wrap: =false
+            X: =20
+            Y: =Toolbar_11.Y + Toolbar_11.Height
+            ZIndex: =1
+
+        lblStageName_2 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =30
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Name"
+            Width: =120
+            X: =bcProcessStage_3.X
+            Y: =bcProcessStage_3.Y + bcProcessStage_3.Height + 10
+            ZIndex: =2
+
+        txtStageName_1 As text:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Default: =_selectedRuntimeStage.Name
+            DelayOutput: =true
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =Self.BorderColor
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            MaxLength: =100
+            OnChange: =
+            PaddingLeft: =5
+            PressedBorderColor: =Self.BorderColor
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Width: =(Parent.Width - Self.X) / 2
+            X: =140
+            Y: =lblStageName_2.Y
+            ZIndex: =3
+
+        lblStageDesc_3 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =30
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Description"
+            Width: =120
+            X: =lblStageName_2.X
+            Y: =lblStageName_2.Y + lblStageName_2.Height + 10
+            ZIndex: =4
+
+        txtStageDesc_1 As text:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Clear: =true
+            Color: =RGBA(51, 51, 51, 1)
+            Default: =_selectedRuntimeStage.Description
+            DelayOutput: =true
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =60
+            HoverBorderColor: =Self.BorderColor
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            MaxLength: =100
+            Mode: =TextMode.MultiLine
+            OnChange: =
+            PaddingLeft: =5
+            PressedBorderColor: =Self.BorderColor
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Width: =(Parent.Width - Self.X) / 2
+            X: =txtStageName_1.X
+            Y: =lblStageDesc_3.Y
+            ZIndex: =5
+
+        lblStageConditionHeader_1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =Semibold
+            Height: =30
+            PaddingLeft: =0
+            Size: =10
+            Text: ="Conditions"
+            Width: =txtStageName_1.X - Self.X
+            Wrap: =false
+            X: =bcProcessStage_3.X
+            Y: =txtStageDesc_1.Y + txtStageDesc_1.Height + 20
+            ZIndex: =6
+
+        lblStageCondition_1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =30
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Condition"
+            Width: =120
+            X: =lblStageName_2.X
+            Y: =244
+            ZIndex: =7
+
+        imgWorkflowDiagram_2 As image:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            FocusedBorderThickness: =4
+            Height: =If(Self.Visible, 70, 0)
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Image: |
+                ="data:image/svg+xml;utf8, " & 
+                Switch(radSwitchPaths_1.Selected.Value,
+                    3, EncodeUrl("<svg width='657' height='382' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='1718' y='254' width='657' height='382'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-1718 -254)'><path d='M1911.5 324 2048.5 257.5 2185.5 324 2048.5 390.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='1720.5' y='516.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1950.5' y='514.5' width='192' height='118' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M2048.52 390 2048.52 452.736 1816 452.736 1816 515.471' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M2048.01 390 2048.01 451.787 2046 451.787 2046 513.575' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='2181.5' y='514.5' width='191' height='118' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 61.7874 0 61.7874 228.498 123.575 228.498' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2048 390)'/></g></svg>"),
+                    4, EncodeUrl("<svg width='907' height='384' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='551' y='760' width='907' height='384'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-551 -760)'><path d='M870.5 830 1007.5 763.5 1144.5 830 1007.5 896.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='553.5' y='1024.5' width='192' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='790.5' y='1024.5' width='192' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M1006.71 896 1006.71 959.73 649 959.73 649 1023.46' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M1006.89 896 1006.89 959.729 886 959.729 886 1023.46' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='1027.5' y='1024.5' width='192' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1264.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 63.7293 0 63.7293 352.731 127.459 352.731' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 1007 896)'/><path d='M0 0 63.7293 0 63.7293 115.918 127.459 115.918' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 1007 896)'/></g></svg>"),
+                    5, EncodeUrl("<svg width='1144' height='374' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='1589' y='770' width='1144' height='374'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-1589 -770)'><path d='M2024.5 840 2161 773.5 2297.5 840 2161 906.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='1591.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1828.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M2160.14 906 2160.14 964.793 1686 964.793 1686 1023.59' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M2160.07 906 2160.07 964.793 1923 964.793 1923 1023.59' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='2065.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='2302.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 58.7933 0 58.7933 237.069 117.587 237.069' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2161 906)'/><path d='M0 0 58.7933 0 58.7933 0.000360892 117.586 0.000360892' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2161 906)'/><rect x='2539.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 58.7934 0 58.7934 474.138 117.587 474.138' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2161 906)'/></g></svg>"),
+                    EncodeUrl("<svg width='522' height='386' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='752' y='250' width='522' height='386'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-752 -250)'><path d='M870.5 320.5 1007.5 253.5 1144.5 320.5 1007.5 387.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='754.5' y='516.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1080.5' y='516.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M1007.36 387 1007.36 451.678 850 451.678 850 516.356' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M0 0 64.6777 0 64.6777 168.735 129.355 168.735' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 1007 387)'/></g></svg>"))
+            PressedBorderColor: =RGBA(0, 0, 0, 0)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            Visible: =_selectedRuntimeStage.'Stage Condition' <> 'Business Approval Stage Condition'.None
+            Width: =300
+            X: =radSwitchPaths_1.X
+            Y: =radSwitchPaths_1.Y + radSwitchPaths_1.Height + 2
+            ZIndex: =8
+
+        radSwitchPaths_1 As radio:
+            BorderColor: =RGBA(51, 51, 51, 1)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            Default: =_selectedRuntimeStage.Paths
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisplayMode: =DisplayMode.View
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            Height: =If(Self.Visible, 30, 0)
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Items: =[ 2, 3, 4, 5]
+            Layout: =Layout.Horizontal
+            OnChange: |
+                =With({ count: CountRows(_conditions), newCount: radSwitchPaths_1.Selected.Value },
+                    If(count > newCount, 
+                        //new paths is less than current - remove last n conditions
+                        //push paths that are to be removed into temp stack then remove
+                        Collect(_removedConditions, 
+                            ShowColumns(Filter(_conditions, Path > newCount), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                        );
+                        RemoveIf(_conditions, Path > newCount),
+                
+                        //new paths is more than current - add conditions
+                        Collect(_conditions,
+                            ForAll(Sequence(newCount - count, count + 1),                 
+                                Coalesce(
+                                    LookUp(_removedConditions, Path = Value),
+                                    { 
+                                        ConditionId: Blank(), TargetData: Blank(), StaticValue: "", TargetStage: Blank(),
+                                        Path: Value, Text: "Path " & Value, Target: 'Business Approval Condition Target Data'.'Static value'
+                                    }
+                                )
+                            )
+                        );
+                
+                        //pop from temp stack for any conditions that has been restored back
+                        RemoveIf(_removedConditions, Path <= newCount);
+                    )
+                );
+            PaddingBottom: =0
+            PaddingTop: =2
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            RadioBorderColor: =RGBA(51, 51, 51, 1)
+            RadioSelectionFill: =RGBA(0, 120, 212, 1)
+            RadioSize: =25
+            Size: =10
+            Visible: =lblSwitchPaths_2.Visible
+            Width: =lblRuntimeStageCondition.Width
+            X: =txtStageName_1.X
+            Y: =lblSwitchPaths_2.Y
+            ZIndex: =9
+
+        lblSwitchPaths_2 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =30
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Paths"
+            Visible: =_selectedRuntimeStage.'Stage Condition' = 'Business Approval Stage Condition'.Switch
+            Width: =120
+            X: =lblStageCondition_1.X
+            Y: =lblStageCondition_1.Y + lblStageCondition_1.Height + 10
+            ZIndex: =10
+
+        lblStageConditionSource_1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =Normal
+            Height: =30
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Source"
+            Visible: =_selectedRuntimeStage.'Stage Condition' <> 'Business Approval Stage Condition'.None
+            Width: =120
+            X: =lblStageName_2.X
+            Y: =imgWorkflowDiagram_2.Y + imgWorkflowDiagram_2.Height + 10
+            ZIndex: =11
+
+        lblRequestDataCondition_2 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =If(Self.Visible, 30, 0)
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Request Data"
+            Visible: =_selectedRuntimeStage.'Source Data Type' = 'Business Approval Condition Source Data'.'Request Data' && lblRuntimeStageSource.Visible
+            Width: =120
+            X: =lblStageName_2.X
+            Y: =lblStageConditionSource_1.Y + lblStageConditionSource_1.Height + If(Self.Visible, 10, 0)
+            ZIndex: =12
+
+        lblRequestDataDetails_1 As label:
+            AutoHeight: =true
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =12
+            Size: =10
+            Text: |-
+                ="Default value: " & Coalesce(_selectedRuntimeStage.'Source Data'.'Default Value', "Not specified.")
+            Visible: =lblRuntimeStageRequestData.Visible
+            Width: =Parent.Width - Self.X - 100
+            X: =lblRuntimeStageRequestData.X + lblRuntimeStageRequestData.Width + 10
+            Y: =lblRuntimeStageRequestData.Y
+            ZIndex: =13
+
+        galConditions_1 As gallery.galleryVertical:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Height: =80
+            Items: |-
+                =SortByColumns(
+                    Filter(
+                        'Business Approval Runtime Conditions', Stage.'Business Approval Runtime Stage' = _selectedRuntimeStage.'Business Approval Runtime Stage'
+                    ), "cat_conditionvalue"
+                )
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =80
+            Visible: |-
+                =CountRows(Self.AllItems) > 0 && _selectedRuntimeStage.'Stage Condition' <> 'Business Approval Stage Condition'.None && 
+                _selectedRuntimeStage.Operand <> 'Business Approval Condition Operand'.'Is Blank' &&
+                _selectedRuntimeStage.Operand <> 'Business Approval Condition Operand'.'Is Not Blank'
+            Width: |-
+                =If(_selectedRuntimeStage.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else',
+                    txtStageName_1.Width,
+                    Parent.Width - Self.X - 20
+                )
+            WrapCount: =CountRows(Self.AllItems)
+            X: =lblRuntimeStageCondition.X
+            Y: =lblStageOperand_1.Y + lblStageOperand_1.Height + 20
+            ZIndex: =14
+
+            Rectangle3_2 As rectangle:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(230, 230, 230, 1)
+                FocusedBorderThickness: =4
+                Height: =Parent.TemplateHeight
+                HoverFill: =RGBA(105, 121, 126, 1)
+                OnSelect: =Select(Parent)
+                PressedFill: =RGBA(105, 121, 126, 1)
+                Width: =Parent.TemplateWidth - 2
+                ZIndex: =1
+
+            lblConditionTarget_1 As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                PaddingLeft: =12
+                Size: =9
+                Text: =_selectedRuntimeStage.'Source Data Name Value' & " " & _selectedRuntimeStage.Operand
+                Width: =Parent.TemplateWidth
+                X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                Y: =5
+                ZIndex: =2
+
+            lblRuntimeConditionValue As label:
+                Align: =Align.Center
+                AutoHeight: =true
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =Semibold
+                Height: =30
+                OnSelect: =Select(Parent)
+                Size: =10
+                Text: =ThisItem.'Condition Value Display'
+                Width: =Rectangle3_2.Width
+                Y: =lblConditionTarget_1.Y + lblConditionTarget_1.Height
+                ZIndex: =6
+
+        lblStageOperand_1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =30
+            PaddingLeft: =12
+            Size: =10
+            Text: ="Operand"
+            Visible: =lblStageConditionSource_1.Visible
+            Width: =120
+            X: =lblStageName_2.X
+            Y: =lblRequestDataCondition_2.Y + lblRequestDataCondition_2.Height + 10
+            ZIndex: =15
+
+        lblRuntimeStageSource As text:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Default: =_selectedRuntimeStage.'Source Data Type'
+            DelayOutput: =true
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =Self.BorderColor
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            MaxLength: =100
+            OnChange: =
+            PaddingLeft: =5
+            PressedBorderColor: =Self.BorderColor
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Visible: =lblStageConditionSource_1.Visible
+            Width: =txtStageDesc_1.Width
+            X: =txtStageName_1.X
+            Y: =lblStageConditionSource_1.Y
+            ZIndex: =16
+
+        lblRuntimeStageRequestData As text:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Default: =_selectedRuntimeStage.'Source Data Name Value'
+            DelayOutput: =true
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =Self.BorderColor
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            MaxLength: =100
+            OnChange: =
+            PaddingLeft: =5
+            PressedBorderColor: =Self.BorderColor
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Visible: =lblStageConditionSource_1.Visible
+            Width: =txtStageDesc_1.Width
+            X: =txtStageName_1.X
+            Y: =lblRequestDataCondition_2.Y
+            ZIndex: =17
+
+        lblRuntimeStageOperand As text:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Default: =_selectedRuntimeStage.Operand
+            DelayOutput: =true
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =Self.BorderColor
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            MaxLength: =100
+            OnChange: =
+            PaddingLeft: =5
+            PressedBorderColor: =Self.BorderColor
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Visible: =lblStageConditionSource_1.Visible
+            Width: =txtStageDesc_1.Width
+            X: =txtStageName_1.X
+            Y: =lblStageOperand_1.Y
+            ZIndex: =18
+
+        lblRuntimeStageCondition As text:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(0, 0, 0, 1)
+            Default: =_selectedRuntimeStage.'Stage Condition'
+            DelayOutput: =true
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =DisplayMode.Disabled
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =Self.BorderColor
+            HoverColor: =RGBA(51, 51, 51, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            MaxLength: =100
+            OnChange: =
+            PaddingLeft: =5
+            PressedBorderColor: =Self.BorderColor
+            PressedColor: =RGBA(51, 51, 51, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Width: =txtStageDesc_1.Width
+            X: =txtStageName_1.X
+            Y: =lblStageCondition_1.Y
+            ZIndex: =19
+
+        Toolbar_11 As Toolbar:
+            DisabledItems: =
+            OnClick: =Switch(MenuItem, "Process", Navigate(scrProcessVersion), "Workflow", Navigate(scrRuntimeWorkflowView))
+            TemplateWidth: =130
+            ToolbarItems: |-
+                =Table(
+                    { Icon: Icon.Items, Text: "Process", Offset: 0 },
+                    { Icon: Icon.LevelsLayersItems, Text: "Workflow", Offset: -10 }
+                )
+            Width: =Parent.Width
+            ZIndex: =20
+
+    Image1_14 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =Menu_15.Height
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: =gradient_top
+        ImagePosition: =ImagePosition.Stretch
+        ImageRotation: =ImageRotation.Rotate90
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =4
+        X: =Menu_15.Width
+        Y: =Menu_15.Y
+        ZIndex: =2
+
+    Menu_15 As Menu:
+        Height: =Parent.Height - Self.Y
+        MenuItems: =_menu
+        OnHamburgerClick: =Set(_hideMenu, !_hideMenu)
+        Width: =If(_hideMenu, 45, 200)
+        Y: =Header_15.Height
+        ZIndex: =3
+
+    Header_15 As Header:
+        Height: =60
+        ShowRefresh: =false
+        Title: =_appConfig.Title
+        Width: =Parent.Width
+        ZIndex: =4
+

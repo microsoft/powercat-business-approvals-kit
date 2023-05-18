@@ -1,0 +1,213 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "b02a6357-62ed-4d6c-ace6-1703e97b25c3"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "VersionId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "ProcessId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "Name",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "Each_Runtime_Data": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "21db1f26-fd4f-41cc-bee0-c64500060a06"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {},
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "Get_Published_Runtime_Data": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "35b9e804-bac6-4888-9612-dc66f94d21df"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimedatas",
+              "$select": "cat_businessapprovalruntimedataid, cat_name, cat_datatype, _cat_definitiondata_value, cat_defaultvalue",
+              "$filter": "_cat_processversion_value eq @{triggerBody()['text']} and statecode eq 0"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "Construct_Data_JSON": {
+          "runAfter": {
+            "Get_Published_Runtime_Data": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "13eaf5b3-ec32-4200-9fc9-46d16817c8f1"
+          },
+          "type": "Select",
+          "inputs": {
+            "from": "@outputs('Get_Published_Runtime_Data')?['body/value']",
+            "select": {
+              "id": "@item()?['_cat_definitiondata_value']",
+              "runtimeId": "@item()?['cat_businessapprovalruntimedataid']",
+              "name": "@item()?['cat_name']",
+              "type": "@item()['cat_datatype@OData.Community.Display.V1.FormattedValue']"
+            }
+          }
+        },
+        "Upsert_Into_Published_Workflow": {
+          "runAfter": {
+            "Construct_Data_JSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "13d202cc-535a-4b02-a71a-ac9fef226d2f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "UpdateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalpublishedworkflows",
+              "recordId": "@triggerBody()['text_1']",
+              "item/cat_name": "@triggerBody()['text_2']",
+              "item/cat_ActiveVersion@odata.bind": "cat_businessapprovalversions(@{triggerBody()['text']})",
+              "item/cat_runtimedata": "@body('Construct_Data_JSON')"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "Each_Runtime_Data": {
+          "foreach": "@outputs('Get_Published_Runtime_Data')?['body/value']",
+          "actions": {
+            "Upsert_Into_Published_Runtime_Data": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "2ad508a7-fc4f-4229-a9e0-2de6326db527"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "UpdateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalpublishedruntimedatas",
+                  "recordId": "@items('Each_Runtime_Data')?['_cat_definitiondata_value']",
+                  "item/cat_name": "@items('Each_Runtime_Data')?['cat_name']",
+                  "item/cat_datatype": "@items('Each_Runtime_Data')['cat_datatype@OData.Community.Display.V1.FormattedValue']",
+                  "item/cat_defaultvalue": "@items('Each_Runtime_Data')?['cat_defaultvalue']",
+                  "item/cat_RuntimeData@odata.bind": "cat_businessapprovalruntimedatas(@{items('Each_Runtime_Data')?['cat_businessapprovalruntimedataid']})",
+                  "item/cat_Workflow@odata.bind": "cat_businessapprovalpublishedworkflows(@{outputs('Upsert_Into_Published_Workflow')?['body/cat_businessapprovalpublishedworkflowid']})"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Upsert_Into_Published_Workflow": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e1442943-adf9-4b77-a469-9824f8ddfd86"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 50
+            }
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,53 @@
+function CreateNewProcess(selectedItems) {
+    var selectedItem = selectedItems[0];
+
+    // Centered Dialog
+    var pageInput = {
+        pageType: "custom",
+        name: "cat_processdesigner_57f47",
+        recordId:JSON.stringify({prop1: selectedItem, prop2: "new"}),
+    };
+    var navigationOptions = {
+        target: 2,
+        position: 1,
+        width: { value: 90, unit: "%" },
+        title: "Process Designer"
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions);
+}
+
+function RunOnSelected(selectedItems) {
+    var selectedItem = selectedItems[0];
+
+    // Centered Dialog
+    var pageInput = {
+        pageType: "custom",
+        name: "cat_processdesigner_57f47",
+        recordId:JSON.stringify({prop1: selectedItem.Id, prop2: "grid"}),
+    };
+    var navigationOptions = {
+        target: 2,
+        position: 1,
+        width: { value: 90, unit: "%" },
+        title: "Process Designer"
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions);
+}
+
+function RunOnSelectedForm(selectedItems) {
+    var selectedItem = selectedItems[0];
+    
+    // Centered Dialog
+    var pageInput = {
+        pageType: "custom",
+        name: "cat_processdesigner_57f47",
+        recordId:JSON.stringify({prop1: selectedItem, prop2: "form"}),
+    };
+    var navigationOptions = {
+        target: 2,
+        position: 1,
+        width: { value: 90, unit: "%" },
+        title: "Process Designer"
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions);
+}

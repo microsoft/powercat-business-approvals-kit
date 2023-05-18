@@ -1,0 +1,89 @@
+{
+  "ComponentIndexes": {
+    "New (Process Designer)_2": 4,
+    "Override Approvals_1": 1,
+    "Process Designer_3": 3,
+    "Process Designer_4": 4
+  },
+  "ControlUniqueGuids": {},
+  "ControlUniqueIds": {
+    "App": 1,
+    "HelperScreen": 6,
+    "New (Process Designer)_2": 8,
+    "Override Approvals_1": 3,
+    "Process Designer_3": 5,
+    "Process Designer_4": 7
+  },
+  "FunctionParamsInvariantScripts": {},
+  "FunctionParamsInvariantScriptsOnInstances": {},
+  "HeaderLastSavedDateTimeUTC": "02/25/2023 23:32:39",
+  "IsLegacyComponentAllowGlobalScopeCase": false,
+  "LocalConnectionIDReferences": {},
+  "LocalDatabaseReferencesAsEmpty": true,
+  "LocalResourceFileNames": {},
+  "LocalResourceRootPaths": {},
+  "OrderComponentMetadata": {
+    "10b8a5902d694764ac2b29154f7a6919": 1,
+    "14d517ceb3a24df2b14a40885929e63e": 2,
+    "ab10e7d3279c4209af15b25106c0b201": 3,
+    "e1c18df504ec40a68b25a156c52fdd52": 0
+  },
+  "OrderComponentTemplate": {
+    "10b8a5902d694764ac2b29154f7a6919": 1,
+    "14d517ceb3a24df2b14a40885929e63e": 2,
+    "ab10e7d3279c4209af15b25106c0b201": 3,
+    "e1c18df504ec40a68b25a156c52fdd52": 0
+  },
+  "OrderDataSource": {
+    "Business Approval Instances": 9,
+    "Business Approval Instances\\cat_bizappr_approvaltype": 1,
+    "Business Approval Instances\\cat_bizappr_instancestatus": 0,
+    "Business Approval Instances\\cat_bizappr_notificationtype": 4,
+    "Business Approval Instances\\cat_businessapprovalinstance_statecode": 2,
+    "Business Approval Instances\\cat_businessapprovalinstance_statuscode": 3,
+    "Business Approval Instances\\default.cds_cat_businessapprovalinstance_views": 7,
+    "Business Approval Processes": 10,
+    "Business Approval Processes\\cat_businessapprovalprocess_statecode": 5,
+    "Business Approval Processes\\cat_businessapprovalprocess_statuscode": 6,
+    "Business Approval Processes\\default.cds_cat_businessapprovalprocess_views": 8
+  },
+  "OrderGroupControls": {},
+  "OrderPcfTemplate": {},
+  "OrderTemplate": {},
+  "OrderXMLTemplate": {},
+  "OverridablePropertiesEntry": {
+    "App": {},
+    "HelperScreen": {},
+    "New (Process Designer)_2": {},
+    "Override Approvals_1": {},
+    "Process Designer_3": {},
+    "Process Designer_4": {}
+  },
+  "PCFDynamicSchemaForIRRetrievalEntry": {},
+  "PCFTemplateEntry": {},
+  "PublishOrderIndices": {
+    "App": 0,
+    "HelperScreen": 0,
+    "New (Process Designer)_2": 0,
+    "Override Approvals_1": 0,
+    "Process Designer_3": 0,
+    "Process Designer_4": 0
+  },
+  "ResourcesJsonIndices": {
+    "Image-SampleImage": 0
+  },
+  "RuleScreenIdWithoutScreen": {},
+  "TemplateVersions": {},
+  "VolatileProperties": {
+    "AnalysisLoadTime": 0.046891799999999997,
+    "ControlCount": {
+      "14d517ceb3a24df2b14a40885929e63e": 1,
+      "23fd8a48fb7f401ab6be7936acabbb5e": 1,
+      "e1c18df504ec40a68b25a156c52fdd52": 1,
+      "screen": 1
+    },
+    "DeserializationLoadTime": 0.67203250000000003,
+    "ErrorCount": 1
+  },
+  "WasLocalDatabaseReferencesEmpty": true
+}

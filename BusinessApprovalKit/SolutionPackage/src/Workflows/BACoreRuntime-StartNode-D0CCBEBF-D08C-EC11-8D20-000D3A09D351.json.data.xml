@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{d0ccbebf-d08c-ec11-8d20-000d3a09d351}" Name="BACore | Runtime - Start Node" Description="Cloud flow that processes each Node for a stage instance at runtime. This is triggered when a Node instance is created. This cloud flow will create an approval instance according to the Approvers defined in the node." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/BACoreRuntime-StartNode-D0CCBEBF-D08C-EC11-8D20-000D3A09D351.json</JsonFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>5</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.7</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <PrimaryEntity>none</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="BACore | Runtime - Start Node" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description languagecode="1033" description="Cloud flow that processes each Node for a stage instance at runtime. This is triggered when a Node instance is created. This cloud flow will create an approval instance according to the Approvers defined in the node." />
+  </Descriptions>
+</Workflow>

@@ -1,0 +1,150 @@
+scrWorkflowEditor As screen:
+    LoadingSpinnerColor: =RGBA(105, 121, 126, 1)
+    OnHidden: =
+    OnVisible: =Reset(ApprovalDesignerEdit)
+
+    Container1_3 As groupContainer:
+        Height: =Parent.Height - Self.Y
+        Width: =Parent.Width - Self.X
+        X: =Menu_4.Width
+        Y: =Menu_4.Y
+        ZIndex: =1
+
+        ApprovalDesignerEdit As ApprovalDesigner:
+            AddNode: |-
+                =Set(_selectedNode, Blank());
+                Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)));
+                Set(_currentStageIndex, StageIndex);
+                Set(_currentNodeIndex, Row);
+                Set(_currentPathIndex, Path);
+                Navigate(scrNodeEditor)
+            EditNode: |
+                =Concurrent(
+                    Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),
+                    Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)))
+                );
+                Set(_currentNodeIndex, _selectedNode.'Row Index');
+                Set(_currentPathIndex, _selectedNode.'Path Index');
+                Set(_currentStageIndex, _selectedStage.Order);
+                If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
+                    Navigate(scrNodeEditor),
+                    Navigate(scrNodeRule)
+                )
+            EditStage: |-
+                =Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)));
+                Set(_currentStageIndex, _selectedStage.Order);
+                Navigate(scrStageEditor)
+            Height: =Parent.Height - Self.Y
+            MoveStage: |-
+                =With({ currentStage: LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId))},
+                    UpdateContext({ swapOrder: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1)});
+                    UpdateIf('Business Approval Stages', 
+                        Order = swapOrder && Process.'Business Approval Process' = currentStage.Process.'Business Approval Process', 
+                        { Order: currentStage.Order }
+                    );
+                    Patch('Business Approval Stages', currentStage, { Order: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1) }) 
+                )
+            ProcessId: =_selectedProcess.'Business Approval Process'
+            Width: =Parent.Width - 10
+            X: =5
+            Y: =bcProcess.Y + bcProcess.Height + 2
+
+        lblNoStage As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =Normal
+            Height: =30
+            PaddingLeft: =0
+            Size: =10
+            Text: ="No Approval Stage defined. Click 'New Stage' to configure your first Approval stage."
+            Visible: =ApprovalDesignerEdit.TotalStages = 0
+            Width: =bcProcess.Width
+            Wrap: =false
+            X: =bcProcess.X
+            Y: =bcProcess.Y + bcProcess.Height
+            ZIndex: =2
+
+        bcProcess As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =Semibold
+            Height: =30
+            PaddingLeft: =0
+            Size: =10
+            Text: =_selectedProcess.Name
+            Width: =Parent.Width - Self.X - 20
+            Wrap: =false
+            X: =20
+            Y: =Toolbar_3.Y + Toolbar_3.Height
+            ZIndex: =3
+
+        Toolbar_3 As Toolbar:
+            DisabledItems: =If(!ApprovalDesignerEdit.Visible || !ApprovalDesignerEdit.IsValid, [ "Publish"])
+            OnClick: |-
+                =Switch(MenuItem,
+                    "New Stage", 
+                        Set(_selectedStage, Blank()); 
+                        Set(_currentStageIndex, ApprovalDesignerEdit.TotalStages + 1);
+                        Navigate(scrStageEditor),
+                    "Process", Navigate(scrProcessEditor),
+                    "Versions", Navigate(scrProcessVersion),
+                    "Publish", Navigate(scrPublishProcess)
+                )
+            TemplateWidth: =130
+            ToolbarItems: |
+                =Table(
+                    { Icon: Icon.Add, Text: "New Stage", Offset: 0 },
+                    { Icon: Icon.Items, Text: "Process", Offset: 0 },
+                    { Icon: Icon.Journal, Text: "Versions", Offset: -10},
+                    { Icon: Icon.Publish, Text: "Publish", Offset: -10 }
+                )
+            Width: =Parent.Width
+            ZIndex: =4
+
+    Image1_3 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =Menu_4.Height
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: =gradient_top
+        ImagePosition: =ImagePosition.Stretch
+        ImageRotation: =ImageRotation.Rotate90
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =4
+        X: =Menu_4.Width
+        Y: =Menu_4.Y
+        ZIndex: =2
+
+    Menu_4 As Menu:
+        Height: =Parent.Height - Self.Y
+        MenuItems: =_menu
+        OnHamburgerClick: =Set(_hideMenu, !_hideMenu)
+        Width: =If(_hideMenu, 45, 200)
+        Y: =Header_4.Height
+        ZIndex: =3
+
+    Header_4 As Header:
+        Height: =60
+        OnRefresh: =Refresh('Business Approval Runtime Stages');Refresh('Business Approval Nodes'); Reset(ApprovalDesignerEdit)
+        Title: =_appConfig.Title
+        Width: =Parent.Width
+        ZIndex: =4
+

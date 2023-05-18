@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{594d9740-4be4-4ea4-89c3-71f63f2846c0}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalpublishedruntimedataid">
+          <cell name="cat_name" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cat_businessapprovalpublishedruntimedata">
+          <attribute name="cat_businessapprovalpublishedruntimedataid" />
+          <attribute name="cat_name" />
+          <attribute name="createdon" />
+          <order attribute="cat_name" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Business Approval Published Runtime Data Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

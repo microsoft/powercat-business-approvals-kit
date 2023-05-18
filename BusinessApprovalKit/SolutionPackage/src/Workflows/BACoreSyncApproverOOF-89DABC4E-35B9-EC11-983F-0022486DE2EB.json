@@ -1,0 +1,136 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {},
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Hour",
+            "interval": 24,
+            "startTime": "2022-04-11T00:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "68587c74-bef7-402e-bc7a-30dbce317b2c"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Clear_OOF_State": {
+          "actions": {
+            "Compose_2": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "31191b1e-782a-4a36-a3ae-01caf16cc484"
+              },
+              "type": "Compose",
+              "inputs": "List all OOF end date is yesterday, and clear OOF from Approver table"
+            },
+            "List_OOF_end_date_is_Yesterday": {
+              "runAfter": {
+                "Compose_2": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "0db12a72-4e7f-4d6a-81c2-82129b7ad90f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "ListRecords"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapproveroofs",
+                  "$select": "cat_userprincipalname",
+                  "$filter": "cat_enddate ge '@{addDays(outputs('Date_Interval')['TodayStart'], -1)}' and cat_enddate le '@{addDays(outputs('Date_Interval')['TodayStart'], -1)}'"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Date_Interval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5e7ccb88-4918-49ce-a641-0d825a63b74a"
+          },
+          "type": "Scope"
+        },
+        "Set_OOF_State": {
+          "actions": {
+            "Get_Current_OOF_from_table": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0db12a72-4e7f-4d6a-81c2-82129b7ad90f"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "ListRecords"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapproveroofs",
+                  "$select": "cat_userprincipalname",
+                  "$filter": "cat_startdate le '@{outputs('Date_Interval')['TodayStart']}' and cat_enddate ge '@{outputs('Date_Interval')['TodayEnd']}'"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Date_Interval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "521323a2-750f-46fe-8eaf-db85c50360f4"
+          },
+          "type": "Scope"
+        },
+        "Date_Interval": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "fe0c710c-98b1-4966-8b86-6039b5d4326e"
+          },
+          "type": "Compose",
+          "inputs": {
+            "TodayStart": "@{concat(first(split(utcNow(), 'T')), 'T00:00:00Z')}",
+            "TodayEnd": "@{concat(first(split(utcNow(), 'T')), 'T23:59:59Z')}"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

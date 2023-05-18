@@ -1,0 +1,283 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "828a4487-1cb9-42a1-aab3-2b7d609c3075"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "ObjectName",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "ObjectId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "InstanceId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_3": {
+                  "title": "ExceptionType",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT",
+                  "enum": [
+                    "Data not found",
+                    "Approver not found",
+                    "Object not found",
+                    "Other",
+                    "Information"
+                  ]
+                },
+                "text_5": {
+                  "title": "SourceName",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_4": {
+                  "title": "Details",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2",
+                "text_3",
+                "text_5",
+                "text_4"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "If_Information": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d90a8d05-f0e5-4915-960a-265771b24dc0"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {},
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "If_Information": {
+          "actions": {
+            "Log_Information": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "850d7cc3-c3a3-462a-b992-5aae98d3300d"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalinstancelogs",
+                  "item/cat_name": "@triggerBody()['text_5']",
+                  "item/cat_flowid": "@triggerOutputs()?['headers']?['x-ms-workflow-name']",
+                  "item/cat_runhistory": "@triggerBody()['text_4']",
+                  "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerBody()['text_2']})"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                },
+                "retryPolicy": {
+                  "type": "none"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "varExceptionType": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Exception_Type": {
+                "runAfter": {},
+                "cases": {
+                  "Data_not_found": {
+                    "case": "Data not found",
+                    "actions": {
+                      "Set_data_not_found": {
+                        "runAfter": {},
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varExceptionType",
+                          "value": 809060000
+                        }
+                      }
+                    }
+                  },
+                  "Approver_not_found": {
+                    "case": "Approver not found",
+                    "actions": {
+                      "Set_approver_not_found": {
+                        "runAfter": {},
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varExceptionType",
+                          "value": 809060001
+                        }
+                      }
+                    }
+                  },
+                  "Object_not_found": {
+                    "case": "Object not found",
+                    "actions": {
+                      "Set_object_not_found": {
+                        "runAfter": {},
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varExceptionType",
+                          "value": 809060002
+                        }
+                      }
+                    }
+                  }
+                },
+                "default": {
+                  "actions": {}
+                },
+                "expression": "@triggerBody()['text_3']",
+                "metadata": {
+                  "operationMetadataId": "5785593a-5a9e-4eaa-980d-5591ee68ac92"
+                },
+                "type": "Switch"
+              },
+              "Log_Exception": {
+                "runAfter": {
+                  "Exception_Type": [
+                    "Succeeded"
+                  ]
+                },
+                "metadata": {
+                  "operationMetadataId": "46f2d993-716c-42bf-9f59-22a4ab0895ad"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "connectionName": "shared_commondataserviceforapps_1",
+                    "operationId": "CreateRecord",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                  },
+                  "parameters": {
+                    "entityName": "cat_businessapprovalruntimeexceptions",
+                    "item/cat_name": "@triggerBody()['text_5']",
+                    "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerBody()['text_2']})",
+                    "item/cat_details": "@triggerBody()['text_4']",
+                    "item/cat_exceptiontype": "@variables('varExceptionType')",
+                    "item/cat_flowid": "@triggerOutputs()?['headers']?['x-ms-workflow-name']",
+                    "item/cat_objectid": "@triggerBody()['text_1']",
+                    "item/cat_objectname": "@triggerBody()['text']",
+                    "item/cat_runhistory": "https://flow.microsoft.com/manage/environments/@{workflow()?['tags']?['environmentName']}/flows/@{triggerOutputs()?['headers']?['x-ms-workflow-name']}/runs/@{triggerOutputs()?['headers']?['x-ms-workflow-run-id']}",
+                    "item/cat_runid": "@triggerOutputs()?['headers']?['x-ms-workflow-run-id']"
+                  },
+                  "authentication": {
+                    "type": "Raw",
+                    "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                  },
+                  "retryPolicy": {
+                    "type": "none"
+                  }
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@triggerBody()['text_3']",
+              "Information"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5a286aa4-052a-4326-809a-169b16c74b23"
+          },
+          "type": "If"
+        },
+        "varExceptionType": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "6ed0ab81-fe55-4b7d-adec-c564e3002353"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varExceptionType",
+                "type": "integer",
+                "value": 809060003
+              }
+            ]
+          },
+          "description": "Data not found (809060000), Approver not found (809060001), Object not found (809060002), Other (809060003)"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

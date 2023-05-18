@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="cat_businessapprovaldatatype" localizedName="Business Approval Data Type" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Business Approval Data Type" languagecode="1033" />
+  </displaynames>
+  <options>
+    <option value="809060000">
+      <labels>
+        <label description="Text" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060001">
+      <labels>
+        <label description="Number" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060002">
+      <labels>
+        <label description="Date/Time" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060003">
+      <labels>
+        <label description="Boolean" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060004">
+      <labels>
+        <label description="User (Email)" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+  </options>
+</optionset>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{0363b26a-51cb-ec11-a7b5-0022486ddc76}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalinstanceid">
+          <cell name="cat_name" width="200" />
+          <cell name="cat_approver" width="100" />
+          <cell name="cat_stage" width="100" />
+          <cell name="cat_node" width="100" />
+          <cell name="cat_notification" width="100" />
+          <cell name="cat_originalapprover" width="100" />
+          <cell name="cat_additionalinformation" width="100" />
+          <cell name="cat_instancestatus" width="100" />
+          <cell name="a_3aeac2f027894bf99cc60b80beb307b0.cat_delegationrule" width="100" />
+          <cell name="a_3aeac2f027894bf99cc60b80beb307b0.cat_timeout" width="100" />
+          <cell name="a_3aeac2f027894bf99cc60b80beb307b0.cat_timeoutmode" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="cat_businessapprovalinstance">
+          <attribute name="cat_name" />
+          <attribute name="cat_businessapprovalinstanceid" />
+          <attribute name="cat_instancestatus" />
+          <filter type="and">
+            <condition attribute="cat_instancestatus" operator="eq" value="809060001" />
+          </filter>
+          <link-entity alias="a_3aeac2f027894bf99cc60b80beb307b0" name="cat_businessapprovalruntimenode" to="cat_node" from="cat_businessapprovalruntimenodeid" link-type="inner">
+            <attribute name="cat_delegationrule" />
+            <attribute name="cat_timeout" />
+            <attribute name="cat_timeoutmode" />
+            <filter type="and">
+              <condition attribute="cat_delegationrule" operator="ne" value="809060000" />
+            </filter>
+          </link-entity>
+          <attribute name="cat_approver" />
+          <attribute name="cat_stage" />
+          <attribute name="cat_node" />
+          <attribute name="cat_notification" />
+          <attribute name="cat_originalapprover" />
+          <attribute name="cat_additionalinformation" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.4</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Running Instances with Delegation" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

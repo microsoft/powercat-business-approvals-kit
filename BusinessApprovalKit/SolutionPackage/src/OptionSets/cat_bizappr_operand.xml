@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="cat_bizappr_operand" localizedName="Business Approval Condition Operand" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Business Approval Condition Operand" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="" languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="809060000">
+      <labels>
+        <label description="Equals (=)" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060001">
+      <labels>
+        <label description="Less Than (&lt;)" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060002">
+      <labels>
+        <label description="Less Than or Equals (&lt;=)" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060003">
+      <labels>
+        <label description="Greater Than (&gt;)" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060004">
+      <labels>
+        <label description="Greater Than or Equals (&gt;=)" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060005">
+      <labels>
+        <label description="Not Equal (&lt;&gt;)" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060006">
+      <labels>
+        <label description="Starts With" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060007">
+      <labels>
+        <label description="Ends With" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060008">
+      <labels>
+        <label description="Contains" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060009">
+      <labels>
+        <label description="Is Blank" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060010">
+      <labels>
+        <label description="Is Not Blank" languagecode="1033" />
+      </labels>
+    </option>
+  </options>
+</optionset>

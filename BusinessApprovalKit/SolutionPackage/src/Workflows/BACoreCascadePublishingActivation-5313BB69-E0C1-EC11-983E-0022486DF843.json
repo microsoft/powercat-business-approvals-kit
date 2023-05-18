@@ -1,0 +1,118 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "b961331d-8fbf-4a69-b57a-d3a0ce68e204"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "cat_businessapprovalversion",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "statecode",
+              "subscriptionRequest/runas": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_All_Associated_Runtime_Data": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "e46e48e8-7924-4a93-883b-bb677cced32a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimedatas",
+              "$select": "cat_businessapprovalruntimedataid",
+              "$filter": "_cat_processversion_value eq @{triggerOutputs()?['body/cat_businessapprovalversionid']}"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Each_Runtime_Data": {
+          "foreach": "@outputs('Get_All_Associated_Runtime_Data')?['body/value']",
+          "actions": {
+            "Update_Runtime_Data_Status": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "f9c7aef5-0bd4-4c20-a0c7-5d4ec6315ced"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "UpdateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalruntimedatas",
+                  "recordId": "@items('Each_Runtime_Data')?['cat_businessapprovalruntimedataid']",
+                  "item/statecode": "@triggerOutputs()?['body/statecode']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Get_All_Associated_Runtime_Data": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0c49c9fe-2bae-435b-a9d0-176f9d06f3f8"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 50
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

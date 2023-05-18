@@ -1,0 +1,17 @@
+function RunOnSelected(data) {
+    var selectedRecordID = data;
+
+    // Centered Dialog
+    var pageInput = {
+        pageType: "custom",
+        name: "cat_businessapprovaloverridecustompage_c87bd",
+        recordId: selectedRecordID,
+    };
+    var navigationOptions = {
+        target: 2,
+        position: 2,
+        width: { value: 25, unit: "%" },
+        title: "Approval Override"
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions);
+}

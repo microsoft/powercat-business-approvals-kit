@@ -1,0 +1,73 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Update_Published_Workflow_when_a_version_is_activated": {
+          "metadata": {
+            "operationMetadataId": "1877681b-e29b-4d9b-ba40-c95e154fca60"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "cat_businessapprovalversion",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "statecode",
+              "subscriptionRequest/filterexpression": "statecode eq 0",
+              "subscriptionRequest/runas": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Run_a_Child_Flow": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2a9dbf5f-bb9c-4a37-bd34-8c584cdd27f9"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "e46573c9-d86f-ed11-81ac-000d3a09c30d"
+            },
+            "body": {
+              "text": "@triggerOutputs()?['body/cat_businessapprovalversionid']",
+              "text_1": "@triggerOutputs()?['body/_cat_process_value']"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

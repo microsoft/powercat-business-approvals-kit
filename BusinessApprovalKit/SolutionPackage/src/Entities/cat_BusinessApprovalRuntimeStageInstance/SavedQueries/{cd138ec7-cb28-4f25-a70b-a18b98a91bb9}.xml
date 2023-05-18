@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{cd138ec7-cb28-4f25-a70b-a18b98a91bb9}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalruntimestageinstanceid">
+          <cell name="cat_name" width="300" />
+          <cell name="cat_stage" width="100" />
+          <cell name="cat_start" width="100" />
+          <cell name="cat_instancestatus" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cat_businessapprovalruntimestageinstance">
+          <attribute name="cat_businessapprovalruntimestageinstanceid" />
+          <attribute name="cat_name" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="cat_stage" />
+          <attribute name="cat_start" />
+          <attribute name="cat_instancestatus" />
+          <order attribute="cat_start" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Business Approval Runtime Stage Instances" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

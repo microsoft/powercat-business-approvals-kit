@@ -1,0 +1,110 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovalprocesses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprovalprocess",
+    "Name": "Business Approval Processes",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_BusinessApprovalCondition_Process_cat": "Business Approval Conditions",
+      "cat_BusinessApprovalData_Process_cat_Busi": "Business Approval Data",
+      "cat_BusinessApprovalNode_Process_cat_Busi": "Business Approval Nodes",
+      "cat_businessapprovalprocess_AsyncOperations": "System Jobs",
+      "cat_businessapprovalprocess_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapprovalprocess_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalprocess_DuplicateBaseRecord)",
+      "cat_businessapprovalprocess_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprovalprocess_DuplicateMatchingRecord)",
+      "cat_businessapprovalprocess_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprovalprocess_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprovalprocess_ProcessSession": "Process Sessions",
+      "cat_businessapprovalprocess_SyncErrors": "Sync Errors",
+      "cat_businessapprovalprocessid": "Business Approval Process",
+      "cat_BusinessApprovalStage_Process_cat_Bus": "Business Approval Stages",
+      "cat_BusinessApprovalVersion_Process_cat_B": "Business Approval Versions",
+      "cat_businessowner": "Business Owner",
+      "cat_businessowneremail": "Business Owner Email",
+      "cat_category": "Category",
+      "cat_DefaultApprover": "Default Approver",
+      "cat_defaultapproverdisplayname": "Default Approver Display Name",
+      "cat_defaultapproveremail": "Default Approver Email",
+      "cat_description": "Description",
+      "cat_name": "Name",
+      "cat_secondaryowner": "Secondary Owner",
+      "cat_secondaryowneremail": "Secondary Owner Email",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approval Processes",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approval Processes (Views)",
+    "Name": "_cat_businessapprovalprocess_views",
+    "RelatedEntityName": "Business Approval Processes",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "7d3ad287-2e45-4d4e-9bb7-2d85aa439751": "Business Approval Process Advanced Find View",
+      "995ddaed-83ae-4f04-9522-2475ee02e2c5": "Business Approval Process Lookup View",
+      "9bd5ec9a-30e8-4c89-8f9e-e8912a5527ef": "Active Business Approval Processes",
+      "a8cff3b7-e0ce-4e84-ae56-1ff000ccb571": "Inactive Business Approval Processes",
+      "dba842b1-24d2-4c90-a7cb-7d8f5c9f200d": "Business Approval Process Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Business Approval Processes)",
+    "Name": "cat_businessapprovalprocess_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approval Processes"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approval Processes",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approval Processes)",
+    "Name": "cat_businessapprovalprocess_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approval Processes"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Processes",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "IsComponentScoped": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "_colPublishedVersions",
+    "Type": "CollectionDataSourceInfo"
+  }
+]

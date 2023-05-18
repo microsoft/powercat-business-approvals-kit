@@ -1,0 +1,211 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "c9dc076e-2a22-4433-ac23-7d3f1d8f988c"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Get_Settings": {
+          "runAfter": {
+            "varSettings": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "43d36683-f791-4978-8779-acf2eced1993"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalsettings",
+              "$select": "cat_name, cat_useoutlookforoof, cat_waitonnoapprover,cat_waitonnodata",
+              "$top": 1
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "If_found_settings": {
+          "actions": {
+            "Get_Setting_Values": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "03009053-ed8b-46e2-904c-98c3851dad69"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "varSettings",
+                "value": {
+                  "name": "@{first(body('Get_Settings')['value'])['cat_name']}",
+                  "OutlookOOF": "@first(body('Get_Settings')['value'])['cat_useoutlookforoof']",
+                  "WaitOnNoApprover": "@first(body('Get_Settings')['value'])['cat_waitonnoapprover']",
+                  "WaitOnNoData": "@first(body('Get_Settings')['value'])['cat_waitonnodata']"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Get_Settings": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Set_Default_Setting": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "03009053-ed8b-46e2-904c-98c3851dad69"
+                },
+                "type": "SetVariable",
+                "inputs": {
+                  "name": "varSettings",
+                  "value": {
+                    "name": "Default",
+                    "OutlookOOF": false,
+                    "WaitOnNoApprover": true,
+                    "WaitOnNoData": true
+                  }
+                }
+              },
+              "Add_Default_setting": {
+                "runAfter": {
+                  "Set_Default_Setting": [
+                    "Succeeded"
+                  ]
+                },
+                "metadata": {
+                  "operationMetadataId": "de356c7d-8550-4165-8f62-4e8179601ec9"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "connectionName": "shared_commondataserviceforapps_1",
+                    "operationId": "CreateRecord",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                  },
+                  "parameters": {
+                    "entityName": "cat_businessapprovalsettings",
+                    "item/cat_waitonnoapprover": true,
+                    "item/cat_waitonnodata": true,
+                    "item/cat_name": "Default",
+                    "item/cat_useoutlookforoof": false
+                  },
+                  "authentication": {
+                    "type": "Raw",
+                    "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                  }
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@length(outputs('Get_Settings')?['body/value'])",
+              1
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "fe822f9b-567a-4637-b203-2e61d8e12ea0"
+          },
+          "type": "If"
+        },
+        "varSettings": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2c81c33a-d0da-4bcc-a704-6d3ff4a06d46"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varSettings",
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "If_found_settings": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b4417eef-193e-4ebb-ad46-455a16506d2c"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "headers": {
+              "Content-type": "application/json"
+            },
+            "body": "@variables('varSettings')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "OutlookOOF": {
+                  "type": "boolean"
+                },
+                "WaitOnNoApprover": {
+                  "type": "boolean"
+                },
+                "WaitOnNoData": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

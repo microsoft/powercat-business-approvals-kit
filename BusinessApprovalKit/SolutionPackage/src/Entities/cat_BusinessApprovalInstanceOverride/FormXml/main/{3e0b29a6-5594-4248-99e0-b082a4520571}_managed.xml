@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{3e0b29a6-5594-4248-99e0-b082a4520571}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{dcb50414-e2b7-43c9-9644-afdfc05da98b}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{f7b7f79c-a30f-4dbd-957e-23859083fe8f}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{e35a511d-aff3-4986-9332-f86023b7f11e}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="cat_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cat_name" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e9d4054e-80a1-4c20-b59a-ce3210d322e2}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Approval Instance" languagecode="1033" />
+                        </labels>
+                        <control id="cat_approvalinstance" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_approvalinstance" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{25e8990c-9de8-4c0c-98c7-b07187b80f1f}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is Cancellation" languagecode="1033" />
+                        </labels>
+                        <control id="cat_iscancellation" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_iscancellation" disabled="false" uniqueid="{0ea34bf0-a5ad-47aa-90ae-86b198e572b8}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{73862e09-09eb-4519-a385-fdeb2137b095}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Override Approver" languagecode="1033" />
+                        </labels>
+                        <control id="cat_overrideapprover" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_overrideapprover" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{37bd750b-8a23-468f-9f6c-c342b1f2f696}" locklevel="0" colspan="1" rowspan="4">
+                        <labels>
+                          <label description="Override Reason" languagecode="1033" />
+                        </labels>
+                        <control id="cat_overridereason" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="cat_overridereason" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{75127490-72d0-4289-9e61-cb67d110935e}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{2df94f97-3f62-45c4-a571-4621b588a184}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{be00a790-aca5-4e61-985b-46c9772c4c7f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{47ad4963-ba89-4306-8a03-35922fcd6c39}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{68ebe298-f057-470e-9074-8fc484a89206}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{7ea385ca-a85f-4711-babd-78e7585ec78b}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{48f405e7-34c8-40a8-a052-562103a36e21}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d8a4bb22-6261-43a7-8ba8-f335705afe56}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{49f7130e-c1ba-43c3-9569-f1dfba4ff9aa}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{0ea34bf0-a5ad-47aa-90ae-86b198e572b8}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_iscancellation</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_iscancellation</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_iscancellation</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_iscancellation</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

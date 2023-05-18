@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="cat_bizappr_overridetype" localizedName="Business Approval Override Type" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.14</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Business Approval Override Type" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="" languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="809060000" ExternalValue="">
+      <labels>
+        <label description="Admin" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060001" ExternalValue="">
+      <labels>
+        <label description="Time-out" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060002" ExternalValue="">
+      <labels>
+        <label description="Out-of-office" languagecode="1033" />
+      </labels>
+    </option>
+  </options>
+</optionset>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{3d47a794-d1fe-eb11-94f0-000d3a09e4ea}</WebResourceId>
+  <Name>cat_approval_icons_approvalpath</Name>
+  <DisplayName>Approval Icons Approval Path</DisplayName>
+  <LanguageCode>1033</LanguageCode>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <DependencyXml>&lt;Dependencies&gt;&lt;Dependency componentType="WebResource"/&gt;&lt;/Dependencies&gt;</DependencyXml>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/cat_approval_icons_approvalpath3D47A794-D1FE-EB11-94F0-000D3A09E4EA</FileName>
+</WebResource>

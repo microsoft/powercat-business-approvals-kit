@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</Name>
+  <AppVersion>2023-02-25T23:32:41Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23021.21.0</CreatedByClientVersion>
+  <MinClientVersion>0.0.0.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"640","primaryDeviceHeight":"1136","sienaVersion":"20230225T232928Z-3.23021.21.0","deviceCapabilities":"","supportsPortrait":"true","supportsLandscape":"false","primaryFormFactor":"Phone","publisherVersion":"3.22111.28.0","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>rgba(0, 176, 240, 1)</BackgroundColor>
+  <DisplayName>BusinessApprovalManagement_DefaultCommandLibrary</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage>Saved by Command designer.</CommitMessage>
+  <Publisher></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds"},"dataSources":{"Business Approval Instances":{"entitySetName":"cat_businessapprovalinstances","logicalName":"cat_businessapprovalinstance"},"Business Approval Processes":{"entitySetName":"cat_businessapprovalprocesses","logicalName":"cat_businessapprovalprocess"}}}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>1</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"cat_businessapprovalinstance","componenttype":1},{"logicalname":"cat_businessapprovalprocess","componenttype":1}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl01930_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl87934_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

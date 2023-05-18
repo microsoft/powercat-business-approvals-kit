@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cat_businessapprovaloverridecustompage_c87bd</Name>
+  <AppVersion>2023-01-31T06:49:01Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.22114.18.0</CreatedByClientVersion>
+  <MinClientVersion>3.22114.18.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"3769","primaryDeviceHeight":"1365","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.22114.18","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","sienaVersion":"20221207T075248Z-3.22114.18.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>Business Approval Override Custom Page</DisplayName>
+  <Description></Description>
+  <CommitMessage></CommitMessage>
+  <Publisher></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"c6590951-29c0-400e-8067-958fb9fc6a79":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1611/1.0.1611.3104/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["UserPhoto_V2"]}}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Business Approval Instances":{"entitySetName":"cat_businessapprovalinstances","logicalName":"cat_businessapprovalinstance"},"Business Approval Instance Overrides":{"entitySetName":"cat_businessapprovalinstanceoverrides","logicalName":"cat_businessapprovalinstanceoverride"},"Business Approvers":{"entitySetName":"cat_businessapprovers","logicalName":"cat_businessapprover"}}}}</DatabaseReferences>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>2</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"componenttype":1,"logicalname":"cat_businessapprovalinstance"},{"componenttype":1,"logicalname":"cat_businessapprovalinstanceoverride"},{"componenttype":1,"logicalname":"cat_businessapprover"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cat_businessapprovaloverridecustompage_c87bd_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cat_businessapprovaloverridecustompage_c87bd_DocumentUri.msapp</DocumentUri>
+</CanvasApp>
