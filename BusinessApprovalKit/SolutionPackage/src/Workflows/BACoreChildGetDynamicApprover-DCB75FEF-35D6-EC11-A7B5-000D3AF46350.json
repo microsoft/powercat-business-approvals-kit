@@ -1,0 +1,465 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365users_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitO365Users"
+        },
+        "api": {
+          "name": "shared_office365users"
+        }
+      },
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "c6ded59c-0968-48bf-b262-e715bf41932a"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "boolean": {
+                  "title": "GetManager",
+                  "type": "boolean",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please select yes or no",
+                  "x-ms-content-hint": "BOOLEAN"
+                },
+                "text": {
+                  "title": "NodeId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "InstanceId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "ApproverUPN",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "boolean",
+                "text",
+                "text_1"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "varApprover": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "fedc7e49-3002-46bf-a11b-f8e35045a1af"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varApprover",
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "If_approver_UPN_has_value": [
+              "Succeeded",
+              "Failed",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c437bf09-5bf1-4302-8fc5-0fa7c7a99860"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "approverid": "@{variables('varApproverId')['approverId']}",
+              "notificationtype": "@{variables('varApproverId')['notificationType']}",
+              "upn": "@{variables('varApprover')['upn']}"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "approverid": {
+                  "title": "ApproverId",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                },
+                "notificationtype": {
+                  "title": "NotificationType",
+                  "x-ms-dynamically-added": true,
+                  "type": "number"
+                },
+                "upn": {
+                  "title": "upn",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "varApproverId": {
+          "runAfter": {
+            "varApprover": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "19a5fc5f-1a11-4214-9018-82dc14a1b74b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varApproverId",
+                "type": "object",
+                "value": {
+                  "approverId": "",
+                  "notificationType": 809060000
+                }
+              }
+            ]
+          }
+        },
+        "If_approver_UPN_has_value": {
+          "actions": {
+            "If_Manager_Lookup": {
+              "actions": {
+                "Get_manager_by_UPN": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "d6a38427-553f-4b9e-8070-d078ec133825"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365users_1",
+                      "operationId": "Manager_V2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365users"
+                    },
+                    "parameters": {
+                      "id": "@triggerBody()['text_2']",
+                      "$select": "accountEnabled, userPrincipalName, displayName"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    },
+                    "retryPolicy": {
+                      "type": "none"
+                    }
+                  }
+                },
+                "Log_Exception_getting_manager_for_approver": {
+                  "runAfter": {
+                    "Get_manager_by_UPN": [
+                      "Failed"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "1f84f1a4-37b2-4145-b351-b7cdbc239f36"
+                  },
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+                    },
+                    "body": {
+                      "text": "Node",
+                      "text_1": "@triggerBody()['text']",
+                      "text_2": "@triggerBody()['text_1']",
+                      "text_3": "Approver not found",
+                      "text_5": "@workflow()?['tags']?['flowDisplayName']",
+                      "text_4": "Unable to get manager for Approver with UPN @{triggerBody()['text_2']}"
+                    }
+                  }
+                },
+                "Set_Manager_UPN": {
+                  "runAfter": {
+                    "Get_manager_by_UPN": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "5cc44aaa-3cae-4590-bb57-041533c26846"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varApprover",
+                    "value": {
+                      "upn": "@{outputs('Get_manager_by_UPN')?['body/userPrincipalName']}",
+                      "name": "@{outputs('Get_manager_by_UPN')?['body/displayName']}"
+                    }
+                  }
+                }
+              },
+              "runAfter": {},
+              "else": {
+                "actions": {
+                  "Get_user_profile_(V2)": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "7b9941e1-2c89-43af-9954-dc6503e7aebf"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_office365users_1",
+                        "operationId": "UserProfile_V2",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365users"
+                      },
+                      "parameters": {
+                        "id": "@triggerBody()['text_2']",
+                        "$select": "accountEnabled, userPrincipalName, displayName"
+                      },
+                      "authentication": {
+                        "type": "Raw",
+                        "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                      },
+                      "retryPolicy": {
+                        "type": "none"
+                      }
+                    }
+                  },
+                  "Log_Exception_getting_approver_from_O365_users": {
+                    "runAfter": {
+                      "Get_user_profile_(V2)": [
+                        "Failed"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "812fdcdf-20b3-41aa-b56f-512fcc993bee"
+                    },
+                    "type": "Workflow",
+                    "inputs": {
+                      "host": {
+                        "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+                      },
+                      "body": {
+                        "text": "Node",
+                        "text_1": "@triggerBody()['text']",
+                        "text_2": "@triggerBody()['text_1']",
+                        "text_3": "Approver not found",
+                        "text_5": "@workflow()?['tags']?['flowDisplayName']",
+                        "text_4": "Approver with UPN @{triggerBody()['text_2']} not found as an Office 365 User."
+                      },
+                      "retryPolicy": {
+                        "type": "none"
+                      }
+                    }
+                  },
+                  "Set_Approver_UPN": {
+                    "runAfter": {
+                      "Get_user_profile_(V2)": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "c64cd026-7a80-4dce-b23a-7649dc42f125"
+                    },
+                    "type": "SetVariable",
+                    "inputs": {
+                      "name": "varApprover",
+                      "value": {
+                        "upn": "@{outputs('Get_user_profile_(V2)')?['body/userPrincipalName']}",
+                        "name": "@{outputs('Get_user_profile_(V2)')?['body/displayName']}"
+                      }
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@triggerBody()['boolean']",
+                  "@true"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "0d0c5805-ed8c-4b3b-9227-e654959b84bd"
+              },
+              "type": "If"
+            },
+            "Lookup_UPN": {
+              "actions": {
+                "Get_Approver_and_Delegates": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "8e286ee9-59ea-48a1-bdb7-33e887b333e2"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "ListRecords",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovers",
+                      "$select": "cat_businessapproverid,cat_approverid, cat_isoutofoffice, cat_notificationtype, cat_Delegate, cat_BackupDelegate",
+                      "$filter": "cat_approverid eq '@{variables('varApprover')['upn']}'",
+                      "$expand": "cat_Delegate($select=cat_businessapproverid,cat_approverid,cat_isoutofoffice,cat_notificationtype), cat_BackupDelegate($select=cat_businessapproverid,cat_approverid,cat_isoutofoffice,cat_notificationtype)",
+                      "$top": 1
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "If_Approver_is_not_found": {
+                  "actions": {
+                    "Add_Approver_to_Table": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "3304d9a4-e462-4f4c-81d9-e0e8a2f73c9d"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "CreateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovers",
+                          "item/cat_approverid": "@variables('varApprover')['upn']",
+                          "item/cat_approvertype": 809060000,
+                          "item/cat_name": "@variables('varApprover')['name']",
+                          "item/cat_isoutofoffice": false,
+                          "item/cat_notificationtype": 809060001
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    },
+                    "Set_new_approver_data": {
+                      "runAfter": {
+                        "Add_Approver_to_Table": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "53a9b54a-ecd4-4f9a-8be8-cc5bb80ab00c"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varApproverId",
+                        "value": {
+                          "approverId": "@{first(body('Add_Approver_to_Table')?['value'])['cat_businessapproverid']}",
+                          "notificationType": "@first(body('Add_Approver_to_Table')?['value'])['cat_notificationtype']"
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Get_Approver_and_Delegates": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {
+                      "Set_Approver_data": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "fa087288-65dc-40da-b99d-83568ae87282"
+                        },
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varApproverId",
+                          "value": {
+                            "approverId": "@{first(body('Get_Approver_and_Delegates')?['value'])['cat_businessapproverid']}",
+                            "notificationType": "@first(body('Get_Approver_and_Delegates')?['value'])['cat_notificationtype']"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "equals": [
+                      "@length(outputs('Get_Approver_and_Delegates')?['body/value'])",
+                      0
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "146c0e7c-93b9-48ac-8a64-5f46a397c5d1"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {
+                "If_Manager_Lookup": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5017c450-5d74-48c5-b74b-5bcf62eeff4c"
+              },
+              "type": "Scope"
+            }
+          },
+          "runAfter": {
+            "varApproverId": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "greater": [
+              "@length(triggerBody()['text_2'])",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f75eed95-14d9-41d2-89a2-62b35ed93ca6"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

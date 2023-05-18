@@ -1,0 +1,528 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_approvals": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitApprovals"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      },
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_new_Approval_Instance_is_created": {
+          "metadata": {
+            "operationMetadataId": "19f29ac8-a9ee-471a-a583-65481d36be3b"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "cat_businessapprovalinstance",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/runas": 1,
+              "subscriptionRequest/name": "a04208b8-428d-ec11-8d20-000d3a09ca36"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "If_no_Custom_Responses": {
+          "actions": {
+            "Standard_Approval": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "220e087e-aa97-4de9-9cff-df9452a8956a"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+                  "connectionName": "shared_approvals",
+                  "operationId": "CreateAnApproval"
+                },
+                "parameters": {
+                  "approvalType": "Basic",
+                  "ApprovalCreationInput/title": "@triggerOutputs()?['body/cat_title']",
+                  "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
+                  "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
+                  "ApprovalCreationInput/enableNotifications": "@equals(body('Get_a_row_by_ID')?['cat_notification'],'809060000')",
+                  "ApprovalCreationInput/enableReassignment": false
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "varApprovalCompleted": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Custom_Approval": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "da96a1f1-b251-4336-a248-86d51363335d"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+                    "connectionName": "shared_approvals",
+                    "operationId": "CreateAnApproval"
+                  },
+                  "parameters": {
+                    "approvalType": "CustomResponse",
+                    "ApprovalCreationInput/responseOptions": [
+                      "@triggerOutputs()?['body/cat_customresponses']"
+                    ],
+                    "ApprovalCreationInput/title": "@triggerOutputs()?['body/cat_title']",
+                    "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
+                    "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
+                    "ApprovalCreationInput/enableNotifications": "@equals(body('Get_a_row_by_ID')?['cat_notification'],'809060000')",
+                    "ApprovalCreationInput/enableReassignment": false
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@length(coalesce(triggerOutputs()?['body/cat_customresponses'],''))",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c34dc24f-18a3-4753-a72b-949b65fd7dd4"
+          },
+          "type": "If"
+        },
+        "Wait_Approval": {
+          "runAfter": {
+            "Update_Approval_Instance_State": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "77d7e9eb-4ae5-4c85-910d-7831ef2619f4"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+              "connectionName": "shared_approvals",
+              "operationId": "WaitForAnApproval"
+            },
+            "parameters": {
+              "approvalName": "@coalesce(outputs('Standard_Approval')?['body/name'],outputs('Custom_Approval')?['body/name'])"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Update_Approval_Instance_State": {
+          "runAfter": {
+            "If_no_Custom_Responses": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ba59039b-b2e6-429c-ab17-f37b72357a15"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "UpdateRecord"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalinstances",
+              "recordId": "@triggerOutputs()?['body/cat_businessapprovalinstanceid']",
+              "item/cat_instancestatus": 809060001,
+              "item/cat_appovalid": "@coalesce(outputs('Standard_Approval')?['body/name'],outputs('Custom_Approval')?['body/name'])",
+              "item/cat_start": "@utcNow()"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Update_Approval_Instance": {
+          "runAfter": {
+            "Set_Approval_completion": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ead2fd95-07e3-49f7-adab-64abe7a138b5"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "UpdateRecord"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalinstances",
+              "recordId": "@triggerOutputs()?['body/cat_businessapprovalinstanceid']",
+              "item/cat_instancestatus": 809060002,
+              "item/cat_actionedon": "@utcNow()",
+              "item/cat_comments": "@first(outputs('Wait_Approval')?['body/responses'])?['comments']",
+              "item/cat_outcome": "@outputs('Wait_Approval')?['body/outcome']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Wait_on_Override": {
+          "runAfter": {
+            "Update_Approval_Instance_State": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e474a56b-991c-4279-801d-040f6d6e61a4"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "cat_businessapprovalinstanceoverride",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "_cat_approvalinstance_value eq @{outputs('Update_Approval_Instance_State')?['body/cat_businessapprovalinstanceid']}",
+              "subscriptionRequest/runas": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Terminate_on_Success_-_No_Override_cancelation_required": {
+          "runAfter": {
+            "Update_Approval_Instance": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f2692e72-1da0-4482-b603-4f862531222e"
+          },
+          "type": "Terminate",
+          "inputs": {
+            "runStatus": "Succeeded"
+          }
+        },
+        "varApprovalCompleted": {
+          "runAfter": {
+            "Get_a_row_by_ID": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "06e5447f-6065-4443-a084-bce28b4304bd"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varApprovalCompleted",
+                "type": "boolean",
+                "value": "@false"
+              }
+            ]
+          },
+          "description": "Control variable to avoid override if approval completes"
+        },
+        "Set_Approval_completion": {
+          "runAfter": {
+            "Wait_Approval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5a9eb0db-5090-4769-ad45-6d0962544ae8"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "varApprovalCompleted",
+            "value": "@true"
+          }
+        },
+        "If_Approval_not_completed": {
+          "actions": {
+            "Set_override_approver_for_cancellation": {
+              "actions": {
+                "Update_Approval_Instance_to_Canceled": {
+                  "runAfter": {
+                    "If_Not_Cancellation": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "ead2fd95-07e3-49f7-adab-64abe7a138b5"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "UpdateRecord"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovalinstances",
+                      "recordId": "@triggerOutputs()?['body/cat_businessapprovalinstanceid']",
+                      "item/cat_instancestatus": 809060004,
+                      "item/cat_actionedon": "@utcNow()",
+                      "item/cat_OverrideApprover@odata.bind": "@if(equals(body('Wait_on_Override')['cat_iscancellation'],false),concat('cat_businessapprovers(',body('Wait_on_Override')['_cat_overrideapprover_value'],')'),null)"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Cancel_Approval": {
+                  "runAfter": {
+                    "If_Not_Cancellation": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "bd61fe78-ac40-4e1c-b60b-445f9ecc2ec5"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "UpdateRecord"
+                    },
+                    "parameters": {
+                      "entityName": "msdyn_flow_approvals",
+                      "recordId": "@outputs('Update_Approval_Instance_State')?['body/cat_appovalid']",
+                      "item/msdyn_flow_approval_stage": 192351000,
+                      "item/statuscode": 192350006,
+                      "item/msdyn_flow_approval_completedon": "@utcNow()",
+                      "item/statecode": 1
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Override_completed": {
+                  "runAfter": {
+                    "Update_Approval_Instance_to_Canceled": [
+                      "Succeeded"
+                    ],
+                    "Cancel_Approval": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "5088c43e-feb2-448f-94a2-db939b83a537"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "UpdateRecord"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovalinstanceoverrides",
+                      "recordId": "@outputs('Wait_on_Override')?['body/cat_businessapprovalinstanceoverrideid']",
+                      "item/cat_overridestatus": 809060000
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "If_Not_Cancellation": {
+                  "actions": {
+                    "Get_Override_Approver_UPN": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "e6925195-dd50-44b7-a068-167012e8aa54"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "ListRecords"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovers",
+                          "$select": "cat_approverid",
+                          "$filter": "cat_businessapproverid eq @{outputs('Wait_on_Override')?['body/_cat_overrideapprover_value']}",
+                          "$top": 1
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Create_Approval_for_Override_Approver": {
+                      "runAfter": {
+                        "Get_Override_Approver_UPN": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "8e0c8766-35de-4878-8145-13c7cc17ef2e"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "CreateRecord"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovalinstances",
+                          "item/cat_Approver@odata.bind": "cat_businessapprovers(@{outputs('Wait_on_Override')?['body/_cat_overrideapprover_value']})",
+                          "item/cat_instancestatus": 809060000,
+                          "item/cat_NodeInstance@odata.bind": "cat_businessapprovalruntimenodeinstances(@{outputs('Update_Approval_Instance_State')?['body/_cat_nodeinstance_value']})",
+                          "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Update_Approval_Instance_State')?['body/_cat_workflowinstance_value']})",
+                          "item/cat_additionalinformation": "Admin override created for approver.",
+                          "item/cat_approvaltype": "@outputs('Wait_on_Override')?['body/cat_approvaltype']",
+                          "item/cat_approverupn": "@first(outputs('Get_Override_Approver_UPN')?['body/value'])['cat_approverid']",
+                          "item/cat_customresponses": "@outputs('Wait_on_Override')?['body/cat_customresponses']",
+                          "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodeinstances(@{outputs('Update_Approval_Instance_State')?['body/_cat_node_value']})",
+                          "item/cat_notification": "@triggerOutputs()?['body/cat_notification']",
+                          "item/cat_OriginalApprover@odata.bind": "cat_businessapprovers(@{triggerOutputs()?['body/_cat_approver_value']})",
+                          "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stage_value']})",
+                          "item/cat_title": "@triggerOutputs()?['body/cat_title']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "expression": {
+                    "equals": [
+                      "@outputs('Wait_on_Override')?['body/cat_iscancellation']",
+                      "@false"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "67eb2654-1893-42d3-ace0-41b360eb3d45"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "264d8c5d-62ef-4544-81d9-ee21bd3bb9b8"
+              },
+              "type": "Scope"
+            },
+            "Terminate_as_Canceled_due_to_override": {
+              "runAfter": {
+                "Set_override_approver_for_cancellation": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "1f1c74eb-4667-48f4-b4c9-8535137dbe91"
+              },
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Cancelled"
+              }
+            }
+          },
+          "runAfter": {
+            "Wait_on_Override": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Override_unsuccessful": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "5b8028a5-05dc-4ad5-9419-18538e4e59d5"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                    "connectionName": "shared_commondataserviceforapps_1",
+                    "operationId": "UpdateRecord"
+                  },
+                  "parameters": {
+                    "entityName": "cat_businessapprovalinstanceoverrides",
+                    "recordId": "@outputs('Wait_on_Override')?['body/cat_businessapprovalinstanceoverrideid']",
+                    "item/cat_overridestatus": 809060001
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@variables('varApprovalCompleted')",
+              "@false"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "348ec275-0af6-4980-bd12-fff837e454cc"
+          },
+          "type": "If"
+        },
+        "Get_a_row_by_ID": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "07ae2bb1-e74f-41c3-818f-87608de66416"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalinstances",
+              "recordId": "@triggerOutputs()?['body/cat_businessapprovalinstanceid']",
+              "$select": "cat_notification"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

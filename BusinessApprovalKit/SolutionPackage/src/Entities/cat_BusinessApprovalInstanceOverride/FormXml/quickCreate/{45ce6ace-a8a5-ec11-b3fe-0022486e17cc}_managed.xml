@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{45ce6ace-a8a5-ec11-b3fe-0022486e17cc}</formid>
+    <IntroducedVersion>1.0.0.12</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="F931FFE2-B873-473F-8F95-9502F0AA3F5E" name="tab_1" showlabel="false" labelid="{023f7e2d-c8ec-4e75-97e7-cad30d6a223f}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="34%">
+              <sections>
+                <section id="0C655D4E-C6E3-424E-9AF5-71E72D30D12E" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{89e6cce5-6659-4ef9-aebb-817a83780705}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{6dd783fd-5613-4cf1-b6f4-038a164385a5}" locklevel="0" colspan="1" rowspan="1" visible="false" labelid="{e7afb8f5-f8dc-4a92-a002-6c738cf50e19}">
+                        <labels>
+                          <label description="Approval Instance" languagecode="1033" />
+                        </labels>
+                        <control id="cat_approvalinstance" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_approvalinstance" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{e6ecde44-59c0-4527-8010-00547f31b33a}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is Cancellation" languagecode="1033" />
+                        </labels>
+                        <control id="cat_iscancellation" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_iscancellation" disabled="false" uniqueid="{303298eb-f598-4346-9b05-4adc3599461d}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{94baf78f-73ad-488e-9d85-d3d1c2f92ff3}" locklevel="0" colspan="1" rowspan="1" labelid="{4fbe9b81-44d0-4f82-9e73-355197e8f9e5}">
+                        <labels>
+                          <label description="Override Approver" languagecode="1033" />
+                        </labels>
+                        <control id="cat_overrideapprover" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_overrideapprover" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f045c5ed-19fa-4d5f-b5f3-4b591572c121}" locklevel="0" colspan="1" rowspan="1" labelid="{272fbd86-4f29-43df-96d6-1716bb7747f2}">
+                        <labels>
+                          <label description="Override Reason" languagecode="1033" />
+                        </labels>
+                        <control id="cat_overridereason" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="cat_overridereason" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="02DECBA0-3AE2-484D-A19F-C5353AF4F4F2" name="tab_1_column_2_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{a5c8c184-0779-4827-a53e-857e208ae753}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="266FE48D-4D04-4E9A-8C5A-7DEF9A2F059B" labelid="{8fce454e-1e87-4036-980f-5622a1cc9845}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="46FD66EA-B686-41D9-AAE0-C565BD78EC1F" name="tab_1_column_3_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{f10a06ce-e878-4621-a87d-774031441389}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="07C04A4E-A482-45CC-BAB7-7FCA3CD02938" labelid="{339acc2f-c794-4b56-82a5-3e80252736a3}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{303298eb-f598-4346-9b05-4adc3599461d}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_iscancellation</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_iscancellation</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_iscancellation</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_iscancellation</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Business Approval Instance Override quick create form" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

@@ -1,0 +1,35 @@
+<appaction uniquename="cat__ProcessDesigner!f0de52840e4049c29b1aeab52739b8f8!cat_BusinessApprovalManagement!cat_businessapprovalprocess!0">
+  <appmoduleid>
+    <uniquename>cat_BusinessApprovalManagement</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Process Designer">
+    <label description="Process Designer" languagecode="1033" />
+  </buttonlabeltext>
+  <buttonsequencepriority>5.0000000000</buttonsequencepriority>
+  <context>1</context>
+  <contextentity>
+    <logicalname>cat_businessapprovalprocess</logicalname>
+  </contextentity>
+  <contextvalue>cat_businessapprovalprocess</contextvalue>
+  <fonticon>$clientsvg:TaskSequence</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>ProcessDesigner!f0de52840e4049c29b1aeab52739b8f8</name>
+  <onclickeventjavascriptfunctionname>RunOnSelectedForm</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":3},{"type":21,"value":"form"}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>b9b6535e-3bb2-ed11-83fe-0022482a97de</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>14d517ceb3a24df2b14a40885929e63e</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

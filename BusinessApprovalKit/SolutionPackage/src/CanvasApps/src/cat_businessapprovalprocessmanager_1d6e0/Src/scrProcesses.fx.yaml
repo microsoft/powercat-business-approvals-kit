@@ -1,0 +1,272 @@
+scrProcesses As screen:
+    LoadingSpinnerColor: =RGBA(105, 121, 126, 1)
+
+    Container1_1 As groupContainer:
+        Height: =Parent.Height - Self.Y
+        Width: =Parent.Width - Self.X
+        X: =Menu_2.Width
+        Y: =Menu_2.Y
+        ZIndex: =1
+
+        Toolbar_1 As Toolbar:
+            OnClick: |-
+                =If(MenuItem = "New", 
+                    Set(_selectedProcess, Blank()); 
+                    NewForm(frmProcess);
+                    Navigate(scrProcessEditor)
+                )
+            TemplateWidth: =200
+            ToolbarItems: |-
+                =Table(
+                    { Icon: Icon.Add, Text: "New", Offset: 0 }
+                    //,
+                    //{ Icon: Icon.Trash, Text: "Deactivate", Offset: -60 }
+                )
+            Width: =Parent.Width
+            ZIndex: =1
+
+        TableHeader_1 As TableHeader:
+            ColumnOnClick: ="Text"
+            Columns: |-
+                =Table(
+                    { Index: 1, Text: "Process Name", Column: "Name", Width: 250, Offset: 0, EnableSort: true },    
+                    { Index: 2, Text: "Category", Column: "Category", Width: 200, Offset: 0, EnableSort: true },
+                    { Index: 3, Text: "Modified By", Column: "Modified", Width: 180, Offset: -50, EnableSort: false },
+                    { Index: 4, Text: "Modified On", Column: "ModifiedOn", Width: 180, Offset: -120, EnableSort: true }
+                )
+            EnableSort: =false
+            Width: =Parent.Width - Self.X - 20
+            X: =16
+            Y: =60
+            ZIndex: =2
+
+        Gallery3 As gallery.galleryVertical:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Height: =Parent.Height - Self.Y
+            Items: =Filter('Business Approval Processes', 'Business Approval Processes (Views)'.'Active Business Approval Processes')
+            Layout: =Layout.Vertical
+            TemplateSize: =30
+            Width: =TableHeader_1.Width
+            X: =TableHeader_1.X
+            Y: =TableHeader_1.Y + TableHeader_1.Height
+            ZIndex: =3
+
+            Label2 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Fill: =RGBA(243, 242, 241, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                OnSelect: =Select(Parent)
+                Size: =10
+                Text: =ThisItem.Name
+                Width: =246
+                ZIndex: =1
+
+            Label2_1 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Fill: =RGBA(243, 242, 241, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                OnSelect: =Select(Parent)
+                Size: =10
+                Text: =ThisItem.Category
+                Width: =198
+                X: =Label2.X + Label2.Width + 6
+                ZIndex: =2
+
+            Label2_2 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Fill: =RGBA(243, 242, 241, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                OnSelect: =Select(Parent)
+                Size: =10
+                Text: =ThisItem.'Modified By'.'Full Name'
+                Width: =178
+                X: =Label2_1.X + Label2_1.Width + 6
+                ZIndex: =3
+
+            Label2_3 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Fill: =RGBA(243, 242, 241, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                OnSelect: =Select(Parent)
+                Size: =10
+                Text: |-
+                    =Text(ThisItem.'Modified On', "dd mmm yyyy hh:mm AM/PM")
+                Width: =178
+                X: =Label2_2.X + Label2_2.Width + 6
+                ZIndex: =4
+
+            icoProcEdit As icon.Edit:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                Color: =RGBA(105, 121, 126, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =30
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Edit
+                OnSelect: =Set(_selectedProcess, ThisItem);EditForm(frmProcess);Navigate(scrProcessEditor)
+                PaddingBottom: =6
+                PaddingLeft: =6
+                PaddingRight: =6
+                PaddingTop: =6
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Edit Process"
+                Width: =30
+                X: =Label2_3.X + Label2_3.Width + 6
+                ZIndex: =5
+
+            icoProcCopy As icon.Edit:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                Color: =RGBA(105, 121, 126, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                DisplayMode: |-
+                    =If(
+                        _copyingProcess = true && 
+                        ThisItem.'Business Approval Process' = _selectedProcess.'Business Approval Process',
+                        DisplayMode.Disabled,DisplayMode.Edit)
+                FocusedBorderThickness: =4
+                Height: =30
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Copy
+                OnSelect: |-
+                    =Set(_selectedProcess, ThisItem);
+                    Set(_copyingProcess, true);
+                    //Process to copy flow
+                    //Notify("Copying process "&ThisItem.Name&". Please wait.",NotificationType.Information);
+                    //Notify("Process "&ThisItem.Name&" copied.",NotificationType.Success);
+                    Notify("Copy feature will be coming soon in future releases.",NotificationType.Information);
+                    Set(_copyingProcess, false);
+                PaddingBottom: =6
+                PaddingLeft: =6
+                PaddingRight: =6
+                PaddingTop: =6
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Published Versions"
+                Width: =30
+                X: =icoProcEdit.X + icoProcEdit.Width + 6
+                ZIndex: =6
+
+            icoProcApproval As icon.Edit:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                Color: =RGBA(105, 121, 126, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =30
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.LevelsLayersItems
+                OnSelect: =Set(_selectedProcess, ThisItem);Navigate(scrWorkflowEditor)
+                PaddingBottom: =6
+                PaddingLeft: =6
+                PaddingRight: =6
+                PaddingTop: =6
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Approval Workflow"
+                Width: =30
+                X: =icoProcCopy.X + icoProcCopy.Width + 6
+                ZIndex: =7
+
+            icoProcVersions As icon.Edit:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                Color: =RGBA(105, 121, 126, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =30
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.OptionsList
+                OnSelect: =Set(_selectedProcess, ThisItem);Navigate(scrProcessVersion)
+                PaddingBottom: =6
+                PaddingLeft: =6
+                PaddingRight: =6
+                PaddingTop: =6
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Published Versions"
+                Width: =30
+                X: =icoProcApproval.X + icoProcApproval.Width + 6
+                ZIndex: =8
+
+    Image1_1 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =Menu_2.Height
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: =gradient_top
+        ImagePosition: =ImagePosition.Stretch
+        ImageRotation: =ImageRotation.Rotate90
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =4
+        X: =Menu_2.Width
+        Y: =Menu_2.Y
+        ZIndex: =2
+
+    Menu_2 As Menu:
+        Height: =Parent.Height - Self.Y
+        MenuItems: =_menu
+        OnHamburgerClick: =Set(_hideMenu, !_hideMenu)
+        Width: =If(_hideMenu, 45, 200)
+        Y: =Header_2.Height
+        ZIndex: =3
+
+    Header_2 As Header:
+        Height: =60
+        ShowRefresh: =false
+        Title: =_appConfig.Title
+        Width: =Parent.Width
+        ZIndex: =4
+

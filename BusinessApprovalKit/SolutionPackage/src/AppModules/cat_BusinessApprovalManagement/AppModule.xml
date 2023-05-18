@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>cat_BusinessApprovalManagement</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalcondition" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovaldata" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovaldatainstance" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalholidaycalendar" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalinstance" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalinstancelog" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalinstanceoverride" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalnode" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalprocess" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalpublicholidays" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimecondition" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimedata" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimeexception" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimeinstance" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimenode" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimenodeinstance" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimestage" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalruntimestageinstance" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalstage" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalversion" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalworkflow" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprovalworkprofile" />
+    <AppModuleComponent type="1" schemaName="cat_businessapprover" />
+    <AppModuleComponent type="1" schemaName="cat_businessapproverdynamicdatamap" />
+    <AppModuleComponent type="26" id="{9bd5ec9a-30e8-4c89-8f9e-e8912a5527ef}" />
+    <AppModuleComponent type="62" schemaName="cat_BusinessApprovalManagement" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Business Approval Management" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Set up and manage processes, rules, approvers and more." languagecode="1033" />
+  </Descriptions>
+  <appelements>
+    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_businessapprovalmanagementdefaultcommandlibrary_94e11">
+      <canvasappid>
+        <name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_businessapprovalmanagementdefaultcommandlibrary_94e11</name>
+    </appelement>
+    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_businessapprovaloverridecustompage_c87bd">
+      <canvasappid>
+        <name>cat_businessapprovaloverridecustompage_c87bd</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_businessapprovaloverridecustompage_c87bd</name>
+    </appelement>
+    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesigner_57f47">
+      <canvasappid>
+        <name>cat_processdesigner_57f47</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesigner_57f47</name>
+    </appelement>
+  </appelements>
+  <appsettings>
+    <appsetting settingdefinitionid.uniquename="FluentThemingPreview">
+      <iscustomizable>1</iscustomizable>
+      <value>true</value>
+    </appsetting>
+  </appsettings>
+</AppModule>

@@ -1,0 +1,218 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovalstages",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprovalstage",
+    "MaxGetRowsCount": 500,
+    "Name": "Business Approval Stages",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_BusinessApprovalCondition_GoToStage_c": "Business Approval Conditions (cat_BusinessApprovalCondition_GoToStage_c)",
+      "cat_BusinessApprovalCondition_Stage_cat_B": "Business Approval Conditions (cat_BusinessApprovalCondition_Stage_cat_B)",
+      "cat_BusinessApprovalNode_GoToStage_cat_Bu": "Business Approval Nodes (cat_BusinessApprovalNode_GoToStage_cat_Bu)",
+      "cat_BusinessApprovalNode_Stage_cat_Busine": "Business Approval Nodes (cat_BusinessApprovalNode_Stage_cat_Busine)",
+      "cat_businessapprovalstage_AsyncOperations": "System Jobs",
+      "cat_businessapprovalstage_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapprovalstage_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalstage_DuplicateBaseRecord)",
+      "cat_businessapprovalstage_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprovalstage_DuplicateMatchingRecord)",
+      "cat_businessapprovalstage_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprovalstage_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprovalstage_ProcessSession": "Process Sessions",
+      "cat_businessapprovalstage_SyncErrors": "Sync Errors",
+      "cat_businessapprovalstageid": "Business Approval Stage",
+      "cat_conditiontext": "Condition Text",
+      "cat_description": "Description",
+      "cat_name": "Name",
+      "cat_operand": "Operand",
+      "cat_order": "Order",
+      "cat_paths": "Paths",
+      "cat_Process": "Process",
+      "cat_SourceData": "Source Data",
+      "cat_sourcedatanamevalue": "Source Data Name Value",
+      "cat_sourcedatatype": "Source Data Type",
+      "cat_stagecondition": "Stage Condition",
+      "cat_stageconditionrule": "Stage Condition Rule",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approval Stages",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approval Stages (Views)",
+    "Name": "_cat_businessapprovalstage_views",
+    "RelatedEntityName": "Business Approval Stages",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "26a45d5e-2624-4bc5-a507-96ec068c9db5": "Business Approval Stage Lookup View",
+      "694b36f5-b874-4b8f-ac57-a97b1acc5d0f": "Active Business Approval Stages",
+      "9b5b8a25-0cde-45c2-82c1-b6d4113d081a": "Business Approval Stage Associated View",
+      "b7e216a4-e3fc-4b05-9861-b89372a9b52c": "Business Approval Stage Advanced Find View",
+      "c7ee23eb-711c-4a44-86b4-9ebf506ed8de": "Inactive Business Approval Stages"
+    }
+  },
+  {
+    "DisplayName": "Business Approval Condition Operand",
+    "Name": "cat_bizappr_operand",
+    "OptionSetInfoNameMapping": {
+      "809060000": "Equals (=)",
+      "809060001": "Less Than (<)",
+      "809060002": "Less Than or Equals (<=)",
+      "809060003": "Greater Than (>)",
+      "809060004": "Greater Than or Equals (>=)",
+      "809060005": "Not Equal (<>)",
+      "809060006": "Starts With",
+      "809060007": "Ends With",
+      "809060008": "Contains",
+      "809060009": "Is Blank",
+      "809060010": "Is Not Blank"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_operand",
+        "OptionSetReferenceEntityName": "Business Approval Stages"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "cat_operand",
+        "OptionSetReferenceEntityName": "Business Approval Nodes"
+      },
+      "OptionSetReferenceItem2": {
+        "OptionSetReferenceColumnName": "cat_operand",
+        "OptionSetReferenceEntityName": "Business Approval Runtime Stages"
+      },
+      "OptionSetReferenceItem3": {
+        "OptionSetReferenceColumnName": "cat_operand",
+        "OptionSetReferenceEntityName": "Business Approval Runtime Nodes"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_operand",
+    "RelatedEntityName": "Business Approval Stages",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Business Approval Condition Source Data",
+    "Name": "cat_bizappr_sourcedata",
+    "OptionSetInfoNameMapping": {
+      "809060000": "Request Data",
+      "809060001": "Previous Node Outcome"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_sourcedatatype",
+        "OptionSetReferenceEntityName": "Business Approval Stages"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "cat_sourcedatatype",
+        "OptionSetReferenceEntityName": "Business Approval Nodes"
+      },
+      "OptionSetReferenceItem2": {
+        "OptionSetReferenceColumnName": "cat_sourcedatatype",
+        "OptionSetReferenceEntityName": "Business Approval Runtime Stages"
+      },
+      "OptionSetReferenceItem3": {
+        "OptionSetReferenceColumnName": "cat_sourcedatatype",
+        "OptionSetReferenceEntityName": "Business Approval Runtime Nodes"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_sourcedatatype",
+    "RelatedEntityName": "Business Approval Stages",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Business Approval Stage Condition",
+    "Name": "cat_bizappr_stagecondition",
+    "OptionSetInfoNameMapping": {
+      "809060000": "None",
+      "809060001": "If/Else",
+      "809060002": "Switch"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_stagecondition",
+        "OptionSetReferenceEntityName": "Business Approval Stages"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "cat_nodecondition",
+        "OptionSetReferenceEntityName": "Business Approval Nodes"
+      },
+      "OptionSetReferenceItem2": {
+        "OptionSetReferenceColumnName": "cat_stagecondition",
+        "OptionSetReferenceEntityName": "Business Approval Runtime Stages"
+      },
+      "OptionSetReferenceItem3": {
+        "OptionSetReferenceColumnName": "cat_nodecondition",
+        "OptionSetReferenceEntityName": "Business Approval Runtime Nodes"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_stagecondition",
+    "RelatedEntityName": "Business Approval Stages",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Business Approval Stages)",
+    "Name": "cat_businessapprovalstage_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approval Stages"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approval Stages",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approval Stages)",
+    "Name": "cat_businessapprovalstage_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approval Stages"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Stages",
+    "Type": "OptionSetInfo"
+  }
+]

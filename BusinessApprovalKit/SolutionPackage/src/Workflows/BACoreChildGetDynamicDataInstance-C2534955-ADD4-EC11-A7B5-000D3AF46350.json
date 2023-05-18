@@ -1,0 +1,622 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "staticResults": {
+        "Get_Runtime_Data_Instance_Value0": {
+          "status": "Succeeded",
+          "outputs": {
+            "statusCode": "OK",
+            "headers": {}
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "5820ca01-1250-483a-a6cb-f55e24001765"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "WorkflowInstanceId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "DataObjectId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "boolean": {
+                  "title": "IsApprover",
+                  "type": "boolean",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please select yes or no",
+                  "x-ms-content-hint": "BOOLEAN"
+                },
+                "text_2": {
+                  "title": "NodeInstanceId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "boolean",
+                "text_2"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "If_this_is_a_dynamic_approver": {
+          "actions": {
+            "Get_Dynamic_Approver_Data": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "819882dd-89c1-44ad-8f41-66ae1465c670"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovaldatainstances",
+                  "$select": "cat_datavalue",
+                  "fetchXml": "<fetch version=\"1.0\" output-format=\"xml-platform\" mapping=\"logical\" distinct=\"true\">\n  <entity name=\"cat_businessapprovaldatainstance\">\n    <attribute name=\"cat_businessapprovaldatainstanceid\" />   \n    <attribute name=\"cat_datavalue\" />\n    <order attribute=\"cat_name\" descending=\"false\" />\n  <filter type=\"and\">    \n      <condition attribute=\"cat_workflowinstance\" operator=\"eq\" uitype=\"cat_businessapprovalworkflow\" value=\"{@{triggerBody()['text']}}\" />\n    </filter>\n<link-entity name=\"cat_businessapprovalruntimedata\" from=\"cat_businessapprovalruntimedataid\" to=\"cat_runtimedata\" link-type=\"inner\" alias=\"ad\">\n <attribute name=\"cat_definitiondata\" />\n<attribute name=\"cat_name\" />\n      <link-entity name=\"cat_businessapproverdynamicdatamap\" from=\"cat_runtimedata\" to=\"cat_businessapprovalruntimedataid\" link-type=\"inner\" alias=\"ae\">\n        <link-entity name=\"cat_businessapprover\" from=\"cat_businessapproverid\" to=\"cat_dynamicapprover\" link-type=\"inner\" alias=\"af\">\n          <filter type=\"and\">\n            <condition attribute=\"cat_businessapproverid\" operator=\"eq\"  uitype=\"cat_businessapprover\" value=\"{@{triggerBody()?['text_1']}}\" />\n          </filter>\n        </link-entity>\n      </link-entity>\n    </link-entity>\n  </entity>\n</fetch>"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              },
+              "runtimeConfiguration": {
+                "staticResult": {
+                  "staticResultOptions": "Disabled",
+                  "name": "Get_Runtime_Data_Instance_Value0"
+                }
+              }
+            },
+            "If_has_data": {
+              "actions": {
+                "Get_Dynamic_Approver": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "13298084-bc95-43a8-96cb-c0d3f1efb058"
+                  },
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "dcb75fef-35d6-ec11-a7b5-000d3af46350"
+                    },
+                    "body": {
+                      "boolean": false,
+                      "text": "@triggerBody()['text_2']",
+                      "text_1": "@triggerBody()['text']",
+                      "text_2": "@first(outputs('Get_Dynamic_Approver_Data')?['body/value'])['cat_datavalue']"
+                    },
+                    "retryPolicy": {
+                      "type": "none"
+                    }
+                  }
+                },
+                "Set_Approver_Data": {
+                  "runAfter": {
+                    "Get_Dynamic_Approver": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "ef7947e2-3065-4c6c-bef1-64886dfbe8b3"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varDynamicValue",
+                    "value": {
+                      "value": "@{body('Get_Dynamic_Approver')?['approverid']}",
+                      "raw": "@{first(outputs('Get_Dynamic_Approver_Data')?['body/value'])['cat_datavalue']}",
+                      "default": "",
+                      "type": "@body('Get_Dynamic_Approver')?['notificationtype']",
+                      "dataname": "@{first(outputs('Get_Dynamic_Approver_Data')?['body/value'])['ad.cat_name']}"
+                    }
+                  },
+                  "description": "Approver can be blank if no approver exists. The parent flow is expected to handle blank value."
+                }
+              },
+              "runAfter": {
+                "Get_Dynamic_Approver_Data": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Do_we_wait_for_Dynamic_Approver_Data": {
+                    "actions": {
+                      "When_Data_Instance_Approver_is_added": {
+                        "runAfter": {
+                          "Get_Runtime_Data_Id": [
+                            "Succeeded"
+                          ]
+                        },
+                        "metadata": {
+                          "operationMetadataId": "3fbeb294-ae71-4e11-ba23-43fe1d5ae295"
+                        },
+                        "type": "OpenApiConnectionWebhook",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_commondataserviceforapps_1",
+                            "operationId": "SubscribeWebhookTrigger",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                          },
+                          "parameters": {
+                            "subscriptionRequest/message": 1,
+                            "subscriptionRequest/entityname": "cat_businessapprovaldatainstance",
+                            "subscriptionRequest/scope": 4,
+                            "subscriptionRequest/filterexpression": "_cat_workflowinstance_value eq @{triggerBody()['text']} and _cat_runtimedata_value eq @{first(outputs('Get_Runtime_Data_Id')?['body/value'])?['cat_RuntimeData/cat_businessapprovalruntimedataid']}",
+                            "subscriptionRequest/runas": 1
+                          },
+                          "authentication": {
+                            "type": "Raw",
+                            "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                          }
+                        }
+                      },
+                      "Retry_get_Dynamic_Approver_Data": {
+                        "runAfter": {
+                          "When_Data_Instance_Approver_is_added": [
+                            "Succeeded"
+                          ]
+                        },
+                        "metadata": {
+                          "operationMetadataId": "819882dd-89c1-44ad-8f41-66ae1465c670"
+                        },
+                        "type": "OpenApiConnection",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_commondataserviceforapps_1",
+                            "operationId": "ListRecords",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                          },
+                          "parameters": {
+                            "entityName": "cat_businessapprovaldatainstances",
+                            "$select": "cat_datavalue",
+                            "fetchXml": "<fetch version=\"1.0\" output-format=\"xml-platform\" mapping=\"logical\" distinct=\"true\">\n  <entity name=\"cat_businessapprovaldatainstance\">\n    <attribute name=\"cat_businessapprovaldatainstanceid\" />   \n    <attribute name=\"cat_datavalue\" />\n    <order attribute=\"cat_name\" descending=\"false\" />\n  <filter type=\"and\">    \n      <condition attribute=\"cat_workflowinstance\" operator=\"eq\" uitype=\"cat_businessapprovalworkflow\" value=\"{@{triggerBody()['text']}}\" />\n    </filter>\n<link-entity name=\"cat_businessapprovalruntimedata\" from=\"cat_businessapprovalruntimedataid\" to=\"cat_runtimedata\" link-type=\"inner\" alias=\"ad\">\n <attribute name=\"cat_definitiondata\" />\n <attribute name=\"cat_name\" />\n      <link-entity name=\"cat_businessapproverdynamicdatamap\" from=\"cat_runtimedata\" to=\"cat_businessapprovalruntimedataid\" link-type=\"inner\" alias=\"ae\">\n        <link-entity name=\"cat_businessapprover\" from=\"cat_businessapproverid\" to=\"cat_dynamicapprover\" link-type=\"inner\" alias=\"af\">\n          <filter type=\"and\">\n            <condition attribute=\"cat_businessapproverid\" operator=\"eq\"  uitype=\"cat_businessapprover\" value=\"{@{triggerBody()?['text_1']}}\" />\n          </filter>\n        </link-entity>\n      </link-entity>\n    </link-entity>\n  </entity>\n</fetch>"
+                          },
+                          "authentication": {
+                            "type": "Raw",
+                            "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                          }
+                        },
+                        "description": "[2022-05] Nested expansion not supported for Many-to-many relationship - using FetchXML instead. Retrieve dynamic approver via Dynamic Approval Map (N:N) related to Runtime Data Instance",
+                        "runtimeConfiguration": {
+                          "staticResult": {
+                            "staticResultOptions": "Disabled",
+                            "name": "Get_Runtime_Data_Instance_Value0"
+                          }
+                        }
+                      },
+                      "Retry_get_Dynamic_Approver": {
+                        "runAfter": {
+                          "Retry_get_Dynamic_Approver_Data": [
+                            "Succeeded"
+                          ]
+                        },
+                        "metadata": {
+                          "operationMetadataId": "13298084-bc95-43a8-96cb-c0d3f1efb058"
+                        },
+                        "type": "Workflow",
+                        "inputs": {
+                          "host": {
+                            "workflowReferenceName": "dcb75fef-35d6-ec11-a7b5-000d3af46350"
+                          },
+                          "body": {
+                            "boolean": false,
+                            "text": "@triggerBody()['text_2']",
+                            "text_1": "@triggerBody()['text']",
+                            "text_2": "@first(outputs('Retry_get_Dynamic_Approver_Data')?['body/value'])['cat_datavalue']"
+                          },
+                          "retryPolicy": {
+                            "type": "none"
+                          }
+                        }
+                      },
+                      "Set_Approver_Data_on_Retry": {
+                        "runAfter": {
+                          "Retry_get_Dynamic_Approver": [
+                            "Succeeded"
+                          ]
+                        },
+                        "metadata": {
+                          "operationMetadataId": "ef7947e2-3065-4c6c-bef1-64886dfbe8b3"
+                        },
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varDynamicValue",
+                          "value": {
+                            "value": "@{body('Retry_get_Dynamic_Approver')?['approverid']}",
+                            "raw": "@{first(outputs('Retry_get_Dynamic_Approver_Data')?['body/value'])['cat_datavalue']}",
+                            "default": "",
+                            "type": "@body('Retry_get_Dynamic_Approver')?['notificationtype']",
+                            "dataname": "@{first(outputs('Retry_get_Dynamic_Approver_Data')?['body/value'])['ad.cat_name']}"
+                          }
+                        },
+                        "description": "Approver can be blank if no approver exists. The parent flow is expected to handle blank value."
+                      },
+                      "Get_Runtime_Data_Id": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "8ed91cbf-65c6-4e64-9a84-c00aa3609738"
+                        },
+                        "type": "OpenApiConnection",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_commondataserviceforapps_1",
+                            "operationId": "ListRecords",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                          },
+                          "parameters": {
+                            "entityName": "cat_businessapproverdynamicdatamaps",
+                            "$select": "cat_RuntimeData",
+                            "$filter": "_cat_dynamicapprover_value eq @{triggerBody()?['text_1']}",
+                            "$expand": "cat_RuntimeData($select=cat_name, cat_businessapprovalruntimedataid)",
+                            "$top": 1
+                          },
+                          "authentication": {
+                            "type": "Raw",
+                            "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                          }
+                        }
+                      }
+                    },
+                    "runAfter": {},
+                    "else": {
+                      "actions": {
+                        "Set_blank_approver_(not_found)": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "5d8e3b5d-a6e0-41a2-b901-0240133aee4d"
+                          },
+                          "type": "SetVariable",
+                          "inputs": {
+                            "name": "varDynamicValue",
+                            "value": {
+                              "value": "",
+                              "raw": "",
+                              "default": "",
+                              "type": 0,
+                              "dataname": ""
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "expression": {
+                      "equals": [
+                        "@body('Get_Default_Setting')?['WaitOnNoApprover']",
+                        "@true"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "5ca7d00e-2209-47df-ac91-3f3102cdfa61"
+                    },
+                    "type": "If"
+                  }
+                }
+              },
+              "expression": {
+                "greater": [
+                  "@length(outputs('Get_Dynamic_Approver_Data')?['body/value'])",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b68ef473-c1fa-4e18-939a-cd6fe44ef23f"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Get_Default_Setting": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Get_Instance_Data": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "bb856755-7bf1-4804-99da-d03241471108"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "connectionName": "shared_commondataserviceforapps_1",
+                    "operationId": "ListRecords",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                  },
+                  "parameters": {
+                    "entityName": "cat_businessapprovaldatainstances",
+                    "$select": "cat_datavalue, cat_RuntimeData",
+                    "$filter": "_cat_workflowinstance_value eq @{triggerBody()['text']} and _cat_runtimedata_value eq @{triggerBody()['text_1']}",
+                    "$expand": "cat_RuntimeData($select=cat_name, cat_defaultvalue,cat_datatype)"
+                  },
+                  "authentication": {
+                    "type": "Raw",
+                    "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                  }
+                }
+              },
+              "If_has_instance_data": {
+                "actions": {
+                  "Set_Dynamic_Data": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "ef7947e2-3065-4c6c-bef1-64886dfbe8b3"
+                    },
+                    "type": "SetVariable",
+                    "inputs": {
+                      "name": "varDynamicValue",
+                      "value": {
+                        "value": "@{first(body('Get_Instance_Data')?['value'])?['cat_datavalue']}",
+                        "raw": "@{first(body('Get_Instance_Data')?['value'])?['cat_datavalue']}",
+                        "default": "@{first(body('Get_Instance_Data')?['value'])?['cat_RuntimeData/cat_defaultvalue']}",
+                        "type": "@first(body('Get_Instance_Data')?['value'])?['cat_RuntimeData/cat_datatype']",
+                        "dataname": "@{first(body('Get_Instance_Data')?['value'])?['cat_RuntimeData/cat_name']}"
+                      }
+                    }
+                  }
+                },
+                "runAfter": {
+                  "Get_Instance_Data": [
+                    "Succeeded"
+                  ]
+                },
+                "else": {
+                  "actions": {
+                    "When_data_instance_is_added": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "3380c98c-5669-4282-a6df-7db408c42c11"
+                      },
+                      "type": "OpenApiConnectionWebhook",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "SubscribeWebhookTrigger",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "subscriptionRequest/message": 1,
+                          "subscriptionRequest/entityname": "cat_businessapprovaldatainstance",
+                          "subscriptionRequest/scope": 4,
+                          "subscriptionRequest/filterexpression": "_cat_workflowinstance_value eq @{triggerBody()['text']} and _cat_runtimedata_value eq @{triggerBody()?['text_1']}",
+                          "subscriptionRequest/runas": 1
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    },
+                    "Set_Dynamic_Data_after_wait": {
+                      "runAfter": {
+                        "Retry_Get_Instance_Data": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "ef7947e2-3065-4c6c-bef1-64886dfbe8b3"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varDynamicValue",
+                        "value": {
+                          "value": "@{first(body('Retry_Get_Instance_Data')?['value'])?['cat_datavalue']}",
+                          "raw": "@{first(body('Retry_Get_Instance_Data')?['value'])?['cat_datavalue']}",
+                          "default": "@{first(body('Retry_Get_Instance_Data')?['value'])?['cat_RuntimeData/cat_defaultvalue']}",
+                          "type": "@first(body('Retry_Get_Instance_Data')?['value'])?['cat_RuntimeData/cat_datatype']",
+                          "dataname": "@{first(body('Retry_Get_Instance_Data')?['value'])?['cat_RuntimeData/cat_name']}"
+                        }
+                      },
+                      "description": "Approver can be blank if no approver exists. The parent flow is expected to handle blank value."
+                    },
+                    "Retry_Get_Instance_Data": {
+                      "runAfter": {
+                        "When_data_instance_is_added": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "bb856755-7bf1-4804-99da-d03241471108"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovaldatainstances",
+                          "$select": "cat_datavalue, cat_RuntimeData",
+                          "$filter": "_cat_workflowinstance_value eq @{triggerBody()['text']} and _cat_runtimedata_value eq @{triggerBody()['text_1']}",
+                          "$expand": "cat_RuntimeData($select=cat_name, cat_defaultvalue,cat_datatype)"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    }
+                  }
+                },
+                "expression": {
+                  "greater": [
+                    "@length(outputs('Get_Instance_Data')?['body/value'])",
+                    0
+                  ]
+                },
+                "metadata": {
+                  "operationMetadataId": "b68ef473-c1fa-4e18-939a-cd6fe44ef23f"
+                },
+                "type": "If"
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@triggerBody()['boolean']",
+              "@true"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c59fde2c-ae36-47d3-bf97-23cc17e6ec8a"
+          },
+          "type": "If"
+        },
+        "varDynamicValue": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "e05b2998-7c65-4f67-a825-a33a0019b03e"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varDynamicValue",
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "varHasData": {
+          "runAfter": {
+            "varDynamicValue": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "251413be-be50-4977-a638-f01fa6554348"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varHasData",
+                "type": "boolean",
+                "value": "@false"
+              }
+            ]
+          }
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "If_this_is_a_dynamic_approver": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0d3d0893-2efd-4d58-b9a5-4c24867bf681"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "value": "@{variables('varDynamicValue')['value']}",
+              "raw": "@{variables('varDynamicValue')['raw']}",
+              "default": "@{variables('varDynamicValue')['default']}",
+              "type": "@{variables('varDynamicValue')['type']}",
+              "dataname": "@{variables('varDynamicValue')['dataname']}"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "title": "value",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                },
+                "raw": {
+                  "title": "raw",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                },
+                "default": {
+                  "title": "default",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                },
+                "type": {
+                  "title": "type",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                },
+                "dataname": {
+                  "title": "dataname",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Get_Default_Setting": {
+          "runAfter": {
+            "varHasData": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3c71ad8e-f9ee-420f-b8c5-5e38c4a42dff"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "83b1ec3a-88d3-ec11-a7b5-000d3af46350"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

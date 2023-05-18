@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="cat_bizappr_publishingstatus" localizedName="Business Approval Publishing Status" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.4</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Business Approval Publishing Status" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="" languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="809060000" ExternalValue="">
+      <labels>
+        <label description="Pending" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060001" ExternalValue="">
+      <labels>
+        <label description="In Progress" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060002" ExternalValue="">
+      <labels>
+        <label description="Published" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060004">
+      <labels>
+        <label description="Archived" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060005">
+      <labels>
+        <label description="Error" languagecode="1033" />
+      </labels>
+    </option>
+  </options>
+</optionset>

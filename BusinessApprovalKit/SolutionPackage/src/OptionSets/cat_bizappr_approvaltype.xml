@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="cat_bizappr_approvaltype" localizedName="Business Approval Type" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Business Approval Type" languagecode="1033" />
+  </displaynames>
+  <options>
+    <option value="809060000">
+      <labels>
+        <label description="Approve/Reject - Everyone must approve" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060001">
+      <labels>
+        <label description="Approve/Reject - First to respond" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060002">
+      <labels>
+        <label description="Custom Responses - Wait for all responses" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="809060003">
+      <labels>
+        <label description="Custom Responses - Wait for one response" languagecode="1033" />
+      </labels>
+    </option>
+  </options>
+</optionset>

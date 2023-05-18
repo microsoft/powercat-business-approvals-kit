@@ -1,0 +1,222 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_Approver_is_OOF": {
+          "metadata": {
+            "operationMetadataId": "356f0fe8-dc3f-4676-ad54-16efb5d66299"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "cat_businessapprover",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "cat_isoutofoffice",
+              "subscriptionRequest/filterexpression": "cat_isoutofoffice eq true",
+              "subscriptionRequest/runas": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Running_Approval_Instances_for_this_Approver": {
+          "runAfter": {
+            "varDelegate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9d55701e-55b0-4a3c-af7f-0558c7bbcf87"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalinstances",
+              "$select": "cat_businessapprovalinstanceid, cat_Node",
+              "$filter": "_cat_approver_value eq @{triggerOutputs()?['body/cat_businessapproverid']} and cat_instancestatus eq   809060001 and cat_Node/cat_delegationrule ge 809060002",
+              "$expand": "cat_Node($select=cat_delegationrule;$expand=cat_ProcessVersion($select=_cat_defaultapprover_value))"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "description": "Find all running instances (Instance Status = Running (809060001) and Node delegation rule is Out of office (809060002), Time-out or Out of Office (809060003))"
+        },
+        "Get_Delegates": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "0dd8fe41-aeff-47ba-a288-709fc7c4c70c"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovers",
+              "$select": "cat_Delegate, cat_BackupDelegate",
+              "$filter": "cat_businessapproverid eq @{triggerOutputs()?['body/cat_businessapproverid']}",
+              "$expand": "cat_Delegate($select=cat_businessapproverid,cat_isoutofoffice),cat_BackupDelegate($select=cat_businessapproverid,cat_isoutofoffice)",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "varDelegate": {
+          "runAfter": {
+            "Available_Delegate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ea5e93ef-5fb4-4d3f-8fa7-cc23f7ee94fe"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varDelegate",
+                "type": "string",
+                "value": "@{coalesce(outputs('Available_Delegate'), '')}"
+              }
+            ]
+          },
+          "description": "Delegate ID or empty string if none available"
+        },
+        "Each_Running_Instances": {
+          "foreach": "@outputs('Running_Approval_Instances_for_this_Approver')?['body/value']",
+          "actions": {
+            "Create_Override_for_Delegate": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0cdce98d-a041-414c-ab24-baadbf528eec"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalinstanceoverrides",
+                  "item/cat_ApprovalInstance@odata.bind": "cat_businessapprovalinstances(@{items('Each_Running_Instances')?['cat_businessapprovalinstanceid']})",
+                  "item/cat_iscancellation": false,
+                  "item/cat_OverrideApprover@odata.bind": "cat_businessapprovers(@{variables('varDelegate')})",
+                  "item/cat_overridereason": "Original approver @{triggerOutputs()?['body/cat_displayname']} is out of office. Set to delegate.",
+                  "item/cat_isreassign": true,
+                  "item/cat_overridetype": 809060002
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "description": "Override Type = OOF (809060002) or Time out (809060001)"
+            }
+          },
+          "runAfter": {
+            "Running_Approval_Instances_for_this_Approver": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "89123adb-2f50-42e5-a4e7-43d432acf882"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 20
+            }
+          }
+        },
+        "Delegates": {
+          "runAfter": {
+            "Get_Delegates": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6806b9bd-ca92-446d-9d82-813dc12934ea"
+          },
+          "type": "Compose",
+          "inputs": [
+            {
+              "Delegate": "@first(body('Get_Delegates')['value'])?['cat_Delegate/cat_businessapproverid']",
+              "OOF": "@first(body('Get_Delegates')['value'])?['cat_Delegate/cat_isoutofoffice']"
+            },
+            {
+              "Delegate": "@first(body('Get_Delegates')['value'])?['cat_BackupDelegate/cat_businessapproverid']",
+              "OOF": "@first(body('Get_Delegates')['value'])?['cat_BackupDelegate/cat_isoutofoffice']"
+            }
+          ]
+        },
+        "Delegates_not_OOF": {
+          "runAfter": {
+            "Delegates": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "db87f010-8108-4032-9f27-50308dac03e9"
+          },
+          "type": "Query",
+          "inputs": {
+            "from": "@outputs('Delegates')",
+            "where": "@not(equals(item()['OOF'], true))"
+          }
+        },
+        "Available_Delegate": {
+          "runAfter": {
+            "Delegates_not_OOF": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "55880e34-45d9-4b23-9194-c43ff484e08c"
+          },
+          "type": "Compose",
+          "inputs": "@if(equals(length(body('Delegates_not_OOF')), 2), coalesce(body('Delegates_not_OOF')[0]['Delegate'],body('Delegates_not_OOF')[1]['Delegate']), if(equals(length(body('Delegates_not_OOF')), 1), first(body('Delegates_not_OOF'))['Delegate'], null))",
+          "description": "Select Delegate or Backup delegate, depending on which is available (not null) and is not out of office"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

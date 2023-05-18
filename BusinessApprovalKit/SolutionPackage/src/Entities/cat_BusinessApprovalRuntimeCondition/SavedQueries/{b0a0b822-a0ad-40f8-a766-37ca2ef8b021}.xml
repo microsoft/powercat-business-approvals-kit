@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{b0a0b822-a0ad-40f8-a766-37ca2ef8b021}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalruntimeconditionid">
+          <cell name="cat_name" width="300" />
+          <cell name="cat_processversion" width="100" />
+          <cell name="cat_stage" width="100" />
+          <cell name="a_3e9352f5bc4d41f6ad016aeb188d25b3.cat_stagecondition" width="100" />
+          <cell name="cat_node" width="100" />
+          <cell name="a_d99b99d1171d4f8f8d4eb40428901197.cat_nodecondition" width="100" />
+          <cell name="cat_conditiondatatype" width="100" />
+          <cell name="cat_gotostage" width="100" />
+          <cell name="cat_conditionvalue" width="100" />
+          <cell name="cat_conditionvaluedisplay" width="100" />
+          <cell name="cat_pathindex" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cat_businessapprovalruntimecondition">
+          <attribute name="cat_businessapprovalruntimeconditionid" />
+          <attribute name="cat_name" />
+          <attribute name="createdon" />
+          <order attribute="cat_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="cat_processversion" />
+          <attribute name="cat_stage" />
+          <attribute name="cat_node" />
+          <attribute name="cat_conditiondatatype" />
+          <attribute name="cat_gotostage" />
+          <attribute name="cat_conditionvalue" />
+          <attribute name="cat_conditionvaluedisplay" />
+          <attribute name="cat_pathindex" />
+          <link-entity alias="a_d99b99d1171d4f8f8d4eb40428901197" name="cat_businessapprovalruntimenode" to="cat_node" from="cat_businessapprovalruntimenodeid" link-type="outer" visible="false">
+            <attribute name="cat_nodecondition" />
+          </link-entity>
+          <link-entity alias="a_3e9352f5bc4d41f6ad016aeb188d25b3" name="cat_businessapprovalruntimestage" to="cat_stage" from="cat_businessapprovalruntimestageid" link-type="outer" visible="false">
+            <attribute name="cat_stagecondition" />
+          </link-entity>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Business Approval Runtime Conditions" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

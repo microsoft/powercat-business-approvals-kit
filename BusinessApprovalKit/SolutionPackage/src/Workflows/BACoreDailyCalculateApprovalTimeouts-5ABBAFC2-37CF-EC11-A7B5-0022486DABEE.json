@@ -1,0 +1,374 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "staticResults": {
+        "Get_Approval_Instances_with_Delegation_Rules0": {
+          "status": "Succeeded",
+          "outputs": {
+            "statusCode": "200",
+            "body": {
+              "value": [
+                {
+                  "cat_Node": {
+                    "cat_delegationrule": 809060001,
+                    "cat_timeout@OData.Community.Display.V1.FormattedValue": "3",
+                    "cat_timeout": 8,
+                    "cat_timeoutmode": 809060000,
+                    "cat_businessapprovalruntimenodeid": "508c83a8-53cb-ec11-a7b5-0022486dad00"
+                  }
+                }
+              ]
+            },
+            "headers": {}
+          }
+        },
+        "Get_Work_Profile_Days1": {
+          "status": "Succeeded",
+          "outputs": {
+            "statusCode": "OK",
+            "headers": {}
+          }
+        },
+        "Decrement_Counter_by_1_(Business_Days)0": {
+          "status": "Succeeded",
+          "outputs": {
+            "statusCode": "OK",
+            "headers": {}
+          }
+        }
+      },
+      "triggers": {
+        "Daily_Run": {
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2022-05-09T00:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "0f34fa93-88b1-47b6-89d0-f2c747da4ff3"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Get_Approval_Instances_with_Delegation_Rules": {
+          "runAfter": {
+            "Dates": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "01c276fa-02ea-419e-abc8-231b0e3b0c75"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalinstances",
+              "$select": "cat_businessapprovalinstanceid, cat_Node,cat_start, _cat_approver_value, cat_timeoutcounter, cat_timeoutupdate",
+              "$filter": "cat_instancestatus eq 809060001 and cat_Node/cat_delegationrule ne 809060000 and cat_timeoutcounter gt 0",
+              "$expand": "cat_Node($select=cat_delegationrule,cat_timeout,cat_timeoutmode)"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "description": "Instance status = Running (809060001), Delegation Rule <> None (809060000) and time-out counter is not 0",
+          "runtimeConfiguration": {
+            "staticResult": {
+              "staticResultOptions": "Disabled",
+              "name": "Get_Approval_Instances_with_Delegation_Rules0"
+            }
+          }
+        },
+        "Each_Approval_Instance": {
+          "foreach": "@outputs('Get_Approval_Instances_with_Delegation_Rules')?['body/value']",
+          "actions": {
+            "If_Time_Out_not_updated_today": {
+              "actions": {
+                "If_TimeOut_Mode_is_Business_Days": {
+                  "actions": {
+                    "Get_Work_Profile_Days": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "cc80327e-7c46-4a88-a5b7-8ab76461b338"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovers",
+                          "$select": "cat_WorkProfile",
+                          "$filter": "cat_businessapproverid eq @{items('Each_Approval_Instance')?['_cat_approver_value']}",
+                          "$expand": "cat_WorkProfile"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      },
+                      "runtimeConfiguration": {
+                        "staticResult": {
+                          "staticResultOptions": "Disabled",
+                          "name": "Get_Work_Profile_Days1"
+                        }
+                      }
+                    },
+                    "Work_Profile_Days": {
+                      "runAfter": {
+                        "Get_Holidays": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "b4a71ead-5904-42b1-bc48-e5b987de2482"
+                      },
+                      "type": "Compose",
+                      "inputs": [
+                        {
+                          "day": 0,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_sunday']"
+                        },
+                        {
+                          "day": 1,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_monday']"
+                        },
+                        {
+                          "day": 2,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_tuesday']"
+                        },
+                        {
+                          "day": 3,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_wednesday']"
+                        },
+                        {
+                          "day": 4,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_thursday']"
+                        },
+                        {
+                          "day": 5,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_friday']"
+                        },
+                        {
+                          "day": 6,
+                          "isWorkday": "@first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/cat_saturday']"
+                        }
+                      ],
+                      "description": "From Sunday to Saturday"
+                    },
+                    "Get_Holidays": {
+                      "runAfter": {
+                        "Get_Work_Profile_Days": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "99691095-a921-413f-b0a4-554d0a0b7d73"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovalpublicholidayses",
+                          "$select": "cat_date",
+                          "$filter": "_cat_calendar_value eq @{first(body('Get_Work_Profile_Days')['value'])['cat_WorkProfile/_cat_holidaycalendar_value']} and cat_date gt '@{outputs('Dates')['Lower']}' and cat_date lt '@{outputs('Dates')['Upper']}'"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "If_Today_is_Working_day_and_not_holiday": {
+                      "actions": {
+                        "Decrement_Counter_by_1_(Business_Days)": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "960c4e95-4316-43eb-96f2-5376742c0d7f"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_commondataserviceforapps_1",
+                              "operationId": "UpdateRecord",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                            },
+                            "parameters": {
+                              "entityName": "cat_businessapprovalinstances",
+                              "recordId": "@items('Each_Approval_Instance')?['cat_businessapprovalinstanceid']",
+                              "item/cat_timeoutcounter": "@sub(item()['cat_timeoutcounter'], 1)",
+                              "item/cat_timeoutupdate": "@utcNow()"
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          },
+                          "runtimeConfiguration": {
+                            "staticResult": {
+                              "staticResultOptions": "Disabled",
+                              "name": "Decrement_Counter_by_1_(Business_Days)0"
+                            }
+                          }
+                        }
+                      },
+                      "runAfter": {
+                        "Compose": [
+                          "Succeeded"
+                        ]
+                      },
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@outputs('Work_Profile_Days')[dayOfWeek(outputs('Today'))]['isWorkday']",
+                              "@true"
+                            ]
+                          },
+                          {
+                            "equals": [
+                              "@length(body('Get_Holidays')['value'])",
+                              0
+                            ]
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "c24cf651-d000-45d4-b0e7-41cbe1121477"
+                      },
+                      "type": "If"
+                    },
+                    "Compose": {
+                      "runAfter": {
+                        "Work_Profile_Days": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "dfeb2a4a-c36b-4134-b68f-e3605a0b4a41"
+                      },
+                      "type": "Compose",
+                      "inputs": {
+                        "hols": "@length(body('Get_Holidays')['value'])",
+                        "isWorkday": "@outputs('Work_Profile_Days')[dayOfWeek(outputs('Today'))]['isWorkday']"
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "else": {
+                    "actions": {
+                      "Decrement_Counter_by_1_(Actual_Days)": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "a4bc8934-440e-4996-a5a2-f84031364bff"
+                        },
+                        "type": "OpenApiConnection",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_commondataserviceforapps_1",
+                            "operationId": "UpdateRecord",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                          },
+                          "parameters": {
+                            "entityName": "cat_businessapprovalinstances",
+                            "recordId": "@items('Each_Approval_Instance')?['cat_businessapprovalinstanceid']",
+                            "item/cat_timeoutcounter": "@sub(item()['cat_timeoutcounter'], 1)",
+                            "item/cat_timeoutupdate": "@utcNow()"
+                          },
+                          "authentication": "@parameters('$authentication')"
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "equals": [
+                      "@items('Each_Approval_Instance')?['cat_node/cat_timeoutmode']",
+                      809060000
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "49facc36-3cc4-46b4-b11b-92d5221396ee"
+                  },
+                  "type": "If",
+                  "description": "TimeOut Mode = Business Days (809060002), require calculation based on Work Profile and holidays"
+                }
+              },
+              "runAfter": {},
+              "expression": {
+                "not": {
+                  "equals": [
+                    "@first(split(item()['cat_timeoutupdate'], 'T'))",
+                    "@first(split(utcNow(), 'T'))"
+                  ]
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "d8662e24-15ca-47e1-9d52-c99427d839ba"
+              },
+              "type": "If",
+              "description": "Prevent double decrement if this flow is executed more than once a day"
+            }
+          },
+          "runAfter": {
+            "Get_Approval_Instances_with_Delegation_Rules": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "38ed6144-a673-43d9-9046-21f406223bf1"
+          },
+          "type": "Foreach"
+        },
+        "Dates": {
+          "runAfter": {
+            "Today": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "789fbe26-8850-4fc7-a086-fc576dc2726d"
+          },
+          "type": "Compose",
+          "inputs": {
+            "Lower": "@{addDays(outputs('Today'), -1)}",
+            "Upper": "@{addDays(outputs('Today'), 1)}"
+          }
+        },
+        "Today": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "60f7c55f-6755-4ba8-8df8-517266acbe04"
+          },
+          "type": "Compose",
+          "inputs": "@concat(first(split(utcNow(), 'T')), 'T00:00:00Z')"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

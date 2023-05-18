@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{8f99d74f-efa9-43fc-a2e5-4f6cbac8789f}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{dec3283e-687f-42c3-ad4c-35880d483590}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{7e921002-5cde-456c-92f0-77b1bc8c5465}" columns="11">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{e0c5cdef-1cf7-4c03-9e49-d23391f1cdee}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="cat_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cat_name" />
+                      </cell>
+                      <cell locklevel="0" id="{3b2c9115-90ee-4b7e-a357-6f0a4249dcfc}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Monday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_monday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_monday" disabled="false" uniqueid="{3fd264ee-d819-4360-96ad-61a872d4988f}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ee79234f-568e-4e66-b261-7cb00ca4de6d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Holiday Calendar" languagecode="1033" />
+                        </labels>
+                        <control id="cat_holidaycalendar" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_holidaycalendar" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{c59cbb54-bb7e-4b51-9293-c818b6abeffd}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Tuesday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_tuesday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_tuesday" disabled="false" uniqueid="{9c99dfc4-b977-4feb-926f-6815c5f2ce9d}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{857f3aa3-bcfe-405c-a08e-da3d8d613d00}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                      <cell locklevel="0" id="{62b19818-03c9-42c0-a4d8-148f80faa0be}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Wednesday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_wednesday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_wednesday" disabled="false" uniqueid="{fa212a24-9b10-49b2-b950-ef3e066662c7}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{0c6d7eff-8971-4eff-bf81-903ae92e29fd}" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="New SG control 1642996522824" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>bulkdeletefailure</TargetEntityType>
+                            <ViewId>{00000000-0000-0000-00AA-000010001001}</ViewId>
+                            <ViewIds>{00000000-0000-0000-00AA-000010001001}</ViewIds>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <RelationshipName>cat_businessapprovalworkprofile_BulkDeleteFailures</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell locklevel="0" id="{6319bff1-88ec-4fb0-b6dd-491460dab434}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Thursday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_thursday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_thursday" disabled="false" uniqueid="{b369ba69-1da5-418b-9aa8-1588fa1c03a4}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{ddbfdfa5-daa0-4d2e-aaca-256245234841}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell locklevel="0" id="{865631f0-ad93-45e8-84f8-be29475da9aa}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Friday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_friday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_friday" disabled="false" uniqueid="{1adb5fee-26ff-4856-a6fd-a2f0ff6f2569}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{b88e8619-a5ac-478c-a3e9-8b6b61af31ea}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell locklevel="0" id="{6fd98f89-858a-40b7-ba63-4b22dc45fa7e}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Saturday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_saturday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_saturday" disabled="false" uniqueid="{b0849a46-8fd3-442d-b135-d9085e3bc35e}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{6630232a-62fb-45ec-a5f3-51acd9b9e994}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell locklevel="0" id="{200ba53e-72bd-4132-8bcf-6615da868a1c}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Sunday" languagecode="1033" />
+                        </labels>
+                        <control id="cat_sunday" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cat_sunday" disabled="false" uniqueid="{8a417ef6-de51-41f0-af50-4b2ef6b04f8c}" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{11da8823-bae0-4d40-aa95-d933e5ccec53}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{8e4be286-063d-423d-ae6f-e512287b81a6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f80d7f19-2dcb-4c54-8eca-2f590ad448ef}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3c839d4b-51fa-4d23-ae3d-844d3fc13331}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{73a4333d-bd08-428e-8acb-bdb18bb9b424}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{734a7359-fc24-4bce-a80e-6ad9435112a8}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{12683f33-1196-440d-8ff3-8a21bfa3d41f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{aba7dba8-1931-431a-82ea-ec8c4a6b0db1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{3fd264ee-d819-4360-96ad-61a872d4988f}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_monday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_monday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_monday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_monday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{9c99dfc4-b977-4feb-926f-6815c5f2ce9d}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_tuesday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_tuesday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_tuesday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_tuesday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{fa212a24-9b10-49b2-b950-ef3e066662c7}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_wednesday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_wednesday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_wednesday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_wednesday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{b369ba69-1da5-418b-9aa8-1588fa1c03a4}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_thursday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_thursday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_thursday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_thursday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{1adb5fee-26ff-4856-a6fd-a2f0ff6f2569}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_friday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_friday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_friday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_friday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{b0849a46-8fd3-442d-b135-d9085e3bc35e}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_saturday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_saturday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_saturday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_saturday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{8a417ef6-de51-41f0-af50-4b2ef6b04f8c}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>cat_sunday</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_sunday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_sunday</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">cat_sunday</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

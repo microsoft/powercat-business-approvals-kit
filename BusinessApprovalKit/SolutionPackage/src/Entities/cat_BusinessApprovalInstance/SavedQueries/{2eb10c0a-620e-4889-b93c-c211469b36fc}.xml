@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{2eb10c0a-620e-4889-b93c-c211469b36fc}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalinstanceid">
+          <cell name="cat_name" width="300" />
+          <cell name="cat_approver" width="100" />
+          <cell name="cat_stage" width="100" />
+          <cell name="cat_node" width="100" />
+          <cell name="cat_notification" width="100" />
+          <cell name="cat_originalapprover" width="100" />
+          <cell name="cat_additionalinformation" width="100" />
+          <cell name="cat_instancestatus" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cat_businessapprovalinstance">
+          <attribute name="cat_businessapprovalinstanceid" />
+          <attribute name="cat_name" />
+          <attribute name="createdon" />
+          <order attribute="cat_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="cat_approver" />
+          <attribute name="cat_node" />
+          <attribute name="cat_additionalinformation" />
+          <attribute name="cat_stage" />
+          <attribute name="cat_instancestatus" />
+          <attribute name="cat_notification" />
+          <attribute name="cat_originalapprover" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Business Approval Instances" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{4976d0c5-487c-ec11-8d20-000d3a0a0d6b}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapproverid">
+          <cell name="cat_approverid" width="227" />
+          <cell name="cat_name" width="200" />
+          <cell name="cat_notificationtype" width="100" />
+          <cell name="cat_delegate" width="100" />
+          <cell name="cat_backupdelegate" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="cat_businessapprover">
+          <attribute name="cat_name" />
+          <attribute name="cat_businessapproverid" />
+          <attribute name="cat_approverid" />
+          <attribute name="cat_notificationtype" />
+          <attribute name="cat_backupdelegate" />
+          <attribute name="cat_delegate" />
+          <filter type="and">
+            <condition attribute="cat_approvertype" operator="eq" value="809060000" />
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <order attribute="cat_name" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.5</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active User Approvers" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

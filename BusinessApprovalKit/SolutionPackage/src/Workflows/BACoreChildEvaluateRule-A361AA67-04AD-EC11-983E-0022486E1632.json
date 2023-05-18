@@ -1,0 +1,601 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "60960b29-5621-48b1-8cbd-488814bf3ed1"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text_1": {
+                  "title": "Object Type",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT",
+                  "enum": [
+                    "Stage Instance",
+                    "Node Instance"
+                  ]
+                },
+                "text": {
+                  "title": "Object Id",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_3": {
+                  "title": "Source Data Id",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_5": {
+                  "title": "Instance Id",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "number": {
+                  "title": "Operand",
+                  "type": "number",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter a number",
+                  "x-ms-content-hint": "NUMBER"
+                },
+                "number_1": {
+                  "title": "Source Data Type",
+                  "type": "number",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter a number",
+                  "x-ms-content-hint": "NUMBER"
+                },
+                "number_2": {
+                  "title": "Default Path",
+                  "type": "number",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter a number",
+                  "x-ms-content-hint": "NUMBER"
+                }
+              },
+              "required": [
+                "text_1",
+                "text",
+                "text_5",
+                "number",
+                "number_1",
+                "number_2"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "varSourceData": {
+          "runAfter": {
+            "varNextStagePath": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b51e2547-6ed4-4b31-bbce-5d1b50aea31d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varSourceData",
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "Get_Conditions": {
+          "actions": {
+            "Get_Node_or_Stage_Conditions": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "a46cbcf4-3868-463f-be6a-d0e7ac0a0a5a"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalruntimeconditions",
+                  "$select": "cat_conditionvalue, _cat_gotostage_value, cat_pathindex",
+                  "$filter": "@{if(equals(triggerBody()['text_1'],'Stage Instance'),'_cat_stage_value','_cat_node_value')} eq @{triggerBody()['text']}"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "varConditions": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d58df459-ca59-48ea-b01f-8e392e895070"
+          },
+          "type": "Scope"
+        },
+        "Get_Source_Data": {
+          "actions": {
+            "If_uses_Source_Data": {
+              "actions": {
+                "Get_Dynamic_Data": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "8e646686-8d86-4724-944c-f5b7aeb8046b"
+                  },
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "c2534955-add4-ec11-a7b5-000d3af46350"
+                    },
+                    "body": {
+                      "text": "@triggerBody()['text_5']",
+                      "boolean": false,
+                      "text_2": "@triggerBody()['text']",
+                      "text_1": "@triggerBody()?['text_3']"
+                    }
+                  }
+                },
+                "Condition": {
+                  "actions": {
+                    "Set_variable": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "795b8863-b807-4799-83a1-d11a667aa760"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varSourceData",
+                        "value": {
+                          "value": "@if(equals(body('Get_Dynamic_Data')?['type'], 809060001),body('Get_Dynamic_Data')?['value'],concat('''', body('Get_Dynamic_Data')?['value'],''''))",
+                          "raw": "@{body('Get_Dynamic_Data')?['raw']}",
+                          "default": "@{body('Get_Dynamic_Data')?['default']}",
+                          "type": "@body('Get_Dynamic_Data')?['type']"
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Get_Dynamic_Data": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "equals": [
+                      "@true",
+                      "@true"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "c025d1f5-b23c-44eb-8c6b-8beb17c5fe04"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {},
+              "else": {
+                "actions": {
+                  "Set_Previous_Approval_Outcome": {
+                    "runAfter": {
+                      "Get_Last_Completed_Approval_Instance": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "065c98c6-ad94-42e3-a69b-cbd72057a637"
+                    },
+                    "type": "SetVariable",
+                    "inputs": {
+                      "name": "varSourceData",
+                      "value": {
+                        "value": "@{first(body('Get_Last_Completed_Approval_Instance')?['value'])?['cat_outcome']}",
+                        "default": "",
+                        "type": 809060000
+                      }
+                    }
+                  },
+                  "Get_Last_Completed_Approval_Instance": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "186461e3-fb3a-46fe-8eb1-210ee15b7b0c"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "ListRecords",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "cat_businessapprovalinstances",
+                        "$select": "cat_outcome",
+                        "$filter": "_cat_workflowinstance_value eq @{triggerBody()['text_5']} and cat_instancestatus eq 809060002",
+                        "$orderby": "modifiedon desc",
+                        "$top": 1
+                      },
+                      "authentication": {
+                        "type": "Raw",
+                        "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                      }
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@triggerBody()['number_1']",
+                  809060000
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2df2eaf9-7312-437a-9d53-d31171911801"
+              },
+              "type": "If",
+              "description": "Request Data (809060000), Previous Node Outcome (809060001)"
+            }
+          },
+          "runAfter": {
+            "varConditions": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5057dc56-1d3f-4743-9c34-5609531ce78a"
+          },
+          "type": "Scope"
+        },
+        "varNextStagePath": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "c1993cf9-2f55-4b98-a6ca-28c3614b346b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varNextStagePath",
+                "type": "array"
+              }
+            ]
+          },
+          "description": "Default path set to 2 (for If/Else branch, if no conditions evaluated to true, this will be on a false path)"
+        },
+        "If_Comparison_Operands": {
+          "actions": {
+            "Matched_Operand": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "83d8b674-ca41-4c96-9784-4d9e6bee6476"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": [
+                  {
+                    "id": 809060000,
+                    "op": "="
+                  },
+                  {
+                    "id": 809060001,
+                    "op": ">="
+                  },
+                  {
+                    "id": 809060002,
+                    "op": ">"
+                  },
+                  {
+                    "id": 809060003,
+                    "op": "<="
+                  },
+                  {
+                    "id": 809060004,
+                    "op": "<"
+                  },
+                  {
+                    "id": 809060005,
+                    "op": "!="
+                  }
+                ],
+                "where": "@equals(item()['id'], triggerBody()['number'])"
+              },
+              "description": "The rule is expressed as \"If [source] [operand] [condition value]\". Eg: if [source] <= [condition value], XPath expression is to select condition > source."
+            },
+            "Eval_rule": {
+              "runAfter": {
+                "Matched_Operand": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "6a223a60-8a7e-46e7-8095-a2e9f10a7388"
+              },
+              "type": "Compose",
+              "inputs": "conditions/items[cat_conditionvalue @{body('Matched_Operand')?[0]?['op']} @{variables('varSourceData')['value']}]"
+            },
+            "XPath_Selection": {
+              "runAfter": {
+                "Eval_rule": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "9b022c97-4492-45ba-9b21-4ee71539400d"
+              },
+              "type": "Compose",
+              "inputs": "@xpath(xml(json(concat('{ \"conditions\": { \"items\": ',body('Get_Node_or_Stage_Conditions')?['value'],'}}'))),outputs('Eval_rule'))"
+            },
+            "Found_Condition": {
+              "actions": {
+                "Each_Condition": {
+                  "foreach": "@outputs('XPath_Selection')",
+                  "actions": {
+                    "Matched_Condition": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "fc2781b2-8550-444e-9490-eecb7823575f"
+                      },
+                      "type": "Compose",
+                      "inputs": "@json(item())"
+                    },
+                    "Add_Condition_Result": {
+                      "runAfter": {
+                        "Matched_Condition": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "56973c5c-390e-470a-bce8-cfd7725a0bd7"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "varConditions",
+                        "value": {
+                          "stageid": "@{outputs('Matched_Condition')['items']?['_cat_gotostage_value']}",
+                          "path": "@outputs('Matched_Condition')['items']['cat_pathindex']"
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "da4b12a9-602e-4126-9bd8-e3e40c659dbb"
+                  },
+                  "type": "Foreach"
+                }
+              },
+              "runAfter": {
+                "XPath_Selection": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Add_Default_Path": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "bea6be20-5708-4630-9a96-4100be0b1076"
+                    },
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                      "name": "varConditions",
+                      "value": {
+                        "stageid": "",
+                        "path": "@triggerBody()['number_2']"
+                      }
+                    },
+                    "description": "No condition matched - Last Path is the default path"
+                  }
+                }
+              },
+              "expression": {
+                "greater": [
+                  "@length(outputs('XPath_Selection'))",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c041ca6f-b677-46e1-920c-3163bdb1130a"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Get_Conditions": [
+              "Succeeded"
+            ],
+            "Get_Source_Data": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Non-Comparison_Operands": {
+                "actions": {
+                  "Evaluate_Each_Condition": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "a1fbdf79-830d-4380-937b-c007cfc6f76c"
+                    },
+                    "type": "Select",
+                    "inputs": {
+                      "from": "@outputs('Get_Node_or_Stage_Conditions')?['body/value']",
+                      "select": {
+                        "_809060006": "@startsWith(variables('varSourceData')['raw'],item()['cat_conditionvalue'])",
+                        "_809060007": "@endsWith(variables('varSourceData')['raw'],item()['cat_conditionvalue'])",
+                        "_809060008": "@contains(variables('varSourceData')['raw'],item()['cat_conditionvalue'])",
+                        "_809060009": "@equals(variables('varSourceData')['raw'], null)",
+                        "_809060010": "@not(equals(variables('varSourceData')['raw'], null))",
+                        "stageid": "@item()?['_cat_gotostage_value']",
+                        "path": "@item()?['cat_pathindex']"
+                      }
+                    }
+                  },
+                  "Rule_Result_Selection_XPath": {
+                    "runAfter": {
+                      "Evaluate_Each_Condition": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "b7928b9a-fad6-42cf-a520-a8d0d55a3551"
+                    },
+                    "type": "Compose",
+                    "inputs": "results/rules/_@{triggerBody()['number']}/text()"
+                  },
+                  "Get_Rule_Result": {
+                    "runAfter": {
+                      "Rule_Result_Selection_XPath": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "91b3c093-c9cf-4e9c-b3c2-bf3b2afe4109"
+                    },
+                    "type": "Compose",
+                    "inputs": "@xpath(xml(json(concat('{ \"results\": { \"rules\": ', body('Evaluate_Each_Condition'), '}}'))),outputs('Rule_Result_Selection_XPath'))[0]"
+                  },
+                  "Adds_to_path_result": {
+                    "runAfter": {
+                      "Get_Rule_Result": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "bea6be20-5708-4630-9a96-4100be0b1076"
+                    },
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                      "name": "varConditions",
+                      "value": {
+                        "stageid": "@{first(body('Evaluate_Each_Condition'))['stageid']}",
+                        "path": "@if(equals(length(outputs('Get_Rule_Result')),0),2, 1)"
+                      }
+                    },
+                    "description": "For non equal operand, it can only be if/else type. If evaluated condition is true, it is always Path = 1. If no result found, default to Path = 2."
+                  }
+                },
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "4fd77eaf-5cf0-4f1b-9629-89e378a07047"
+                },
+                "type": "Scope",
+                "description": "For StartsWith, EndsWith, Contains, Is Blank/Not Blank operands"
+              }
+            }
+          },
+          "expression": {
+            "less": [
+              "@triggerBody()['number']",
+              809060006
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "43f1bd79-48c1-4e71-840a-6268ace357fc"
+          },
+          "type": "If",
+          "description": "For operands that are not StartsWith/EndsWith, Contains, Is Blank/Not Blank"
+        },
+        "Response": {
+          "runAfter": {
+            "If_Comparison_Operands": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "19aebee7-6ada-4440-8881-f49973e675e0"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": "@variables('varConditions')",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "stageid": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "objectid",
+                  "path"
+                ]
+              }
+            }
+          }
+        },
+        "varConditions": {
+          "runAfter": {
+            "varSourceData": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7da47591-f61d-4030-8e7c-9781637c37d2"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varConditions",
+                "type": "array"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

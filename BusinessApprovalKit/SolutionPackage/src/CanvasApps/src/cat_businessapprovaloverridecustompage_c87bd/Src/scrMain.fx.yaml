@@ -1,0 +1,735 @@
+scrMain As screen:
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: |-
+        =UpdateContext({ShowSearch:true});
+        UpdateContext({ShowPeopleSearch:true});
+        Set(
+            varRecordIdParameter,
+            Param("recordId")
+        );
+        Set(
+            varRecordIds,
+            ForAll(
+                Split(varRecordIdParameter,","),
+                GUID(ThisRecord.Result)
+            )
+        );
+        
+        ClearCollect(colBusinessApprovalOverrides,
+            ForAll(Filter('Business Approval Instances', 'Business Approval Instance' in varRecordIds),
+                {
+                    id:ThisRecord.'Business Approval Instance',
+                    instanceno:ThisRecord.'Instance No',
+                    approver:ThisRecord.'Approver UPN',
+                    instancestatus:'Instance Status'
+                }
+            )
+        )
+    Width: =App.Width
+
+    ctnMain As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =1
+
+        ctnHeader As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            Fill: =RGBA(230, 230, 230, 1)
+            FillPortions: =0
+            Height: =32
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            Width: =Parent.Width
+            ZIndex: =3
+
+            Title3_1 As Label:
+                Alignment: =Align.Left
+                AutoHeight: =false
+                DisplayMode: =DisplayMode.Edit
+                FontSize: =10.5
+                FontWeight: =FontWeight.Semibold
+                Height: =Parent.Height
+                LayoutMinHeight: =32
+                LayoutMinWidth: =150
+                OnSelect: |-
+                    =UpdateContext({ShowSearch:true});
+                    UpdateContext({ShowPeopleSearch:true});
+                    Set(
+                        varRecordIdParameter,
+                        Coalesce(
+                            Param("recordId"),"6c2d2caa-da74-ed11-81ac-000d3a09f62d,cc209dfa-d974-ed11-81ac-000d3a09f6b0")
+                    );
+                    Set(
+                        varRecordIds,
+                        ForAll(
+                            Split(varRecordIdParameter,","),
+                            GUID(ThisRecord.Result)
+                        )
+                    );
+                    
+                    ClearCollect(colBusinessApprovalOverrides,
+                        ForAll(
+                            Filter('Business Approval Instances', 'Business Approval Instance' in varRecordIds),
+                            {
+                                id:ThisRecord.'Business Approval Instance',
+                                instanceno:ThisRecord.'Instance No',
+                                approver:ThisRecord.'Approver UPN',
+                                instancestatus:'Instance Status'
+                            }
+                        )
+                    )
+                PaddingStart: =10
+                TabIndex: =-1
+                Text: ="Instance No."
+                VerticalAlignment: =VerticalAlign.Top
+                Width: =120
+                Wrap: =true
+                X: =12
+                Y: =
+                ZIndex: =1
+
+            Subtitle2_1 As Label:
+                DisplayMode: =DisplayMode.Edit
+                FillPortions: =1
+                FontSize: =10.5
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                LayoutMinHeight: =32
+                LayoutMinWidth: =200
+                OnSelect: =
+                PaddingStart: =10
+                TabIndex: =-1
+                Text: ="Approver"
+                VerticalAlignment: =VerticalAlign.Top
+                Width: =Title3_1.Width
+                X: =Title3_1.X
+                Y: =Title3_1.Y + Title3_1.Height - 6
+                ZIndex: =2
+
+            Body1_1 As Label:
+                DisplayMode: =DisplayMode.Edit
+                FontSize: =10.5
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                LayoutMinHeight: =32
+                LayoutMinWidth: =320
+                OnSelect: =
+                PaddingStart: =10
+                TabIndex: =-1
+                Text: ="Status"
+                VerticalAlignment: =VerticalAlign.Top
+                Visible: =false
+                Width: =130
+                X: =Title3_1.X
+                Y: =50
+                ZIndex: =4
+
+        galInstance As gallery.BrowseLayout_Vertical_ThreeTextVariant_pcfCore:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            BorderColor: =RGBA(166, 166, 166, 1)
+            DelayItemLoading: =true
+            FocusedBorderColor: =RGBA(0, 120, 212, 1)
+            FocusedBorderThickness: =2
+            Items: =colBusinessApprovalOverrides
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =50
+            LayoutMinWidth: =100
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =0
+            TemplateSize: =30
+            Width: =Parent.Width
+            ZIndex: =4
+
+            Container3 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =Parent.Height
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =10
+                Width: =Parent.Width
+                ZIndex: =5
+
+                Title3 As Label:
+                    Alignment: =Align.Left
+                    AutoHeight: =false
+                    DisplayMode: =DisplayMode.Edit
+                    FontSize: =10.5
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Parent.Height
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =320
+                    OnSelect: =
+                    TabIndex: =-1
+                    Text: =ThisItem.instanceno
+                    VerticalAlignment: =VerticalAlign.Top
+                    Width: =120
+                    Wrap: =true
+                    X: =12
+                    Y: =
+                    ZIndex: =1
+
+                Subtitle2 As Label:
+                    AutoHeight: =true
+                    DisplayMode: =DisplayMode.Edit
+                    FillPortions: =1
+                    FontSize: =10.5
+                    FontWeight: =FontWeight.Normal
+                    Height: =24
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =200
+                    OnSelect: =
+                    TabIndex: =-1
+                    Text: =ThisItem.approver
+                    VerticalAlignment: =VerticalAlign.Top
+                    Width: =Title3.Width
+                    X: =Title3.X
+                    Y: =Title3.Y + Title3.Height - 6
+                    ZIndex: =2
+
+                Container11 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =35
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    Visible: =false
+                    Width: =35
+                    ZIndex: =3
+
+                    Circle1 As circle:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        DisabledFill: =RGBA(0, 120, 212, 1)
+                        Fill: |+
+                            =Switch(ThisItem.instancestatus,
+                            'Business Approval Instance Status'.Running,Color.Blue,
+                            'Business Approval Instance Status'.Completed,Color.Green,
+                            'Business Approval Instance Status'.Error,Color.Red,
+                            'Business Approval Instance Status'.Canceled ,Color.Orange,
+                            Color.LightGray)
+                            
+                        Height: =30
+                        HoverFill: =RGBA(0, 120, 212, 1)
+                        PressedFill: =RGBA(0, 120, 212, 1)
+                        Width: =30
+                        X: =Parent.Width/2 - Self.Width/2
+                        Y: =Parent.Height/2 - Self.Height/2
+                        ZIndex: =1
+
+                    Icon2 As icon.Check:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        Color: =RGBA(255, 255, 255, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(220, 220, 220, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        Height: =25
+                        HoverBorderColor: =RGBA(0, 0, 0, 0)
+                        HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: |+
+                            =Switch(ThisItem.instancestatus,
+                            'Business Approval Instance Status'.Running,Icon.Sync,
+                            'Business Approval Instance Status'.Completed,Icon.Check,
+                            'Business Approval Instance Status'.Error,Icon.Error,
+                            'Business Approval Instance Status'.Canceled ,Icon.Alarm,Icon.Blocked)
+                            
+                        PaddingBottom: =3
+                        PaddingLeft: =5
+                        PaddingRight: =5
+                        PaddingTop: =5
+                        PressedBorderColor: =RGBA(0, 0, 0, 0)
+                        PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =25
+                        X: =Parent.Width/2 - Self.Width/2
+                        Y: =Parent.Height/2 - Self.Height/2
+                        ZIndex: =2
+
+                Body1 As Label:
+                    DisplayMode: =DisplayMode.Edit
+                    FontSize: =10.5
+                    FontWeight: =FontWeight.Normal
+                    Height: =24
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =320
+                    OnSelect: =
+                    TabIndex: =-1
+                    Text: =ThisItem.instancestatus
+                    VerticalAlignment: =VerticalAlign.Top
+                    Visible: =false
+                    Width: =100
+                    X: =Title3.X
+                    Y: =50
+                    ZIndex: =4
+
+        Rectangle9 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            DisabledFill: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(230, 230, 230, 1)
+            FocusedBorderColor: =RGBA(0, 120, 212, 1)
+            Height: =1
+            HoverFill: =RGBA(0, 120, 212, 1)
+            PressedFill: =RGBA(0, 120, 212, 1)
+            Width: =Parent.Width
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+        ctnOverrideSettings As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =330
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width
+            ZIndex: =6
+
+            ctnCancellation As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutMinWidth: =50
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                Width: =Parent.Width
+                ZIndex: =1
+
+                lblCancellation As Label:
+                    AutoHeight: =false
+                    DisplayMode: =DisplayMode.Edit
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =320
+                    PaddingStart: =10  
+                    Text: ="Is Cancelation?"
+                    Width: =130
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                tglCancellation As Toggle:
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =160
+                    OffText: ="No"
+                    OnCheck: |-
+                        =UpdateContext({ShowPeopleSearch:false})
+                    OnText: ="Yes"
+                    OnUncheck: |-
+                        =UpdateContext({ShowPeopleSearch:true})
+                    Width: =160
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+
+            ctnNewApprover As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Height: =150
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutMinHeight: =180
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                Visible: =ShowPeopleSearch
+                Width: =Parent.Width
+                ZIndex: =2
+
+                lblNewApprover As Label:
+                    AutoHeight: =false
+                    DisplayMode: =DisplayMode.Edit
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =320
+                    PaddingStart: =10  
+                    Text: ="New Approver"
+                    Width: =130
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                ctnNewApproverDetails As groupContainer.verticalAutoLayoutContainer:
+                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =150
+                    LayoutMinWidth: =180
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingBottom: =2
+                    PaddingLeft: =2
+                    PaddingRight: =2
+                    PaddingTop: =2
+                    Width: =Parent.Width
+                    ZIndex: =4
+
+                    ctnApproverSearch As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        FillPortions: =0
+                        Height: =40
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =Parent.Width
+                        ZIndex: =1
+
+                        "txtSearchBox As 'Text box'":
+                            DisplayMode: =DisplayMode.Edit
+                            FillPortions: =1
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =200
+                            Placeholder: ="Type to search for approvers"
+                            Required: =false
+                            SpellCheck: =true
+                            Tooltip: ="Search for people here"
+                            Value: =""
+                            Width: =320
+                            X: =0
+                            Y: =0
+                            ZIndex: =1
+
+                    ctnApproverGallery As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        BorderColor: =RGBA(230, 230, 230, 1)
+                        BorderThickness: =1
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =0
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =5
+                        PaddingLeft: =5
+                        PaddingRight: =5
+                        PaddingTop: =5
+                        Visible: =!IsEmpty(galApprovers.AllItems)
+                        Width: =Parent.Width
+                        ZIndex: =3
+
+                        galApprovers As gallery.BrowseLayout_Vertical_ThreeTextOneImageVariant_pcfCore:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            DelayItemLoading: =true
+                            FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                            FocusedBorderThickness: =2
+                            Items: =Search(Filter('Business Approvers','Approver Type'='Business Approver Type'.User),txtSearchBox.Value,"cat_approverid","cat_displayname")
+                            Layout: =Layout.Vertical
+                            LayoutMinHeight: =50
+                            LayoutMinWidth: =200
+                            LoadingSpinner: =LoadingSpinner.Data
+                            TemplateFill: =If(ThisItem.IsSelected,Color.LightBlue,Color.White)
+                            TemplatePadding: =0
+                            TemplateSize: =50
+                            Visible: =!IsEmpty(Self.AllItems)
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                            Rectangle11 As rectangle:
+                                BorderColor: =RGBA(255, 255, 255, 1)
+                                BorderStyle: =BorderStyle.None
+                                DisabledFill: =RGBA(0,0,0,0)
+                                Fill: =RGBA(230, 230, 230, 1)
+                                FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                                Height: =1
+                                HoverFill: =RGBA(0,0,0,0)
+                                OnSelect: =Select(Parent)
+                                PressedFill: =RGBA(0,0,0,0)
+                                TabIndex: =0
+                                Width: =Parent.TemplateWidth
+                                ZIndex: =1
+
+                            cntApproverItemImage As groupContainer.horizontalAutoLayoutContainer:
+                                Height: =45
+                                LayoutAlignItems: =LayoutAlignItems.Center
+                                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =Parent.Width
+                                ZIndex: =6
+
+                                cntApproverImage As groupContainer.manualLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.SetByContainer
+                                    FillPortions: =0
+                                    LayoutMinHeight: =45
+                                    LayoutMinWidth: =45
+                                    Width: =45
+                                    ZIndex: =1
+
+                                    Icon1 As icon.Person:
+                                        BorderColor: =RGBA(0, 0, 0, 0)
+                                        Color: =RGBA(0, 120, 212, 1)
+                                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                                        DisabledColor: =RGBA(220, 220, 220, 1)
+                                        DisabledFill: =RGBA(0, 0, 0, 0)
+                                        Height: =32
+                                        HoverBorderColor: =RGBA(0, 0, 0, 0)
+                                        HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                        HoverFill: =RGBA(0, 0, 0, 0)
+                                        Icon: =Icon.Person
+                                        PaddingBottom: =3
+                                        PaddingLeft: =3
+                                        PaddingRight: =3
+                                        PaddingTop: =3
+                                        PressedBorderColor: =RGBA(0, 0, 0, 0)
+                                        PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                        PressedFill: =RGBA(0, 0, 0, 0)
+                                        Width: =32
+                                        X: =Parent.Width/2 - Self.Width/2
+                                        Y: =Parent.Height/2 - Self.Height/2
+                                        ZIndex: =1
+
+                                    Image3 As image:
+                                        BorderColor: =RGBA(230, 230, 230, 1)
+                                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                        DisabledFill: =RGBA(0, 0, 0, 0)
+                                        Height: =40
+                                        HoverBorderColor: =RGBA(0, 0, 0, 0)
+                                        HoverFill: =RGBA(0, 0, 0, 0)
+                                        Image: =If(!IsBlankOrError(ThisItem.'Approver Id'),Office365Users.UserPhotoV2(ThisItem.'Approver Id'))
+                                        OnSelect: =
+                                        PressedBorderColor: =RGBA(0, 0, 0, 0)
+                                        PressedFill: =RGBA(0, 0, 0, 0)
+                                        RadiusBottomLeft: =90
+                                        RadiusBottomRight: =90
+                                        RadiusTopLeft: =90
+                                        RadiusTopRight: =90
+                                        Width: =40
+                                        X: =Parent.Width/2-Self.Width/2
+                                        Y: =Parent.Height/2-Self.Height/2
+                                        ZIndex: =2
+
+                                cntApproverItem As groupContainer.verticalAutoLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.SetByContainer
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMinHeight: =45
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    ZIndex: =3
+
+                                    lblApproverName As Label:
+                                        Alignment: =Align.Justify
+                                        DisplayMode: =DisplayMode.Edit
+                                        FillPortions: =1
+                                        FontSize: =10.5
+                                        FontWeight: =FontWeight.Semibold
+                                        Height: =24
+                                        LayoutMinHeight: =20
+                                        LayoutMinWidth: =150
+                                        OnSelect: =
+                                        PaddingStart: =10
+                                        TabIndex: =-1
+                                        Text: =ThisItem.'Display Name'
+                                        VerticalAlignment: =VerticalAlign.Top
+                                        Width: =Parent.Width
+                                        X: =0
+                                        Y: =0
+                                        ZIndex: =1
+
+                                    lblApproverUPN As Label:
+                                        DisplayMode: =DisplayMode.Edit
+                                        FillPortions: =1
+                                        FontSize: =10
+                                        FontWeight: =FontWeight.Normal
+                                        Height: =24
+                                        LayoutMinHeight: =18
+                                        LayoutMinWidth: =100
+                                        OnSelect: =
+                                        PaddingStart: =10
+                                        TabIndex: =-1
+                                        Text: =ThisItem.'Approver Id'
+                                        VerticalAlignment: =VerticalAlign.Top
+                                        Width: =Parent.Width
+                                        X: =0
+                                        Y: =0
+                                        ZIndex: =2
+
+            cntOverrideReason As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutMinHeight: =60
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =10
+                ZIndex: =3
+
+                lblOverrideReason As Label:
+                    AutoHeight: =false
+                    DisplayMode: =DisplayMode.Edit
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =320
+                    PaddingStart: =10  
+                    Text: ="Override Reason"
+                    Width: =130
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                "txtOverrideReason As 'Text box'":
+                    DisplayMode: =DisplayMode.Edit
+                    FillPortions: =1
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =200
+                    Mode: ='''Microsoft.CoreControls.TextBox.Mode'''.Multiline
+                    Underlined: =false
+                    Value: =""
+                    Width: =320
+                    X: =0
+                    Y: =0
+                    ZIndex: =3
+
+        cntButtons As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =64
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutGap: =50
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width
+            ZIndex: =7
+
+            ctnProcessButton As groupContainer.manualLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                Height: =40
+                LayoutMinHeight: =40
+                LayoutMinWidth: =100
+                Width: =170
+                ZIndex: =3
+
+                recProcessButton As rectangle:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    DisabledFill: =RGBA(166, 166, 166, 1)
+                    Fill: =RGBA(0, 120, 212, 1)
+                    FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                    Height: =40
+                    HoverFill: =RGBA(0, 120, 212, 1)
+                    OnSelect: =Select(lblProcessButton)
+                    PressedFill: =RGBA(0, 120, 212, 1)
+                    Width: =170
+                    X: =Parent.Width/2-Self.Width/2
+                    ZIndex: =1
+
+                lblProcessButton As Label:
+                    Alignment: =Align.Center
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisplayMode: =If(IsEmpty(galApprovers.Selected),DisplayMode.Disabled,DisplayMode.Edit)
+                    FontSize: =12
+                    FontWeight: =FontWeight.Bold
+                    Height: =40
+                    OnSelect: |-
+                        =IfError(
+                            Set(_IsProcessing,true);
+                            Clear(recordcount);
+                            If(tglCancellation.Checked,
+                                //For Cancellation
+                                ForAll(colBusinessApprovalOverrides,
+                                    Patch('Business Approval Instance Overrides',Defaults('Business Approval Instance Overrides'),
+                                        {
+                                            'Approval Instance':LookUp('Business Approval Instances','Instance No' = colBusinessApprovalOverrides[@instanceno]),
+                                            'Is Cancellation':tglCancellation.Checked,
+                                            'Override Reason':txtOverrideReason.Value
+                                        }
+                                    );
+                                    Collect(recordcount,1); //Increment number of records
+                                ),
+                                //For Approver Override
+                                ForAll(colBusinessApprovalOverrides,
+                                    Patch('Business Approval Instance Overrides',Defaults('Business Approval Instance Overrides'),
+                                        {
+                                            'Approval Instance':LookUp('Business Approval Instances','Instance No' = colBusinessApprovalOverrides[@instanceno]),
+                                            'Is Cancellation':tglCancellation.Checked,
+                                            'Override Approver':LookUp('Business Approvers','Approver Id'=galApprovers.Selected.'Approver Id'),
+                                            'Override Reason':txtOverrideReason.Value
+                                        }
+                                    );
+                                    Collect(recordcount,1); //Increment number of records
+                                )
+                            ),
+                            Notify(FirstError.Message);Set(_IsProcessing,false),
+                            Notify(
+                                Count(recordcount)&" record(s) processed for override",
+                                NotificationType.Success
+                            );
+                            Set(_IsProcessing,false);
+                            Navigate('Business Approval Instances (Views)'.'Active Business Approval Instances')
+                        )
+                    Text: =If(tglCancellation.Checked,"Override Cancelation","Override Approvers")
+                    Width: =170
+                    X: =Parent.Width/2-Self.Width/2
+                    Y: =0
+                    ZIndex: =2
+
+    ctnProcessing As groupContainer.verticalAutoLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.29)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        Visible: =_IsProcessing
+        Width: =Parent.Width
+        ZIndex: =2
+
+        imgProcessing As image:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            Height: =70
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Image: =loading
+            ImagePosition: =ImagePosition.Center
+            LayoutMinHeight: =150
+            PressedBorderColor: =RGBA(0, 0, 0, 0)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            Width: =150
+            X: =Parent.Width/2 - Self.Width/2
+            Y: =Parent.Height/2 - Self.Height/2
+            ZIndex: =1
+
+        Label1 As Label:
+            Alignment: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.Edit
+            FontSize: =11
+            FontWeight: =FontWeight.Semibold
+            Height: =32
+            LayoutMinHeight: =32
+            LayoutMinWidth: =320
+            Text: ="Processing..."
+            Width: =320
+            X: =0
+            Y: =0
+            ZIndex: =2
+

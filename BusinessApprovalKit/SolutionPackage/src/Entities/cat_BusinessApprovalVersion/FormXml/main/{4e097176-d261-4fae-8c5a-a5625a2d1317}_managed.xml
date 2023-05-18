@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{4e097176-d261-4fae-8c5a-a5625a2d1317}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{35b0aaa8-0e8a-4fea-a7f1-e84e70e805cf}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{899a7543-57c3-4eee-bfc0-756aa2c5faad}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{7e4f6d9d-27e6-4fe0-af95-8a0f79e9a4f4}">
+                        <labels>
+                          <label description="Approval Version" languagecode="1033" />
+                        </labels>
+                        <control id="cat_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cat_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{12d2f555-fff7-4fc4-bb8e-cc080bf124b1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Process" languagecode="1033" />
+                        </labels>
+                        <control id="cat_process" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_process" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f86cee62-3580-473c-88e9-ac75d0852d8c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Version" languagecode="1033" />
+                        </labels>
+                        <control id="cat_version" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="cat_version" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b31f6cda-49ff-41da-a5eb-57008473befd}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Version Comments" languagecode="1033" />
+                        </labels>
+                        <control id="cat_versioncomments" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="cat_versioncomments" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6412b7d4-e4e6-4fe0-85a0-481cba2cd531}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Publishing Status" languagecode="1033" />
+                        </labels>
+                        <control id="cat_publishingstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_publishingstatus" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a6c4fd07-3afc-4794-b9f7-eee0e710fd1d}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c4c49487-65ee-4b84-9ac5-962b8edf121b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Created By" languagecode="1033" />
+                        </labels>
+                        <control id="createdby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdby" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d2fdaa3b-86a0-47c8-a262-3140525dc2d9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Created On" languagecode="1033" />
+                        </labels>
+                        <control id="createdon" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="null_section_3" id="0d8949ee-c047-4d0a-a9ef-fa900d41cfcb" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Application Data" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{d64541b7-1604-4ace-82f8-52f1f157a3b6}" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="Runtime Data Definition" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>cat_businessapprovalruntimedata</TargetEntityType>
+                            <RelationshipName>cat_BusinessApprovalRuntimeData_ProcessVe</RelationshipName>
+                            <ViewId>{7A298574-6FBC-4B3B-AD92-6E7C809E9D57}</ViewId>
+                            <ViewIds>{7A298574-6FBC-4B3B-AD92-6E7C809E9D57}</ViewIds>
+                            <EnableViewPicker>false</EnableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_2" id="cc858309-0173-4fb4-af37-8e50ef14deff" IsUserDefined="0" locklevel="0" showlabel="true">
+          <labels>
+            <label description="Workflow" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_2_section_1" id="31f2dc3f-d747-489b-86ab-7bcb67b7bda9" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Stages" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{8f35d95e-5963-4e2c-b358-a4a42161d565}" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="Runtime Stages" languagecode="1033" />
+                        </labels>
+                        <control id="Subgrid_2" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                          <parameters>
+                            <TargetEntityType>cat_businessapprovalruntimestage</TargetEntityType>
+                            <RelationshipName>cat_BusinessApprovalRuntimeStage_ProcessV</RelationshipName>
+                            <ViewId>{E306F93F-FF63-49A2-8D87-26536003131B}</ViewId>
+                            <ViewIds>{E306F93F-FF63-49A2-8D87-26536003131B}</ViewIds>
+                            <EnableViewPicker>false</EnableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{6a82ef60-72e5-460f-9bef-e9f49aed270a}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{c96347d4-7f4e-4faa-8983-1247f5151ec5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{0789bf00-7a0d-4451-8b44-289122948dcc}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{03396086-4d73-415d-b1d3-7f5abafd0c19}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{32a73304-04ed-4a8d-81ec-e19b84ca0198}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{33c0d496-81da-46f8-a5e1-927e6bd0c4ac}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{1c2b6825-adfe-4a14-8827-30c12dec1c68}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{be767b94-9f1c-4953-a1a5-180fe110cb98}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

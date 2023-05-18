@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{984654e3-d374-ed11-81ac-000d3a09f6b0}</WebResourceId>
+  <Name>cat_businessapprovaloverridecustompagejs</Name>
+  <DisplayName>Business Approval Override Custom Page JS</DisplayName>
+  <LanguageCode>0</LanguageCode>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>1.0.0.29</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/cat_businessapprovaloverridecustompagejs984654E3-D374-ED11-81AC-000D3A09F6B0</FileName>
+</WebResource>

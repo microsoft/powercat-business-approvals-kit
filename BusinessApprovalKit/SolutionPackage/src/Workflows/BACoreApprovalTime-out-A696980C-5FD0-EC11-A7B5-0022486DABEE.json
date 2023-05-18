@@ -1,0 +1,202 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Running_Approval_Instance_Time-Out_Counter_has_reached_0": {
+          "metadata": {
+            "operationMetadataId": "8b65ab56-44c9-4dc2-bf08-1bd2c918999b"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "cat_businessapprovalinstance",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "cat_timeoutcounter",
+              "subscriptionRequest/filterexpression": "cat_timeoutcounter eq 0 and cat_instancestatus eq 809060001",
+              "subscriptionRequest/runas": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "description": "When timeout counter = 0 and Instance status is Running (809060001)"
+        }
+      },
+      "actions": {
+        "Get_Delegates": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "cefdbb6e-7124-46fd-9846-1fa209335035"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovers",
+              "$filter": "cat_businessapproverid eq @{triggerOutputs()?['body/cat_businessapproverid']}",
+              "$expand": "cat_Delegate($select=cat_businessapproverid,cat_isoutofoffice),cat_BackupDelegate($select=cat_businessapproverid,cat_isoutofoffice)",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "varDelegate": {
+          "runAfter": {
+            "Get_Delegates": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b9122572-54c4-483e-b7e6-4e2882e59c03"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varDelegate",
+                "type": "string",
+                "value": "@{if(equals(first(body('Get_Delegates')['value'])['cat_Delegate/cat_isoutofoffice'], true), first(body('Get_Delegates')['value'])['cat_BackupDelegate/cat_businessapproverid'], first(body('Get_Delegates')['value'])['cat_Delegate/cat_businessapproverid'])}"
+              }
+            ]
+          },
+          "description": "If delegate is OOF, use backup delegate."
+        },
+        "If_no_delegates": {
+          "actions": {
+            "Get_Default_Approver": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "fa607e1a-6540-4a41-8042-dd2d241d6950"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalruntimenodes",
+                  "$select": "cat_ProcessVersion/_cat_defaultapprover_value",
+                  "$filter": "cat_businessapprovalruntimenodeid eq @{triggerOutputs()?['body/_cat_node_value']}",
+                  "$expand": "cat_ProcessVersion($select=_cat_defaultapprover_value)",
+                  "$top": 1
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Set_varDelegate_to_Default_Approver": {
+              "runAfter": {
+                "Get_Default_Approver": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "057a326a-18fe-4c07-960e-5fd4638e4bd5"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "varDelegate",
+                "value": "@{first(body('Get_Default_Approver')['value'])['cat_ProcessVersion/_cat_defaultapprover_value']}"
+              }
+            }
+          },
+          "runAfter": {
+            "varDelegate": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@variables('varDelegate')",
+              "@null"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ddbaa330-bf2b-4eab-9779-34d3862de34f"
+          },
+          "type": "If"
+        },
+        "If_delegate_exists": {
+          "actions": {
+            "Create_Override_for_Delegate": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "bdce01c3-f869-4c5c-aebd-edc103a85a83"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalinstanceoverrides",
+                  "item/cat_ApprovalInstance@odata.bind": "cat_businessapprovalinstances(@{triggerOutputs()?['body/cat_businessapprovalinstanceid']})",
+                  "item/cat_iscancellation": false,
+                  "item/cat_OverrideApprover@odata.bind": "cat_businessapprovalinstances(@{variables('varDelegate')})",
+                  "item/cat_isreassign": true,
+                  "item/cat_overridetype": 809060001
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "description": "Override Type = OOF (809060002) or Time out (809060001)"
+            }
+          },
+          "runAfter": {
+            "If_no_delegates": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "greater": [
+              "@length(coalesce(variables('varDelegate'), ''))",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6be4754d-c1ee-4cbb-9e37-4cd166045594"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

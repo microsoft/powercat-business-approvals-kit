@@ -1,0 +1,363 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "staticResults": {
+        "Initialize_Node_Instance0": {
+          "status": "Succeeded",
+          "outputs": {
+            "statusCode": "OK",
+            "headers": {}
+          }
+        },
+        "Update_Stage_Instance_to_Running1": {
+          "status": "Succeeded",
+          "outputs": {
+            "statusCode": "OK",
+            "headers": {}
+          }
+        }
+      },
+      "triggers": {
+        "When_new_Stage_Instance_is_created": {
+          "metadata": {
+            "operationMetadataId": "cb0f86f1-2005-4863-8a17-3a536f72e06f"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "cat_businessapprovalruntimestageinstance",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/runas": 1,
+              "subscriptionRequest/name": "fb00d840-ca8c-ec11-8d20-000d3a09d351"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_Runtime_Stage_Definition": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "89ab483b-aa1a-4356-ba77-6a3b5917c757"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimestages",
+              "recordId": "@triggerOutputs()?['body/_cat_stage_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "varPathIndex": {
+          "runAfter": {
+            "Get_Runtime_Stage_Definition": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ae127814-4f52-4c5a-b56b-f9028a49413a"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varPathIndex",
+                "type": "array"
+              }
+            ]
+          },
+          "description": "Array variable to determine which node path(s) to take."
+        },
+        "If_No_Conditions": {
+          "actions": {
+            "Set_Path_=_1": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "757e3754-6e6b-4bda-8479-675db211d493"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "varPathIndex",
+                "value": 1
+              }
+            }
+          },
+          "runAfter": {
+            "varPathIndex": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Get_Condition_Evals": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "f4bc780a-1edd-40fa-ae77-ba623cf498c3"
+                },
+                "type": "Workflow",
+                "inputs": {
+                  "host": {
+                    "workflowReferenceName": "a361aa67-04ad-ec11-983e-0022486e1632"
+                  },
+                  "body": {
+                    "text_1": "Stage Instance",
+                    "text": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_businessapprovalruntimestageid']",
+                    "text_5": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+                    "number": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_operand']",
+                    "number_1": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_sourcedatatype']",
+                    "number_2": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_paths']",
+                    "text_3": "@outputs('Get_Runtime_Stage_Definition')?['body/_cat_sourcedata_value']"
+                  }
+                },
+                "description": "Returns a collection of Paths and Object Id. For Stage Instance conditions, only paths will be used."
+              },
+              "Each_evaluated_paths": {
+                "foreach": "@body('Get_Condition_Evals')",
+                "actions": {
+                  "Add_all_possible_paths": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "57261845-a56f-4547-815c-5999a7a6b1fb"
+                    },
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                      "name": "varPathIndex",
+                      "value": "@item()['path']"
+                    }
+                  }
+                },
+                "runAfter": {
+                  "Get_Condition_Evals": [
+                    "Succeeded"
+                  ]
+                },
+                "metadata": {
+                  "operationMetadataId": "02cc5c5b-ff32-487b-ae85-ef5ac6c9e491"
+                },
+                "type": "Foreach"
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@outputs('Get_Runtime_Stage_Definition')?['body/cat_stagecondition']",
+              809060000
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e4afd754-c61d-48fb-bfbf-6880c0970dab"
+          },
+          "type": "If",
+          "description": "Stage Condition: None (809060000), If/Else (809060001), Switch (809,060,002)"
+        },
+        "Each_Path": {
+          "foreach": "@variables('varPathIndex')",
+          "actions": {
+            "Get_First_Node_in_Stage": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "241e56cd-05e2-40f4-909b-bb0baf22ef8b"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps_1",
+                  "operationId": "ListRecords"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalruntimenodes",
+                  "$select": "cat_businessapprovalruntimenodeid",
+                  "$filter": "cat_pathindex eq @{item()} and cat_rowindex eq 1 and _cat_stage_value eq '@{triggerOutputs()?['body/_cat_stage_value']}'"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "If_exactly_1_node_found": {
+              "actions": {
+                "Initialize_Node_Instance": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "2de3c6e6-dc6c-4946-94fd-151e94e40f67"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "CreateRecord"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovalruntimenodeinstances",
+                      "item/cat_instancestatus": 809060000,
+                      "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodes(@{first(body('Get_First_Node_in_Stage')['value'])['cat_businessapprovalruntimenodeid']})",
+                      "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{triggerOutputs()?['body/_cat_stage_value']})",
+                      "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimestageinstanceid']})",
+                      "item/cat_start": "@utcNow()",
+                      "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runtimeConfiguration": {
+                    "staticResult": {
+                      "staticResultOptions": "Disabled",
+                      "name": "Initialize_Node_Instance0"
+                    }
+                  }
+                },
+                "Update_Stage_Instance_to_Running": {
+                  "runAfter": {
+                    "Initialize_Node_Instance": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "cb8a623d-210a-42fd-a431-1ed642e671b6"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "UpdateRecord"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovalruntimestageinstances",
+                      "recordId": "@triggerOutputs()?['body/cat_businessapprovalruntimestageinstanceid']",
+                      "item/cat_instancestatus": 809060001
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runtimeConfiguration": {
+                    "staticResult": {
+                      "staticResultOptions": "Disabled",
+                      "name": "Update_Stage_Instance_to_Running1"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Get_First_Node_in_Stage": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Update_Stage_Instance_to_Completed": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "cb8a623d-210a-42fd-a431-1ed642e671b6"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "connectionName": "shared_commondataserviceforapps_1",
+                        "operationId": "UpdateRecord"
+                      },
+                      "parameters": {
+                        "entityName": "cat_businessapprovalruntimestageinstances",
+                        "recordId": "@triggerOutputs()?['body/cat_businessapprovalruntimestageinstanceid']",
+                        "item/cat_instancestatus": 809060002
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    },
+                    "description": "No nodes in current path. Completes the current stage.",
+                    "runtimeConfiguration": {
+                      "staticResult": {
+                        "staticResultOptions": "Disabled",
+                        "name": "Update_Stage_Instance_to_Running1"
+                      }
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@length(outputs('Get_First_Node_in_Stage')?['body/value'])",
+                  1
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a9d0e1fb-ced2-40b0-999a-df66a0885a24"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "If_No_Conditions": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6fb0200d-cb4f-4cfb-8639-40ef445dd007"
+          },
+          "type": "Foreach"
+        },
+        "Log_Stage_Instance_Run": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "17905f2c-b263-4b84-96a8-51dbeda204b7"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+            },
+            "body": {
+              "text": "Stage | @{triggerOutputs()?['body/cat_stagenamevalue']}",
+              "text_1": "@triggerOutputs()?['body/_cat_stage_value']",
+              "text_2": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+              "text_3": "Information",
+              "text_5": "@workflow()['tags']['flowDisplayName']",
+              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/@{workflow()['run/name']}"
+            },
+            "retryPolicy": {
+              "type": "none"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

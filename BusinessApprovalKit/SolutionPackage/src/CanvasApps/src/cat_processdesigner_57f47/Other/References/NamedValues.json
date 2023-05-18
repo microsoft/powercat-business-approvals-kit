@@ -1,0 +1,14 @@
+{
+  "NamedValues": [
+    {
+      "Kind": "Page",
+      "Name": "Business Approval Override Custom Page",
+      "Value": "custompage:cat_businessapprovaloverridecustompage_c87bd"
+    },
+    {
+      "Kind": "Page",
+      "Name": "Process Designer",
+      "Value": "custompage:cat_processdesigner_57f47"
+    }
+  ]
+}

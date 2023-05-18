@@ -1,0 +1,35 @@
+<appaction uniquename="cat__OverrideApprovals!159f205f19224aa7a6db65f837eb492e!cat_BusinessApprovalManagement!cat_businessapprovalinstance!1">
+  <appmoduleid>
+    <uniquename>cat_BusinessApprovalManagement</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Override Approvals">
+    <label description="Override Approvals" languagecode="1033" />
+  </buttonlabeltext>
+  <buttonsequencepriority>3000030.0000000000</buttonsequencepriority>
+  <context>1</context>
+  <contextentity>
+    <logicalname>cat_businessapprovalinstance</logicalname>
+  </contextentity>
+  <contextvalue>cat_businessapprovalinstance</contextvalue>
+  <fonticon>People</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>1</location>
+  <name>OverrideApprovals!159f205f19224aa7a6db65f837eb492e</name>
+  <onclickeventjavascriptfunctionname>RunOnSelected</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":23}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>984654e3-d374-ed11-81ac-000d3a09f6b0</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>e1c18df504ec40a68b25a156c52fdd52</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>
