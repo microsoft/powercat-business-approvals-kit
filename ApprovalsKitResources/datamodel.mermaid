@@ -1,0 +1,11 @@
+erDiagram
+    "Business Approval Process" ||--o{ "Business Approval Data" : "input data"
+    "Business Approval Process" ||--o{ "Business Approval Stage" : stages
+    "Business Approval Stage" ||--o{ "Business Approval Node" : nodes
+    "Business Approval Stage" ||--1 "Business Approval Condition" : condition
+    "Business Approval Process" ||--o{ "Business Approval Version" : versions
+    "Business Approval Version" ||--o{ "Business Approval Runtime Instance" : instances
+    "Business Approval Runtime Instance" ||--o{ "Business Approval Runtime Data" : instances
+    "Business Approval Runtime Instance" ||--o{ "Business Approval Runtime Stage" : stages
+    "Business Approval Runtime Stage" ||--o{ "Business Approval Runtime Node" : nodes
+  
