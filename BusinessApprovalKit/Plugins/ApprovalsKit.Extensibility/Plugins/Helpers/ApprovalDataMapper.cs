@@ -29,6 +29,5 @@ namespace ApprovalsKit.Extensibility.Plugins.Helpers
 
             return JsonSerializer.Deserialize<DataTable>(json, options);
         }
-
     }
 }
