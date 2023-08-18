@@ -1,12 +1,14 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
 using ApprovalsKit.Extensibility.Plugins.Helpers;
 using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Query;
 using System;
 
 namespace ApprovalsKit.Extensibility.Plugins
 {
     /// <summary>
-    /// Dataverse unbound plugin that maps JSON data to create Approval Workflow process and associated data
+    /// Dataverse unbound plugin that maps JSON data to create an instance Approval Workflow process and associated data
     /// </summary>
     public class ApprovalsKitDataMapper : PluginBase
     {
@@ -14,6 +16,7 @@ namespace ApprovalsKit.Extensibility.Plugins
         private IOrganizationService _service;
         private ApprovalDataMapper _mapper;
 
+        
         public ApprovalProcessLookup Lookup
         {
             get
@@ -63,8 +66,9 @@ namespace ApprovalsKit.Extensibility.Plugins
             }
 
             var context = localPluginContext.ServiceProvider.GetService(typeof(IPluginExecutionContext)) as IPluginExecutionContext;
-            
 
+            // TODO add logging
+            
             // TODO: Check for the entity on which the plugin would be registered
 
             // TODO: Check expected input parameters Approval 

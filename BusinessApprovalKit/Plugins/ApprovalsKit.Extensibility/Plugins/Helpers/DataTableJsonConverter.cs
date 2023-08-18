@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace ApprovalsKit.Extensibility.Plugins.Helpers
 {
+    /// <summary>
+    /// Convert from JSON to a <seealso cref="DataTable"/> using DataTable extensions
+    /// </summary>
     public class DataTableJsonConverter : JsonConverter<DataTable>
     {
         public override DataTable Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

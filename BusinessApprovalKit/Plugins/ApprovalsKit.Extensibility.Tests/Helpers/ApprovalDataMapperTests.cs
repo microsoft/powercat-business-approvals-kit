@@ -1,9 +1,11 @@
-﻿using ApprovalsKit.Extensibility.Plugins.Helpers;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+using ApprovalsKit.Extensibility.Plugins.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace ApprovalsKit.Extensibility.Tests.Helpers
 {

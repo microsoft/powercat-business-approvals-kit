@@ -1,15 +1,23 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ApprovalsKit.Extensibility.Plugins.Helpers
 {
+    /// <summary>
+    /// Provide common help extensions to convert json data into DataTables
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Convert properties of a json object into a <seealso cref="DataTable"/>
+        /// </summary>
+        /// <param name="dataRoot">The JsonElement to convert to a DataTable</param>
+        /// <returns>The table and data rows converted from the JSON</returns>
         public static DataTable JsonElementToDataTable(this JsonElement dataRoot)
         {
             var dataTable = new DataTable();
@@ -68,6 +76,12 @@ namespace ApprovalsKit.Extensibility.Plugins.Helpers
             return dataTable;
         }
 
+        /// <summary>
+        /// Convert simple scalar properties and objects into columns of the DataTable
+        /// </summary>
+        /// <param name="text">The JSON fragment to parse</param>
+        /// <param name="parent">The name of the parent property that the object belongs to</param>
+        /// <param name="dataTable">The table to add the columns to</param>
         private static void AddJsonObjectTableColumns(string text, string parent, DataTable dataTable)
         {
             var options = new JsonDocumentOptions
@@ -88,6 +102,12 @@ namespace ApprovalsKit.Extensibility.Plugins.Helpers
             }
         }
 
+        /// <summary>
+        /// Convert the values of scale values and object properties into the matching DataTable columns
+        /// </summary>
+        /// <param name="text">The JSON fragment to add values from</param>
+        /// <param name="parent">The named parent of the JSON Object</param>
+        /// <param name="dataTable">The table to add the row values into</param>
         private static void AddJsonObjectTableValues(string text, string parent, DataTable dataTable)
         {
             var options = new JsonDocumentOptions
@@ -111,6 +131,13 @@ namespace ApprovalsKit.Extensibility.Plugins.Helpers
             }
         }
 
+        /// <summary>
+        /// Map the JSON object value into the matching .Net type
+        /// </summary>
+        /// <param name="valueKind"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotSupportedException"></exception>
         private static Type ValueKindToType(this JsonValueKind valueKind, string value)
         {
             switch (valueKind)

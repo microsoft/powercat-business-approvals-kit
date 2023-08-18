@@ -1,4 +1,7 @@
-﻿using FakeItEasy;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+using FakeItEasy;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.PluginTelemetry;
 using System;
@@ -50,6 +53,5 @@ namespace ApprovalsKit.Extensibility.Tests
 
             return (fakePluginExecutionContext, fakeOrganizationService);
         }
-
     }
 }

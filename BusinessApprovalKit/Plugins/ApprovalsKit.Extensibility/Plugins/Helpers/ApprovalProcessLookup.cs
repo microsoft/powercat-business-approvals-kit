@@ -1,16 +1,15 @@
-﻿using ApprovalsKit.Extensibility.Plugins.Models;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+using ApprovalsKit.Extensibility.Plugins.Models;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApprovalsKit.Extensibility.Plugins.Helpers
 {
     /// <summary>
-    /// Heklp class to lookup a active published Approval ket process
+    /// Helper class to lookup a active published Approval process
     /// </summary>
     public class ApprovalProcessLookup
     {

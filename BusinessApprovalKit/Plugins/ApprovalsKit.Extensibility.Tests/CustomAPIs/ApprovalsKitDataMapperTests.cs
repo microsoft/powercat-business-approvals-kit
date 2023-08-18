@@ -1,13 +1,14 @@
-﻿using ApprovalsKit.Extensibility.Plugins;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+using ApprovalsKit.Extensibility.Plugins;
 using ApprovalsKit.Extensibility.Plugins.Helpers;
 using ApprovalsKit.Extensibility.Plugins.Models;
 using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;

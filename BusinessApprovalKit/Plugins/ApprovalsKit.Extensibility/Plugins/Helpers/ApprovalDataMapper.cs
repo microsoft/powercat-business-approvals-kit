@@ -1,15 +1,9 @@
-﻿using ApprovalsKit.Extensibility.Plugins.Models;
+﻿// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
 using Microsoft.Xrm.Sdk;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ApprovalsKit.Extensibility.Plugins.Helpers
 {
