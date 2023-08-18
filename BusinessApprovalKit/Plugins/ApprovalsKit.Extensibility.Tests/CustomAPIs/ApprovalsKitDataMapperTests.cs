@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 
 namespace ApprovalsKit.Extensibility.Tests
@@ -16,6 +17,21 @@ namespace ApprovalsKit.Extensibility.Tests
     [TestClass]
     public class ApprovalsKitDataMapperTests : PluginTestBase
     {
+        static ApprovalsKitDataMapperTests()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+        }
+
+        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            var name = new AssemblyName(args.Name);
+            if (name.Name.Contains("System.Runtime.CompilerServices.Unsafe"))
+            {
+                return typeof(System.Runtime.CompilerServices.Unsafe).Assembly;
+            }
+            return null;
+        }
+
         [TestMethod]
         public void CreatesBusinessApprovalRunTimeInstance()
         {
@@ -71,8 +87,8 @@ namespace ApprovalsKit.Extensibility.Tests
             plugin.Execute(fakeServiceProvider);
 
             // Assert
-            Assert.AreEqual(1, created.Count(c => c.LogicalName == "cat_businessapprovalruntimeinstance"));
-            Assert.AreEqual(newId, created.FirstOrDefault(c => c.LogicalName == "cat_businessapprovalruntimeinstance").Id);
+            Assert.AreEqual(1, created.Count(c => c.LogicalName == "cat_businessapprovalworkflow"));
+            Assert.AreEqual(newId, created.FirstOrDefault(c => c.LogicalName == "cat_businessapprovalworkflow").Id);
 
         }
     }
