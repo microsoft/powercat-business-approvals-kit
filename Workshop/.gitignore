@@ -1,0 +1,11 @@
+**/bin
+**/obj
+**/temp.json
+**/temp.zip
+**/connector
+**/flows.txt
+**/videos# SecureStore key file ignore rule:
+/secure/secret.key
+/secure/secrets.json
+/AppinaDay Trainer Package.zip
+/ContosoCoffee_1_0_0_2.zip

@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+
+WORKDIR /setup
+
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN dotnet tool install Microsoft.PowerApps.CLI.Tool --tool-path /bin
+RUN dotnet tool install --global PowerShell
+RUN dotnet tool install --global SecureStore.Client
+
+COPY src/install/. ./install
+RUN cd /setup/install ; dotnet build
+RUN pwsh /setup/install/bin/Debug/net7.0/playwright.ps1 install
+RUN pwsh /setup/install/bin/Debug/net7.0/playwright.ps1 install-deps
+COPY src/scripts/. ./scripts
+COPY assets/. ./assets
+
+CMD ["pwsh", "/setup/scripts/start.ps1" ]

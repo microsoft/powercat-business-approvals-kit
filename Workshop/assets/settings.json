@@ -1,0 +1,15 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "powercat_AdminAccount",
+      "Value": "%AdminAccount%"
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "powercat_sharedapprovals_f76aa",
+      "ConnectionId": "%ApprovalsConnectionId%",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
+    }
+  ]
+}
