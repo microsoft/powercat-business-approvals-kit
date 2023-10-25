@@ -495,22 +495,16 @@ function Install-ApprovalsKit {
         Invoke-UpdateOAuthSettings $installFile $Environment
 
         pac solution import --path $installFile --settings-file $tempFile
-
-        $installed = Invoke-SolutionInstalled $Environment "BusinessApprovalKit"
-
-        # if ( $installed -eq $True ) {
-        #     Invoke-ApprovalsConnectorUpdate $UserUPN $Environment
-        # } else {
-        #     Write-Error "Approvals Kit did not complete"
-        # }
-
-        
     } else {
         Write-Host "Approvals Kit is installed"
     }
 
-    Invoke-ApprovalsKitPostInstall $UserUPN $Environment
-    
+    $installed = Invoke-SolutionInstalled $Environment "BusinessApprovalKit"
+    if ( $installed -eq $True ) {
+        Invoke-ApprovalsKitPostInstall $UserUPN $Environment
+    } else {
+        Write-Host "Approvals Kit is not installed"
+    }
 }
 
 function Invoke-ApprovalsKitPostInstall {

@@ -8,5 +8,27 @@ param([string] $user)
 Push-Location
 $appPath = [System.IO.Path]::Combine($PSScriptRoot,"..","..")
 Set-Location $appPath
+
 $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
-Invoke-SetupUserForWorkshop "$user@$domain"
+
+if ( Test-Path $user ) {
+    Write-Host "Found user file"
+    $lines = Get-Content $user
+    $total = $lines.Length
+    $index = 0
+    foreach($line in $lines) {
+        if ( -not [System.String]::IsNullOrEmpty($line) ) {
+            $index = $index + 1
+            Write-Host "---------------------------------------------"
+            Write-Host "$index of $total - $(Get-Date)"
+            Write-Host "$line@$domain"
+            Write-Host "---------------------------------------------"
+            Invoke-SetupUserForWorkshop "$line@$domain"
+        }
+    }
+} else {
+    Write-Host "Single user setup"
+    Invoke-SetupUserForWorkshop "$user@$domain"
+}
+
+
