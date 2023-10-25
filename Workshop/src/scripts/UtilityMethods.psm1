@@ -143,7 +143,7 @@ class UtilityMethods {
         $displayName = $user[0].displayName
         $environmentName = "$displayName Dev"
     
-        if ( (Get-ConfigValue "Feature.ResetUserPassword") -eq "Y" ) 
+        if ( ([UtilityMethods]::GetConfigValue("Feature.ResetUserPassword")) -eq "Y" ) 
         {
             Write-Host "Reset user"
             Reset-User $UserUPN | Out-Null
@@ -488,10 +488,10 @@ class UtilityMethods {
     None. You can't pipe objects to Add-Connection.
 
     .OUTPUTS
-    None. Add-Connection does not return any objects.
+    None. AddConnection does not return any objects.
 
     .EXAMPLE
-    PS> Add-Connection -UserUPN "first.last@contoso.com" -Environment $env -ConnectorName "approvals"
+    PS> [UtilityMethods::AddConnection("first.last@contoso.com", $env, "approvals")
     Adds a new connection of type "MyConnector" to the specified development environment for the specified user.
 
     #> 

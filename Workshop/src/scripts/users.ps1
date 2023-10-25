@@ -15,6 +15,7 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License.
 #>
 
+. $PSScriptRoot\common.ps1
 . $PSScriptRoot\security.ps1
 . $PSScriptRoot\activate-flows.ps1
 Import-Module $PSScriptRoot\UtilityMethods.psm1

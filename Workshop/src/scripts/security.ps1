@@ -65,7 +65,7 @@ function Invoke-AzureLogin {
 
 #> 
 function Add-SecurityMakersGroup {
-    $makerGroup = az ad group list --filter "displayname eq 'Makers'"
+    $makerGroup = az ad group list --filter "displayname eq 'Makers'" | ConvertFrom-Json
     if ( $makerGroup.Count -eq 0 ) {
         az ad group create --display-name Makers --mail-nickname makers --description "Security group for Makers in the organization"
     } else {

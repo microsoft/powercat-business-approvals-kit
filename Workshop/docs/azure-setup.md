@@ -155,7 +155,7 @@ pwsh
 1. In the Power Shell
 
 ```pwsh
-cd power-platform-admin-main
+cd Workflow
 . ./src/scripts/users.ps1
 Invoke-SetupUserForWorkshop AdeleV@M365x63805008.OnMicrosoft.com
 ```
