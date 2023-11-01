@@ -348,3 +348,6 @@ MigrationBackup/
 .ionide/
 
 site/**
+
+**/assets/temp.*
+**/assets/connector/**
