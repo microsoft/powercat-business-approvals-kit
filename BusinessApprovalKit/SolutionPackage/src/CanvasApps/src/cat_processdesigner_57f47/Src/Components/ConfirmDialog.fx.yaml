@@ -37,7 +37,7 @@ ConfirmDialog As CanvasComponent:
         Y: =lblConfirmMessage.Y + lblConfirmMessage.Height + 30
         ZIndex: =4
 
-        btnYes As button:
+        btnYes1 As button:
             BorderColor: =RGBA(0, 0, 0, 0)
             DisabledBorderColor: =RGBA(0, 0, 0, 0)
             DisabledColor: =RGBA(166, 166, 166, 1)
@@ -60,11 +60,12 @@ ConfirmDialog As CanvasComponent:
             RadiusTopRight: =0
             Size: =10
             Text: =If(ConfirmDialog.OkOnly, "Ok", "Yes")
+            Visible: =false
             Width: =100
             X: =If(ConfirmDialog.OkOnly, Parent.Width / 2 - Self.Width / 2, 0)
             ZIndex: =1
 
-        btnNo As button:
+        btnNo1 As button:
             BorderColor: =RGBA(0, 0, 0, 0)
             DisabledBorderColor: =RGBA(0, 0, 0, 0)
             DisabledColor: =RGBA(166, 166, 166, 1)
@@ -87,8 +88,32 @@ ConfirmDialog As CanvasComponent:
             RadiusTopRight: =0
             Size: =10
             Text: ="No"
-            Visible: =!ConfirmDialog.OkOnly
+            Visible: =false
             Width: =100
-            X: =btnYes.Width + 50
+            X: =btnYes1.Width + 50
             ZIndex: =2
+
+        btnYes As Button:
+            BasePaletteColor: =
+            DisplayMode: =DisplayMode.Edit
+            Height: =32
+            OnSelect: =ConfirmDialog.OnClick(true)
+            Text: =If(ConfirmDialog.OkOnly, "Ok", "Yes")
+            Width: =96
+            X: =0
+            Y: =0
+            ZIndex: =3
+
+        btnNo As Button:
+            Appearance: ='ButtonCanvas.Appearance'.Secondary
+            BasePaletteColor: =
+            DisplayMode: =DisplayMode.Edit
+            Height: =32
+            OnSelect: =ConfirmDialog.OnClick(false)
+            Text: ="No"
+            Visible: =!ConfirmDialog.OkOnly
+            Width: =96
+            X: =btnYes.Width + 10
+            Y: =0
+            ZIndex: =4
 

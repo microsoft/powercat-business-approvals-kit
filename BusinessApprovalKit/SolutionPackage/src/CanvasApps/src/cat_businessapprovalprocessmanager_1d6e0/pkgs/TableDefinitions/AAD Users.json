@@ -21,5 +21,6 @@
     "TableName": "aaduser",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"29616411\\\"\",\"savedqueryid\":\"f802f753-1e75-4eba-9bc9-4da3935813c4\",\"name\":\"AAD User Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"29616403\\\"\",\"savedqueryid\":\"41d3f913-bf6f-4d27-84c8-4f2a3f43644e\",\"name\":\"AAD User Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"29616387\\\"\",\"savedqueryid\":\"1f1810e2-2903-402f-92bc-db11ec075c24\",\"name\":\"All AAD users\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"29616395\\\"\",\"savedqueryid\":\"37ced142-2ece-4621-94f0-f5c3398ee4e8\",\"name\":\"AAD User Lookup View\",\"querytype\":64}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

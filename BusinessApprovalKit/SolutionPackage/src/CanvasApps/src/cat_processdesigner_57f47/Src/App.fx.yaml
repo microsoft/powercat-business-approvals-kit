@@ -1,7 +1,8 @@
 App As appinfo:
     BackEnabled: =false
     OnStart: |-
-        =//Passing record ID from main view
+        =Set(_isBusy,false);
+        //Passing record ID from main view
         Set(inputParameters,Param("recordId"));
         Set(props, Match(inputParameters, "\""prop1"":""(?<prop1>[^""]*)"",""prop2"":""(?<prop2>[^""]*)"));
         Set(
@@ -30,7 +31,7 @@ App As appinfo:
                 */
                 Blank(); 
             );
-            NewForm(frmProcess),
+            NewForm(frmProcess);,
             Set(_selectedProcess,
                 LookUp(
                     'Business Approval Processes',
@@ -38,10 +39,39 @@ App As appinfo:
                 )
             )
         );
-        
         // Set themeing
         Set(
             AppTheme,
+            {
+                palette: {
+                    themePrimary: "#0880a8",
+                    themeLighterAlt: "#f2f9fc",
+                    themeLighter: "#cce8f1",
+                    themeLight: "#a4d5e5",
+                    themeTertiary: "#57aecb",
+                    themeSecondary: "#1d8db3",
+                    themeDarkAlt: "#087397",
+                    themeDark: "#066280",
+                    themeDarker: "#05485e",
+                    neutralLighterAlt: "#faf9f8",
+                    neutralLighter: "#f3f2f1",
+                    neutralLight: "#edebe9",
+                    neutralQuaternaryAlt: "#e1dfdd",
+                    neutralQuaternary: "#d0d0d0",
+                    neutralTertiaryAlt: "#c8c6c4",
+                    neutralTertiary: "#a19f9d",
+                    neutralSecondary: "#605e5c",
+                    neutralPrimaryAlt: "#3b3a39",
+                    neutralPrimary: "#323130",
+                    neutralDark: "#201f1e",
+                    black: "#000000",
+                    white: "#ffffff"
+                }
+            }
+        );
+        // Set themeing
+        Set(
+            AppTheme1,
             /* START THEME OBJECT */
             {
                 palette: {
@@ -99,6 +129,8 @@ App As appinfo:
             )
         )
         */
+    StartScreen: =scrWorkflowDesignerScreen
+    Theme: =SteelTheme
 
     Host As hostControl.DefaultHostControlVariant:
         OnCancel: =false

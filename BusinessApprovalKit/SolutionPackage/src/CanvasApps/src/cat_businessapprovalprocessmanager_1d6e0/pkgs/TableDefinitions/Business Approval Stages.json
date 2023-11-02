@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalstage",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"24663381\\\"\",\"savedqueryid\":\"26a45d5e-2624-4bc5-a507-96ec068c9db5\",\"name\":\"Business Approval Stage Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"29094274\\\"\",\"savedqueryid\":\"c7ee23eb-711c-4a44-86b4-9ebf506ed8de\",\"name\":\"Inactive Business Approval Stages\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"25561618\\\"\",\"savedqueryid\":\"694b36f5-b874-4b8f-ac57-a97b1acc5d0f\",\"name\":\"Active Business Approval Stages\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24663369\\\"\",\"savedqueryid\":\"9b5b8a25-0cde-45c2-82c1-b6d4113d081a\",\"name\":\"Business Approval Stage Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"24663393\\\"\",\"savedqueryid\":\"b7e216a4-e3fc-4b05-9861-b89372a9b52c\",\"name\":\"Business Approval Stage Advanced Find View\",\"querytype\":1}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

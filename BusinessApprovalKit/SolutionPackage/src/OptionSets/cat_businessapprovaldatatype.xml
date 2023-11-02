@@ -20,8 +20,11 @@
     </option>
     <option value="809060002">
       <labels>
-        <label description="Date/Time" languagecode="1033" />
+        <label description="Date" languagecode="1033" />
       </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
     </option>
     <option value="809060003">
       <labels>

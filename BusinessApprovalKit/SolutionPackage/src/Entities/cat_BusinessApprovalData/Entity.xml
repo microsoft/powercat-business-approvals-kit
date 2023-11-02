@@ -80,7 +80,7 @@
           <IsFilterable>0</IsFilterable>
           <IsRetrievable>0</IsRetrievable>
           <IsLocalizable>0</IsLocalizable>
-          <AppDefaultValue>809060000</AppDefaultValue>
+          <AppDefaultValue>-1</AppDefaultValue>
           <OptionSetName>cat_businessapprovaldatatype</OptionSetName>
           <displaynames>
             <displayname description="Data Type" languagecode="1033" />
@@ -617,7 +617,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>0</ValidForCreateApi>
           <IsCustomField>0</IsCustomField>
-          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
           <IntroducedVersion>1.0</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>

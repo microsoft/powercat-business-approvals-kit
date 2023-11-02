@@ -20,6 +20,7 @@ BusyScreen As CanvasComponent:
         Image: ='25_black'
         PressedBorderColor: =RGBA(0, 0, 0, 0)
         PressedFill: =RGBA(0, 0, 0, 0)
+        Visible: =false
         Width: =30
         X: =20
         Y: =20
@@ -38,8 +39,19 @@ BusyScreen As CanvasComponent:
         Height: =30
         Size: =10
         Text: =Parent.BusyMessage
+        Visible: =false
         Width: =Parent.Width - Self.X - 30
         X: =Image2.X + Image2.Width + 10
         Y: =Image2.Y
         ZIndex: =2
+
+    Spinner1 As Spinner:
+        BasePaletteColor: =
+        DisplayMode: =DisplayMode.Edit
+        Height: =Parent.Height
+        Label: =Parent.BusyMessage
+        Width: =Parent.Width
+        X: =0
+        Y: =0
+        ZIndex: =3
 

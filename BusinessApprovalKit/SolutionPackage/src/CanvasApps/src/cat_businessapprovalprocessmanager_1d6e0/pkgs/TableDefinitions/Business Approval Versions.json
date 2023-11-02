@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalversion",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"26160593\\\"\",\"savedqueryid\":\"efbb6236-3d82-ec11-8d20-0022486dd812\",\"name\":\"All Versions\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"25910677\\\"\",\"savedqueryid\":\"dbbc6c88-2ba6-49af-a88d-4a0d81835c42\",\"name\":\"Business Approval Version Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"25910653\\\"\",\"savedqueryid\":\"a1f746b5-cfe4-47ca-8b26-6677981a23f1\",\"name\":\"Business Approval Version Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"26092565\\\"\",\"savedqueryid\":\"4401321d-180b-432a-a4c8-995bbcf7bda1\",\"name\":\"Active Business Approval Versions\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"27543757\\\"\",\"savedqueryid\":\"f1cbc293-7a4e-48dd-9730-e457be996bba\",\"name\":\"Business Approval Version Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"25910641\\\"\",\"savedqueryid\":\"aeb3a15a-7501-4f11-8364-e60103ba08e6\",\"name\":\"Inactive Business Approval Versions\",\"querytype\":0}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

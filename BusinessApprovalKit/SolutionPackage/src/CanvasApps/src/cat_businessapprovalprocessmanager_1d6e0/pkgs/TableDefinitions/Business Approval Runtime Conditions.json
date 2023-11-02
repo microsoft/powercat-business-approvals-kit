@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalruntimecondition",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"25995534\\\"\",\"savedqueryid\":\"3b5d554b-8efa-4de2-bf31-21fbf02b5118\",\"name\":\"Inactive Business Approval Runtime Conditions\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"26929112\\\"\",\"savedqueryid\":\"b0a0b822-a0ad-40f8-a766-37ca2ef8b021\",\"name\":\"Active Business Approval Runtime Conditions\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"25995546\\\"\",\"savedqueryid\":\"9bcf8458-c895-4e77-87ad-5574f25623a3\",\"name\":\"Business Approval Runtime Condition Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"25995570\\\"\",\"savedqueryid\":\"3bf3e270-8994-47e9-ae3a-b454a57adaa8\",\"name\":\"Business Approval Runtime Condition Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"25995558\\\"\",\"savedqueryid\":\"c8805a3e-b50e-4fd6-b449-cdc69afa80d7\",\"name\":\"Business Approval Runtime Condition Lookup View\",\"querytype\":64}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

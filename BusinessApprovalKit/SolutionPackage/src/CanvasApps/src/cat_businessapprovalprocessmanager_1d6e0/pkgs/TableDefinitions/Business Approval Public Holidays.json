@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalpublicholidays",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"24681970\\\"\",\"savedqueryid\":\"341fb646-98d1-4466-b5dd-cab07405a869\",\"name\":\"Business Approval Public Holidays Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"24681994\\\"\",\"savedqueryid\":\"ac7d7eee-a473-45cd-9a5b-dab11e535deb\",\"name\":\"Business Approval Public Holidays Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"24681982\\\"\",\"savedqueryid\":\"b2891982-6150-494a-92e9-e3fd4547fbc2\",\"name\":\"Business Approval Public Holidays Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"24681958\\\"\",\"savedqueryid\":\"f7835725-dc68-434f-a47a-fc006b8e34b9\",\"name\":\"Inactive Business Approval Public Holidays\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24691068\\\"\",\"savedqueryid\":\"6ef26764-6966-4f5c-aec7-fdefbcd2837e\",\"name\":\"Active Business Approval Public Holidays\",\"querytype\":0}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

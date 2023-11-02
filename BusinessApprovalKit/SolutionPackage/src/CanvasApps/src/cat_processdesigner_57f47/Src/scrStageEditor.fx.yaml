@@ -20,7 +20,7 @@ scrStageEditor As screen:
                         'Business Approval Condition Operand'.'Greater Than or Equals (>=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
                         'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
                     ],
-                    type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.'Date/Time' ]
+                    type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.Date ]
                 },
                 { 
                     operands: [
@@ -1224,7 +1224,7 @@ scrStageEditor As screen:
             BusyMessage: =busyMessage
             Fill: =RGBA(255, 255, 255, 0.8)
             Height: =Parent.Height
-            Visible: =_isBusy
+            Visible: =false
             Width: =Parent.Width
             ZIndex: =28
 

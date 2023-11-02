@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalworkprofile",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"24678781\\\"\",\"savedqueryid\":\"8f3df788-d951-4433-a5f7-14307b4545db\",\"name\":\"Business Approval Work Profile Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"24678769\\\"\",\"savedqueryid\":\"d5706496-902e-4699-9e7d-7b7107d2f796\",\"name\":\"Business Approval Work Profile Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"24678733\\\"\",\"savedqueryid\":\"3e2629f1-2998-4270-a6b3-8cea66b835fe\",\"name\":\"Active Business Approval Work Profiles\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24678745\\\"\",\"savedqueryid\":\"2a547a86-5e54-4112-b4fd-cd07ab8a1f09\",\"name\":\"Inactive Business Approval Work Profiles\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24678757\\\"\",\"savedqueryid\":\"b2111bc3-8435-4b63-806d-f47804b9ea54\",\"name\":\"Business Approval Work Profile Associated View\",\"querytype\":2}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }
