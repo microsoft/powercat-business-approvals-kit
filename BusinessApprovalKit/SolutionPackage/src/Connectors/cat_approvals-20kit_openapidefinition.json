@@ -1,0 +1,415 @@
+{
+  "basePath": "/",
+  "consumes": [],
+  "definitions": {},
+  "host": "@environmentVariables(\"cat_ApprovalKitOrgUrl\")",
+  "info": {
+    "description": "",
+    "title": "Approvals kit Connector",
+    "version": "1.0"
+  },
+  "parameters": {},
+  "paths": {
+    "/api/data/v9.2/cat_GetDynamicParameters(ProcessID={processID})": {
+      "get": {
+        "description": "An action to get all the approval data field based on the Process ID selected",
+        "operationId": "GetApprovalDataFields",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "processID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "properties": {
+                "@odata.context": {
+                  "description": "@odata.context",
+                  "type": "string"
+                },
+                "@odata.type": {
+                  "description": "@odata.type",
+                  "type": "string"
+                },
+                "schemavalue": {
+                  "description": "schemavalue",
+                  "properties": {
+                    "@odata.type": {
+                      "description": "@odata.type",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "description": "properties",
+                      "properties": {
+                        "@odata.type": {
+                          "description": "@odata.type",
+                          "type": "string"
+                        },
+                        "properties": {
+                          "description": "properties",
+                          "properties": {
+                            "amount": {
+                              "description": "amount",
+                              "properties": {
+                                "@odata.type": {
+                                  "description": "@odata.type",
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "description": "title",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "description": "type",
+                                  "type": "string"
+                                },
+                                "x-ms-visibility": {
+                                  "description": "x-ms-visibility",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "category": {
+                              "description": "category",
+                              "properties": {
+                                "@odata.type": {
+                                  "description": "@odata.type",
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "description": "title",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "description": "type",
+                                  "type": "string"
+                                },
+                                "x-ms-visibility": {
+                                  "description": "x-ms-visibility",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "description": "type",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Get Approval Data Fields",
+        "x-ms-visibility": "internal"
+      }
+    },
+    "/api/data/v9.2/cat_businessapprovalpublishedworkflows": {
+      "get": {
+        "description": "List all published workflows",
+        "operationId": "GetPublishedWorkflows",
+        "parameters": [
+          {
+            "default": "cat_businessapprovalpublishedworkflowid,cat_friendlyname,cat_name,cat_version,_cat_activeversion_value",
+            "in": "query",
+            "name": "$select",
+            "required": true,
+            "type": "string",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "default": "cat_publishedworkflow($select=cat_businessapprovalpublishedruntimedataid,cat_name,cat_datatype,cat_defaultvalue,_cat_runtimedata_value)",
+            "in": "query",
+            "name": "$expand",
+            "required": true,
+            "type": "string",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "default": "application/json",
+            "in": "header",
+            "name": "Accept",
+            "required": true,
+            "type": "string",
+            "x-ms-visibility": "internal"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "properties": {
+                "@odata.context": {
+                  "description": "@odata.context",
+                  "type": "string"
+                },
+                "@odata.type": {
+                  "description": "@odata.type",
+                  "type": "string"
+                },
+                "schemavalue": {
+                  "description": "schemavalue",
+                  "properties": {
+                    "@odata.type": {
+                      "description": "@odata.type",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "description": "properties",
+                      "properties": {
+                        "@odata.type": {
+                          "description": "@odata.type",
+                          "type": "string"
+                        },
+                        "properties": {
+                          "description": "properties",
+                          "properties": {
+                            "amount": {
+                              "description": "amount",
+                              "properties": {
+                                "@odata.type": {
+                                  "description": "@odata.type",
+                                  "type": "string"
+                                },
+                                "default": {
+                                  "description": "default",
+                                  "format": "int32",
+                                  "type": "integer"
+                                },
+                                "format": {
+                                  "description": "format",
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "description": "title",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "description": "type",
+                                  "type": "string"
+                                },
+                                "x-ms-summary": {
+                                  "description": "x-ms-summary",
+                                  "type": "string"
+                                },
+                                "x-ms-visibility": {
+                                  "description": "x-ms-visibility",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "category": {
+                              "description": "category",
+                              "properties": {
+                                "@odata.type": {
+                                  "description": "@odata.type",
+                                  "type": "string"
+                                },
+                                "format": {
+                                  "description": "format",
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "description": "title",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "description": "type",
+                                  "type": "string"
+                                },
+                                "x-ms-summary": {
+                                  "description": "x-ms-summary",
+                                  "type": "string"
+                                },
+                                "x-ms-visibility": {
+                                  "description": "x-ms-visibility",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "description": "type",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Get Published Workflows",
+        "x-ms-visibility": "internal"
+      }
+    },
+    "/api/data/v9.2/cat_businessapprovalworkflowqueues": {
+      "post": {
+        "description": "Create a new workflow instance.",
+        "operationId": "CreateWorkflowInstance",
+        "parameters": [
+          {
+            "default": "application/json;odata.metadata=full",
+            "description": "The header parameter required to make Microsoft Dataverse return the odata id",
+            "in": "header",
+            "name": "accept",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Accept",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "default": "return=representation,odata.include-annotations=*",
+            "description": "The header parameter required to make Microsoft Dataverse return the created resource",
+            "in": "header",
+            "name": "prefer",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Prefer",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "description": "Select a published workflow process",
+            "in": "header",
+            "name": "selectedProcess",
+            "required": true,
+            "type": "string",
+            "x-ms-dynamic-values": {
+              "operationId": "GetPublishedWorkflows",
+              "value-collection": "value",
+              "value-path": "cat_businessapprovalpublishedworkflowid",
+              "value-title": "cat_friendlyname"
+            },
+            "x-ms-summary": "Workflow Process"
+          },
+          {
+            "in": "body",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "x-ms-dynamic-schema": {
+                "operationId": "GetApprovalDataFields",
+                "parameters": {
+                  "processID": {
+                    "parameter": "selectedProcess"
+                  }
+                },
+                "value-path": "schemavalue/properties"
+              },
+              "x-ms-visibility": "important"
+            },
+            "x-ms-visibility": "important"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "properties": {
+                "@odata.context": {
+                  "description": "@odata.context",
+                  "type": "string"
+                },
+                "@odata.editLink": {
+                  "description": "@odata.editLink",
+                  "type": "string"
+                },
+                "@odata.etag": {
+                  "description": "@odata.etag",
+                  "type": "string"
+                },
+                "@odata.id": {
+                  "description": "@odata.id",
+                  "type": "string"
+                },
+                "@odata.type": {
+                  "description": "@odata.type",
+                  "type": "string"
+                },
+                "cat_businessapprovalworkflowqueueid": {
+                  "description": "cat_businessapprovalworkflowqueueid",
+                  "type": "string"
+                },
+                "cat_businessapprovalworkflowqueueid@odata.type": {
+                  "description": "cat_businessapprovalworkflowqueueid@odata.type",
+                  "type": "string"
+                },
+                "cat_processid": {
+                  "description": "cat_processid",
+                  "type": "string"
+                },
+                "cat_runtimedata": {
+                  "description": "cat_runtimedata",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "description": "id",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "value",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Start business approval process",
+        "x-ms-visibility": "important"
+      }
+    }
+  },
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "responses": {},
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "oauth2-auth": []
+    }
+  ],
+  "securityDefinitions": {
+    "oauth2-auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "type": "oauth2"
+    }
+  },
+  "swagger": "2.0",
+  "tags": []
+}

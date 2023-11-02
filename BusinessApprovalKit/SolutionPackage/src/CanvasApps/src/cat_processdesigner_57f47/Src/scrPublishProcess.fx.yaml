@@ -317,7 +317,7 @@ scrPublishProcess As screen:
             BusyMessage: =busyMessage
             Fill: =RGBA(255, 255, 255, 0.8)
             Height: =Parent.Height
-            Visible: =busyPublish
+            Visible: =false
             Width: =Parent.Width
             ZIndex: =8
 
@@ -339,4 +339,15 @@ scrPublishProcess As screen:
             X: =10
             Y: =5
             ZIndex: =9
+
+        "Progress1 As 'Progress Bar'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =45
+            Indeterminate: =true
+            ProgressColor: ='Progress.ProgressColor'.Brand
+            Visible: =!isPublishReady
+            Width: =Parent.Width
+            X: =0
+            Y: =252
+            ZIndex: =10
 

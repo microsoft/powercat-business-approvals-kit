@@ -1,0 +1,18 @@
+<customapi uniquename="cat_GetDynamicParameters">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="A method to get the input fields mentioned in business approval data based on approval process Id">
+    <label description="A method to get the input fields mentioned in business approval data based on approval process Id" languagecode="1033" />
+  </description>
+  <displayname default="Get Dynamic Parameters">
+    <label description="Get Dynamic Parameters" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>1</isfunction>
+  <isprivate>0</isprivate>
+  <name>GetDynamicParameters</name>
+  <plugintypeid>
+    <plugintypeexportkey>30c04a0c-3e7e-4e56-afe0-87e8dc251d4c</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

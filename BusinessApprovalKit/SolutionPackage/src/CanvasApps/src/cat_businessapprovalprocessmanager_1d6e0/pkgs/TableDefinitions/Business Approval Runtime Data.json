@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalruntimedata",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"25997378\\\"\",\"savedqueryid\":\"79b2ba8c-0a72-ec11-8942-000d3a09e138\",\"name\":\"Approval Data User Fields\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"25914831\\\"\",\"savedqueryid\":\"66487abd-a4ea-45a6-8caa-1738f839f7d4\",\"name\":\"Business Approval Runtime Data Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"25914855\\\"\",\"savedqueryid\":\"aa321d3a-ab69-467e-bb2c-2104ac29a423\",\"name\":\"Business Approval Runtime Data Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"25914819\\\"\",\"savedqueryid\":\"33bec020-5a18-46a8-8dac-22d1f176cdc9\",\"name\":\"Inactive Business Approval Runtime Data\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"26302674\\\"\",\"savedqueryid\":\"7a298574-6fbc-4b3b-ad92-6e7c809e9d57\",\"name\":\"Active Business Approval Runtime Data\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"29520508\\\"\",\"savedqueryid\":\"34c63dd4-361f-4255-8bad-a84d7c9721f3\",\"name\":\"Business Approval Runtime Data Lookup View\",\"querytype\":64}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

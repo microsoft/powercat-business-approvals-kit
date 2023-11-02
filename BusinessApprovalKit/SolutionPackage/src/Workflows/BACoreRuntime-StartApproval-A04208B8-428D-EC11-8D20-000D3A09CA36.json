@@ -21,6 +21,15 @@
         "api": {
           "name": "shared_commondataserviceforapps"
         }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_afa4e"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
       }
     },
     "definition": {
@@ -44,16 +53,15 @@
           "type": "OpenApiConnectionWebhook",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "SubscribeWebhookTrigger"
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "subscriptionRequest/message": 1,
               "subscriptionRequest/entityname": "cat_businessapprovalinstance",
               "subscriptionRequest/scope": 4,
-              "subscriptionRequest/runas": 1,
-              "subscriptionRequest/name": "a04208b8-428d-ec11-8d20-000d3a09ca36"
+              "subscriptionRequest/runas": 1
             },
             "authentication": "@parameters('$authentication')"
           }
@@ -70,15 +78,17 @@
               "type": "OpenApiConnection",
               "inputs": {
                 "host": {
-                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
                   "connectionName": "shared_approvals",
-                  "operationId": "CreateAnApproval"
+                  "operationId": "CreateAnApproval",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
                 },
                 "parameters": {
                   "approvalType": "Basic",
                   "ApprovalCreationInput/title": "@triggerOutputs()?['body/cat_title']",
                   "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
+                  "ApprovalCreationInput/details": "@triggerOutputs()?['body/cat_additionalinformation']",
                   "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
+                  "ApprovalCreationInput/requestor": "@{outputs('Get_Owner_Email')?['body/internalemailaddress']};",
                   "ApprovalCreationInput/enableNotifications": "@equals(body('Get_a_row_by_ID')?['cat_notification'],'809060000')",
                   "ApprovalCreationInput/enableReassignment": false
                 },
@@ -101,9 +111,9 @@
                 "type": "OpenApiConnection",
                 "inputs": {
                   "host": {
-                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
                     "connectionName": "shared_approvals",
-                    "operationId": "CreateAnApproval"
+                    "operationId": "CreateAnApproval",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
                   },
                   "parameters": {
                     "approvalType": "CustomResponse",
@@ -112,7 +122,9 @@
                     ],
                     "ApprovalCreationInput/title": "@triggerOutputs()?['body/cat_title']",
                     "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
+                    "ApprovalCreationInput/details": "@triggerOutputs()?['body/cat_additionalinformation']",
                     "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
+                    "ApprovalCreationInput/requestor": "@{outputs('Get_Owner_Email')?['body/internalemailaddress']};",
                     "ApprovalCreationInput/enableNotifications": "@equals(body('Get_a_row_by_ID')?['cat_notification'],'809060000')",
                     "ApprovalCreationInput/enableReassignment": false
                   },
@@ -144,9 +156,9 @@
           "type": "OpenApiConnectionWebhook",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
               "connectionName": "shared_approvals",
-              "operationId": "WaitForAnApproval"
+              "operationId": "WaitForAnApproval",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
             },
             "parameters": {
               "approvalName": "@coalesce(outputs('Standard_Approval')?['body/name'],outputs('Custom_Approval')?['body/name'])"
@@ -166,9 +178,9 @@
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "UpdateRecord"
+              "operationId": "UpdateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "entityName": "cat_businessapprovalinstances",
@@ -192,9 +204,9 @@
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "UpdateRecord"
+              "operationId": "UpdateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "entityName": "cat_businessapprovalinstances",
@@ -219,9 +231,9 @@
           "type": "OpenApiConnectionWebhook",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "SubscribeWebhookTrigger"
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "subscriptionRequest/message": 1,
@@ -299,9 +311,9 @@
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                       "connectionName": "shared_commondataserviceforapps_1",
-                      "operationId": "UpdateRecord"
+                      "operationId": "UpdateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                     },
                     "parameters": {
                       "entityName": "cat_businessapprovalinstances",
@@ -325,9 +337,9 @@
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                       "connectionName": "shared_commondataserviceforapps_1",
-                      "operationId": "UpdateRecord"
+                      "operationId": "UpdateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                     },
                     "parameters": {
                       "entityName": "msdyn_flow_approvals",
@@ -355,9 +367,9 @@
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                       "connectionName": "shared_commondataserviceforapps_1",
-                      "operationId": "UpdateRecord"
+                      "operationId": "UpdateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                     },
                     "parameters": {
                       "entityName": "cat_businessapprovalinstanceoverrides",
@@ -377,9 +389,9 @@
                       "type": "OpenApiConnection",
                       "inputs": {
                         "host": {
-                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                           "connectionName": "shared_commondataserviceforapps_1",
-                          "operationId": "ListRecords"
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                         },
                         "parameters": {
                           "entityName": "cat_businessapprovers",
@@ -402,9 +414,9 @@
                       "type": "OpenApiConnection",
                       "inputs": {
                         "host": {
-                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                           "connectionName": "shared_commondataserviceforapps_1",
-                          "operationId": "CreateRecord"
+                          "operationId": "CreateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                         },
                         "parameters": {
                           "entityName": "cat_businessapprovalinstances",
@@ -412,7 +424,7 @@
                           "item/cat_instancestatus": 809060000,
                           "item/cat_NodeInstance@odata.bind": "cat_businessapprovalruntimenodeinstances(@{outputs('Update_Approval_Instance_State')?['body/_cat_nodeinstance_value']})",
                           "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Update_Approval_Instance_State')?['body/_cat_workflowinstance_value']})",
-                          "item/cat_additionalinformation": "Admin override created for approver.",
+                          "item/cat_additionalinformation": "Admin override created for approver.@{outputs('Update_Approval_Instance_State')?['body/cat_additionalinformation']}",
                           "item/cat_approvaltype": "@outputs('Wait_on_Override')?['body/cat_approvaltype']",
                           "item/cat_approverupn": "@first(outputs('Get_Override_Approver_UPN')?['body/value'])['cat_approverid']",
                           "item/cat_customresponses": "@outputs('Wait_on_Override')?['body/cat_customresponses']",
@@ -475,9 +487,9 @@
                 "type": "OpenApiConnection",
                 "inputs": {
                   "host": {
-                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                     "connectionName": "shared_commondataserviceforapps_1",
-                    "operationId": "UpdateRecord"
+                    "operationId": "UpdateRecord",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                   },
                   "parameters": {
                     "entityName": "cat_businessapprovalinstanceoverrides",
@@ -501,16 +513,20 @@
           "type": "If"
         },
         "Get_a_row_by_ID": {
-          "runAfter": {},
+          "runAfter": {
+            "Get_Owner_Email": [
+              "Succeeded"
+            ]
+          },
           "metadata": {
             "operationMetadataId": "07ae2bb1-e74f-41c3-818f-87608de66416"
           },
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "GetItem"
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "entityName": "cat_businessapprovalinstances",
@@ -519,10 +535,29 @@
             },
             "authentication": "@parameters('$authentication')"
           }
+        },
+        "Get_Owner_Email": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "18de8da1-023c-44a4-9472-151365c0016f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "systemusers",
+              "recordId": "@triggerOutputs()?['body/_ownerid_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }

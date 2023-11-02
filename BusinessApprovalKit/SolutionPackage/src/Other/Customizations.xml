@@ -12,10 +12,12 @@
   <Dashboards />
   <WebResources />
   <CustomControls />
+  <SolutionPluginAssemblies />
   <AppModuleSiteMaps />
   <AppModules />
   <EntityDataProviders />
   <CanvasApps />
+  <Connectors />
   <connectionreferences>
     <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitApprovals">
       <connectionreferencedisplayname>Business Approval Kit | Approvals</connectionreferencedisplayname>
@@ -34,6 +36,34 @@
     <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitO365Users">
       <connectionreferencedisplayname>Business Approval Kit | O365 Users</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365users</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_sharedapprovals_71396">
+      <connectionreferencedisplayname>Approvals BusinessApprovalKit-71396</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_approvals</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_sharedcommondataserviceforapps_9160d">
+      <connectionreferencedisplayname>Microsoft Dataverse BusinessApprovalKit-9160d</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_sharedcommondataserviceforapps_afa4e">
+      <connectionreferencedisplayname>Microsoft Dataverse BusinessApprovalKit-afa4e</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_sharedcommondataserviceforapps_f07ea">
+      <connectionreferencedisplayname>Microsoft Dataverse BusinessApprovalKit-f07ea</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
       <iscustomizable>1</iscustomizable>
       <statecode>0</statecode>
       <statuscode>1</statuscode>

@@ -1,0 +1,203 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovers",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprover",
+    "Name": "Business Approvers",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_approverid": "Approver Id",
+      "cat_approvertype": "Approver Type",
+      "cat_BackupDelegate": "Backup Delegate",
+      "cat_backupdelegateid": "Backup Delegate Id",
+      "cat_bizappr_nodeapprover": "Business Approval Nodes",
+      "cat_bizappr_runtimenodeapprover": "Business Approval Runtime Nodes",
+      "cat_BusinessApprovalInstance_Approver_cat": "Business Approval Instances (cat_BusinessApprovalInstance_Approver_cat)",
+      "cat_BusinessApprovalInstance_DelegateAppr": "Business Approval Instances (cat_BusinessApprovalInstance_DelegateAppr)",
+      "cat_BusinessApprovalInstance_OriginalAppr": "Business Approval Instances (cat_BusinessApprovalInstance_OriginalAppr)",
+      "cat_BusinessApprovalInstance_OverrideAppr": "Business Approval Instances (cat_BusinessApprovalInstance_OverrideAppr)",
+      "cat_BusinessApprovalInstanceOverride_Over": "Business Approval Instance Overrides",
+      "cat_BusinessApprovalProcess_DefaultApprov": "Business Approval Processes",
+      "cat_BusinessApprovalVersion_DefaultApprov": "Business Approval Versions",
+      "cat_businessapprover_AsyncOperations": "System Jobs",
+      "cat_BusinessApprover_BackupDelegate_cat_B": "Business Approvers (cat_BusinessApprover_BackupDelegate_cat_B)",
+      "cat_businessapprover_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_BusinessApprover_Delegate_cat_Busines": "Business Approvers (cat_BusinessApprover_Delegate_cat_Busines)",
+      "cat_businessapprover_DuplicateBaseRecord": "Duplicate Records (cat_businessapprover_DuplicateBaseRecord)",
+      "cat_businessapprover_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprover_DuplicateMatchingRecord)",
+      "cat_businessapprover_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprover_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprover_ProcessSession": "Process Sessions",
+      "cat_businessapprover_SyncErrors": "Sync Errors",
+      "cat_BusinessApproverDynamicDataMap_Dynami": "Business Approver Dynamic Data Maps",
+      "cat_businessapproverid": "Business Approver",
+      "cat_Delegate": "Delegate",
+      "cat_delegateid": "Delegate Id",
+      "cat_displayname": "Display Name",
+      "cat_dynamicapprovertype": "Dynamic Approver Type",
+      "cat_isoutofoffice": "Is Out of Office",
+      "cat_name": "Name",
+      "cat_notificationtype": "Notification Type",
+      "cat_RequestData": "Request Data",
+      "cat_WorkProfile": "Work Profile",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approvers",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approvers (Views)",
+    "Name": "_cat_businessapprover_views",
+    "RelatedEntityName": "Business Approvers",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0fb7e7b8-c59c-49d1-b443-eac28e551871": "Business Approver Associated View",
+      "30a048ad-2046-4f9e-b689-61a5546fd842": "Active Business Approvers",
+      "3141b298-7dd4-44ad-8e0f-ba49afdc6a04": "Business Approver Advanced Find View",
+      "495045bd-463f-4dd0-b5fe-8ce8e9034528": "Inactive Business Approvers",
+      "4976d0c5-487c-ec11-8d20-000d3a0a0d6b": "Active User Approvers",
+      "fedc5914-2801-4d23-8ff7-6dc56a2f6a14": "Business Approver Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Business Approver Type",
+    "Name": "cat_bizappr_approvertype",
+    "OptionSetInfoNameMapping": {
+      "809060000": "User",
+      "809060002": "Dynamic"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_approvertype",
+        "OptionSetReferenceEntityName": "Business Approvers"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_approvertype",
+    "RelatedEntityName": "Business Approvers",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Business Approval Dynamic Approver Type",
+    "Name": "cat_bizappr_dynamicapprovertype",
+    "OptionSetInfoNameMapping": {
+      "809060000": "Manager of Initiator",
+      "809060001": "Use Request Data Field",
+      "809060002": "Manager of [Request data field]",
+      "809060003": "Manager of Last Approver"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_dynamicapprovertype",
+        "OptionSetReferenceEntityName": "Business Approvers"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_dynamicapprovertype",
+    "RelatedEntityName": "Business Approvers",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Business Approver Notification Type",
+    "Name": "cat_bizappr_prefnotificationtype",
+    "OptionSetInfoNameMapping": {
+      "809060000": "Default Notification",
+      "809060001": "None (Custom)"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_notificationtype",
+        "OptionSetReferenceEntityName": "Business Approvers"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_notificationtype",
+    "RelatedEntityName": "Business Approvers",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Business Approvers)",
+    "Name": "cat_businessapprover_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approvers"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approvers",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approvers)",
+    "Name": "cat_businessapprover_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approvers"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approvers",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Is Out of Office (Business Approvers)",
+    "Name": "cat_cat_businessapprover_isoutofoffice",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_isoutofoffice",
+        "OptionSetReferenceEntityName": "Business Approvers"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_isoutofoffice",
+    "RelatedEntityName": "Business Approvers",
+    "Type": "OptionSetInfo"
+  }
+]

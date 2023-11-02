@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalnode",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"29094196\\\"\",\"savedqueryid\":\"920f272e-d859-40a9-bdd7-07ac1ca897d4\",\"name\":\"Inactive Business Approval Nodes\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24665186\\\"\",\"savedqueryid\":\"7170b9d3-172e-40a9-ac56-41a9f09a9054\",\"name\":\"Business Approval Node Advanced Find View\",\"querytype\":1},{\"@odata.etag\":\"W/\\\"24665162\\\"\",\"savedqueryid\":\"bb940793-1478-4c74-b55a-4dbc76cbd229\",\"name\":\"Business Approval Node Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"24665174\\\"\",\"savedqueryid\":\"e1633832-b9ef-4510-b611-8dddd6f86116\",\"name\":\"Business Approval Node Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"25990063\\\"\",\"savedqueryid\":\"a37ae4b6-9f2e-4283-a3b3-f429ee778ed1\",\"name\":\"Active Business Approval Nodes\",\"querytype\":0}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

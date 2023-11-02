@@ -139,13 +139,10 @@
                   "item/cat_runhistory": "@triggerBody()['text_4']",
                   "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerBody()['text_2']})"
                 },
-                "authentication": {
-                  "type": "Raw",
-                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
-                },
                 "retryPolicy": {
                   "type": "none"
-                }
+                },
+                "authentication": "@parameters('$authentication')"
               }
             }
           },
@@ -164,6 +161,9 @@
                     "actions": {
                       "Set_data_not_found": {
                         "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "e62ee46a-0a9a-42fc-adee-844317bd2b3b"
+                        },
                         "type": "SetVariable",
                         "inputs": {
                           "name": "varExceptionType",
@@ -177,6 +177,9 @@
                     "actions": {
                       "Set_approver_not_found": {
                         "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "655a0ff9-02ce-4f75-a215-bfd1555edd47"
+                        },
                         "type": "SetVariable",
                         "inputs": {
                           "name": "varExceptionType",
@@ -190,6 +193,9 @@
                     "actions": {
                       "Set_object_not_found": {
                         "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "4f51e1d9-31f5-49b9-a7b6-1f2aec4e9eb5"
+                        },
                         "type": "SetVariable",
                         "inputs": {
                           "name": "varExceptionType",
@@ -236,13 +242,10 @@
                     "item/cat_runhistory": "https://flow.microsoft.com/manage/environments/@{workflow()?['tags']?['environmentName']}/flows/@{triggerOutputs()?['headers']?['x-ms-workflow-name']}/runs/@{triggerOutputs()?['headers']?['x-ms-workflow-run-id']}",
                     "item/cat_runid": "@triggerOutputs()?['headers']?['x-ms-workflow-run-id']"
                   },
-                  "authentication": {
-                    "type": "Raw",
-                    "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
-                  },
                   "retryPolicy": {
                     "type": "none"
-                  }
+                  },
+                  "authentication": "@parameters('$authentication')"
                 }
               }
             }

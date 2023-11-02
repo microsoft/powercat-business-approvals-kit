@@ -1,0 +1,47 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_cat_businessapprover_forms",
+      "Namespace": "Business Approvers (Forms)",
+      "Values": {
+        "Information": "00ea396d-367c-46bf-b325-e8baaac94841"
+      }
+    },
+    {
+      "Kind": "default.cds_cat_businessapprovalworkprofile_forms",
+      "Namespace": "Business Approval Work Profiles (Forms)",
+      "Values": {
+        "Information": "b8cce418-c951-4a06-ad1e-6e3b0c2f9562"
+      }
+    },
+    {
+      "Kind": "default.cds_cat_businessapprovalholidaycalendar_forms",
+      "Namespace": "Business Approval Holiday Calendars (Forms)",
+      "Values": {
+        "Information": "d4a71b62-d754-4f0b-85a9-f35cc4303564"
+      }
+    },
+    {
+      "Kind": "default.cds_cat_businessapproveroof_forms",
+      "Namespace": "Business Approver OOF (Forms)",
+      "Values": {
+        "Information": "20b44cb6-b5ae-42fb-9478-f96d80e2992b"
+      }
+    },
+    {
+      "Kind": "default.cds_cat_businessapprovalpublicholidays_forms",
+      "Namespace": "Business Approval Public Holidays (Forms)",
+      "Values": {
+        "Business Approval Public Holidays quick create form": "fb5625fd-087d-ec11-8d20-000d3af4936b",
+        "Information": "355b72c2-4335-41e2-b6ef-b0c69a3c0637"
+      }
+    },
+    {
+      "Kind": "default.cds_cat_businessapprovalprocess_forms",
+      "Namespace": "Business Approval Processes (Forms)",
+      "Values": {
+        "Information": "3a762fdd-cbfa-4b89-8a41-726d38c6e9ad"
+      }
+    }
+  ]
+}

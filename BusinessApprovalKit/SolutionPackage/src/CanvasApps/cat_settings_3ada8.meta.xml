@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cat_settings_3ada8</Name>
+  <AppVersion>2023-10-19T12:45:22Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23101.23.0</CreatedByClientVersion>
+  <MinClientVersion>3.23101.23.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"2511","primaryDeviceHeight":"1211","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.23101.23","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20231019T120042Z-3.23101.23.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>Settings</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"3e7985e9-b67b-42bc-bbae-537b66bf1847":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/u/henryorsborn/partial-builds/asev3migrations-with-resourceTemplate/1.0.1653.3403/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["SearchUserV2","MyProfile_V2","SearchUser"]}}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Business Approval Work Profiles":{"entitySetName":"cat_businessapprovalworkprofiles","logicalName":"cat_businessapprovalworkprofile"},"Business Approval Holiday Calendars":{"entitySetName":"cat_businessapprovalholidaycalendars","logicalName":"cat_businessapprovalholidaycalendar"},"Business Approver OOF":{"entitySetName":"cat_businessapproveroofs","logicalName":"cat_businessapproveroof"},"Business Approval Public Holidays":{"entitySetName":"cat_businessapprovalpublicholidayses","logicalName":"cat_businessapprovalpublicholidays"},"Business Approvers":{"entitySetName":"cat_businessapprovers","logicalName":"cat_businessapprover"}},"components":[{"componentName":"CustomControl","identifier":"cat_PowerCAT.CommandBar","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Spinner","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.CommandBar","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Icon","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}}]}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>2</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"cat_businessapprovalworkprofile","componenttype":1},{"logicalname":"cat_businessapprovalholidaycalendar","componenttype":1},{"logicalname":"cat_businessapproveroof","componenttype":1},{"logicalname":"cat_businessapprovalpublicholidays","componenttype":1},{"logicalname":"cat_businessapprover","componenttype":1},{"dependencyid":"","logicalname":"cat_PowerCAT.CommandBar","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.Spinner","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.CommandBar","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.Icon","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.PeoplePicker","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.PeoplePicker","componenttype":66,"componenttypeplatformname":"CustomControl"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cat_settings_3ada8_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cat_settings_3ada8_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

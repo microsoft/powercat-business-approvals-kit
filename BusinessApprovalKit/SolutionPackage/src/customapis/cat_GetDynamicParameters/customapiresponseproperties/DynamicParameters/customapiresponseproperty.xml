@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="DynamicParameters">
+  <description default="Entity containing details of field names associated to a specific process">
+    <label description="Entity containing details of field names associated to a specific process" languagecode="1033" />
+  </description>
+  <displayname default="DynamicParameters">
+    <label description="DynamicParameters" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <name>DynamicParameters</name>
+  <type>3</type>
+</customapiresponseproperty>
