@@ -1,6 +1,9 @@
 {
     "EnvironmentVariables":  [
-
+                                 {
+                                     "SchemaName":  "cat_ApprovalKitOrgUrl",
+                                     "Value":  "#{environmentvariable.cat_ApprovalKitOrgUrl}#"
+                                 }
                              ],
     "ConnectionReferences":  [
                                  {
