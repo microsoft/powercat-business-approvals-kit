@@ -197,8 +197,8 @@
         <Dependent type="300" schemaName="cat_businessapprovalprocessmanager_1d6e0" displayName="[Deprecated] Business Approval Process Manager" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="1" schemaName="msdyn_flow_approval" displayName="Approval" solution="msdyn_FlowApprovalsCore (2.0.4.3)">
-          <package>msdyn_FlowApprovals (2.0.4.3)</package>
+        <Required type="1" schemaName="msdyn_flow_approval" displayName="Approval" solution="msdyn_FlowApprovalsCore (2.0.4.8)">
+          <package>msdyn_FlowApprovals (2.0.4.8)</package>
         </Required>
         <Dependent type="29" displayName="BACore | Runtime - Start Approval" id="{a04208b8-428d-ec11-8d20-000d3a09ca36}" />
       </MissingDependency>
