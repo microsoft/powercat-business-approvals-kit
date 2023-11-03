@@ -3,6 +3,47 @@
 
                              ],
     "ConnectionReferences":  [
-
+                                 {
+                                     "LogicalName":  "cat_sharedapprovals_71396",
+                                     "ConnectionId":  "#{connectionreference.cat_sharedapprovals_71396}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_approvals",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_sharedapprovals_71396}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_BusinessApprovalKitApprovals",
+                                     "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitApprovals}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_approvals",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitApprovals}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_BusinessApprovalKitDataverse",
+                                     "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitDataverse}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitDataverse}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_BusinessApprovalKitO365Users",
+                                     "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitO365Users}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_office365users",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitO365Users}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_sharedcommondataserviceforapps_9160d",
+                                     "ConnectionId":  "#{connectionreference.cat_sharedcommondataserviceforapps_9160d}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_sharedcommondataserviceforapps_9160d}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_sharedcommondataserviceforapps_afa4e",
+                                     "ConnectionId":  "#{connectionreference.cat_sharedcommondataserviceforapps_afa4e}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_sharedcommondataserviceforapps_afa4e}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_sharedcommondataserviceforapps_f07ea",
+                                     "ConnectionId":  "#{connectionreference.cat_sharedcommondataserviceforapps_f07ea}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_sharedcommondataserviceforapps_f07ea}#"
+                                 }
                              ]
 }
