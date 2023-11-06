@@ -1,7 +1,7 @@
 
 # Get started
 
-The Automation kit includes a set of automation scripts to help you set up isolated environments for each attendee, reducing the amount of time required for setup. 
+The Automation kit includes a set of automation scripts to help you set up isolated environments for each attendee, reducing the amount of time required for setup.
 
 This guide assumes that you use one of the following methods to set up and run the automation scripts:
 
@@ -54,6 +54,8 @@ dotnet build
 ```pwsh
 ./bin/Debug/net7.0/playwright.ps1 install-deps
 ```
+
+1. Ensure that latest managed release of Business Approvals kit has been downloaded to the Workshop assets folder.
 
 ## Docker install
 
