@@ -27,7 +27,7 @@
       "Name": "OnClick",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "139",
+        "PropertyScopeRuleNamespaceKey": "144",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "OnClick_IsConfirmed",
@@ -67,7 +67,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638338216188749866",
+  "LastModifiedTimestamp": "638348342793667115",
   "Name": "7b1eab7f21764779b658df214f56f16c",
   "OverridableProperties": {},
   "TemplateOriginalName": "29b4d38c23224cd7979258806047f1d4",

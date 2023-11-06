@@ -84,13 +84,6 @@
       <iscustomizable>1</iscustomizable>
       <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesigner_57f47</name>
     </appelement>
-    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesignerreimagined_2478d">
-      <canvasappid>
-        <name>cat_processdesignerreimagined_2478d</name>
-      </canvasappid>
-      <iscustomizable>1</iscustomizable>
-      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesignerreimagined_2478d</name>
-    </appelement>
     <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_settings_3ada8">
       <canvasappid>
         <name>cat_settings_3ada8</name>
