@@ -1,0 +1,16 @@
+{
+  "Configdatastorage": {
+    "Installsampledata": "false",
+    "Waitforsampledatatoinstall": "false",
+    "Crmmigdataimportfile": "data.zip",
+    "Solutions": [
+      {
+        "Name": "BusinessApprovalKit",
+        "Path": "Solutions\\BusinessApprovalKit\\BusinessApprovalKit.zip",
+        "Importorder": "1",
+        "Publishworkflows-activate-plugins": "false",
+        "Importmode": "false"
+      }
+    ]
+  }
+}
