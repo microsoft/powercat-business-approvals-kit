@@ -41,7 +41,7 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     source: 'specific'
-    project: 'powercat-business-approvals-kit'
+    project: 'Business-Approvals-Kit'
     pipeline: '1990' #Production buildId
     runVersion: 'latest'
     patterns: '**/BusinessApprovalKit*.zip'
