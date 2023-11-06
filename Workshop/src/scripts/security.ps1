@@ -68,7 +68,8 @@ function Add-SecurityMakersGroup {
     $makerGroup = az ad group list --filter "displayname eq 'Makers'" | ConvertFrom-Json
     if ( $makerGroup.Count -eq 0 ) {
         az ad group create --display-name Makers --mail-nickname makers --description "Security group for Makers in the organization"
-    } else {
+    }
+    else {
         Write-Host "Makers group already exists"
     }
 }
@@ -95,8 +96,8 @@ function Add-SecurityMakersGroup {
 
 #> 
 function Add-SecurityMakersGroupAssignDeveloperPlan {
-    $token=(az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
-    $headers = @{Authorization="Bearer $token"}
+    $token = (az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
+    $headers = @{Authorization = "Bearer $token" }
     # https://learn.microsoft.com/graph/api/subscribedsku-list?view=graph-rest-1.0&tabs=http
     $sku = (Invoke-RestMethod -Method GET -Headers $headers -Uri "https://graph.microsoft.com/beta/subscribedSkus" )
     $powerAppDeveloperPlan = $sku.value | Where-Object { $_.skuPartNumber -eq "POWERAPPS_DEV" }
@@ -115,16 +116,17 @@ function Add-SecurityMakersGroupAssignDeveloperPlan {
     $assigned = (Invoke-RestMethod -Method GET -Headers $headers -Uri "https://graph.microsoft.com/v1.0/groups/$($group.id)?`$select=assignedLicenses")
     if ( $assigned.assignedLicenses.Count -lt 2 ) {
         $assignGroup = @{ 
-            addLicenses=@( 
-                @{ skuId=$powerAppDeveloperPlan.skuId },
-                @{ skuId=$freeFlow.skuId }
+            addLicenses    = @( 
+                @{ skuId = $powerAppDeveloperPlan.skuId },
+                @{ skuId = $freeFlow.skuId }
             ) 
-            removeLicenses=@() 
+            removeLicenses = @() 
         }
         Write-Host "Power Apps Developer Plan / Flow Free License assigned to Makers"
         # https://learn.microsoft.com/graph/api/user-assignlicense?view=graph-rest-1.0&tabs=http
         Invoke-RestMethod -Method POST -Headers $headers -Uri "https://graph.microsoft.com/v1.0/groups/$($group.id)/assignLicense" -Body ( $assignGroup | ConvertTo-Json ) -ContentType 'application/json' | Out-Null
-    } else {
+    }
+    else {
         Write-Host "Power Apps Developer Plan / Automate License already assigned to Makers"
     }
 }
@@ -158,8 +160,7 @@ function Validate-User {
     $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
     if ( $NULL -eq $user ) {
         Write-Host "Unable to find user $UserUPN"
-        if ( Get-ConfigValue("Feature.ResetUserPassword") -eq "Y" ) 
-        {
+        if ( Get-ConfigValue("Feature.ResetUserPassword") -eq "Y" ) {
             return Reset-User $UserUPN
         }
     }
@@ -207,17 +208,24 @@ function Reset-User {
         return $NULL
     }
 
+    $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
     if ( [System.String]::IsNullOrEmpty($First) ) {
         $parts = $UserUPN -Split "@"
         $firstLast = $parts[0] -Split "\."
-        $First =  $firstLast[0].ToLower()
-        $First = $First.Substring(0,1).ToUpper() + $First.Substring(1)
-        $Last =  $firstLast[1].ToLower()
-        $Last = $Last.Substring(0,1).ToUpper() + $Last.Substring(1)
+        $First = $firstLast[0].ToLower()
+        $First = $First.Substring(0, 1).ToUpper() + $First.Substring(1)
+        $Last = $firstLast[1].ToLower()
+        $Last = $Last.Substring(0, 1).ToUpper() + $Last.Substring(1)
+    }
+    
+    if ( [System.String]::IsNullOrEmpty($First) ) {
+        $name = "$First $Last"
+    } else {
+        if ( -not ($NULL -eq $user) ) {
+            $name = $user.displayName
+        }
     }
 
-    $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
-    $name = "$First $Last"
     if ( $NULL -eq $user ) {
         Write-Host "Creating $name"
         az ad user create --display-name "$name" --user-principal-name $UserUPN --password $password
@@ -227,10 +235,10 @@ function Reset-User {
     $userId = $($user[0].id)
     Write-Host "Reset Name and Location"
 
-    $token=(az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
+    $token = (az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
     $headers = @{
-        Authorization="Bearer $token"
-        ConsistencyLevel="eventual"
+        Authorization    = "Bearer $token"
+        ConsistencyLevel = "eventual"
     }
 
     # https://learn.microsoft.com/previous-versions/azure/ad/graph/api/users-operations#ResetUserPassword
@@ -243,18 +251,18 @@ function Reset-User {
     Write-Host "Reset Password"
 
     $headers = @{
-        Authorization="Bearer $token"
+        Authorization = "Bearer $token"
     }
 
     # https://learn.microsoft.com/previous-versions/azure/ad/graph/api/users-operations#ResetUserPassword
-    $graphToken=(az account get-access-token --resource=https://graph.windows.net/ --query accessToken --output tsv)
+    $graphToken = (az account get-access-token --resource=https://graph.windows.net/ --query accessToken --output tsv)
     $graphHeaders = @{
-        Authorization="Bearer $graphToken"
+        Authorization = "Bearer $graphToken"
     }
     $body = @{
         passwordProfile = @{
-            password = $password
-            forceChangePasswordNextLogin =  $false
+            password                     = $password
+            forceChangePasswordNextLogin = $false
         }
     } | ConvertTo-Json
 
@@ -297,14 +305,14 @@ function Add-SecurityUserToMakersGroup {
     }
 
     $userId = $user.id
-    $adminToken=(az account get-access-token --resource=https://admin.microsoft.com --query accessToken --output tsv)
+    $adminToken = (az account get-access-token --resource=https://admin.microsoft.com --query accessToken --output tsv)
     $adminHeaders = @{
-        Authorization="Bearer $adminToken"
+        Authorization = "Bearer $adminToken"
     }
-    $token=(az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
+    $token = (az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
     $headers = @{
-        Authorization="Bearer $token"
-        ConsistencyLevel="eventual"
+        Authorization    = "Bearer $token"
+        ConsistencyLevel = "eventual"
     }
 
     # https://learn.microsoft.com/graph/aad-advanced-queries?tabs=http#user-properties
@@ -329,7 +337,8 @@ function Add-SecurityUserToMakersGroup {
             }
         }
         
-    } else {
+    }
+    else {
         Write-Host "User already in Makers group"
     }
 
@@ -343,10 +352,10 @@ function Get-AdminAccessToken {
     $url = "https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token"
 
     $body = @{
-        client_id = (Get-SecureValue "ADMIN_APP_ID")
-        scope= "https://graph.microsoft.com/.default"
+        client_id     = (Get-SecureValue "ADMIN_APP_ID")
+        scope         = "https://graph.microsoft.com/.default"
         client_secret = (Get-SecureValue "ADMIN_APP_SECRET")
-        grant_type = "client_credentials"
+        grant_type    = "client_credentials"
     }
 
     $response = (Invoke-RestMethod -Method POST -Uri $url -ContentType "application/x-www-form-urlencoded" -Body $body)
@@ -387,9 +396,9 @@ function Add-SecurityUserPhone {
     $userId = $user.id
 
     # Assume that the Application Token has been given and granted application permissions of UserAuthenticationMethod.ReadWrite.All
-    $graphToken=( Get-AdminAccessToken )
+    $graphToken = ( Get-AdminAccessToken )
     $graphHeaders = @{
-        Authorization="Bearer $graphToken"
+        Authorization = "Bearer $graphToken"
     }
 
     # https://learn.microsoft.com/en-us/graph/api/phoneauthenticationmethod-get?view=graph-rest-beta&tabs=http
@@ -397,7 +406,8 @@ function Add-SecurityUserPhone {
     if ( $phoneMethods.value.Count -eq 0 ) {
         Write-Host "Adding Phone Authentication"
         $results = Invoke-RestMethod -Method POST -Headers $graphHeaders -Uri "https://graph.microsoft.com/v1.0/users/$userId/authentication/phoneMethods" -Body "{""phoneNumber"":""+1 4255551223"",""phoneType"":""mobile""}" -ContentType 'application/json'
-    } else {
+    }
+    else {
         Write-Host "Phone Authentication already allocated"
     }
 }
@@ -422,9 +432,9 @@ function Add-Manager {
     $managerId = $manager.id
 
     # Assume that the Application Token has been given and granted application permissions of User.ReadWrite.All
-    $graphToken=( Get-AdminAccessToken )
+    $graphToken = ( Get-AdminAccessToken )
     $graphHeaders = @{
-        Authorization="Bearer $graphToken"
+        Authorization = "Bearer $graphToken"
     }
 
     Write-Host "Updating manager"

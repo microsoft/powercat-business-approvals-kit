@@ -412,37 +412,6 @@ function Install-ApprovalsKit {
         $assetsPath = [System.IO.Path]::Combine($PSScriptRoot, "..", "assets")
     }
 
-    $installed = Invoke-SolutionInstalled $Environment "PowerAppsTools_cat"
-
-    if ( $installed -eq $False ) {
-        $files = (Get-ChildItem -Path $assetsPath -Filter "PowerAppsTools_cat*.zip")
-
-        if ( $files.Count -le 0 ) {
-            Write-Error "Unable to find install solution file"
-            return
-        }
-
-        if ( $files.Count -le 0 ) {
-            Write-Error "Unable to find install PowerAppsTools CAT solution file"
-            return
-        }
-
-        $installFile = [System.IO.Path]::Combine( $assetsPath, $files[0].Name )
-
-        pac org select --environment $Environment.EnvironmentId
-
-        pac solution import --path $installFile
-
-        $installed = Invoke-SolutionInstalled $Environment "PowerAppsTools_cat"
-
-        if ( $installed -eq $True ) {
-            Write-Host "PowerApps CAT Tools solution installed"
-        } else {
-            Write-Error "PowerApps CAT Tools did not complete"
-            return
-        }
-    }
-
     $installed = Invoke-SolutionInstalled $Environment "BusinessApprovalKit"
 
     if ( $installed -eq $False ) {
@@ -550,16 +519,19 @@ function Install-ContosoCoffee {
     Write-Host "Checking if contoso coffee solution exists"
     $installed = Invoke-SolutionInstalled $Environment "ContosoCoffee"
     if ( -not $installed ) {
-        if ( -not (Test-Path "AppinaDay Trainer Package.zip") ) {
+        $packageZip = [System.IO.Path]::Combine($PSScriptRoot,"..","..", "AppinaDay Trainer Package.zip")
+        if ( -not (Test-Path $packageZip) ) {
             Write-Host "Downloading App In a Day Trainer Package"
-            Invoke-WebRequest -Uri "https://aka.ms/appinadayTrainer" -OutFile  "AppinaDay Trainer Package.zip"
+            Invoke-WebRequest -Uri "https://aka.ms/appinadayTrainer" -OutFile $packageZip
         }
-        if ( -not (Test-Path "ContosoCoffee_1_0_0_2.zip") ) {
-            Invoke-ExtractZipContents "AppinaDay Trainer Package.zip" "Completed Lab Solution for students/Module 2/ContosoCoffee_1_0_0_2.zip" "ContosoCoffee_1_0_0_2.zip"
+        $installZip = [System.IO.Path]::Combine($PSScriptRoot,"..","..", "ContosoCoffee_1_0_0_2.zip")
+        
+        if ( -not (Test-Path $installZip) ) {
+            Invoke-ExtractZipContents $packageZip "Completed Lab Solution for students/Module 2/ContosoCoffee_1_0_0_2.zip" $installZip
         }
         Invoke-DevEnvironmentAuthUtility $UserUPN $Environment
         pac org select --environment $Environment.EnvironmentId
-        pac solution import --path "ContosoCoffee_1_0_0_2.zip"
+        pac solution import --path $installZip
     } else {
         Write-Host "Contoso coffee solution exists"
     }
