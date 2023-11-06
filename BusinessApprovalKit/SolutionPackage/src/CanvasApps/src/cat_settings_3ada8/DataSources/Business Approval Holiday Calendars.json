@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovalholidaycalendars",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprovalholidaycalendar",
+    "Name": "Business Approval Holiday Calendars",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_businessapprovalholidaycalendar_AsyncOperations": "System Jobs",
+      "cat_businessapprovalholidaycalendar_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapprovalholidaycalendar_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalholidaycalendar_DuplicateBaseRecord)",
+      "cat_businessapprovalholidaycalendar_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprovalholidaycalendar_DuplicateMatchingRecord)",
+      "cat_businessapprovalholidaycalendar_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprovalholidaycalendar_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprovalholidaycalendar_ProcessSession": "Process Sessions",
+      "cat_businessapprovalholidaycalendar_SyncErrors": "Sync Errors",
+      "cat_businessapprovalholidaycalendarid": "Business Approval Holiday Calendar",
+      "cat_BusinessApprovalPublicHolidays_Calend": "Business Approval Public Holidays",
+      "cat_BusinessApprovalWorkProfile_HolidayCa": "Business Approval Work Profiles",
+      "cat_name": "Name",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approval Holiday Calendars",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approval Holiday Calendars (Views)",
+    "Name": "_cat_businessapprovalholidaycalendar_views",
+    "RelatedEntityName": "Business Approval Holiday Calendars",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "242fc2c0-6bd9-40d2-99be-3951dd7f5509": "Inactive Business Approval Holiday Calendars",
+      "6aed7f41-f9f0-45d0-8294-e9b73add8b78": "Business Approval Holiday Calendar Advanced Find View",
+      "906b8345-ec73-4205-ab2a-8a97a0e7b03e": "Business Approval Holiday Calendar Lookup View",
+      "9df4d1b6-733c-4bf3-83cb-0a043fa5f268": "Business Approval Holiday Calendar Associated View",
+      "bdcabbf2-44ba-4b2c-8606-9bc59fe7b11e": "Active Business Approval Holiday Calendars"
+    }
+  },
+  {
+    "DisplayName": "Status (Business Approval Holiday Calendars)",
+    "Name": "cat_businessapprovalholidaycalendar_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approval Holiday Calendars"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approval Holiday Calendars",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approval Holiday Calendars)",
+    "Name": "cat_businessapprovalholidaycalendar_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approval Holiday Calendars"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Holiday Calendars",
+    "Type": "OptionSetInfo"
+  }
+]

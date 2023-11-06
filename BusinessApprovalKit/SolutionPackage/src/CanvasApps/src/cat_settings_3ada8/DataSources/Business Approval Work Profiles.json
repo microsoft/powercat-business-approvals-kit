@@ -1,0 +1,245 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovalworkprofiles",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprovalworkprofile",
+    "Name": "Business Approval Work Profiles",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_businessapprovalworkprofile_AsyncOperations": "System Jobs",
+      "cat_businessapprovalworkprofile_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapprovalworkprofile_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalworkprofile_DuplicateBaseRecord)",
+      "cat_businessapprovalworkprofile_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprovalworkprofile_DuplicateMatchingRecord)",
+      "cat_businessapprovalworkprofile_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprovalworkprofile_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprovalworkprofile_ProcessSession": "Process Sessions",
+      "cat_businessapprovalworkprofile_SyncErrors": "Sync Errors",
+      "cat_businessapprovalworkprofileid": "Business Approval Work Profile",
+      "cat_BusinessApprover_WorkProfile_cat_Busi": "Business Approvers",
+      "cat_friday": "Friday",
+      "cat_HolidayCalendar": "Holiday Calendar",
+      "cat_monday": "Monday",
+      "cat_name": "Name",
+      "cat_saturday": "Saturday",
+      "cat_sunday": "Sunday",
+      "cat_thursday": "Thursday",
+      "cat_tuesday": "Tuesday",
+      "cat_wednesday": "Wednesday",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approval Work Profiles",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approval Work Profiles (Views)",
+    "Name": "_cat_businessapprovalworkprofile_views",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2a547a86-5e54-4112-b4fd-cd07ab8a1f09": "Inactive Business Approval Work Profiles",
+      "3e2629f1-2998-4270-a6b3-8cea66b835fe": "Active Business Approval Work Profiles",
+      "8f3df788-d951-4433-a5f7-14307b4545db": "Business Approval Work Profile Advanced Find View",
+      "b2111bc3-8435-4b63-806d-f47804b9ea54": "Business Approval Work Profile Associated View",
+      "d5706496-902e-4699-9e7d-7b7107d2f796": "Business Approval Work Profile Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Business Approval Work Profiles)",
+    "Name": "cat_businessapprovalworkprofile_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approval Work Profiles)",
+    "Name": "cat_businessapprovalworkprofile_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Friday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_friday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_friday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_friday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Monday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_monday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_monday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_monday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Saturday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_saturday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_saturday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_saturday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Sunday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_sunday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_sunday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_sunday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Thursday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_thursday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_thursday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_thursday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Tuesday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_tuesday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_tuesday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_tuesday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Wednesday (Business Approval Work Profiles)",
+    "Name": "cat_cat_businessapprovalworkprofile_wednesday",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_wednesday",
+        "OptionSetReferenceEntityName": "Business Approval Work Profiles"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cat_wednesday",
+    "RelatedEntityName": "Business Approval Work Profiles",
+    "Type": "OptionSetInfo"
+  }
+]

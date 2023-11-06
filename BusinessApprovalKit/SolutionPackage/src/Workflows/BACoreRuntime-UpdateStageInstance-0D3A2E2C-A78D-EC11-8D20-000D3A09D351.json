@@ -204,6 +204,9 @@
               "actions": {
                 "Get_Next_Stage_2": {
                   "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "b843628d-63b0-46dc-97e7-845de214cf7e"
+                  },
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
@@ -252,6 +255,9 @@
                       "@length(outputs('Get_Next_Stage_2')?['body/value'])",
                       0
                     ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "64a429eb-b3a8-4c31-ac52-079720b50f3f"
                   },
                   "type": "If"
                 }

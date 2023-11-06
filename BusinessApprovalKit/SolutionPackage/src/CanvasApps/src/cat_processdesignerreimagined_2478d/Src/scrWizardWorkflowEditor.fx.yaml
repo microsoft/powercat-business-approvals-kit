@@ -1,0 +1,317 @@
+scrWizardWorkflowEditor As screen:
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: =Reset(ApprovalDesignerEdit_1)
+
+    RootContainer_2 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Container4_2 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =1
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =1
+
+            Container12_3 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =72
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =72
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Container11_3 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =Parent.Height
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    "Breadcrumb1_1 As 'Fluent Breadcrumb (1.0.22)'.pcfdataset":
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =54
+                        Items: |-
+                            =Table(
+                                {
+                                    ItemKey: "1",
+                                    ItemDisplayName: Coalesce(_selectedProcess.Name,"Workflow"),
+                                    ItemClickable: false
+                                },
+                                {
+                                    ItemKey: "2",
+                                    ItemDisplayName: Coalesce(_selectedStage.Name, "(New Stage)"),
+                                    ItemClickable: false
+                                }
+                            )
+                        Width: =433
+                        X: =15
+                        Y: =11
+                        ZIndex: =2
+
+            Container10_1 As groupContainer.horizontalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                LayoutGap: =3
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =2
+
+                Container11_4 As groupContainer.manualLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Width: =210
+                    ZIndex: =1
+
+                    "SubwayNav2_2 As 'SubwayNav (1.0.22) Preview'.pcfdataset":
+                        DisplayMode: =DisplayMode.Disabled
+                        Height: =486
+                        Items: |-
+                            =Table(
+                                { ItemKey:"1", ItemLabel:"Create Workflow", ItemState:"Completed" },
+                                { ItemKey:"2", ItemLabel:"Create Stages & Nodes", ItemState:"Current" },
+                                /*{ ItemKey:"3", ItemLabel:"Create Node(Step)", ItemState:"Unsaved" },*/
+                                { ItemKey:"4", ItemLabel:"Publish", ItemState:"Unsaved" }
+                            )
+                        ShowAnimation: =false
+                        Theme: =AppThemeJson
+                        Width: =200
+                        X: =10
+                        Y: =24
+                        ZIndex: =1
+
+                recHeaderDevider_5 As rectangle:
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    DisabledFill: =RGBA(166, 166, 166, 1)
+                    Fill: =ColorValue(AppTheme.palette.neutralLight)
+                    FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                    Height: =Parent.Height - 10
+                    HoverFill: =RGBA(225, 223, 221, 1)
+                    PressedFill: =RGBA(225, 223, 221, 1)
+                    Width: =1
+                    ZIndex: =3
+
+                Container1_8 As groupContainer:
+                    Height: =Parent.Height - Self.Y
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    Width: =Parent.Width - Self.X
+                    ZIndex: =4
+
+                    Container1_1 As groupContainer.verticalAutoLayoutContainer:
+                        Height: =590
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =1117
+                        ZIndex: =1
+
+                        "CommandBar1_1 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =40
+                            Items: |-
+                                =Table(
+                                    {
+                                        ItemKey: "new",
+                                        ItemDisplayName: "New Stage",
+                                        ItemIconName: "Add"
+                                    },{
+                                        ItemKey: "process",
+                                        ItemDisplayName: "Process",
+                                        ItemIconName: "Flowchart"
+                                    },{
+                                        ItemKey: "versions",
+                                        ItemDisplayName: "Versions",
+                                        ItemIconName: "DependencyAdd"
+                                    },{
+                                        ItemKey: "publish",
+                                        ItemDisplayName: "Publish",
+                                        ItemIconName: "PublishContent"
+                                    }
+                                )
+                            LayoutMinHeight: =200
+                            LayoutMinWidth: =200
+                            OnSelect: |-
+                                =Switch(Self.Selected.ItemKey,
+                                    "new", 
+                                        Set(_selectedStage, Blank()); 
+                                        Set(_currentStageIndex, ApprovalDesignerEdit_1.TotalStages + 1);
+                                        Navigate(scrWizardStageEditor),
+                                    "process", Navigate(scrWizardProcessEditor),
+                                    "versions", Navigate(scrWizardProcessVersion),
+                                    "publish", Navigate(scrWizardPublishProcess)
+                                )
+                            Theme: =AppThemeJson
+                            Width: =200
+                            X: =0
+                            Y: =155
+                            ZIndex: =1
+
+                        bcProcess_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            Size: =10
+                            Text: =_selectedProcess.Name
+                            Width: =Parent.Width - Self.X - 20
+                            Wrap: =false
+                            X: =20
+                            Y: =
+                            ZIndex: =2
+
+                        lblNoStage_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="No Approval Stage defined. Click 'New Stage' to configure your first Approval stage."
+                            Visible: =ApprovalDesignerEdit_1.TotalStages = 0
+                            Width: =bcProcess_1.Width
+                            Wrap: =false
+                            X: =bcProcess_1.X
+                            Y: =bcProcess_1.Y + bcProcess_1.Height
+                            ZIndex: =3
+
+                        ApprovalDesignerEdit_1 As ApprovalDesigner:
+                            AddNode: |-
+                                =Set(_selectedNode, Blank());
+                                Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)));
+                                Set(_currentStageIndex, StageIndex);
+                                Set(_currentNodeIndex, Row);
+                                Set(_currentPathIndex, Path);
+                                Navigate(scrWizardNodeEditor)
+                            EditNode: |
+                                =Concurrent(
+                                    Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),
+                                    Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)))
+                                );
+                                Set(_currentNodeIndex, _selectedNode.'Row Index');
+                                Set(_currentPathIndex, _selectedNode.'Path Index');
+                                Set(_currentStageIndex, _selectedStage.Order);
+                                If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
+                                    Navigate(scrWizardNodeEditor),
+                                    Navigate(scrWizardNodeRule)
+                                )
+                            EditStage: |-
+                                =Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)));
+                                Set(_currentStageIndex, _selectedStage.Order);
+                                Navigate(scrWizardStageEditor)
+                            Height: =Parent.Height - Self.Y
+                            LayoutMinHeight: =640
+                            LayoutMinWidth: =640
+                            MoveStage: |-
+                                =With({ currentStage: LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId))},
+                                    UpdateContext({ swapOrder: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1)});
+                                    UpdateIf('Business Approval Stages', 
+                                        Order = swapOrder && Process.'Business Approval Process' = currentStage.Process.'Business Approval Process', 
+                                        { Order: currentStage.Order }
+                                    );
+                                    Patch('Business Approval Stages', currentStage, { Order: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1) }) 
+                                )
+                            ProcessId: =_selectedProcess.'Business Approval Process'
+                            Width: =Parent.Width - 10
+                            Y: =70
+                            ZIndex: =5
+
+            Container12_4 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =72
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =12
+                LayoutMinHeight: =72
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                ZIndex: =3
+
+                btnBack_4 As Button:
+                    BorderColor: =ColorValue(AppTheme.palette.neutralPrimary)
+                    BorderRadius: =2
+                    BorderStyle: =BorderStyle.Solid
+                    BorderThickness: =1
+                    ButtonType: ='Button.ButtonType'.Standard
+                    DisplayMode: =DisplayMode.Edit
+                    FillColor: =ColorValue(AppTheme.palette.white)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: =Back()
+                    Text: ="Back"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                btnNext_4 As Button:
+                    BorderRadius: =2
+                    ButtonType: ='Button.ButtonType'.Primary
+                    DisplayMode: =
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: =Navigate(scrWizardPublishProcess)
+                    Text: ="Save & Next"
+                    Visible: =true
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+

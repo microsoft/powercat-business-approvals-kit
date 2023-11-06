@@ -35,16 +35,15 @@
           "type": "OpenApiConnectionWebhook",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "SubscribeWebhookTrigger"
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "subscriptionRequest/message": 1,
               "subscriptionRequest/entityname": "cat_businessapprovalworkflow",
               "subscriptionRequest/scope": 4,
-              "subscriptionRequest/runas": 1,
-              "subscriptionRequest/name": "65045bb1-f682-ec11-8d20-0022486da35f"
+              "subscriptionRequest/runas": 1
             },
             "authentication": "@parameters('$authentication')"
           }
@@ -59,9 +58,9 @@
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "ListRecords"
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
               "entityName": "cat_businessapprovalruntimestages",
@@ -82,15 +81,16 @@
               "type": "OpenApiConnection",
               "inputs": {
                 "host": {
-                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                   "connectionName": "shared_commondataserviceforapps_1",
-                  "operationId": "CreateRecord"
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                 },
                 "parameters": {
                   "entityName": "cat_businessapprovalruntimestageinstances",
                   "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{first(body('Get_First_Stage')['value'])['cat_businessapprovalruntimestageid']})",
                   "item/cat_start": "@utcNow()",
                   "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/cat_businessapprovalworkflowid']})",
+                  "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
                   "item/cat_instancestatus": 809060000,
                   "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{triggerOutputs()?['body/_cat_processversion_value']})"
                 },
@@ -113,9 +113,9 @@
                 "type": "OpenApiConnection",
                 "inputs": {
                   "host": {
-                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
                     "connectionName": "shared_commondataserviceforapps_1",
-                    "operationId": "UpdateRecord"
+                    "operationId": "UpdateRecord",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                   },
                   "parameters": {
                     "entityName": "cat_businessapprovalworkflows",
@@ -164,7 +164,7 @@
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }

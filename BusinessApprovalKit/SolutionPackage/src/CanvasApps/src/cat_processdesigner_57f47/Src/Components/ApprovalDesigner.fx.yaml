@@ -30,7 +30,7 @@ ApprovalDesigner As CanvasComponent:
         ThisProperty:
             Default: =100
     Fill: =RGBA(0, 0, 0, 0)
-    Height: =800
+    Height: =600
     IsValid: =true//CountRows(Filter(galProcessStages_1.AllItems, !IsBlank(stageBackground.Tooltip))) = 0
     ProcessId: ="a4517557-c6f2-ed11-8848-0022482a91f4"
     TotalStages: =CountRows(galProcessStages_1.AllItems)
@@ -39,27 +39,49 @@ ApprovalDesigner As CanvasComponent:
     Y: =0
     ZIndex: =1
 
+    divStartTemplate As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =0
+        PaddingBottom: =0
+        PaddingLeft: =0
+        PaddingRight: =0
+        PaddingTop: =0
+        Size: =13
+        Text: |-
+            ="<div style='border: 1px solid #888;line-height:46px;height:46px;width:50px;word-wrap:normal;display:inline-block;text-align:center;vertical-align:middle;margin:2px;padding:0px 2px 4px 2px'><span style='line-height:11px;display:inline-block;vertical-align:middle'>"
+        Visible: =false
+        Width: =0
+        X: =5
+        Y: =40
+        ZIndex: =3
+
     galProcessStages_1 As gallery.variableTemplateHeightGallery:
         AccessibleLabel: ="Process stages"
         BorderColor: =RGBA(166, 166, 166, 1)
-        DelayItemLoading: =true
+        DelayItemLoading: =false//true
         Height: =Parent.Height
         Items: |-
             =Filter(
                 Filter('Business Approval Stages', 'Business Approval Stages (Views)'.'Active Business Approval Stages'),
                 Process.'Business Approval Process' = GUID(Parent.ProcessId)
             )
+            //"036025df-1f73-ee11-9ae7-0022482a91f4"
+            //Parent.ProcessId
         Layout: =Layout.Vertical
         LoadingSpinner: =LoadingSpinner.Data
         ShowNavigation: =true
         ShowScrollbar: =false
-        TemplatePadding: =0
         TemplateSize: =280
         Visible: =CountRows(Self.AllItems) > 0
-        Width: =Parent.Width - Self.X - 5
-        X: =5
-        Y: =5
-        ZIndex: =1
+        Width: =Parent.Width - Self.X * 2
+        ZIndex: =5
 
         stageBackground_1 As rectangle:
             BorderColor: |-
@@ -82,31 +104,10 @@ ApprovalDesigner As CanvasComponent:
             OnSelect: =
             PressedFill: =RGBA(105, 121, 126, 1)
             Tooltip: =If(Self.BorderColor = RGBA(255, 0, 0, 1), "Stage must have at least one node", Blank())
+            Visible: =false
             Width: =Parent.TemplateWidth
             Y: =5
             ZIndex: =1
-
-        lblGalStageName_1 As label:
-            BorderColor: =RGBA(0, 0, 0, 0)
-            BorderStyle: =BorderStyle.None
-            BorderThickness: =2
-            Color: =RGBA(51, 51, 51, 1)
-            DisabledBorderColor: =RGBA(0, 0, 0, 0)
-            DisabledColor: =RGBA(166, 166, 166, 1)
-            FocusedBorderThickness: =4
-            Font: =Font.'Segoe UI'
-            FontWeight: =FontWeight.Semibold
-            Height: =30
-            OnSelect: =Select(Parent)
-            PaddingLeft: =8
-            Size: =10
-            Text: |-
-                ="Stage: " & ThisItem.Name
-            Tooltip: =Self.Text
-            Width: =icoMoveUp.X
-            Wrap: =false
-            Y: =stageBackground_1.Y
-            ZIndex: =2
 
         icoEditStage_1 As icon.Edit:
             AccessibleLabel: ="Edit stage"
@@ -131,10 +132,11 @@ ApprovalDesigner As CanvasComponent:
             PressedBorderColor: =RGBA(0, 0, 0, 0)
             PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
             PressedFill: =RGBA(0, 0, 0, 0)
+            Visible: =false
             Width: =30
             X: =Parent.TemplateWidth - 60
             Y: =stageBackground_1.Y
-            ZIndex: =3
+            ZIndex: =2
 
         icoToggleStage_1 As icon.Edit:
             AccessibleLabel: =If(Self.Icon = Icon.ChevronUp, "Hide stage", "Expand stage")
@@ -164,7 +166,7 @@ ApprovalDesigner As CanvasComponent:
             Width: =30
             X: =Parent.TemplateWidth - Self.Width
             Y: =stageBackground_1.Y
-            ZIndex: =4
+            ZIndex: =3
 
         icoMoveDown As icon.ArrowDown:
             AccessibleLabel: ="Move stage down"
@@ -190,10 +192,11 @@ ApprovalDesigner As CanvasComponent:
             PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
             PressedFill: =RGBA(0, 0, 0, 0)
             Tooltip: ="Move stage down"
+            Visible: =false
             Width: =30
             X: =icoEditStage_1.X - Self.Width
             Y: =icoEditStage_1.Y
-            ZIndex: =5
+            ZIndex: =4
 
         icoMoveUp As icon.ArrowDown:
             AccessibleLabel: ="Move stage up"
@@ -220,99 +223,51 @@ ApprovalDesigner As CanvasComponent:
             PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
             PressedFill: =RGBA(0, 0, 0, 0)
             Tooltip: ="Move stage up"
+            Visible: =false
             Width: =30
             X: =icoMoveDown.X - Self.Width
             Y: =icoMoveDown.Y
+            ZIndex: =5
+
+        "stageBGElevation_1 As 'Fluent Elevation (1.0.22)'":
+            DisplayMode: =DisplayMode.Edit
+            Height: |-
+                =Max(
+                    galStageNodes.Height + galStageNodes.Y -2,
+                    lblNoNodeInStage_1.Y + lblNoNodeInStage_1.Height -2, 
+                    galStageConditions_1.Y + galStageConditions_1.Height -2
+                )
+            HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth16
+            HoverFillColor: =AppTheme.palette.themeLight
+            Width: =Parent.TemplateWidth - 10
+            X: =5
+            Y: =5
             ZIndex: =6
 
-        btnAddFirstNode_1 As button:
-            BorderColor: =RGBA(74, 85, 88, 1)
-            BorderThickness: =1
-            Color: =RGBA(74, 85, 88, 1)
-            DisabledBorderColor: =RGBA(0, 0, 0, 0)
-            DisabledColor: =RGBA(166, 166, 166, 1)
-            DisabledFill: =RGBA(244, 244, 244, 1)
-            Fill: =RGBA(204, 204, 204, 1)
-            FocusedBorderColor: =ColorFade(Self.Fill, -75%)
-            Font: =Font.'Segoe UI'
-            FontWeight: =FontWeight.Semibold
-            Height: =If(Self.Visible, 20, 0)
-            HoverBorderColor: =RGBA(0, 0, 0, 0)
-            HoverColor: =RGBA(255, 255, 255, 1)
-            HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
-            OnSelect: |-
-                =ApprovalDesigner.AddNode(1, 1, ThisItem.Order, ThisItem.'Business Approval Stage')
-                
-                /*
-                Set(_currentNodeIndex, 1);
-                Set(_currentPathIndex, 1);
-                Set(_currentStageCount, CountRows(galProcessStages_1.AllItems));
-                Set(_selectedStage, ThisItem);
-                Set(_selectedNode, Blank());
-                Navigate(scrApprovalNodeEditor)*/
-            PaddingBottom: =3
-            PaddingLeft: =0
-            PaddingRight: =0
-            PaddingTop: =0
-            PressedBorderColor: =ColorFade(RGBA(105, 121, 126, 1), -50%)
-            PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =ColorFade(RGBA(105, 121, 126, 1), -30%)
-            RadiusBottomLeft: =20
-            RadiusBottomRight: =20
-            RadiusTopLeft: =20
-            RadiusTopRight: =20
-            Size: =12
-            Text: ="+"
-            Visible: =!galStageNodes.Visible && ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.None && icoToggleStage_1.Icon = Icon.ChevronUp
-            Width: =20
-            X: =Parent.TemplateWidth / 2 - Self.Width / 2
-            Y: =lblGalStageName_1.Height
-            ZIndex: =7
-
-        lblNoNodeInStage_1 As label:
-            Align: =Align.Center
-            BorderColor: =RGBA(0, 0, 0, 0)
-            BorderStyle: =BorderStyle.None
-            BorderThickness: =2
-            Color: =RGBA(51, 51, 51, 1)
-            DisabledBorderColor: =RGBA(0, 0, 0, 0)
-            DisabledColor: =RGBA(166, 166, 166, 1)
-            FocusedBorderThickness: =4
-            Font: =Font.'Segoe UI'
-            Height: =If(Self.Visible, 30, 0)
-            OnSelect: =Select(Parent)
-            Size: =9
-            Text: ="No node configured for this stage. Click '+' to add first node."
-            Visible: =btnAddFirstNode_1.Visible
-            Width: =Parent.TemplateWidth
-            X: =btnAddFirstNode_1.X + btnAddFirstNode_1.Width / 2 - Self.Width / 2
-            Y: =btnAddFirstNode_1.Y + btnAddFirstNode_1.Height + 5
-            ZIndex: =8
-
-        lblStageConditionText_1 As label:
-            Align: =Align.Center
-            BorderColor: =RGBA(0, 0, 0, 0)
-            BorderStyle: =BorderStyle.None
-            BorderThickness: =2
-            Color: =RGBA(51, 51, 51, 1)
-            DisabledBorderColor: =RGBA(0, 0, 0, 0)
-            DisabledColor: =RGBA(166, 166, 166, 1)
-            FocusedBorderThickness: =4
-            Font: =Font.'Segoe UI'
-            Height: =If(Self.Visible, 20, 0)
-            OnSelect: =Select(Parent)
-            Size: =8
-            Text: |-
-                ="If " & If(ThisItem.'Source Data Type' = 'Business Approval Condition Source Data'.'Request Data', 
-                    ThisItem.'Source Data Name Value', ThisItem.'Source Data Type') & " " & ThisItem.Operand & 
-                If(ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else', " " & 
-                    First(Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage')).'Condition Value Display'
+        stageBackGround_1 As groupContainer.manualLayoutContainer:
+            BorderColor: |-
+                =If(
+                    CountRows(galStageNodes.AllItems) > 0, 
+                    /*RGBA(105, 121, 126, 1)*/ColorValue(AppTheme.palette.themePrimary),
+                    RGBA(255, 0, 0, 1)
                 )
-            Visible: =(ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None) && icoToggleStage_1.Icon = Icon.ChevronUp
-            Width: =Parent.TemplateWidth
-            X: =btnAddFirstNode_1.X + btnAddFirstNode_1.Width / 2 - Self.Width / 2
-            Y: =btnAddFirstNode_1.Y + btnAddFirstNode_1.Height + If(btnAddFirstNode_1.Visible, 5, 0)
-            ZIndex: =9
+            BorderThickness: =1
+            DropShadow: =DropShadow.Semilight
+            Fill: =If(Self.BorderColor=RGBA(255, 0, 0, 1),ColorValue(AppTheme.palette.white), ColorFade(ColorValue(AppTheme.palette.themeLighterAlt),60%))//RGBA(237, 237, 237, 1) //ColorValue(AppTheme.palette.themeLighterAlt)
+            Height: |-
+                =Max(
+                    galStageNodes.Height + galStageNodes.Y,
+                    lblNoNodeInStage_1.Y + lblNoNodeInStage_1.Height, 
+                    galStageConditions_1.Y + galStageConditions_1.Height
+                )
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Width: =Parent.TemplateWidth - Self.X -2
+            X: =2
+            Y: =5
+            ZIndex: =7
 
         galStageNodes As gallery.galleryVertical:
             AccessibleLabel: ="Stage nodes"
@@ -340,7 +295,63 @@ ApprovalDesigner As CanvasComponent:
                     lblGalStageName_1.Height,
                     galStageConditions_1.Y + galStageConditions_1.Height
                 )
-            ZIndex: =10
+            ZIndex: =8
+
+            "elevationNodeBoxPath5 As 'Fluent Elevation (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =88
+                HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
+                HoverFillColor: =AppTheme.palette.themeLight
+                Visible: =conNodeBoxPath5.Visible
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: =conNodeBoxPath5.X
+                Y: =
+                ZIndex: =1
+
+            "elevationNodeBoxPath4 As 'Fluent Elevation (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =88
+                HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
+                HoverFillColor: =AppTheme.palette.themeLight
+                Visible: =conNodeBoxPath4.Visible
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: =conNodeBoxPath4.X
+                Y: =
+                ZIndex: =2
+
+            "elevationNodeBoxPath3 As 'Fluent Elevation (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =88
+                HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
+                HoverFillColor: =AppTheme.palette.themeLight
+                Visible: =conNodeBoxPath3.Visible
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: =conNodeBoxPath3.X
+                Y: =
+                ZIndex: =3
+
+            "elevationNodeBoxPath2 As 'Fluent Elevation (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =88
+                HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
+                HoverFillColor: =AppTheme.palette.themeLight
+                Visible: =conNodeBoxPath2.Visible
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: =conNodeBoxPath2.X
+                Y: =0
+                ZIndex: =4
+
+            "elevationNodeBoxPath1 As 'Fluent Elevation (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =88
+                HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
+                HoverFillColor: =AppTheme.palette.themeLight
+                Visible: =conNodeBoxPath1.Visible
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: |-
+                    =With({ pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, pathWidth / 2 - Self.Width / 2)
+                Y: =0
+                ZIndex: =5
 
             nodeLineCenter1_1 As rectangle:
                 BorderColor: =RGBA(0, 0, 0, 0)
@@ -355,9 +366,9 @@ ApprovalDesigner As CanvasComponent:
                 PressedFill: =RGBA(105, 121, 126, 1)
                 Visible: =false
                 Width: =1
-                X: =nodeBoxPath1.X + nodeBoxPath1.Width / 2
+                X: =conNodeBoxPath1.X + conNodeBoxPath1.Width / 2//nodeBoxPath1.X + nodeBoxPath1.Width / 2
                 Y: =nodeBoxPath1.Y + nodeBoxPath1.Height
-                ZIndex: =1
+                ZIndex: =6
 
             nodeBoxPath5 As rectangle:
                 BorderColor: =RGBA(128, 128, 128, 1)
@@ -369,12 +380,11 @@ ApprovalDesigner As CanvasComponent:
                 HoverFill: =RGBA(105, 121, 126, 1)
                 OnSelect: =
                 PressedFill: =RGBA(105, 121, 126, 1)
-                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 5))
+                Visible: =false//!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 5))
                 Width: =nodeBoxPath1.Width
-                X: |-
-                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, (4 * pathWidth) + (pathWidth/2  - Self.Width / 2))
+                X: =665
                 Y: =
-                ZIndex: =2
+                ZIndex: =7
 
             nodeBoxPath4 As rectangle:
                 BorderColor: =RGBA(128, 128, 128, 1)
@@ -386,12 +396,11 @@ ApprovalDesigner As CanvasComponent:
                 HoverFill: =RGBA(105, 121, 126, 1)
                 OnSelect: =
                 PressedFill: =RGBA(105, 121, 126, 1)
-                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 4))
+                Visible: =false//!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 4))
                 Width: =nodeBoxPath1.Width
-                X: |-
-                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, (3 * pathWidth) + (pathWidth/2  - Self.Width / 2))
+                X: =665
                 Y: =
-                ZIndex: =3
+                ZIndex: =8
 
             nodeBoxPath3 As rectangle:
                 BorderColor: =RGBA(128, 128, 128, 1)
@@ -403,12 +412,11 @@ ApprovalDesigner As CanvasComponent:
                 HoverFill: =RGBA(105, 121, 126, 1)
                 OnSelect: =
                 PressedFill: =RGBA(105, 121, 126, 1)
-                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 3))
+                Visible: =false//!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 3))
                 Width: =nodeBoxPath1.Width
-                X: |-
-                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, (2 * pathWidth) + (pathWidth/2  - Self.Width / 2))
+                X: =665
                 Y: =
-                ZIndex: =4
+                ZIndex: =9
 
             nodeBoxPath2 As rectangle:
                 BorderColor: =RGBA(128, 128, 128, 1)
@@ -420,12 +428,11 @@ ApprovalDesigner As CanvasComponent:
                 HoverFill: =RGBA(105, 121, 126, 1)
                 OnSelect: =
                 PressedFill: =RGBA(105, 121, 126, 1)
-                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 2))
+                Visible: =false//!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 2))
                 Width: =nodeBoxPath1.Width
-                X: |-
-                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, pathWidth + (pathWidth/2  - Self.Width / 2))
+                X: =665
                 Y: =
-                ZIndex: =5
+                ZIndex: =10
 
             nodeBoxPath1 As rectangle:
                 BorderColor: =RGBA(128, 128, 128, 1)
@@ -437,17 +444,99 @@ ApprovalDesigner As CanvasComponent:
                 HoverFill: =RGBA(105, 121, 126, 1)
                 OnSelect: =
                 PressedFill: =RGBA(105, 121, 126, 1)
-                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 1))
+                Visible: =false//!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 1))
                 Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
                 X: |-
                     =With({ pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, pathWidth / 2 - Self.Width / 2)
                 Y: =
-                ZIndex: =6
+                ZIndex: =11
+
+            conNodeBoxPath5 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =88
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 5))
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: |-
+                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, (4 * pathWidth) + (pathWidth/2  - Self.Width / 2))
+                Y: =
+                ZIndex: =12
+
+            conNodeBoxPath4 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =88
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 4))
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: |-
+                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, (3 * pathWidth) + (pathWidth/2  - Self.Width / 2))
+                Y: =
+                ZIndex: =13
+
+            conNodeBoxPath3 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =88
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 3))
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: |-
+                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, (2 * pathWidth) + (pathWidth/2  - Self.Width / 2))
+                ZIndex: =14
+
+            conNodeBoxPath2 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =88
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 2))
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: |-
+                    =With({pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, pathWidth + (pathWidth/2  - Self.Width / 2))
+                ZIndex: =15
+
+            conNodeBoxPath1 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =88
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 1))//nodeBoxPath1.Visible
+                Width: =Min(300, (Parent.TemplateWidth / Coalesce(ThisItem.Paths,1)) - 4)
+                X: |-
+                    =With({ pathWidth: Parent.Width / Coalesce(ThisItem.Paths,1)}, pathWidth / 2 - Self.Width / 2)
+                ZIndex: =16
 
             btnAddNodePath5 As button:
                 BorderColor: =RGBA(74, 85, 88, 1)
                 BorderThickness: =1
-                Color: =RGBA(74, 85, 88, 1)
+                Color: =ColorValue(AppTheme.palette.white)//RGBA(74, 85, 88, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -456,7 +545,7 @@ ApprovalDesigner As CanvasComponent:
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: =20
-                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverBorderColor: =ColorValue(AppTheme.palette.themePrimary) //RGBA(0, 0, 0, 0)
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
                 OnSelect: |-
@@ -476,16 +565,16 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
-                Visible: =nodeBoxPath5.Visible
+                Visible: =conNodeBoxPath5.Visible
                 Width: =20
                 X: =nodeBoxPath5.X + nodeBoxPath5.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
-                ZIndex: =7
+                ZIndex: =17
 
             btnAddNodePath4 As button:
                 BorderColor: =RGBA(74, 85, 88, 1)
                 BorderThickness: =1
-                Color: =RGBA(74, 85, 88, 1)
+                Color: =ColorValue(AppTheme.palette.white)//RGBA(74, 85, 88, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -494,7 +583,7 @@ ApprovalDesigner As CanvasComponent:
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: =20
-                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverBorderColor: =ColorValue(AppTheme.palette.themePrimary) //RGBA(0, 0, 0, 0)
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
                 OnSelect: |-
@@ -514,16 +603,16 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
-                Visible: =nodeBoxPath4.Visible
+                Visible: =conNodeBoxPath4.Visible
                 Width: =20
                 X: =nodeBoxPath4.X + nodeBoxPath4.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
-                ZIndex: =8
+                ZIndex: =18
 
             btnAddNodePath3 As button:
                 BorderColor: =RGBA(74, 85, 88, 1)
                 BorderThickness: =1
-                Color: =RGBA(74, 85, 88, 1)
+                Color: =ColorValue(AppTheme.palette.white)//RGBA(74, 85, 88, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -532,7 +621,7 @@ ApprovalDesigner As CanvasComponent:
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: =20
-                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverBorderColor: =ColorValue(AppTheme.palette.themePrimary) //RGBA(0, 0, 0, 0)
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
                 OnSelect: |-
@@ -552,16 +641,16 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
-                Visible: =nodeBoxPath3.Visible
+                Visible: =conNodeBoxPath3.Visible
                 Width: =20
                 X: =nodeBoxPath3.X + nodeBoxPath3.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
-                ZIndex: =9
+                ZIndex: =19
 
             btnAddNodePath2 As button:
                 BorderColor: =RGBA(74, 85, 88, 1)
                 BorderThickness: =1
-                Color: =RGBA(74, 85, 88, 1)
+                Color: =ColorValue(AppTheme.palette.white)//RGBA(74, 85, 88, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -570,7 +659,7 @@ ApprovalDesigner As CanvasComponent:
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: =20
-                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverBorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 0)
                 HoverColor: =RGBA(255, 255, 255, 1)
                 HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
                 OnSelect: |-
@@ -590,16 +679,16 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
-                Visible: =nodeBoxPath2.Visible
+                Visible: =conNodeBoxPath2.Visible
                 Width: =20
                 X: =nodeBoxPath2.X + nodeBoxPath2.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
-                ZIndex: =10
+                ZIndex: =20
 
             btnAddNodePath1 As button:
                 BorderColor: =RGBA(74, 85, 88, 1)
                 BorderThickness: =1
-                Color: =RGBA(74, 85, 88, 1)
+                Color: =ColorValue(AppTheme.palette.white)//RGBA(74, 85, 88, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -608,9 +697,9 @@ ApprovalDesigner As CanvasComponent:
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: =20
-                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverBorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(0, 0, 0, 0)
                 HoverColor: =RGBA(255, 255, 255, 1)
-                HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
+                HoverFill: =ColorValue(AppTheme.palette.themePrimary)//ColorFade(RGBA(105, 121, 126, 1), -10%)
                 OnSelect: |-
                     =With({ stage: First(ThisItem.Nodes).Stage },
                         ApprovalDesigner.AddNode(1, ThisItem.cat_rowindex + 1, stage.Order, stage.'Business Approval Stage')
@@ -628,11 +717,12 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
-                Visible: =nodeBoxPath1.Visible
+                Tooltip: ="Add Node"
+                Visible: =conNodeBoxPath1.Visible
                 Width: =20
                 X: =nodeBoxPath1.X + nodeBoxPath1.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
-                ZIndex: =11
+                ZIndex: =21
 
             lblNodeApproversPath5 As htmlViewer:
                 Color: =RGBA(128, 128, 128, 1)
@@ -640,7 +730,7 @@ ApprovalDesigner As CanvasComponent:
                 Height: =60
                 HtmlText: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 5)},
-                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;text-align:center'>" &
+                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;color:black;text-align:center'>" &
                             If(node.'Node Condition' = 'Business Approval Stage Condition'.None,
                                 If(IsBlank(node.'Go To Stage'),    
                                     //show approvers              
@@ -667,11 +757,11 @@ ApprovalDesigner As CanvasComponent:
                 PaddingRight: =0
                 PaddingTop: =0
                 Size: =7
-                Visible: =nodeBoxPath5.Visible
+                Visible: =conNodeBoxPath5.Visible
                 Width: =nodeBoxPath1.Width
-                X: =nodeBoxPath5.X
+                X: =conNodeBoxPath5.X
                 Y: =lblNodeApproversPath1.Y
-                ZIndex: =12
+                ZIndex: =22
 
             lblNodeApproversPath4 As htmlViewer:
                 Color: =RGBA(128, 128, 128, 1)
@@ -679,7 +769,7 @@ ApprovalDesigner As CanvasComponent:
                 Height: =60
                 HtmlText: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 4)},
-                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;text-align:center'>" &
+                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;color:black;text-align:center'>" &
                             If(node.'Node Condition' = 'Business Approval Stage Condition'.None,
                                 If(IsBlank(node.'Go To Stage'),    
                                     //show approvers              
@@ -706,11 +796,11 @@ ApprovalDesigner As CanvasComponent:
                 PaddingRight: =0
                 PaddingTop: =0
                 Size: =7
-                Visible: =nodeBoxPath4.Visible
+                Visible: =conNodeBoxPath4.Visible
                 Width: =nodeBoxPath1.Width
-                X: =nodeBoxPath4.X
+                X: =conNodeBoxPath4.X
                 Y: =lblNodeApproversPath1.Y
-                ZIndex: =13
+                ZIndex: =23
 
             lblNodeApproversPath3 As htmlViewer:
                 Color: =RGBA(128, 128, 128, 1)
@@ -718,7 +808,7 @@ ApprovalDesigner As CanvasComponent:
                 Height: =60
                 HtmlText: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 3)},
-                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;text-align:center'>" &
+                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;color:black;text-align:center'>" &
                             If(node.'Node Condition' = 'Business Approval Stage Condition'.None,
                                 If(IsBlank(node.'Go To Stage'),    
                                     //show approvers              
@@ -745,11 +835,11 @@ ApprovalDesigner As CanvasComponent:
                 PaddingRight: =0
                 PaddingTop: =0
                 Size: =7
-                Visible: =nodeBoxPath3.Visible
+                Visible: =conNodeBoxPath3.Visible
                 Width: =nodeBoxPath1.Width
-                X: =nodeBoxPath3.X
+                X: =conNodeBoxPath3.X
                 Y: =lblNodeApproversPath1.Y
-                ZIndex: =14
+                ZIndex: =24
 
             lblNodeApproversPath2 As htmlViewer:
                 Color: =RGBA(128, 128, 128, 1)
@@ -757,7 +847,7 @@ ApprovalDesigner As CanvasComponent:
                 Height: =60
                 HtmlText: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 2)},
-                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;text-align:center'>" &
+                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:auto;margin:1px;height:54px;color:black;text-align:center'>" &
                             If(node.'Node Condition' = 'Business Approval Stage Condition'.None,
                                 If(IsBlank(node.'Go To Stage'),    
                                     //show approvers              
@@ -784,11 +874,11 @@ ApprovalDesigner As CanvasComponent:
                 PaddingRight: =0
                 PaddingTop: =0
                 Size: =7
-                Visible: =nodeBoxPath2.Visible
+                Visible: =conNodeBoxPath2.Visible
                 Width: =nodeBoxPath1.Width
-                X: =nodeBoxPath2.X
+                X: =conNodeBoxPath2.X
                 Y: =lblNodeApproversPath1.Y
-                ZIndex: =15
+                ZIndex: =25
 
             lblNodeApproversPath1 As htmlViewer:
                 Color: =RGBA(128, 128, 128, 1)
@@ -796,12 +886,12 @@ ApprovalDesigner As CanvasComponent:
                 Height: =60
                 HtmlText: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1)},
-                        With({ nodeId: node.'Business Approval Node' }, "<div style='overflow:hidden;margin:1px;height:55px;text-align:center'>" &
+                        With({ nodeId: node.'Business Approval Node' }, "<div style='border:4px;overflow:hidden;margin:1px;height:55px;color:black;text-align:center;'>" &
                             If(node.'Node Condition' = 'Business Approval Stage Condition'.None,
                                 If(IsBlank(node.'Go To Stage'),    
                                     //show approvers              
                                     Concat(
-                                        ForAll(Split(node.Approvers, ", "), 
+                                        ForAll(Split(node.Approvers, ", "),
                                             {Result: ThisRecord.Value}), $"{ divStartTemplate.Text }{ Result }</span></div>"
                                         ),
                                     //show go to stage
@@ -825,25 +915,24 @@ ApprovalDesigner As CanvasComponent:
                 PaddingRight: =0
                 PaddingTop: =0
                 Size: =7
-                Visible: =nodeBoxPath1.Visible
-                Width: =nodeBoxPath1.Width
-                X: =nodeBoxPath1.X
+                Visible: =!IsBlank(LookUp(ThisItem.Nodes, 'Path Index' = 1))//nodeBoxPath1.Visible
+                Width: =conNodeBoxPath1.Width
+                X: =conNodeBoxPath1.X
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height
-                ZIndex: =16
+                ZIndex: =26
 
             lblNodeNamePath5 As label:
                 Align: =Align.Center
                 BorderColor: =RGBA(105, 121, 126, 1)
-                BorderThickness: =1
-                Color: =RGBA(51, 51, 51, 1)
+                Color: =RGBA(255, 255, 255, 1)//RGBA(51, 51, 51, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =RGBA(225, 228, 229, 1)
+                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
                 OnSelect: =
-                Size: =8
+                Size: =9
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 5)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
@@ -851,26 +940,25 @@ ApprovalDesigner As CanvasComponent:
                         )
                     )
                 Tooltip: =Self.Text
-                Visible: =nodeBoxPath5.Visible
-                Width: =nodeBoxPath1.Width - 2
+                Visible: =conNodeBoxPath5.Visible //nodeBoxPath5.Visible
+                Width: =nodeBoxPath1.Width  + 1
                 Wrap: =false
-                X: =nodeBoxPath5.X + 1
+                X: =conNodeBoxPath5.X - 1
                 Y: =lblNodeNamePath1.Y
-                ZIndex: =17
+                ZIndex: =27
 
             lblNodeNamePath4 As label:
                 Align: =Align.Center
                 BorderColor: =RGBA(105, 121, 126, 1)
-                BorderThickness: =1
-                Color: =RGBA(51, 51, 51, 1)
+                Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =RGBA(225, 228, 229, 1)
+                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
                 OnSelect: =
-                Size: =8
+                Size: =9
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 4)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
@@ -878,26 +966,25 @@ ApprovalDesigner As CanvasComponent:
                         )
                     )
                 Tooltip: =Self.Text
-                Visible: =nodeBoxPath4.Visible
-                Width: =nodeBoxPath1.Width - 2
+                Visible: =conNodeBoxPath4.Visible //nodeBoxPath4.Visible
+                Width: =nodeBoxPath1.Width  + 1
                 Wrap: =false
-                X: =nodeBoxPath4.X + 1
+                X: =conNodeBoxPath4.X - 1
                 Y: =lblNodeNamePath1.Y
-                ZIndex: =18
+                ZIndex: =28
 
             lblNodeNamePath3 As label:
                 Align: =Align.Center
                 BorderColor: =RGBA(105, 121, 126, 1)
-                BorderThickness: =1
-                Color: =RGBA(51, 51, 51, 1)
+                Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =RGBA(225, 228, 229, 1)
+                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
                 OnSelect: =
-                Size: =8
+                Size: =9
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 3)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
@@ -905,26 +992,25 @@ ApprovalDesigner As CanvasComponent:
                         )
                     )
                 Tooltip: =Self.Text
-                Visible: =nodeBoxPath3.Visible
-                Width: =nodeBoxPath1.Width - 2
+                Visible: =conNodeBoxPath3.Visible //nodeBoxPath3.Visible
+                Width: =nodeBoxPath1.Width  + 1
                 Wrap: =false
-                X: =nodeBoxPath3.X + 1
+                X: =conNodeBoxPath3.X - 1
                 Y: =lblNodeNamePath1.Y
-                ZIndex: =19
+                ZIndex: =29
 
             lblNodeNamePath2 As label:
                 Align: =Align.Center
                 BorderColor: =RGBA(105, 121, 126, 1)
-                BorderThickness: =1
-                Color: =RGBA(51, 51, 51, 1)
+                Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =RGBA(225, 228, 229, 1)
+                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
                 OnSelect: =
-                Size: =8
+                Size: =9
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 2)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
@@ -932,26 +1018,25 @@ ApprovalDesigner As CanvasComponent:
                         )
                     )
                 Tooltip: =Self.Text
-                Visible: =nodeBoxPath2.Visible
-                Width: =nodeBoxPath1.Width - 2
+                Visible: =conNodeBoxPath2.Visible  //nodeBoxPath2.Visible
+                Width: =conNodeBoxPath2.Width 
                 Wrap: =false
-                X: =nodeBoxPath2.X + 1
-                Y: =lblNodeNamePath1.Y
-                ZIndex: =20
+                X: =conNodeBoxPath2.X 
+                Y: =conNodeBoxPath2.Y 
+                ZIndex: =30
 
             lblNodeNamePath1 As label:
                 Align: =Align.Center
                 BorderColor: =RGBA(105, 121, 126, 1)
-                BorderThickness: =1
-                Color: =RGBA(51, 51, 51, 1)
+                Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =RGBA(225, 228, 229, 1)
+                Fill: =ColorFade(ColorValue(AppTheme.palette.themeSecondary),30%)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
                 OnSelect: =
-                Size: =8
+                Size: =9
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1)},   
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
@@ -959,12 +1044,12 @@ ApprovalDesigner As CanvasComponent:
                         )
                     )
                 Tooltip: =Self.Text
-                Visible: =nodeBoxPath1.Visible
-                Width: =nodeBoxPath1.Width - 2
+                Visible: =conNodeBoxPath1.Visible //nodeBoxPath1.Visible
+                Width: =conNodeBoxPath1.Width 
                 Wrap: =false
-                X: =nodeBoxPath1.X + 1
-                Y: =nodeBoxPath1.Y + 1
-                ZIndex: =21
+                X: =conNodeBoxPath1.X 
+                Y: =conNodeBoxPath1.Y 
+                ZIndex: =31
 
             icoEditNodePath5 As icon.Edit:
                 AccessibleLabel: =$"Edit node { lblNodeNamePath5.Text }"
@@ -993,9 +1078,9 @@ ApprovalDesigner As CanvasComponent:
                 Tooltip: =
                 Visible: =nodeBoxPath5.Visible
                 Width: =30
-                X: =nodeBoxPath5.X + nodeBoxPath5.Width - Self.Width
+                X: =935
                 Y: =icoEditNodePath1.Y
-                ZIndex: =22
+                ZIndex: =32
 
             icoEditNodePath4 As icon.Edit:
                 AccessibleLabel: =$"Edit node { lblNodeNamePath4.Text }"
@@ -1024,9 +1109,9 @@ ApprovalDesigner As CanvasComponent:
                 Tooltip: =
                 Visible: =nodeBoxPath4.Visible
                 Width: =30
-                X: =nodeBoxPath4.X + nodeBoxPath4.Width - Self.Width
+                X: =935
                 Y: =icoEditNodePath1.Y
-                ZIndex: =23
+                ZIndex: =33
 
             icoEditNodePath3 As icon.Edit:
                 AccessibleLabel: =$"Edit node { lblNodeNamePath3.Text }"
@@ -1055,9 +1140,9 @@ ApprovalDesigner As CanvasComponent:
                 Tooltip: =
                 Visible: =nodeBoxPath3.Visible
                 Width: =30
-                X: =nodeBoxPath3.X + nodeBoxPath3.Width - Self.Width
+                X: =935
                 Y: =icoEditNodePath1.Y
-                ZIndex: =24
+                ZIndex: =34
 
             icoEditNodePath2 As icon.Edit:
                 AccessibleLabel: =$"Edit node { lblNodeNamePath2.Text }"
@@ -1086,9 +1171,9 @@ ApprovalDesigner As CanvasComponent:
                 Tooltip: =
                 Visible: =nodeBoxPath2.Visible
                 Width: =30
-                X: =nodeBoxPath2.X + nodeBoxPath2.Width - Self.Width
+                X: =935
                 Y: =icoEditNodePath1.Y
-                ZIndex: =25
+                ZIndex: =35
 
             icoEditNodePath1 As icon.Edit:
                 AccessibleLabel: =$"Edit node { lblNodeNamePath1.Text }"
@@ -1115,11 +1200,550 @@ ApprovalDesigner As CanvasComponent:
                 PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
                 PressedFill: =RGBA(0, 0, 0, 0)
                 Tooltip: =
-                Visible: =nodeBoxPath1.Visible
+                Visible: =false//nodeBoxPath1.Visible
                 Width: =30
                 X: =nodeBoxPath1.X + nodeBoxPath1.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
-                ZIndex: =26
+                ZIndex: =36
+
+            "icoCKEditNodePath1_1 As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themePrimary
+                IconColor: =AppTheme.palette.white
+                IconName: ="Edit"
+                OnChange: |-
+                    =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    )
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
+                Visible: =false
+                Width: =25
+                X: =nodeBoxPath1.X + nodeBoxPath1.Width - Self.Width
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =37
+
+            "icoCKEditNodePath2 As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themePrimary
+                IconColor: =AppTheme.palette.white
+                IconName: ="Edit"
+                OnChange: |-
+                    =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 2) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    )
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
+                Visible: =conNodeBoxPath2.Visible 
+                Width: =25
+                X: =conNodeBoxPath2.X + conNodeBoxPath2.Width - Self.Width
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =38
+
+            "icoCKEditNodePath3 As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themePrimary
+                IconColor: =AppTheme.palette.white
+                IconName: ="Edit"
+                OnChange: |-
+                    =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 4) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    )
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
+                Visible: =conNodeBoxPath3.Visible 
+                Width: =25
+                X: =conNodeBoxPath3.X + conNodeBoxPath3.Width - Self.Width
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =39
+
+            "icoCKEditNodePath4 As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themePrimary
+                IconColor: =AppTheme.palette.white
+                IconName: ="Edit"
+                OnChange: |-
+                    =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 5) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    )
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
+                Visible: =conNodeBoxPath4.Visible 
+                Width: =25
+                X: =conNodeBoxPath4.X + conNodeBoxPath4.Width - Self.Width
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =40
+
+            "icoCKEditNodePath5 As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themePrimary
+                IconColor: =AppTheme.palette.white
+                IconName: ="Edit"
+                OnChange: |-
+                    =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    )
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
+                Visible: =conNodeBoxPath5.Visible 
+                Width: =25
+                X: =conNodeBoxPath5.X + conNodeBoxPath5.Width - Self.Width
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =41
+
+            "commandbarCKEditNode2 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 2) },
+                            ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                        ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 2));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath2.Visible 
+                Width: =25
+                X: =nodeBoxPath2.X + nodeBoxPath2.Width - Self.Width - 5
+                Y: =lblNodeNamePath2.Y + lblNodeNamePath2.Height / 2 - Self.Height / 2
+                ZIndex: =42
+
+            "commandbarCKEditNode3 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With(
+                            {
+                                node: LookUp(
+                                    ThisItem.Nodes,
+                                    'Path Index' = 3
+                                )
+                            },
+                            ApprovalDesigner.EditNode(
+                                node.'Business Approval Node',
+                                node.Stage.'Business Approval Stage'
+                            )
+                        ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 3));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath3.Visible 
+                Width: =25
+                X: =nodeBoxPath3.X + nodeBoxPath3.Width - Self.Width - 5
+                Y: =lblNodeNamePath3.Y + lblNodeNamePath3.Height / 2 - Self.Height / 2
+                ZIndex: =43
+
+            "commandbarCKEditNode4 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                       With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 4) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 4));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath4.Visible 
+                Width: =25
+                X: =nodeBoxPath4.X + nodeBoxPath4.Width - Self.Width - 5
+                Y: =lblNodeNamePath4.Y + lblNodeNamePath4.Height / 2 - Self.Height / 2
+                ZIndex: =44
+
+            "commandbarCKEditNode5 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 5) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                         Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 5));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath5.Visible 
+                Width: =25
+                X: =nodeBoxPath5.X + nodeBoxPath5.Width - Self.Width - 5
+                Y: =lblNodeNamePath5.Y + lblNodeNamePath5.Height / 2 - Self.Height / 2
+                ZIndex: =45
+
+            "commandbarCKEditNode1 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 1));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath1.Visible 
+                Width: =25
+                X: =nodeBoxPath1.X + nodeBoxPath1.Width - Self.Width - 5
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =46
 
         galStageConditions_1 As gallery.galleryVertical:
             AccessibleLabel: ="Conditions"
@@ -1143,12 +1767,12 @@ ApprovalDesigner As CanvasComponent:
             Width: =Parent.TemplateWidth
             WrapCount: =Max(2, CountRows(Self.AllItems))
             Y: =lblStageConditionText_1.Y + lblStageConditionText_1.Height
-            ZIndex: =11
+            ZIndex: =9
 
             nodeLineRightH_3 As rectangle:
                 BorderColor: =RGBA(105, 121, 126, 1)
                 DisplayMode: =DisplayMode.Disabled
-                Fill: =RGBA(128, 128, 128, 1)
+                Fill: =ColorValue(AppTheme.palette.themePrimary)//RGBA(128, 128, 128, 1)
                 FocusedBorderThickness: =4
                 Height: =1
                 HoverFill: =RGBA(105, 121, 126, 1)
@@ -1162,10 +1786,10 @@ ApprovalDesigner As CanvasComponent:
             nodeLineLeftH_6 As rectangle:
                 BorderColor: =RGBA(105, 121, 126, 1)
                 DisplayMode: =DisplayMode.Disabled
-                Fill: =RGBA(128, 128, 128, 1)
+                Fill: =ColorValue(AppTheme.palette.themePrimary) //RGBA(128, 128, 128, 1)
                 FocusedBorderThickness: =4
                 Height: =1
-                HoverFill: =RGBA(105, 121, 126, 1)
+                HoverFill: =ColorValue(AppTheme.palette.themePrimary) //RGBA(105, 121, 126, 1)
                 OnSelect: =Select(Parent)
                 PressedFill: =RGBA(105, 121, 126, 1)
                 Visible: =ThisItem.'Path Index' > 1
@@ -1177,7 +1801,7 @@ ApprovalDesigner As CanvasComponent:
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =2
                 DisplayMode: =DisplayMode.Disabled
-                Fill: =RGBA(128, 128, 128, 1)
+                Fill: =ColorValue(AppTheme.palette.themePrimary)//RGBA(128, 128, 128, 1)
                 FocusedBorderThickness: =4
                 Height: =10
                 HoverFill: =RGBA(105, 121, 126, 1)
@@ -1189,13 +1813,14 @@ ApprovalDesigner As CanvasComponent:
 
             lblConditionTarget_5 As label:
                 Align: =Align.Center
+                AutoHeight: =true
                 BorderColor: =RGBA(0, 0, 0, 0)
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =2
                 Color: =RGBA(51, 51, 51, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =RGBA(237, 237, 237, 1)
+                Fill: =ColorValue(AppTheme.palette.themeLight) //RGBA(237, 237, 237, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
@@ -1208,6 +1833,8 @@ ApprovalDesigner As CanvasComponent:
                             ThisItem.'Condition Value Display'
                         )
                     )
+                Tooltip: =Self.Text
+                Visible: =false
                 Width: =nodeLineRightH_3.Width
                 X: =Parent.TemplateWidth / 2 - Self.Width / 2
                 Y: =10
@@ -1242,10 +1869,73 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
+                Visible: =false
                 Width: =20
                 X: =Parent.TemplateWidth / 2 - Self.Width / 2
-                Y: =lblConditionTarget_5.Y + lblConditionTarget_5.Height
+                Y: =conConditionLabel.Y + conConditionLabel.Height
                 ZIndex: =10
+
+            conConditionLabel As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Light
+                Fill: =ColorValue(AppTheme.palette.themeLight)
+                Height: =28
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                Width: =If(ThisItem.StageSelection.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else',"60",nodeLineRightH_3.Width)
+                X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                Y: =10
+                ZIndex: =12
+
+                lblConditionTarget_7 As label:
+                    Align: =Align.Center
+                    AutoHeight: =true
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Fill: =ColorValue(AppTheme.palette.themeLight) //RGBA(237, 237, 237, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =28
+                    PaddingTop: =0
+                    Size: =8
+                    Text: |-
+                        =If(ThisItem.StageSelection.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else', "TRUE",
+                            If(ThisItem.'Condition Data Type' = 'Business Approval Condition Target Data'.'Request Data',
+                                ThisItem.'Condition Data'.Name, 
+                                ThisItem.'Condition Value Display'
+                            )
+                        )
+                    Tooltip: =Self.Text
+                    Width: =Parent.Width
+                    X: =
+                    Y: =10
+                    ZIndex: =1
+
+            "icoCKFirstFalseNode_1 As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themeLighter
+                IconName: ="CircleAdditionSolid"
+                IconSize: =22
+                OnChange: =ApprovalDesigner.AddNode(ThisItem.'Path Index', 1, ThisItem.Stage.Order, ThisItem.Stage.'Business Approval Stage')
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Theme: =AppThemeJson
+                Tooltip: |-
+                    =If(
+                        ThisItem.StageSelection.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else',
+                        "Create node under " & ThisItem.'Stage Name Value' &" for true condition",
+                        "Create node under " & ThisItem.'Stage Name Value' &" for "& ThisItem.'Condition Value Display'
+                    )
+                Width: =25
+                X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                Y: =conConditionLabel.Y + conConditionLabel.Height
+                ZIndex: =13
 
         conFalsePath_1 As groupContainer:
             BorderColor: =RGBA(105, 121, 126, 1)
@@ -1254,12 +1944,12 @@ ApprovalDesigner As CanvasComponent:
             Width: =galStageConditions_1.TemplateWidth
             X: =galStageConditions_1.X + galStageConditions_1.Width / 2
             Y: =galStageConditions_1.Y
-            ZIndex: =12
+            ZIndex: =10
 
             nodeLineLeftH_7 As rectangle:
-                BorderColor: =RGBA(105, 121, 126, 1)
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary)//RGBA(105, 121, 126, 1)
                 DisplayMode: =DisplayMode.Disabled
-                Fill: =RGBA(128, 128, 128, 1)
+                Fill: =ColorValue(AppTheme.palette.themePrimary)//RGBA(128, 128, 128, 1)
                 FocusedBorderThickness: =4
                 Height: =1
                 HoverFill: =RGBA(105, 121, 126, 1)
@@ -1273,49 +1963,31 @@ ApprovalDesigner As CanvasComponent:
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =2
                 DisplayMode: =DisplayMode.Disabled
-                Fill: =RGBA(128, 128, 128, 1)
+                Fill: =ColorValue(AppTheme.palette.themePrimary)//RGBA(128, 128, 128, 1)
                 FocusedBorderThickness: =4
                 Height: =10
                 HoverFill: =RGBA(105, 121, 126, 1)
                 OnSelect: =
                 PressedFill: =RGBA(105, 121, 126, 1)
                 Width: =1
-                X: =nodeLineLeftH_7.X + nodeLineLeftH_7.Width - 1
+                X: =nodeLineLeftH_7.X + nodeLineLeftH_7.Width 
                 ZIndex: =4
 
-            Label3_3 As label:
-                Align: =Align.Center
-                BorderColor: =RGBA(0, 0, 0, 0)
-                BorderStyle: =BorderStyle.None
-                BorderThickness: =2
-                Color: =RGBA(51, 51, 51, 1)
-                DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                DisabledColor: =RGBA(166, 166, 166, 1)
-                FocusedBorderThickness: =4
-                Font: =Font.'Segoe UI'
-                Height: =28
-                PaddingTop: =0
-                Size: =9
-                Text: ="FALSE"
-                Width: =Parent.Width
-                Y: =10
-                ZIndex: =5
-
             btnAddFirstNodeFalsePath_2 As button:
-                BorderColor: =RGBA(74, 85, 88, 1)
+                BorderColor: =ColorValue(AppTheme.palette.themePrimary) 
                 BorderThickness: =1
-                Color: =RGBA(74, 85, 88, 1)
+                Color: =ColorValue(AppTheme.palette.white) 
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =RGBA(204, 204, 204, 1)
+                Fill: =ColorValue(AppTheme.palette.themePrimary) 
                 FocusedBorderColor: =ColorFade(Self.Fill, -75%)
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: =20
                 HoverBorderColor: =RGBA(0, 0, 0, 0)
-                HoverColor: =RGBA(255, 255, 255, 1)
-                HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
+                HoverColor: =ColorValue(AppTheme.palette.white) 
+                HoverFill: =ColorFade(ColorValue(AppTheme.palette.themePrimary), -10%)
                 OnSelect: =ApprovalDesigner.AddNode(2, 1, ThisItem.Order, ThisItem.'Business Approval Stage')
                 PaddingBottom: =3
                 PaddingLeft: =0
@@ -1330,29 +2002,290 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
+                Visible: =false
                 Width: =20
                 X: =Parent.Width / 2 - Self.Width / 2
-                Y: =Label3_3.Y + Label3_3.Height
+                Y: =conConditionLabelFalse.Y + conConditionLabelFalse.Height
                 ZIndex: =6
 
-    divStartTemplate As label:
-        BorderColor: =RGBA(0, 0, 0, 0)
-        BorderStyle: =BorderStyle.None
-        BorderThickness: =2
-        Color: =RGBA(51, 51, 51, 1)
-        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-        DisabledColor: =RGBA(166, 166, 166, 1)
-        FocusedBorderThickness: =4
-        Font: =Font.'Segoe UI'
-        Height: =0
-        PaddingBottom: =0
-        PaddingLeft: =0
-        PaddingRight: =0
-        PaddingTop: =0
-        Size: =13
-        Text: |-
-            ="<div style='border: 1px solid #888;line-height:46px;height:46px;width:50px;word-wrap:normal;display:inline-block;text-align:center;vertical-align:middle;margin:2px;padding:0px 2px 4px 2px'><span style='line-height:11px;display:inline-block;vertical-align:middle'>"
-        Visible: =false
-        Width: =0
-        ZIndex: =2
+            conConditionLabelFalse As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Light
+                Fill: =ColorValue(AppTheme.palette.themeLight)
+                Height: =28
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                Width: =60
+                X: =nodeLineLeftH_7.X + nodeLineLeftH_7.Width - Self.Width/2
+                Y: =10
+                ZIndex: =7
+
+                lablConditionFalse As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =28
+                    PaddingTop: =0
+                    Size: =9
+                    Text: ="FALSE"
+                    Tooltip: =Self.Text
+                    Width: =Parent.Width
+                    Y: =5
+                    ZIndex: =1
+
+            "icoCKFirstFalseNode As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                HoverFillColor: =AppTheme.palette.themeLighter
+                IconName: ="CircleAdditionSolid"
+                IconSize: =22
+                OnChange: =ApprovalDesigner.AddNode(2, 1, ThisItem.Order, ThisItem.'Business Approval Stage')
+                TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+                Theme: =AppThemeJson
+                Tooltip: ="Create node under " & ThisItem.Name & " for false condition"
+                Width: =25
+                X: =Parent.Width / 2 - Self.Width / 2
+                Y: =conConditionLabelFalse.Y + conConditionLabelFalse.Height + 3
+                ZIndex: =8
+
+        "icoEdit_1 As 'Fluent Icon (1.0.22)'":
+            DisplayMode: =DisplayMode.Edit
+            FillColor: =
+            FontColor: =
+            Height: =30
+            HoverFillColor: =AppTheme.palette.themeLighter
+            HoverFontColor: =""
+            IconColor: =AppTheme.palette.themePrimary
+            IconName: ="Edit"
+            OnChange: =ApprovalDesigner.EditStage(ThisItem.'Business Approval Stage')
+            TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+            Theme: =AppThemeJson
+            Tooltip: ="Edit stage"
+            Visible: =false
+            Width: =30
+            X: =Parent.TemplateWidth - 62
+            Y: =stageBackground_1.Y + 1
+            ZIndex: =11
+
+        "icoToggle_1 As 'Fluent Icon (1.0.22)'":
+            AccessibilityLabel: =If(ThisItem.'Business Approval Stage' in _collapsedStage.Value, "Hide stage", "Expand stage")
+            DisplayMode: =DisplayMode.Edit
+            Height: =30
+            HoverFillColor: =AppTheme.palette.themeLighter
+            IconName: =If(ThisItem.'Business Approval Stage' in _collapsedStage.Value, "ChevronDown", "ChevronUp")
+            OnChange: |
+                =If(icoToggleStage_1.Icon = Icon.ChevronUp, 
+                    Collect(_collapsedStage, ThisItem.'Business Approval Stage'), 
+                    RemoveIf(_collapsedStage, Value = ThisItem.'Business Approval Stage')
+                )
+                /*
+                If(ThisItem.'Business Approval Stage' in _collapsedStage.Value, 
+                    Collect(_collapsedStage, ThisItem.'Business Approval Stage'), 
+                    RemoveIf(_collapsedStage, Value = ThisItem.'Business Approval Stage')
+                )*/
+            TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+            Theme: =AppThemeJson
+            Tooltip: =If(ThisItem.'Business Approval Stage' in _collapsedStage.Value, "Hide stage", "Expand stage")
+            Visible: =false
+            Width: =30
+            X: =Parent.TemplateWidth - Self.Width - 2
+            Y: =stageBackground_1.Y + 1
+            ZIndex: =12
+
+        "icoShiftDown_1 As 'Fluent Icon (1.0.22)'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =30
+            HoverFillColor: =AppTheme.palette.themeLighter
+            IconName: ="Down"
+            OnChange: =ApprovalDesigner.MoveStage(ThisItem.'Business Approval Stage', false)
+            TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+            Theme: =AppThemeJson
+            Tooltip: ="Move stage down"
+            Visible: =false
+            Width: =30
+            X: =icoEdit_1.X - Self.Width - 2
+            Y: =stageBackground_1.Y + 1
+            ZIndex: =13
+
+        "icoShiftUp_1 As 'Fluent Icon (1.0.22)'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =30
+            HoverFillColor: =AppTheme.palette.themeLighter
+            IconName: ="Up"
+            OnChange: =ApprovalDesigner.MoveStage(ThisItem.'Business Approval Stage', true)
+            TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+            Theme: =AppThemeJson
+            Tooltip: ="Move stage up"
+            Visible: =false
+            Width: =30
+            X: =icoMoveDown.X - Self.Width - 2
+            Y: =stageBackground_1.Y + 1
+            ZIndex: =14
+
+        btnAddFirstNode_1 As button:
+            BorderColor: =RGBA(74, 85, 88, 1)
+            BorderThickness: =1
+            Color: =RGBA(74, 85, 88, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            Fill: =RGBA(204, 204, 204, 1)
+            FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =If(Self.Visible, 20, 0)
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverColor: =ColorValue(AppTheme.palette.white) 
+            HoverFill: =ColorFade(ColorValue(AppTheme.palette.themePrimary), -10%)
+            OnSelect: |-
+                =ApprovalDesigner.AddNode(1, 1, ThisItem.Order, ThisItem.'Business Approval Stage')
+                
+                /*
+                Set(_currentNodeIndex, 1);
+                Set(_currentPathIndex, 1);
+                Set(_currentStageCount, CountRows(galProcessStages_1.AllItems));
+                Set(_selectedStage, ThisItem);
+                Set(_selectedNode, Blank());
+                Navigate(scrApprovalNodeEditor)*/
+            PaddingBottom: =3
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedBorderColor: =ColorFade(RGBA(105, 121, 126, 1), -50%)
+            PressedColor: =ColorValue(AppTheme.palette.white) 
+            PressedFill: =ColorFade(ColorValue(AppTheme.palette.themePrimary) , -30%)
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Size: =12
+            Text: ="+"
+            Visible: =!galStageNodes.Visible && ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.None && icoToggleStage_1.Icon = Icon.ChevronUp
+            Width: =20
+            X: =Parent.TemplateWidth / 2 - Self.Width / 2
+            Y: =lblGalStageName_1.Height
+            ZIndex: =15
+
+        lblNoNodeInStage_1 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =If(Self.Visible, 30, 0)
+            OnSelect: =Select(Parent)
+            Size: =9
+            Text: ="No node configured for this stage. Click '+' to add first node."
+            Visible: =btnAddFirstNode_1.Visible
+            Width: =Parent.TemplateWidth
+            X: =btnAddFirstNode_1.X + btnAddFirstNode_1.Width / 2 - Self.Width / 2
+            Y: =btnAddFirstNode_1.Y + btnAddFirstNode_1.Height + 5
+            ZIndex: =16
+
+        lblStageConditionText_1 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            Height: =If(Self.Visible, 20, 0)
+            OnSelect: =Select(Parent)
+            Size: =8
+            Text: |-
+                ="If " & If(ThisItem.'Source Data Type' = 'Business Approval Condition Source Data'.'Request Data', 
+                    ThisItem.'Source Data Name Value', ThisItem.'Source Data Type') & " " & ThisItem.Operand & 
+                If(ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else', " " & 
+                    First(Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage')).'Condition Value Display'
+                )
+            Visible: =(ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None) && icoToggleStage_1.Icon = Icon.ChevronUp
+            Width: =Parent.TemplateWidth
+            X: =btnAddFirstNode_1.X + btnAddFirstNode_1.Width / 2 - Self.Width / 2
+            Y: =btnAddFirstNode_1.Y + btnAddFirstNode_1.Height + If(btnAddFirstNode_1.Visible, 5, 0)
+            ZIndex: =17
+
+        lblGalStageName_1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =8
+            Size: =10
+            Text: |-
+                ="Stage: " & ThisItem.Name
+            Tooltip: =Self.Text
+            Width: =icoMoveUp.X
+            Wrap: =false
+            Y: =stageBackground_1.Y
+            ZIndex: =18
+
+        "CommandBarOptions As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            DisplayMode: =DisplayMode.Edit
+            Height: =35
+            Items: |-
+                =Table(
+                   {
+                        ItemKey: "edit",
+                        ItemDisplayName: "Edit",
+                        ItemIconName: "Edit"
+                    },
+                    {
+                        ItemKey: "delete",
+                        ItemDisplayName: "Delete",
+                        ItemIconName: "Delete"
+                    },{
+                        ItemKey: "up",
+                        ItemDisplayName: "Move Up",
+                        ItemIconName: "Up"
+                    },{
+                        ItemKey: "down",
+                        ItemDisplayName: "Move Down",
+                        ItemIconName: "Down"
+                    }
+                )
+            OnChange: =
+            OnSelect: |-
+                =Switch(
+                    Self.Selected.ItemKey,
+                    "edit",
+                    ApprovalDesigner.EditStage(ThisItem.'Business Approval Stage'),
+                    "delete",
+                    Set(confirmActionDelete,"delete");Set(_selectedStage, ThisItem);Set(confirmMessageDeteleStage, "Deleting Stage - " & _selectedStage.Name & ". This will also delete all approval nodes in this stage and it cannot be undone. Are you sure?");Set(_showConfirmDeleteStage, true),
+                    "up",
+                    ApprovalDesigner.MoveStage(
+                        ThisItem.'Business Approval Stage',
+                        true
+                    ),
+                    "down",
+                    ApprovalDesigner.MoveStage(
+                        ThisItem.'Business Approval Stage',
+                        false
+                    )
+                )
+            Theme: =AppThemeJson
+            Width: =35
+            X: =Parent.TemplateWidth - Self.Width - 2
+            Y: =stageBackground_1.Y + 1
+            ZIndex: =19
 

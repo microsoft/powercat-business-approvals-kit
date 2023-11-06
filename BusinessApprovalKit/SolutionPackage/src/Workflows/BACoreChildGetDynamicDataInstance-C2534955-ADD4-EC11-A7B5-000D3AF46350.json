@@ -189,7 +189,7 @@
                             "subscriptionRequest/message": 1,
                             "subscriptionRequest/entityname": "cat_businessapprovaldatainstance",
                             "subscriptionRequest/scope": 4,
-                            "subscriptionRequest/filterexpression": "_cat_workflowinstance_value eq @{triggerBody()['text']} and _cat_runtimedata_value eq @{first(outputs('Get_Runtime_Data_Id')?['body/value'])?['cat_RuntimeData/cat_businessapprovalruntimedataid']}",
+                            "subscriptionRequest/filterexpression": "_cat_workflowinstance_value eq '@{triggerBody()['text']}' and _cat_runtimedata_value eq '@{first(outputs('Get_Runtime_Data_Id')?['body/value'])?['cat_RuntimeData/cat_businessapprovalruntimedataid']}'",
                             "subscriptionRequest/runas": 1
                           },
                           "authentication": {
@@ -616,7 +616,7 @@
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }

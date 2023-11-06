@@ -42,26 +42,14 @@ steps:
   inputs:
     source: 'specific'
     project: 'powercat-business-approvals-kit'
-    pipeline: '56' #Production buildId
+    pipeline: '1990' #Production buildId
     runVersion: 'latest'
     patterns: '**/BusinessApprovalKit*.zip'
   displayName: 'Download Business Approval Kit solution'
 
-# Download the artifacts from the latest deployment of BusinessApprovalKitConnector to production.
-- task: DownloadPipelineArtifact@2
-  inputs:
-    source: 'specific'
-    project: 'powercat-business-approvals-kit'
-    pipeline: '59' #Production buildId
-    runVersion: 'latest'
-    patterns: '**/BusinessApprovalKitConnector*.zip'
-  displayName: 'Download Business Approval Kit Connector solution'
-
 - powershell: |
     New-Item -Path $(Pipeline.Workspace)\releaseassets -ItemType Directory
-
     New-Item -Path $(Pipeline.Workspace)\assetstaging -ItemType Directory
-
     Copy-Item '$(Pipeline.Workspace)\drop\*managed.zip' -Destination '$(Pipeline.Workspace)\assetstaging'
     Copy-Item '$(Build.SourcesDirectory)\powercat-business-approvals-kit\ApprovalsKitResources\Release\Collateral\ApprovalsKit\*.*' -Destination '$(Pipeline.Workspace)\assetstaging'
 
@@ -77,8 +65,7 @@ steps:
     Remove-Item $(Pipeline.Workspace)\assetstaging -Recurse -Force -Confirm:$false
     New-Item -Path $(Pipeline.Workspace)\assetstaging -ItemType Directory
 
-    Copy-Item '$(Pipeline.Workspace)/drop/BusinessApprovalKit*.zip' -Destination '$(Pipeline.Workspace)\assetstaging'
-    Copy-Item '$(Pipeline.Workspace)/drop/BusinessApprovalKitConnector*.zip' -Destination '$(Pipeline.Workspace)\assetstaging'
+    Copy-Item '$(Pipeline.Workspace)/drop/BusinessApprovalKit*.zip' -Destination '$(Pipeline.Workspace)\assetstaging'    
     
     $compress = @{
       Path = '$(Pipeline.Workspace)\assetstaging\*.*'
@@ -86,13 +73,22 @@ steps:
       DestinationPath = '$(Pipeline.Workspace)/releaseassets/BusinessApprovalKit-Unmanaged.zip'
     }
     Compress-Archive @compress
+
+    $templateTag = 'BusinessApprovalsKit-$(ReleaseMonthName)${{parameters.ReleaseYearNumber}}'
+    $templateTitle = 'Business Approvals Kit $(ReleaseMonthName) ${{parameters.ReleaseYearNumber}}'
+    if(${{parameters.HotfixReleaseNumber}} -ne 0) {
+        $templateTag = 'BusinessApprovalsKit-$(ReleaseMonthName)${{parameters.ReleaseYearNumber}}-HF${{parameters.HotfixReleaseNumber}}'
+        $templateTitle = 'Business Approvals Kit $(ReleaseMonthName) ${{parameters.ReleaseYearNumber}} - Hotfix ${{parameters.HotfixReleaseNumber}}'
+    }
+    Write-Host "##vso[task.setvariable variable=TemplateTag]$templateTag"
+    Write-Host "##vso[task.setvariable variable=TemplateTitle]$templateTitle"    
   displayName: 'Prepare release assets'
 
 - template: Pipelines\Templates\create-release-github.yml@PipelineRepo
   parameters:
-    gitHubApiUrl: 'microsoft/powercat-creator-kit'
-    solutionName: 'CreatorKit'
-    solutionDisplayName: 'Creator Kit'
+    gitHubApiUrl: 'microsoft/powercat-business-approvals-kit'
+    solutionName: 'BusinessApprovalKit'
+    solutionDisplayName: 'Business Approval Kit'
     releaseMonth: ${{parameters.ReleaseMonthNumber}}
     releaseYear: ${{parameters.ReleaseYearNumber}}
     connectionName: 'powercat-alm'

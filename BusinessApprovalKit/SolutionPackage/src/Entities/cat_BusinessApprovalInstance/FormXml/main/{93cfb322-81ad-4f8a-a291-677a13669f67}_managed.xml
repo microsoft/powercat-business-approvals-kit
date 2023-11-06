@@ -92,6 +92,14 @@
                       </cell>
                     </row>
                     <row>
+                      <cell id="{6ba33f00-afb2-4dd3-bc0a-8a58e6e9cf8b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="cat_details" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="cat_details" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell id="{1eee49ac-ebbc-4e8c-bc3e-b8cbd7b62540}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Comments" languagecode="1033" />

@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ProcessID">
+  <description default="Record ID of the Records in Business Approval Processes Table">
+    <label description="Record ID of the Records in Business Approval Processes Table" languagecode="1033" />
+  </description>
+  <displayname default="ProcessID">
+    <label description="ProcessID" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>ProcessID</name>
+  <type>12</type>
+</customapirequestparameter>

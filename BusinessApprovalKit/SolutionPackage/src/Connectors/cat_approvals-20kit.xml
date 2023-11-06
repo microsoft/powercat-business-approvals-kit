@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Connector xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <connectorid>d5781852-d15c-476b-852c-48c738e17be4</connectorid>
+  <description></description>
+  <displayname>Approvals Kit</displayname>
+  <iconbrandcolor>#007ee5</iconbrandcolor>
+  <name>cat_approvals-20kit</name>
+  <connectortype>1</connectortype>
+  <scriptoperations>["GetApprovalDataFields","CreateWorkflowInstance"]</scriptoperations>
+  <openapidefinition>/Connector/cat_approvals-20kit_openapidefinition.json</openapidefinition>
+  <connectionparameters>/Connector/cat_approvals-20kit_connectionparameters.json</connectionparameters>
+  <policytemplateinstances>/Connector/cat_approvals-20kit_policytemplateinstances.json</policytemplateinstances>
+  <customcodeblobcontent>/Connector/cat_approvals-20kit_customcodeblobcontent.csx</customcodeblobcontent>
+  <iconblob>/Connector/cat_approvals-20kit_iconblob.Png</iconblob>
+</Connector>

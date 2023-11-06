@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalholidaycalendar",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"24684949\\\"\",\"savedqueryid\":\"9df4d1b6-733c-4bf3-83cb-0a043fa5f268\",\"name\":\"Business Approval Holiday Calendar Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"24684937\\\"\",\"savedqueryid\":\"242fc2c0-6bd9-40d2-99be-3951dd7f5509\",\"name\":\"Inactive Business Approval Holiday Calendars\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24684961\\\"\",\"savedqueryid\":\"906b8345-ec73-4205-ab2a-8a97a0e7b03e\",\"name\":\"Business Approval Holiday Calendar Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"24684925\\\"\",\"savedqueryid\":\"bdcabbf2-44ba-4b2c-8606-9bc59fe7b11e\",\"name\":\"Active Business Approval Holiday Calendars\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"24684973\\\"\",\"savedqueryid\":\"6aed7f41-f9f0-45d0-8294-e9b73add8b78\",\"name\":\"Business Approval Holiday Calendar Advanced Find View\",\"querytype\":1}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

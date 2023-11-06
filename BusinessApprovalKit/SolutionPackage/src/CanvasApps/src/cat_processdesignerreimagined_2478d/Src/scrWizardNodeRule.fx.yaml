@@ -1,0 +1,1359 @@
+scrWizardNodeRule As screen:
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: |-
+        =//cache operands if not already available
+        If(IsEmpty(_operands),
+            ClearCollect(_operands, 
+                { 
+                    operands: [
+                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                        'Business Approval Condition Operand'.'Starts With', 'Business Approval Condition Operand'.'Ends With',
+                        'Business Approval Condition Operand'.Contains, 'Business Approval Condition Operand'.'Is Blank',
+                        'Business Approval Condition Operand'.'Is Not Blank'
+                    ],
+                    type: [ 'Business Approval Data Type'.Text, 'Business Approval Data Type'.'User (Email)' ]
+                },
+                { 
+                    operands: [
+                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Less Than (<)',
+                        'Business Approval Condition Operand'.'Less Than or Equals (<=)', 'Business Approval Condition Operand'.'Greater Than (>)',
+                        'Business Approval Condition Operand'.'Greater Than or Equals (>=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                        'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
+                    ],
+                    type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.Date ]
+                },
+                { 
+                    operands: [
+                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                        'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
+                    ],
+                    type: [ 'Business Approval Data Type'.Boolean ]
+                }
+            )
+        );
+        
+        //load conditions if exists
+        If(!IsBlank(_selectedNode),
+            ForAll(
+                Filter(
+                    Filter('Business Approval Conditions','Business Approval Conditions (Views)'.'Active Node Conditions'),
+                    Node.'Business Approval Node' = _selectedNode.'Business Approval Node'
+                ),
+                Collect(_conditions, 
+                { 
+                    ConditionId: ThisRecord.'Business Approval Condition', Path: ThisRecord.'Path Index', 
+                    Target: ThisRecord.'Condition Data Type', TargetData: ThisRecord.'Condition Data', 
+                    TargetStage: ThisRecord.'Go To Stage', StaticValue: ThisRecord.'Condition Value' 
+                })
+            )
+        );
+        
+        //allow change of condition type if there are no existing conditions defined
+        //isCleared - tracks if the user clicked on "Clear" (may not yet proceed to change condition, as they can undo it)
+        UpdateContext({ allowUpdateConditionType: CountRows(_conditions) = 0, isCleared: false });
+        SetFocus(txtNodeName_3)
+
+    RootContainer_7 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Container4_7 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =1
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =1
+
+            Container12_13 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =72
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =72
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Container11_13 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =Parent.Height
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    "Breadcrumb1_6 As 'Fluent Breadcrumb (1.0.22)'.pcfdataset":
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =54
+                        Items: |-
+                            =Table(
+                                {
+                                    ItemKey: "1",
+                                    ItemDisplayName: _selectedProcess.Name,
+                                    ItemClickable: false
+                                },
+                                {
+                                    ItemKey: "2",
+                                    ItemDisplayName: _selectedStage.Name,
+                                    ItemClickable: false
+                                },{
+                                    ItemKey: "2",
+                                    ItemDisplayName:  Coalesce(_selectedNode.Name, "(New node)"),
+                                    ItemClickable: false
+                                }
+                            )
+                        Width: =433
+                        X: =15
+                        Y: =11
+                        ZIndex: =2
+
+            Container10_6 As groupContainer.horizontalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                LayoutGap: =3
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =2
+
+                Container11_14 As groupContainer.manualLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Width: =210
+                    ZIndex: =1
+
+                    "SubwayNav2_7 As 'SubwayNav (1.0.22) Preview'.pcfdataset":
+                        DisplayMode: =DisplayMode.Disabled
+                        Height: =486
+                        Items: |-
+                            =Table(
+                                { ItemKey:"1", ItemLabel:"Create Workflow", ItemState:"Completed", ItemDisabled:true },
+                                { ItemKey:"2", ItemLabel:"Create Stage", ItemState:"Completed", ItemDisabled:true },
+                                { ItemKey:"3", ItemLabel:"Create Node(Step)", ItemState:"Completed", ItemDisabled:true },
+                                { ItemKey:"4", ItemLabel:"Publish", ItemState:"NotStarted", ItemDisabled:true }
+                            )
+                        ShowAnimation: =false
+                        Theme: =AppThemeJson
+                        Width: =200
+                        WizardCompleteorError: ='PowerCAT.SubwayNav.WizardCompleteorError'.None
+                        X: =10
+                        Y: =24
+                        ZIndex: =1
+
+                recHeaderDevider_10 As rectangle:
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    DisabledFill: =RGBA(166, 166, 166, 1)
+                    Fill: =ColorValue(AppTheme.palette.neutralLight)
+                    FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                    Height: =Parent.Height - 10
+                    HoverFill: =RGBA(225, 223, 221, 1)
+                    PressedFill: =RGBA(225, 223, 221, 1)
+                    Width: =1
+                    ZIndex: =3
+
+                Container1_17 As groupContainer:
+                    Height: =Parent.Height - Self.Y
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width - Self.X
+                    ZIndex: =4
+
+                    "CommandBar2_10 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =40
+                        Items: |-
+                            =Table(
+                                /*{
+                                    ItemKey: "back",
+                                    ItemDisplayName: "Back",
+                                    ItemIconName: "NavigateBack"
+                                },{
+                                    ItemKey: "save",
+                                    ItemDisplayName: "Save",
+                                    ItemIconName: "Save"
+                                },*/
+                                {
+                                    ItemKey: "saveback",
+                                    ItemDisplayName: "Save & Back",
+                                    ItemIconName: "SaveAndClose"
+                                },{
+                                    ItemKey: "message",
+                                    ItemDisplayName: "Message",
+                                    ItemIconName: "TextDocument"
+                                },{
+                                    ItemKey: "delete",
+                                    ItemDisplayName: "Delete",
+                                    ItemIconName: "Delete"
+                                }
+                            )
+                        OnSelect: |-
+                            =If(Self.Selected.ItemKey = "back",Back(),
+                                If(Self.Selected.ItemKey = "delete",
+                                    Set(_showConfirm, true),
+                                    
+                                    UpdateContext({ busyMessage: "Saving node - " & txtNodeName_3.Text });
+                                    Set(_isBusy, true);
+                            
+                                    //save rule-based node ("Go to Stage...")
+                                    Set(_selectedNode, Patch('Business Approval Nodes', Coalesce(_selectedNode, Defaults('Business Approval Nodes')),
+                                        {
+                                            Name: txtNodeName_3.Text, Description: txtNodeDesc_3.Text, Stage: _selectedStage, Process: _selectedProcess,
+                                            'Node Type': radNodeType_3.Selected.Value, 'Go To Stage': If(ddlGoToStageNone_1.Visible, ddlGoToStageNone_1.Selected, Blank()),
+                                            'Node Condition': ddlNodeCondition_1.Selected.Value, 
+                                            Operand: 
+                                                If(ddlNodeOperand_1.Visible, ddlNodeOperand_1.Selected.Value, 
+                                                ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.Switch, 
+                                                'Business Approval Condition Operand'.'Equals (=)',Blank()),
+                                            'Source Data': If(ddlNodeSourceData_1.Visible && 
+                                                ddlNodeConditionSource_1.Selected.Value = 'Business Approval Condition Source Data'.'Request Data', 
+                                                ddlNodeSourceData_1.Selected, Blank()),
+                                            'Source Data Type': If(ddlNodeConditionSource_1.Visible, ddlNodeConditionSource_1.Selected.Value, Blank()),
+                                            'Go To Paths': radSwitchNodePaths_1.Selected.Value,
+                                            'Path Index': _currentPathIndex, 'Row Index': _currentNodeIndex
+                                        })
+                                    );
+                                    
+                                    //remove any conditions that has been removed and clear the stack
+                                    RemoveIf('Business Approval Conditions', 'Business Approval Condition' in _removedConditions.ConditionId);
+                            
+                                    //save conditions
+                                    Clear(_addedConditions);
+                                    If(CountRows(_conditions) > 0, UpdateContext({ busyMessage: "Updating Conditions..." }));
+                                    ForAll(_conditions As conds,
+                                        With({ conditionId: GUID(conds.ConditionId)},
+                                            With({ condition:  LookUp('Business Approval Conditions', 'Business Approval Condition' = conditionId) },
+                                                With({ addedCondition: 
+                                                    Patch('Business Approval Conditions', 
+                                                        Coalesce(condition, Defaults('Business Approval Conditions')),
+                                                        {
+                                                            'Path Index': conds.Path, 'Condition Data Type': conds.Target, Process: _selectedProcess,
+                                                            'Condition Data': 
+                                                                If(conds.Target = 'Business Approval Condition Target Data'.'Request Data', conds.TargetData, Blank()),
+                                                            'Condition Value': 
+                                                                If(conds.Target = 'Business Approval Condition Target Data'.'Static value', conds.StaticValue, Blank()), 
+                                                            Node: _selectedNode,
+                                                            'Go To Stage': conds.TargetStage
+                                                        }
+                                                    )},
+                                                    If(IsBlank(condition), 
+                                                        //track newly added condition
+                                                        Collect(_addedConditions, { Id: addedCondition.'Business Approval Condition', Path: addedCondition.'Path Index'})
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    );
+                            
+                                    //update in memory Condition for any newly added Condition Guids
+                                    ForAll(_addedConditions As added, UpdateIf(_conditions, Path = added.Path, { ConditionId: added.Id }));
+                            
+                                    //increment node index for any nodes after this node in this path, if exists
+                                    UpdateIf('Business Approval Nodes', 
+                                        'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                        ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                        Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                        { 'Row Index': ThisRecord.'Row Index' + 1 }
+                                    );
+                                
+                                    Set(_isBusy, false);
+                                    If(Self.Selected.ItemKey = "saveback", Navigate(scrWorkflowEditor))
+                                )
+                            );
+                        Theme: =AppThemeJson
+                        Width: =Parent.Width
+                        X: =0
+                        Y: =0
+                        ZIndex: =1
+
+                    bcProcessStage_5 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        PaddingLeft: =0
+                        Size: =10
+                        Text: =_selectedProcess.Name & " > " & _selectedStage.Name & " > " & Coalesce(_selectedNode.Name, "(New node)")
+                        Visible: =false
+                        Width: =Parent.Width - Self.X - 20
+                        Wrap: =false
+                        X: =20
+                        Y: =CommandBar2_10.Y + CommandBar2_10.Height
+                        ZIndex: =2
+
+                    lblNodeType_3 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        PaddingLeft: =12
+                        Size: =10
+                        Text: ="Node Type"
+                        Width: =120
+                        X: =bcProcessStage_5.X
+                        Y: =bcProcessStage_5.Y + bcProcessStage_5.Height + 10
+                        ZIndex: =3
+
+                    radNodeType_3 As radio:
+                        BorderColor: =RGBA(51, 51, 51, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        Default: ="Go to Stage"
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisplayMode: =If(_currentNodeIndex > 0 && IsBlank(_selectedNode), DisplayMode.Edit, DisplayMode.Disabled)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =38
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Items: =Choices('Business Approval Node Type')
+                        Layout: =Layout.Horizontal
+                        OnChange: =
+                        OnSelect: =If(Self.Selected.Value = 'Business Approval Node Type'.Approval, Navigate(scrWizardNodeEditor))
+                        PaddingBottom: =5
+                        PaddingTop: =5
+                        PressedColor: =RGBA(51, 51, 51, 1)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        RadioBorderColor: =RGBA(51, 51, 51, 1)
+                        RadioSelectionFill: =RGBA(0, 120, 212, 1)
+                        RadioSize: =25
+                        Size: =10
+                        Width: =500
+                        X: =lblNodeType_3.X + lblNodeType_3.Width
+                        Y: =lblNodeType_3.Y
+                        ZIndex: =4
+
+                    lblNodeNameCondition_1 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        PaddingLeft: =12
+                        Size: =10
+                        Text: ="Name"
+                        Width: =120
+                        X: =bcProcessStage_5.X
+                        Y: =bcProcessStage_5.Y + bcProcessStage_5.Height + 50
+                        ZIndex: =5
+
+                    txtNodeName_3 As text:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        Clear: =true
+                        Color: =RGBA(51, 51, 51, 1)
+                        Default: =_selectedNode.Name
+                        DelayOutput: =true
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        FocusedBorderThickness: =1
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        HoverBorderColor: =Self.BorderColor
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =100
+                        OnChange: =
+                        PaddingLeft: =5
+                        PressedBorderColor: =Self.BorderColor
+                        PressedColor: =RGBA(51, 51, 51, 1)
+                        PressedFill: =RGBA(255, 255, 255, 1)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =10
+                        Width: =(Parent.Width - Self.X) / 2
+                        X: =radNodeType_3.X
+                        Y: =lblNodeNameCondition_1.Y
+                        ZIndex: =6
+
+                    lblStageDesc_5 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        PaddingLeft: =12
+                        Size: =10
+                        Text: ="Description"
+                        Width: =120
+                        X: =lblNodeNameCondition_1.X
+                        Y: =lblNodeNameCondition_1.Y + lblNodeNameCondition_1.Height + 5
+                        ZIndex: =7
+
+                    txtNodeDesc_3 As text:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        Clear: =true
+                        Color: =RGBA(51, 51, 51, 1)
+                        Default: =_selectedNode.Description
+                        DelayOutput: =true
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        FocusedBorderThickness: =1
+                        Font: =Font.'Segoe UI'
+                        Height: =60
+                        HoverBorderColor: =Self.BorderColor
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =100
+                        Mode: =TextMode.MultiLine
+                        OnChange: =
+                        PaddingLeft: =5
+                        PressedBorderColor: =Self.BorderColor
+                        PressedColor: =RGBA(51, 51, 51, 1)
+                        PressedFill: =RGBA(255, 255, 255, 1)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =10
+                        Width: =(Parent.Width - Self.X) / 2
+                        X: =txtNodeName_3.X
+                        Y: =lblStageDesc_5.Y
+                        ZIndex: =8
+
+                    conNodeCondition_1 As groupContainer:
+                        Height: =Parent.Height - Self.Y
+                        Width: =Parent.Width
+                        Y: =txtNodeDesc_3.Y + txtNodeDesc_3.Height + 10
+                        ZIndex: =9
+
+                        lblNodeConditionHeader_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingLeft: =0
+                            Size: =10
+                            Text: ="Conditions"
+                            Width: =txtNodeName_3.X - Self.X
+                            Wrap: =false
+                            X: =bcProcessStage_5.X
+                            ZIndex: =1
+
+                        lblGoToStageNone_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Go to Stage"
+                            Visible: |-
+                                =ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.None || 
+                                (
+                                    ddlNodeOperand_1.Visible && 
+                                    (
+                                        ddlNodeOperand_1.Selected.Value = 'Business Approval Condition Operand'.'Is Blank' || 
+                                        ddlNodeOperand_1.Selected.Value = 'Business Approval Condition Operand'.'Is Not Blank'
+                                    )
+                                )
+                            Width: =120
+                            X: =lblNodeNameCondition_1.X
+                            Y: =If(ddlNodeOperand_1.Visible, ddlNodeOperand_1.Y, lblNodeCondition_1.Y) + lblNodeCondition_1.Height + 10
+                            ZIndex: =2
+
+                        ddlGoToStageNone_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =_selectedNode.'Go To Stage'.Name
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            HoverBorderColor: =Self.BorderColor
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: =Filter('Business Approval Stages', Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && Order > _selectedStage.Order)
+                            OnChange: =
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =Self.Color
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Visible: =lblGoToStageNone_1.Visible
+                            Width: =txtNodeName_3.Width
+                            X: =lblGoToStageNone_1.X + lblGoToStageNone_1.Width
+                            Y: =lblGoToStageNone_1.Y
+                            ZIndex: =3
+
+                        lblNodeCondition_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Condition"
+                            Width: =120
+                            X: =lblNodeNameCondition_1.X
+                            Y: =lblNodeConditionHeader_1.Y + lblNodeConditionHeader_1.Height + 10
+                            ZIndex: =4
+
+                        ddlNodeCondition_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =_selectedNode.'Node Condition'
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =If(allowUpdateConditionType, DisplayMode.Edit, DisplayMode.Disabled)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            HoverBorderColor: =Self.BorderColor
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: =['Business Approval Stage Condition'.None, 'Business Approval Stage Condition'.'If/Else'] //Choices('Business Approval Stage Condition')
+                            OnChange: |-
+                                =UpdateContext({ conditionsCount: CountRows(_conditions)});
+                                Switch(Self.Selected.Value,
+                                    'Business Approval Stage Condition'.'If/Else', 
+                                    //if there are existing conditions, remove all except the first condition
+                                    Collect(_removedConditions, 
+                                        ShowColumns(Filter(_conditions, Path > 1), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                                    );
+                                    RemoveIf(_conditions, Path > 1);
+                                    If(conditionsCount = 0, 
+                                        ClearCollect(_conditions,
+                                        { 
+                                            ConditionId: "", Path: 1, Target: 'Business Approval Condition Target Data'.'Static value', 
+                                            TargetData: Blank(), StaticValue: "", TargetStage: Defaults('Business Approval Stages')
+                                        })
+                                    );
+                                    Reset(radSwitchNodePaths_1),
+                                    
+                                    'Business Approval Stage Condition'.Switch, 
+                                    Collect(_conditions, 
+                                        ForAll(Sequence(radSwitchNodePaths_1.Selected.Value - conditionsCount, conditionsCount + 1), 
+                                        { 
+                                            ConditionId: "", Path: Value, Target: 'Business Approval Condition Target Data'.'Static value', 
+                                            TargetData: Blank(), StaticValue: "", TargetStage: Blank()
+                                        })
+                                    ),
+                                
+                                    'Business Approval Stage Condition'.None, 
+                                    //if there are any existing conditions, add them to the remove list
+                                    If(conditionsCount > 0, 
+                                        Collect(_removedConditions, ShowColumns(_conditions,  "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage"));    
+                                        Clear(_conditions)
+                                    )
+                                );
+                                Reset(ddlStageOperand)
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =Self.Color
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Width: =txtNodeDesc_3.Width
+                            X: =txtNodeName_3.X
+                            Y: =lblNodeCondition_1.Y
+                            ZIndex: =5
+
+                        imgWorkflowDiagram_3 As image:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledFill: =RGBA(0, 0, 0, 0)
+                            FocusedBorderThickness: =4
+                            Height: =If(Self.Visible, 70, 0)
+                            HoverBorderColor: =RGBA(0, 0, 0, 0)
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            Image: |
+                                ="data:image/svg+xml;utf8, " & 
+                                Switch(radSwitchNodePaths_1.Selected.Value,
+                                    3, EncodeUrl("<svg width='657' height='382' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='1718' y='254' width='657' height='382'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-1718 -254)'><path d='M1911.5 324 2048.5 257.5 2185.5 324 2048.5 390.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='1720.5' y='516.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1950.5' y='514.5' width='192' height='118' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M2048.52 390 2048.52 452.736 1816 452.736 1816 515.471' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M2048.01 390 2048.01 451.787 2046 451.787 2046 513.575' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='2181.5' y='514.5' width='191' height='118' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 61.7874 0 61.7874 228.498 123.575 228.498' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2048 390)'/></g></svg>"),
+                                    4, EncodeUrl("<svg width='907' height='384' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='551' y='760' width='907' height='384'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-551 -760)'><path d='M870.5 830 1007.5 763.5 1144.5 830 1007.5 896.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='553.5' y='1024.5' width='192' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='790.5' y='1024.5' width='192' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M1006.71 896 1006.71 959.73 649 959.73 649 1023.46' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M1006.89 896 1006.89 959.729 886 959.729 886 1023.46' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='1027.5' y='1024.5' width='192' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1264.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 63.7293 0 63.7293 352.731 127.459 352.731' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 1007 896)'/><path d='M0 0 63.7293 0 63.7293 115.918 127.459 115.918' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 1007 896)'/></g></svg>"),
+                                    5, EncodeUrl("<svg width='1144' height='374' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='1589' y='770' width='1144' height='374'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-1589 -770)'><path d='M2024.5 840 2161 773.5 2297.5 840 2161 906.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='1591.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1828.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M2160.14 906 2160.14 964.793 1686 964.793 1686 1023.59' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M2160.07 906 2160.07 964.793 1923 964.793 1923 1023.59' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='2065.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='2302.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 58.7933 0 58.7933 237.069 117.587 237.069' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2161 906)'/><path d='M0 0 58.7933 0 58.7933 0.000360892 117.586 0.000360892' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2161 906)'/><rect x='2539.5' y='1024.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M0 0 58.7934 0 58.7934 474.138 117.587 474.138' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 2161 906)'/></g></svg>"),
+                                    EncodeUrl("<svg width='522' height='386' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='hidden'><defs><clipPath id='clip0'><rect x='752' y='250' width='522' height='386'/></clipPath></defs><g clip-path='url(#clip0)' transform='translate(-752 -250)'><path d='M870.5 320.5 1007.5 253.5 1144.5 320.5 1007.5 387.5Z' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><rect x='754.5' y='516.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><rect x='1080.5' y='516.5' width='191' height='117' stroke='#000000' stroke-width='4.58333' stroke-miterlimit='8' fill='none'/><path d='M1007.36 387 1007.36 451.678 850 451.678 850 516.356' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd'/><path d='M0 0 64.6777 0 64.6777 168.735 129.355 168.735' stroke='#000000' stroke-width='2.29167' stroke-miterlimit='8' fill='none' fill-rule='evenodd' transform='matrix(1.83697e-16 1 1 -1.83697e-16 1007 387)'/></g></svg>"))
+                            PressedBorderColor: =RGBA(0, 0, 0, 0)
+                            PressedFill: =RGBA(0, 0, 0, 0)
+                            Visible: =ddlNodeCondition_1.Selected.Value <> 'Business Approval Stage Condition'.None
+                            Width: =300
+                            X: =radSwitchNodePaths_1.X
+                            Y: =radSwitchNodePaths_1.Y + radSwitchNodePaths_1.Height + 2
+                            ZIndex: =6
+
+                        radSwitchNodePaths_1 As radio:
+                            BorderColor: =RGBA(51, 51, 51, 1)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =If(Self.Visible, _selectedNode.'Go To Paths')
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisplayMode: =ddlNodeCondition_1.DisplayMode
+                            FocusedBorderThickness: =0
+                            Font: =Font.'Segoe UI'
+                            Height: =If(Self.Visible, 30, 0)
+                            HoverColor: =RGBA(51, 51, 51, 1)
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            Items: =[ 2, 3, 4, 5]
+                            Layout: =Layout.Horizontal
+                            OnChange: |
+                                =With({ count: CountRows(_conditions), newCount: radSwitchNodePaths_1.Selected.Value },
+                                    If(count > newCount, 
+                                        //new paths is less than current - remove last n conditions
+                                        //push paths that are to be removed into temp stack then remove
+                                        Collect(_removedConditions, 
+                                            ShowColumns(Filter(_conditions, Path > newCount), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                                        );
+                                        RemoveIf(_conditions, Path > newCount),
+                                
+                                        //new paths is more than current - add conditions
+                                        Collect(_conditions,
+                                            ForAll(Sequence(newCount - count, count + 1),                 
+                                                Coalesce(
+                                                    LookUp(_removedConditions, Path = Value),
+                                                    { 
+                                                        ConditionId: Blank(), TargetData: Blank(), StaticValue: "", TargetStage: Blank(),
+                                                        Path: Value, Text: "Path " & Value, Target: 'Business Approval Condition Target Data'.'Static value'
+                                                    }
+                                                )
+                                            )
+                                        );
+                                
+                                        //pop from temp stack for any conditions that has been restored back
+                                        RemoveIf(_removedConditions, Path <= newCount);
+                                    )
+                                );
+                            PaddingBottom: =0
+                            PaddingTop: =2
+                            PressedColor: =RGBA(51, 51, 51, 1)
+                            PressedFill: =RGBA(0, 0, 0, 0)
+                            RadioBorderColor: =RGBA(51, 51, 51, 1)
+                            RadioSelectionFill: =RGBA(0, 120, 212, 1)
+                            RadioSize: =25
+                            Size: =10
+                            Visible: =lblSwitchPaths_3.Visible
+                            Width: =ddlNodeCondition_1.Width - 200
+                            X: =txtNodeName_3.X
+                            Y: =lblSwitchPaths_3.Y
+                            ZIndex: =7
+
+                        lblSwitchPaths_3 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Paths"
+                            Visible: =ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.Switch
+                            Width: =120
+                            X: =lblNodeCondition_1.X
+                            Y: =lblNodeCondition_1.Y + lblNodeCondition_1.Height + 10
+                            ZIndex: =8
+
+                        lblNodeConditionSource_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Source"
+                            Visible: =ddlNodeCondition_1.Selected.Value <> 'Business Approval Stage Condition'.None && ddlNodeCondition_1.Visible
+                            Width: =120
+                            X: =lblNodeNameCondition_1.X
+                            Y: =imgWorkflowDiagram_3.Y + imgWorkflowDiagram_3.Height + 10
+                            ZIndex: =9
+
+                        ddlNodeConditionSource_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =_selectedNode.'Source Data Type'
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            HoverBorderColor: =Self.BorderColor
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: =Choices('Business Approval Condition Source Data')
+                            OnChange: =Reset(ddlNodeOperand_1)
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =Self.Color
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Visible: =lblNodeConditionSource_1.Visible
+                            Width: =txtNodeName_3.Width
+                            X: =ddlNodeCondition_1.X
+                            Y: =lblNodeConditionSource_1.Y
+                            ZIndex: =10
+
+                        lblRequestDataCondition_3 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =If(Self.Visible, 30, 0)
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Request Data"
+                            Visible: =ddlNodeConditionSource_1.Selected.Value = 'Business Approval Condition Source Data'.'Request Data' && ddlNodeConditionSource_1.Visible
+                            Width: =120
+                            X: =lblNodeNameCondition_1.X
+                            Y: =lblNodeConditionSource_1.Y + lblNodeConditionSource_1.Height + If(Self.Visible, 10, 0)
+                            ZIndex: =11
+
+                        ddlNodeSourceData_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =_selectedNode.'Source Data'.Name
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =lblRequestDataCondition_3.Height
+                            HoverBorderColor: =Self.BorderColor
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: |-
+                                =Filter(
+                                    Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                                    Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                                )
+                            OnChange: |-
+                                =UpdateIf(_conditions, true, { TargetData: Blank() }) //clear all target data value if exists
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =Self.Color
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Visible: =lblRequestDataCondition_3.Visible
+                            Width: =txtNodeName_3.Width
+                            X: =ddlNodeCondition_1.X
+                            Y: =lblRequestDataCondition_3.Y
+                            ZIndex: =12
+
+                        lblNodeRequestDataIsEmpty_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(255, 0, 0, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Fill: =RGBA(255, 255, 255, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =ddlNodeSourceData_1.Height
+                            Size: =10
+                            Text: ="No request data available. Create new request data in the process edit screen."
+                            Visible: |-
+                                =IsEmpty(
+                                    Filter(
+                                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                                    )
+                                ) && ddlNodeConditionSource_1.Visible && 
+                                ddlNodeConditionSource_1.Selected.Value = 'Business Approval Condition Source Data'.'Request Data'
+                            Width: =ddlNodeSourceData_1.Width
+                            X: =ddlNodeSourceData_1.X
+                            Y: =ddlNodeSourceData_1.Y
+                            ZIndex: =13
+
+                        galNodeConditions_1 As gallery.galleryVertical:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            Height: =150
+                            Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
+                            Layout: =Layout.Vertical
+                            TemplatePadding: =0
+                            TemplateSize: =150
+                            Visible: =CountRows(Self.AllItems) > 0 && ddlNodeOperand_1.Selected.Value <> 'Business Approval Condition Operand'.'Is Blank' && ddlNodeOperand_1.Selected.Value <> 'Business Approval Condition Operand'.'Is Not Blank'
+                            Width: |-
+                                =If(ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.'If/Else',
+                                    txtNodeName_3.Width,
+                                    Parent.Width - Self.X - 20
+                                )
+                            WrapCount: =CountRows(Self.AllItems)
+                            X: =If(ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.'If/Else', txtNodeName_3.X, lblNodeNameCondition_1.X)
+                            Y: =lblNodeOperand_1.Y + lblNodeOperand_1.Height + 10
+                            ZIndex: =14
+
+                            Rectangle3_3 As rectangle:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                DisplayMode: =DisplayMode.Disabled
+                                Fill: =RGBA(230, 230, 230, 1)
+                                FocusedBorderThickness: =4
+                                Height: =Parent.TemplateHeight
+                                HoverFill: =RGBA(105, 121, 126, 1)
+                                OnSelect: =Select(Parent)
+                                PressedFill: =RGBA(105, 121, 126, 1)
+                                Width: =Parent.TemplateWidth - 2
+                                ZIndex: =1
+
+                            lblGoToStage_1 As label:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                Size: =9
+                                Text: ="Go to Stage"
+                                Visible: =!lblNodeTargetRequestDataNotFound_1.Visible
+                                Width: =80
+                                X: =txtTargetStatic_3.X
+                                Y: =txtTargetStatic_3.Y + txtTargetStatic_3.Height + 5
+                                ZIndex: =2
+
+                            ddlTargetStage_1 As dropdown:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(255, 255, 255, 1)
+                                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                                ChevronFill: =RGBA(33, 33, 33, 1)
+                                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =ThisItem.TargetStage.Name
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =1
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverFill: =RGBA(243, 242, 241, 1)
+                                Items: =Filter('Business Approval Stages', Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && Order > _selectedStage.Order)
+                                OnChange: |-
+                                    =Patch(_conditions, ThisItem, { TargetStage: ddlTargetStage_1.Selected })
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                PressedFill: =Self.HoverFill
+                                SelectionColor: =Self.Color
+                                SelectionFill: =RGBA(243, 242, 241, 1)
+                                Size: =10
+                                Visible: =!lblNodeTargetRequestDataNotFound_1.Visible
+                                Width: =ddlConditionTarget_3.Width - lblGoToStage_1.Width
+                                X: =lblGoToStage_1.X + lblGoToStage_1.Width
+                                Y: =lblGoToStage_1.Y
+                                ZIndex: =3
+
+                            lblConditionTarget_3 As label:
+                                Align: =Align.Center
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                PaddingLeft: =12
+                                Size: =9
+                                Text: |-
+                                    ="If " & 
+                                        If(ddlNodeSourceData_1.Visible, ddlNodeSourceData_1.Selected.Name, ddlNodeConditionSource_1.Selected.Value) & " " &
+                                        ddlNodeOperand_1.Selected.Value
+                                Width: =Parent.TemplateWidth
+                                X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                                Y: =5
+                                ZIndex: =4
+
+                            ddlConditionTarget_3 As dropdown:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(255, 255, 255, 1)
+                                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                                ChevronFill: =RGBA(33, 33, 33, 1)
+                                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =ThisItem.Target
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =1
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverFill: =RGBA(243, 242, 241, 1)
+                                Items: =Choices('Business Approval Condition Target Data')
+                                OnChange: |
+                                    =If(Self.Selected.Value = 'Business Approval Condition Target Data'.'Request Data',
+                                        Patch(_conditions, ThisItem, 
+                                            { Target: Self.Selected.Value, TargetData: ddlNodeTargetRequestData_1.Selected, TargetStage: ddlTargetStage_1.Selected, StaticValue: Blank() }
+                                        ),
+                                        Patch(_conditions, ThisItem,
+                                            { Target: Self.Selected.Value, TargetData: Blank(), TargetStage: ddlTargetStage_1.Selected }
+                                        )
+                                    )
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                PressedFill: =Self.HoverFill
+                                SelectionColor: =Self.Color
+                                SelectionFill: =RGBA(243, 242, 241, 1)
+                                Size: =10
+                                Width: =Min(txtNodeName_3.Width, Parent.TemplateWidth - 20)
+                                X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                                Y: =lblConditionTarget_3.Y + lblConditionTarget_3.Height
+                                ZIndex: =5
+
+                            ddlNodeTargetRequestData_1 As dropdown:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(255, 255, 255, 1)
+                                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                                ChevronFill: =RGBA(33, 33, 33, 1)
+                                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =ThisItem.TargetData.Name
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =1
+                                Font: =Font.'Segoe UI'
+                                Height: =If(Self.Visible, 30, 0)
+                                HoverBorderColor: =Self.BorderColor
+                                HoverFill: =RGBA(243, 242, 241, 1)
+                                Items: |-
+                                    =Filter(
+                                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 
+                                        'Business Approval Data' <> ddlNodeSourceData_1.Selected.'Business Approval Data' &&
+                                        'Data Type' = ddlNodeSourceData_1.Selected.'Data Type'
+                                    )
+                                OnChange: |-
+                                    =Patch(_conditions, ThisItem, { TargetData: Self.Selected, StaticValue: Blank(), TargetStage: ddlTargetStage_1.Selected })
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                PressedFill: =Self.HoverFill
+                                SelectionColor: =Self.Color
+                                SelectionFill: =RGBA(243, 242, 241, 1)
+                                Size: =10
+                                Visible: =ddlConditionTarget_3.Selected.Value = 'Business Approval Condition Target Data'.'Request Data'
+                                Width: =ddlConditionTarget_3.Width
+                                X: =ddlConditionTarget_3.X
+                                Y: =ddlConditionTarget_3.Y + ddlConditionTarget_3.Height + 10
+                                ZIndex: =6
+
+                            lblNodeTargetRequestDataNotFound_1 As label:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                Fill: =RGBA(230, 230, 230, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =ddlNodeTargetRequestData_1.Height
+                                OnSelect: =Select(Parent)
+                                Size: =10
+                                Text: ="No other data field found of similar data type for " & ddlNodeSourceData_1.Selected.Name & " (" & ddlNodeSourceData_1.Selected.'Data Type' & ")"
+                                Visible: |-
+                                    =With({ conditionData: Filter(
+                                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 
+                                        'Business Approval Data' <> ddlNodeSourceData_1.Selected.'Business Approval Data' &&
+                                        'Data Type' = ddlNodeSourceData_1.Selected.'Data Type'
+                                    )},
+                                        ddlNodeTargetRequestData_1.Visible && IsEmpty(conditionData)
+                                    )
+                                Width: =ddlNodeTargetRequestData_1.Width
+                                X: =ddlNodeTargetRequestData_1.X
+                                Y: =ddlNodeTargetRequestData_1.Y
+                                ZIndex: =7
+
+                            txtTargetStatic_3 As text:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                Clear: =true
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =ThisItem.StaticValue
+                                DelayOutput: =true
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =1
+                                Font: =Font.'Segoe UI'
+                                Format: =If(ddlNodeSourceData_1.Selected.'Data Type' = 'Business Approval Data Type'.Number, TextFormat.Number, TextFormat.Text)
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverColor: =RGBA(51, 51, 51, 1)
+                                HoverFill: =RGBA(255, 255, 255, 1)
+                                MaxLength: =100
+                                OnChange: |-
+                                    =Patch(_conditions, ThisItem, { StaticValue: Self.Text, TargetData: Blank(), TargetStage: ddlTargetStage_1.Selected })
+                                PaddingLeft: =5
+                                PressedBorderColor: =Self.BorderColor
+                                PressedColor: =RGBA(51, 51, 51, 1)
+                                PressedFill: =RGBA(255, 255, 255, 1)
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =10
+                                Visible: =!ddlNodeTargetRequestData_1.Visible
+                                Width: =ddlConditionTarget_3.Width
+                                X: =ddlConditionTarget_3.X
+                                Y: =ddlConditionTarget_3.Y + ddlConditionTarget_3.Height + 10
+                                ZIndex: =8
+
+                        lblNodeOperand_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =If(Self.Visible, 30, 0)
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Operand"
+                            Visible: =lblNodeConditionSource_1.Visible && ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.'If/Else'
+                            Width: =120
+                            X: =lblNodeNameCondition_1.X
+                            Y: =lblRequestDataCondition_3.Y + lblRequestDataCondition_3.Height + 10
+                            ZIndex: =15
+
+                        ddlNodeOperand_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: |-
+                                =If(IsBlank(_selectedNode.Operand) || ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.Switch || ddlNodeConditionSource_1.Selected.Value = 'Business Approval Condition Source Data'.'Previous Node Outcome',
+                                    'Business Approval Condition Operand'.'Equals (=)', 
+                                    _selectedNode.Operand
+                                )
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: |-
+                                =If(
+                                    ddlNodeCondition_1.Selected.Value = 'Business Approval Stage Condition'.Switch ||
+                                    ddlNodeConditionSource_1.Selected.Value = 'Business Approval Condition Source Data'.'Previous Node Outcome' ||
+                                    lblNodeRequestDataIsEmpty_1.Visible, 
+                                    DisplayMode.Disabled, DisplayMode.Edit
+                                )
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =If(Self.Visible, 30, 0)
+                            HoverBorderColor: =Self.BorderColor
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: |-
+                                =If(ddlNodeConditionSource_1.Selected.Value = 'Business Approval Condition Source Data'.'Request Data',
+                                    LookUp(_operands, ddlNodeSourceData_1.Selected.'Data Type' in type).operands,
+                                        [ 'Business Approval Condition Operand'.'Equals (=)' ]
+                                )
+                            OnChange: |-
+                                =If(Self.Selected.Value = 'Business Approval Condition Operand'.'Is Blank' || 
+                                Self.Selected.Value = 'Business Approval Condition Operand'.'Is Not Blank', 
+                                    Patch(_conditions, First(_conditions), { StaticValue: ""})
+                                )
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =Self.Color
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Visible: =lblNodeOperand_1.Visible
+                            Width: =txtNodeName_3.Width
+                            X: =ddlNodeCondition_1.X
+                            Y: =lblNodeOperand_1.Y
+                            ZIndex: =16
+
+                        btnResetNodeConditions_1 As button:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            Fill: =RGBA(105, 121, 126, 1)
+                            FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            HoverBorderColor: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(255, 255, 255, 1)
+                            HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
+                            OnSelect: |-
+                                =If(Self.Text = "Edit",
+                                    //saves current condition in memory
+                                    ClearCollect(_savedConditions, _conditions);
+                                    UpdateContext({ allowUpdateConditionType: true, isCleared: true }),
+                                
+                                    //restore saved conditions back from memory
+                                    ClearCollect(_conditions, _savedConditions);
+                                    Clear(_savedConditions);
+                                    Reset(ddlNodeCondition_1);
+                                    UpdateContext({ allowUpdateConditionType: false, isCleared: false })
+                                )
+                            PressedBorderColor: =ColorFade(RGBA(105, 121, 126, 1), -50%)
+                            PressedColor: =RGBA(255, 255, 255, 1)
+                            PressedFill: =ColorFade(RGBA(105, 121, 126, 1), -30%)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =10
+                            Text: =If(isCleared, "Reset", "Edit")
+                            Visible: =(!allowUpdateConditionType || isCleared) && _currentNodeIndex > 1
+                            Width: =90
+                            X: =ddlNodeCondition_1.X + ddlNodeCondition_1.Width + 20
+                            Y: =ddlNodeCondition_1.Y
+                            ZIndex: =17
+
+                        lblResetConditions_3 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Lighter
+                            Height: =30
+                            PaddingLeft: =0
+                            Size: =10
+                            Text: ="Currently editing a node with Conditions defined. To change condition type, click 'Edit' to change existing definitions. You can 'Reset' to undo."
+                            Visible: =btnResetNodeConditions_1.Visible
+                            Width: =Parent.Width - Self.X - 20
+                            X: =txtNodeName_3.X
+                            Y: =lblNodeConditionHeader_1.Y
+                            ZIndex: =18
+
+                    ConfirmDialog_9 As ConfirmDialog:
+                        ConfirmText: ="Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?"
+                        Height: =Parent.Height
+                        OnClick: |-
+                            =If(IsConfirmed,
+                                UpdateContext({ busyMessage: "Deleting node - " & _selectedNode.Name });
+                                Set(_isBusy, true);
+                                
+                                Concurrent(
+                                    //remove the node 
+                                    Remove('Business Approval Nodes', _selectedNode),
+                            
+                                    //remove any conditions
+                                    RemoveIf('Business Approval Conditions', Node.'Business Approval Node' = _selectedNode.'Business Approval Node')
+                                );
+                                
+                                Set(_selectedNode, Blank());
+                                Set(_isBusy, false);
+                                Set(_showConfirm, false);
+                                Back(),
+                                Set(_showConfirm, false)
+                            )
+                        Visible: =_showConfirm
+                        Width: =Parent.Width
+                        ZIndex: =10
+
+                    BusyScreen_9 As BusyScreen:
+                        BusyMessage: =busyMessage
+                        Fill: =RGBA(255, 255, 255, 0.8)
+                        Height: =Parent.Height
+                        Visible: =_isBusy
+                        Width: =Parent.Width
+                        ZIndex: =11
+
+            Container12_14 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =72
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =12
+                LayoutMinHeight: =72
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                ZIndex: =3
+
+                btnBack_9 As Button:
+                    BorderColor: =ColorValue(AppTheme.palette.neutralPrimary)
+                    BorderRadius: =2
+                    BorderStyle: =BorderStyle.Solid
+                    BorderThickness: =1
+                    ButtonType: ='Button.ButtonType'.Standard
+                    DisplayMode: =DisplayMode.Edit
+                    FillColor: =ColorValue(AppTheme.palette.white)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: =Back()
+                    Text: ="Back"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                btnNext_9 As Button:
+                    BorderRadius: =2
+                    ButtonType: ='Button.ButtonType'.Primary
+                    DisplayMode: =
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: =
+                    Text: ="Publish"
+                    Visible: =true
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+

@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovalpublicholidayses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprovalpublicholidays",
+    "Name": "Business Approval Public Holidays",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_businessapprovalpublicholidays_AsyncOperations": "System Jobs",
+      "cat_businessapprovalpublicholidays_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapprovalpublicholidays_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalpublicholidays_DuplicateBaseRecord)",
+      "cat_businessapprovalpublicholidays_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprovalpublicholidays_DuplicateMatchingRecord)",
+      "cat_businessapprovalpublicholidays_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprovalpublicholidays_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprovalpublicholidays_ProcessSession": "Process Sessions",
+      "cat_businessapprovalpublicholidays_SyncErrors": "Sync Errors",
+      "cat_businessapprovalpublicholidaysid": "Business Approval Public Holidays",
+      "cat_Calendar": "Calendar",
+      "cat_date": "Date",
+      "cat_name": "Name",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approval Public Holidays",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approval Public Holidays (Views)",
+    "Name": "_cat_businessapprovalpublicholidays_views",
+    "RelatedEntityName": "Business Approval Public Holidays",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "341fb646-98d1-4466-b5dd-cab07405a869": "Business Approval Public Holidays Associated View",
+      "6ef26764-6966-4f5c-aec7-fdefbcd2837e": "Active Business Approval Public Holidays",
+      "ac7d7eee-a473-45cd-9a5b-dab11e535deb": "Business Approval Public Holidays Advanced Find View",
+      "b2891982-6150-494a-92e9-e3fd4547fbc2": "Business Approval Public Holidays Lookup View",
+      "f7835725-dc68-434f-a47a-fc006b8e34b9": "Inactive Business Approval Public Holidays"
+    }
+  },
+  {
+    "DisplayName": "Status (Business Approval Public Holidays)",
+    "Name": "cat_businessapprovalpublicholidays_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approval Public Holidays"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approval Public Holidays",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approval Public Holidays)",
+    "Name": "cat_businessapprovalpublicholidays_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approval Public Holidays"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Public Holidays",
+    "Type": "OptionSetInfo"
+  }
+]

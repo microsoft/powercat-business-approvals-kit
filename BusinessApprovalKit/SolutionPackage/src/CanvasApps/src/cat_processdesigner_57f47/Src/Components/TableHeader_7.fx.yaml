@@ -1,0 +1,113 @@
+TableHeader_7 As CanvasComponent:
+    ColumnOnClick(Column As String, SortAsc As Boolean):
+        Column:
+            Default: ="Text"
+        SortAsc:
+            Default: =true
+        ThisProperty:
+            Default: ="Text"
+    Columns: |-
+        =Table(
+            { Index: 1, Text: "Process Name", Column: "Name", Width: 180, Offset: 0, EnableSort: true },    
+            { Index: 2, Text: "Category", Column: "Category", Width: 150, Offset: 0, EnableSort: true },
+            { Index: 3, Text: "Modified By", Column: "Modified", Width: 120, Offset: -30, EnableSort: false },
+            { Index: 4, Text: "Modified On", Column: "ModifiedOn", Width: 120, Offset: -90, EnableSort: true }
+        )
+    DefaultSortColumn: ="ModifiedOn"
+    EnableSort: =true
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =32
+    OnReset: |-
+        =Set(_sortColumn, Blank());
+        Set(_sortAsc, true)
+    SortColumn_Column: ="Text"
+    SortColumn_SortAsc: =true
+    Visible: =true
+    Width: =800
+    X: =0
+    Y: =0
+    ZIndex: =3
+
+    Gallery2_4 As gallery.galleryHorizontal:
+        AccessibleLabel: ="Table headers"
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Height: =Parent.Height - Rectangle1_4.Height
+        Items: =Parent.Columns
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =Max(TableHeader_7.Columns, Width) + 2
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Button1_4 As button:
+            Align: =Align.Left
+            BorderColor: =RGBA(230, 230, 230, 1)
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(244, 244, 244, 1)
+            DisplayMode: =If(TableHeader_7.EnableSort, DisplayMode.Edit, DisplayMode.View)
+            Fill: =RGBA(0, 0, 0, 0)
+            FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+            FocusedBorderThickness: =0
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =Parent.TemplateHeight
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =RGBA(225, 223, 221, 1)
+            OnSelect: |-
+                =Set(_sortAsc, !_sortAsc);
+                Set(_sortColumn, ThisItem.Column);
+                TableHeader_7.ColumnOnClick(ThisItem.Column, _sortAsc)
+            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -50%)
+            PressedColor: =Self.Color
+            PressedFill: =Self.HoverFill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Text: =ThisItem.Text
+            Width: =ThisItem.Width
+            X: =ThisItem.Offset
+            ZIndex: =1
+
+        Icon2_4 As icon.ArrowUp:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(220, 220, 220, 1)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: =DisplayMode.View
+            FocusedBorderThickness: =4
+            Height: =30
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Icon: =If(_sortAsc, Icon.ArrowDown, Icon.ArrowUp)
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =5
+            PaddingRight: =5
+            PaddingTop: =10
+            PressedBorderColor: =RGBA(0, 0, 0, 0)
+            PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            Visible: =ThisItem.EnableSort && TableHeader_7.EnableSort && ThisItem.Column = Coalesce(_sortColumn, TableHeader_7.DefaultSortColumn)
+            Width: =20
+            X: =Button1_4.X + Button1_4.Width - Self.Width
+            ZIndex: =2
+
+    Rectangle1_4 As rectangle:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisplayMode: =DisplayMode.Disabled
+        Fill: =RGBA(225, 223, 221, 1)
+        FocusedBorderThickness: =4
+        Height: =4
+        PressedFill: =RGBA(0, 120, 212, 1)
+        Width: =Parent.Width
+        Y: =30
+        ZIndex: =2
+

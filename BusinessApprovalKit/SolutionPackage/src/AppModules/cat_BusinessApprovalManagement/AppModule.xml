@@ -6,6 +6,7 @@
   <OptimizedFor></OptimizedFor>
   <statecode>0</statecode>
   <statuscode>1</statuscode>
+  <WelcomePageId>1c3e75bb-ef33-44d2-b0d8-139587cbe1f1</WelcomePageId>
   <FormFactor>1</FormFactor>
   <ClientType>4</ClientType>
   <NavigationType>0</NavigationType>
@@ -62,12 +63,33 @@
       <iscustomizable>1</iscustomizable>
       <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_businessapprovaloverridecustompage_c87bd</name>
     </appelement>
+    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_homepage_96ece">
+      <canvasappid>
+        <name>cat_homepage_96ece</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_homepage_96ece</name>
+    </appelement>
+    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_homepagereimagined_709bf">
+      <canvasappid>
+        <name>cat_homepagereimagined_709bf</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_homepagereimagined_709bf</name>
+    </appelement>
     <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesigner_57f47">
       <canvasappid>
         <name>cat_processdesigner_57f47</name>
       </canvasappid>
       <iscustomizable>1</iscustomizable>
       <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_processdesigner_57f47</name>
+    </appelement>
+    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_settings_3ada8">
+      <canvasappid>
+        <name>cat_settings_3ada8</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_settings_3ada8</name>
     </appelement>
   </appelements>
   <appsettings>

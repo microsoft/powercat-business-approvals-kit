@@ -47,13 +47,216 @@
         }
       },
       "actions": {
-        "Compose": {
+        "Parse_RuntimeData_JSON": {
           "runAfter": {},
           "metadata": {
-            "operationMetadataId": "e6cef020-1c8a-4e7b-8da1-58b153747972"
+            "operationMetadataId": "909c0e9d-4b04-4cf7-94b2-21d7116d7e9f"
           },
-          "type": "Compose",
-          "inputs": "Test"
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@triggerOutputs()?['body/cat_runtimedata']",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "value"
+                ]
+              }
+            }
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@body('Parse_RuntimeData_JSON')",
+          "actions": {
+            "Condition": {
+              "actions": {
+                "Create_Workflow_Parameters": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "461d2827-78bf-4321-806e-8ff818c3a6bd"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovaldatainstances",
+                      "item/cat_datavalue": "@items('Apply_to_each')['value']",
+                      "item/cat_RuntimeData@odata.bind": "cat_businessapprovalruntimedatas(@{items('Apply_to_each')['id']})",
+                      "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Create_new_Workflow_Instance')?['body/cat_businessapprovalworkflowid']})"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {},
+              "expression": {
+                "not": {
+                  "equals": [
+                    "@items('Apply_to_each')['id']",
+                    "additionalinformation"
+                  ]
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Create_new_Workflow_Instance": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "afbeae88-2f33-4232-ba47-1464b3482f38"
+          },
+          "type": "Foreach",
+          "description": "Iterate through each process field data and create data instance"
+        },
+        "Create_new_Workflow_Instance": {
+          "runAfter": {
+            "Apply_to_each_": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d06def27-8fcf-46d6-84bd-fca5a9b93e6f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "CreateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalworkflows",
+              "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{outputs('Get_Business_Approval_version_record')?['body/cat_businessapprovalversionid']})",
+              "item/cat_additionalinformation": "@variables('var_AdditionalInformation')"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Business_Approval_Published_WF_record": {
+          "runAfter": {
+            "Parse_RuntimeData_JSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9419cc42-c3d1-443f-b7ee-8f8b6ec31027"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalpublishedworkflows",
+              "recordId": "@triggerOutputs()?['body/cat_processid']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Business_Approval_version_record": {
+          "runAfter": {
+            "Get_Business_Approval_Published_WF_record": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "2e097b32-59dc-4b41-b1ad-a5fb05102153"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalversions",
+              "recordId": "@outputs('Get_Business_Approval_Published_WF_record')?['body/_cat_activeversion_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialize_variable": {
+          "runAfter": {
+            "Get_Business_Approval_version_record": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c1c5d2e4-4dd9-4e03-be63-5d47aaa9fd91"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "var_AdditionalInformation",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Apply_to_each_": {
+          "foreach": "@body('Parse_RuntimeData_JSON')",
+          "actions": {
+            "Condition_2": {
+              "actions": {
+                "Set_Additonal_Information_value": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "769aaf5c-8811-4b1d-982a-538045753ddb"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "var_AdditionalInformation",
+                    "value": "@items('Apply_to_each_')['value']"
+                  }
+                }
+              },
+              "runAfter": {},
+              "expression": {
+                "equals": [
+                  "@items('Apply_to_each_')['id']",
+                  "additionalinformation"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "afbeae88-2f33-4232-ba47-1464b3482f38"
+          },
+          "type": "Foreach",
+          "description": "Iterate through each process field data and create data instance"
         }
       }
     },

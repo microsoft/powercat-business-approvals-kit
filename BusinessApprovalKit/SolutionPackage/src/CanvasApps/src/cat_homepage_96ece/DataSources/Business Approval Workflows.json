@@ -1,0 +1,139 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapprovalworkflows",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapprovalworkflow",
+    "MaxGetRowsCount": 500,
+    "Name": "Business Approval Workflows",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_additionalinformation": "Additional Information",
+      "cat_BusinessApprovalDataInstance_Workflow": "Business Approval Data Instances",
+      "cat_BusinessApprovalInstance_WorkflowInst": "Business Approval Instances",
+      "cat_BusinessApprovalRuntimeNodeInstance_W": "Business Approval Runtime Node Instances",
+      "cat_BusinessApprovalRuntimeStageInstance_": "Business Approval Runtime Stage Instances",
+      "cat_businessapprovalworkflow_AsyncOperations": "System Jobs",
+      "cat_businessapprovalworkflow_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapprovalworkflow_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalworkflow_DuplicateBaseRecord)",
+      "cat_businessapprovalworkflow_DuplicateMatchingRecord": "Duplicate Records (cat_businessapprovalworkflow_DuplicateMatchingRecord)",
+      "cat_businessapprovalworkflow_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapprovalworkflow_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapprovalworkflow_ProcessSession": "Process Sessions",
+      "cat_businessapprovalworkflow_SyncErrors": "Sync Errors",
+      "cat_businessapprovalworkflowid": "Business Approval Workflow",
+      "cat_cat_businessapprovalinstancelog_WorkflowI": "Business Approval Instance Logs",
+      "cat_cat_businessapprovalruntimeexception_Work": "Business Approval Runtime Exceptions",
+      "cat_correlationid": "Correlation Id",
+      "cat_instancestatus": "Instance Status",
+      "cat_name": "Name",
+      "cat_ProcessVersion": "Process Version",
+      "cat_version": "Process Version Number",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approval Workflows",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approval Workflows (Views)",
+    "Name": "_cat_businessapprovalworkflow_views",
+    "RelatedEntityName": "Business Approval Workflows",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "14e54460-a58f-4f37-afdc-db4cd464e49b": "Business Approval Workflow Lookup View",
+      "186099a4-43da-ec11-a7b5-0022486dca48": "Completed Workflow Instances",
+      "2f666561-9962-48ba-b848-a07cee7b785b": "Active Business Approval Workflows",
+      "95fb398b-50ab-425b-b3f8-9be81e34d11a": "Business Approval Workflow Advanced Find View",
+      "b2150e3c-43da-ec11-a7b5-0022486d9d1f": "Running Workflow Instances",
+      "bd929111-8284-414b-af1f-dd84f880e22e": "Business Approval Workflow Associated View",
+      "f7498d9c-ef07-4e19-9e4a-27b7677f8fdd": "Inactive Business Approval Workflows"
+    }
+  },
+  {
+    "DisplayName": "Business Approval Instance Status",
+    "Name": "cat_bizappr_instancestatus",
+    "OptionSetInfoNameMapping": {
+      "809060000": "New",
+      "809060001": "Running",
+      "809060002": "Completed",
+      "809060003": "Suspended",
+      "809060004": "Canceled",
+      "809060005": "Timed Out",
+      "809060006": "Error"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_instancestatus",
+        "OptionSetReferenceEntityName": "Business Approval Workflows"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "cat_instancestatus",
+        "OptionSetReferenceEntityName": "Business Approval Instances"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_instancestatus",
+    "RelatedEntityName": "Business Approval Workflows",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Business Approval Workflows)",
+    "Name": "cat_businessapprovalworkflow_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approval Workflows"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approval Workflows",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approval Workflows)",
+    "Name": "cat_businessapprovalworkflow_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approval Workflows"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Workflows",
+    "Type": "OptionSetInfo"
+  }
+]

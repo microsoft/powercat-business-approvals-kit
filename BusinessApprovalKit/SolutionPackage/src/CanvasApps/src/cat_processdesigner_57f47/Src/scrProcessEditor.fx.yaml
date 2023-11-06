@@ -1112,7 +1112,7 @@ scrProcessEditor As screen:
             PaddingTop: =5
             SelectedDateFill: =RGBA(105, 121, 126, 1)
             Size: =10
-            Visible: =ddlDataType.Selected.Value = 'Business Approval Data Type'.'Date/Time'
+            Visible: =ddlDataType.Selected.Value = 'Business Approval Data Type'.Date
             Width: =txtAppDataDefault.Width - If(!IsBlank(varAppDataItem.'Default Value'), 30, 0)
             X: =txtAppDataDefault.X
             Y: =txtAppDataDefault.Y
@@ -1235,7 +1235,7 @@ scrProcessEditor As screen:
                         'Default Value': 
                             Switch(ddlDataType.Selected.Value,
                                 'Business Approval Data Type'.Boolean, ddlAppDataDefault.Selected.Value,
-                                'Business Approval Data Type'.'Date/Time', Text(dtAppDataDefault.SelectedDate, "dd mmm yyyy"), 
+                                'Business Approval Data Type'.Date, Text(dtAppDataDefault.SelectedDate, "dd mmm yyyy"), 
                                 txtAppDataDefault.Text
                             ), 
                         Description: txtAppDataDesc.Text,
@@ -1498,15 +1498,7 @@ scrProcessEditor As screen:
                 Set(_showConfirm, false);
             Visible: =_showConfirm
             Width: =Parent.Width
-            ZIndex: =17
-
-        BusyScreen_1 As BusyScreen:
-            BusyMessage: =busyMessage
-            Fill: =RGBA(255, 255, 255, 0.8)
-            Height: =Parent.Height
-            Visible: =_isBusy
-            Width: =Parent.Width
-            ZIndex: =18
+            ZIndex: =16
 
         "CommandBar2_4 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
@@ -1552,7 +1544,15 @@ scrProcessEditor As screen:
             Width: =Parent.Width
             X: =0
             Y: =0
-            ZIndex: =19
+            ZIndex: =17
+
+        BusyScreen_1 As BusyScreen:
+            BusyMessage: =busyMessage
+            Fill: =RGBA(255, 255, 255, 0.8)
+            Height: =Parent.Height
+            Visible: =_isBusy
+            Width: =Parent.Width
+            ZIndex: =18
 
     Button2 As Button:
         DisplayMode: =DisplayMode.Edit

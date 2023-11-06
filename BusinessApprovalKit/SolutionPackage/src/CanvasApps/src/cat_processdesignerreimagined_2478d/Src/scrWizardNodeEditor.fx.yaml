@@ -1,0 +1,1311 @@
+scrWizardNodeEditor As screen:
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: |
+        =//cache operands if not already available
+        If(IsEmpty(_operands),
+            ClearCollect(_operands, 
+                { 
+                    operands: [
+                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                        'Business Approval Condition Operand'.'Starts With', 'Business Approval Condition Operand'.'Ends With',
+                        'Business Approval Condition Operand'.Contains, 'Business Approval Condition Operand'.'Is Blank',
+                        'Business Approval Condition Operand'.'Is Not Blank'
+                    ],
+                    type: [ 'Business Approval Data Type'.Text, 'Business Approval Data Type'.'User (Email)' ]
+                },
+                { 
+                    operands: [
+                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Less Than (<)',
+                        'Business Approval Condition Operand'.'Less Than or Equals (<=)', 'Business Approval Condition Operand'.'Greater Than (>)',
+                        'Business Approval Condition Operand'.'Greater Than or Equals (>=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                        'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
+                    ],
+                    type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.Date ]
+                },
+                { 
+                    operands: [
+                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                        'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
+                    ],
+                    type: [ 'Business Approval Data Type'.Boolean ]
+                }
+            )
+        );
+        
+        //load approvers for Node edit
+        If(!IsBlank(_selectedNode),
+            ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending))
+        );
+        
+        //check if this is on a parallel path, disable conditional nodes if it is
+        UpdateContext({ isParallelPath:
+            !IsBlank(
+                LookUp('Business Approval Conditions', Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage' && 
+                'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes && 'Path Index' = _currentPathIndex)
+            )
+        });
+        
+        SetFocus(txtNodeName_2);
+
+    RootContainer_3 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Container4_3 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =1
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =1
+
+            Container12_5 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =72
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =72
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Container11_5 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0
+                    Height: =Parent.Height
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    "Breadcrumb1_2 As 'Fluent Breadcrumb (1.0.22)'.pcfdataset":
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =54
+                        Items: |+
+                            =Table(
+                                {
+                                    ItemKey: "1",
+                                    ItemDisplayName: _selectedProcess.Name ,
+                                    ItemClickable: true
+                                },
+                                {
+                                    ItemKey: "2",
+                                    ItemDisplayName: _selectedStage.Name,
+                                    ItemClickable: true
+                                },
+                                {
+                                    ItemKey: "2",
+                                    ItemDisplayName: Coalesce(_selectedNode.Name, "(New node)"),
+                                    ItemClickable: true
+                                }
+                            )
+                            
+                        Width: =433
+                        X: =15
+                        Y: =11
+                        ZIndex: =2
+
+            Container10_2 As groupContainer.horizontalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                LayoutGap: =3
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =2
+
+                Container11_6 As groupContainer.manualLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Width: =210
+                    ZIndex: =1
+
+                    "SubwayNav2_3 As 'SubwayNav (1.0.22) Preview'.pcfdataset":
+                        DisplayMode: =DisplayMode.Disabled
+                        Height: =486
+                        Items: |-
+                            =Table(
+                                { ItemKey:"workflow", ItemLabel:"Create Workflow", ItemState:"Completed" },
+                                { ItemKey:"2", ItemLabel:"Create Stages & Nodes", ItemState:"Current" },
+                                /*{ ItemKey:"3", ItemLabel:"Create Nodes(Steps)", ItemState:"Current" },*/
+                                { ItemKey:"4", ItemLabel:"Publish", ItemState:"Unsaved" }
+                            )
+                        ShowAnimation: =false
+                        Theme: =AppThemeJson
+                        Width: =200
+                        X: =10
+                        Y: =24
+                        ZIndex: =1
+
+                recHeaderDevider_6 As rectangle:
+                    AlignInContainer: =AlignInContainer.Start
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    DisabledFill: =RGBA(166, 166, 166, 1)
+                    Fill: =ColorValue(AppTheme.palette.neutralLight)
+                    FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                    Height: =Parent.Height - 10
+                    HoverFill: =RGBA(225, 223, 221, 1)
+                    PressedFill: =RGBA(225, 223, 221, 1)
+                    Width: =1
+                    ZIndex: =3
+
+                Container1_12 As groupContainer:
+                    Height: =Parent.Height - Self.Y
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    Width: =Parent.Width - Self.X
+                    ZIndex: =4
+
+                    "CommandBar2_6 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =40
+                        Items: |-
+                            =Table(
+                                {
+                                    ItemKey: "save",
+                                    ItemDisplayName: "Save",
+                                    ItemIconName: "Save"
+                                },{
+                                    ItemKey: "saveback",
+                                    ItemDisplayName: "Save & Add stage",
+                                    ItemIconName: "SaveAndClose"
+                                }/*,{
+                                    ItemKey: "message",
+                                    ItemDisplayName: "Message",
+                                    ItemIconName: "TextDocument"
+                                }*/,{
+                                    ItemKey: "delete",
+                                    ItemDisplayName: "Delete",
+                                    ItemIconName: "Delete"
+                                }
+                            )
+                        OnSelect: |-
+                            =If(Self.Selected.ItemKey = "back",Back(),
+                                If(Self.Selected.ItemKey = "delete",
+                                    Set(_showConfirm, true),
+                            
+                                    //if not Delete    
+                                    UpdateContext({ busyMessage: "Saving node - " & txtNodeName_2.Text });
+                                    Set(_isBusy, true);
+                                    Set(_selectedNode, Patch('Business Approval Nodes', Coalesce(_selectedNode, Defaults('Business Approval Nodes')),
+                                        {
+                                            Name: txtNodeName_2.Text, Description: txtNodeDesc_2.Text, Stage: _selectedStage, Process: _selectedProcess,
+                                            'Approval Type': ddlNodeApprovalType_1.Selected.Value, 'Notification Type': ddlNotificationType_1.Selected.Value,
+                                            'Delegation Rule': ddlDelegationRule_1.Selected.Value, 'Time Out': If(txtTimeout_1.Visible, Value(txtTimeout_1.Text), Blank()), 
+                                            'Time Out Mode': If(ddlTimeOutRule_1.Visible, ddlTimeOutRule_1.Selected.Value, Blank()), 'Node Type': radNodeType_2.Selected.Value,
+                                            'Path Index': _currentPathIndex, 'Row Index': _currentNodeIndex, 
+                                            'Custom Responses': If(txtCustomResponses_1.Visible, txtCustomResponses_1.Text, Blank()),
+                                            Approvers: Concat(_nodeApprovers, Name, ", ")
+                                        })
+                                    );
+                            
+                                    //increment node index for any nodes after this node in this path, if exists
+                                    UpdateIf('Business Approval Nodes', 
+                                        'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                        ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                        Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                        { 'Row Index': ThisRecord.'Row Index' + 1 }
+                                    );
+                            
+                                    If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                        Concurrent(
+                                            //unrelate removed approvers
+                                            Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                            ForAll(_removedApprovers As appr,
+                                                Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                            );
+                                            Clear(_removedApprovers),
+                                            
+                                            //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                            With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                                Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                                ForAll(addedApprovers As appr, 
+                                                    Relate(_selectedNode.'Business Approvers',
+                                                        Patch('Business Approvers', 
+                                                            Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                            { 
+                                                                Name: 
+                                                                    If(
+                                                                        appr.'Dynamic Approver Type' = 
+                                                                        'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                        "Manager of " & appr.'Request Data'.Name,
+                            
+                                                                        appr.'Dynamic Approver Type' =
+                                                                        'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                        appr.'Request Data'.Name,
+                            
+                                                                        appr.Name
+                                                                    ),
+                                                                'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                                'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                            }
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        );
+                            
+                                        //refresh selected node reference
+                                        Refresh('Business Approval Nodes');
+                                        Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                                    );
+                                    Set(_isBusy, false);
+                                    If(Self.Selected.ItemKey = "saveback", Navigate(scrWizardWorkflowEditor))
+                                )
+                            );
+                        Theme: =AppThemeJson
+                        Width: =Parent.Width
+                        X: =0
+                        Y: =0
+                        ZIndex: =1
+
+                    bcProcessStage_3 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        PaddingLeft: =0
+                        Size: =10
+                        Text: =_selectedProcess.Name & " > " & _selectedStage.Name & " > " & Coalesce(_selectedNode.Name, "(New node)")
+                        Visible: =false
+                        Width: =Parent.Width - Self.X - 20
+                        Wrap: =false
+                        X: =20
+                        Y: =CommandBar2_6.Y + CommandBar2_6.Height
+                        ZIndex: =2
+
+                    lblNodeType_2 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        PaddingLeft: =12
+                        Size: =10
+                        Text: ="Node Type"
+                        Width: =120
+                        X: =bcProcessStage_3.X
+                        Y: =bcProcessStage_3.Y + bcProcessStage_3.Height + 10
+                        ZIndex: =3
+
+                    radNodeType_2 As radio:
+                        BorderColor: =RGBA(51, 51, 51, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        Default: ="Approval"
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisplayMode: =If(_currentNodeIndex > 0 && IsBlank(_selectedNode) && (_currentStageIndex + _currentNodeIndex > 2) && !isParallelPath, DisplayMode.Edit, DisplayMode.Disabled)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =38
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Items: =Choices('Business Approval Node Type')
+                        Layout: =Layout.Horizontal
+                        OnSelect: =If(Self.Selected.Value = 'Business Approval Node Type'.'Go to Stage', Navigate(scrNodeRule))
+                        PaddingBottom: =5
+                        PaddingTop: =5
+                        PressedColor: =RGBA(51, 51, 51, 1)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        RadioBorderColor: =RGBA(51, 51, 51, 1)
+                        RadioSelectionFill: =RGBA(0, 120, 212, 1)
+                        RadioSize: =25
+                        Size: =10
+                        Width: =500
+                        X: =lblNodeType_2.X + lblNodeType_2.Width
+                        Y: =lblNodeType_2.Y
+                        ZIndex: =4
+
+                    lblStageName_2 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        PaddingLeft: =12
+                        Size: =10
+                        Text: ="Name"
+                        Width: =120
+                        X: =bcProcessStage_3.X
+                        Y: =bcProcessStage_3.Y + bcProcessStage_3.Height + 50
+                        ZIndex: =5
+
+                    txtNodeName_2 As text:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        Clear: =true
+                        Color: =RGBA(51, 51, 51, 1)
+                        Default: =_selectedNode.Name
+                        DelayOutput: =true
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        FocusedBorderThickness: =1
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        HoverBorderColor: =Self.BorderColor
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =100
+                        OnChange: =
+                        PaddingLeft: =5
+                        PressedBorderColor: =Self.BorderColor
+                        PressedColor: =RGBA(51, 51, 51, 1)
+                        PressedFill: =RGBA(255, 255, 255, 1)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =10
+                        Width: =(Parent.Width - Self.X) / 2
+                        X: =radNodeType_2.X
+                        Y: =lblStageName_2.Y
+                        ZIndex: =6
+
+                    lblStageDesc_3 As label:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        Color: =RGBA(51, 51, 51, 1)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        FocusedBorderThickness: =4
+                        Font: =Font.'Segoe UI'
+                        Height: =30
+                        PaddingLeft: =12
+                        Size: =10
+                        Text: ="Description"
+                        Width: =120
+                        X: =lblStageName_2.X
+                        Y: =lblStageName_2.Y + lblStageName_2.Height + 5
+                        ZIndex: =7
+
+                    txtNodeDesc_2 As text:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        Clear: =true
+                        Color: =RGBA(51, 51, 51, 1)
+                        Default: =_selectedNode.Description
+                        DelayOutput: =true
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        FocusedBorderThickness: =1
+                        Font: =Font.'Segoe UI'
+                        Height: =60
+                        HoverBorderColor: =Self.BorderColor
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =100
+                        Mode: =TextMode.MultiLine
+                        OnChange: =
+                        PaddingLeft: =5
+                        PressedBorderColor: =Self.BorderColor
+                        PressedColor: =RGBA(51, 51, 51, 1)
+                        PressedFill: =RGBA(255, 255, 255, 1)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =10
+                        Width: =(Parent.Width - Self.X) / 2
+                        X: =txtNodeName_2.X
+                        Y: =lblStageDesc_3.Y
+                        ZIndex: =8
+
+                    conApprovalConfig_1 As groupContainer:
+                        Height: =Parent.Height - Self.Y
+                        Visible: =radNodeType_2.Selected.Value = 'Business Approval Node Type'.Approval
+                        Width: =Parent.Width
+                        Y: =txtNodeDesc_2.Y + txtNodeDesc_2.Height + 10
+                        ZIndex: =9
+
+                        lblApprovalConfiguration_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingLeft: =0
+                            Size: =10
+                            Text: ="Approval Configuration"
+                            Width: =Parent.Width - Self.X - 20
+                            Wrap: =false
+                            X: =bcProcessStage_3.X
+                            ZIndex: =1
+
+                        lblNodeApprovalType_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Approval Type"
+                            Width: =120
+                            X: =lblNodeType_2.X
+                            Y: =lblApprovalConfiguration_1.Y + lblApprovalConfiguration_1.Height + 5
+                            ZIndex: =2
+
+                        ddlNodeApprovalType_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =_selectedNode.'Approval Type'
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            HoverBorderColor: =Self.BorderColor
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: =Choices('Business Approval Type')
+                            OnChange: =
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =Self.Color
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Width: =txtNodeDesc_2.Width
+                            X: =txtNodeName_2.X
+                            Y: =lblNodeApprovalType_1.Y
+                            ZIndex: =3
+
+                        txtCustomResponses_1 As text:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            Clear: =true
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: =_selectedNode.'Custom Responses'
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            HintText: ="Enter list of custom responses, seperated by comma (Response1, Response2)"
+                            HoverBorderColor: =Self.BorderColor
+                            HoverColor: =RGBA(51, 51, 51, 1)
+                            HoverFill: =RGBA(255, 255, 255, 1)
+                            MaxLength: =100
+                            OnChange: =
+                            PaddingLeft: =5
+                            PressedBorderColor: =Self.BorderColor
+                            PressedColor: =RGBA(51, 51, 51, 1)
+                            PressedFill: =RGBA(255, 255, 255, 1)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =10
+                            Visible: =lblCustomResponses_1.Visible
+                            Width: =(Parent.Width - Self.X) / 2
+                            X: =radNodeType_2.X
+                            Y: =lblCustomResponses_1.Y
+                            ZIndex: =4
+
+                        lblCustomResponses_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =If(Self.Visible, 30, 0)
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Responses"
+                            Visible: =StartsWith(ddlNodeApprovalType_1.Selected.Value, "Custom Responses")
+                            Width: =lblNodeApprovalType_1.Width
+                            X: =lblNodeType_2.X
+                            Y: =lblNodeApprovalType_1.Y + lblNodeApprovalType_1.Height + 4
+                            ZIndex: =5
+
+                        lblNodeApprover_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            PaddingLeft: =12
+                            Size: =10
+                            Text: ="Approver"
+                            Width: =lblNodeApprovalType_1.Width
+                            X: =lblNodeType_2.X
+                            Y: =lblCustomResponses_1.Y + lblCustomResponses_1.Height + 4
+                            ZIndex: =6
+
+                        radApproverType_1 As radio:
+                            BorderColor: =RGBA(51, 51, 51, 1)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            Default: ="User"
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =38
+                            HoverColor: =RGBA(51, 51, 51, 1)
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            Items: =Choices('Business Approver Type')
+                            Layout: =Layout.Horizontal
+                            PaddingBottom: =5
+                            PaddingTop: =5
+                            PressedColor: =RGBA(51, 51, 51, 1)
+                            PressedFill: =RGBA(0, 0, 0, 0)
+                            RadioBorderColor: =RGBA(51, 51, 51, 1)
+                            RadioSelectionFill: =RGBA(0, 120, 212, 1)
+                            RadioSize: =25
+                            Size: =10
+                            Width: =300
+                            X: =ddlNodeApprovalType_1.X + ddlNodeApprovalType_1.Width
+                            Y: =ddlNodeApprovalType_1.Y
+                            ZIndex: =7
+
+                        btnAddUser_1 As button:
+                            BorderColor: =RGBA(128, 128, 128, 1)
+                            BorderThickness: =1
+                            Color: =RGBA(0, 0, 0, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =If((cboApproverUsers_1.Visible && CountRows(cboApproverUsers_1.SelectedItems) > 0) || ddlApproverDynamic_1.Visible, DisplayMode.Edit, DisplayMode.Disabled)
+                            Fill: =RGBA(255, 255, 255, 1)
+                            FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            HoverBorderColor: =Self.BorderColor
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            OnSelect: |-
+                                =//TODO: Cloud flow to force sync user on a daily added new user in the approver table
+                                
+                                //add users into _nodeApprovers collection - we will use this to relate approvers to this node
+                                If(radApproverType_1.Selected.Value = 'Business Approver Type'.User,
+                                    ForAll(cboApproverUsers_1.SelectedItems As Approver,
+                                        //for user type, check if approver id already exist in approver table
+                                        If(IsBlank(LookUp(_nodeApprovers, 'Approver Id' = Approver.UserPrincipalName)),
+                                            //add user to collection if does not exist
+                                            Patch(_nodeApprovers, Defaults(_nodeApprovers),
+                                            {
+                                                'Approver Id': Approver.UserPrincipalName,
+                                                Name: Approver.DisplayName,
+                                                'Approver Type': 'Business Approver Type'.User
+                                            })
+                                        )
+                                    );
+                                    Reset(cboApproverUsers_1),
+                                    
+                                    //for dynamic type, check approver id and request data
+                                    With({ id: 
+                                        If(ddlRequestDataField_1.Visible, //request data is referenced
+                                            ddlRequestDataField_1.Selected.'Business Approval Data' & "@") & ddlApproverDynamic_1.Selected.Value },
+                                        Patch(_nodeApprovers, Defaults(_nodeApprovers),
+                                        { 
+                                            'Approver Id': id, 
+                                            Name: 
+                                                Switch(ddlApproverDynamic_1.Selected.Value,
+                                                    'Business Approval Dynamic Approver Type'.'Manager of [Request data field]',
+                                                    "Manager of " & ddlRequestDataField_1.Selected.Name,
+                                                    'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                    ddlRequestDataField_1.Selected.Name, ddlApproverDynamic_1.Selected.Value
+                                                ), 
+                                            'Approver Type': 'Business Approver Type'.Dynamic,
+                                            'Request Data': If(ddlRequestDataField_1.Visible, ddlRequestDataField_1.Selected, Blank()),
+                                            'Dynamic Approver Type': ddlApproverDynamic_1.Selected.Value
+                                        })    
+                                    )
+                                )
+                            PressedBorderColor: =Self.BorderColor
+                            PressedColor: =Self.Color
+                            PressedFill: =Self.HoverFill
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =10
+                            Text: ="Add"
+                            Width: =105
+                            X: =ddlNodeApprovalType_1.X
+                            Y: =ddlRequestDataField_1.Y + ddlRequestDataField_1.Height + 10
+                            ZIndex: =8
+
+                        cboApproverUsers_1 As combobox:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayFields: =["DisplayName","JobTitle"]
+                            Font: =Font.'Segoe UI'
+                            Height: =30
+                            HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            HoverColor: =RGBA(51, 51, 51, 1)
+                            HoverFill: =RGBA(212, 212, 212, 1)
+                            InputTextPlaceholder: ="Find user(s)"
+                            IsSearchable: =false
+                            Items: |-
+                                =Office365Users.SearchUser({ searchTerm: Self.SearchText })
+                            PressedBorderColor: =Self.BorderColor
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(243, 242, 241, 1)
+                            SearchFields: =["DisplayName"]
+                            SearchItems: =[]
+                            SelectionColor: =Self.HoverColor
+                            SelectionFill: =Self.HoverFill
+                            Size: =10
+                            Template: =ListItemTemplate.Double
+                            Visible: =radApproverType_1.Selected.Value = 'Business Approver Type'.User
+                            Width: =ddlNodeApprovalType_1.Width
+                            X: =ddlNodeApprovalType_1.X
+                            Y: =lblNodeApprover_1.Y
+                            ZIndex: =9
+
+                        ddlApproverDynamic_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =cboApproverUsers_1.Height
+                            HoverBorderColor: =Self.BorderColor
+                            HoverColor: =RGBA(51, 51, 51, 1)
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: =Choices('Business Approval Dynamic Approver Type')
+                            PaddingBottom: =5
+                            PaddingLeft: =8
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =RGBA(0, 0, 0, 1)
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Visible: =radApproverType_1.Selected.Value = 'Business Approver Type'.Dynamic
+                            Width: =cboApproverUsers_1.Width
+                            X: =cboApproverUsers_1.X
+                            Y: =cboApproverUsers_1.Y
+                            ZIndex: =10
+
+                        Container2_1 As groupContainer:
+                            Height: =Parent.Height - Self.Y
+                            Visible: =CountRows(galApprovers_1.AllItems) > 0
+                            Width: =Parent.Width
+                            Y: =galApprovers_1.Y + galApprovers_1.Height
+                            ZIndex: =11
+
+                            lblDelegationRule_1 As label:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                PaddingLeft: =12
+                                Size: =10
+                                Text: ="Delegation Rule"
+                                Width: =lblNodeApprovalType_1.Width
+                                X: =lblNodeApprovalType_1.X
+                                Y: =lblNotificationType_1.Y + lblNotificationType_1.Height + 5
+                                ZIndex: =1
+
+                            ddlDelegationRule_1 As dropdown:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(255, 255, 255, 1)
+                                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                                ChevronFill: =RGBA(33, 33, 33, 1)
+                                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =_selectedNode.'Delegation Rule'
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =2
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverColor: =RGBA(51, 51, 51, 1)
+                                HoverFill: =RGBA(212, 212, 212, 1)
+                                Items: =Choices('Business Approval Delegation Rule')
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =Self.BorderColor
+                                PressedFill: =Self.HoverFill
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(243, 242, 241, 1)
+                                Size: =10
+                                Width: =ddlNodeApprovalType_1.Width
+                                X: =lblDelegationRule_1.X + lblDelegationRule_1.Width
+                                Y: =lblDelegationRule_1.Y
+                                ZIndex: =2
+
+                            lblTimeOut_1 As label:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                PaddingLeft: =12
+                                Size: =10
+                                Text: ="Time Out Setting"
+                                Visible: =StartsWith(ddlDelegationRule_1.Selected.Value, "Time-out")
+                                Width: =lblNodeApprovalType_1.Width
+                                X: =lblNodeApprovalType_1.X
+                                Y: =lblDelegationRuleDescription_1.Y + lblDelegationRuleDescription_1.Height+ 10
+                                ZIndex: =3
+
+                            txtTimeout_1 As text:
+                                Align: =Align.Right
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =Coalesce(_selectedNode.'Time Out', 3)
+                                DelayOutput: =true
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Format: =TextFormat.Number
+                                Height: =30
+                                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                HoverColor: =RGBA(51, 51, 51, 1)
+                                HoverFill: =RGBA(255, 255, 255, 1)
+                                OnChange: =
+                                PaddingLeft: =5
+                                PressedBorderColor: =RGBA(0, 120, 212, 1)
+                                PressedColor: =RGBA(51, 51, 51, 1)
+                                PressedFill: =RGBA(255, 255, 255, 1)
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =10
+                                Visible: =lblTimeOut_1.Visible
+                                Width: =30
+                                X: =ddlDelegationRule_1.X
+                                Y: =lblTimeOut_1.Y
+                                ZIndex: =4
+
+                            ddlTimeOutRule_1 As dropdown:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(255, 255, 255, 1)
+                                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                                ChevronFill: =RGBA(33, 33, 33, 1)
+                                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =_selectedNode.'Time Out Mode'
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =2
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverColor: =RGBA(51, 51, 51, 1)
+                                HoverFill: =RGBA(212, 212, 212, 1)
+                                Items: =Choices('Business Approval Time Out Mode')
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =Self.BorderColor
+                                PressedFill: =Self.HoverFill
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(243, 242, 241, 1)
+                                Size: =10
+                                Visible: =lblTimeOut_1.Visible
+                                Width: =ddlDelegationRule_1.Width - txtTimeout_1.Width - 5
+                                X: =txtTimeout_1.X + txtTimeout_1.Width + 5
+                                Y: =txtTimeout_1.Y
+                                ZIndex: =5
+
+                            lblDelegationRuleDescription_1 As label:
+                                AutoHeight: =true
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                FontWeight: =FontWeight.Lighter
+                                PaddingLeft: =12
+                                Size: =10
+                                Text: |-
+                                    ="Delegate is configured as an Approver setting. If no delegate is configured, delegation rules will be ignored for the approver. 
+                                    Time Out: Delegation will be triggered upon a specified time period. Out of office: Delegation will be triggered if the approver is out of office at the time the approval is received."
+                                Width: =Parent.Width - Self.X - 10
+                                X: =lblDelegationRule_1.X
+                                Y: =lblDelegationRule_1.Y + lblDelegationRule_1.Height + 2
+                                ZIndex: =6
+
+                            lblTimeOutDescription_1 As label:
+                                AutoHeight: =true
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                FontWeight: =FontWeight.Lighter
+                                PaddingLeft: =12
+                                Size: =10
+                                Text: ="Business Days  will use the Approver's Work Profile and Holiday settings."
+                                Visible: =lblTimeOut_1.Visible
+                                Width: =Parent.Width - Self.X - 10
+                                X: =lblTimeOut_1.X
+                                Y: =lblTimeOut_1.Y + lblTimeOut_1.Height + 2
+                                ZIndex: =7
+
+                            lblNotificationType_1 As label:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                PaddingLeft: =12
+                                Size: =10
+                                Text: ="Notification"
+                                Width: =lblNodeApprovalType_1.Width
+                                X: =lblNodeApprovalType_1.X
+                                Y: =5
+                                ZIndex: =8
+
+                            ddlNotificationType_1 As dropdown:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(255, 255, 255, 1)
+                                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                                ChevronFill: =RGBA(33, 33, 33, 1)
+                                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                                Color: =RGBA(51, 51, 51, 1)
+                                Default: =_selectedNode.'Notification Type'
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                DisabledFill: =RGBA(244, 244, 244, 1)
+                                FocusedBorderThickness: =2
+                                Font: =Font.'Segoe UI'
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverColor: =RGBA(51, 51, 51, 1)
+                                HoverFill: =RGBA(212, 212, 212, 1)
+                                Items: =Choices('Business Approval Notification Type')
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =Self.BorderColor
+                                PressedFill: =Self.HoverFill
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(243, 242, 241, 1)
+                                Size: =10
+                                Width: =ddlNodeApprovalType_1.Width
+                                X: =lblDelegationRule_1.X + lblDelegationRule_1.Width
+                                Y: =lblNotificationType_1.Y
+                                ZIndex: =9
+
+                        ddlRequestDataField_1 As dropdown:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                            ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                            ChevronFill: =RGBA(33, 33, 33, 1)
+                            ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                            ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            FocusedBorderThickness: =1
+                            Font: =Font.'Segoe UI'
+                            Height: =If(Self.Visible, cboApproverUsers_1.Height, 0)
+                            HoverBorderColor: =Self.BorderColor
+                            HoverColor: =RGBA(51, 51, 51, 1)
+                            HoverFill: =RGBA(243, 242, 241, 1)
+                            Items: |-
+                                =Filter(
+                                    Filter('Business Approval Data', 'Business Approval Data (Views)'.'Approval Data User Fields'),
+                                    Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                                )
+                            PaddingBottom: =5
+                            PaddingLeft: =5
+                            PaddingRight: =5
+                            PaddingTop: =5
+                            PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                            PressedFill: =Self.HoverFill
+                            SelectionColor: =RGBA(0, 0, 0, 1)
+                            SelectionFill: =RGBA(243, 242, 241, 1)
+                            Size: =10
+                            Visible: |-
+                                =With({ selectedDynamicApprover: ddlApproverDynamic_1.Selected.Value}, 
+                                    If(selectedDynamicApprover in [
+                                        'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                        'Business Approval Dynamic Approver Type'.'Manager of [Request data field]'
+                                    ], ddlApproverDynamic_1.Visible, false)
+                                )
+                            Width: =cboApproverUsers_1.Width
+                            X: =cboApproverUsers_1.X
+                            Y: =ddlApproverDynamic_1.Y + ddlApproverDynamic_1.Height + 5
+                            ZIndex: =12
+
+                        lblNoRequestData_1 As label:
+                            BorderColor: =RGBA(0, 0, 0, 0)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =2
+                            Color: =RGBA(51, 51, 51, 1)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Fill: =RGBA(255, 255, 255, 1)
+                            FocusedBorderThickness: =4
+                            Font: =Font.'Segoe UI'
+                            Height: =ddlRequestDataField_1.Height
+                            Size: =8
+                            Text: ="No request data field of type Email is available for this process."
+                            Visible: =!ddlRequestDataField_1.Visible
+                            Width: =ddlRequestDataField_1.Width
+                            X: =ddlRequestDataField_1.X
+                            Y: =ddlRequestDataField_1.Y
+                            ZIndex: =13
+
+                        galApprovers_1 As gallery.galleryHorizontal:
+                            BorderColor: =RGBA(166, 166, 166, 1)
+                            FocusedBorderThickness: =0
+                            Height: =50
+                            Items: =_nodeApprovers
+                            ShowNavigation: =true
+                            ShowScrollbar: =false
+                            TemplateSize: =150
+                            Width: =Parent.Width - Self.X - 50
+                            X: =btnAddUser_1.X
+                            Y: =btnAddUser_1.Y + btnAddUser_1.Height + 10
+                            ZIndex: =14
+
+                            Rectangle2_3 As rectangle:
+                                BorderColor: =RGBA(128, 128, 128, 1)
+                                BorderThickness: =1
+                                DisabledFill: =RGBA(166, 166, 166, 1)
+                                DisplayMode: =DisplayMode.View
+                                Fill: =RGBA(230, 230, 230, 1)
+                                FocusedBorderThickness: =4
+                                Height: =Parent.TemplateHeight - 2
+                                OnSelect: =Select(Parent)
+                                PressedFill: =RGBA(0, 120, 212, 1)
+                                Width: =Parent.TemplateWidth
+                                Y: =2
+                                ZIndex: =1
+
+                            Icon5_2 As icon.Person:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                Color: =RGBA(0, 120, 212, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(220, 220, 220, 1)
+                                DisabledFill: =RGBA(0, 0, 0, 0)
+                                FocusedBorderThickness: =4
+                                Height: =Image4_2.Height
+                                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                                HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                HoverFill: =RGBA(0, 0, 0, 0)
+                                Icon: =Icon.Person
+                                OnSelect: =Select(Parent)
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                                PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                PressedFill: =RGBA(0, 0, 0, 0)
+                                Width: =Image4_2.Width
+                                X: =Image4_2.X
+                                Y: =Image4_2.Y
+                                ZIndex: =2
+
+                            Image4_2 As image:
+                                BorderThickness: =1
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledFill: =RGBA(0, 0, 0, 0)
+                                FocusedBorderThickness: =4
+                                Height: =30
+                                HoverBorderColor: =Self.BorderColor
+                                HoverFill: =RGBA(0, 0, 0, 0)
+                                Image: =If(!IsBlank(ThisItem.'Approver Id') && ThisItem.'Approver Type' = 'Business Approver Type'.User, Office365Users.UserPhotoV2(ThisItem.'Approver Id'))
+                                OnSelect: =Select(Parent)
+                                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                                PressedFill: =RGBA(0, 0, 0, 0)
+                                RadiusBottomLeft: =30
+                                RadiusBottomRight: =30
+                                RadiusTopLeft: =30
+                                RadiusTopRight: =30
+                                Width: =30
+                                X: =2
+                                Y: =Parent.TemplateHeight / 2 - Self.Height / 2 + 1
+                                ZIndex: =3
+
+                            Separator1_2 As rectangle:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                Fill: =RGBA(166, 166, 166, 1)
+                                Height: =1
+                                OnSelect: =Select(Parent)
+                                Visible: =false
+                                Width: =Parent.TemplateWidth
+                                Y: =Parent.TemplateHeight - 1
+                                ZIndex: =5
+
+                            lblApproverName_1 As label:
+                                BorderColor: =RGBA(0, 0, 0, 0)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =2
+                                Color: =RGBA(51, 51, 51, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(166, 166, 166, 1)
+                                FocusedBorderThickness: =4
+                                Font: =Font.'Segoe UI'
+                                Height: =Rectangle2_3.Height
+                                OnSelect: =Select(Parent)
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Size: =9
+                                Text: =ThisItem.Name
+                                Tooltip: =ThisItem.'Approver Id'
+                                Width: =icoRemoveApprover_1.X - Self.X
+                                X: =Image4_2.X + Image4_2.Width + 5
+                                Y: =2
+                                ZIndex: =6
+
+                            icoRemoveApprover_1 As icon.Cancel:
+                                BorderColor: =RGBA(166, 166, 166, 1)
+                                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                DisabledColor: =RGBA(220, 220, 220, 1)
+                                DisabledFill: =RGBA(0, 0, 0, 0)
+                                FocusedBorderThickness: =4
+                                Height: =20
+                                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                                HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                HoverFill: =RGBA(0, 0, 0, 0)
+                                Icon: =Icon.Cancel
+                                OnSelect: |-
+                                    =If(!IsBlank(ThisItem.'Business Approver'), Collect(_removedApprovers, ThisItem.'Business Approver'));
+                                    Remove(_nodeApprovers, ThisItem)
+                                PaddingBottom: =5
+                                PaddingLeft: =5
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                                PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                                PressedFill: =RGBA(0, 0, 0, 0)
+                                Width: =20
+                                X: =Parent.TemplateWidth - Self.Width
+                                Y: =5
+                                ZIndex: =7
+
+                    ConfirmDialog_7 As ConfirmDialog:
+                        ConfirmText: ="Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?"
+                        Height: =Parent.Height
+                        OnClick: |-
+                            =If(IsConfirmed,
+                                UpdateContext({ busyMessage: "Deleting node - " & _selectedNode.Name });
+                                Set(_isBusy, true);
+                            
+                                Concurrent(
+                                    //update other nodes after this node on the same path to move up by 1 position
+                                    UpdateIf('Business Approval Nodes', 
+                                            Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage' && 
+                                            'Path Index' = _currentPathIndex && 'Row Index' > _currentNodeIndex,
+                                            { 'Row Index': 'Row Index' - 1}            
+                                    );
+                                    //remove the node 
+                                    Remove('Business Approval Nodes', _selectedNode),
+                            
+                                    //remove any conditions
+                                    RemoveIf('Business Approval Conditions', Node.'Business Approval Node' = _selectedNode.'Business Approval Node')
+                                );
+                            
+                                Set(_selectedNode, Blank());
+                                Set(_isBusy, false);
+                                Set(_showConfirm, false);
+                                Back(),
+                                Set(_showConfirm, false)
+                            )
+                        Visible: =_showConfirm
+                        Width: =Parent.Width
+                        ZIndex: =10
+
+                    BusyScreen_7 As BusyScreen:
+                        BusyMessage: =busyMessage
+                        Fill: =RGBA(255, 255, 255, 0.8)
+                        Height: =Parent.Height
+                        Visible: =_isBusy
+                        Width: =Parent.Width
+                        ZIndex: =11
+
+            Container12_6 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =72
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =12
+                LayoutMinHeight: =72
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                ZIndex: =3
+
+                btnBack_5 As Button:
+                    BorderColor: =ColorValue(AppTheme.palette.neutralPrimary)
+                    BorderRadius: =2
+                    BorderStyle: =BorderStyle.Solid
+                    BorderThickness: =1
+                    ButtonType: ='Button.ButtonType'.Standard
+                    DisplayMode: =DisplayMode.Edit
+                    FillColor: =ColorValue(AppTheme.palette.white)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: =Back()
+                    Text: ="Back"
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                btnNext_5 As Button:
+                    BorderRadius: =2
+                    ButtonType: ='Button.ButtonType'.Primary
+                    DisplayMode: |+
+                        =If(IsBlank(_selectedProcess),DisplayMode.Disabled,DisplayMode.Edit)
+                        
+                    FontWeight: =FontWeight.Semibold
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    OnSelect: |-
+                        =Set(_isBusy, true);
+                        Navigate(scrWizardPublishProcess);
+                    Text: ="Save & Next"
+                    Visible: =true
+                    Width: =96
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+

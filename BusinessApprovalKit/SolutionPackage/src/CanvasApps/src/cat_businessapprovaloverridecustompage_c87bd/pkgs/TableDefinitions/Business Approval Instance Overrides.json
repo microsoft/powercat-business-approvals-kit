@@ -21,5 +21,6 @@
     "TableName": "cat_businessapprovalinstanceoverride",
     "Views": "{\"@odata.context\":\"https://approval-dev.crm3.dynamics.com/api/data/v9.0/$metadata#savedqueries(savedqueryid,name,querytype)\",\"value\":[{\"@odata.etag\":\"W/\\\"26738078\\\"\",\"savedqueryid\":\"6255efeb-bcd3-483e-9a49-290be2a09486\",\"name\":\"Inactive Business Approval Instance Overrides\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"26739980\\\"\",\"savedqueryid\":\"29bc9856-c41b-49ce-a910-55aaeeadf815\",\"name\":\"Active Business Approval Instance Overrides\",\"querytype\":0},{\"@odata.etag\":\"W/\\\"26738102\\\"\",\"savedqueryid\":\"d92b551a-c414-410c-b512-b333fb4333e3\",\"name\":\"Business Approval Instance Override Lookup View\",\"querytype\":64},{\"@odata.etag\":\"W/\\\"26738090\\\"\",\"savedqueryid\":\"ebb71851-cc65-4682-92e7-c51c7d473c87\",\"name\":\"Business Approval Instance Override Associated View\",\"querytype\":2},{\"@odata.etag\":\"W/\\\"26738114\\\"\",\"savedqueryid\":\"e10f6156-4564-43a6-bdb4-f8866ede8515\",\"name\":\"Business Approval Instance Override Advanced Find View\",\"querytype\":1}]}"
   },
+  "UnusedDataSources": {},
   "webApiVersion": "v9.0"
 }

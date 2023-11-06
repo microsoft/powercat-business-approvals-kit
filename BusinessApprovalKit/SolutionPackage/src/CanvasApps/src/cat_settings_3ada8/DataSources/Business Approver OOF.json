@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cat_businessapproveroofs",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cat_businessapproveroof",
+    "Name": "Business Approver OOF",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cat_businessapproveroof_AsyncOperations": "System Jobs",
+      "cat_businessapproveroof_BulkDeleteFailures": "Bulk Delete Failures",
+      "cat_businessapproveroof_DuplicateBaseRecord": "Duplicate Records (cat_businessapproveroof_DuplicateBaseRecord)",
+      "cat_businessapproveroof_DuplicateMatchingRecord": "Duplicate Records (cat_businessapproveroof_DuplicateMatchingRecord)",
+      "cat_businessapproveroof_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cat_businessapproveroof_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cat_businessapproveroof_ProcessSession": "Process Sessions",
+      "cat_businessapproveroof_SyncErrors": "Sync Errors",
+      "cat_businessapproveroofid": "Business Approver OOF",
+      "cat_enddate": "End Date",
+      "cat_startdate": "Start Date",
+      "cat_userprincipalname": "User Principal Name",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Business Approver OOF",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Business Approver OOF (Views)",
+    "Name": "_cat_businessapproveroof_views",
+    "RelatedEntityName": "Business Approver OOF",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2bb7973c-d862-4079-b122-d02fedf03974": "Business Approver OOF Advanced Find View",
+      "4a29dd6b-d639-4b81-b187-7129891e1eba": "Business Approver OOF Associated View",
+      "4e184f8a-05af-4c57-9639-46ba4a7853b1": "Active Business Approver OOF",
+      "861b51b6-d2bf-49de-a91c-3bb9c43a0f87": "Business Approver OOF Lookup View",
+      "b8ad2fc8-d296-4390-a837-b8cabce2c685": "Inactive Business Approver OOF"
+    }
+  },
+  {
+    "DisplayName": "Status (Business Approver OOF)",
+    "Name": "cat_businessapproveroof_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Business Approver OOF"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Business Approver OOF",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Business Approver OOF)",
+    "Name": "cat_businessapproveroof_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Business Approver OOF"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approver OOF",
+    "Type": "OptionSetInfo"
+  }
+]
