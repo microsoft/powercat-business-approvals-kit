@@ -72,8 +72,7 @@ ApprovalDesigner As CanvasComponent:
                 Filter('Business Approval Stages', 'Business Approval Stages (Views)'.'Active Business Approval Stages'),
                 Process.'Business Approval Process' = GUID(Parent.ProcessId)
             )
-            //a24bac16-cfb1-ed11-83fe-0022482a97de
-            //"84dd8276-a756-ee11-be6f-0022482a91f4"
+            //"036025df-1f73-ee11-9ae7-0022482a91f4"
             //Parent.ProcessId
         Layout: =Layout.Vertical
         LoadingSpinner: =LoadingSpinner.Data
@@ -1020,9 +1019,9 @@ ApprovalDesigner As CanvasComponent:
                     )
                 Tooltip: =Self.Text
                 Visible: =conNodeBoxPath2.Visible  //nodeBoxPath2.Visible
-                Width: =conNodeBoxPath2.Width  + 1
+                Width: =conNodeBoxPath2.Width 
                 Wrap: =false
-                X: =conNodeBoxPath2.X - 1
+                X: =conNodeBoxPath2.X 
                 Y: =conNodeBoxPath2.Y 
                 ZIndex: =30
 
@@ -1032,7 +1031,7 @@ ApprovalDesigner As CanvasComponent:
                 Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
+                Fill: =ColorFade(ColorValue(AppTheme.palette.themeSecondary),30%)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
@@ -1046,9 +1045,9 @@ ApprovalDesigner As CanvasComponent:
                     )
                 Tooltip: =Self.Text
                 Visible: =conNodeBoxPath1.Visible //nodeBoxPath1.Visible
-                Width: =conNodeBoxPath1.Width + 1
+                Width: =conNodeBoxPath1.Width 
                 Wrap: =false
-                X: =conNodeBoxPath1.X -1
+                X: =conNodeBoxPath1.X 
                 Y: =conNodeBoxPath1.Y 
                 ZIndex: =31
 
@@ -1207,7 +1206,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =36
 
-            "icoCKEditNodePath1 As 'Fluent Icon (1.0.22)'":
+            "icoCKEditNodePath1_1 As 'Fluent Icon (1.0.22)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themePrimary
@@ -1219,7 +1218,7 @@ ApprovalDesigner As CanvasComponent:
                     )
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
-                Visible: =conNodeBoxPath1.Visible 
+                Visible: =false
                 Width: =25
                 X: =nodeBoxPath1.X + nodeBoxPath1.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
@@ -1296,6 +1295,455 @@ ApprovalDesigner As CanvasComponent:
                 X: =conNodeBoxPath5.X + conNodeBoxPath5.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =41
+
+            "commandbarCKEditNode2 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 2) },
+                            ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                        ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 2));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath2.Visible 
+                Width: =25
+                X: =nodeBoxPath2.X + nodeBoxPath2.Width - Self.Width - 5
+                Y: =lblNodeNamePath2.Y + lblNodeNamePath2.Height / 2 - Self.Height / 2
+                ZIndex: =42
+
+            "commandbarCKEditNode3 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With(
+                            {
+                                node: LookUp(
+                                    ThisItem.Nodes,
+                                    'Path Index' = 3
+                                )
+                            },
+                            ApprovalDesigner.EditNode(
+                                node.'Business Approval Node',
+                                node.Stage.'Business Approval Stage'
+                            )
+                        ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 3));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath3.Visible 
+                Width: =25
+                X: =nodeBoxPath3.X + nodeBoxPath3.Width - Self.Width - 5
+                Y: =lblNodeNamePath3.Y + lblNodeNamePath3.Height / 2 - Self.Height / 2
+                ZIndex: =43
+
+            "commandbarCKEditNode4 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                       With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 4) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 4));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath4.Visible 
+                Width: =25
+                X: =nodeBoxPath4.X + nodeBoxPath4.Width - Self.Width - 5
+                Y: =lblNodeNamePath4.Y + lblNodeNamePath4.Height / 2 - Self.Height / 2
+                ZIndex: =44
+
+            "commandbarCKEditNode5 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 5) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                         Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 5));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath5.Visible 
+                Width: =25
+                X: =nodeBoxPath5.X + nodeBoxPath5.Width - Self.Width - 5
+                Y: =lblNodeNamePath5.Y + lblNodeNamePath5.Height / 2 - Self.Height / 2
+                ZIndex: =45
+
+            "commandbarCKEditNode1 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                DisplayMode: =DisplayMode.Edit
+                Height: =25
+                Items: |-
+                    =Table(
+                       {
+                            ItemKey: "edit",
+                            ItemDisplayName: "Edit Node",
+                            ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "delete",
+                            ItemDisplayName: "Delete Node",
+                            ItemIconName: "Delete"
+                        }
+                    )
+                OnChange: =
+                OnSelect: |-
+                    =Switch(
+                        Self.Selected.ItemKey,
+                        "edit",
+                        With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1) },
+                        ApprovalDesigner.EditNode(node.'Business Approval Node', node.Stage.'Business Approval Stage')
+                    ),
+                        "delete",
+                        Set(_showConfirmNode,true);
+                        Set(_selectedNode,LookUp(ThisItem.Nodes, 'Path Index' = 1));
+                        Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+                        //
+                            //increment node index for any nodes after this node in this path, if exists
+                            UpdateIf('Business Approval Nodes', 
+                                'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
+                                ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
+                                { 'Row Index': ThisRecord.'Row Index' + 1 }
+                            );
+                    
+                            If(CountRows(_nodeApprovers) > 0 || CountRows(_removedApprovers) > 0,
+                                Concurrent(
+                                    //unrelate removed approvers
+                                    Trace("_removedApprovers count: " & CountRows(_removedApprovers), TraceSeverity.Information);
+                                    ForAll(_removedApprovers As appr,
+                                        Unrelate(_selectedNode.'Business Approvers', LookUp('Business Approvers', 'Business Approver' = appr.Value))
+                                    );
+                                    Clear(_removedApprovers),
+                                    
+                                    //add newly added approvers to approver table if does not exist, otherwise update and then relate to selected node
+                                    With({ addedApprovers: Filter(_nodeApprovers, IsBlank('Business Approver'))},
+                                        Trace("newly added approvers count: " & CountRows(addedApprovers), TraceSeverity.Information);
+                                        ForAll(addedApprovers As appr, 
+                                            Relate(_selectedNode.'Business Approvers',
+                                                Patch('Business Approvers', 
+                                                    Coalesce(LookUp('Business Approvers', 'Approver Id' = appr.'Approver Id'), Defaults('Business Approvers')),
+                                                    { 
+                                                        Name: 
+                                                            If(
+                                                                appr.'Dynamic Approver Type' = 
+                                                                'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
+                                                                "Manager of " & appr.'Request Data'.Name,
+                    
+                                                                appr.'Dynamic Approver Type' =
+                                                                'Business Approval Dynamic Approver Type'.'Use Request Data Field',
+                                                                appr.'Request Data'.Name,
+                    
+                                                                appr.Name
+                                                            ),
+                                                        'Approver Id': appr.'Approver Id', 'Approver Type': appr.'Approver Type',
+                                                        'Dynamic Approver Type': appr.'Dynamic Approver Type', 'Request Data': appr.'Request Data'
+                                                    }
+                                                )
+                                            )
+                                        )
+                                    )
+                                );
+                    
+                                //refresh selected node reference
+                                Refresh('Business Approval Nodes');
+                                Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = _selectedNode.'Business Approval Node'))
+                            );
+                            Set(_isBusy, false);
+                    )
+                Theme: =AppThemeJson
+                Visible: =conNodeBoxPath1.Visible 
+                Width: =25
+                X: =nodeBoxPath1.X + nodeBoxPath1.Width - Self.Width - 5
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
+                ZIndex: =46
 
         galStageConditions_1 As gallery.galleryVertical:
             AccessibleLabel: ="Conditions"
@@ -1823,7 +2271,7 @@ ApprovalDesigner As CanvasComponent:
                     "edit",
                     ApprovalDesigner.EditStage(ThisItem.'Business Approval Stage'),
                     "delete",
-                    Set(confirmActionDelete,"delete");Set(_selectedStage, ThisItem);Set(_showConfirm, true);,
+                    Set(confirmActionDelete,"delete");Set(_selectedStage, ThisItem);Set(confirmMessageDeteleStage, "Deleting Stage - " & _selectedStage.Name & ". This will also delete all approval nodes in this stage and it cannot be undone. Are you sure?");Set(_showConfirmDeleteStage, true),
                     "up",
                     ApprovalDesigner.MoveStage(
                         ThisItem.'Business Approval Stage',

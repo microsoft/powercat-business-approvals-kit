@@ -6494,6 +6494,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "App.confirmAction"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "App.confirmAction",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "confirmAction",
+                "module": "App",
+                "type": "App"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "scrProcessEditor._selectedBusinessOwner"
                 }
               ],
@@ -6673,6 +6703,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.confirmAction"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.confirmAction",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "confirmAction",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.MainContainer.DesginerContainer.lblNoStage_1.X"
                 }
               ],
@@ -6820,7 +6880,7 @@
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"scrWorkflowDesignerScreen\" is 449, which exceeds the maximum threshold recommended (300)."
+                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"scrWorkflowDesignerScreen\" is 450, which exceeds the maximum threshold recommended (300)."
               }
             },
             {

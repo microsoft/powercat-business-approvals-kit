@@ -11,7 +11,7 @@
     SelectionMin: =100
     Title: = 
     Tooltip: = 
-    Visible: =!IsEmpty(Self.Selected.AllItems)
+    Visible: =CountRows(Self.Selected.AllItems)=1
     Width: =0
     X: =0
     Y: =0

@@ -1,18 +1,421 @@
 {
     "ActivateFlowConfiguration":  [
-
+                                      {
+                                          "solutionComponentName":  "BACore|ApprovalTime-out",
+                                          "solutionComponentUniqueName":  "a696980c-5fd0-ec11-a7b5-0022486dabee",
+                                          "sortOrder":  "#{activateflow.order.BACore|ApprovalTime-out.a696980c-5fd0-ec11-a7b5-0022486dabee}#",
+                                          "activate":  "#{activateflow.activate.BACore|ApprovalTime-out.a696980c-5fd0-ec11-a7b5-0022486dabee}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|ApproverOOF",
+                                          "solutionComponentUniqueName":  "c5c9a675-66d0-ec11-a7b5-0022486ddab5",
+                                          "sortOrder":  "#{activateflow.order.BACore|ApproverOOF.c5c9a675-66d0-ec11-a7b5-0022486ddab5}#",
+                                          "activate":  "#{activateflow.activate.BACore|ApproverOOF.c5c9a675-66d0-ec11-a7b5-0022486ddab5}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|CascadeProcessStatus",
+                                          "solutionComponentUniqueName":  "0cc362b4-1e53-ec11-8f8e-0022486dc855",
+                                          "sortOrder":  "#{activateflow.order.BACore|CascadeProcessStatus.0cc362b4-1e53-ec11-8f8e-0022486dc855}#",
+                                          "activate":  "#{activateflow.activate.BACore|CascadeProcessStatus.0cc362b4-1e53-ec11-8f8e-0022486dc855}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|CascadePublishingActivation",
+                                          "solutionComponentUniqueName":  "5313bb69-e0c1-ec11-983e-0022486df843",
+                                          "sortOrder":  "#{activateflow.order.BACore|CascadePublishingActivation.5313bb69-e0c1-ec11-983e-0022486df843}#",
+                                          "activate":  "#{activateflow.activate.BACore|CascadePublishingActivation.5313bb69-e0c1-ec11-983e-0022486df843}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|ActivatePublishedWorkflow",
+                                          "solutionComponentUniqueName":  "e46573c9-d86f-ed11-81ac-000d3a09c30d",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|ActivatePublishedWorkflow.e46573c9-d86f-ed11-81ac-000d3a09c30d}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|ActivatePublishedWorkflow.e46573c9-d86f-ed11-81ac-000d3a09c30d}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|EvaluateRule",
+                                          "solutionComponentUniqueName":  "a361aa67-04ad-ec11-983e-0022486e1632",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|EvaluateRule.a361aa67-04ad-ec11-983e-0022486e1632}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|EvaluateRule.a361aa67-04ad-ec11-983e-0022486e1632}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|GetDefaultSettings",
+                                          "solutionComponentUniqueName":  "83b1ec3a-88d3-ec11-a7b5-000d3af46350",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|GetDefaultSettings.83b1ec3a-88d3-ec11-a7b5-000d3af46350}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|GetDefaultSettings.83b1ec3a-88d3-ec11-a7b5-000d3af46350}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|GetDynamicApprover",
+                                          "solutionComponentUniqueName":  "dcb75fef-35d6-ec11-a7b5-000d3af46350",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|GetDynamicApprover.dcb75fef-35d6-ec11-a7b5-000d3af46350}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|GetDynamicApprover.dcb75fef-35d6-ec11-a7b5-000d3af46350}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|GetDynamicDataInstance",
+                                          "solutionComponentUniqueName":  "c2534955-add4-ec11-a7b5-000d3af46350",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|GetDynamicDataInstance.c2534955-add4-ec11-a7b5-000d3af46350}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|GetDynamicDataInstance.c2534955-add4-ec11-a7b5-000d3af46350}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|LogRuns",
+                                          "solutionComponentUniqueName":  "613b8c18-5ad4-ec11-a7b5-000d3af4ac06",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|LogRuns.613b8c18-5ad4-ec11-a7b5-000d3af4ac06}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|LogRuns.613b8c18-5ad4-ec11-a7b5-000d3af4ac06}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|CopyProcess",
+                                          "solutionComponentUniqueName":  "c23760b5-657a-ed11-81ad-000d3af460f9",
+                                          "sortOrder":  "#{activateflow.order.BACore|CopyProcess.c23760b5-657a-ed11-81ad-000d3af460f9}#",
+                                          "activate":  "#{activateflow.activate.BACore|CopyProcess.c23760b5-657a-ed11-81ad-000d3af460f9}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Daily|CalculateApprovalTimeouts",
+                                          "solutionComponentUniqueName":  "5abbafc2-37cf-ec11-a7b5-0022486dabee",
+                                          "sortOrder":  "#{activateflow.order.BACore|Daily|CalculateApprovalTimeouts.5abbafc2-37cf-ec11-a7b5-0022486dabee}#",
+                                          "activate":  "#{activateflow.activate.BACore|Daily|CalculateApprovalTimeouts.5abbafc2-37cf-ec11-a7b5-0022486dabee}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|PublishProcess",
+                                          "solutionComponentUniqueName":  "d492106f-e56d-ec11-8f8e-000d3a09f61a",
+                                          "sortOrder":  "#{activateflow.order.BACore|PublishProcess.d492106f-e56d-ec11-8f8e-000d3a09f61a}#",
+                                          "activate":  "#{activateflow.activate.BACore|PublishProcess.d492106f-e56d-ec11-8f8e-000d3a09f61a}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-InitializeWorkflowQueue",
+                                          "solutionComponentUniqueName":  "d9eb54ac-e574-ed11-81ac-000d3a09c3ea",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-InitializeWorkflowQueue.d9eb54ac-e574-ed11-81ac-000d3a09c3ea}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-InitializeWorkflowQueue.d9eb54ac-e574-ed11-81ac-000d3a09c3ea}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-StartApproval",
+                                          "solutionComponentUniqueName":  "a04208b8-428d-ec11-8d20-000d3a09ca36",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-StartApproval.a04208b8-428d-ec11-8d20-000d3a09ca36}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-StartApproval.a04208b8-428d-ec11-8d20-000d3a09ca36}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-StartNode",
+                                          "solutionComponentUniqueName":  "d0ccbebf-d08c-ec11-8d20-000d3a09d351",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-StartNode.d0ccbebf-d08c-ec11-8d20-000d3a09d351}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-StartNode.d0ccbebf-d08c-ec11-8d20-000d3a09d351}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-StartStage",
+                                          "solutionComponentUniqueName":  "fb00d840-ca8c-ec11-8d20-000d3a09d351",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-StartStage.fb00d840-ca8c-ec11-8d20-000d3a09d351}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-StartStage.fb00d840-ca8c-ec11-8d20-000d3a09d351}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-StartWorkflow",
+                                          "solutionComponentUniqueName":  "65045bb1-f682-ec11-8d20-0022486da35f",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-StartWorkflow.65045bb1-f682-ec11-8d20-0022486da35f}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-StartWorkflow.65045bb1-f682-ec11-8d20-0022486da35f}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-UpdateApproval",
+                                          "solutionComponentUniqueName":  "bf11ca75-9d8d-ec11-8d20-000d3a09d351",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-UpdateApproval.bf11ca75-9d8d-ec11-8d20-000d3a09d351}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-UpdateApproval.bf11ca75-9d8d-ec11-8d20-000d3a09d351}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-UpdateNodeInstance",
+                                          "solutionComponentUniqueName":  "514b484e-a68d-ec11-8d20-000d3a09d351",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-UpdateNodeInstance.514b484e-a68d-ec11-8d20-000d3a09d351}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-UpdateNodeInstance.514b484e-a68d-ec11-8d20-000d3a09d351}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Runtime-UpdateStageInstance",
+                                          "solutionComponentUniqueName":  "0d3a2e2c-a78d-ec11-8d20-000d3a09d351",
+                                          "sortOrder":  "#{activateflow.order.BACore|Runtime-UpdateStageInstance.0d3a2e2c-a78d-ec11-8d20-000d3a09d351}#",
+                                          "activate":  "#{activateflow.activate.BACore|Runtime-UpdateStageInstance.0d3a2e2c-a78d-ec11-8d20-000d3a09d351}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|SyncApproverOOF",
+                                          "solutionComponentUniqueName":  "89dabc4e-35b9-ec11-983f-0022486de2eb",
+                                          "sortOrder":  "#{activateflow.order.BACore|SyncApproverOOF.89dabc4e-35b9-ec11-983f-0022486de2eb}#",
+                                          "activate":  "#{activateflow.activate.BACore|SyncApproverOOF.89dabc4e-35b9-ec11-983f-0022486de2eb}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|UpdateActivePublishedWorkflow",
+                                          "solutionComponentUniqueName":  "27678b1c-da6f-ed11-81ac-000d3a09cf6c",
+                                          "sortOrder":  "#{activateflow.order.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#",
+                                          "activate":  "#{activateflow.activate.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#"
+                                      }
                                   ],
     "ConnectorShareWithGroupTeamConfiguration":  [
-
+                                                     {
+                                                         "solutionComponentName":  "ApprovalsKit",
+                                                         "solutionComponentUniqueName":  "d5781852-d15c-476b-852c-48c738e17be4",
+                                                         "aadGroupTeamName":  "#{connector.teamname.ApprovalsKit.d5781852-d15c-476b-852c-48c738e17be4}#"
+                                                     }
                                                  ],
     "SolutionComponentOwnershipConfiguration":  [
-
+                                                    {
+                                                        "solutionComponentType":  300,
+                                                        "solutionComponentName":  "cat_businessapprovalprocessmanager_1d6e0",
+                                                        "solutionComponentUniqueName":  "979e681f-fea5-4d30-8559-236f5bd3e8de",
+                                                        "ownerEmail":  "#{canvasowner.ownerEmail.cat_businessapprovalprocessmanager_1d6e0.979e681f-fea5-4d30-8559-236f5bd3e8de}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|ApprovalTime-out",
+                                                        "solutionComponentUniqueName":  "a696980c-5fd0-ec11-a7b5-0022486dabee",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|ApprovalTime-out.a696980c-5fd0-ec11-a7b5-0022486dabee}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|ApproverOOF",
+                                                        "solutionComponentUniqueName":  "c5c9a675-66d0-ec11-a7b5-0022486ddab5",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|ApproverOOF.c5c9a675-66d0-ec11-a7b5-0022486ddab5}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|CascadeProcessStatus",
+                                                        "solutionComponentUniqueName":  "0cc362b4-1e53-ec11-8f8e-0022486dc855",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|CascadeProcessStatus.0cc362b4-1e53-ec11-8f8e-0022486dc855}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|CascadePublishingActivation",
+                                                        "solutionComponentUniqueName":  "5313bb69-e0c1-ec11-983e-0022486df843",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|CascadePublishingActivation.5313bb69-e0c1-ec11-983e-0022486df843}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|ActivatePublishedWorkflow",
+                                                        "solutionComponentUniqueName":  "e46573c9-d86f-ed11-81ac-000d3a09c30d",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|ActivatePublishedWorkflow.e46573c9-d86f-ed11-81ac-000d3a09c30d}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|EvaluateRule",
+                                                        "solutionComponentUniqueName":  "a361aa67-04ad-ec11-983e-0022486e1632",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|EvaluateRule.a361aa67-04ad-ec11-983e-0022486e1632}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|GetDefaultSettings",
+                                                        "solutionComponentUniqueName":  "83b1ec3a-88d3-ec11-a7b5-000d3af46350",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|GetDefaultSettings.83b1ec3a-88d3-ec11-a7b5-000d3af46350}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|GetDynamicApprover",
+                                                        "solutionComponentUniqueName":  "dcb75fef-35d6-ec11-a7b5-000d3af46350",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|GetDynamicApprover.dcb75fef-35d6-ec11-a7b5-000d3af46350}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|GetDynamicDataInstance",
+                                                        "solutionComponentUniqueName":  "c2534955-add4-ec11-a7b5-000d3af46350",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|GetDynamicDataInstance.c2534955-add4-ec11-a7b5-000d3af46350}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|LogRuns",
+                                                        "solutionComponentUniqueName":  "613b8c18-5ad4-ec11-a7b5-000d3af4ac06",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|LogRuns.613b8c18-5ad4-ec11-a7b5-000d3af4ac06}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|CopyProcess",
+                                                        "solutionComponentUniqueName":  "c23760b5-657a-ed11-81ad-000d3af460f9",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|CopyProcess.c23760b5-657a-ed11-81ad-000d3af460f9}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Daily|CalculateApprovalTimeouts",
+                                                        "solutionComponentUniqueName":  "5abbafc2-37cf-ec11-a7b5-0022486dabee",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Daily|CalculateApprovalTimeouts.5abbafc2-37cf-ec11-a7b5-0022486dabee}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|PublishProcess",
+                                                        "solutionComponentUniqueName":  "d492106f-e56d-ec11-8f8e-000d3a09f61a",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|PublishProcess.d492106f-e56d-ec11-8f8e-000d3a09f61a}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-InitializeWorkflowQueue",
+                                                        "solutionComponentUniqueName":  "d9eb54ac-e574-ed11-81ac-000d3a09c3ea",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-InitializeWorkflowQueue.d9eb54ac-e574-ed11-81ac-000d3a09c3ea}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-StartApproval",
+                                                        "solutionComponentUniqueName":  "a04208b8-428d-ec11-8d20-000d3a09ca36",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-StartApproval.a04208b8-428d-ec11-8d20-000d3a09ca36}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-StartNode",
+                                                        "solutionComponentUniqueName":  "d0ccbebf-d08c-ec11-8d20-000d3a09d351",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-StartNode.d0ccbebf-d08c-ec11-8d20-000d3a09d351}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-StartStage",
+                                                        "solutionComponentUniqueName":  "fb00d840-ca8c-ec11-8d20-000d3a09d351",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-StartStage.fb00d840-ca8c-ec11-8d20-000d3a09d351}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-StartWorkflow",
+                                                        "solutionComponentUniqueName":  "65045bb1-f682-ec11-8d20-0022486da35f",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-StartWorkflow.65045bb1-f682-ec11-8d20-0022486da35f}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-UpdateApproval",
+                                                        "solutionComponentUniqueName":  "bf11ca75-9d8d-ec11-8d20-000d3a09d351",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-UpdateApproval.bf11ca75-9d8d-ec11-8d20-000d3a09d351}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-UpdateNodeInstance",
+                                                        "solutionComponentUniqueName":  "514b484e-a68d-ec11-8d20-000d3a09d351",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-UpdateNodeInstance.514b484e-a68d-ec11-8d20-000d3a09d351}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Runtime-UpdateStageInstance",
+                                                        "solutionComponentUniqueName":  "0d3a2e2c-a78d-ec11-8d20-000d3a09d351",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Runtime-UpdateStageInstance.0d3a2e2c-a78d-ec11-8d20-000d3a09d351}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|SyncApproverOOF",
+                                                        "solutionComponentUniqueName":  "89dabc4e-35b9-ec11-983f-0022486de2eb",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|SyncApproverOOF.89dabc4e-35b9-ec11-983f-0022486de2eb}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|UpdateActivePublishedWorkflow",
+                                                        "solutionComponentUniqueName":  "27678b1c-da6f-ed11-81ac-000d3a09cf6c",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#"
+                                                    }
                                                 ],
     "FlowShareWithGroupTeamConfiguration":  [
-
+                                                {
+                                                    "solutionComponentName":  "BACore|ApprovalTime-out",
+                                                    "solutionComponentUniqueName":  "a696980c-5fd0-ec11-a7b5-0022486dabee",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|ApprovalTime-out.a696980c-5fd0-ec11-a7b5-0022486dabee}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|ApproverOOF",
+                                                    "solutionComponentUniqueName":  "c5c9a675-66d0-ec11-a7b5-0022486ddab5",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|ApproverOOF.c5c9a675-66d0-ec11-a7b5-0022486ddab5}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|CascadeProcessStatus",
+                                                    "solutionComponentUniqueName":  "0cc362b4-1e53-ec11-8f8e-0022486dc855",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|CascadeProcessStatus.0cc362b4-1e53-ec11-8f8e-0022486dc855}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|CascadePublishingActivation",
+                                                    "solutionComponentUniqueName":  "5313bb69-e0c1-ec11-983e-0022486df843",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|CascadePublishingActivation.5313bb69-e0c1-ec11-983e-0022486df843}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|ActivatePublishedWorkflow",
+                                                    "solutionComponentUniqueName":  "e46573c9-d86f-ed11-81ac-000d3a09c30d",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|ActivatePublishedWorkflow.e46573c9-d86f-ed11-81ac-000d3a09c30d}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|EvaluateRule",
+                                                    "solutionComponentUniqueName":  "a361aa67-04ad-ec11-983e-0022486e1632",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|EvaluateRule.a361aa67-04ad-ec11-983e-0022486e1632}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|GetDefaultSettings",
+                                                    "solutionComponentUniqueName":  "83b1ec3a-88d3-ec11-a7b5-000d3af46350",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|GetDefaultSettings.83b1ec3a-88d3-ec11-a7b5-000d3af46350}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|GetDynamicApprover",
+                                                    "solutionComponentUniqueName":  "dcb75fef-35d6-ec11-a7b5-000d3af46350",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|GetDynamicApprover.dcb75fef-35d6-ec11-a7b5-000d3af46350}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|GetDynamicDataInstance",
+                                                    "solutionComponentUniqueName":  "c2534955-add4-ec11-a7b5-000d3af46350",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|GetDynamicDataInstance.c2534955-add4-ec11-a7b5-000d3af46350}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|LogRuns",
+                                                    "solutionComponentUniqueName":  "613b8c18-5ad4-ec11-a7b5-000d3af4ac06",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|LogRuns.613b8c18-5ad4-ec11-a7b5-000d3af4ac06}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|CopyProcess",
+                                                    "solutionComponentUniqueName":  "c23760b5-657a-ed11-81ad-000d3af460f9",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|CopyProcess.c23760b5-657a-ed11-81ad-000d3af460f9}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Daily|CalculateApprovalTimeouts",
+                                                    "solutionComponentUniqueName":  "5abbafc2-37cf-ec11-a7b5-0022486dabee",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Daily|CalculateApprovalTimeouts.5abbafc2-37cf-ec11-a7b5-0022486dabee}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|PublishProcess",
+                                                    "solutionComponentUniqueName":  "d492106f-e56d-ec11-8f8e-000d3a09f61a",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|PublishProcess.d492106f-e56d-ec11-8f8e-000d3a09f61a}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-InitializeWorkflowQueue",
+                                                    "solutionComponentUniqueName":  "d9eb54ac-e574-ed11-81ac-000d3a09c3ea",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-InitializeWorkflowQueue.d9eb54ac-e574-ed11-81ac-000d3a09c3ea}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-StartApproval",
+                                                    "solutionComponentUniqueName":  "a04208b8-428d-ec11-8d20-000d3a09ca36",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-StartApproval.a04208b8-428d-ec11-8d20-000d3a09ca36}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-StartNode",
+                                                    "solutionComponentUniqueName":  "d0ccbebf-d08c-ec11-8d20-000d3a09d351",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-StartNode.d0ccbebf-d08c-ec11-8d20-000d3a09d351}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-StartStage",
+                                                    "solutionComponentUniqueName":  "fb00d840-ca8c-ec11-8d20-000d3a09d351",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-StartStage.fb00d840-ca8c-ec11-8d20-000d3a09d351}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-StartWorkflow",
+                                                    "solutionComponentUniqueName":  "65045bb1-f682-ec11-8d20-0022486da35f",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-StartWorkflow.65045bb1-f682-ec11-8d20-0022486da35f}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-UpdateApproval",
+                                                    "solutionComponentUniqueName":  "bf11ca75-9d8d-ec11-8d20-000d3a09d351",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-UpdateApproval.bf11ca75-9d8d-ec11-8d20-000d3a09d351}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-UpdateNodeInstance",
+                                                    "solutionComponentUniqueName":  "514b484e-a68d-ec11-8d20-000d3a09d351",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-UpdateNodeInstance.514b484e-a68d-ec11-8d20-000d3a09d351}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Runtime-UpdateStageInstance",
+                                                    "solutionComponentUniqueName":  "0d3a2e2c-a78d-ec11-8d20-000d3a09d351",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Runtime-UpdateStageInstance.0d3a2e2c-a78d-ec11-8d20-000d3a09d351}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|SyncApproverOOF",
+                                                    "solutionComponentUniqueName":  "89dabc4e-35b9-ec11-983f-0022486de2eb",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|SyncApproverOOF.89dabc4e-35b9-ec11-983f-0022486de2eb}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|UpdateActivePublishedWorkflow",
+                                                    "solutionComponentUniqueName":  "27678b1c-da6f-ed11-81ac-000d3a09cf6c",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#"
+                                                }
                                             ],
     "AadGroupCanvasConfiguration":  [
-
+                                        {
+                                            "aadGroupId":  "#{canvasshare.aadGroupId.cat_businessapprovalprocessmanager_1d6e0}#",
+                                            "canvasNameInSolution":  "cat_businessapprovalprocessmanager_1d6e0",
+                                            "canvasDisplayName":  "[Deprecated] Business Approval Process Manager",
+                                            "roleName":  "#{canvasshare.roleName.cat_businessapprovalprocessmanager_1d6e0}#"
+                                        }
                                     ],
     "AadGroupTeamConfiguration":  [
 
