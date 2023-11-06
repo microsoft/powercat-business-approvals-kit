@@ -348,3 +348,8 @@ MigrationBackup/
 .ionide/
 
 site/**
+
+**/assets/temp.*
+**/assets/connector/**
+**/BusinessApprovalKit*.zip
+**/ContosoCoffee*.zip

@@ -1,0 +1,10 @@
+{
+    "Log": "Debug",
+    "Headless": "N",
+    "Record": "Y",
+    "Feature.ResetUserPassword": "N",
+    "Feature.CustomControls": "Y",
+    "Feature.CreatorKit": "Y",
+    "Feature.Approvals": "Y",
+    "Approvals.Install": "pac"
+}

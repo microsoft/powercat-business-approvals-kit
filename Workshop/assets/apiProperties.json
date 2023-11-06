@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "connectionParameters": {
+      "token": {
+        "type": "oAuthSetting",
+        "oAuthSettings": {
+          "identityProvider": "aad",
+          "scopes": [],
+          "redirectMode": "Global",
+          "customParameters": {
+            "LoginUri": {
+              "value": "https://login.microsoftonline.com"
+            },
+            "TenantId": {
+              "value": "#TenantId#"
+            },
+            "ResourceUri": {
+              "value": "#EnvironmentUrl#"
+            },
+            "EnableOnbehalfOfLogin": {
+              "value": false
+            }
+          },
+          "clientId": "#ClientId#",
+          "clientSecret": "#ClientSecret#"
+        },
+        "uiDefinition": null
+      }
+    },
+    "iconBrandColor": "#007ee5",
+    "capabilities": [],
+    "scriptOperations": [
+      "GetApprovalDataFields",
+      "CreateWorkflowInstance"
+    ],
+    "publisher": "",
+    "stackOwner": "",
+    "policyTemplateInstances": []
+  }
+}
