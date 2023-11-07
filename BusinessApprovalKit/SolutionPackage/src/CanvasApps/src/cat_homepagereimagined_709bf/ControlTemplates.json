@@ -174,21 +174,6 @@
     "TemplateDisplayName": "Label",
     "Version": "1.6.0"
   },
-  "NavigationComponentPCF(0.2.1)": {
-    "CustomGroupControlTemplateName": "",
-    "FirstParty": false,
-    "Id": "http://microsoft.com/appmagic/powercontrol/cat_PowerCAT.NavigationComponentPCF",
-    "IsComponentTemplate": false,
-    "IsCustomGroupControlTemplate": false,
-    "IsPcfControl": true,
-    "IsPremiumPcfControl": false,
-    "IsWidgetTemplate": false,
-    "LastModifiedTimestamp": "0",
-    "Name": "cat_PowerCAT.NavigationComponentPCF",
-    "OverridableProperties": {},
-    "TemplateDisplayName": "NavigationComponentPCF(0.2.1)",
-    "Version": "0.2.1"
-  },
   "pcfDataField": {
     "CustomGroupControlTemplateName": "",
     "FirstParty": true,

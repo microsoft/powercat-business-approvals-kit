@@ -8,7 +8,7 @@ function CreateNewProcess(selectedItems) {
         recordId:JSON.stringify({prop1: selectedItem, prop2: "new"}),
     };
     var navigationOptions = {
-        target: 2,
+        target: 1,
         position: 1,
         width: { value: 90, unit: "%" },
         title: "Process Designer"
@@ -26,7 +26,7 @@ function RunOnSelected(selectedItems) {
         recordId:JSON.stringify({prop1: selectedItem.Id, prop2: "grid"}),
     };
     var navigationOptions = {
-        target: 2,
+        target: 1,
         position: 1,
         width: { value: 90, unit: "%" },
         title: "Process Designer"
@@ -44,7 +44,7 @@ function RunOnSelectedForm(selectedItems) {
         recordId:JSON.stringify({prop1: selectedItem, prop2: "form"}),
     };
     var navigationOptions = {
-        target: 2,
+        target: 1,
         position: 1,
         width: { value: 90, unit: "%" },
         title: "Process Designer"

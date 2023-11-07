@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>cat_settings_3ada8</Name>
-  <AppVersion>2023-10-19T12:45:22Z</AppVersion>
+  <AppVersion>2023-11-07T10:29:36Z</AppVersion>
   <Status>Ready</Status>
-  <CreatedByClientVersion>3.23101.23.0</CreatedByClientVersion>
-  <MinClientVersion>3.23101.23.0</MinClientVersion>
-  <Tags>{"primaryDeviceWidth":"2511","primaryDeviceHeight":"1211","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.23101.23","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20231019T120042Z-3.23101.23.0"}</Tags>
+  <CreatedByClientVersion>3.23102.20.0</CreatedByClientVersion>
+  <MinClientVersion>3.23102.20.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1871","primaryDeviceHeight":"855","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.23102.20","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20231107T050725Z-3.23102.20.0"}</Tags>
   <IsCdsUpgraded>0</IsCdsUpgraded>
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
@@ -14,7 +14,7 @@
   <CommitMessage xsi:nil="true"></CommitMessage>
   <Publisher xsi:nil="true"></Publisher>
   <AuthorizationReferences>[]</AuthorizationReferences>
-  <ConnectionReferences>{"3e7985e9-b67b-42bc-bbae-537b66bf1847":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/u/henryorsborn/partial-builds/asev3migrations-with-resourceTemplate/1.0.1653.3403/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["SearchUserV2","MyProfile_V2","SearchUser"]}}</ConnectionReferences>
+  <ConnectionReferences>{"3e7985e9-b67b-42bc-bbae-537b66bf1847":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["MyProfile_V2","SearchUserV2","SearchUser"]}}</ConnectionReferences>
   <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Business Approval Work Profiles":{"entitySetName":"cat_businessapprovalworkprofiles","logicalName":"cat_businessapprovalworkprofile"},"Business Approval Holiday Calendars":{"entitySetName":"cat_businessapprovalholidaycalendars","logicalName":"cat_businessapprovalholidaycalendar"},"Business Approver OOF":{"entitySetName":"cat_businessapproveroofs","logicalName":"cat_businessapproveroof"},"Business Approval Public Holidays":{"entitySetName":"cat_businessapprovalpublicholidayses","logicalName":"cat_businessapprovalpublicholidays"},"Business Approvers":{"entitySetName":"cat_businessapprovers","logicalName":"cat_businessapprover"}},"components":[{"componentName":"CustomControl","identifier":"cat_PowerCAT.CommandBar","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Spinner","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.CommandBar","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Icon","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}}]}}</DatabaseReferences>
   <AppComponents>[]</AppComponents>
   <AppComponentDependencies>[]</AppComponentDependencies>

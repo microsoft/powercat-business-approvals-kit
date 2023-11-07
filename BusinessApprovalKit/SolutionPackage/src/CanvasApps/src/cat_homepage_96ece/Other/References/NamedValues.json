@@ -12,7 +12,7 @@
     },
     {
       "Kind": "Page",
-      "Name": "Home page",
+      "Name": "Home page - Old",
       "Value": "custompage:cat_homepage_96ece"
     },
     {
@@ -24,6 +24,11 @@
       "Kind": "Page",
       "Name": "Process Designer Reimagined",
       "Value": "custompage:cat_processdesignerreimagined_2478d"
+    },
+    {
+      "Kind": "Page",
+      "Name": "Home page",
+      "Value": "custompage:cat_homepagereimagined_709bf"
     }
   ]
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23094.220" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23101.246" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>BusinessApprovalKit</UniqueName>
     <LocalizedNames>
@@ -166,7 +166,6 @@
       <RootComponent type="61" schemaName="cat_businessapprovalprocessdesignercustompagejs" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapprovers" behavior="0" />
       <RootComponent type="62" schemaName="cat_BusinessApprovalManagement" behavior="0" />
-      <RootComponent type="66" schemaName="cat_PowerCAT.NavigationComponentPCF" behavior="0" />
       <RootComponent type="66" schemaName="cat_PowerCAT.Panel" behavior="0" />
       <RootComponent type="80" schemaName="cat_BusinessApprovalManagement" behavior="0" />
       <RootComponent type="9" schemaName="cat_bizappr_approvaltype" behavior="0" />
@@ -193,7 +192,7 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra Identity" solution="MetadataExtension (1.0.2.73)" />
+        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra Identity" solution="MetadataExtension (1.0.2.74)" />
         <Dependent type="300" schemaName="cat_businessapprovalprocessmanager_1d6e0" displayName="[Deprecated] Business Approval Process Manager" />
       </MissingDependency>
       <MissingDependency>
@@ -220,11 +219,11 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.AutoWidthLabel" displayName="cat_PowerCAT.AutoWidthLabel" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page" />
+        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.AutoWidthLabel" displayName="cat_PowerCAT.AutoWidthLabel" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page - Reimagined" />
+        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Breadcrumb" displayName="cat_PowerCAT.Breadcrumb" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -244,11 +243,11 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Elevation" displayName="cat_PowerCAT.Elevation" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page" />
+        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Elevation" displayName="cat_PowerCAT.Elevation" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page - Reimagined" />
+        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Elevation" displayName="cat_PowerCAT.Elevation" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -260,19 +259,19 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.FluentDetailsList" displayName="cat_PowerCAT.FluentDetailsList" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page" />
+        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.FluentDetailsList" displayName="cat_PowerCAT.FluentDetailsList" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page - Reimagined" />
+        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page" />
+        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page - Reimagined" />
+        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -285,6 +284,14 @@
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_settings_3ada8" displayName="Settings" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="cat_PowerCAT.NavigationComponentPCF" displayName="cat_PowerCAT.NavigationComponentPCF" solution="Active" />
+        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="cat_PowerCAT.NavigationComponentPCF" displayName="cat_PowerCAT.NavigationComponentPCF" solution="Active" />
+        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.PeoplePicker" displayName="cat_PowerCAT.PeoplePicker" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -316,34 +323,34 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.TagList" displayName="cat_PowerCAT.TagList" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page" />
+        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.TagList" displayName="cat_PowerCAT.TagList" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page - Reimagined" />
+        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2309.4021)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.1023)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Instance Override" id="{3e0b29a6-5594-4248-99e0-b082a4520571}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2309.4021)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.1023)" />
         <Dependent type="60" displayName="Business Approval Instance Override quick create form" parentDisplayName="Business Approval Instance Override" id="{45ce6ace-a8a5-ec11-b3fe-0022486e17cc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2309.4021)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.1023)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Work Profile" id="{8f99d74f-efa9-43fc-a2e5-4f6cbac8789f}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2309.4021)" />
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2310.1023)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Holiday Calendar" id="{22204bf0-25b0-4c88-92b9-1d2d751ffd2d}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2309.4021)" />
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2310.1023)" />
         <Dependent type="68" id="{227a813e-01cd-4a3c-8f52-96b5bafbdb0b}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="SettingDefinition" displayName="FluentThemingPreview" solution="msdyn_PowerAppsThemingSettings (1.0.0.10)" id.uniquename="FluentThemingPreview" />
+        <Required type="SettingDefinition" displayName="FluentThemingPreview" solution="msdyn_PowerAppsThemingSettings (1.0.0.11)" id.uniquename="FluentThemingPreview" />
         <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=cat_BusinessApprovalManagement,settingdefinitionid.uniquename=FluentThemingPreview" id.parentappmoduleid.uniquename="cat_BusinessApprovalManagement" id.settingdefinitionid.uniquename="FluentThemingPreview" />
       </MissingDependency>
     </MissingDependencies>
