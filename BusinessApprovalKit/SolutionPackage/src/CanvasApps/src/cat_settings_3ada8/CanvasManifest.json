@@ -87,7 +87,6 @@
       "smartemaildatacard": false,
       "supportcolumnnamesasidentifiers": false,
       "tabledoesntwraprecords": true,
-      "untypedobject": true,
       "usedisplaynamemetadata": true,
       "useenforcesavedatalimits": true,
       "useexperimentalcdsconnector": true,
@@ -98,7 +97,7 @@
       "zeroalltabindexes": true
     },
     "Author": "",
-    "BindingErrorCount": 1,
+    "BindingErrorCount": 0,
     "ContainsThirdPartyPcfControls": true,
     "DefaultConnectedDataSourceMaxGetRowsCount": 500,
     "DocumentAppType": "DesktopOrTablet",

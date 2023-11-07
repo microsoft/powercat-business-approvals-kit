@@ -1,8 +1,30 @@
 scrSettingsNew As screen:
     LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
-    OnVisible: |-
+    OnVisible: |
         =If(IsBlank(_myUPN), Set(_myUPN, Office365Users.MyProfileV2({'$select':"userPrincipalName"}).userPrincipalName));
-        Set(_mySettings, LookUp('Business Approvers', 'Approver Id' = _myUPN))
+        Set(_mySettings, LookUp('Business Approvers', 'Approver Id' = _myUPN));
+        
+        
+        If(!IsBlankOrError(_mySettings.Delegate),
+        ClearCollect(
+            colSelectedApprovalDelegate,
+            AddColumns(
+            Office365Users.SearchUserV2({searchTerm: _mySettings.Delegate.'Approver Id', top:1 }).value,
+            "PersonaKey", UserPrincipalName, 
+            "PersonaName", DisplayName,
+            "PersonaRole", JobTitle
+        )));
+        
+        
+        If(!IsBlankOrError(_mySettings.'Backup Delegate'),
+        ClearCollect(
+            colSelectedBackupDelegate,
+            AddColumns(
+            Office365Users.SearchUserV2({searchTerm: _mySettings.'Backup Delegate'.'Approver Id', top:1 }).value,
+            "PersonaKey", UserPrincipalName, 
+            "PersonaName", DisplayName,
+            "PersonaRole", JobTitle
+        )));
 
     MainContainer_1 As groupContainer.verticalAutoLayoutContainer:
         DropShadow: =DropShadow.Light
@@ -63,7 +85,7 @@ scrSettingsNew As screen:
                             {
                                 ItemKey: "Reset",
                                 ItemDisplayName: "Reset",
-                                ItemIconName: "Refresh"
+                                ItemIconName: "Undo"
                             }
                         )
                         /*Table({ Icon: Icon.Save, Text: "Save", Offset: 0 },{Icon: Icon.Reset, Text: "Reset", Offset: -60 })*/
@@ -80,84 +102,89 @@ scrSettingsNew As screen:
                             );
                             //first delegate
                         If(
-                                CountRows(ck_PeoplePicker_ApprovalDelegate.SelectedPeople) > 0,
-                                With(
+                                CountRows(colSelectedApprovalDelegate) > 0,
+                                UpdateContext(
                                     {
                                         del1: LookUp(
                                             'Business Approvers',
                                             'Approver Id' = First(colSelectedApprovalDelegate).PersonaKey
-                                        ),
+                                        )
+                                    }
+                                ));
+                        If(
+                                CountRows(colSelectedBackupDelegate) > 0,
+                                UpdateContext(
+                                    {
                                         del2: LookUp(
                                             'Business Approvers',
                                             'Approver Id' = First(colSelectedBackupDelegate).PersonaKey
                                         )
-                                    },
-                                    //save delegates as new approvers if does not exist
-                        //first delegate
-                                    Patch(
-                                        'Business Approvers',
-                                        Coalesce(
-                                            _mySettings,
-                                            Defaults('Business Approvers')
+                                    }
+                                ));
+                                Patch(
+                                    'Business Approvers',
+                                    Coalesce(
+                                        _mySettings,
+                                        Defaults('Business Approvers')
+                                    ),
+                                    {
+                                         Name: _myUPN,
+                                        'Approver Id':_myUPN,
+                                        Delegate: If(
+                                            IsBlank(del1),
+                                            Patch(
+                                                'Business Approvers',
+                                                Defaults('Business Approvers'),
+                                                {
+                                                    'Approver Id': First(colSelectedApprovalDelegate).PersonaKey,
+                                                    Name: First(colSelectedApprovalDelegate).PersonaName,
+                                                    'Approver Type': 'Business Approver Type'.User
+                                                }
+                                            ),
+                                            del1
                                         ),
-                                        {
-                                            Delegate: If(
-                                                IsBlank(del1),
+                                        'Backup Delegate': If(
+                                            CountRows(colSelectedBackupDelegate) > 0,
+                                            If(
+                                                IsBlank(del2),
                                                 Patch(
                                                     'Business Approvers',
                                                     Defaults('Business Approvers'),
                                                     {
-                                                        cat_approverid: First(colSelectedApprovalDelegate).PersonaKey,
-                                                        Name:  First(colSelectedApprovalDelegate).PersonaName,
+                                                        'Approver Id': First(colSelectedBackupDelegate).PersonaKey,
+                                                        Name: First(colSelectedBackupDelegate).PersonaName,
                                                         'Approver Type': 'Business Approver Type'.User
                                                     }
                                                 ),
-                                                del1
+                                                del2
                                             ),
-                                            'Backup Delegate': If(
-                                                CountRows(colSelectedBackupDelegate) > 0,
-                                                If(
-                                                    IsBlank(del2),
-                                                    Patch(
-                                                        'Business Approvers',
-                                                        Defaults('Business Approvers'),
-                                                        {
-                                                            cat_approverid: First(colSelectedBackupDelegate).PersonaKey,
-                                                            Name: First(colSelectedBackupDelegate).PersonaName,
-                                                            'Approver Type': 'Business Approver Type'.User
-                                                        }
-                                                    ),
-                                                    del2
-                                                ),
-                                                Blank()
-                                            ),
-                                            'Notification Type': cmbxlPreferredNotification.Selected.Value,
-                                            'Work Profile': cmbxWorkProfile.Selected,
-                                            'Approver Type': 'Business Approver Type'.User,
-                                            'Is Out of Office': cbxOutOfOffice.Checked
-                                        }
-                                    );
-                                )
-                            );
-                            //error check
-                        If(
-                                !IsEmpty(Errors('Business Approvers')),
-                                Notify(
-                                    Concat(
-                                        Errors('Business Approvers'),
-                                        Column & ": " & Message
+                                            Blank()
+                                        ),
+                                        'Notification Type': cmbxlPreferredNotification.Selected.Value,
+                                        'Work Profile': cmbxWorkProfile.Selected,
+                                        'Approver Type': 'Business Approver Type'.User,
+                                        'Is Out of Office': cbxOutOfOffice.Checked
+                                    }
+                                );
+                        //error check
+                                If(
+                                    !IsEmpty(Errors('Business Approvers')),
+                                    Notify(
+                                        Concat(
+                                            Errors('Business Approvers'),
+                                            Column & ": " & Message
+                                        ),
+                                        NotificationType.Error
                                     ),
-                                    NotificationType.Error
-                                ),
-                                Notify(
-                                    "Settings saved successfully.",
-                                    NotificationType.Success
-                                )
-                            );
+                                    Notify(
+                                        "Settings saved successfully.",
+                                        NotificationType.Success
+                                    )
+                                );
                             Set(
                                 _isBusy,
                                 false
-                            ),
+                            );,
                             "Reset",
                             Set(
                                 _mySettings,
@@ -186,10 +213,10 @@ scrSettingsNew As screen:
 
                 TextCanvas1 As Text:
                     DisplayMode: =DisplayMode.Edit
-                    Height: =27
-                    Text: =First(colSelectedApprovalDelegate).PersonaKey
-                    Width: =308
-                    X: =820
+                    Height: =32
+                    Text: =
+                    Width: =96
+                    X: =700
                     Y: =13
                     ZIndex: =2
 
@@ -532,6 +559,7 @@ scrSettingsNew As screen:
                         ZIndex: =31
 
                 "cbxOutOfOffice As 'Check box'":
+                    Checked: =_mySettings.'Is Out of Office'
                     DisplayMode: =DisplayMode.Edit
                     Height: =32
                     Label: =If(Self.Checked,"Enabled","Disabled")
@@ -565,7 +593,7 @@ scrSettingsNew As screen:
                     Items: =colSelectedApprovalDelegate
                     MaxPeople: =1
                     OnChange: |-
-                        =If(!IsBlank(Self.SelectedPeople), ClearCollect(
+                        =If(!IsBlankOrError(Self.SelectedPeople), ClearCollect(
                             colSelectedApprovalDelegate,
                             Self.SelectedPeople
                         ))
@@ -593,7 +621,7 @@ scrSettingsNew As screen:
                     Items: =colSelectedBackupDelegate
                     MaxPeople: =1
                     OnChange: |-
-                        =If(!IsBlank(Self.SelectedPeople), ClearCollect(
+                        =If(!IsBlankOrError(Self.SelectedPeople), ClearCollect(
                             colSelectedBackupDelegate,
                             Self.SelectedPeople
                         ))
@@ -827,14 +855,11 @@ scrSettingsNew As screen:
                     Y: =26
                     ZIndex: =35
 
-    Spinner1 As Spinner:
-        Appearance: ='Spinner.Appearance'.Inverted
-        DisplayMode: =DisplayMode.Edit
+    BusyScreen_1 As BusyScreen:
+        BusyMessage: ="Saving..."
+        Fill: =RGBA(0, 0, 0, 0.05)
         Height: =Parent.Height
-        Label: ="Saving..."
         Visible: =_isBusy
         Width: =Parent.Width
-        X: =0
-        Y: =0
         ZIndex: =3
 

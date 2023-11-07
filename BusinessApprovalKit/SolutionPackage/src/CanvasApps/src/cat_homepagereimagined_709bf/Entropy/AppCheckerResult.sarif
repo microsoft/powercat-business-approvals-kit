@@ -38,6 +38,66 @@
           },
           "ruleId": "app-UnusedVariables",
           "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "HomeScreen._Navigate"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "HomeScreen._Navigate",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "_Navigate",
+                "module": "HomeScreen",
+                "type": "HomeScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrHome.componentVisible"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrHome.componentVisible",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "componentVisible",
+                "module": "scrHome",
+                "type": "scrHome"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 0
         }
       ],
       "tool": {

@@ -1,8 +1,39 @@
 App As appinfo:
     BackEnabled: =false
     OnStart: |
-        =Set(
+        =// Set themeing
+        Set(
             AppTheme,
+            {
+                palette: {
+                    themePrimary: "#0880a8",
+                    themeLighterAlt: "#f2f9fc",
+                    themeLighter: "#cce8f1",
+                    themeLight: "#a4d5e5",
+                    themeTertiary: "#57aecb",
+                    themeSecondary: "#1d8db3",
+                    themeDarkAlt: "#087397",
+                    themeDark: "#066280",
+                    themeDarker: "#05485e",
+                    neutralLighterAlt: "#faf9f8",
+                    neutralLighter: "#f3f2f1",
+                    neutralLight: "#edebe9",
+                    neutralQuaternaryAlt: "#e1dfdd",
+                    neutralQuaternary: "#d0d0d0",
+                    neutralTertiaryAlt: "#c8c6c4",
+                    neutralTertiary: "#a19f9d",
+                    neutralSecondary: "#605e5c",
+                    neutralPrimaryAlt: "#3b3a39",
+                    neutralPrimary: "#323130",
+                    neutralDark: "#201f1e",
+                    black: "#000000",
+                    white: "#ffffff"
+                }
+            }
+        );
+        
+        Set(
+            DefaultTheme,
             {
                 palette: {
                     themePrimary: "#0078d4",
@@ -45,27 +76,6 @@ App As appinfo:
             )
         );
         ClearCollect(colSelectedBackupDelegate, _mySettings.'Backup Delegate');
-        
-        If(!IsBlank(_mySettings.Delegate),
-        ClearCollect(
-            colSelectedApprovalDelegate,
-            AddColumns(
-            Office365Users.SearchUserV2({searchTerm: _mySettings.Delegate.'Approver Id', top:1 }).value,
-            "SuggestionKey", UserPrincipalName, 
-            "SuggestionName", DisplayName,
-            "SuggestionRole", JobTitle
-        )));
-        
-        
-        If(!IsBlank(_mySettings.'Backup Delegate'),
-        ClearCollect(
-            colSelectedBackupDelegate,
-            AddColumns(
-            Office365Users.SearchUserV2({searchTerm: _mySettings.'Backup Delegate'.'Approver Id', top:1 }).value,
-            "SuggestionKey", UserPrincipalName, 
-            "SuggestionName", DisplayName,
-            "SuggestionRole", JobTitle
-        )));
     Theme: =PowerAppsTheme
 
     Host As hostControl.DefaultHostControlVariant:

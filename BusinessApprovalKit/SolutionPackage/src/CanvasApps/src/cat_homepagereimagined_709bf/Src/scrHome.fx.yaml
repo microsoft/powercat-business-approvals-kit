@@ -45,26 +45,6 @@
                 Width: =Parent.Width
                 ZIndex: =1
 
-                "NavigationComponentPCF1_1 As 'NavigationComponentPCF(0.2.1)'":
-                    DisplayMode: =DisplayMode.View
-                    EntityName: =""
-                    Height: =47
-                    Name: ="cat_processdesigner_57f47"
-                    Navigate: =_Navigate
-                    OnClose: |-
-                        =UpdateContext({_Navigate:false})
-                    PageType: ="custom"
-                    Target: =0
-                    TargetHeight: =Parent.Height
-                    TargetPosition: =2
-                    TargetWidth: =Parent.Width
-                    Title: ="Process Designer"
-                    Visible: =componentVisible
-                    Width: =52
-                    X: =40
-                    Y: =40
-                    ZIndex: =1
-
                 BannerImage As image:
                     BorderColor: =RGBA(0, 0, 0, 0)
                     BorderStyle: =BorderStyle.None
@@ -79,7 +59,7 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     PressedFill: =RGBA(0, 0, 0, 0)
                     Width: =Parent.Width
-                    ZIndex: =2
+                    ZIndex: =1
 
                 TitleContainer As groupContainer.horizontalAutoLayoutContainer:
                     Height: =AutoWidthLabel1.Height + lblSubtext_2.Height
@@ -92,7 +72,7 @@
                     Width: =370
                     X: =Parent.Width * 0.5 - Self.Width *0.5
                     Y: =Parent.Height/2.7
-                    ZIndex: =3
+                    ZIndex: =2
 
                     "AutoWidthLabel1_2 As 'Auto Width Label (1.0.22)'":
                         DisplayMode: =DisplayMode.Edit
@@ -283,8 +263,7 @@
                                 HoverBorderColor: =RGBA(230, 230, 230, 1)
                                 HoverFill: =RGBA(0, 0, 0, 0)
                                 Image: =
-                                OnSelect: |-
-                                    =UpdateContext({_Navigate:true})
+                                OnSelect: =Navigate('Process Designer')
                                 PressedBorderColor: =RGBA(0, 0, 0, 0)
                                 PressedFill: =RGBA(0, 0, 0, 0)
                                 RadiusBottomLeft: =8

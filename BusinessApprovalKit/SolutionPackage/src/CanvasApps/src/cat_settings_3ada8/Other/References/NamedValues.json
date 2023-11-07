@@ -2,7 +2,7 @@
   "NamedValues": [
     {
       "Kind": "Page",
-      "Name": "Home page",
+      "Name": "Home page - Old",
       "Value": "custompage:cat_homepage_96ece"
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "Kind": "Page",
-      "Name": "Home page - Reimagined",
+      "Name": "Home page",
       "Value": "custompage:cat_homepagereimagined_709bf"
     }
   ]
