@@ -42,7 +42,7 @@ steps:
   inputs:
     source: 'specific'
     project: 'powercat-business-approvals-kit'
-    pipeline: '1990' #Production buildId
+    pipeline: '2027' #Production buildId
     runVersion: 'latest'
     patterns: '**/BusinessApprovalKit*.zip'
   displayName: 'Download Business Approval Kit solution'
