@@ -264,51 +264,43 @@
                                     }
                                 )
                             OnSelect: |-
-                                =Switch(
-                                    Self.Selected.ItemKey,
-                                    "variables",
-                                    If(
-                                        IsBlankOrError(_selectedProcess),
-                                        Set(
-                                            _selectedProcess,
-                                            Patch(
-                                                'Business Approval Processes',
-                                                Defaults('Business Approval Processes'),
-                                                {Name: txtInputProcessName.Value}
-                                            )
-                                        ),
+                                =If(
+                                    Self.Selected.ItemKey <> "save",
+                                    UpdateContext(
+                                        {
+                                            isPanelOpen: false,
+                                            isPanelVisible: true
+                                        }
+                                    )
+                                );
+                                If(
+                                    IsBlankOrError(_selectedProcess),
+                                    Set(
+                                        _selectedProcess,
                                         Patch(
                                             'Business Approval Processes',
-                                            _selectedProcess,
+                                            Defaults('Business Approval Processes'),
                                             {Name: txtInputProcessName.Value}
                                         )
-                                    );
+                                    ),
+                                    Patch(
+                                        'Business Approval Processes',
+                                        _selectedProcess,
+                                        {Name: txtInputProcessName.Value}
+                                    )
+                                );
+                                Switch(
+                                    Self.Selected.ItemKey,
+                                    "variables",
                                     UpdateContext(
                                         {
                                             isPanelOpen: true,
                                             panelHeaderText: "Set Variables",
-                                            isPanelVisible: true,
                                             showVariableContainer: true
                                         }
                                     );
                                     SetFocus(txtAppDataName_2),
                                     "save",
-                                    If(
-                                        IsBlankOrError(_selectedProcess),
-                                        Set(
-                                            _selectedProcess,
-                                            Patch(
-                                                'Business Approval Processes',
-                                                Defaults('Business Approval Processes'),
-                                                {Name: txtInputProcessName.Value}
-                                            )
-                                        ),
-                                        Patch(
-                                            'Business Approval Processes',
-                                            _selectedProcess,
-                                            {Name: txtInputProcessName.Value}
-                                        )
-                                    );
                                     If(
                                         !IsBlankOrError(_selectedProcess),
                                         Notify(
@@ -316,115 +308,12 @@
                                             NotificationType.Success
                                         )
                                     ),
-                                    "new",
-                                // Onscreen stage editor visible logic starts
-                                //cache operands if not already available
-                                    If(
-                                        IsEmpty(_operands),
-                                        ClearCollect(
-                                            _operands,
-                                            {
-                                                operands: [
-                                                    'Business Approval Condition Operand'.'Equals (=)',
-                                                    'Business Approval Condition Operand'.'Not Equal (<>)',
-                                                    'Business Approval Condition Operand'.'Starts With',
-                                                    'Business Approval Condition Operand'.'Ends With',
-                                                    'Business Approval Condition Operand'.Contains,
-                                                    'Business Approval Condition Operand'.'Is Blank',
-                                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                                ],
-                                                type: [
-                                                    'Business Approval Data Type'.Text,
-                                                    'Business Approval Data Type'.'User (Email)'
-                                                ]
-                                            },
-                                            {
-                                                operands: [
-                                                    'Business Approval Condition Operand'.'Equals (=)',
-                                                    'Business Approval Condition Operand'.'Less Than (<)',
-                                                    'Business Approval Condition Operand'.'Less Than or Equals (<=)',
-                                                    'Business Approval Condition Operand'.'Greater Than (>)',
-                                                    'Business Approval Condition Operand'.'Greater Than or Equals (>=)',
-                                                    'Business Approval Condition Operand'.'Not Equal (<>)',
-                                                    'Business Approval Condition Operand'.'Is Blank',
-                                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                                ],
-                                                type: [
-                                                    'Business Approval Data Type'.Number,
-                                                    'Business Approval Data Type'.Date
-                                                ]
-                                            },
-                                            {
-                                                operands: [
-                                                    'Business Approval Condition Operand'.'Equals (=)',
-                                                    'Business Approval Condition Operand'.'Not Equal (<>)',
-                                                    'Business Approval Condition Operand'.'Is Blank',
-                                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                                ],
-                                                type: ['Business Approval Data Type'.Boolean]
-                                            }
-                                        )
-                                    );
-                                    
-                                //load conditions if exists
-                                Clear(_conditions);
-                                    ForAll(
-                                        Filter(
-                                            Filter(
-                                                'Business Approval Conditions',
-                                                'Business Approval Conditions (Views)'.'Active Stage Conditions'
-                                            ),
-                                            Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
-                                        ),
-                                        Collect(
-                                            _conditions,
-                                            {
-                                                ConditionId: ThisRecord.'Business Approval Condition',
-                                                Path: ThisRecord.'Path Index',
-                                                Target: ThisRecord.'Condition Data Type',
-                                                TargetData: ThisRecord.'Condition Data',
-                                                StaticValue: ThisRecord.'Condition Value',
-                                                IsDefault: ThisRecord.'Is Default' = 'Is Default (Business Approval Conditions)'.Yes,
-                                                IsParallel: ThisRecord.'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes
-                                            }
-                                        )
-                                    );
-                                    
-                                //allow change of condition type if there are no existing conditions defined
-                                //isCleared - tracks if the user clicked on "Clear" (may not yet proceed to change condition, as they can undo it)
-                                UpdateContext(
-                                        {
-                                            allowUpdateConditionType: CountRows(_conditions) = 0,
-                                            isCleared: false
-                                        }
-                                    );
-                                    
-                                // Onscreen stage editor visible logic ends
-                                Set(
-                                        _selectedStage,
-                                        Blank()
-                                    );
-                                    Set(
-                                        _currentStageIndex,
-                                        ApprovalDesignerEdit_2.TotalStages + 1
-                                    );
-                                    UpdateContext(
-                                        {
-                                            isPanelOpen: true,
-                                            panelHeaderText: "Create Stage",
-                                            showStageContainer: true,
-                                            isPanelVisible: true
-                                        }
-                                    );
-                                    ,
-                                    //Navigate(scrWizardStageEditor),
                                     "versions",
                                     UpdateContext(
                                         {
                                             isPanelOpen: true,
                                             showProcessVersionContainer: true,
-                                            panelHeaderText: "Versions",
-                                            isPanelVisible: true
+                                            panelHeaderText: "Versions"
                                         }
                                     ),
                                     "publish",
@@ -432,7 +321,6 @@
                                         {
                                             isPanelOpen: true,
                                             panelHeaderText: "Publish",
-                                            isPanelVisible: true,
                                             showPublishProcessContainer: true
                                         }
                                     );

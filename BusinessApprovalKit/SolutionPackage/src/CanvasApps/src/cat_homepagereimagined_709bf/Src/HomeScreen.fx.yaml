@@ -2,26 +2,6 @@ HomeScreen As screen:
     LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
     OnVisible: =
 
-    "NavigationComponentPCF1 As 'NavigationComponentPCF(0.2.1)'":
-        DisplayMode: =DisplayMode.View
-        EntityName: =""
-        Height: =47
-        Name: ="cat_processdesigner_57f47"
-        Navigate: =_Navigate
-        OnClose: |-
-            =UpdateContext({_Navigate:false})
-        PageType: ="custom"
-        Target: =0
-        TargetHeight: =Parent.Height
-        TargetPosition: =2
-        TargetWidth: =Parent.Width
-        Title: ="Process Designer"
-        Visible: =true
-        Width: =52
-        X: =670
-        Y: =105
-        ZIndex: =1
-
     MainContainer As groupContainer.verticalAutoLayoutContainer:
         DropShadow: =DropShadow.Light
         Fill: =RGBA(245, 245, 245, 1)

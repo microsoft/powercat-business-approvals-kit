@@ -5,7 +5,7 @@
       "DataflowAnalysisEnabled": false,
       "DataflowAnalysisFlagStateToggledByUser": false
     },
-    "DocVersion": "1.334",
+    "DocVersion": "1.335",
     "MinVersionToLoad": "1.331",
     "MSAppStructureVersion": "2.0"
   },
@@ -87,7 +87,6 @@
       "smartemaildatacard": false,
       "supportcolumnnamesasidentifiers": false,
       "tabledoesntwraprecords": true,
-      "untypedobject": true,
       "usedisplaynamemetadata": true,
       "useenforcesavedatalimits": true,
       "useexperimentalcdsconnector": true,
@@ -114,13 +113,13 @@
     "Id": "6c20e10c-2f7a-4bad-95fa-c8b59131bfd5",
     "InstrumentationKey": "",
     "ManualOfflineProfileId": "",
-    "Name": "Home page",
+    "Name": "Home page - Old",
     "OriginatingVersion": "1.332",
     "ParserErrorCount": 0,
     "ShowStatusBar": false
   },
   "PublishInfo": {
-    "AppName": "Home page",
+    "AppName": "Home page - Old",
     "BackgroundColor": "RGBA(0,176,240,1)",
     "IconColor": "RGBA(255,255,255,1)",
     "IconName": "Edit",

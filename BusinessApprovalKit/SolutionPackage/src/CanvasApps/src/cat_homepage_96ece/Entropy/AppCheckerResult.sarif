@@ -8,12 +8,62 @@
           "executionSuccessful": true
         }
       ],
-      "results": [],
+      "results": [
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "HomeScreen._Navigate"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "HomeScreen._Navigate",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "_Navigate",
+                "module": "HomeScreen",
+                "type": "HomeScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 0
+        }
+      ],
       "tool": {
         "driver": {
           "fullName": "PowerApps app checker",
           "name": "PowerApps app checker",
-          "version": "1.334"
+          "rules": [
+            {
+              "id": "app-UnusedVariables",
+              "messageStrings": {
+                "issue": {
+                  "text": "Unused variable"
+                }
+              },
+              "properties": {
+                "componentType": "app",
+                "howToFix": [
+                  "Remove the unused variable."
+                ],
+                "level": "Medium",
+                "primaryCategory": "performance",
+                "whyFix": "This variable is declared but is not referenced by any control, so it is not needed."
+              }
+            }
+          ],
+          "version": "1.335"
         }
       }
     }
