@@ -11,6 +11,11 @@ concurrency:
   cancel-in-progress: false    
 
 jobs:
+  print-issue-milestone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Issue Milestone
+        run: echo "The milestone of your issue is ${{ github.event.issue.milestone.title }}"
   alertEnhancementAK:
     if: |
       contains(github.event.issue.labels.*.name, 'enhancement')
