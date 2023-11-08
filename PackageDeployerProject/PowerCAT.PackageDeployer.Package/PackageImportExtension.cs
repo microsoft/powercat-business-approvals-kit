@@ -41,6 +41,29 @@ namespace PowerCAT.PackageDeployer.Package
         /// <see cref="ImportExtension.InitializeCustomExtension"/>
         public override void InitializeCustomExtension()
         {
+            // Validate the state of the runtime settings object.  
+            if (RuntimeSettings != null)
+            {
+                PackageLog.Log(string.Format("Runtime Settings populated.  Count = {0}", RuntimeSettings.Count));
+                foreach (var setting in RuntimeSettings)
+                {
+                    PackageLog.Log(string.Format("Key={0} | Value={1}", setting.Key, setting.Value.ToString()));
+                }
+
+                // Check to see if skip checks is present.  
+                if (RuntimeSettings.ContainsKey("SkipChecks"))
+                {
+                    bool bSkipChecks = false;
+                    if (bool.TryParse((string)RuntimeSettings["SkipChecks"], out bSkipChecks))
+                    {
+                        OverrideDataImportSafetyChecks = bSkipChecks;
+                    }
+                }
+            }
+            else
+            {
+                PackageLog.Log("Runtime Settings not populated");
+            }
         }
 
         /// <summary>
