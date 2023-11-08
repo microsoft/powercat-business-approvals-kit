@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <AssemblyTitle>PD.ApprovalKit</AssemblyTitle>
-    <Product>PD.ApprovalKit</Product>
+    <AssemblyTitle>PowerCAT.PackageDeployer.Package</AssemblyTitle>
+    <Product>PowerCAT.PackageDeployer.Package</Product>
     <Copyright>Copyright © 2023</Copyright>
   </PropertyGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.Composition;
 
-namespace PD.ApprovalKit
+namespace PowerCAT.PackageDeployer.Package
 {
     /// <summary>
     /// Import package starter frame.
@@ -21,17 +21,17 @@ namespace PD.ApprovalKit
         /// Name of the Import Package to Use
         /// </summary>
         /// <param name="plural">if true, return plural version</param>
-        public override string GetNameOfImport(bool plural) => plural ? "PDApprovalKit" : "PDApprovalKit";
+        public override string GetNameOfImport(bool plural) => plural ? "PowerCAT.PackageDeployer.Package" : "PowerCAT.PackageDeployer.Package";
 
         /// <summary>
         /// Long name of the Import Package.
         /// </summary>
-        public override string GetLongNameOfImport => "PackageDeployerApprovalKit";
+        public override string GetLongNameOfImport => "PowerCAT.PackageDeployer.Package";
 
         /// <summary>
         /// Description of the package, used in the package selection UI
         /// </summary>
-        public override string GetImportPackageDescriptionText => "Package Deployer Project for Approval Kit";
+        public override string GetImportPackageDescriptionText => "Power CAT Package Deployer Project";
 
         #endregion
 
@@ -41,6 +41,29 @@ namespace PD.ApprovalKit
         /// <see cref="ImportExtension.InitializeCustomExtension"/>
         public override void InitializeCustomExtension()
         {
+            // Validate the state of the runtime settings object.  
+            if (RuntimeSettings != null)
+            {
+                PackageLog.Log(string.Format("Runtime Settings populated.  Count = {0}", RuntimeSettings.Count));
+                foreach (var setting in RuntimeSettings)
+                {
+                    PackageLog.Log(string.Format("Key={0} | Value={1}", setting.Key, setting.Value.ToString()));
+                }
+
+                // Check to see if skip checks is present.  
+                if (RuntimeSettings.ContainsKey("SkipChecks"))
+                {
+                    bool bSkipChecks = false;
+                    if (bool.TryParse((string)RuntimeSettings["SkipChecks"], out bSkipChecks))
+                    {
+                        OverrideDataImportSafetyChecks = bSkipChecks;
+                    }
+                }
+            }
+            else
+            {
+                PackageLog.Log("Runtime Settings not populated");
+            }
         }
 
         /// <summary>
