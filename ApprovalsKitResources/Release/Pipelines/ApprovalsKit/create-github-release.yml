@@ -16,7 +16,7 @@ parameters:
 - name: PrepareAppSourcePackage
   type: boolean
   default: false
-- name: preparePackageDeployerPackage
+- name: PreparePackageDeployerPackage
   type: boolean
   default: false
   
@@ -103,5 +103,5 @@ steps:
     hotfixReleaseNumber: ${{parameters.HotfixReleaseNumber}}
     queryHeadingDelimited: ""
     prepareAppSourcePackage: ${{parameters.PrepareAppSourcePackage}}
-    preparePackageDeployerPackage: ${{parameters.preparePackageDeployerPackage}}
+    preparePackageDeployerPackage: ${{parameters.PreparePackageDeployerPackage}}
     projectName: "powercat-business-approvals-kit"
