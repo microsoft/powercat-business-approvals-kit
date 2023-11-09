@@ -36,7 +36,10 @@ jobs:
         
       - name: Set Iteration Path
         id: set-iteration
-        run: echo "ITERATION=OneCatTools\\FY24\\Q2\\$MONTH" >> $GITHUB_ENV
+        run: echo "ITERATION=OneCatTools\\FY${{ env.YEAR }}\\Q2\\$MONTH" >> $GITHUB_ENV
+
+      - name: Print the Iteration Path
+        run: echo "Iteration Path ${{ env.ITERATION }}"        
 
       - name: Sync to Azure DevOps
         uses: danhellem/github-actions-issue-to-work-item@master
