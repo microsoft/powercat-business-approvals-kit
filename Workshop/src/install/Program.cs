@@ -1,6 +1,9 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Parsing;
+using System.Dynamic;
+using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.PowerApps.TestEngine.TestInfra;
 using Microsoft.PowerPlatform.Config;
@@ -26,7 +29,8 @@ class Program
         {
             CreateUserCommands(),
             CreateFlowCommands(),
-            CreateConnectionCommands()
+            CreateConnectionCommands(),
+            EnvironmentCommands()
         };
 
         var recordOption = new Option<string>("--record", () => "", "Y to record any output as video. If missing will not record");
@@ -46,6 +50,18 @@ class Program
         await rootCommand.InvokeAsync(args);
     }
 
+    private static Command EnvironmentCommands() {
+        var environmentCommand = new Command("environment", "Environment commands");
+
+        var userOption = new Option<string>("--upn");
+
+        var listCommand = new Command("list", "List environments") { userOption };
+        listCommand.SetHandler(EnvironmentQuery, userOption );
+        environmentCommand.Add(listCommand);
+
+        return environmentCommand;
+    }
+
     private static Command CreateUserCommands()
     {
         var userCommand = new Command("user", "Manage users");
@@ -59,6 +75,15 @@ class Program
         };
         userStartCommand.SetHandler(UserStart, nameOption, environmentOption);
         userCommand.Add(userStartCommand);
+
+        var fileOption = new Option<string>("--file");
+        var dataOption = new Option<string>("--data");
+        var userScriptCommand = new Command("script", "Start browser session")
+        {
+            nameOption, environmentOption, fileOption, dataOption
+        };
+        userScriptCommand.SetHandler(UserScriptExecute, nameOption, environmentOption, fileOption, dataOption);
+        userCommand.Add(userScriptCommand);
 
         var pageOption = new Option<string>("--page");
         var requestOption = new Option<string>("--request");
@@ -117,6 +142,49 @@ class Program
         return connectorCommand;
     }
 
+    private static void EnvironmentQuery(string user) {
+        using var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddConsole();
+        });
+        var logger = loggerFactory.CreateLogger<Program>();
+
+        if ( commands == null ) {
+            throw new NullReferenceException("commands");
+        }
+
+        var common = new Common(logger, commands);
+        var playwright = common.Login(user).Result;
+        playwright.GoToUrlAsync("https://admin.powerplatform.microsoft.com/environments").Wait();
+
+        playwright.PauseAsync().Wait();
+
+        var matches = playwright.GetMatch(5,"[data-automation-key='Environment']", GetEnvironments).Result;
+
+        Console.WriteLine(JsonSerializer.Serialize(matches));
+    }
+
+    public static async Task<IEnumerable<ExpandoObject>> GetEnvironments(IEnumerable<Microsoft.Playwright.ILocator> matches) {
+        var results = new List<ExpandoObject>();
+
+
+        foreach ( var match in matches ) {
+            dynamic result = new ExpandoObject();
+            var host = await match.Locator(".ms-TooltipHost div").AllInnerTextsAsync();
+            result.EnvironmentUrl = host.FirstOrDefault();
+
+            String val  = await (await match.Locator("a").AllAsync()).First().GetAttributeAsync("href");
+            result.Id = val.Replace("/environments/environment/","").Split('/')[0];
+            
+            var link = await match.Locator(".ms-Link").AllInnerTextsAsync();
+            result.Name = link.FirstOrDefault();
+            
+            results.Add(result);
+        }
+
+        return results;
+    }
+
     /// <summary>
     /// Start a Power Automate Flow
     /// </summary>
@@ -148,6 +216,22 @@ class Program
         Thread.Sleep(1000);
 
         logger.LogInformation("End user flow start");
+    }
+
+    public static void UserScriptExecute(string user, string environment, string script, string data) {
+         using var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddConsole();
+        });
+        var logger = loggerFactory.CreateLogger<Program>();
+
+        if ( commands == null ) {
+            throw new NullReferenceException("commands");
+        }
+
+        var common = new Common(logger, commands);
+        var playwright = common.Login(user).Result;
+        playwright.ExecuteScript(data, script).Wait();
     }
 
      /// <summary>
