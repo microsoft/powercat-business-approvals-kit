@@ -33,21 +33,24 @@ jobs:
 
       - name: Extract Year
         id: extract-year
-        run: echo "vYEAR=$(echo $MILESTONE | cut -d' ' -f3)" >> $GITHUB_ENV
-
-      - name: Print Year
-        run: echo "Year - ${{ env.vYEAR }}"          
-  
+        run: |
+            MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
+            YEAR=$(echo $MILESTONE_PART | cut -d' ' -f2)
+            echo "YEAR=$YEAR" >> $GITHUB_ENV
+      
+      - name: Print YEAR
+        run: echo "YEAR is $YEAR"
+      
       - name: Replace first two characters with 'FY'
         id: replace-fy
-        run: echo "vFYYEAR=$(echo $vYEAR | sed 's/^../FY/')" >> $GITHUB_ENV
+        run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
         
       - name: Print FY Year
-        run: echo "Formatted year - ${{ env.vFYYEAR }}"        
+        run: echo "Formatted year - ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
-        run: echo "ITERATION=OneCatTools\\FY${{ env.vFYYEAR }}\\Q2\\$MONTH" >> $GITHUB_ENV
+        run: echo "ITERATION=OneCatTools\\FY${{ env.YEAR }}\\Q2\\$MONTH" >> $GITHUB_ENV
 
       - name: Print the Iteration Path
         run: echo "Iteration Path ${{ env.ITERATION }}"        
