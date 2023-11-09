@@ -49,11 +49,29 @@ jobs:
         run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
         
       - name: Print FY Year
-        run: echo "FY Year - ${{ env.YEAR }}"        
+        run: echo "FY Year - ${{ env.YEAR }}"
+
+      - name: Determine Quarter
+        id: determine-quarter
+        run: |
+          LOWERCASE_MONTH=$(echo "$MONTH" | tr '[:upper:]' '[:lower:]')
+          if [[ "$LOWERCASE_MONTH" == "october" || "$LOWERCASE_MONTH" == "november" || "$LOWERCASE_MONTH" == "december" ]]; then
+            QUARTER="Q2"
+          elif [[ "$LOWERCASE_MONTH" == "january" || "$LOWERCASE_MONTH" == "february" || "$LOWERCASE_MONTH" == "march" ]]; then
+            QUARTER="Q3"
+          elif [[ "$LOWERCASE_MONTH" == "april" || "$LOWERCASE_MONTH" == "may" || "$LOWERCASE_MONTH" == "june" ]]; then
+            QUARTER="Q4"              
+          else
+            QUARTER="Q1"
+          fi
+          echo "QUARTER=$QUARTER" >> $GITHUB_ENV
+
+      - name: Print QUARTER
+        run: echo "QUARTER is $QUARTER"          
         
       - name: Set Iteration Path
         id: set-iteration
-        run: echo "ITERATION=OneCatTools\\${{ env.YEAR }}\\Q2\\$MONTH" >> $GITHUB_ENV
+        run: echo "ITERATION=OneCatTools\\$YEAR }}\\$QUARTER\\$MONTH" >> $GITHUB_ENV
 
       - name: Print the Iteration Path
         run: echo "Iteration Path ${{ env.ITERATION }}"        
