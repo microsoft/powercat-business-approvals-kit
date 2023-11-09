@@ -3434,19 +3434,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrPublishProcess.Container1_10.tggActivate.AccessibleLabel"
+                  "fullyQualifiedName": "scrPublishProcess.Container1_10.Progress1.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "scrPublishProcess.Container1_10.tggActivate.AccessibleLabel",
+                  "fullyQualifiedName": "scrPublishProcess.Container1_10.Progress1.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "scrPublishProcess",
-                "type": "scrPublishProcess.Container1_10.tggActivate"
+                "type": "scrPublishProcess.Container1_10.Progress1"
               }
             }
           ],
@@ -3464,19 +3464,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrPublishProcess.Container1_10.Progress1.AccessibleLabel"
+                  "fullyQualifiedName": "scrPublishProcess.Container1_10.tggActivate.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "scrPublishProcess.Container1_10.Progress1.AccessibleLabel",
+                  "fullyQualifiedName": "scrPublishProcess.Container1_10.tggActivate.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "scrPublishProcess",
-                "type": "scrPublishProcess.Container1_10.Progress1"
+                "type": "scrPublishProcess.Container1_10.tggActivate"
               }
             }
           ],
@@ -6434,17 +6434,17 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "App.AppTheme1"
+                  "fullyQualifiedName": "App.DefaultTheme"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "App.AppTheme1",
+                  "fullyQualifiedName": "App.DefaultTheme",
                   "relativeAddress": 0
                 }
               },
               "properties": {
-                "member": "AppTheme1",
+                "member": "DefaultTheme",
                 "module": "App",
                 "type": "App"
               }
@@ -6667,36 +6667,6 @@
           },
           "ruleId": "app-ScreenHasManyControls",
           "ruleIndex": 4
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen._isBusy"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen._isBusy",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "_isBusy",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 3
         },
         {
           "locations": [

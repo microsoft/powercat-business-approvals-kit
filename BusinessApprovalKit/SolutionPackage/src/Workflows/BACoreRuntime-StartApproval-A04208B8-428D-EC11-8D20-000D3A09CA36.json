@@ -21,15 +21,6 @@
         "api": {
           "name": "shared_commondataserviceforapps"
         }
-      },
-      "shared_commondataserviceforapps": {
-        "runtimeSource": "embedded",
-        "connection": {
-          "connectionReferenceLogicalName": "cat_sharedcommondataserviceforapps_afa4e"
-        },
-        "api": {
-          "name": "shared_commondataserviceforapps"
-        }
       }
     },
     "definition": {
@@ -544,7 +535,7 @@
           "type": "OpenApiConnection",
           "inputs": {
             "host": {
-              "connectionName": "shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps_1",
               "operationId": "GetItem",
               "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },

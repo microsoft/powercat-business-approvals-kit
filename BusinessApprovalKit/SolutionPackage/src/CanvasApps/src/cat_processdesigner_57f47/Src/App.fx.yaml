@@ -71,7 +71,7 @@ App As appinfo:
         );
         // Set themeing
         Set(
-            AppTheme1,
+            DefaultTheme,
             /* START THEME OBJECT */
             {
                 palette: {

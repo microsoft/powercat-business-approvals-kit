@@ -96,6 +96,7 @@ ConfirmDialog As CanvasComponent:
         btnYes As Button:
             BasePaletteColor: =
             DisplayMode: =DisplayMode.Edit
+            FontSize: =0
             Height: =32
             OnSelect: =ConfirmDialog.OnClick(true)
             Text: =If(ConfirmDialog.OkOnly, "Ok", "Yes")
@@ -108,6 +109,7 @@ ConfirmDialog As CanvasComponent:
             Appearance: ='ButtonCanvas.Appearance'.Secondary
             BasePaletteColor: =
             DisplayMode: =DisplayMode.Edit
+            FontSize: =0
             Height: =32
             OnSelect: =ConfirmDialog.OnClick(false)
             Text: ="No"

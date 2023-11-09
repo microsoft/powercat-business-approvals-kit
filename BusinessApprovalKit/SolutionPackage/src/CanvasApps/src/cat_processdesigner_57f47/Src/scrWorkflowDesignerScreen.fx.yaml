@@ -1,8 +1,14 @@
 "scrWorkflowDesignerScreen As screen.'autoLayout_HeaderFooter_ver1.0'":
     LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
-    OnVisible: |
-        =
-        
+    OnVisible: |-
+        =// We open & close the panel to know the container dimensions upfront 
+        Set(_isBusy,true);
+        UpdateContext(
+                {
+                    busyMessage: "Loading...",
+                    isPanelOpen: true,
+                    isPanelVisible: true
+                });
         //Node editor logic starts *************/
         If(IsEmpty(_operands),
             ClearCollect(_operands, 
@@ -33,6 +39,7 @@
                 }
             )
         );
+        
         
         //load approvers for Node edit
         If(!IsBlank(_selectedNode),
@@ -110,6 +117,13 @@
         UpdateContext({ isPublishReady: true });
         
         /*******Publish Process ends*******/
+        
+        UpdateContext(
+                {
+                    isPanelOpen: false,
+                    isPanelVisible: false
+                });
+        Set(_isBusy,false);
 
     MainContainer As groupContainer.verticalAutoLayoutContainer:
         DropShadow: =DropShadow.Light
@@ -184,6 +198,7 @@
                 "txtInputProcessName As 'Text input'":
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =320
@@ -321,7 +336,8 @@
                                         {
                                             isPanelOpen: true,
                                             panelHeaderText: "Publish",
-                                            showPublishProcessContainer: true
+                                            showPublishProcessContainer: true,
+                                            isPublishReady: false
                                         }
                                     );
                                     //check last published version
@@ -511,15 +527,41 @@
 
             ApprovalDesignerEdit_2 As ApprovalDesigner:
                 AddNode: |-
-                    =Set(_selectedNode, Blank());
+                    =UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true
+                            }
+                        );
+                    Set(_selectedNode, Blank());
                     Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)));
                     Set(_currentStageIndex, StageIndex);
                     Set(_currentNodeIndex, Row);
                     Set(_currentPathIndex, Path);
-                    UpdateContext({isPanelOpen:true,panelHeaderText:"Create Node", isPanelVisible:true,showNodeContainer:true});
+                    UpdateContext({isPanelOpen:true,panelHeaderText:"Create Node", showNodeContainer:true});
                 AlignInContainer: =AlignInContainer.Stretch
                 EditNode: |-
-                    =//Node editor logic starts *************/
+                    =UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true
+                            }
+                        );
+                    
+                    
+                    Concurrent(
+                        Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),
+                        Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)))
+                    );
+                    Set(_currentNodeIndex, _selectedNode.'Row Index');
+                    Set(_currentPathIndex, _selectedNode.'Path Index');
+                    Set(_currentStageIndex, _selectedStage.Order);
+                    If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
+                    );
+                    
+                    //Node editor logic starts *************/
                     If(IsEmpty(_operands),
                         ClearCollect(_operands, 
                             { 
@@ -565,18 +607,6 @@
                     
                     SetFocus(txtNodeName_4);
                     //Node editor logic ends*************/
-                    
-                    Concurrent(
-                        Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),
-                        Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)))
-                    );
-                    Set(_currentNodeIndex, _selectedNode.'Row Index');
-                    Set(_currentPathIndex, _selectedNode.'Path Index');
-                    Set(_currentStageIndex, _selectedStage.Order);
-                    If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
-                    )
                 EditStage: |
                     =Set(
                         _selectedStage,
@@ -614,7 +644,7 @@
                         }
                     );
                 Fill: =RGBA(245, 245, 245, 1)
-                Height: =ApprovalDesignerEdit_2.TotalStages * 240
+                Height: =ApprovalDesignerEdit_2.TotalStages * 340
                 LayoutMinHeight: =120
                 LayoutMinWidth: =640
                 MoveStage: |-
@@ -639,7 +669,7 @@
                 IconSize: =35
                 LayoutMinHeight: =200
                 LayoutMinWidth: =200
-                OnChange: |
+                OnChange: |+
                     =//Save the process   
                     Concurrent(
                         If(
@@ -760,6 +790,7 @@
                             stageDesc: Blank()
                         }
                     );
+                    
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Theme: =AppThemeJson
                 Tooltip: ="Add Stage"
@@ -787,6 +818,7 @@
                     isPanelVisible: false
                 }
             )
+        OnOpen: =
         OnOpened: =
         PanelType: ='PowerCAT.Panel.PanelType'.ExtraLarge
         Visible: =isPanelVisible
@@ -839,10 +871,11 @@
                 btnSaveStage As Button:
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =96
-                    OnSelect: |
+                    OnSelect: |-
                         =//save stage configuration
                         UpdateContext({busyMessage: "Saving Stage - " & txtStageName_2.Value});
                         Set(
@@ -1006,6 +1039,8 @@
                         Reset(ddlStageOperand_2);
                         Reset(radSwitchPaths_2);
                         Reset(galConditions_2);
+                        Refresh('Business Approval Stages');
+                        Refresh('Business Approval Nodes');
                     Text: ="Save"
                     Width: =96
                     X: =0
@@ -1016,6 +1051,7 @@
                     Appearance: ='ButtonCanvas.Appearance'.Secondary
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =96
@@ -1888,6 +1924,7 @@
                 Appearance: ='ButtonCanvas.Appearance'.Secondary
                 BasePaletteColor: =
                 DisplayMode: =DisplayMode.Edit
+                FontSize: =0
                 Height: =32
                 OnSelect: |-
                     =If(!isCleared,
@@ -2082,6 +2119,8 @@
                     ZIndex: =38
 
             "txtStageName_2 As 'Text box'":
+                ColorBackground: =
+                ColorText: =
                 DisplayMode: =DisplayMode.Edit
                 Height: =32
                 OnChange: |-
@@ -2093,6 +2132,8 @@
                 ZIndex: =25
 
             "txtStageDesc_2 As 'Text box'":
+                ColorBackground: =
+                ColorText: =
                 DisplayMode: =DisplayMode.Edit
                 Height: =60
                 Mode: ='TextBox.Mode'.Multiline
@@ -3192,6 +3233,7 @@
                 btnSaveNode As Button:
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =96
@@ -3341,6 +3383,8 @@
                         Reset(cboApproverUsers_2);
                         Reset(ddlNodeApprovalType_2);
                         Reset(galApprovers_2);
+                        Refresh('Business Approval Stages');
+                        Refresh('Business Approval Nodes');
                     Text: ="Save"
                     Width: =96
                     X: =0
@@ -3351,6 +3395,7 @@
                     Appearance: ='ButtonCanvas.Appearance'.Secondary
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =96
@@ -4565,83 +4610,153 @@
                 btnSaveNode_1 As Button:
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =96
-                    OnSelect: |-
-                        =UpdateContext({ busyMessage: "Saving node - " & txtNodeName_5.Text });
-                                Set(_isBusy, true);
-                        
+                    OnSelect: |
+                        =UpdateContext({busyMessage: "Saving node - " & txtNodeName_5.Text});
+                        Set(
+                            _isBusy,
+                            true
+                        );
                                 //save rule-based node ("Go to Stage...")
-                                Set(_selectedNode, Patch('Business Approval Nodes', Coalesce(_selectedNode, Defaults('Business Approval Nodes')),
-                                    {
-                                        Name: txtNodeName_5.Text, Description: txtNodeDesc_5.Text, Stage: _selectedStage, Process: _selectedProcess,
-                                        'Node Type': radNodeType_5.Selected.Value, 'Go To Stage': If(ddlGoToStageNone_2.Visible, ddlGoToStageNone_2.Selected, Blank()),
-                                        'Node Condition': ddlNodeCondition_2.Selected.Value, 
-                                        Operand: 
-                                            If(ddlNodeOperand_2.Visible, ddlNodeOperand_2.Selected.Value, 
-                                            ddlNodeCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch, 
-                                            'Business Approval Condition Operand'.'Equals (=)',Blank()),
-                                        'Source Data': If(ddlNodeSourceData_2.Visible && 
-                                            ddlNodeConditionSource_2.Selected.Value = 'Business Approval Condition Source Data'.'Request Data', 
-                                            ddlNodeSourceData_2.Selected, Blank()),
-                                        'Source Data Type': If(ddlNodeConditionSource_2.Visible, ddlNodeConditionSource_2.Selected.Value, Blank()),
-                                        'Go To Paths': radSwitchNodePaths_2.Selected.Value,
-                                        'Path Index': _currentPathIndex, 'Row Index': _currentNodeIndex
-                                    })
-                                );
-                                
+                        Set(
+                            _selectedNode,
+                            Patch(
+                                'Business Approval Nodes',
+                                Coalesce(
+                                    _selectedNode,
+                                    Defaults('Business Approval Nodes')
+                                ),
+                                {
+                                    Name: txtNodeName_5.Text,
+                                    Description: txtNodeDesc_5.Text,
+                                    Stage: _selectedStage,
+                                    Process: _selectedProcess,
+                                    'Node Type': radNodeType_5.Selected.Value,
+                                    'Go To Stage': If(
+                                        ddlGoToStageNone_2.Visible,
+                                        ddlGoToStageNone_2.Selected,
+                                        Blank()
+                                    ),
+                                    'Node Condition': ddlNodeCondition_2.Selected.Value,
+                                    Operand: If(
+                                        ddlNodeOperand_2.Visible,
+                                        ddlNodeOperand_2.Selected.Value,
+                                        ddlNodeCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch,
+                                        'Business Approval Condition Operand'.'Equals (=)',
+                                        Blank()
+                                    ),
+                                    'Source Data': If(
+                                        ddlNodeSourceData_2.Visible && ddlNodeConditionSource_2.Selected.Value = 'Business Approval Condition Source Data'.'Request Data',
+                                        ddlNodeSourceData_2.Selected,
+                                        Blank()
+                                    ),
+                                    'Source Data Type': If(
+                                        ddlNodeConditionSource_2.Visible,
+                                        ddlNodeConditionSource_2.Selected.Value,
+                                        Blank()
+                                    ),
+                                    'Go To Paths': radSwitchNodePaths_2.Selected.Value,
+                                    'Path Index': _currentPathIndex,
+                                    'Row Index': _currentNodeIndex
+                                }
+                            )
+                        );
                                 //remove any conditions that has been removed and clear the stack
-                                RemoveIf('Business Approval Conditions', 'Business Approval Condition' in _removedConditions.ConditionId);
-                        
+                        RemoveIf(
+                            'Business Approval Conditions',
+                            'Business Approval Condition' in _removedConditions.ConditionId
+                        );
                                 //save conditions
-                                Clear(_addedConditions);
-                                If(CountRows(_conditions) > 0, UpdateContext({ busyMessage: "Updating Conditions..." }));
-                                ForAll(_conditions As conds,
-                                    With({ conditionId: GUID(conds.ConditionId)},
-                                        With({ condition:  LookUp('Business Approval Conditions', 'Business Approval Condition' = conditionId) },
-                                            With({ addedCondition: 
-                                                Patch('Business Approval Conditions', 
-                                                    Coalesce(condition, Defaults('Business Approval Conditions')),
-                                                    {
-                                                        'Path Index': conds.Path, 'Condition Data Type': conds.Target, Process: _selectedProcess,
-                                                        'Condition Data': 
-                                                            If(conds.Target = 'Business Approval Condition Target Data'.'Request Data', conds.TargetData, Blank()),
-                                                        'Condition Value': 
-                                                            If(conds.Target = 'Business Approval Condition Target Data'.'Static value', conds.StaticValue, Blank()), 
-                                                        Node: _selectedNode,
-                                                        'Go To Stage': conds.TargetStage
-                                                    }
-                                                )},
-                                                If(IsBlank(condition), 
+                        Clear(_addedConditions);
+                        If(
+                            CountRows(_conditions) > 0,
+                            UpdateContext({busyMessage: "Updating Conditions..."})
+                        );
+                        ForAll(
+                            _conditions As conds,
+                            With(
+                                {conditionId: GUID(conds.ConditionId)},
+                                With(
+                                    {
+                                        condition: LookUp(
+                                            'Business Approval Conditions',
+                                            'Business Approval Condition' = conditionId
+                                        )
+                                    },
+                                    With(
+                                        {
+                                            addedCondition: Patch(
+                                                'Business Approval Conditions',
+                                                Coalesce(
+                                                    condition,
+                                                    Defaults('Business Approval Conditions')
+                                                ),
+                                                {
+                                                    'Path Index': conds.Path,
+                                                    'Condition Data Type': conds.Target,
+                                                    Process: _selectedProcess,
+                                                    'Condition Data': If(
+                                                        conds.Target = 'Business Approval Condition Target Data'.'Request Data',
+                                                        conds.TargetData,
+                                                        Blank()
+                                                    ),
+                                                    'Condition Value': If(
+                                                        conds.Target = 'Business Approval Condition Target Data'.'Static value',
+                                                        conds.StaticValue,
+                                                        Blank()
+                                                    ),
+                                                    Node: _selectedNode,
+                                                    'Go To Stage': conds.TargetStage
+                                                }
+                                            )
+                                        },
+                                        If(
+                                            IsBlank(condition),
                                                     //track newly added condition
-                                                    Collect(_addedConditions, { Id: addedCondition.'Business Approval Condition', Path: addedCondition.'Path Index'})
-                                                )
+                                            Collect(
+                                                _addedConditions,
+                                                {
+                                                    Id: addedCondition.'Business Approval Condition',
+                                                    Path: addedCondition.'Path Index'
+                                                }
                                             )
                                         )
                                     )
-                                );
-                        
+                                )
+                            )
+                        );
                                 //update in memory Condition for any newly added Condition Guids
-                                ForAll(_addedConditions As added, UpdateIf(_conditions, Path = added.Path, { ConditionId: added.Id }));
-                        
+                        ForAll(
+                            _addedConditions As added,
+                            UpdateIf(
+                                _conditions,
+                                Path = added.Path,
+                                {ConditionId: added.Id}
+                            )
+                        );
                                 //increment node index for any nodes after this node in this path, if exists
-                                UpdateIf('Business Approval Nodes', 
-                                    'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' &&
-                                    ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' &&
-                                    Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage', 
-                                    { 'Row Index': ThisRecord.'Row Index' + 1 }
-                                );
-                            
-                                Set(_isBusy, false);
-                                Reset(radNodeType_5);
-                                Reset(txtNodeName_5);
-                                Reset(txtNodeDesc_5);
-                                Reset(ddlNodeCondition_2);
-                                Reset(ddlGoToStageNone_2);
-                                Reset(galNodeConditions_2);
-                                Reset(ddlNodeOperand_2);
-                                Reset(ddlNodeSourceData_2);
+                        UpdateIf(
+                            'Business Approval Nodes',
+                            'Path Index' = _selectedNode.'Path Index' && 'Row Index' >= _selectedNode.'Row Index' && ThisRecord.'Business Approval Node' <> _selectedNode.'Business Approval Node' && Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage',
+                            {'Row Index': ThisRecord.'Row Index' + 1}
+                        );
+                        Set(
+                            _isBusy,
+                            false
+                        );
+                        Reset(radNodeType_5);
+                        Reset(txtNodeName_5);
+                        Reset(txtNodeDesc_5);
+                        Reset(ddlNodeCondition_2);
+                        Reset(ddlGoToStageNone_2);
+                        Reset(galNodeConditions_2);
+                        Reset(ddlNodeOperand_2);
+                        Reset(ddlNodeSourceData_2);
+                        Refresh('Business Approval Stages');
+                        Refresh('Business Approval Nodes');
                     Text: ="Save"
                     Width: =96
                     X: =0
@@ -4652,6 +4767,7 @@
                     Appearance: ='ButtonCanvas.Appearance'.Secondary
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =96
@@ -4728,7 +4844,7 @@
                     OnSelect: =Select(Parent)
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     PressedFill: =RGBA(0, 0, 0, 0)
-                    Visible: =IsBlank(ThisItem.Status)
+                    Visible: =false//IsBlank(ThisItem.Status)
                     Width: =30
                     Y: =Parent.TemplateHeight / 2 - Self.Height / 2
                     ZIndex: =2
@@ -4753,7 +4869,7 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
                     PressedFill: =RGBA(0, 0, 0, 0)
-                    Visible: =!Image3_2.Visible
+                    Visible: =!icoChecker.Visible
                     Width: =30
                     X: =Image3_2.X
                     Y: =Image3_2.Y
@@ -4777,7 +4893,9 @@
                 icoChecker As Spinner:
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
+                    FontSize: =0
                     Height: =30
+                    SpinnerSize: ='Spinner.SpinnerSize'.ExtraSmall
                     Visible: =IsBlank(ThisItem.Status)
                     Width: =30
                     X: =0
@@ -4974,6 +5092,7 @@
             btnPublishWorkflow As Button:
                 BasePaletteColor: =
                 DisplayMode: =If(isPublishReady && Sum(_validationChecks, Status) = 4, DisplayMode.Edit, DisplayMode.Disabled)
+                FontSize: =0
                 Height: =32
                 OnSelect: |
                     =With(
@@ -5759,12 +5878,22 @@
                 BorderStyle: =BorderStyle.Solid
                 BorderThickness: =1
                 ButtonType: ='Button.ButtonType'.Standard
+                DisabledBorderColor: =
+                DisabledFillColor: =
+                DisabledTextColor: =
                 DisplayMode: =DisplayMode.Edit
                 FillColor: =ColorValue(AppTheme.palette.white)
                 FontWeight: =FontWeight.Semibold
                 Height: =30
+                HoverBorderColor: =
+                HoverFillColor: =
+                HoverTextColor: =
                 OnSelect: =Back()
+                PressedBorderColor: =
+                PressedFillColor: =
+                PressedTextColor: =
                 Text: ="Cancel"
+                TextColor: =
                 Visible: =!IsBlank(varAppDataItem)
                 Width: =80
                 X: =btnSaveAppData_3.X + btnSaveAppData_3.Width + 8
@@ -5853,15 +5982,21 @@
                 ZIndex: =16
 
             btnSaveAppData_3 As Button:
+                BorderColor: =
                 BorderRadius: =2
                 ButtonType: ='Button.ButtonType'.Primary
+                DisabledBorderColor: =
+                DisabledFillColor: =
+                DisabledTextColor: =
                 DisplayMode: |+
                     =If(IsBlank(_selectedProcess),DisplayMode.Disabled,DisplayMode.Edit)
                     
                 FillColor: =ColorValue(AppTheme.palette.themePrimary)
                 FontWeight: =FontWeight.Semibold
                 Height: =30
+                HoverBorderColor: =
                 HoverFillColor: =ColorFade(ColorValue(AppTheme.palette.themePrimary),10%)
+                HoverTextColor: =
                 OnSelect: |-
                     =Patch(
                         'Business Approval Data', 
@@ -5881,7 +6016,11 @@
                     
                     UpdateContext({ varAppDataItem: Blank(), isDefaultDataClear: false });
                     Reset(txtAppDataName_2);Reset(ddlDataType_3);Reset(txtAppDataDefault_2);Reset(txtAppDataDesc_2)
+                PressedBorderColor: =
+                PressedFillColor: =
+                PressedTextColor: =
                 Text: =If(IsBlank(varAppDataItem), "+ Add", "Update")
+                TextColor: =
                 Visible: =true
                 Width: =80
                 X: =txtAppDataDesc_2.X + txtAppDataDesc_2.Width + 8

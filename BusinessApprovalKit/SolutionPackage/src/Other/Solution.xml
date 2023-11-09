@@ -132,7 +132,6 @@
       <RootComponent type="29" id="{fb00d840-ca8c-ec11-8d20-000d3a09d351}" behavior="0" />
       <RootComponent type="300" schemaName="cat_businessapprovalmanagementdefaultcommandlibrary_94e11" behavior="0" />
       <RootComponent type="300" schemaName="cat_businessapprovaloverridecustompage_c87bd" behavior="0" />
-      <RootComponent type="300" schemaName="cat_businessapprovalprocessmanager_1d6e0" behavior="0" />
       <RootComponent type="300" schemaName="cat_homepage_96ece" behavior="0" />
       <RootComponent type="300" schemaName="cat_homepagereimagined_709bf" behavior="0" />
       <RootComponent type="300" schemaName="cat_processdesigner_57f47" behavior="0" />
@@ -191,10 +190,6 @@
       <RootComponent type="91" id="{1bb59aa3-f0eb-44bf-8822-da762a08b78f}" schemaName="CreateBusinessApprovalWF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d45e5ea3a3459213" behavior="0" />
     </RootComponents>
     <MissingDependencies>
-      <MissingDependency>
-        <Required type="1" schemaName="aaduser" displayName="Microsoft Entra Identity" solution="MetadataExtension (1.0.2.74)" />
-        <Dependent type="300" schemaName="cat_businessapprovalprocessmanager_1d6e0" displayName="[Deprecated] Business Approval Process Manager" />
-      </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="msdyn_flow_approval" displayName="Approval" solution="msdyn_FlowApprovalsCore (2.0.4.8)">
           <package>msdyn_FlowApprovals (2.0.4.8)</package>
