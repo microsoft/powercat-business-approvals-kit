@@ -39,24 +39,8 @@ jobs:
         run: |
             MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
             YEAR=$(echo $MILESTONE_PART | cut -d' ' -f2)
-            echo "YEAR=$YEAR" >> $GITHUB_ENV    
-
-      - name: Increment Year by 1
-        id: increment-year
-        run: |
-          YEAR=$(($YEAR + 1))
-          echo "INCREMENTED_YEAR=$YEAR" >> $GITHUB_ENV
-
-      - name: Print YEAR
-        run: echo "YEAR is $YEAR"          
+            echo "YEAR=$YEAR" >> $GITHUB_ENV
       
-      - name: Replace first two characters with 'FY'
-        id: replace-fy
-        run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
-        
-      - name: Print FY Year
-        run: echo "FY Year - ${{ env.YEAR }}"
-
       - name: Determine Quarter
         id: determine-quarter
         run: |
@@ -70,10 +54,27 @@ jobs:
           else
             QUARTER="Q1"
           fi
-          echo "QUARTER=$QUARTER" >> $GITHUB_ENV
+          echo "QUARTER=$QUARTER" >> $GITHUB_ENV          
 
       - name: Print QUARTER
-        run: echo "QUARTER is $QUARTER"          
+        run: echo "QUARTER is $QUARTER"
+
+      - name: Increment Year if Q1 or Q2
+        id: increment-year
+        if: ${{ env.QUARTER == 'Q1' || env.QUARTER == 'Q2' }}
+        run: |
+          YEAR=$(($YEAR + 1))
+          echo "YEAR=$YEAR" >> $GITHUB_ENV
+
+      - name: Print YEAR
+        run: echo "YEAR is $YEAR"        
+
+      - name: Replace first two characters with 'FY'
+        id: replace-fy
+        run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
+        
+      - name: Print FY Year
+        run: echo "FY Year - ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
