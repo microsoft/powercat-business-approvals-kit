@@ -49,12 +49,16 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
     }
 
     $solutionComponents = (Get-SolutionComponents $token $devEnv.EnvironmentUrl $solution.value[0].solutionid) 
-    
-    Write-Host ($solutionComponents | ConvertTo-Json)
 
-    $data = ($solutionComponents | ConvertTo-Json)
+    $environmentId = $devEnv.Id
+    $appId = ($solutionComponents.value | Where-Object { $_.msdyn_displayname -eq "Machine Ordering App"} | Select-Object -First 1).msdyn_objectid
 
-    Invoke-PlaywrightScript $UserUPN $devEnv.Id "sample.csx" $data
+    $data = (@{
+        contosoCoffeeApplication = "https://apps.powerapps.com/play/e/${environmentId}/a/${appId}"
+        powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
+    } | ConvertTo-Json)
+
+    Invoke-PlaywrightScript $UserUPN $devEnv.Id "contoso-coffee-submit-machine-request.csx" $data
 
     # TODO
     
