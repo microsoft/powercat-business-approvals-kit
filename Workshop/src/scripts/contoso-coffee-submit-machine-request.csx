@@ -43,6 +43,8 @@ public class PlaywrightScript {
         await appFrame.GetByRole(AriaRole.Button, new() { Name = "Submit machine request" }).ClickAsync();
 
         await appFrame.GetByRole(AriaRole.Button, new() { Name = "OK" }).ClickAsync();
+
+        logger.LogInformation("Machine request created");
     }
 
     public static async Task<bool> ConfirmApprovalRequest(Dictionary<string, string> values, IPage page, ILogger logger) {
@@ -64,11 +66,13 @@ public class PlaywrightScript {
                 confirmed = true;
 
                 logger.LogInformation("Approval Confirmed");
+
+                await page.ReloadAsync();
             } catch {
                 
             }
 
-            if ( ! confirmed) {
+            if ( ! confirmed ) {
                 Console.WriteLine("Waiting 30 seconds");
                 System.Threading.Thread.Sleep(30 * 1000);
                 await page.ReloadAsync();

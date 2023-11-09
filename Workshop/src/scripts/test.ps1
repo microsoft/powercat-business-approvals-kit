@@ -19,7 +19,7 @@ Licensed under the MIT License.
 
 <#
 .SYNOPSIS
-Validates a two-stage machine request approval in the Contoso Coffee solution.
+Validates a two-stage machine request approval with the Contoso Coffee solution.
 
 .PARAMETER UserUPN
 The user's UPN (user principal name) to run the validation as.
@@ -51,7 +51,6 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
         Write-Error "Environment not found"
         return
     }
-
     
     $dataverse = $devEnv.EnvironmentUrl
     $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
@@ -118,7 +117,7 @@ function Invoke-PlaywrightScript {
     $dataEncoded = [System.Convert]::ToBase64String($dataBytes)
 
     $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-    dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless "N" --record "N"
+    dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless "Y" --record "Y"
 }
 
 <#
