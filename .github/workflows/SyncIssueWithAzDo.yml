@@ -71,7 +71,7 @@ jobs:
         
       - name: Set Iteration Path
         id: set-iteration
-        run: echo "ITERATION=OneCatTools\\$YEAR }}\\$QUARTER\\$MONTH" >> $GITHUB_ENV
+        run: echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_ENV
 
       - name: Print the Iteration Path
         run: echo "Iteration Path ${{ env.ITERATION }}"        
