@@ -17,6 +17,21 @@ Licensed under the MIT License.
 
 . $PSScriptRoot\users.ps1
 
+<#
+.SYNOPSIS
+Validates a two-stage machine request approval in the Contoso Coffee solution.
+
+.PARAMETER UserUPN
+The user's UPN (user principal name) to run the validation as.
+
+.PARAMETER EnvironmentName
+The name of the environment to run the validation in. If not specified, the user's display name followed by "Dev" will be used.
+
+.EXAMPLE
+Invoke-ValidateTwoStageMachineRequestApproval -UserUPN "user@example.com" -EnvironmentName "ContosoCoffee Dev"
+Validates a two-stage machine request approval in the "ContosoCoffee Dev" environment.
+
+#>
 function Invoke-ValidateTwoStageMachineRequestApproval {
     param (
         [Parameter(Mandatory)] [String] $UserUPN,
@@ -60,14 +75,30 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
 
     Invoke-PlaywrightScript $UserUPN $devEnv.Id "contoso-coffee-submit-machine-request.csx" $data
 
-    # TODO
-    
-    # Record - Open Machine Request (Select Item, Compare, Submit)
-    # Verify Machine Order Exists
-
-    # 
+    # TODO Validate Approved in Dataverse
 }
 
+<#
+.SYNOPSIS
+Runs a Playwright script with the specified user UPN, environment ID, script file, and data.
+
+.PARAMETER UserUPN
+The user's UPN (user principal name) to run the script as.
+
+.PARAMETER EnvironmentId
+The ID of the environment to run the script in.
+
+.PARAMETER ScriptFile
+The path to the script file to run.
+
+.PARAMETER Data
+The data to pass to the script.
+
+.EXAMPLE
+Invoke-PlaywrightScript -UserUPN "user@example.com" -EnvironmentId "1234" -ScriptFile "C:\Scripts\myScript.ps1" -Data "{'key': 'value'}"
+Runs the Playwright script located at "C:\Scripts\myScript.ps1" with the user UPN "user@example.com", environment ID "1234", and data '{"key": "value"}'.
+
+#>
 function Invoke-PlaywrightScript {
     param (
         [Parameter(Mandatory)] [String] $UserUPN,
@@ -90,6 +121,18 @@ function Invoke-PlaywrightScript {
     dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless "N" --record "N"
 }
 
+<#
+.SYNOPSIS
+Gets a list of environments for the specified user.
+
+.PARAMETER UserUPN
+The user's UPN (user principal name) to get the environments for.
+
+.EXAMPLE
+Get-Environments -UserUPN "user@example.com"
+Gets a list of environments for the user with the UPN "user@example.com".
+
+#>
 function Get-Environments {
     param (
         [Parameter(Mandatory)] [String] $UserUPN
@@ -108,7 +151,24 @@ function Get-Environments {
     return ($json | ConvertFrom-Json)
 }
 
+<#
+.SYNOPSIS
+Gets a solution with the specified unique name in the specified environment using the specified access token.
 
+.PARAMETER token
+The access token to use for authentication.
+
+.PARAMETER environmentUrl
+The URL of the environment to get the solution from.
+
+.PARAMETER uniqueName
+The unique name of the solution to get.
+
+.EXAMPLE
+Get-Solution -token "abc123" -environmentUrl "https://contoso.crm.dynamics.com/" -uniqueName "ContosoCoffee"
+Gets the solution with the unique name "ContosoCoffee" in the environment at "https://contoso.crm.dynamics.com/" using the access token "abc123".
+
+#>
 function Get-Solution {
     param (
         [Parameter(Mandatory)] [String] $token,
@@ -121,6 +181,24 @@ function Get-Solution {
     return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${environmentUrl}api/data/v9.2/solutions?`$select=uniquename,solutionid&`$filter=uniquename eq '$uniqueName'" )
 }
 
+<#
+.SYNOPSIS
+Gets the components of a solution with the specified ID in the specified environment using the specified access token.
+
+.PARAMETER token
+The access token to use for authentication.
+
+.PARAMETER environmentUrl
+The URL of the environment to get the solution components from.
+
+.PARAMETER solutionId
+The ID of the solution to get the components for.
+
+.EXAMPLE
+Get-SolutionComponents -token "abc123" -environmentUrl "https://contoso.crm.dynamics.com/" -solutionId "1234"
+Gets the components of the solution with the ID "1234" in the environment at "https://contoso.crm.dynamics.com/" using the access token "abc123".
+
+#>
 function Get-SolutionComponents {
     param (
         [Parameter(Mandatory)] [String] $token,
