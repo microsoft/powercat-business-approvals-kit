@@ -40,34 +40,6 @@
       <statecode>0</statecode>
       <statuscode>1</statuscode>
     </connectionreference>
-    <connectionreference connectionreferencelogicalname="cat_sharedapprovals_71396">
-      <connectionreferencedisplayname>Approvals BusinessApprovalKit-71396</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_approvals</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="cat_sharedcommondataserviceforapps_9160d">
-      <connectionreferencedisplayname>Microsoft Dataverse BusinessApprovalKit-9160d</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="cat_sharedcommondataserviceforapps_afa4e">
-      <connectionreferencedisplayname>Microsoft Dataverse BusinessApprovalKit-afa4e</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="cat_sharedcommondataserviceforapps_f07ea">
-      <connectionreferencedisplayname>Microsoft Dataverse BusinessApprovalKit-f07ea</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
   </connectionreferences>
   <Languages>
     <Language>1033</Language>

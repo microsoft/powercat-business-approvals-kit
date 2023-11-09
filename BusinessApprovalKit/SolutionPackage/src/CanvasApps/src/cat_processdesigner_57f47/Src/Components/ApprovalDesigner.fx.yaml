@@ -72,7 +72,7 @@ ApprovalDesigner As CanvasComponent:
                 Filter('Business Approval Stages', 'Business Approval Stages (Views)'.'Active Business Approval Stages'),
                 Process.'Business Approval Process' = GUID(Parent.ProcessId)
             )
-            //"036025df-1f73-ee11-9ae7-0022482a91f4"
+            //"65d75041-777d-ee11-8179-0022482a91f4"
             //Parent.ProcessId
         Layout: =Layout.Vertical
         LoadingSpinner: =LoadingSpinner.Data
@@ -567,7 +567,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: ="+"
                 Visible: =conNodeBoxPath5.Visible
                 Width: =20
-                X: =nodeBoxPath5.X + nodeBoxPath5.Width / 2 - Self.Width / 2
+                X: =conNodeBoxPath5.X + conNodeBoxPath5.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
                 ZIndex: =17
 
@@ -605,7 +605,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: ="+"
                 Visible: =conNodeBoxPath4.Visible
                 Width: =20
-                X: =nodeBoxPath4.X + nodeBoxPath4.Width / 2 - Self.Width / 2
+                X: =conNodeBoxPath4.X + conNodeBoxPath4.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
                 ZIndex: =18
 
@@ -643,7 +643,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: ="+"
                 Visible: =conNodeBoxPath3.Visible
                 Width: =20
-                X: =nodeBoxPath3.X + nodeBoxPath3.Width / 2 - Self.Width / 2
+                X: =conNodeBoxPath3.X + conNodeBoxPath3.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
                 ZIndex: =19
 
@@ -681,7 +681,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: ="+"
                 Visible: =conNodeBoxPath2.Visible
                 Width: =20
-                X: =nodeBoxPath2.X + nodeBoxPath2.Width / 2 - Self.Width / 2
+                X: =conNodeBoxPath2.X + conNodeBoxPath2.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
                 ZIndex: =20
 
@@ -720,7 +720,7 @@ ApprovalDesigner As CanvasComponent:
                 Tooltip: ="Add Node"
                 Visible: =conNodeBoxPath1.Visible
                 Width: =20
-                X: =nodeBoxPath1.X + nodeBoxPath1.Width / 2 - Self.Width / 2
+                X: =conNodeBoxPath1.X + conNodeBoxPath1.Width / 2 - Self.Width / 2
                 Y: =nodeLineCenter1_1.Y + nodeLineCenter1_1.Height / 2 - Self.Height / 2
                 ZIndex: =21
 
@@ -1005,7 +1005,7 @@ ApprovalDesigner As CanvasComponent:
                 Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
+                Fill: =ColorFade(ColorValue(AppTheme.palette.themeSecondary),30%)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
@@ -1236,7 +1236,7 @@ ApprovalDesigner As CanvasComponent:
                     )
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
-                Visible: =conNodeBoxPath2.Visible 
+                Visible: =false
                 Width: =25
                 X: =conNodeBoxPath2.X + conNodeBoxPath2.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
@@ -1254,7 +1254,7 @@ ApprovalDesigner As CanvasComponent:
                     )
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
-                Visible: =conNodeBoxPath3.Visible 
+                Visible: =false
                 Width: =25
                 X: =conNodeBoxPath3.X + conNodeBoxPath3.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
@@ -1272,7 +1272,7 @@ ApprovalDesigner As CanvasComponent:
                     )
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
-                Visible: =conNodeBoxPath4.Visible 
+                Visible: =false
                 Width: =25
                 X: =conNodeBoxPath4.X + conNodeBoxPath4.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
@@ -1290,7 +1290,7 @@ ApprovalDesigner As CanvasComponent:
                     )
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Tooltip: ="Edit " & lblNodeNamePath1.Text &" node"
-                Visible: =conNodeBoxPath5.Visible 
+                Visible: =false
                 Width: =25
                 X: =conNodeBoxPath5.X + conNodeBoxPath5.Width - Self.Width
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
@@ -1380,8 +1380,8 @@ ApprovalDesigner As CanvasComponent:
                 Theme: =AppThemeJson
                 Visible: =conNodeBoxPath2.Visible 
                 Width: =25
-                X: =nodeBoxPath2.X + nodeBoxPath2.Width - Self.Width - 5
-                Y: =lblNodeNamePath2.Y + lblNodeNamePath2.Height / 2 - Self.Height / 2
+                X: =conNodeBoxPath2.X + conNodeBoxPath2.Width - Self.Width - 5
+                Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =42
 
             "commandbarCKEditNode3 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
@@ -1477,7 +1477,7 @@ ApprovalDesigner As CanvasComponent:
                 Theme: =AppThemeJson
                 Visible: =conNodeBoxPath3.Visible 
                 Width: =25
-                X: =nodeBoxPath3.X + nodeBoxPath3.Width - Self.Width - 5
+                X: =conNodeBoxPath3.X + conNodeBoxPath3.Width - Self.Width - 5
                 Y: =lblNodeNamePath3.Y + lblNodeNamePath3.Height / 2 - Self.Height / 2
                 ZIndex: =43
 
@@ -1565,7 +1565,7 @@ ApprovalDesigner As CanvasComponent:
                 Theme: =AppThemeJson
                 Visible: =conNodeBoxPath4.Visible 
                 Width: =25
-                X: =nodeBoxPath4.X + nodeBoxPath4.Width - Self.Width - 5
+                X: =conNodeBoxPath4.X + conNodeBoxPath4.Width - Self.Width - 5
                 Y: =lblNodeNamePath4.Y + lblNodeNamePath4.Height / 2 - Self.Height / 2
                 ZIndex: =44
 
@@ -1653,7 +1653,7 @@ ApprovalDesigner As CanvasComponent:
                 Theme: =AppThemeJson
                 Visible: =conNodeBoxPath5.Visible 
                 Width: =25
-                X: =nodeBoxPath5.X + nodeBoxPath5.Width - Self.Width - 5
+                X: =conNodeBoxPath5.X + conNodeBoxPath5.Width - Self.Width - 5
                 Y: =lblNodeNamePath5.Y + lblNodeNamePath5.Height / 2 - Self.Height / 2
                 ZIndex: =45
 
@@ -1917,7 +1917,7 @@ ApprovalDesigner As CanvasComponent:
                     Y: =10
                     ZIndex: =1
 
-            "icoCKFirstFalseNode_1 As 'Fluent Icon (1.0.22)'":
+            "icoCKFirstTrueNode As 'Fluent Icon (1.0.22)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themeLighter

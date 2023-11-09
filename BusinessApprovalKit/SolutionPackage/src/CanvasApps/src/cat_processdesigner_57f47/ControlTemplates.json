@@ -84,7 +84,7 @@
     "Name": "PowerApps_CoreControls_ComboboxCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Combobox",
-    "Version": "0.0.18"
+    "Version": "0.0.19"
   },
   "Date picker": {
     "CustomGroupControlTemplateName": "",
@@ -452,7 +452,7 @@
     "Name": "PowerApps_CoreControls_Progress",
     "OverridableProperties": {},
     "TemplateDisplayName": "Progress Bar",
-    "Version": "1.1.12"
+    "Version": "1.1.13"
   },
   "radio": {
     "CustomGroupControlTemplateName": "",
@@ -509,7 +509,7 @@
     "Name": "PowerApps_CoreControls_Spinner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Spinner",
-    "Version": "1.0.20"
+    "Version": "1.0.22"
   },
   "text": {
     "CustomGroupControlTemplateName": "",
@@ -568,7 +568,7 @@
     "Name": "PowerApps_CoreControls_TextInputCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Text input",
-    "Version": "0.0.18"
+    "Version": "0.0.20"
   },
   "toggleSwitch": {
     "CustomGroupControlTemplateName": "",
