@@ -26,7 +26,10 @@ jobs:
         
       - name: Extract Month
         id: extract-month
-        run: echo "MONTH=$(echo $MILESTONE | rev | cut -d' ' -f2 | rev)" >> $GITHUB_ENV
+        run: |
+          MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
+          MONTH=$(echo $MILESTONE_PART | cut -d' ' -f1)
+          echo "MONTH=$MONTH" >> $GITHUB_ENV
         
       - name: Print Extracted Month
         run: echo "Extracted Month ${{ env.MONTH }}"
