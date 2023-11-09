@@ -26,6 +26,9 @@ jobs:
       - name: Set Milestone
         id: set-milestone
         run: echo "MILESTONE=${{ github.event.issue.milestone.title }}" >> $GITHUB_ENV
+
+      - name: Print Milestone
+        run: echo "Milestone is ${{ env.MILESTONE }}"        
         
       - name: Extract Month
         id: extract-month
@@ -36,10 +39,10 @@ jobs:
 
       - name: Extract Year and Add FY
         id: extract-year
-        run: echo "YEAR=$(echo $MILESTONE | rev | cut -d' ' -f1 | rev) && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
-
+        run: echo "YEAR=$(echo $MILESTONE | awk -F' ' '{print $NF}' | cut -c1-4) && echo "FY${YEAR}" >> $GITHUB_ENV"
+        
       - name: Print FY Year
-        run: echo "Extracted Month ${{ env.YEAR }}"        
+        run: echo "Formatted year ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
