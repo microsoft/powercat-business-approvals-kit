@@ -34,6 +34,9 @@ jobs:
       - name: Extract Year
         id: extract-year
         run: echo "YEAR=$(echo $MILESTONE | cut -d' ' -f3)" >> $GITHUB_ENV
+
+      - name: Print Year
+        run: echo "Year - ${{ env.YEAR }}"          
   
       - name: Replace first two characters with 'FY'
         id: replace-fy
