@@ -34,12 +34,13 @@ jobs:
       - name: Extract Year
         id: extract-year
         run: echo "YEAR=$(echo $MILESTONE | cut -d' ' -f3)" >> $GITHUB_ENV
-
-      - name: Add FY
-        run: echo "FY$(echo ${{ env.YEAR }} | cut -c3-)" >> $GITHUB_ENV
+  
+      - name: Replace first two characters with 'FY'
+        id: replace-fy
+        run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
         
       - name: Print FY Year
-        run: echo "Formatted year ${{ env.FY }}"        
+        run: echo "Formatted year - ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
