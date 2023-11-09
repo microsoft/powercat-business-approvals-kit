@@ -33,7 +33,7 @@ jobs:
 
       - name: Extract Year and Add FY
         id: extract-year
-        run: echo "YEAR=$(echo $MILESTONE | sed -n 's/.* \([0-9]\{4\}\).*/\1/p') && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
+        run: echo "YEAR=$(echo $MILESTONE | cut -d' ' -f3) && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
         
       - name: Print FY Year
         run: echo "Formatted year ${{ env.YEAR }}"        
