@@ -4,15 +4,13 @@ on:
       [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
   issue_comment:
     types: [created, edited, deleted]
-concurrency:
-  group: issue-${{ github.event.issue.number }}
-  cancel-in-progress: false
 
 jobs:
   extract-variables:
     runs-on: ubuntu-latest
     outputs:
       id: extract-vars
+      values: ${{ steps.extract-vars.outputs }}
     steps:
       - name: Set Milestone
         id: set-milestone
@@ -84,8 +82,11 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'enhancement')
     runs-on: ubuntu-latest
     needs: extract-variables
+    concurrency:
+      group: issue-${{ github.event.issue.number }}
+      cancel-in-progress: false
     steps:
-      # Steps specific to alertIssueAK
+      # Steps specific to alertEnhancementAK
       - uses: danhellem/github-actions-issue-to-work-item@master
         env:
           ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
@@ -93,7 +94,7 @@ jobs:
           ado_organization: "cattools"
           ado_project: "OneCatTools"
           ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "${{ env.ITERATION }}"
+          ado_iteration_path: "${{ needs.extract-variables.outputs.values.ITERATION }}"
           ado_wit: "User Story"
           ado_new_state: "New"
           ado_active_state: "Active"
@@ -105,6 +106,9 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'bug')
     runs-on: ubuntu-latest
     needs: extract-variables
+    concurrency:
+      group: issue-${{ github.event.issue.number }}
+      cancel-in-progress: false
     steps:
       # Steps specific to alertIssueAK
       - uses: danhellem/github-actions-issue-to-work-item@master
@@ -114,7 +118,7 @@ jobs:
           ado_organization: "cattools"
           ado_project: "OneCatTools"
           ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "${{ env.ITERATION }}"
+          ado_iteration_path: "${{ needs.extract-variables.outputs.values.ITERATION }}"
           ado_wit: "Bug"
           ado_new_state: "New"
           ado_active_state: "Active"
@@ -123,10 +127,14 @@ jobs:
           log_level: 100
 
   alertQuestionAK:
-    if: |
-      contains(github.event.issue.labels.*.name, 'question')
+    if: contains(github.event.issue.labels.*.name, 'question')
     runs-on: ubuntu-latest
+    needs: extract-variables
+    concurrency:
+      group: issue-${{ github.event.issue.number }}
+      cancel-in-progress: false
     steps:
+      # Steps specific to alertQuestionAK
       - uses: danhellem/github-actions-issue-to-work-item@master
         env:
           ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
@@ -134,10 +142,10 @@ jobs:
           ado_organization: "cattools"
           ado_project: "OneCatTools"
           ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "${{ env.ITERATION }}"  
+          ado_iteration_path: "${{ needs.extract-variables.outputs.values.ITERATION }}"  
           ado_wit: "Question"
           ado_new_state: "New"
           ado_active_state: "Active"
           ado_close_state: "Closed"
           ado_bypassrules: true
-          log_level: 100  
+          log_level: 100
