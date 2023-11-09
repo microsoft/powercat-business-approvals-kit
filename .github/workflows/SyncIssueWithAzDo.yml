@@ -16,9 +16,6 @@ jobs:
         id: set-milestone
         run: echo "MILESTONE=${{ github.event.issue.milestone.title }}" >> $GITHUB_ENV
 
-      - name: Print Milestone
-        run: echo "Milestone is ${{ env.MILESTONE }}"        
-
       - name: Extract Month
         id: extract-month
         run: |
@@ -26,9 +23,6 @@ jobs:
           MONTH=$(echo $MILESTONE_PART | cut -d' ' -f1)
           echo "MONTH=$MONTH" >> $GITHUB_ENV
         
-      - name: Print Month
-        run: echo "Month ${{ env.MONTH }}"
-
       - name: Extract Year
         id: extract-year
         run: |
@@ -51,9 +45,6 @@ jobs:
           fi
           echo "QUARTER=$QUARTER" >> $GITHUB_ENV          
 
-      - name: Print QUARTER
-        run: echo "QUARTER is $QUARTER"
-
       - name: Increment Year if Q1 or Q2
         id: increment-year
         if: ${{ env.QUARTER == 'Q1' || env.QUARTER == 'Q2' }}
@@ -61,22 +52,16 @@ jobs:
           YEAR=$(($YEAR + 1))
           echo "YEAR=$YEAR" >> $GITHUB_ENV
 
-      - name: Print YEAR
-        run: echo "YEAR is $YEAR"        
-
       - name: Replace first two characters with 'FY'
         id: replace-fy
         run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
-        
-      - name: Print FY Year
-        run: echo "FY Year - ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
         run: echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_ENV
 
       - name: Print the Iteration Path
-        run: echo "Iteration Path ${{ env.ITERATION }}"
+        run: echo "ITERATION is $ITERATION"
 
   alertEnhancementAK:
     if: contains(github.event.issue.labels.*.name, 'enhancement')
@@ -86,12 +71,8 @@ jobs:
       group: issue-${{ github.event.issue.number }}
       cancel-in-progress: false
     steps:
-      # Steps specific to alertEnhancementAK
-      - name: Use ITERATION variable
-        run: echo "ITERATION=${{ needs.extract-variables.outputs.values.ITERATION }}" >> $GITHUB_ENV
-
       - name: Print ITERATION
-        run: echo "ITERATION is ${{ env.ITERATION }}"
+        run: echo "ITERATION is ${{ needs.extract-variables.outputs.values.ITERATION }}"
 
       - name: Use ITERATION variable in the action
         uses: danhellem/github-actions-issue-to-work-item@master
@@ -101,7 +82,7 @@ jobs:
           ado_organization: "cattools"
           ado_project: "OneCatTools"
           ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "${{ env.ITERATION }}"
+          ado_iteration_path: "${{ needs.extract-variables.outputs.values.ITERATION }}"
           ado_wit: "User Story"
           ado_new_state: "New"
           ado_active_state: "Active"
