@@ -6,6 +6,7 @@ on:
       [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
   issue_comment:
     types: [created, edited, deleted]
+
 concurrency:
   group: issue-${{ github.event.issue.number }}
   cancel-in-progress: false    
@@ -16,62 +17,20 @@ jobs:
     steps:
       - name: Print Issue Milestone
         run: echo "The milestone of your issue is ${{ github.event.issue.milestone.title }}"
+
   alertEnhancementAK:
     if: |
       contains(github.event.issue.labels.*.name, 'enhancement')
     runs-on: ubuntu-latest    
     steps:
-      - uses: danhellem/github-actions-issue-to-work-item@master
-        env:
-          ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
-          github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
-          ado_organization: "cattools"
-          ado_project: "OneCatTools"
-          ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "OneCatTools\\FY24\\Q2\\November"  
-          ado_wit: "User Story"
-          ado_new_state: "New"
-          ado_active_state: "Active"
-          ado_close_state: "Resolved"
-          ado_bypassrules: true
-          log_level: 100
-          
-  alertIssueAK:
-    if: |
-      contains(github.event.issue.labels.*.name, 'bug')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: danhellem/github-actions-issue-to-work-item@master
-        env:
-          ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
-          github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
-          ado_organization: "cattools"
-          ado_project: "OneCatTools"
-          ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "OneCatTools\\FY24\\Q2\\November"  
-          ado_wit: "Bug"
-          ado_new_state: "New"
-          ado_active_state: "Active"
-          ado_close_state: "Resolved"
-          ado_bypassrules: true
-          log_level: 100
+      - name: Get Milestone Name
+        id: milestone
+        run: echo "::set-output name=name::${{ github.event.issue.milestone.title }}"
 
-  alertQuestionAK:
-    if: |
-      contains(github.event.issue.labels.*.name, 'question')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: danhellem/github-actions-issue-to-work-item@master
-        env:
-          ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
-          github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
-          ado_organization: "cattools"
-          ado_project: "OneCatTools"
-          ado_area_path: "OneCatTools\\ApprovalsKit\\Develop"
-          ado_iteration_path: "OneCatTools\\FY24\\Q2\\November"  
-          ado_wit: "Question"
-          ado_new_state: "New"
-          ado_active_state: "Active"
-          ado_close_state: "Closed"
-          ado_bypassrules: true
-          log_level: 100             
+      - name: Extract Month
+        id: extract-month
+        run: echo "::set-output name=month::$(echo ${{ steps.milestone.outputs.name }} | rev | cut -d' ' -f1 | rev)"
+
+      - name: Set Iteration Path
+        id: set-iteration
+        run: echo "::set-output name=iteration::OneCatTools\\FY24\\Q2\\${{ steps.extract-month.outputs.month }}"
