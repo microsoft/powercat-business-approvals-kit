@@ -1,8 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Dynamic;
+using System.Reflection;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using Microsoft.PowerApps.TestEngine.Config;
@@ -278,6 +285,108 @@ namespace Microsoft.PowerApps.TestEngine.TestInfra
         {
             ValidatePage();
             await Page.ClickAsync(selector);
+        }
+
+        public async Task<List<ExpandoObject>> GetMatch(int timeout, string selector, Func<IEnumerable<ILocator>, Task<IEnumerable<ExpandoObject>>> action) {
+            var start = DateTime.Now;
+            var complete = false;
+            List<ExpandoObject> results = new List<ExpandoObject>();
+            ValidatePage();
+            while ( DateTime.Now.Subtract(start).TotalMinutes <= timeout && !complete ) {
+                var pages = Page.Context.Pages.ToArray();
+                foreach ( var page in pages ) {
+                    ILocator matches = page.Locator(selector);
+
+                    var pageMatch = await matches.IsVisibleAsync();
+
+                    if (  !pageMatch ) { 
+                        Thread.Sleep(1000);
+                    } else {
+                        results.AddRange(await action(await matches.AllAsync()));
+                        complete = true;
+                        break;
+                    }
+                }   
+            }
+            return results;
+        }
+
+        public async Task ExecuteScript(string base64Data, string scriptFile) {
+            byte[] assemblyBinaryContent;
+
+            var script = File.ReadAllText(scriptFile);
+
+            _logger.LogDebug("Compiling file");
+
+            ScriptOptions options = ScriptOptions.Default;
+            var roslynScript = CSharpScript.Create(script, options);
+            var compilation = roslynScript.GetCompilation();
+
+            compilation = compilation.WithOptions(compilation.Options
+                .WithOptimizationLevel(OptimizationLevel.Release)
+                .WithOutputKind(OutputKind.DynamicallyLinkedLibrary));
+
+            using (var assemblyStream = new MemoryStream())
+            {
+                var result = compilation.Emit(assemblyStream);
+                if (!result.Success)
+                {
+                    var errors = string.Join(Environment.NewLine, result.Diagnostics.Select(x => x));
+                    throw new Exception("Compilation errors: " + Environment.NewLine + errors);
+                }
+
+                assemblyBinaryContent = assemblyStream.ToArray();
+            }
+
+            GC.Collect();
+
+            Assembly assembly = Assembly.Load(assemblyBinaryContent);
+
+            _logger.LogDebug("Run script");
+            Run(base64Data, assembly);
+
+            _logger.LogInformation("Successfully finished executing PlaywrightScript function.");
+        }
+
+        private void Run(string base64Data, Assembly assembly)
+        {
+            //Execute the script
+            var types = assembly.GetTypes();
+
+            bool found = false;
+            foreach ( var scriptType in types )
+            {
+                if ( scriptType.Name.Equals("PlaywrightScript") )
+                {
+                    found = true;
+
+                    var method = scriptType.GetMethod("Run", BindingFlags.Static | BindingFlags.Public);
+
+                    var context = Page.Context;
+
+                    if (method == null)
+                    {
+                        _logger.LogError("Static Run Method not found");
+                    }
+
+                    var data = base64Data;
+                    if ( !string.IsNullOrEmpty(base64Data)) {
+                        data = Base64Decode(data);
+                    }
+
+                    method?.Invoke(null, new object[] { context, data, _logger });
+                }
+            }
+
+            if ( !found ) {
+                 _logger.LogError("PlaywrightScript class not found");
+            }
+        }
+
+        private string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+            return Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
         public async Task ClickIfAppearAsync(int timeout, params PlaywrightCondition[] conditions) {
