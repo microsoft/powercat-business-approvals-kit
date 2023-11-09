@@ -39,10 +39,16 @@ jobs:
         run: |
             MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
             YEAR=$(echo $MILESTONE_PART | cut -d' ' -f2)
-            echo "YEAR=$YEAR" >> $GITHUB_ENV
-      
+            echo "YEAR=$YEAR" >> $GITHUB_ENV    
+
+      - name: Increment Year by 1
+        id: increment-year
+        run: |
+          YEAR=$(($YEAR + 1))
+          echo "INCREMENTED_YEAR=$YEAR" >> $GITHUB_ENV
+
       - name: Print YEAR
-        run: echo "YEAR is $YEAR"
+        run: echo "YEAR is $YEAR"          
       
       - name: Replace first two characters with 'FY'
         id: replace-fy
