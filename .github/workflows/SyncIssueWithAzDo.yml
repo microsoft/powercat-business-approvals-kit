@@ -39,7 +39,7 @@ jobs:
 
       - name: Extract Year and Add FY
         id: extract-year
-        run: echo "YEAR=$(echo $MILESTONE | awk -F' ' '{print $NF}' | cut -c1-4) && echo "FY${YEAR}" >> $GITHUB_ENV"
+        run: echo "YEAR=$(echo $MILESTONE | grep -oP '\b\d{4}\b') && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
         
       - name: Print FY Year
         run: echo "Formatted year ${{ env.YEAR }}"        
