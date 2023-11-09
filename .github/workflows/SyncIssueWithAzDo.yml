@@ -15,7 +15,7 @@ jobs:
   print-issue-milestone:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Issue Milestone
+      - name: Print Milestone
         run: echo "The milestone of your issue is ${{ github.event.issue.milestone.title }}"
 
   alertEnhancementAK:
@@ -36,7 +36,10 @@ jobs:
 
       - name: Extract Year and Add FY
         id: extract-year
-        run: echo "YEAR=$(echo $MILESTONE | rev | cut -d' ' -f1 | rev) && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"        
+        run: echo "YEAR=$(echo $MILESTONE | rev | cut -d' ' -f1 | rev) && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
+
+      - name: Print FY Year
+        run: echo "Extracted Month ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
