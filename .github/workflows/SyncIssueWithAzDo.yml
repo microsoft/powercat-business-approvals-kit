@@ -31,8 +31,8 @@ jobs:
           MONTH=$(echo $MILESTONE_PART | cut -d' ' -f1)
           echo "MONTH=$MONTH" >> $GITHUB_ENV
         
-      - name: Print Extracted Month
-        run: echo "Extracted Month ${{ env.MONTH }}"
+      - name: Print Month
+        run: echo "Month ${{ env.MONTH }}"
 
       - name: Extract Year
         id: extract-year
@@ -49,7 +49,7 @@ jobs:
         run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
         
       - name: Print FY Year
-        run: echo "Formatted year - ${{ env.YEAR }}"        
+        run: echo "FY Year - ${{ env.YEAR }}"        
         
       - name: Set Iteration Path
         id: set-iteration
