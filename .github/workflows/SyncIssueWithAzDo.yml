@@ -26,11 +26,11 @@ jobs:
       - name: Set Milestone
         id: set-milestone
         run: echo "MILESTONE=${{ github.event.issue.milestone.title }}" >> $GITHUB_ENV
-
+        
       - name: Extract Month
         id: extract-month
-        run: echo "MONTH=$(echo $MILESTONE | rev | cut -d' ' -f1 | rev)" >> $GITHUB_ENV
-      
+        run: echo "MONTH=$(echo $MILESTONE | rev | cut -d' ' -f2 | rev)" >> $GITHUB_ENV
+        
       - name: Print Extracted Month
         run: echo "Extracted Month ${{ env.MONTH }}"
         
