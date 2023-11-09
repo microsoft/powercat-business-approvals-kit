@@ -12,12 +12,6 @@ concurrency:
   cancel-in-progress: false    
 
 jobs:
-  print-issue-milestone:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Milestone
-        run: echo "The milestone of your issue is ${{ github.event.issue.milestone.title }}"
-
   alertEnhancementAK:
     if: |
       contains(github.event.issue.labels.*.name, 'enhancement')
@@ -39,7 +33,7 @@ jobs:
 
       - name: Extract Year and Add FY
         id: extract-year
-        run: echo "YEAR=$(echo $MILESTONE | grep -oP '\b\d{4}\b') && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
+        run: echo "YEAR=$(echo $MILESTONE | sed -n 's/.* \([0-9]\{4\}\).*/\1/p') && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
         
       - name: Print FY Year
         run: echo "Formatted year ${{ env.YEAR }}"        
