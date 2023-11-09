@@ -1555,8 +1555,16 @@ scrProcessEditor As screen:
             ZIndex: =18
 
     Button2 As Button:
+        BorderColor: =
+        DisabledBorderColor: =
+        DisabledFillColor: =
+        DisabledTextColor: =
         DisplayMode: =DisplayMode.Edit
+        FillColor: =
         Height: =32
+        HoverBorderColor: =
+        HoverFillColor: =
+        HoverTextColor: =
         OnSelect: |-
             =//Passing record ID from main view
                 Set(_selectedProcess,
@@ -1566,6 +1574,10 @@ scrProcessEditor As screen:
                     ) 
                 );
                 EditForm(frmProcess)
+        PressedBorderColor: =
+        PressedFillColor: =
+        PressedTextColor: =
+        TextColor: =
         Visible: =false
         Width: =96
         X: =1270

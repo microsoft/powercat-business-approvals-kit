@@ -341,6 +341,7 @@ scrPublishProcess As screen:
             ZIndex: =9
 
         "Progress1 As 'Progress Bar'":
+            BasePaletteColor: =
             DisplayMode: =DisplayMode.Edit
             Height: =45
             Indeterminate: =true
