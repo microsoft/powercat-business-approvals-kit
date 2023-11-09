@@ -1,7 +1,7 @@
 on:
   issues:
     types:
-      [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
+      [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned, milestoned]
   issue_comment:
     types: [created, edited, deleted]
 
