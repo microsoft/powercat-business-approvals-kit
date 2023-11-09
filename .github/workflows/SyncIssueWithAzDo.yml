@@ -31,16 +31,19 @@ jobs:
       - name: Print Extracted Month
         run: echo "Extracted Month ${{ env.MONTH }}"
 
-      - name: Extract Year and Add FY
+      - name: Extract Year
         id: extract-year
-        run: echo "YEAR=$(echo $MILESTONE | cut -d' ' -f3) && echo "FY$(echo $YEAR | cut -c3-)" >> $GITHUB_ENV"
+        run: echo "YEAR=$(echo $MILESTONE | cut -d' ' -f3)" >> $GITHUB_ENV
+
+      - name: Add FY
+        run: echo "FY$(echo ${{ env.YEAR }} | cut -c3-)" >> $GITHUB_ENV
         
       - name: Print FY Year
-        run: echo "Formatted year ${{ env.YEAR }}"        
+        run: echo "Formatted year ${{ env.FY }}"        
         
       - name: Set Iteration Path
         id: set-iteration
-        run: echo "ITERATION=OneCatTools\\FY${{ env.YEAR }}\\Q2\\$MONTH" >> $GITHUB_ENV
+        run: echo "ITERATION=OneCatTools\\FY${{ env.FY }}\\Q2\\$MONTH" >> $GITHUB_ENV
 
       - name: Print the Iteration Path
         run: echo "Iteration Path ${{ env.ITERATION }}"        
