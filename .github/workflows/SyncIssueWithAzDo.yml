@@ -78,8 +78,7 @@ jobs:
       - name: Set Iteration Path
         id: set-iteration
         run: |
-            #echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT     
-            echo "ITERATION=Hello" >> $GITHUB_OUTPUT     
+            echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT            
 
   mainjob2:
     needs: prepareIterationPathJob
