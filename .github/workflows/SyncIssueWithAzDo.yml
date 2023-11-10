@@ -14,6 +14,8 @@ jobs:
   print-issue-milestone:
     runs-on: ubuntu-latest
     steps:
+    - name: Debug payload
+      run: echo ${{ toJson(github) }}    
     - name: Display Event Payload
       run: echo "${{ toJson(github.context.payload) }}"
   alertEnhancementAK:
