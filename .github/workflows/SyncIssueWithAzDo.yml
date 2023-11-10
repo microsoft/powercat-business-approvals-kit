@@ -96,7 +96,7 @@ jobs:
           ado_active_state: "Active"
           ado_close_state: "Resolved"
           ado_bypassrules: true
-          log_level: 300          
+          log_level: 100          
 
   alertIssueAK:
     if: |
