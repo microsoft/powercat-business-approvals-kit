@@ -148,12 +148,6 @@
                                                  ],
     "SolutionComponentOwnershipConfiguration":  [
                                                     {
-                                                        "solutionComponentType":  300,
-                                                        "solutionComponentName":  "cat_businessapprovalprocessmanager_1d6e0",
-                                                        "solutionComponentUniqueName":  "979e681f-fea5-4d30-8559-236f5bd3e8de",
-                                                        "ownerEmail":  "#{canvasowner.ownerEmail.cat_businessapprovalprocessmanager_1d6e0.979e681f-fea5-4d30-8559-236f5bd3e8de}#"
-                                                    },
-                                                    {
                                                         "solutionComponentType":  29,
                                                         "solutionComponentName":  "BACore|ApprovalTime-out",
                                                         "solutionComponentUniqueName":  "a696980c-5fd0-ec11-a7b5-0022486dabee",
@@ -410,12 +404,7 @@
                                                 }
                                             ],
     "AadGroupCanvasConfiguration":  [
-                                        {
-                                            "aadGroupId":  "#{canvasshare.aadGroupId.cat_businessapprovalprocessmanager_1d6e0}#",
-                                            "canvasNameInSolution":  "cat_businessapprovalprocessmanager_1d6e0",
-                                            "canvasDisplayName":  "[Deprecated] Business Approval Process Manager",
-                                            "roleName":  "#{canvasshare.roleName.cat_businessapprovalprocessmanager_1d6e0}#"
-                                        }
+
                                     ],
     "AadGroupTeamConfiguration":  [
 
