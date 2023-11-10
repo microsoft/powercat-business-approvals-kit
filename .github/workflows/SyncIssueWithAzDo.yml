@@ -81,7 +81,7 @@ jobs:
           if [ -n "${{ github.event.issue.milestone.title }}" ]; then
             echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT
           else
-            echo "ITERATION=" >> $GITHUB_OUTPUT
+            echo "ITERATION=OneCatTools" >> $GITHUB_OUTPUT
           fi         
 
   alertEnhancementAK:
