@@ -10,41 +10,36 @@
       <Titles>
         <Title LCID="1033" Title="Approvals Center" />
       </Titles>
-      <Group Id="NewGroup_a9ccc72b" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+      <Group Id="group_bf2f0714" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
-          <Title LCID="1033" Title="Approvals Kit" />
+          <Title LCID="1033" Title="Quick links" />
         </Titles>
-        <SubArea Id="subarea_6cb3f366" VectorIcon="/WebResources/mspp_web_page_access_control_rules.svg" Icon="/WebResources/mspp_web_page_access_control_rules.svg" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" Page="cat_homepagereimagined_709bf">
+        <SubArea Id="subarea_5bd0f3f1" VectorIcon="/WebResources/mspp_web_page_access_control_rules.svg" Icon="/WebResources/mspp_web_page_access_control_rules.svg" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" Page="cat_homepagereimagined_709bf">
           <Titles>
-            <Title LCID="1033" Title="Home" />
+            <Title LCID="1033" Title="Home page" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_87d6dba5" VectorIcon="/WebResources/cat_businessapproval_override" Icon="/WebResources/cat_businessapproval_override" Entity="cat_businessapprovalinstanceoverride" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubArea_c550c30a" VectorIcon="/WebResources/cat_businessapproval_override" Icon="/WebResources/cat_businessapproval_override" Entity="cat_businessapprovalinstanceoverride" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Approval Overrides" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_b90f6de3" VectorIcon="/WebResources/cat_businessapproval_workflow" Icon="/WebResources/cat_businessapproval_workflow" Entity="cat_businessapprovalworkflow" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubArea_c32f2134" VectorIcon="/WebResources/cat_businessapproval_workflow" Icon="/WebResources/cat_businessapproval_workflow" Entity="cat_businessapprovalworkflow" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Workflows" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_38141ba9" VectorIcon="/WebResources/cat_businessapproval_stageinstance" Icon="/WebResources/cat_businessapproval_stageinstance" Entity="cat_businessapprovalruntimestageinstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
-          <Titles>
-            <Title LCID="1033" Title="Stage Instances" />
-          </Titles>
-        </SubArea>
-        <SubArea Id="NewSubarea_f7bdad4c" VectorIcon="/WebResources/cat_businessapproval_nodeinstance" Icon="/WebResources/cat_businessapproval_nodeinstance" Entity="cat_businessapprovalruntimenodeinstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubArea_8bf6e0db" VectorIcon="/WebResources/cat_businessapproval_node" Icon="/WebResources/cat_businessapproval_node" Entity="cat_businessapprovalruntimenodeinstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Node Instances" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_be9eafe6" VectorIcon="/WebResources/cat_businessapproval_datainstance" Icon="/WebResources/cat_businessapproval_datainstance" Entity="cat_businessapprovaldatainstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubArea_3d13105d" VectorIcon="/WebResources/cat_businessapproval_datainstance" Icon="/WebResources/cat_businessapproval_datainstance" Entity="cat_businessapprovaldatainstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Reference Data Instances" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_14442e1d" VectorIcon="/WebResources/cat_businessapproval_approvalinstance" Icon="/WebResources/cat_businessapproval_approvalinstance" Entity="cat_businessapprovalinstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubArea_7ffb47f1" VectorIcon="/WebResources/cat_businessapproval_approvalinstance" Icon="/WebResources/cat_businessapproval_approvalinstance" Entity="cat_businessapprovalinstance" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Approval Instances" />
           </Titles>
@@ -129,17 +124,17 @@
         <Titles>
           <Title LCID="1033" Title="Company Settings" />
         </Titles>
-        <SubArea Id="NewSubarea_1eccf7c2" VectorIcon="/WebResources/cat_businessapproval_workprofile" Icon="/WebResources/cat_businessapproval_workprofile" Entity="cat_businessapprovalworkprofile" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubarea_1eccf7c2" VectorIcon="/WebResources/cat_businessapproval_workprofile" Entity="cat_businessapprovalworkprofile" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Work Profiles" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_0b804648" VectorIcon="/WebResources/cat_businessapproval_holiday" Icon="/WebResources/cat_businessapproval_holiday" Entity="cat_businessapprovalpublicholidays" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubarea_0b804648" VectorIcon="/WebResources/cat_businessapproval_holiday" Entity="cat_businessapprovalpublicholidays" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Public Holidays" />
           </Titles>
         </SubArea>
-        <SubArea Id="NewSubarea_864adb7b" VectorIcon="/WebResources/cat_businessapproval_calendar" Icon="/WebResources/cat_businessapproval_calendar" Entity="cat_businessapprovalholidaycalendar" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="NewSubarea_864adb7b" VectorIcon="/WebResources/cat_businessapproval_calendar" Entity="cat_businessapprovalholidaycalendar" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Holiday Calendars" />
           </Titles>
@@ -149,8 +144,8 @@
         <Titles>
           <Title LCID="1033" Title="System" />
         </Titles>
-        <SubArea Id="subarea_882ab14d" VectorIcon="/WebResources/cat_approval_icons_approvalpath" Icon="/WebResources/cat_approval_icons_approvalpath" Entity="cat_businessapprovalinstancelog" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
-        <SubArea Id="subarea_d6dd5789" VectorIcon="/WebResources/cat_businessapproval_log" Icon="/WebResources/cat_businessapproval_log" Entity="cat_businessapprovalruntimeexception" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+        <SubArea Id="subarea_882ab14d" VectorIcon="/WebResources/cat_approval_icons_approvalpath" Entity="cat_businessapprovalinstancelog" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_d6dd5789" VectorIcon="/WebResources/cat_businessapproval_log" Entity="cat_businessapprovalruntimeexception" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Runtime Exceptions" />
           </Titles>

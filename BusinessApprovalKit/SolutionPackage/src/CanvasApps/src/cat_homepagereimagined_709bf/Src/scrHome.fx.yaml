@@ -121,8 +121,8 @@
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 PaddingBottom: =16
-                PaddingLeft: =16
-                PaddingRight: =16
+                PaddingLeft: =35
+                PaddingRight: =35
                 PaddingTop: =16
                 RadiusBottomLeft: =4
                 RadiusBottomRight: =4
@@ -134,12 +134,13 @@
                 "OptionHeaderAutoWidthLabel As 'Auto Width Label (1.0.22)'":
                     DisplayMode: =DisplayMode.Edit
                     FontColor: =AppTheme.palette.black
-                    FontSize: =22
+                    FontSize: =21
                     FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Px
                     Height: =32
                     LayoutMinHeight: =200
                     LayoutMinWidth: =200
                     Text: ="Learn how to use the kit"
+                    Tooltip: =""
                     Width: =Parent.Width
                     X: =0
                     Y: =0
@@ -222,6 +223,7 @@
 
                                 lblCardTitle_1 As Label:
                                     Alignment: =Align.Justify
+                                    Color: =
                                     DisplayMode: =DisplayMode.Edit
                                     FontSize: =15
                                     FontWeight: =FontWeight.Semibold
@@ -330,6 +332,7 @@
 
                                 lblCardTitle_2 As Label:
                                     Alignment: =Align.Justify
+                                    Color: =
                                     DisplayMode: =DisplayMode.Edit
                                     FontSize: =15
                                     FontWeight: =FontWeight.Semibold
@@ -441,6 +444,7 @@
 
                                 lblCardTitle_3 As Label:
                                     Alignment: =Align.Justify
+                                    Color: =
                                     DisplayMode: =DisplayMode.Edit
                                     FontSize: =15
                                     FontWeight: =FontWeight.Semibold
@@ -496,12 +500,13 @@
                 "OptionHeaderAutoWidthLabel_1 As 'Auto Width Label (1.0.22)'":
                     DisplayMode: =DisplayMode.Edit
                     FontColor: =AppTheme.palette.black
-                    FontSize: =22
+                    FontSize: =21
                     FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Px
                     Height: =32
                     LayoutMinHeight: =200
                     LayoutMinWidth: =200
                     Text: ="My submitted workflow"
+                    Tooltip: =""
                     Width: =Parent.Width
                     X: =0
                     Y: =0
@@ -654,7 +659,7 @@
                 "OptionHeaderAutoWidthLabel_2 As 'Auto Width Label (1.0.22)'":
                     DisplayMode: =DisplayMode.Edit
                     FontColor: =AppTheme.palette.black
-                    FontSize: =22
+                    FontSize: =21
                     FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Px
                     Height: =32
                     LayoutMinHeight: =200

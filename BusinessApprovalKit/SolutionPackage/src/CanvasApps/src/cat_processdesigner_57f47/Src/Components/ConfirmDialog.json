@@ -111,7 +111,7 @@
         "Name": "lblConfirmMessage",
         "Parent": "ConfirmDialog",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 663,
+        "PublishOrderIndex": 664,
         "Rules": [
           {
             "Category": "Data",
@@ -491,7 +491,7 @@
             "Name": "btnYes1",
             "Parent": "conConfirmButtons",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 665,
+            "PublishOrderIndex": 666,
             "Rules": [
               {
                 "Category": "Data",
@@ -788,7 +788,7 @@
             "Name": "btnYes",
             "Parent": "conConfirmButtons",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 666,
+            "PublishOrderIndex": 667,
             "Rules": [
               {
                 "Category": "Data",
@@ -941,7 +941,7 @@
             "Name": "btnNo",
             "Parent": "conConfirmButtons",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 667,
+            "PublishOrderIndex": 668,
             "Rules": [
               {
                 "Category": "Data",
@@ -1145,7 +1145,7 @@
             "Name": "btnNo1",
             "Parent": "conConfirmButtons",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 668,
+            "PublishOrderIndex": 669,
             "Rules": [
               {
                 "Category": "Data",
@@ -1450,7 +1450,7 @@
         "Name": "conConfirmButtons",
         "Parent": "ConfirmDialog",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 664,
+        "PublishOrderIndex": 665,
         "Rules": [
           {
             "Category": "Design",
@@ -1623,7 +1623,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638350489378892623",
+    "LastModifiedTimestamp": "638352111162021813",
     "Name": "ConfirmDialog",
     "Rules": [
       {
@@ -1754,7 +1754,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638350489378892623",
+  "LastModifiedTimestamp": "638352111162021813",
   "Name": "29b4d38c23224cd7979258806047f1d4",
   "OverridableProperties": {},
   "TemplateOriginalName": "0219e5e1e199469da2309eecb5e19744",

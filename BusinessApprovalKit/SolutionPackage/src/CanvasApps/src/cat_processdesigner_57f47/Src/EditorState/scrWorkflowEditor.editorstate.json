@@ -101,7 +101,9 @@
           "NameMapSourceSchema": "?"
         },
         "MoveStage_StageId",
-        "AddNode_Path"
+        "AddNode_Path",
+        "DesignerAutoHeight",
+        "AddStage"
       ],
       "DynamicProperties": [
         {
@@ -227,6 +229,11 @@
           "RuleProviderType": "System"
         },
         {
+          "Category": "Data",
+          "PropertyName": "DesignerAutoHeight",
+          "RuleProviderType": "System"
+        },
+        {
           "Category": "Design",
           "PropertyName": "Y",
           "RuleProviderType": "Unknown"
@@ -275,6 +282,11 @@
           "Category": "Behavior",
           "PropertyName": "MoveStage",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "AddStage",
+          "RuleProviderType": "System"
         }
       ],
       "StyleName": "",

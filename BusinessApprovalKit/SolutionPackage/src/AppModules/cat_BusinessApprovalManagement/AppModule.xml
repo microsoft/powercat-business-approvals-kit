@@ -2,11 +2,11 @@
 <AppModule>
   <UniqueName>cat_BusinessApprovalManagement</UniqueName>
   <IntroducedVersion>1.0.0.0</IntroducedVersion>
-  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <WebResourceId>cad17b5e-0edb-ec11-a7b5-0022486dca48</WebResourceId>
   <OptimizedFor></OptimizedFor>
   <statecode>0</statecode>
   <statuscode>1</statuscode>
-  <WelcomePageId>1c3e75bb-ef33-44d2-b0d8-139587cbe1f1</WelcomePageId>
+  <WelcomePageId>2c352c59-f2c5-4eb5-9b7b-e140d64a9215</WelcomePageId>
   <FormFactor>1</FormFactor>
   <ClientType>4</ClientType>
   <NavigationType>0</NavigationType>

@@ -6,7 +6,7 @@
   <iconbrandcolor>#007ee5</iconbrandcolor>
   <name>cat_approvals-20kit</name>
   <connectortype>1</connectortype>
-  <scriptoperations>["GetApprovalDataFields","CreateWorkflowInstance"]</scriptoperations>
+  <scriptoperations>["CreateWorkflowInstance","GetApprovalDataFields"]</scriptoperations>
   <openapidefinition>/Connector/cat_approvals-20kit_openapidefinition.json</openapidefinition>
   <connectionparameters>/Connector/cat_approvals-20kit_connectionparameters.json</connectionparameters>
   <policytemplateinstances>/Connector/cat_approvals-20kit_policytemplateinstances.json</policytemplateinstances>

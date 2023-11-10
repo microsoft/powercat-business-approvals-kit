@@ -47,7 +47,7 @@
         }
       },
       "actions": {
-        "Parse_RuntimeData_JSON": {
+        "Parse_RuntimeData_JSON_WFQueueTable": {
           "runAfter": {},
           "metadata": {
             "operationMetadataId": "909c0e9d-4b04-4cf7-94b2-21d7116d7e9f"
@@ -73,33 +73,60 @@
                 ]
               }
             }
-          }
+          },
+          "description": "This Runtime data is of Workflow queue table"
         },
         "Apply_to_each": {
-          "foreach": "@body('Parse_RuntimeData_JSON')",
+          "foreach": "@body('Parse_RuntimeData_JSON_WFQueueTable')",
           "actions": {
             "Condition": {
               "actions": {
-                "Create_Workflow_Parameters": {
+                "Apply_to_each_-_Iterate_through_parameters": {
+                  "foreach": "@body('Parse_JSON_-_Runtime_Data_-_Published_WF_Table')",
+                  "actions": {
+                    "Condition_-_If_Runtime_ID_is_equal_to_ID": {
+                      "actions": {
+                        "Create_Workflow_Parameters": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "461d2827-78bf-4321-806e-8ff818c3a6bd"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_commondataserviceforapps_1",
+                              "operationId": "CreateRecord",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                            },
+                            "parameters": {
+                              "entityName": "cat_businessapprovaldatainstances",
+                              "item/cat_datavalue": "@items('Apply_to_each')['value']",
+                              "item/cat_RuntimeData@odata.bind": "cat_businessapprovalruntimedatas(@{items('Apply_to_each_-_Iterate_through_parameters')['runtimeId']})",
+                              "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Create_new_Workflow_Instance')?['body/cat_businessapprovalworkflowid']})"
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        }
+                      },
+                      "runAfter": {},
+                      "expression": {
+                        "equals": [
+                          "@items('Apply_to_each_-_Iterate_through_parameters')['name']",
+                          "@items('Apply_to_each')['id']"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "96009c3c-ee2d-40da-83aa-1ace029c207e"
+                      },
+                      "type": "If",
+                      "description": "Here 'name' is the Application Data(Variable), ID is also the same which is passed from custom connector. "
+                    }
+                  },
                   "runAfter": {},
                   "metadata": {
-                    "operationMetadataId": "461d2827-78bf-4321-806e-8ff818c3a6bd"
+                    "operationMetadataId": "1ad02e6f-8f5f-4feb-a50d-6ce72d46e53f"
                   },
-                  "type": "OpenApiConnection",
-                  "inputs": {
-                    "host": {
-                      "connectionName": "shared_commondataserviceforapps_1",
-                      "operationId": "CreateRecord",
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                    },
-                    "parameters": {
-                      "entityName": "cat_businessapprovaldatainstances",
-                      "item/cat_datavalue": "@items('Apply_to_each')['value']",
-                      "item/cat_RuntimeData@odata.bind": "cat_businessapprovalruntimedatas(@{items('Apply_to_each')['id']})",
-                      "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Create_new_Workflow_Instance')?['body/cat_businessapprovalworkflowid']})"
-                    },
-                    "authentication": "@parameters('$authentication')"
-                  }
+                  "type": "Foreach"
                 }
               },
               "runAfter": {},
@@ -118,7 +145,7 @@
             }
           },
           "runAfter": {
-            "Create_new_Workflow_Instance": [
+            "Parse_JSON_-_Runtime_Data_-_Published_WF_Table": [
               "Succeeded"
             ]
           },
@@ -154,7 +181,7 @@
         },
         "Get_Business_Approval_Published_WF_record": {
           "runAfter": {
-            "Parse_RuntimeData_JSON": [
+            "Parse_RuntimeData_JSON_WFQueueTable": [
               "Succeeded"
             ]
           },
@@ -218,7 +245,7 @@
           }
         },
         "Apply_to_each_": {
-          "foreach": "@body('Parse_RuntimeData_JSON')",
+          "foreach": "@body('Parse_RuntimeData_JSON_WFQueueTable')",
           "actions": {
             "Condition_2": {
               "actions": {
@@ -257,6 +284,46 @@
           },
           "type": "Foreach",
           "description": "Iterate through each process field data and create data instance"
+        },
+        "Parse_JSON_-_Runtime_Data_-_Published_WF_Table": {
+          "runAfter": {
+            "Create_new_Workflow_Instance": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c12db432-c7ed-445f-bf25-9adbb3ee2825"
+          },
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@outputs('Get_Business_Approval_Published_WF_record')?['body/cat_runtimedata']",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "runtimeId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "runtimeId",
+                  "name",
+                  "type"
+                ]
+              }
+            }
+          }
         }
       }
     },

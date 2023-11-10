@@ -1,7 +1,7 @@
 App As appinfo:
     BackEnabled: =false
     OnStart: |-
-        =Set(_isBusy,false);
+        =Set(_isBusy,true);
         //Passing record ID from main view
         Set(inputParameters,Param("recordId"));
         Set(props, Match(inputParameters, "\""prop1"":""(?<prop1>[^""]*)"",""prop2"":""(?<prop2>[^""]*)"));
