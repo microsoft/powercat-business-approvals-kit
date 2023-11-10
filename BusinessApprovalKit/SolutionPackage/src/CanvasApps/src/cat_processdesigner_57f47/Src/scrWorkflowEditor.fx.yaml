@@ -98,6 +98,7 @@ scrWorkflowEditor As screen:
                 Set(_currentNodeIndex, Row);
                 Set(_currentPathIndex, Path);
                 Navigate(scrNodeEditor)
+            AddStage: ="Text"
             EditNode: |
                 =Concurrent(
                     Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),

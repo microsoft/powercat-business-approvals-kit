@@ -2381,8 +2381,22 @@
         "RadiusTopRight",
         "RadiusBottomLeft",
         "RadiusBottomRight",
-        "PaddingLeft",
-        "PaddingRight",
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "",
+          "InvariantPropertyName": "PaddingLeft",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
+        },
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "",
+          "InvariantPropertyName": "PaddingRight",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
+        },
         "PaddingTop",
         "PaddingBottom"
       ],
@@ -5877,7 +5891,8 @@
           "InvariantPropertyName": "Alignment",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "Color"
       ],
       "DynamicProperties": [
         {
@@ -5958,6 +5973,11 @@
         {
           "Category": "Data",
           "PropertyName": "Text",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "Color",
           "RuleProviderType": "Unknown"
         },
         {
@@ -6064,7 +6084,8 @@
           "InvariantPropertyName": "Alignment",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "Color"
       ],
       "DynamicProperties": [
         {
@@ -6145,6 +6166,11 @@
         {
           "Category": "Data",
           "PropertyName": "Text",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "Color",
           "RuleProviderType": "Unknown"
         },
         {
@@ -6251,7 +6277,8 @@
           "InvariantPropertyName": "Alignment",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "Color"
       ],
       "DynamicProperties": [
         {
@@ -6332,6 +6359,11 @@
         {
           "Category": "Data",
           "PropertyName": "Text",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "Color",
           "RuleProviderType": "Unknown"
         },
         {
@@ -7284,6 +7316,14 @@
           "InvariantPropertyName": "FontColor",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
+        },
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "",
+          "InvariantPropertyName": "Tooltip",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
         }
       ],
       "DynamicProperties": [
@@ -7355,6 +7395,11 @@
         {
           "Category": "Data",
           "PropertyName": "FontSizeUnits",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "Tooltip",
           "RuleProviderType": "Unknown"
         },
         {
@@ -7445,6 +7490,14 @@
           "InvariantPropertyName": "FontColor",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
+        },
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "",
+          "InvariantPropertyName": "Tooltip",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
         }
       ],
       "DynamicProperties": [
@@ -7516,6 +7569,11 @@
         {
           "Category": "Data",
           "PropertyName": "FontSizeUnits",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "Tooltip",
           "RuleProviderType": "Unknown"
         },
         {
