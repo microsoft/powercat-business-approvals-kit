@@ -3,7 +3,7 @@ name: Sync issue to Azure DevOps work item
 on:
   issues:
     types:
-      [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
+      [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned, milestoned]
   issue_comment:
     types: [created, edited, deleted]
 concurrency:
@@ -36,7 +36,7 @@ jobs:
           ado_active_state: "Active"
           ado_close_state: "Resolved"
           ado_bypassrules: true
-          log_level: 100
+          log_level: 300
           
   alertIssueAK:
     if: |
