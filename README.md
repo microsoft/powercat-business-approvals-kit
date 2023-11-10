@@ -18,9 +18,9 @@ The Business Approvals kit GitHub Repo contains the source, releases, issues and
 
 ## Latest Release
 
-The latest shipped version is available via **[Releases](https://github.com/microsoft/powercat-business-approvals-kit/releases)**. From there, you can download the latest version of all managed solutions that have been tested and are ready for use. 
+The latest shipped version is available via **[Releases](https://github.com/microsoft/powercat-business-approvals-kit/releases)**. From there, you can download the latest version of all managed solutions that have been tested and are ready for use.
 
-Stay up to date with our releases by **subscribing** to them: 
+Stay up to date with our releases by **subscribing** to them:
 1. Select Watch <br>
       ![image](https://user-images.githubusercontent.com/55705669/121772447-4ede5700-cb6d-11eb-91a7-fe41715fc431.png)
 2. Select Custom > Releases > Apply to receive notifications about our releases<br>

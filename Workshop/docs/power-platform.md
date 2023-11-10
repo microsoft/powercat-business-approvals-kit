@@ -17,6 +17,3 @@ Enabled development environment settings to enable features for dependent compon
 |Settings | Description |
 |---------|-------------|
 |Enable PCF | Enabling PCF (PowerApps Component Framework) in a Power Platform environment allows developers to create custom controls for their Power Apps using web technologies. This feature provides access to the PCF Gallery and allows developers to create, test, and deploy custom controls within the environment, extending the capabilities of the Power Platform. |
-
-## Dependant Components
-
