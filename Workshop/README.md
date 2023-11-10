@@ -1,7 +1,5 @@
 # Overview
 
-Sure, here's a draft of the welcome README.md overview text for the Power Platform Business Approvals Kit workshop content:
-
 Welcome to the Power Platform Business Approvals Kit workshop content on GitHub! This content is designed to support the [Approvals Kit in Power Automate workshop](https://aka.ms/approvals-kit/learn) and is intended to be used by an instructor to set up development environments for learners to complete the workshop.
 
 The [Scripts README](./src/scripts/README.md) provides more information on the scripts that can be used to automate the setup of a workshop. Additionally, there is further reading in the docs section that provides further information on how to set up for a workshop.
