@@ -184,7 +184,7 @@ param([string] $user)
 Push-Location
 Set-Location "/home/accadmin/powercat-business-approvals-kit/Workshop"
 . ./src/scripts/users.ps1
-Invoke-SetupUserForWorkshop "$user@M365x63805008.OnMicrosoft.com"
+Invoke-SetupUserForWorkshop "$user@contoso.OnMicrosoft.com"
 Pop-Location
 EOF
 cat << \EOF >> ~/sh.sh
