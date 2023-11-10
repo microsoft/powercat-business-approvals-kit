@@ -77,15 +77,12 @@ jobs:
         
       - name: Set Iteration Path
         id: set-iteration
-        run: echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT
-
-      - name: Print the Iteration Path
-        run: echo "Iteration Path ${{ env.ITERATION }}"      
+        run: echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT     
 
   mainjob2:
     needs: prepareIterationPathJob
     runs-on: ubuntu-latest
     steps:
-      - name: Access Variable
+      - name: Read Iteration
         run: |
-          echo "var1=${{ needs.prepareIterationPathJob.outputs.ITERATION }}"  
+          echo "ITERATION=${{ needs.prepareIterationPathJob.outputs.ITERATION }}"  
