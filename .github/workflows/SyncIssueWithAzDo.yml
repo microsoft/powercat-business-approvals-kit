@@ -14,7 +14,7 @@ jobs:
   prepareIterationPathJob:
     runs-on: ubuntu-latest
     outputs:
-      var1: ${{ steps.set-iteration.outputs.ITERATION }}
+      ITERATION: ${{ steps.set-iteration.outputs.ITERATION }}
     steps:
       - name: Set Milestone
         id: set-milestone
