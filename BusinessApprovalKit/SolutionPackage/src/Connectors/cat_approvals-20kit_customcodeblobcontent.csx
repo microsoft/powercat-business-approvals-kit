@@ -4,6 +4,7 @@
     {
         public string id { get; set; }
         public string value { get; set; }
+        public string name { get; set; }
     }
     public override async Task<HttpResponseMessage> ExecuteAsync()
     {
@@ -31,10 +32,9 @@
         var processId = this.Context.Request.Headers.GetValues("selectedProcess").First(); //cat_processid
         var dynamicParameters = JObject.Parse(await this.Context.Request.Content.ReadAsStringAsync().ConfigureAwait(false));
         List<RuntimeData> runtimeDatalist = new List<RuntimeData>();
-        this.Context.Request.Content =  CreateJsonContent(dynamicParameters.ToString());
         foreach (var dynamicParameter in dynamicParameters)
         {
-            runtimeDatalist.Add(new RuntimeData { id = dynamicParameter.Key, value = dynamicParameter.Value.ToString() });
+            runtimeDatalist.Add(new RuntimeData { id = dynamicParameter.Key, value = dynamicParameter.Value.ToString(), name = dynamicParameter.ToString() });
         }
         RuntimeData[] runtimeDataArray = runtimeDatalist.ToArray<RuntimeData>();
         var newBody = new JObject
@@ -43,7 +43,7 @@
                 ["cat_runtimedata"] = JsonConvert.SerializeObject(runtimeDataArray)
             };
         // Replace the content with support schema & value
-        //this.Context.Request.Content = CreateJsonContent(newBody.ToString());
+        this.Context.Request.Content = CreateJsonContent(newBody.ToString());
         return await this.Context
                     .SendAsync(this.Context.Request, this.CancellationToken)
                     .ConfigureAwait(false);
@@ -84,8 +84,8 @@
                     if(_object["title"].ToString() != "Additional Information")
                     {
                         _object["x-ms-visibility"] = "important";
-                        runtimeId = _object["id"].ToString();
-                        _object["id"] = _property.Name;
+                        runtimeId = _object["title"].ToString();
+                        //_object["id"] = _property.Name;
                     }
                     else
                     {

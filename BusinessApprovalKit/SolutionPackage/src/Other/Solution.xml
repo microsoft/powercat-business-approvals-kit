@@ -197,13 +197,7 @@
         <Dependent type="29" displayName="BACore | Runtime - Start Approval" id="{a04208b8-428d-ec11-8d20-000d3a09ca36}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
-        <Dependent type="80" schemaName="cat_BusinessApprovalManagement" displayName="Business Approval Management" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="61" schemaName="msdyncrm_/KnowledgeSuggestion/kbarticlepagehost.html" displayName="msdyncrm_/KnowledgeSuggestion/kbarticlepagehost.html" solution="msdynce_KnowledgeManagementFeatures (9.0.23091.5020)">
-          <package>msdynce_KnowledgeManagementAnchor (9.0.23091.5020)</package>
-        </Required>
+        <Required type="61" schemaName="msdyn_/AdvancedInAppShell.htm" displayName="msdyn_/AdvancedInAppShell.htm" solution="AppModuleWebResources (2.5)" />
         <Dependent type="80" schemaName="cat_BusinessApprovalManagement" displayName="Business Approval Management" />
       </MissingDependency>
       <MissingDependency>
@@ -283,10 +277,6 @@
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.NavigationComponentPCF" displayName="cat_PowerCAT.NavigationComponentPCF" solution="Active" />
         <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.NavigationComponentPCF" displayName="cat_PowerCAT.NavigationComponentPCF" solution="Active" />
-        <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.PeoplePicker" displayName="cat_PowerCAT.PeoplePicker" solution="CreatorKitCore (1.0.20230421.1)" />

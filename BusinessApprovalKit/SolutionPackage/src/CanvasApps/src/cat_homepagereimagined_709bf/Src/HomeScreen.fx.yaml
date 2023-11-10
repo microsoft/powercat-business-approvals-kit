@@ -296,6 +296,7 @@ HomeScreen As screen:
 
                             lblCardTitle As Label:
                                 Alignment: =Align.Justify
+                                Color: =
                                 DisplayMode: =DisplayMode.Edit
                                 FontSize: =11
                                 FontWeight: =FontWeight.Semibold
