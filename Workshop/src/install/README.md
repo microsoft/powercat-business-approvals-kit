@@ -1,8 +1,8 @@
 # Overview
 
-This application is designed to add specific functionality that is not currently available to automate via command line or REST interfaces. The interfaces could be the Power Platform Command Line interface or via Power Plaftorm API or Dataverse REST interfaces.
+This application is designed to add specific functionality that is not currently available to automate via command line or REST interfaces. The interfaces could be the Power Platform Command Line interface or via Power Platform API or Dataverse REST interfaces.
 
-> **IMPORTANT**
+> [!IMPORTANT]
 >
 > 1. The functionality in the application may become unnecessary as administration features of the Power Platform API and REST services grow.
 >
@@ -14,7 +14,9 @@ The sample application is designed for demo environment usage and is not optimiz
 
 If the application was used in production environment, there would be several issues and factors that would need to be considered. For example, secret management of user password would need to be taken into account, as well as key rotation. Additionally, the application would need to undergo a full security review and analysis before being used in a production environment. It is also important to note that non-demo usage is unlikely to know the user password outside of known System Accounts, and these special user accounts would need to have safeguards in place to protect user passwords in a production environment.
 
-Overall, the application is designed to provide specific functionality within a demo environment, but could potentially be adapted for use in other contexts with appropriate modifications and safeguards which is currently out of scope for this application.
+> [!IMPORTANT]
+> 
+> Overall, the application is designed to provide specific functionality within a demo environment, but could potentially be adapted for use in other contexts with appropriate modifications and safeguards which is currently out of scope for this application.
 
 ## Key functionality
 

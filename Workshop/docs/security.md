@@ -1,6 +1,6 @@
 # Overview
 
-This page summarize security setup required for the demo environments. These are implemeted as PowerShell scripts [security.ps1](../src/scripts/security.ps1)
+This page summarize security setup required for the demo environments. These are implemented as PowerShell scripts [security.ps1](../src/scripts/security.ps1)
 
 ## Getting Started
 

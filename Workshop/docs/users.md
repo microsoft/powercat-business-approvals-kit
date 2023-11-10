@@ -8,10 +8,10 @@
 . .\src\scripts\users.ps1
 ```
 
-2. Setup a user
+2. Setup a user for the workshop
 
 ```pwsh
-Invoke-ConfigureUser "AdeleV@M365x63805008.OnMicrosoft.com"
+Invoke-SetupUserForWorkshop "AdeleV@M365x63805008.OnMicrosoft.com"
 ```
 
 3. (Optional) To setup a group of users, assuming they have the same password the following PowerShell could be used
@@ -22,7 +22,7 @@ Invoke-ConfigureUser "AdeleV@M365x63805008.OnMicrosoft.com"
     Write-Host "-------------------------------------------------------------------------"
     Write-Host $upn
     Write-Host "-------------------------------------------------------------------------"
-    Invoke-ConfigureUser $upn
+    Invoke-SetupUserForWorkshop $upn
 }
 ```
 
