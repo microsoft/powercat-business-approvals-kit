@@ -11,20 +11,81 @@ concurrency:
   cancel-in-progress: false    
 
 jobs:
-  mainjob1:
+  prepareIterationPathJob:
     runs-on: ubuntu-latest
     outputs:
-      var1: ${{ steps.set_var.outputs.var1 }}
+      var1: ${{ steps.set-iteration.outputs.ITERATION }}
     steps:
-      - name: Set Variable
-        id: set_var
+      - name: Set Milestone
+        id: set-milestone
+        run: echo "MILESTONE=${{ github.event.issue.milestone.title }}" >> $GITHUB_ENV
+
+      - name: Print Milestone
+        run: echo "Milestone is ${{ env.MILESTONE }}"        
+        
+      - name: Extract Month
+        id: extract-month
         run: |
-          echo "var1=good" >> $GITHUB_OUTPUT
+          MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
+          MONTH=$(echo $MILESTONE_PART | cut -d' ' -f1)
+          echo "MONTH=$MONTH" >> $GITHUB_ENV
+        
+      - name: Print Month
+        run: echo "Month ${{ env.MONTH }}"
+
+      - name: Extract Year
+        id: extract-year
+        run: |
+            MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
+            YEAR=$(echo $MILESTONE_PART | cut -d' ' -f2)
+            echo "YEAR=$YEAR" >> $GITHUB_ENV
+      
+      - name: Determine Quarter
+        id: determine-quarter
+        run: |
+          LOWERCASE_MONTH=$(echo "$MONTH" | tr '[:upper:]' '[:lower:]')
+          if [[ "$LOWERCASE_MONTH" == "october" || "$LOWERCASE_MONTH" == "november" || "$LOWERCASE_MONTH" == "december" ]]; then
+            QUARTER="Q2"
+          elif [[ "$LOWERCASE_MONTH" == "january" || "$LOWERCASE_MONTH" == "february" || "$LOWERCASE_MONTH" == "march" ]]; then
+            QUARTER="Q3"
+          elif [[ "$LOWERCASE_MONTH" == "april" || "$LOWERCASE_MONTH" == "may" || "$LOWERCASE_MONTH" == "june" ]]; then
+            QUARTER="Q4"              
+          else
+            QUARTER="Q1"
+          fi
+          echo "QUARTER=$QUARTER" >> $GITHUB_ENV          
+
+      - name: Print QUARTER
+        run: echo "QUARTER is $QUARTER"
+
+      - name: Increment Year if Q1 or Q2
+        id: increment-year
+        if: ${{ env.QUARTER == 'Q1' || env.QUARTER == 'Q2' }}
+        run: |
+          YEAR=$(($YEAR + 1))
+          echo "YEAR=$YEAR" >> $GITHUB_ENV
+
+      - name: Print YEAR
+        run: echo "YEAR is $YEAR"        
+
+      - name: Replace first two characters with 'FY'
+        id: replace-fy
+        run: echo "YEAR=$(echo $YEAR | sed 's/^../FY/')" >> $GITHUB_ENV
+        
+      - name: Print FY Year
+        run: echo "FY Year - ${{ env.YEAR }}"        
+        
+      - name: Set Iteration Path
+        id: set-iteration
+        run: echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT
+
+      - name: Print the Iteration Path
+        run: echo "Iteration Path ${{ env.ITERATION }}"      
 
   mainjob2:
-    needs: mainjob1
+    needs: prepareIterationPathJob
     runs-on: ubuntu-latest
     steps:
       - name: Access Variable
         run: |
-          echo "var1=${{ needs.mainjob1.outputs.var1 }}"  
+          echo "var1=${{ needs.prepareIterationPathJob.outputs.ITERATION }}"  
