@@ -14,8 +14,8 @@ jobs:
   print-issue-milestone:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Issue Milestone
-        run: echo "The milestone of your issue is ${{ github.event.issue.milestone.title }}"
+    - name: Display Event Payload
+      run: echo "${{ toJson(github.context.payload) }}"
   alertEnhancementAK:
     if: |
       contains(github.event.issue.labels.*.name, 'enhancement')
