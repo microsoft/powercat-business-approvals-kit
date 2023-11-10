@@ -78,15 +78,7 @@ jobs:
       - name: Set Iteration Path
         id: set-iteration
         run: |
-            echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT
-
-  mainjob2:
-    needs: prepareIterationPathJob
-    runs-on: ubuntu-latest
-    steps:
-      - name: Read Iteration
-        run: |
-          echo "ITERATION=${{ needs.prepareIterationPathJob.outputs.ITERATION }}"             
+            echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT            
 
   alertEnhancementAK:
     if: |
