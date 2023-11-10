@@ -504,8 +504,8 @@
             AlignInContainer: =AlignInContainer.SetByContainer
             BorderStyle: =BorderStyle.None
             Fill: =RGBA(245, 245, 245, 1)
-            Height: =Parent.Height
-            LayoutAlignItems: =LayoutAlignItems.Stretch
+            Height: =ApprovalDesignerEdit_2.DesignerAutoHeight + 10
+            LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
             LayoutMinHeight: =100
             LayoutMinWidth: =250
@@ -782,8 +782,8 @@
                         }
                     );
                 Fill: =RGBA(245, 245, 245, 1)
-                Height: =Parent.Height
-                LayoutMinHeight: =120
+                Height: =ApprovalDesignerEdit_2.TotalStages * 300
+                LayoutMinHeight: =640
                 LayoutMinWidth: =640
                 MoveStage: |-
                     =With({ currentStage: LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId))},
@@ -933,7 +933,7 @@
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Theme: =AppThemeJson
                 Tooltip: ="Add Stage"
-                Visible: =false //true
+                Visible: =true
                 Width: =30
                 X: =Parent.Width / 2 - Self.Width / 2
                 Y: =
@@ -1187,6 +1187,7 @@
                         Reset(galConditions_2);
                         Refresh('Business Approval Stages');
                         Refresh('Business Approval Nodes');
+                        Refresh('Business Approval Conditions');
                     Text: ="Save"
                     Width: =96
                     X: =0

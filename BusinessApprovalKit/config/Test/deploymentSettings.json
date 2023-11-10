@@ -20,12 +20,6 @@
                                      "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitO365Users}#",
                                      "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_office365users",
                                      "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitO365Users}#"
-                                 },
-                                 {
-                                     "LogicalName":  "cat_sharedcommondataserviceforapps_f07ea",
-                                     "ConnectionId":  "#{connectionreference.cat_sharedcommondataserviceforapps_f07ea}#",
-                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
-                                     "ConnectionOwner":  "#{connectionreference.user.cat_sharedcommondataserviceforapps_f07ea}#"
                                  }
                              ]
 }
