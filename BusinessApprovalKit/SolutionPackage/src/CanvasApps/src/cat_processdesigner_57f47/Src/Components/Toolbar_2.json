@@ -27,7 +27,7 @@
       "Name": "OnClick",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "133",
+        "PropertyScopeRuleNamespaceKey": "134",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "OnClick_MenuItem",
@@ -76,7 +76,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638352111162040143",
+  "LastModifiedTimestamp": "638352240466932898",
   "Name": "333a6f761c324d27a33951f5a5a4f531",
   "OverridableProperties": {},
   "TemplateOriginalName": "d6be7b8d5f164056966e832ffef8ae1d",

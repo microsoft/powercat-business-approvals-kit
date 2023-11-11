@@ -197,10 +197,6 @@
         <Dependent type="29" displayName="BACore | Runtime - Start Approval" id="{a04208b8-428d-ec11-8d20-000d3a09ca36}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="msdyn_/AdvancedInAppShell.htm" displayName="msdyn_/AdvancedInAppShell.htm" solution="AppModuleWebResources (2.5)" />
-        <Dependent type="80" schemaName="cat_BusinessApprovalManagement" displayName="Business Approval Management" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="61" schemaName="mspp_web_page_access_control_rules.svg" displayName="mspp_web_page_access_control_rules.svg" solution="PowerPages_AppResources (1.0.2308.1)">
           <package>PowerPages_Core (1.0.2309.63)</package>
         </Required>
