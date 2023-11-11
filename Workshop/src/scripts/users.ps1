@@ -628,7 +628,8 @@ function Invoke-UpdateOAuthSettings {
         return
     }
 
-    $current = (Get-ZipContents $zipFile "Connector/cat_approvals-20kit_connectionparameters.json" | ConvertFrom-Json)
+    $apiPropertiesFile = [System.IO.Path]::Combine((Get-AssetPath),"apiProperties.json")
+    $current = (Get-Content $apiPropertiesFile | ConvertFrom-Json)
     
     $current.token.oAuthSettings.clientId = $clientId
     $current.token.oAuthSettings | Add-Member -MemberType NoteProperty -Name 'clientSecret' -Value $secret

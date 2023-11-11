@@ -1,40 +1,43 @@
 {
-  "properties": {
-    "connectionParameters": {
-      "token": {
-        "type": "oAuthSetting",
-        "oAuthSettings": {
-          "identityProvider": "aad",
-          "scopes": [],
-          "redirectMode": "Global",
-          "customParameters": {
-            "LoginUri": {
-              "value": "https://login.microsoftonline.com"
-            },
-            "TenantId": {
-              "value": "#TenantId#"
-            },
-            "ResourceUri": {
-              "value": "#EnvironmentUrl#"
-            },
-            "EnableOnbehalfOfLogin": {
-              "value": false
-            }
-          },
-          "clientId": "#ClientId#",
-          "clientSecret": "#ClientSecret#"
+  "token": {
+    "type": "oauthSetting",
+    "oAuthSettings": {
+      "identityProvider": "aad",
+      "clientId": "",
+      "scopes": [],
+      "redirectMode": "Global",
+      "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+      "properties": {
+        "IsFirstParty": "False",
+        "AzureActiveDirectoryResourceId": "",
+        "IsOnbehalfofLoginSupported": true
+      },
+      "customParameters": {
+        "loginUri": {
+          "value": "https://login.microsoftonline.com"
         },
-        "uiDefinition": null
+        "tenantId": {
+          "value": ""
+        },
+        "resourceUri": {
+          "value": ""
+        },
+        "enableOnbehalfOfLogin": {
+          "value": "false"
+        }
       }
+    }
+  },
+  "token:TenantId": {
+    "type": "string",
+    "metadata": {
+      "sourceType": "AzureActiveDirectoryTenant"
     },
-    "iconBrandColor": "#007ee5",
-    "capabilities": [],
-    "scriptOperations": [
-      "GetApprovalDataFields",
-      "CreateWorkflowInstance"
-    ],
-    "publisher": "",
-    "stackOwner": "",
-    "policyTemplateInstances": []
+    "uiDefinition": {
+      "constraints": {
+        "required": "false",
+        "hidden": "true"
+      }
+    }
   }
 }
