@@ -77,6 +77,9 @@ namespace Microsoft.PowerPlatform.Demo
                 await playwright.SetupAsync();
 
                 var desiredUrl = string.IsNullOrEmpty(environment) ? "https://make.powerapps.com" : $"https://make.powerapps.com/environments/{environment}";
+                if ( string.IsNullOrEmpty(environment) && environment.StartsWith("https://") ) {
+                    desiredUrl = environment;
+                }
 
                 await playwright.GoToUrlAsync(desiredUrl);
                 await playwright.HandleUserEmailScreen(EmailSelector, user);

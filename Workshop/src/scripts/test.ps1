@@ -209,3 +209,20 @@ function Get-SolutionComponents {
 
     return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${environmentUrl}api/data/v9.2/msdyn_solutioncomponentsummaries?`$filter=msdyn_solutionid eq $solutionId&`$select=msdyn_displayname,msdyn_objectid" )
 }
+
+function Get-TestConfigValue() {
+    param (
+        [Parameter(Mandatory)] [String] $path,
+        [Parameter(Mandatory)] [String] $Name
+    )
+
+    $configFile = [System.IO.Path]::Combine($path, "config.json")
+    $configDevFile = [System.IO.Path]::Combine($path, "config.dev.json")
+    if ( Test-Path $configDevFile ) {
+        $configFile = $configDevFile
+    }
+
+    $config = (Get-Content $configFile | ConvertFrom-Json)
+
+    return ( $config | Select-Object -ExpandProperty $Name )
+}

@@ -141,6 +141,8 @@ SecureStore create secrets.json --keyfile secret.key
 1. Store the values for your setup
 
 ```pwsh
+SecureStore set ADMIN_USER "admin@contoso.onmicrosoft.com" --keyfile secret.key
+SecureStore set ADMIN_PASSWORD "SomePassword" --keyfile secret.key
 SecureStore set DEMO_PASSWORD "SomePassword" --keyfile secret.key
 SecureStore set CLIENT_ID "Azure Client id" --keyfile secret.key
 SecureStore set CLIENT_SECRET "Azure Client secret" --keyfile secret.key

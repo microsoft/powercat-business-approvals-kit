@@ -1056,8 +1056,22 @@ This function depends on the `Validate-User` function being available.
 function Invoke-OpenBrowser {
     param (
         [Parameter(Mandatory)] [String] $UserUPN,
-        $Environment
+        $Environment,
+        [System.Boolean] $Admin = $False
     )
+
+    if ( $Admin ) {
+        $password = Get-SecureValue "ADMIN_PASSWORD"
+
+        if ( [System.String]::IsNullOrEmpty($password) ) {
+            Write-Error "ADMIN_PASSWORD is not set"
+            return
+        }
+
+        $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
+        dotnet $appPath user start --upn $UserUPN --env "https://aka.ms/ppac" --admin "Y" --headless "N" --record "N"
+        return
+    }
 
     if ( $NULL -eq $Environment ) {
         $user = Validate-User $UserUPN
@@ -1070,7 +1084,7 @@ function Invoke-OpenBrowser {
         if ( [System.String]::IsNullOrEmpty($password) ) {
             Write-Error "DEMO_PASSWORD is not set"
             return
-        }
+        }            
 
         $displayName = $user.displayName
         $environmentName = "$displayName Dev"
@@ -1085,9 +1099,10 @@ function Invoke-OpenBrowser {
             Write-Error "Development environment not found"
             return
         }
+
+        $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
+        dotnet $appPath user start --upn $UserUPN --env $Environment.EnvironmentId --headless "N" --record "N"
     }
-    $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-    dotnet $appPath user start --upn $UserUPN --env $Environment.EnvironmentId --headless "N" --record "N"
 }
 
 <#

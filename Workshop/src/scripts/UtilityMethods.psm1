@@ -49,15 +49,20 @@ class UtilityMethods {
     A string value representing the retrieved secure value.
     #>
     static [string] GetSecureValue([String] $Name) {
-        $secureFolder = [System.IO.Path]::Combine((Get-Location),"secure")
-        if ( Test-Path $secureFolder) {
-            Push-Location 
-            Set-Location $secureFolder
-            $value = ( SecureStore get $Name --keyfile secret.key  )
-            Pop-Location
-            return $value
+        $secureFolder = @(
+            [System.IO.Path]::Combine($PSScriptRoot, "..", "..","secure"),
+            [System.IO.Path]::Combine((Get-Location),"secure")
+        )
+        foreach ($folder in $secureFolder) {
+            if ( Test-Path $folder ) {
+                Push-Location 
+                Set-Location $folder
+                $value = ( SecureStore get $Name --keyfile secret.key  )
+                Pop-Location
+                return $value
+            }
         }
-    
+        
         return ( SecureStore get $Name --keyfile secret.key  )      
     }
 
