@@ -45,7 +45,7 @@
       "Name": "EditNode",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "159",
+        "PropertyScopeRuleNamespaceKey": "161",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "EditNode_NodeId",
@@ -89,7 +89,7 @@
       "Name": "EditStage",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "159",
+        "PropertyScopeRuleNamespaceKey": "161",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "EditStage_StageId",
@@ -118,7 +118,7 @@
       "Name": "AddNode",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "159",
+        "PropertyScopeRuleNamespaceKey": "161",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "AddNode_Path",
@@ -192,7 +192,7 @@
       "Name": "MoveStage",
       "PropertyDataTypeKey": "Number",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "159",
+        "PropertyScopeRuleNamespaceKey": "161",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "MoveStage_StageId",
@@ -238,7 +238,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638352240466948127",
+  "LastModifiedTimestamp": "638354693801657918",
   "Name": "8c0433e7300b4cfd87fb2f508a741580",
   "OverridableProperties": {},
   "TemplateOriginalName": "b1c1ad98802640e590b1d3b9408cefd7",

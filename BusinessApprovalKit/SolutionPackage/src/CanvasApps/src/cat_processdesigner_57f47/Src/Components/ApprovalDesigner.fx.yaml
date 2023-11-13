@@ -32,9 +32,10 @@ ApprovalDesigner As CanvasComponent:
             Default: =true
         ThisProperty:
             Default: =100
-    DesignerAutoHeight: =App.Height - icoAddStage_1.Height  - 65
+    AssignedHeight: =
+    DesignerAutoHeight: =App.Height - 65
     Fill: =RGBA(0, 0, 0, 0)
-    Height: =600
+    Height: =Self.AssignedHeight
     IsValid: =true//CountRows(Filter(galProcessStages_1.AllItems, !IsBlank(stageBackground.Tooltip))) = 0
     ProcessId: ="a4517557-c6f2-ed11-8848-0022482a91f4"
     TotalStages: =CountRows(galProcessStages_1.AllItems)
@@ -70,13 +71,13 @@ ApprovalDesigner As CanvasComponent:
         AccessibleLabel: ="Process stages"
         BorderColor: =RGBA(166, 166, 166, 1)
         DelayItemLoading: =false//true
-        Height: =Parent.Height//galStageNodes.Height * Self.AllItemsCount + galStageConditions_1.Height* Self.AllItemsCount + Self.TemplatePadding + 50
+        Height: =ApprovalDesigner.AssignedHeight //galStageNodes.Height * Self.AllItemsCount + galStageConditions_1.Height* Self.AllItemsCount + Self.TemplatePadding + 50
         Items: |-
             =Filter(
                 Filter('Business Approval Stages', 'Business Approval Stages (Views)'.'Active Business Approval Stages'),
                 Process.'Business Approval Process' = GUID(Parent.ProcessId)
             )
-            //"65d75041-777d-ee11-8179-0022482a91f4"
+            //"26bafa27-ca7d-ee11-8179-0022482a91f4"
             //Parent.ProcessId
         Layout: =Layout.Vertical
         LoadingSpinner: =LoadingSpinner.Data
@@ -85,6 +86,7 @@ ApprovalDesigner As CanvasComponent:
         TemplateSize: =280
         Visible: =CountRows(Self.AllItems) > 0
         Width: =Parent.Width - Self.X * 2
+        Y: =textProcessDesigner.Height
         ZIndex: =2
 
         stageBackground_1 As rectangle:
@@ -2273,6 +2275,7 @@ ApprovalDesigner As CanvasComponent:
                 =Switch(
                     Self.Selected.ItemKey,
                     "edit",
+                    Set(_selectedStage, ThisItem);
                     ApprovalDesigner.EditStage(ThisItem.'Business Approval Stage'),
                     "delete",
                     Set(confirmActionDelete,"delete");Set(_selectedStage, ThisItem);Set(confirmMessageDeteleStage, "Deleting Stage - " & _selectedStage.Name & ". This will also delete all approval nodes in this stage and it cannot be undone. Are you sure?");Set(_showConfirmDeleteStage, true),
@@ -2293,19 +2296,44 @@ ApprovalDesigner As CanvasComponent:
             Y: =stageBackground_1.Y + 1
             ZIndex: =19
 
-    "icoAddStage_1 As 'Fluent Icon (1.0.22)'":
+        "icoAddStage_1 As 'Fluent Icon (1.0.22)'":
+            DisplayMode: =DisplayMode.Edit
+            FontSize: =30
+            Height: =40
+            IconName: ="CircleAdditionSolid"
+            IconSize: =35
+            OnChange: =ApprovalDesigner.AddStage()
+            TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
+            Theme: =AppThemeJson
+            Tooltip: ="Add Stage"
+            Visible: =false
+            Width: =30
+            X: =Parent.Width / 2 - Self.Width / 2
+            Y: =0
+            ZIndex: =20
+
+    textProcessDesigner As Text:
         DisplayMode: =DisplayMode.Edit
-        FontSize: =30
-        Height: =45
-        IconName: ="CircleAdditionSolid"
-        IconSize: =35
-        OnChange: =ApprovalDesigner.AddStage()
-        TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
-        Theme: =AppThemeJson
-        Tooltip: ="Add Stage"
-        Visible: =false//true
-        Width: =30
-        X: =Parent.Width / 2 - Self.Width / 2
-        Y: =galProcessStages_1.Height + 10
-        ZIndex: =3
+        Height: =34
+        Italic: =false
+        Text: ="Process Designer"
+        Underline: =true
+        Weight: ='TextCanvas.Weight'.Semibold
+        Width: =138
+        Wrap: =true
+        X: =galProcessStages_1.X + 10
+        Y: =galProcessStages_1.Y - Self.Height 
+        ZIndex: =4
+
+    "InfoButtonCanvas1 As 'Information button'":
+        BasePaletteColor: =
+        Content: ="Please make use of refresh option, incase, approval conditions does not appear immediately aftering creating a stage with condition."
+        DisplayMode: =DisplayMode.Edit
+        FontSize: =0
+        Height: =40
+        Visible: =galProcessStages_1.AllItemsCount > 1
+        Width: =40
+        X: =textProcessDesigner.X+ textProcessDesigner.Width -30
+        Y: =textProcessDesigner.Y -5
+        ZIndex: =5
 

@@ -6,6 +6,7 @@
     "IsSampleData": false,
     "IsWritable": true,
     "LogicalName": "cat_businessapprover",
+    "MaxGetRowsCount": 500,
     "Name": "Business Approvers",
     "NativeCDSDataSourceInfoNameMapping": {
       "_ownerid_value": "Owner",

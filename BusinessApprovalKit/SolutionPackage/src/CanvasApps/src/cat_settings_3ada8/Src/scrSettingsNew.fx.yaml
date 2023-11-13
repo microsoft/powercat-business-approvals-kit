@@ -533,7 +533,7 @@ scrSettingsNew As screen:
                     ZIndex: =28
 
                 "cmbxWorkProfile As 'Combo box'.pcfdataset":
-                    DefaultSelectedItems: =LookUp('Business Approval Work Profiles',Name = _mySettings.'Work Profile'.Name)
+                    DefaultSelectedItems: =[LookUp('Business Approval Work Profiles',Name = _mySettings.'Work Profile'.Name)]
                     DisplayMode: =DisplayMode.Edit
                     Height: =32
                     Items: =Filter('Business Approval Work Profiles', 'Business Approval Work Profiles (Views)'.'Active Business Approval Work Profiles')
@@ -560,16 +560,24 @@ scrSettingsNew As screen:
 
                 "cbxOutOfOffice As 'Check box'":
                     Checked: =_mySettings.'Is Out of Office'
+                    CheckedCheckboxBackgroundFill: =
+                    CheckedCheckboxBorderColor: =
+                    CheckmarkFill: =
+                    Color: =
                     DisplayMode: =DisplayMode.Edit
                     Height: =32
+                    HoverCheckboxBackgroundFill: =
+                    HoverCheckboxBorderColor: =
                     Label: =If(Self.Checked,"Enabled","Disabled")
+                    UncheckedCheckboxBackgroundFill: =
+                    UncheckedCheckboxBorderColor: =
                     Width: =160
                     X: =319
                     Y: =251
                     ZIndex: =30
 
                 "cmbxlPreferredNotification As 'Combo box'.pcfdataset":
-                    DefaultSelectedItems: =If(!IsBlankOrError(_mySettings.'Notification Type'),[_mySettings.'Notification Type'])
+                    DefaultSelectedItems: =If(!IsBlankOrError(_mySettings.'Notification Type'),[LookUp(Choices('Business Approver Notification Type'), Value = _mySettings.'Notification Type')])
                     DisplayMode: =DisplayMode.Edit
                     Height: =32
                     Items: =Choices('Business Approver Notification Type')

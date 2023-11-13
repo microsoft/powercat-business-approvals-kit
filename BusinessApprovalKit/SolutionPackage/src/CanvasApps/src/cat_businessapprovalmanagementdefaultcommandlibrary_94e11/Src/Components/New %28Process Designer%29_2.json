@@ -6,7 +6,7 @@
     "AllowCustomization": true,
     "Description": "",
     "Name": "New (Process Designer)_2",
-    "TemplateGuid": "10b8a5902d694764ac2b29154f7a6919"
+    "TemplateGuid": "67abd62ed9ab42de8978fe1f3d97a27a"
   },
   "ComponentType": "CommandComponent",
   "CustomGroupControlTemplateName": "",
@@ -19,8 +19,8 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638348422400491670",
-  "Name": "10b8a5902d694764ac2b29154f7a6919",
+  "LastModifiedTimestamp": "638354866124613141",
+  "Name": "67abd62ed9ab42de8978fe1f3d97a27a",
   "OverridableProperties": {},
-  "Version": "638129635362252170"
+  "Version": "1.0"
 }
