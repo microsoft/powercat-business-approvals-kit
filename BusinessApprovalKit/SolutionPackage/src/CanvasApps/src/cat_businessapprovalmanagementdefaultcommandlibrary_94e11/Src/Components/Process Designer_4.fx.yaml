@@ -1,6 +1,6 @@
 "'Process Designer_4' As CommandComponent":
     AutoSave: =true
-    DataSource: ='''Business Approval Processes'''
+    DataSource: ='Business Approval Processes'
     Fill: =RGBA(0, 0, 0, 0)
     Height: =0
     Icon: =SampleImage

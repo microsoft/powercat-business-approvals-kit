@@ -45,7 +45,7 @@
       "Name": "SortColumn",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "152",
+        "PropertyScopeRuleNamespaceKey": "155",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "SortColumn_Column",
@@ -97,7 +97,7 @@
       "Name": "ColumnOnClick",
       "PropertyDataTypeKey": "String",
       "PropertyScopeKey": {
-        "PropertyScopeRuleNamespaceKey": "152",
+        "PropertyScopeRuleNamespaceKey": "155",
         "PropertyScopeRulesKey": [
           {
             "DisplayName": "ColumnOnClick_Column",
@@ -143,7 +143,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638352111162050414",
+  "LastModifiedTimestamp": "638354693801653487",
   "Name": "e35fd616dd6340a49d075a9d17f2c510",
   "OverridableProperties": {},
   "TemplateOriginalName": "dfb803d08d96465e8c5dbfb0db6e415f",

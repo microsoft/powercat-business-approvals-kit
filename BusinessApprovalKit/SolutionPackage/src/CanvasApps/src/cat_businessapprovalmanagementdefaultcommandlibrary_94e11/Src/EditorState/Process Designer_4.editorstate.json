@@ -2,6 +2,16 @@
   "ControlStates": {
     "Process Designer_4": {
       "AllowAccessToGlobals": false,
+      "ComponentExternalDependencies": {
+        "ComponentExternalDataDependencies": [
+          {
+            "ComponentCdsDependency": {
+              "EntityName": "Business Approval Processes"
+            },
+            "ComponentExternalDependencyKind": "Cds"
+          }
+        ]
+      },
       "ControlPropertyState": [
         "Fill",
         "Height",

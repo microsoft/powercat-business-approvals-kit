@@ -8,7 +8,9 @@ BusyScreen As CanvasComponent:
     ZIndex: =4
 
     Spinner2 As Spinner:
+        BasePaletteColor: =
         DisplayMode: =DisplayMode.Edit
+        FontSize: =0
         Height: =Parent.Height
         Label: =Parent.BusyMessage
         Width: =Parent.Width

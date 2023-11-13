@@ -1,0 +1,26 @@
+{
+  "Name": "PowerApps_CoreControls_InfoButtonCanvas",
+  "PcfConversions": [
+    {
+      "Action": [
+        {
+          "Name": "BasePaletteColor",
+          "Type": "add"
+        }
+      ],
+      "From": "0.0.15",
+      "To": "0.0.16"
+    },
+    {
+      "Action": [
+        {
+          "Name": "FontSize",
+          "Type": "add"
+        }
+      ],
+      "From": "0.0.17",
+      "To": "0.0.18"
+    }
+  ],
+  "Version": "0.0.20"
+}
