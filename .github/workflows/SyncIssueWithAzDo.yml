@@ -79,13 +79,12 @@ jobs:
         id: set-iteration
         run: |
           if [ -n "${{ github.event.issue.milestone.title }}" ]; then
+            echo "Iteration Path - OneCatTools\\$YEAR\\$QUARTER\\$MONTH"
             echo "ITERATION=OneCatTools\\$YEAR\\$QUARTER\\$MONTH" >> $GITHUB_OUTPUT
           else
+            echo "Iteration Path - OneCatTools"
             echo "ITERATION=OneCatTools" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Print Iteration Path
-        run: echo "Iteration Path - ${{ env.ITERATION }}"          
+          fi      
 
   alertEnhancementAK:
     if: |
