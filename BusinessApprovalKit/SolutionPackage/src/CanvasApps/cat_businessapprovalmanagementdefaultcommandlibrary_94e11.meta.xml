@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</Name>
-  <AppVersion>2023-11-06T04:37:28Z</AppVersion>
+  <AppVersion>2023-11-13T15:37:08Z</AppVersion>
   <Status>Ready</Status>
-  <CreatedByClientVersion>3.23102.20.0</CreatedByClientVersion>
+  <CreatedByClientVersion>3.23104.18.0</CreatedByClientVersion>
   <MinClientVersion>0.0.0.0</MinClientVersion>
-  <Tags>{"primaryDeviceWidth":"640","primaryDeviceHeight":"1136","sienaVersion":"20230225T233241Z-3.23021.21.0","deviceCapabilities":"","supportsPortrait":"true","supportsLandscape":"false","primaryFormFactor":"Phone","publisherVersion":"3.22111.28.0","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false"}</Tags>
+  <Tags>{"primaryDeviceWidth":"640","primaryDeviceHeight":"1136","sienaVersion":"20231113T151638Z-3.23104.18.0","deviceCapabilities":"","supportsPortrait":"true","supportsLandscape":"false","primaryFormFactor":"Phone","publisherVersion":"3.22111.28.0","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false"}</Tags>
   <IsCdsUpgraded>0</IsCdsUpgraded>
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>rgba(0, 176, 240, 1)</BackgroundColor>
@@ -26,6 +26,6 @@
   <IntroducedVersion>1.0</IntroducedVersion>
   <CdsDependencies>{"cdsdependencies":[{"logicalname":"cat_businessapprovalinstance","componenttype":1},{"logicalname":"cat_businessapprovalprocess","componenttype":1}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
-  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl49589_BackgroundImageUri</BackgroundImageUri>
-  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl39337_DocumentUri.msapp</DocumentUri>
+  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl64247_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl64167_DocumentUri.msapp</DocumentUri>
 </CanvasApp>

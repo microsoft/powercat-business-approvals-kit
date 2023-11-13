@@ -6,6 +6,7 @@
     "IsSampleData": false,
     "IsWritable": true,
     "LogicalName": "cat_businessapprovalpublicholidays",
+    "MaxGetRowsCount": 500,
     "Name": "Business Approval Public Holidays",
     "NativeCDSDataSourceInfoNameMapping": {
       "_ownerid_value": "Owner",

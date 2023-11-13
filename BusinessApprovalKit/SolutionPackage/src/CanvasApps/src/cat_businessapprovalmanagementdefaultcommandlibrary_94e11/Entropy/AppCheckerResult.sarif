@@ -8,71 +8,11 @@
           "executionSuccessful": true
         }
       ],
-      "results": [
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "'Process Designer_4'.DataSource"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "'Process Designer_4'.DataSource",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 33,
-                  "charOffset": 0,
-                  "snippet": {
-                    "text": "'''Business Approval Processes'''"
-                  }
-                }
-              },
-              "properties": {
-                "member": "DataSource",
-                "module": "Process Designer_4",
-                "type": "'Process Designer_4'"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "'Business Approval Processes'"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 0
-        }
-      ],
+      "results": [],
       "tool": {
         "driver": {
           "fullName": "PowerApps app checker",
           "name": "PowerApps app checker",
-          "rules": [
-            {
-              "id": "app-ErrInvalidName",
-              "messageStrings": {
-                "issue": {
-                  "text": "Name isn't valid. '{0}' isn't recognized."
-                }
-              },
-              "properties": {
-                "componentType": "app",
-                "howToFix": [
-                  "Remove or correct the reference to the name that isn't valid."
-                ],
-                "level": "High",
-                "primaryCategory": "formula",
-                "whyFix": ""
-              }
-            }
-          ],
           "version": "1.335"
         }
       }

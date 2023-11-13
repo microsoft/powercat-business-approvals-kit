@@ -364,7 +364,7 @@
     "Name": "PowerApps_CoreControls_Spinner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Spinner",
-    "Version": "1.0.20"
+    "Version": "1.0.22"
   },
   "Text": {
     "CustomGroupControlTemplateName": "",

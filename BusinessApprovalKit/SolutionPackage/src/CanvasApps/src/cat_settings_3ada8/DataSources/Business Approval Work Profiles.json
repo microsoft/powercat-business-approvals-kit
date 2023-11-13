@@ -6,6 +6,7 @@
     "IsSampleData": false,
     "IsWritable": true,
     "LogicalName": "cat_businessapprovalworkprofile",
+    "MaxGetRowsCount": 500,
     "Name": "Business Approval Work Profiles",
     "NativeCDSDataSourceInfoNameMapping": {
       "_ownerid_value": "Owner",

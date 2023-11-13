@@ -6,6 +6,7 @@
     "IsSampleData": false,
     "IsWritable": true,
     "LogicalName": "cat_businessapprovalholidaycalendar",
+    "MaxGetRowsCount": 500,
     "Name": "Business Approval Holiday Calendars",
     "NativeCDSDataSourceInfoNameMapping": {
       "_ownerid_value": "Owner",
