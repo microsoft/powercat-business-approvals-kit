@@ -134,7 +134,7 @@ pwsh
 cd ~/powercat-business-approvals-kit/Workshop
 . ./src/scripts/users.ps1
 az login --allow-no-subscriptions
-Invoke-SetupUserForWorkshop AdeleV@M365x63805008.OnMicrosoft.com
+Invoke-SetupUserForWorkshop AdeleV@contoso.OnMicrosoft.com
 ```
 
 ## Post Setup
@@ -157,7 +157,7 @@ pwsh
 ```pwsh
 cd Workflow
 . ./src/scripts/users.ps1
-Invoke-SetupUserForWorkshop AdeleV@M365x63805008.OnMicrosoft.com
+Invoke-SetupUserForWorkshop AdeleV@contoso.OnMicrosoft.com
 ```
 
 ## Automating Cloud Shell

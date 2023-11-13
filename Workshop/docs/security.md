@@ -31,11 +31,11 @@ Add-SecurityMakersGroup
 4. Add users to this Makers security group using Azure CLI and Microsoft Graph
 
 ```pwsh
-Add-SecurityUserToMakersGroup "AdeleV@M365x63805008.OnMicrosoft.com"
+Add-SecurityUserToMakersGroup "AdeleV@contoso.OnMicrosoft.com"
 ```
 
 5. Assign a MFA Phone number so that user not prompted on each login
 
 ```pwsh
-Add-SecurityUserPhone "AdeleV@M365x63805008.OnMicrosoft.com"
+Add-SecurityUserPhone "AdeleV@contoso.OnMicrosoft.com"
 ```

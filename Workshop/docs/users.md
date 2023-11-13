@@ -11,14 +11,14 @@
 2. Setup a user for the workshop
 
 ```pwsh
-Invoke-SetupUserForWorkshop "AdeleV@M365x63805008.OnMicrosoft.com"
+Invoke-SetupUserForWorkshop "AdeleV@contoso.OnMicrosoft.com"
 ```
 
 3. (Optional) To setup a group of users, assuming they have the same password the following PowerShell could be used
 
 ```pwsh
 "LidiaH","LynneR" | Foreach-Object { 
-    $upn = "$($_)@M365x63805008.OnMicrosoft.com"
+    $upn = "$($_)@contoso.OnMicrosoft.com"
     Write-Host "-------------------------------------------------------------------------"
     Write-Host $upn
     Write-Host "-------------------------------------------------------------------------"

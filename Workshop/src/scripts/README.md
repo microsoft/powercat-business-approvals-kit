@@ -6,12 +6,23 @@ These scripts provide and use combination of PowerShell, Bash, .Net Apps and C# 
 
 The instructor guide makes use of the PowerShell scripts to provision developer environments for workshop users.
 
-Examples of some key commands
+### Invoke-SetupUserForWorkshop
+
+This command will setup the workshop in a Development environment for a user. If the user does not exist it will be created.
 
 ```pwsh
 Invoke-SetupUserForWorkshop "first.last@contoso.onmicrosoft.com"
+```
+
+### Reset-UserDevelopmentEnvironment
+
+This command will setup the workshop in a Development environment for a user. If a development environment exists it will be deleted and recreated.
+
+```pwsh
 Reset-UserDevelopmentEnvironment "first.last@contoso.onmicrosoft.com"
 ```
+
+### Integration Test
 
 Assuming that the workshop had been completed with a multistage approvals and Cloud Flow
 
