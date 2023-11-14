@@ -4,7 +4,7 @@ This folder includes Pester PowerShell integration tests for the Approvals Kit w
 
 ## Setup
 
-Ensure that you have the lastest version of Pester installed. You can read more on installation at [Pester Installation](https://pester.dev/docs/introduction/installation)
+Ensure that you have the latest version of Pester installed. You can read more on installation at [Pester Installation](https://pester.dev/docs/introduction/installation)
 
 ```pwsh
 Install-Module -Name Pester -Force -SkipPublisherCheck
