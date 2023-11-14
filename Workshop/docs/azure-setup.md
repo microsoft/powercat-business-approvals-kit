@@ -120,7 +120,8 @@ cd ~/powercat-business-approvals-kit/Workshop
 mkdir secure
 cd secure
 SecureStore create secrets.json --keyfile secret.key
-SecureStore set DEMO_PASSWORD "SomePassword" --keyfile secret.key
+SecureStore set DEMO_USER "first.last@contoso.onmicrosoft.com" --keyfile secret.key
+SecureStore set DEMO_PASSWORD "SomeValue" --keyfile secret.key
 SecureStore set CLIENT_ID "Azure Client id" --keyfile secret.key
 SecureStore set CLIENT_SECRET "Azure Client secret" "--keyfile secret.key
 SecureStore set ADMIN_APP_ID "Azure Admin Client id" --keyfile secret.key

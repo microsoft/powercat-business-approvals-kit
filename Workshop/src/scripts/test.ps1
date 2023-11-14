@@ -33,48 +33,58 @@ Validates a two-stage machine request approval in the "ContosoCoffee Dev" enviro
 
 #>
 function Invoke-ValidateTwoStageMachineRequestApproval {
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory)] [String] $UserUPN,
-        [String] $EnvironmentName
+        [Parameter(Mandatory=$False)] $EnvironmentName = "",
+        [Parameter(Mandatory=$False)] $EnvironmentUrl = "",
+        [Parameter(Mandatory=$False)] $EnvironmentId = ""
     )
+
+    Process 
+    {
+        if ( [System.String]::IsNullOrEmpty($EnvironmentUrl) ) {
+            $envs = ( Get-Environments $UserUPN )
     
-    $envs = ( Get-Environments $UserUPN )
-
-    if ( [System.String]::IsNullOrEmpty($EnvironmentName) ) {
-        $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
-        $EnvironmentName = $user.displayName + " Dev"
-    }
-
-    $devEnv = $envs | Where-Object { $_.Name -eq $EnvironmentName } | Select-Object -First 1
-
-    if ( $NULL -eq $devEnv ) {
-        Write-Error "Environment not found"
-        return
-    }
+            if ( [System.String]::IsNullOrEmpty($EnvironmentName) ) {
+                $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
+                $EnvironmentName = $user.displayName + " Dev"
+            }
     
-    $dataverse = $devEnv.EnvironmentUrl
-    $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
-
-    $solution = (Get-Solution $token $devEnv.EnvironmentUrl "ContosoCoffee")
-
-    if ( $solution.value.count -eq 0 ) {
-        Write-Error "Solution ContosoCoffee not found"
-        return
+            $devEnv = $envs | Where-Object { $_.Name -eq $EnvironmentName } | Select-Object -First 1
+    
+            if ( $NULL -eq $devEnv ) {
+                Write-Error "Environment not found"
+                return
+            }
+        
+            $dataverse = $devEnv.EnvironmentUrl
+            $environmentId = $devEnv.Id
+        } else {
+            $dataverse = $EnvironmentUrl
+            $environmentId = $EnvironmentId
+        }
+    
+        $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
+    
+        $solution = (Get-Solution $token $dataverse "ContosoCoffee")
+    
+        if ( $solution.value.count -eq 0 ) {
+            Write-Error "Solution ContosoCoffee not found"
+            return
+        }
+    
+        $solutionComponents = (Get-SolutionComponents $token $dataverse $solution.value[0].solutionid) 
+    
+        $appId = ($solutionComponents.value | Where-Object { $_.msdyn_displayname -eq "Machine Ordering App"} | Select-Object -First 1).msdyn_objectid
+    
+        $data = (@{
+            contosoCoffeeApplication = "https://apps.powerapps.com/play/e/${environmentId}/a/${appId}"
+            powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
+        } | ConvertTo-Json)
+    
+        Invoke-PlaywrightScript $UserUPN $environmentId "contoso-coffee-submit-machine-request.csx" $data    
     }
-
-    $solutionComponents = (Get-SolutionComponents $token $devEnv.EnvironmentUrl $solution.value[0].solutionid) 
-
-    $environmentId = $devEnv.Id
-    $appId = ($solutionComponents.value | Where-Object { $_.msdyn_displayname -eq "Machine Ordering App"} | Select-Object -First 1).msdyn_objectid
-
-    $data = (@{
-        contosoCoffeeApplication = "https://apps.powerapps.com/play/e/${environmentId}/a/${appId}"
-        powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
-    } | ConvertTo-Json)
-
-    Invoke-PlaywrightScript $UserUPN $devEnv.Id "contoso-coffee-submit-machine-request.csx" $data
-
-    # TODO Validate Approved in Dataverse
 }
 
 <#
@@ -116,8 +126,13 @@ function Invoke-PlaywrightScript {
     # Base64 Encode content 
     $dataEncoded = [System.Convert]::ToBase64String($dataBytes)
 
+    $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+
+    Push-Location
+    Set-Location $workshopPath
     $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
     dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless "Y" --record "Y"
+    Pop-Location
 }
 
 <#
@@ -137,6 +152,7 @@ function Get-Environments {
         [Parameter(Mandatory)] [String] $UserUPN
     )
 
+    # TODO - Replace with pac pac org list
     $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
     $envs = (dotnet $appPath environment list --upn $UserUPN --headless "Y" --record "N")
 
@@ -210,19 +226,57 @@ function Get-SolutionComponents {
     return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${environmentUrl}api/data/v9.2/msdyn_solutioncomponentsummaries?`$filter=msdyn_solutionid eq $solutionId&`$select=msdyn_displayname,msdyn_objectid" )
 }
 
-function Get-TestConfigValue() {
+function Get-ApprovalsKitProcess {
     param (
-        [Parameter(Mandatory)] [String] $path,
-        [Parameter(Mandatory)] [String] $Name
+        [Parameter(Mandatory)] $Environment,
+        [Parameter(Mandatory)] [String] $workflowName
     )
 
-    $configFile = [System.IO.Path]::Combine($path, "config.json")
-    $configDevFile = [System.IO.Path]::Combine($path, "config.dev.json")
-    if ( Test-Path $configDevFile ) {
-        $configFile = $configDevFile
+    $dataverse = $Environment.EnvironmentUrl
+    $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
+
+    $headers = @{Authorization = "Bearer $token" }
+
+    return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${dataverse}api/data/v9.2/cat_businessapprovalprocesses?`$select=cat_businessapprovalprocessid,cat_name&`$filter=cat_name eq '$workflowName'" )
+}
+
+function Get-ApprovalsKitPublishedVersion {
+    param (
+        [Parameter(Mandatory)] $Environment,
+        [Parameter(Mandatory)] [String] $workflowName
+    )
+
+    $dataverse = $Environment.EnvironmentUrl
+    $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
+
+    $headers = @{Authorization = "Bearer $token" }
+
+    return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${dataverse}api/data/v9.2/cat_businessapprovalversions?`$select=cat_businessapprovalversionid,cat_name,cat_version,cat_publishingstatus&`$filter=cat_name eq '$workflowName'" )
+}
+
+function Get-ApprovalKitContosoCoffeeState {
+    $user = (Get-SecureValue "DEMO_USER")
+    $Environment = Invoke-UserDevelopmentEnvironment $user
+    $installed = Invoke-SolutionInstalled $Environment "ContosoCoffeeApprovals"
+    $installed | Should -BeTrue
+
+    $dataverse = $Environment.EnvironmentUrl
+    $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
+
+    $solution = (Get-Solution $token $Environment.EnvironmentUrl "ContosoCoffeeApprovals")
+
+    $solution.value.count | Should -BeGreaterThan 0
+
+    $solutionId =  $solution.value[0].solutionid
+
+    $components = (Get-SolutionComponents $token $Environment.EnvironmentUrl $solutionId)
+
+    return @{
+        User = $user
+        Environment = $Environment
+        Dataverse = $dataverse
+        Token = $token
+        Solution = $solution
+        SolutionComponents = $components
     }
-
-    $config = (Get-Content $configFile | ConvertFrom-Json)
-
-    return ( $config | Select-Object -ExpandProperty $Name )
 }

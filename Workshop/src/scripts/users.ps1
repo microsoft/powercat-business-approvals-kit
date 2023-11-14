@@ -1068,8 +1068,13 @@ function Invoke-OpenBrowser {
             return
         }
 
+        $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+
+        Push-Location
+        Set-Location $workshopPath
         $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
         dotnet $appPath user start --upn $UserUPN --env "https://aka.ms/ppac" --admin "Y" --headless "N" --record "N"
+        Pop-Location
         return
     }
 
@@ -1100,8 +1105,13 @@ function Invoke-OpenBrowser {
             return
         }
 
+        $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+
+        Push-Location
+        Set-Location $workshopPath
         $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
         dotnet $appPath user start --upn $UserUPN --env $Environment.EnvironmentId --headless "N" --record "N"
+        Pop-Location
     }
 }
 

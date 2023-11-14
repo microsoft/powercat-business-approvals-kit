@@ -22,13 +22,15 @@ This command will setup the workshop in a Development environment for a user. If
 Reset-UserDevelopmentEnvironment "first.last@contoso.onmicrosoft.com"
 ```
 
-### Integration Test
+### Integration Tests
 
-Assuming that the workshop had been completed with a multistage approvals and Cloud Flow
+Assuming that the workshop had been completed with a multistage approvals and Cloud Flow.
 
 ```pwsh
 Invoke-ValidateTwoStageMachineRequestApproval "first.last@contoso.onmicrosoft.com"
 ```
+
+The [Tests README](./tests/README.md) also includes instructions on how to run Pester PowerShell integration tests
 
 ## Bash Scripts
 
