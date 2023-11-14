@@ -198,7 +198,7 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="61" schemaName="mspp_web_page_access_control_rules.svg" displayName="mspp_web_page_access_control_rules.svg" solution="PowerPages_AppResources (1.0.2308.1)">
-          <package>PowerPages_Core (1.0.2309.63)</package>
+          <package>PowerPages_Core (1.0.2310.71)</package>
         </Required>
         <Dependent type="62" schemaName="cat_BusinessApprovalManagement" />
       </MissingDependency>

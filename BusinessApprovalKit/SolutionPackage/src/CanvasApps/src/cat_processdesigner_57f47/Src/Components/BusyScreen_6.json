@@ -86,7 +86,7 @@
         "Name": "Image2_2",
         "Parent": "BusyScreen_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 709,
+        "PublishOrderIndex": 710,
         "Rules": [
           {
             "Category": "Data",
@@ -386,7 +386,7 @@
         "Name": "Label1_2",
         "Parent": "BusyScreen_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 710,
+        "PublishOrderIndex": 711,
         "Rules": [
           {
             "Category": "Data",
@@ -662,7 +662,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638354693801665297",
+    "LastModifiedTimestamp": "638355626491507500",
     "Name": "BusyScreen_6",
     "Rules": [
       {
@@ -737,7 +737,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638354693801665297",
+  "LastModifiedTimestamp": "638355626491507500",
   "Name": "e2e35dbc8dbd49e18eac295bc4da8204",
   "OverridableProperties": {},
   "TemplateOriginalName": "ed04155a4c23468ba025cafdb088e127",

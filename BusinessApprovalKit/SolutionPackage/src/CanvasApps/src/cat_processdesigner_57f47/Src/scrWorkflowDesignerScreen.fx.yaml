@@ -822,7 +822,8 @@
                 LayoutMinHeight: =200
                 LayoutMinWidth: =200
                 OnChange: |+
-                    =//Save the process   
+                    =
+                    //Save the process   
                     Concurrent(
                         If(
                             IsBlankOrError(_selectedProcess),
@@ -923,7 +924,6 @@
                         }
                     );
                     // Onscreen stage editor visible logic ends
-                    
                     Set(
                         _selectedStage,
                         Blank()
@@ -1252,6 +1252,18 @@
                     X: =113
                     Y: =669
                     ZIndex: =2
+
+                textInfo As Text:
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =32
+                    LayoutMinHeight: =32
+                    LayoutMinWidth: =96
+                    Text: ="Saving stages with condition may take about a minute. Once saved, click the refresh button at the top to view the updated conditions."
+                    Visible: =ApprovalDesignerEdit_2.TotalStages > 1
+                    Width: =Parent.Width - (btnSaveStage.Width + btnCancelStage.Width+ Parent.PaddingLeft + Parent.PaddingRight)
+                    X: =0
+                    Y: =666
+                    ZIndex: =3
 
             "CommandBar2_12 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
@@ -2278,7 +2290,11 @@
 
             "ddlRequestDataCondition_2 As 'Combo box'.pcfdataset":
                 AccessibleLabel: ="Variables(Request Data)"
-                DefaultSelectedItems: =If(IsBlankOrError(_selectedStage.'Source Data'),[_selectedStage.'Source Data'.Name])
+                DefaultSelectedItems: |-
+                    =If(IsBlankOrError(_selectedStage.'Source Data'),[LookUp(Filter(
+                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                    ), Name = _selectedStage.'Source Data'.Name)])
                 DisplayMode: =DisplayMode.Edit
                 FillColor: =RGBA(245, 245, 245, 1)
                 Height: =32
