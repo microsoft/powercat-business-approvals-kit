@@ -62,13 +62,6 @@
       <iscustomizable>1</iscustomizable>
       <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_businessapprovaloverridecustompage_c87bd</name>
     </appelement>
-    <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_homepage_96ece">
-      <canvasappid>
-        <name>cat_homepage_96ece</name>
-      </canvasappid>
-      <iscustomizable>1</iscustomizable>
-      <name>cat_cat_BusinessApprovalManagement_canvasappid_cat_homepage_96ece</name>
-    </appelement>
     <appelement uniquename="cat_cat_BusinessApprovalManagement_canvasappid_cat_homepagereimagined_709bf">
       <canvasappid>
         <name>cat_homepagereimagined_709bf</name>
