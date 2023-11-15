@@ -60,14 +60,6 @@
         "MoveStage",
         "MoveStage_StageId",
         "AddNode_Path",
-        {
-          "AFDDataSourceName": "",
-          "AutoRuleBindingEnabled": false,
-          "AutoRuleBindingString": "100",
-          "InvariantPropertyName": "DesignerAutoHeight",
-          "IsLockable": false,
-          "NameMapSourceSchema": "?"
-        },
         "AddStage",
         {
           "AFDDataSourceName": "",
@@ -148,11 +140,6 @@
         {
           "Category": "Data",
           "PropertyName": "AddNode_Path",
-          "RuleProviderType": "System"
-        },
-        {
-          "Category": "Data",
-          "PropertyName": "DesignerAutoHeight",
           "RuleProviderType": "System"
         },
         {
@@ -7656,7 +7643,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galStageConditions_1",
-      "ParentIndex": 19,
+      "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7952,7 +7939,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galStageNodes",
-      "ParentIndex": 18,
+      "ParentIndex": 15,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -17911,7 +17898,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblNoNodeInStage_1",
-      "ParentIndex": 17,
+      "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -18234,7 +18221,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageConditionText_1",
-      "ParentIndex": 15,
+      "ParentIndex": 19,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

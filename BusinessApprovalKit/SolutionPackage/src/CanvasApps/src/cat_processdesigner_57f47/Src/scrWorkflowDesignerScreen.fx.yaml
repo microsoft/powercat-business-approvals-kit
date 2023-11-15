@@ -9,53 +9,6 @@
                     isPanelOpen: true,
                     isPanelVisible: true
                 });
-        //Node editor logic starts *************/
-        If(IsEmpty(_operands),
-            ClearCollect(_operands, 
-                { 
-                    operands: [
-                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
-                        'Business Approval Condition Operand'.'Starts With', 'Business Approval Condition Operand'.'Ends With',
-                        'Business Approval Condition Operand'.Contains, 'Business Approval Condition Operand'.'Is Blank',
-                        'Business Approval Condition Operand'.'Is Not Blank'
-                    ],
-                    type: [ 'Business Approval Data Type'.Text, 'Business Approval Data Type'.'User (Email)' ]
-                },
-                { 
-                    operands: [
-                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Less Than (<)',
-                        'Business Approval Condition Operand'.'Less Than or Equals (<=)', 'Business Approval Condition Operand'.'Greater Than (>)',
-                        'Business Approval Condition Operand'.'Greater Than or Equals (>=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
-                        'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
-                    ],
-                    type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.Date ]
-                },
-                { 
-                    operands: [
-                        'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
-                        'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
-                    ],
-                    type: [ 'Business Approval Data Type'.Boolean ]
-                }
-            )
-        );
-        
-        
-        //load approvers for Node edit
-        If(!IsBlank(_selectedNode),
-            ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending))
-        );
-        
-        //check if this is on a parallel path, disable conditional nodes if it is
-        UpdateContext({ isParallelPath:
-            !IsBlank(
-                LookUp('Business Approval Conditions', Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage' && 
-                'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes && 'Path Index' = _currentPathIndex)
-            )
-        });
-        
-        SetFocus(txtNodeName_4);
-        //Node editor logic ends*************/
         
         /*******Publish Process starts*******/
         //check last published version
@@ -516,7 +469,7 @@
             AlignInContainer: =AlignInContainer.SetByContainer
             BorderStyle: =BorderStyle.None
             Fill: =RGBA(245, 245, 245, 1)
-            Height: =ApprovalDesignerEdit_2.DesignerAutoHeight + 10
+            Height: =Parent.Height
             LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
             LayoutMinHeight: =100
@@ -567,6 +520,259 @@
                     UpdateContext({isPanelOpen:true,panelHeaderText:"Create Node", showNodeContainer:true});
                     Reset(radNodeType_4);
                 AddStage: |+
+                    =//Save the process   
+                    Concurrent(
+                        If(
+                            IsBlankOrError(_selectedProcess),
+                            Set(
+                                _selectedProcess,
+                                Patch(
+                                    'Business Approval Processes',
+                                    Defaults('Business Approval Processes'),
+                                    {Name: txtInputProcessName.Value}
+                                )
+                            )
+                        ),
+                        UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true,
+                                showStageContainer: false
+                            }
+                        )
+                    );
+                    Set(
+                        _selectedStage,
+                        Blank()
+                    );
+                    Set(
+                        _currentStageIndex,
+                        ApprovalDesignerEdit_2.TotalStages + 1
+                    );
+                    Refresh('Business Approval Data');
+                    UpdateContext(
+                        {
+                            isPanelOpen: true,
+                            panelHeaderText: "Create Stage",
+                            showStageContainer: true,
+                            stageName: Blank(),
+                            stageDesc: Blank()
+                        }
+                    );
+                    
+                AlignInContainer: =AlignInContainer.Stretch
+                AssignedHeight: =Parent.Height - 120
+                EditNode: |-
+                    =UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true
+                            }
+                        );
+                    
+                    
+                    Concurrent(
+                        Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),
+                        Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)))
+                    );
+                    Set(_currentNodeIndex, _selectedNode.'Row Index');
+                    Set(_currentPathIndex, _selectedNode.'Path Index');
+                    Set(_currentStageIndex, _selectedStage.Order);
+                    
+                    
+                    //Node editor logic starts *************/
+                    If(IsEmpty(_operands),
+                        ClearCollect(_operands, 
+                            { 
+                                operands: [
+                                    'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                                    'Business Approval Condition Operand'.'Starts With', 'Business Approval Condition Operand'.'Ends With',
+                                    'Business Approval Condition Operand'.Contains, 'Business Approval Condition Operand'.'Is Blank',
+                                    'Business Approval Condition Operand'.'Is Not Blank'
+                                ],
+                                type: [ 'Business Approval Data Type'.Text, 'Business Approval Data Type'.'User (Email)' ]
+                            },
+                            { 
+                                operands: [
+                                    'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Less Than (<)',
+                                    'Business Approval Condition Operand'.'Less Than or Equals (<=)', 'Business Approval Condition Operand'.'Greater Than (>)',
+                                    'Business Approval Condition Operand'.'Greater Than or Equals (>=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                                    'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
+                                ],
+                                type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.Date ]
+                            },
+                            { 
+                                operands: [
+                                    'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
+                                    'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
+                                ],
+                                type: [ 'Business Approval Data Type'.Boolean ]
+                            }
+                        )
+                    );
+                    
+                    //load approvers for Node edit
+                    If(!IsBlank(_selectedNode),
+                        ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending))
+                    );
+                    
+                    //check if this is on a parallel path, disable conditional nodes if it is
+                    UpdateContext({ isParallelPath:
+                        !IsBlank(
+                            LookUp('Business Approval Conditions', Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage' && 
+                            'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes && 'Path Index' = _currentPathIndex)
+                        )
+                    });
+                    
+                    SetFocus(txtNodeName_4);
+                    //Node editor logic ends*************/
+                    If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
+                    );
+                EditStage: |
+                    =Set(
+                        _selectedStage,
+                        LookUp(
+                            'Business Approval Stages',
+                            'Business Approval Stage' = GUID(StageId)
+                        )
+                    );
+                    UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true,
+                                showStageContainer: false
+                            }
+                        );
+                    Concurrent(
+                        Set(
+                            _currentStageIndex,
+                            _selectedStage.Order
+                        );
+                        ,
+                        UpdateContext(
+                            {
+                                stageName: _selectedStage.Name,
+                                stageDesc: _selectedStage.Description
+                            }
+                        )
+                    );
+                    // Onscreen stage editor visible logic starts
+                    //cache operands if not already available
+                    If(
+                        IsEmpty(_operands),
+                        ClearCollect(
+                            _operands,
+                            {
+                                operands: [
+                                    'Business Approval Condition Operand'.'Equals (=)',
+                                    'Business Approval Condition Operand'.'Not Equal (<>)',
+                                    'Business Approval Condition Operand'.'Starts With',
+                                    'Business Approval Condition Operand'.'Ends With',
+                                    'Business Approval Condition Operand'.Contains,
+                                    'Business Approval Condition Operand'.'Is Blank',
+                                    'Business Approval Condition Operand'.'Is Not Blank'
+                                ],
+                                type: [
+                                    'Business Approval Data Type'.Text,
+                                    'Business Approval Data Type'.'User (Email)'
+                                ]
+                            },
+                            {
+                                operands: [
+                                    'Business Approval Condition Operand'.'Equals (=)',
+                                    'Business Approval Condition Operand'.'Less Than (<)',
+                                    'Business Approval Condition Operand'.'Less Than or Equals (<=)',
+                                    'Business Approval Condition Operand'.'Greater Than (>)',
+                                    'Business Approval Condition Operand'.'Greater Than or Equals (>=)',
+                                    'Business Approval Condition Operand'.'Not Equal (<>)',
+                                    'Business Approval Condition Operand'.'Is Blank',
+                                    'Business Approval Condition Operand'.'Is Not Blank'
+                                ],
+                                type: [
+                                    'Business Approval Data Type'.Number,
+                                    'Business Approval Data Type'.Date
+                                ]
+                            },
+                            {
+                                operands: [
+                                    'Business Approval Condition Operand'.'Equals (=)',
+                                    'Business Approval Condition Operand'.'Not Equal (<>)',
+                                    'Business Approval Condition Operand'.'Is Blank',
+                                    'Business Approval Condition Operand'.'Is Not Blank'
+                                ],
+                                type: ['Business Approval Data Type'.Boolean]
+                            }
+                        )
+                    );
+                    //load conditions if exists
+                    Clear(_conditions);
+                    ForAll(
+                        Filter(
+                            Filter(
+                                'Business Approval Conditions',
+                                'Business Approval Conditions (Views)'.'Active Stage Conditions'
+                            ),
+                            Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
+                        ),
+                        Collect(
+                            _conditions,
+                            {
+                                ConditionId: ThisRecord.'Business Approval Condition',
+                                Path: ThisRecord.'Path Index',
+                                Target: ThisRecord.'Condition Data Type',
+                                TargetData: ThisRecord.'Condition Data',
+                                StaticValue: ThisRecord.'Condition Value',
+                                IsDefault: ThisRecord.'Is Default' = 'Is Default (Business Approval Conditions)'.Yes,
+                                IsParallel: ThisRecord.'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes
+                            }
+                        )
+                    );
+                    //allow change of condition type if there are no existing conditions defined
+                    //isCleared - tracks if the user clicked on "Clear" (may not yet proceed to change condition, as they can undo it)
+                    UpdateContext(
+                        {
+                            allowUpdateConditionType: CountRows(_conditions) = 0,
+                            isCleared: false
+                        }
+                    );
+                    // Onscreen stage editor visible logic ends
+                    UpdateContext(
+                        {
+                            isPanelOpen: true,
+                            isPanelVisible: true,
+                            panelHeaderText: "Edit Stage",
+                            showStageContainer: true
+                        }
+                    );
+                Fill: =ColorFade(RGBA(245, 245, 245, 1),50%)
+                Height: =Parent.Height - 80 //ApprovalDesignerEdit_2.TotalStages * 240
+                LayoutMinHeight: =640
+                LayoutMinWidth: =640
+                MoveStage: |-
+                    =With({ currentStage: LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId))},
+                        UpdateContext({ swapOrder: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1)});
+                        UpdateIf('Business Approval Stages', 
+                            Order = swapOrder && Process.'Business Approval Process' = currentStage.Process.'Business Approval Process', 
+                            { Order: currentStage.Order }
+                        );
+                        Patch('Business Approval Stages', currentStage, { Order: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1) }) 
+                    )
+                Visible: =Self.TotalStages > 0
+                Width: =Parent.Width - 10
+                Y: =70
+                ZIndex: =2
+
+            "icoAddStage As 'Fluent Icon (1.0.22)'":
+                DisplayMode: =DisplayMode.Edit
+                FontSize: =30
+                Height: =45
+                IconName: ="CircleAdditionSolid"
+                IconSize: =35
+                LayoutMinHeight: =200
+                LayoutMinWidth: =200
+                OnChange: |
                     =//Save the process   
                     Concurrent(
                         If(
@@ -687,262 +893,7 @@
                             stageDesc: Blank()
                         }
                     );
-                    
-                AlignInContainer: =AlignInContainer.Stretch
-                AssignedHeight: =Parent.Height - 120
-                EditNode: |-
-                    =UpdateContext(
-                            {
-                                isPanelOpen: false,
-                                isPanelVisible: true
-                            }
-                        );
-                    
-                    
-                    Concurrent(
-                        Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(NodeId))),
-                        Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId)))
-                    );
-                    Set(_currentNodeIndex, _selectedNode.'Row Index');
-                    Set(_currentPathIndex, _selectedNode.'Path Index');
-                    Set(_currentStageIndex, _selectedStage.Order);
-                    
-                    
-                    //Node editor logic starts *************/
-                    If(IsEmpty(_operands),
-                        ClearCollect(_operands, 
-                            { 
-                                operands: [
-                                    'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
-                                    'Business Approval Condition Operand'.'Starts With', 'Business Approval Condition Operand'.'Ends With',
-                                    'Business Approval Condition Operand'.Contains, 'Business Approval Condition Operand'.'Is Blank',
-                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                ],
-                                type: [ 'Business Approval Data Type'.Text, 'Business Approval Data Type'.'User (Email)' ]
-                            },
-                            { 
-                                operands: [
-                                    'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Less Than (<)',
-                                    'Business Approval Condition Operand'.'Less Than or Equals (<=)', 'Business Approval Condition Operand'.'Greater Than (>)',
-                                    'Business Approval Condition Operand'.'Greater Than or Equals (>=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
-                                    'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
-                                ],
-                                type: [ 'Business Approval Data Type'.Number, 'Business Approval Data Type'.Date ]
-                            },
-                            { 
-                                operands: [
-                                    'Business Approval Condition Operand'.'Equals (=)', 'Business Approval Condition Operand'.'Not Equal (<>)',
-                                    'Business Approval Condition Operand'.'Is Blank', 'Business Approval Condition Operand'.'Is Not Blank'
-                                ],
-                                type: [ 'Business Approval Data Type'.Boolean ]
-                            }
-                        )
-                    );
-                    
-                    //load approvers for Node edit
-                    If(!IsBlank(_selectedNode),
-                        ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending))
-                    );
-                    
-                    //check if this is on a parallel path, disable conditional nodes if it is
-                    UpdateContext({ isParallelPath:
-                        !IsBlank(
-                            LookUp('Business Approval Conditions', Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage' && 
-                            'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes && 'Path Index' = _currentPathIndex)
-                        )
-                    });
-                    
-                    SetFocus(txtNodeName_4);
-                    //Node editor logic ends*************/
-                    If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
-                    );
-                EditStage: |
-                    =Set(
-                        _selectedStage,
-                        LookUp(
-                            'Business Approval Stages',
-                            'Business Approval Stage' = GUID(StageId)
-                        )
-                    );
-                    UpdateContext(
-                            {
-                                isPanelOpen: false,
-                                isPanelVisible: true,
-                                showStageContainer: false
-                            }
-                        );
-                    Concurrent(
-                        Set(
-                            _currentStageIndex,
-                            _selectedStage.Order
-                        );
-                        ,
-                        UpdateContext(
-                            {
-                                stageName: _selectedStage.Name,
-                                stageDesc: _selectedStage.Description
-                            }
-                        )
-                    );
-                    UpdateContext(
-                        {
-                            isPanelOpen: true,
-                            isPanelVisible: true,
-                            panelHeaderText: "Edit Stage",
-                            showStageContainer: true
-                        }
-                    );
-                Fill: =ColorFade(RGBA(245, 245, 245, 1),50%)
-                Height: =Parent.Height - 80 //ApprovalDesignerEdit_2.TotalStages * 240
-                LayoutMinHeight: =640
-                LayoutMinWidth: =640
-                MoveStage: |-
-                    =With({ currentStage: LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(StageId))},
-                        UpdateContext({ swapOrder: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1)});
-                        UpdateIf('Business Approval Stages', 
-                            Order = swapOrder && Process.'Business Approval Process' = currentStage.Process.'Business Approval Process', 
-                            { Order: currentStage.Order }
-                        );
-                        Patch('Business Approval Stages', currentStage, { Order: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1) }) 
-                    )
-                ProcessId: =_selectedProcess.'Business Approval Process'
-                Visible: =Self.TotalStages > 0
-                Width: =Parent.Width - 10
-                Y: =70
-                ZIndex: =2
-
-            "icoAddStage As 'Fluent Icon (1.0.22)'":
-                DisplayMode: =DisplayMode.Edit
-                FontSize: =30
-                Height: =45
-                IconName: ="CircleAdditionSolid"
-                IconSize: =35
-                LayoutMinHeight: =200
-                LayoutMinWidth: =200
-                OnChange: |+
-                    =
-                    //Save the process   
-                    Concurrent(
-                        If(
-                            IsBlankOrError(_selectedProcess),
-                            Set(
-                                _selectedProcess,
-                                Patch(
-                                    'Business Approval Processes',
-                                    Defaults('Business Approval Processes'),
-                                    {Name: txtInputProcessName.Value}
-                                )
-                            )
-                        ),
-                        UpdateContext(
-                            {
-                                isPanelOpen: false,
-                                isPanelVisible: true,
-                                showStageContainer: false
-                            }
-                        )
-                    );
-                    // Onscreen stage editor visible logic starts
-                    //cache operands if not already available
-                    If(
-                        IsEmpty(_operands),
-                        ClearCollect(
-                            _operands,
-                            {
-                                operands: [
-                                    'Business Approval Condition Operand'.'Equals (=)',
-                                    'Business Approval Condition Operand'.'Not Equal (<>)',
-                                    'Business Approval Condition Operand'.'Starts With',
-                                    'Business Approval Condition Operand'.'Ends With',
-                                    'Business Approval Condition Operand'.Contains,
-                                    'Business Approval Condition Operand'.'Is Blank',
-                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                ],
-                                type: [
-                                    'Business Approval Data Type'.Text,
-                                    'Business Approval Data Type'.'User (Email)'
-                                ]
-                            },
-                            {
-                                operands: [
-                                    'Business Approval Condition Operand'.'Equals (=)',
-                                    'Business Approval Condition Operand'.'Less Than (<)',
-                                    'Business Approval Condition Operand'.'Less Than or Equals (<=)',
-                                    'Business Approval Condition Operand'.'Greater Than (>)',
-                                    'Business Approval Condition Operand'.'Greater Than or Equals (>=)',
-                                    'Business Approval Condition Operand'.'Not Equal (<>)',
-                                    'Business Approval Condition Operand'.'Is Blank',
-                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                ],
-                                type: [
-                                    'Business Approval Data Type'.Number,
-                                    'Business Approval Data Type'.Date
-                                ]
-                            },
-                            {
-                                operands: [
-                                    'Business Approval Condition Operand'.'Equals (=)',
-                                    'Business Approval Condition Operand'.'Not Equal (<>)',
-                                    'Business Approval Condition Operand'.'Is Blank',
-                                    'Business Approval Condition Operand'.'Is Not Blank'
-                                ],
-                                type: ['Business Approval Data Type'.Boolean]
-                            }
-                        )
-                    );
-                    //load conditions if exists
-                    Clear(_conditions);
-                    ForAll(
-                        Filter(
-                            Filter(
-                                'Business Approval Conditions',
-                                'Business Approval Conditions (Views)'.'Active Stage Conditions'
-                            ),
-                            Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
-                        ),
-                        Collect(
-                            _conditions,
-                            {
-                                ConditionId: ThisRecord.'Business Approval Condition',
-                                Path: ThisRecord.'Path Index',
-                                Target: ThisRecord.'Condition Data Type',
-                                TargetData: ThisRecord.'Condition Data',
-                                StaticValue: ThisRecord.'Condition Value',
-                                IsDefault: ThisRecord.'Is Default' = 'Is Default (Business Approval Conditions)'.Yes,
-                                IsParallel: ThisRecord.'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes
-                            }
-                        )
-                    );
-                    //allow change of condition type if there are no existing conditions defined
-                    //isCleared - tracks if the user clicked on "Clear" (may not yet proceed to change condition, as they can undo it)
-                    UpdateContext(
-                        {
-                            allowUpdateConditionType: CountRows(_conditions) = 0,
-                            isCleared: false
-                        }
-                    );
-                    // Onscreen stage editor visible logic ends
-                    Set(
-                        _selectedStage,
-                        Blank()
-                    );
-                    Set(
-                        _currentStageIndex,
-                        ApprovalDesignerEdit_2.TotalStages + 1
-                    );
-                    Refresh('Business Approval Data');
-                    UpdateContext(
-                        {
-                            isPanelOpen: true,
-                            panelHeaderText: "Create Stage",
-                            showStageContainer: true,
-                            stageName: Blank(),
-                            stageDesc: Blank()
-                        }
-                    );
-                    
+                    // Add Stage 
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Theme: =AppThemeJson
                 Tooltip: ="Add Stage"
@@ -954,6 +905,7 @@
 
     "FluentPanel As 'Fluent Panel'":
         DisplayMode: =DisplayMode.Edit
+        HasCloseButton: =true
         HeaderText: =panelHeaderText
         Height: =Parent.Height
         IsOpen: =isPanelOpen
@@ -969,15 +921,15 @@
                     Refresh('Business Approval Stages');
                     Refresh('Business Approval Nodes');
                     Refresh('Business Approval Conditions');
-                //Reset all fields
-            Reset(txtStageName_2);
+                    //Reset all fields
+                    Reset(txtStageName_2);
                     Reset(txtStageDesc_2);
                     Reset(ddlStageCondition_2);
                     Reset(ddlStageConditionSource_2);
                     Reset(ddlRequestDataCondition_2);
                     Reset(ddlStageOperand_2);
                     Reset(radSwitchPaths_2);
-                    Reset(galConditions_2);
+                    Reset(galConditions_1);
                 )
             );
             UpdateContext(
@@ -995,6 +947,8 @@
         OnOpen: =
         OnOpened: =
         PanelType: ='PowerCAT.Panel.PanelType'.ExtraLarge
+        ShowBorder: =false
+        TrapPanel: =true
         Visible: =isPanelVisible
         Width: =Parent.Width
         X: =0
@@ -1215,7 +1169,7 @@
                         Reset(ddlRequestDataCondition_2);
                         Reset(ddlStageOperand_2);
                         Reset(radSwitchPaths_2);
-                        Reset(galConditions_2);
+                        Reset(galConditions_1);
                     Text: ="Save"
                     Width: =96
                     X: =0
@@ -1246,7 +1200,7 @@
                         Reset(ddlRequestDataCondition_2);
                         Reset(ddlStageOperand_2);
                         Reset(radSwitchPaths_2);
-                        Reset(galConditions_2);
+                        Reset(galConditions_1);
                     Text: ="Cancel"
                     Width: =96
                     X: =113
@@ -1684,7 +1638,7 @@
                 PaddingLeft: =12
                 Size: =10
                 Text: ="Source"
-                Visible: =ddlStageCondition_2.DisplayMode = DisplayMode.Edit
+                Visible: =ddlStageCondition_2.DisplayMode = DisplayMode.Edit && ddlStageCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None
                 Width: =120
                 X: =lblStageName_4.X
                 Y: =imgWorkflowDiagram_4.Y + imgWorkflowDiagram_4.Height + 10
@@ -1742,241 +1696,11 @@
                 PaddingLeft: =12
                 Size: =10
                 Text: ="Switch conditions are parallel rules. You can have one or more paths with the same condition to create parallel paths."
-                Visible: =galConditions_2.Visible && ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch
-                Width: =galConditions_2.Width
+                Visible: =galConditions_1.Visible && ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch
+                Width: =galConditions_1.Width
                 X: =lblStageName_4.X
-                Y: =galConditions_2.Y + galConditions_2.Height
+                Y: =galConditions_1.Y + galConditions_1.Height
                 ZIndex: =15
-
-            galConditions_2 As gallery.galleryVertical:
-                BorderColor: =RGBA(166, 166, 166, 1)
-                Height: =125
-                Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
-                Layout: =Layout.Vertical
-                TemplatePadding: =2
-                TemplateSize: =115
-                Visible: |-
-                    =CountRows(Self.AllItems) > 0 && ddlStageCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None && 
-                    ddlStageOperand_2.Selected.Value <> 'Business Approval Condition Operand'.'Is Blank' &&
-                    ddlStageOperand_2.Selected.Value <> 'Business Approval Condition Operand'.'Is Not Blank'
-                Width: |-
-                    =If(ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.'If/Else',
-                        txtStageName_2.Width,
-                        Parent.Width - Self.X - 20
-                    )
-                WrapCount: =CountRows(Self.AllItems)
-                X: =If(ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.'If/Else', txtStageName_2.X, lblStageName_4.X)
-                Y: =lblStageOperand_2.Y + lblStageOperand_2.Height + 20
-                ZIndex: =16
-
-                Rectangle3_4 As rectangle:
-                    BorderColor: =RGBA(0, 0, 0, 0)
-                    BorderStyle: =BorderStyle.None
-                    BorderThickness: =2
-                    DisplayMode: =DisplayMode.Disabled
-                    Fill: =RGBA(237, 237, 237, 1)
-                    FocusedBorderThickness: =4
-                    Height: =Parent.TemplateHeight
-                    HoverFill: =RGBA(105, 121, 126, 1)
-                    OnSelect: =Select(Parent)
-                    PressedFill: =RGBA(105, 121, 126, 1)
-                    Visible: =false
-                    Width: =Parent.TemplateWidth - 2
-                    ZIndex: =1
-
-                ConditionsContainer As groupContainer.manualLayoutContainer:
-                    BorderColor: =RGBA(166, 166, 166, 1)
-                    BorderThickness: =1
-                    DropShadow: =DropShadow.Semilight
-                    Fill: =RGBA(237, 237, 237, 1)
-                    Height: =Parent.TemplateHeight
-                    RadiusBottomLeft: =4
-                    RadiusBottomRight: =4
-                    RadiusTopLeft: =4
-                    RadiusTopRight: =4
-                    Width: =Parent.TemplateWidth - 3
-                    X: =2
-                    Y: =1
-                    ZIndex: =9
-
-                    lblConditionTarget_4 As label:
-                        Align: =Align.Center
-                        BorderColor: =RGBA(0, 0, 0, 0)
-                        BorderStyle: =BorderStyle.None
-                        BorderThickness: =2
-                        Color: =RGBA(51, 51, 51, 1)
-                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                        DisabledColor: =RGBA(166, 166, 166, 1)
-                        FocusedBorderThickness: =4
-                        Font: =Font.'Segoe UI'
-                        Height: =30
-                        PaddingLeft: =12
-                        Size: =9
-                        Text: |-
-                            =If(ThisItem.IsDefault, "Default", "If " & 
-                                If(ddlRequestDataCondition_2.Visible, ddlRequestDataCondition_2.Selected.Name, ddlStageConditionSource_2.Selected.Value) & " " &
-                                ddlStageOperand_2.Selected.Value
-                            )
-                        Width: =Parent.Width
-                        X: =Parent.Width / 2 - Self.Width / 2
-                        Y: =
-                        ZIndex: =1
-
-                    ddlTargetRequestData_2 As dropdown:
-                        AllowEmptySelection: =true
-                        BorderColor: =RGBA(166, 166, 166, 1)
-                        BorderThickness: =1
-                        ChevronBackground: =RGBA(255, 255, 255, 1)
-                        ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
-                        ChevronDisabledFill: =RGBA(166, 166, 166, 1)
-                        ChevronFill: =RGBA(33, 33, 33, 1)
-                        ChevronHoverBackground: =RGBA(212, 212, 212, 1)
-                        ChevronHoverFill: =RGBA(33, 33, 33, 1)
-                        Color: =RGBA(51, 51, 51, 1)
-                        Default: =ThisItem.TargetData.Name
-                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                        DisabledColor: =RGBA(166, 166, 166, 1)
-                        DisabledFill: =RGBA(244, 244, 244, 1)
-                        FocusedBorderThickness: =1
-                        Font: =Font.'Segoe UI'
-                        Height: =If(Self.Visible, 30, 0)
-                        HoverBorderColor: =Self.BorderColor
-                        HoverFill: =RGBA(243, 242, 241, 1)
-                        Items: |-
-                            =Filter(
-                                Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
-                                Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 
-                                'Business Approval Data' <> ddlRequestDataCondition_2.Selected.'Business Approval Data' &&
-                                'Data Type' = ddlRequestDataCondition_2.Selected.'Data Type'
-                            )
-                        OnChange: |-
-                            =Patch(_conditions, ThisItem, { TargetData: Self.Selected, StaticValue: Blank()})
-                        PaddingBottom: =5
-                        PaddingLeft: =5
-                        PaddingRight: =5
-                        PaddingTop: =5
-                        PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
-                        PressedFill: =Self.HoverFill
-                        SelectionColor: =Self.Color
-                        SelectionFill: =RGBA(243, 242, 241, 1)
-                        Size: =10
-                        Visible: =ddlConditionTarget_4.Selected.Value = 'Business Approval Condition Target Data'.'Request Data' && ThisItem.IsDefault = false
-                        Width: =ddlConditionTarget_4.Width
-                        X: =ddlConditionTarget_4.X
-                        Y: =ddlConditionTarget_4.Y + ddlConditionTarget_4.Height + 10
-                        ZIndex: =3
-
-                    txtTargetStatic_4 As text:
-                        BorderColor: =RGBA(166, 166, 166, 1)
-                        Clear: =true
-                        Color: =RGBA(51, 51, 51, 1)
-                        Default: =ThisItem.StaticValue
-                        DelayOutput: =true
-                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                        DisabledColor: =RGBA(166, 166, 166, 1)
-                        DisabledFill: =RGBA(244, 244, 244, 1)
-                        DisplayMode: =If(ThisItem.IsDefault, DisplayMode.Disabled, DisplayMode.Edit)
-                        FocusedBorderThickness: =1
-                        Font: =Font.'Segoe UI'
-                        Height: =30
-                        HoverBorderColor: =Self.BorderColor
-                        HoverColor: =RGBA(51, 51, 51, 1)
-                        HoverFill: =RGBA(255, 255, 255, 1)
-                        MaxLength: =100
-                        OnChange: |-
-                            =Patch(_conditions, ThisItem, { StaticValue: Self.Text, TargetData: Blank() })
-                        PaddingLeft: =5
-                        PressedBorderColor: =Self.BorderColor
-                        PressedColor: =RGBA(51, 51, 51, 1)
-                        PressedFill: =RGBA(255, 255, 255, 1)
-                        RadiusBottomLeft: =0
-                        RadiusBottomRight: =0
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
-                        Size: =10
-                        Visible: =!ddlTargetRequestData_2.Visible
-                        Width: =ddlConditionTarget_4.Width
-                        X: =ddlConditionTarget_4.X
-                        Y: =ddlConditionTarget_4.Y + ddlConditionTarget_4.Height + 5
-                        ZIndex: =4
-
-                    lblStageTargetRequestDataNotFound_2 As label:
-                        BorderColor: =RGBA(0, 0, 0, 0)
-                        BorderStyle: =BorderStyle.None
-                        BorderThickness: =2
-                        Color: =RGBA(51, 51, 51, 1)
-                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                        DisabledColor: =RGBA(166, 166, 166, 1)
-                        Fill: =RGBA(230, 230, 230, 1)
-                        FocusedBorderThickness: =4
-                        Font: =Font.'Segoe UI'
-                        Height: =ddlTargetRequestData_2.Height
-                        OnSelect: =//Select(Parent)
-                        Size: =10
-                        Text: ="No other data field found of similar data type for " & ddlRequestDataCondition_2.Selected.Name & " (" & ddlRequestDataCondition_2.Selected.'Data Type' & ")"
-                        Visible: |-
-                            =With({ conditionData: Filter(
-                                Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
-                                Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 
-                                'Business Approval Data' <> ddlRequestDataCondition_2.Selected.'Business Approval Data' &&
-                                'Data Type' = ddlRequestDataCondition_2.Selected.'Data Type')},
-                                ddlTargetRequestData_2.Visible && IsEmpty(conditionData)
-                            )
-                        Width: =ddlTargetRequestData_2.Width
-                        X: =ddlTargetRequestData_2.X
-                        Y: =ddlTargetRequestData_2.Y
-                        ZIndex: =5
-
-                    lblIsParallel_2 As label:
-                        Align: =Align.Center
-                        BorderColor: =RGBA(73, 84, 88, 1)
-                        BorderThickness: =1
-                        Color: =RGBA(51, 51, 51, 1)
-                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                        DisabledColor: =RGBA(166, 166, 166, 1)
-                        FocusedBorderThickness: =4
-                        Font: =Font.'Segoe UI'
-                        FontWeight: =FontWeight.Semibold
-                        Height: =lblConditionTarget_4.Height - 5
-                        Size: =lblConditionTarget_4.Size
-                        Text: ="="
-                        Tooltip: ="Parallel paths"
-                        Visible: |-
-                            =!IsBlank(LookUp(_conditions, Path <> ThisItem.Path && Target = ThisItem.Target && IsDefault = false &&
-                                If(ThisItem.Target = 'Business Approval Condition Target Data'.'Static value',
-                                    StaticValue = txtTargetStatic_4.Text,
-                                    TargetData.'Business Approval Data' = ddlTargetRequestData_2.Selected.'Business Approval Data')
-                                )
-                            ) && !ThisItem.IsDefault
-                        Width: =Self.Height
-                        X: =ddlConditionTarget_4.X
-                        Y: =lblConditionTarget_4.Y +2
-                        ZIndex: =6
-
-                    ddlConditionTarget_4 As Combobox.pcfdataset:
-                        BasePaletteColor: =
-                        DefaultSelectedItems: =[If(Self.DisplayMode = DisplayMode.Disabled, First(Choices('Business Approval Condition Target Data')), LookUp(Choices('Business Approval Condition Target Data'),Value = ThisItem.Target))]
-                        DisplayMode: =txtTargetStatic_4.DisplayMode
-                        FontSize: =0
-                        Height: =32
-                        InputTextPlaceholder: ="Choose source"
-                        Items: =Choices('Business Approval Condition Target Data')
-                        OnChange: |-
-                            =Patch(_conditions, ThisItem, { Target: Self.Selected.Value, TargetData: Blank() })
-                        ValidationState: ="None"
-                        Visible: =lblStageConditionSource_2.Visible
-                        Width: =Parent.Width - Self.X * 2
-                        X: =10
-                        Y: =30
-                        ZIndex: =7
-
-                        Value1_2 As pcfDataField.textualColumn:
-                            FieldDisplayName: ="Value"
-                            FieldName: ="Value"
-                            FieldType: ="l"
-                            FieldVariantName: ="textualColumn"
-                            Order: =1
-                            ZIndex: =34
 
             lblStageOperand_2 As label:
                 BorderColor: =RGBA(0, 0, 0, 0)
@@ -2291,10 +2015,10 @@
             "ddlRequestDataCondition_2 As 'Combo box'.pcfdataset":
                 AccessibleLabel: ="Variables(Request Data)"
                 DefaultSelectedItems: |-
-                    =If(IsBlankOrError(_selectedStage.'Source Data'),[LookUp(Filter(
+                    =If(!IsBlankOrError(_selectedStage.'Source Data'),[LookUp(Filter(
                         Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
                         Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
-                    ), Name = _selectedStage.'Source Data'.Name)])
+                    ), "cat_name" = _selectedStage.'Source Data'.Name)])
                 DisplayMode: =DisplayMode.Edit
                 FillColor: =RGBA(245, 245, 245, 1)
                 Height: =32
@@ -2385,6 +2109,232 @@
                 X: =ddlRequestDataCondition_2.X
                 Y: =ddlRequestDataCondition_2.Y
                 ZIndex: =27
+
+            galConditions_1 As gallery.galleryVertical:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                Height: =120
+                Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
+                Layout: =Layout.Vertical
+                TemplatePadding: =0
+                TemplateSize: =118
+                Visible: |-
+                    =CountRows(Self.AllItems) > 0 && ddlStageCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None && 
+                    ddlStageOperand_2.Selected.Value <> 'Business Approval Condition Operand'.'Is Blank' &&
+                    ddlStageOperand_2.Selected.Value <> 'Business Approval Condition Operand'.'Is Not Blank' && ddlStageOperand_2.Visible
+                Width: |-
+                    =If(ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.'If/Else',
+                        txtStageName_2.Width,
+                        Parent.Width - Self.X - 20
+                    )
+                WrapCount: =CountRows(Self.AllItems)
+                X: =If(ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.'If/Else', txtStageName_2.X, lblStageName_4.X)
+                Y: =lblStageOperand_2.Y + lblStageOperand_2.Height + 20
+                ZIndex: =28
+
+                Rectangle3_2 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    DisplayMode: =DisplayMode.Disabled
+                    Fill: =RGBA(230, 230, 230, 1)
+                    FocusedBorderThickness: =4
+                    Height: =Parent.TemplateHeight
+                    HoverFill: =RGBA(105, 121, 126, 1)
+                    OnSelect: =Select(Parent)
+                    PressedFill: =RGBA(105, 121, 126, 1)
+                    Width: =Parent.TemplateWidth - 2
+                    ZIndex: =1
+
+                lblConditionTarget_1 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =30
+                    PaddingLeft: =12
+                    Size: =9
+                    Text: |-
+                        =If(ThisItem.IsDefault, "Default", "If " & 
+                            If(ddlRequestDataCondition.Visible, ddlRequestDataCondition.Selected.Name, ddlStageConditionSource.Selected.Value) & " " &
+                            ddlStageOperand.Selected.Value
+                        )
+                    Width: =Parent.TemplateWidth
+                    X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                    Y: =5
+                    ZIndex: =2
+
+                ddlConditionTarget_2 As dropdown:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =1
+                    ChevronBackground: =RGBA(255, 255, 255, 1)
+                    ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                    ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                    ChevronFill: =RGBA(33, 33, 33, 1)
+                    ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                    ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                    Color: =RGBA(51, 51, 51, 1)
+                    Default: =If(Self.DisplayMode = DisplayMode.Disabled, 'Business Approval Condition Target Data'.'Static value', ThisItem.Target)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =txtTargetStatic_2.DisplayMode
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =30
+                    HoverBorderColor: =Self.BorderColor
+                    HoverFill: =RGBA(243, 242, 241, 1)
+                    Items: =Choices('Business Approval Condition Target Data')
+                    OnChange: |-
+                        =Patch(_conditions, ThisItem, { Target: Self.Selected.Value, TargetData: Blank() })
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    PressedFill: =Self.HoverFill
+                    SelectionColor: =Self.Color
+                    SelectionFill: =RGBA(243, 242, 241, 1)
+                    Size: =10
+                    Width: =Min(txtStageName.Width, Parent.TemplateWidth - 20)
+                    X: =Parent.TemplateWidth / 2 - Self.Width / 2
+                    Y: =lblConditionTarget_1.Y + lblConditionTarget_1.Height
+                    ZIndex: =3
+
+                ddlTargetRequestData_1 As dropdown:
+                    AllowEmptySelection: =true
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderThickness: =1
+                    ChevronBackground: =RGBA(255, 255, 255, 1)
+                    ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                    ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                    ChevronFill: =RGBA(33, 33, 33, 1)
+                    ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                    ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                    Color: =RGBA(51, 51, 51, 1)
+                    Default: =ThisItem.TargetData.Name
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =If(Self.Visible, 30, 0)
+                    HoverBorderColor: =Self.BorderColor
+                    HoverFill: =RGBA(243, 242, 241, 1)
+                    Items: |-
+                        =Filter(
+                            Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                            Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 
+                            'Business Approval Data' <> ddlRequestDataCondition.Selected.'Business Approval Data' &&
+                            'Data Type' = ddlRequestDataCondition.Selected.'Data Type'
+                        )
+                    OnChange: |-
+                        =Patch(_conditions, ThisItem, { TargetData: Self.Selected, StaticValue: Blank()})
+                    PaddingBottom: =5
+                    PaddingLeft: =5
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    PressedFill: =Self.HoverFill
+                    SelectionColor: =Self.Color
+                    SelectionFill: =RGBA(243, 242, 241, 1)
+                    Size: =10
+                    Visible: =ddlConditionTarget_2.Selected.Value = 'Business Approval Condition Target Data'.'Request Data' && ThisItem.IsDefault = false
+                    Width: =ddlConditionTarget_2.Width
+                    X: =ddlConditionTarget_2.X
+                    Y: =ddlConditionTarget_2.Y + ddlConditionTarget_2.Height + 10
+                    ZIndex: =4
+
+                txtTargetStatic_2 As text:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    Clear: =true
+                    Color: =RGBA(51, 51, 51, 1)
+                    Default: =ThisItem.StaticValue
+                    DelayOutput: =true
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =If(ThisItem.IsDefault, DisplayMode.Disabled, DisplayMode.Edit)
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =30
+                    HoverBorderColor: =Self.BorderColor
+                    HoverColor: =RGBA(51, 51, 51, 1)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    MaxLength: =100
+                    OnChange: |-
+                        =Patch(_conditions, ThisItem, { StaticValue: Self.Text, TargetData: Blank() })
+                    PaddingLeft: =5
+                    PressedBorderColor: =Self.BorderColor
+                    PressedColor: =RGBA(51, 51, 51, 1)
+                    PressedFill: =RGBA(255, 255, 255, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Visible: =!ddlTargetRequestData_1.Visible
+                    Width: =ddlConditionTarget_2.Width
+                    X: =ddlConditionTarget_2.X
+                    Y: =ddlConditionTarget_2.Y + ddlConditionTarget_2.Height + 10
+                    ZIndex: =5
+
+                lblStageTargetRequestDataNotFound_1 As label:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Fill: =RGBA(230, 230, 230, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =ddlTargetRequestData_1.Height
+                    OnSelect: =Select(Parent)
+                    Size: =10
+                    Text: ="No other data field found of similar data type for " & ddlRequestDataCondition.Selected.Name & " (" & ddlRequestDataCondition.Selected.'Data Type' & ")"
+                    Visible: |-
+                        =With({ conditionData: Filter(
+                            Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                            Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 
+                            'Business Approval Data' <> ddlRequestDataCondition.Selected.'Business Approval Data' &&
+                            'Data Type' = ddlRequestDataCondition.Selected.'Data Type')},
+                            ddlTargetRequestData_1.Visible && IsEmpty(conditionData)
+                        )
+                    Width: =ddlTargetRequestData_1.Width
+                    X: =ddlTargetRequestData_1.X
+                    Y: =ddlTargetRequestData_1.Y
+                    ZIndex: =6
+
+                lblIsParallel_1 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(73, 84, 88, 1)
+                    BorderThickness: =1
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =lblConditionTarget_1.Height - 5
+                    Size: =lblConditionTarget_1.Size
+                    Text: ="="
+                    Tooltip: ="Parallel paths"
+                    Visible: |-
+                        =!IsBlank(LookUp(_conditions, Path <> ThisItem.Path && Target = ThisItem.Target && IsDefault = false &&
+                            If(ThisItem.Target = 'Business Approval Condition Target Data'.'Static value',
+                                StaticValue = txtTargetStatic_2.Text,
+                                TargetData.'Business Approval Data' = ddlTargetRequestData_1.Selected.'Business Approval Data')
+                            )
+                        ) && !ThisItem.IsDefault
+                    Width: =Self.Height
+                    X: =ddlConditionTarget_2.X
+                    Y: =lblConditionTarget_1.Y
+                    ZIndex: =7
 
         NodeContainer As groupContainer:
             Height: =Parent.Height - Self.Y

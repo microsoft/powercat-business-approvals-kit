@@ -132,10 +132,8 @@
       <RootComponent type="29" id="{fb00d840-ca8c-ec11-8d20-000d3a09d351}" behavior="0" />
       <RootComponent type="300" schemaName="cat_businessapprovalmanagementdefaultcommandlibrary_94e11" behavior="0" />
       <RootComponent type="300" schemaName="cat_businessapprovaloverridecustompage_c87bd" behavior="0" />
-      <RootComponent type="300" schemaName="cat_homepage_96ece" behavior="0" />
       <RootComponent type="300" schemaName="cat_homepagereimagined_709bf" behavior="0" />
       <RootComponent type="300" schemaName="cat_processdesigner_57f47" behavior="0" />
-      <RootComponent type="300" schemaName="cat_processdesignerreimagined_2478d" behavior="0" />
       <RootComponent type="300" schemaName="cat_settings_3ada8" behavior="0" />
       <RootComponent type="372" id="{d5781852-d15c-476b-852c-48c738e17be4}" schemaName="cat_approvals-20kit" behavior="0" />
       <RootComponent type="60" id="{77d97034-84b4-ed11-83fe-0022482a97de}" behavior="0" />
@@ -204,23 +202,11 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.AutoWidthLabel" displayName="cat_PowerCAT.AutoWidthLabel" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.AutoWidthLabel" displayName="cat_PowerCAT.AutoWidthLabel" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.Breadcrumb" displayName="cat_PowerCAT.Breadcrumb" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.CommandBar" displayName="cat_PowerCAT.CommandBar" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_processdesigner_57f47" displayName="Process Designer" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.CommandBar" displayName="cat_PowerCAT.CommandBar" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.CommandBar" displayName="cat_PowerCAT.CommandBar" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -228,10 +214,6 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Elevation" displayName="cat_PowerCAT.Elevation" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.Elevation" displayName="cat_PowerCAT.Elevation" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
@@ -239,20 +221,8 @@
         <Dependent type="300" schemaName="cat_processdesigner_57f47" displayName="Process Designer" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.Elevation" displayName="cat_PowerCAT.Elevation" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.FluentDetailsList" displayName="cat_PowerCAT.FluentDetailsList" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.FluentDetailsList" displayName="cat_PowerCAT.FluentDetailsList" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -261,26 +231,14 @@
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_processdesigner_57f47" displayName="Process Designer" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Icon" displayName="cat_PowerCAT.Icon" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_settings_3ada8" displayName="Settings" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.NavigationComponentPCF" displayName="cat_PowerCAT.NavigationComponentPCF" solution="Active" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.PeoplePicker" displayName="cat_PowerCAT.PeoplePicker" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_processdesigner_57f47" displayName="Process Designer" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.PeoplePicker" displayName="cat_PowerCAT.PeoplePicker" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.PeoplePicker" displayName="cat_PowerCAT.PeoplePicker" solution="CreatorKitCore (1.0.20230421.1)" />
@@ -289,22 +247,10 @@
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.ProgressIndicator" displayName="cat_PowerCAT.ProgressIndicator" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_processdesigner_57f47" displayName="Process Designer" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.ProgressIndicator" displayName="cat_PowerCAT.ProgressIndicator" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.Spinner" displayName="cat_PowerCAT.Spinner" solution="CreatorKitCore (1.0.20230421.1)" />
         <Dependent type="300" schemaName="cat_settings_3ada8" displayName="Settings" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.SubwayNav" displayName="cat_PowerCAT.SubwayNav" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_processdesignerreimagined_2478d" displayName="Process Designer Reimagined" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="66" schemaName="cat_PowerCAT.TagList" displayName="cat_PowerCAT.TagList" solution="CreatorKitCore (1.0.20230421.1)" />
-        <Dependent type="300" schemaName="cat_homepage_96ece" displayName="Home page - Old" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="cat_PowerCAT.TagList" displayName="cat_PowerCAT.TagList" solution="CreatorKitCore (1.0.20230421.1)" />

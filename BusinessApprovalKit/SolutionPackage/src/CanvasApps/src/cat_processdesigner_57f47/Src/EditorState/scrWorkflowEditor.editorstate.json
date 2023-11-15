@@ -102,7 +102,6 @@
         },
         "MoveStage_StageId",
         "AddNode_Path",
-        "DesignerAutoHeight",
         "AddStage",
         "AssignedHeight"
       ],
@@ -187,7 +186,7 @@
         {
           "Category": "Data",
           "PropertyName": "ProcessId",
-          "RuleProviderType": "Unknown"
+          "RuleProviderType": "System"
         },
         {
           "Category": "Data",
@@ -227,11 +226,6 @@
         {
           "Category": "Data",
           "PropertyName": "AddNode_Path",
-          "RuleProviderType": "System"
-        },
-        {
-          "Category": "Data",
-          "PropertyName": "DesignerAutoHeight",
           "RuleProviderType": "System"
         },
         {

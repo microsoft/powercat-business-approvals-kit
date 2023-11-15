@@ -33,11 +33,10 @@ ApprovalDesigner As CanvasComponent:
         ThisProperty:
             Default: =100
     AssignedHeight: =
-    DesignerAutoHeight: =App.Height - 65
     Fill: =RGBA(0, 0, 0, 0)
     Height: =Self.AssignedHeight
     IsValid: =true//CountRows(Filter(galProcessStages_1.AllItems, !IsBlank(stageBackground.Tooltip))) = 0
-    ProcessId: ="a4517557-c6f2-ed11-8848-0022482a91f4"
+    ProcessId: =_selectedProcess.'Business Approval Process'
     TotalStages: =CountRows(galProcessStages_1.AllItems)
     Width: =App.Width
     X: =0
@@ -77,7 +76,7 @@ ApprovalDesigner As CanvasComponent:
                 Filter('Business Approval Stages', 'Business Approval Stages (Views)'.'Active Business Approval Stages'),
                 Process.'Business Approval Process' = GUID(Parent.ProcessId)
             )
-            //"26bafa27-ca7d-ee11-8179-0022482a91f4"
+            //"56c54a79-9682-ee11-8179-0022482a91f4"
             //Parent.ProcessId
         Layout: =Layout.Vertical
         LoadingSpinner: =LoadingSpinner.Data
@@ -1769,7 +1768,7 @@ ApprovalDesigner As CanvasComponent:
             ShowScrollbar: =false
             TemplatePadding: =0
             TemplateSize: =Self.Height
-            Visible: =CountRows(Self.AllItems) > 0 && icoToggleStage_1.Icon = Icon.ChevronUp && ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None
+            Visible: =CountRows(Self.AllItems) > 0  && ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None
             Width: =Parent.TemplateWidth
             WrapCount: =Max(2, CountRows(Self.AllItems))
             Y: =lblStageConditionText_1.Y + lblStageConditionText_1.Height

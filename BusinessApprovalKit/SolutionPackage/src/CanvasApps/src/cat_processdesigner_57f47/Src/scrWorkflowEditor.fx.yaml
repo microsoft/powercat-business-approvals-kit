@@ -128,7 +128,6 @@ scrWorkflowEditor As screen:
                     );
                     Patch('Business Approval Stages', currentStage, { Order: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1) }) 
                 )
-            ProcessId: =_selectedProcess.'Business Approval Process'
             Width: =Parent.Width - 10
             Y: =70
             ZIndex: =4
