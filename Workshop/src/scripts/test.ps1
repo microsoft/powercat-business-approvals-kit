@@ -44,7 +44,7 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
     Process 
     {
         if ( [System.String]::IsNullOrEmpty($EnvironmentUrl) ) {
-            $envs = ( Get-Environments $UserUPN )
+            $envs = Get-Environments
     
             if ( [System.String]::IsNullOrEmpty($EnvironmentName) ) {
                 $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
@@ -137,33 +137,48 @@ function Invoke-PlaywrightScript {
 
 <#
 .SYNOPSIS
-Gets a list of environments for the specified user.
-
-.PARAMETER UserUPN
-The user's UPN (user principal name) to get the environments for.
+Gets a list of environments for the current user.
 
 .EXAMPLE
-Get-Environments -UserUPN "user@example.com"
-Gets a list of environments for the user with the UPN "user@example.com".
+Get-Environments
+Gets a list of environments for power platform authenticated user.
 
 #>
 function Get-Environments {
-    param (
-        [Parameter(Mandatory)] [String] $UserUPN
-    )
+    $items = [System.Collections.ArrayList]@()
 
-    # TODO - Replace with pac pac org list
-    $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-    $envs = (dotnet $appPath environment list --upn $UserUPN --headless "Y" --record "N")
+    # TODO - Replace with pac pac org list --json when supported
+    $orgs = (pac org list)
 
-    $json = ""
-    foreach ( $line in $envs ) {
-        if ( $line.StartsWith("[") ) {
-            $json = $line
+    $index = 0
+    foreach ($org in $orgs)
+    {
+        if ( $connection -like "*Error:*") {
+            return [System.Collections.ArrayList]@()
         }
+        if ( [System.String]::IsNullOrEmpty($org) ) {
+            continue
+        }
+        if ( $index -eq 0) {
+            $displayName = $orgs[0].IndexOf("Display Name")
+            $environmentId = $orgs[0].IndexOf("Environment ID")
+            $environmentURL = $orgs[0].IndexOf("Environment URL")
+            $uniqueName = $orgs[0].IndexOf("Unique Name")
+        }
+        if ( $index -gt 0) {
+            $environment = [PSCustomObject]@{ 
+                Active = $org.Substring(0, $displayName).Trim() -eq "*"
+                Name =  $org.Substring($displayName, $environmentId - $displayName).Trim()
+                EnvironmentId = $org.Substring($environmentId, $environmentURL - $environmentId).Trim()
+                EnvironmentUrl = $org.Substring($environmentURL, $uniqueName - $environmentURL).Trim()
+                UniqueName = $org.Substring($uniqueName,$org.Length - $uniqueName).Trim()
+            }
+            $items.Add($environment) | out-null
+        }
+        $index = $index + 1
     }
     
-    return ($json | ConvertFrom-Json)
+    return $items
 }
 
 <#
