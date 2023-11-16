@@ -59,7 +59,7 @@ jobs:
           fi       
 
       - name: Print Previous Month
-        run: echo "Month ${{ env.PREVIOUS_MONTH }}"
+        run: echo "Previous Month ${{ env.PREVIOUS_MONTH }}"
 
       - name: Set Previous Month
         id: set-previous-month
