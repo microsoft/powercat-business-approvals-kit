@@ -23,7 +23,7 @@ jobs:
       - name: Print Milestone
         run: echo "Milestone is ${{ env.MILESTONE }}"        
         
-      - name: Extract Month
+      - name: Extract Month and Previous Months
         id: extract-month
         run: |
           MILESTONE_PART=$(echo $MILESTONE | cut -d'-' -f2)
@@ -53,15 +53,22 @@ jobs:
                 echo "PREVIOUS_MONTH=$PREVIOUS_MONTH" >> $GITHUB_ENV
                 break
               fi
-            done
-      
-            echo "Previous Month: $PREVIOUS_MONTH"
+            done              
           else
             echo "Invalid month name. Skipping calculation of Previous Month."
-          fi
-        
+          fi       
+
+      - name: Print Previous Month
+        run: echo "Month ${{ env.PREVIOUS_MONTH }}"
+
+      - name: Set Previous Month
+        id: set-previous-month
+        run: |
+          MONTH=${PREVIOUS_MONTH}
+          echo "MONTH=${MONTH}" >> $GITHUB_ENV     
+
       - name: Print Month
-        run: echo "Month ${{ env.MONTH }}"
+        run: echo "Month ${{ env.MONTH }}"          
 
       - name: Extract Year
         id: extract-year
