@@ -7,6 +7,9 @@ This application is designed to add specific functionality that is not currently
 > 1. The functionality in the application may become unnecessary as administration features of the Power Platform API and REST services grow.
 >
 > 2. The application is not intended as a production solution and is the key use case is to support Approvals Kit workshop. Usage outside this scope is not a core use case and would require additional review and updates to expand the scope.
+>
+> 3. The application assumes a known interactive password for a user account is stored in encrypted secure storage to enable Playwright login.
+>
 
 ## Usage
 
@@ -29,5 +32,5 @@ If the application was used in production environment, there would be several is
 
 ## Assumptions
 
-1. Use of known secure value DEMO_PASSWORD is available to login as interactive user
+1. Use of known secure value DEMO_PASSWORD or ADMIN_PASSWORD is available to login as interactive user
 1. The automation assumed that the user is not configured with Multi Factor Authentication (MFA)

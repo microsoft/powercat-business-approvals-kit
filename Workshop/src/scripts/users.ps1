@@ -395,8 +395,6 @@ function Install-ApprovalsKit {
         $Environment = ($Environment | ConvertFrom-Json)
     }
 
-    Enable-DevelopmentEnvironmentCustomControls $Environment
-
     if ( ( (Get-ConfigValue "Feature.CreatorKit") -eq "Y") ) {
         Install-CreatorKit $Environment
     }

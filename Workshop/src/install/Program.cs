@@ -29,8 +29,7 @@ class Program
         {
             CreateUserCommands(),
             CreateFlowCommands(),
-            CreateConnectionCommands(),
-            EnvironmentCommands()
+            CreateConnectionCommands()
         };
 
         var recordOption = new Option<string>("--record", () => "", "Y to record any output as video. If missing will not record");
@@ -48,18 +47,6 @@ class Program
         commands.Options.Add(ParseCommand.Timeout, timeoutOption);
 
         await rootCommand.InvokeAsync(args);
-    }
-
-    private static Command EnvironmentCommands() {
-        var environmentCommand = new Command("environment", "Environment commands");
-
-        var userOption = new Option<string>("--upn");
-
-        var listCommand = new Command("list", "List environments") { userOption };
-        listCommand.SetHandler(EnvironmentQuery, userOption );
-        environmentCommand.Add(listCommand);
-
-        return environmentCommand;
     }
 
     private static Command CreateUserCommands()
@@ -140,49 +127,6 @@ class Program
         connectorCommand.Add(connectorCreateCommand);
 
         return connectorCommand;
-    }
-
-    private static void EnvironmentQuery(string user) {
-        using var loggerFactory = LoggerFactory.Create(builder =>
-        {
-            builder.AddConsole();
-        });
-        var logger = loggerFactory.CreateLogger<Program>();
-
-        if ( commands == null ) {
-            throw new NullReferenceException("commands");
-        }
-
-        var common = new Common(logger, commands);
-        var playwright = common.Login(user).Result;
-        playwright.GoToUrlAsync("https://admin.powerplatform.microsoft.com/environments").Wait();
-
-        playwright.PauseAsync().Wait();
-
-        var matches = playwright.GetMatch(5,"[data-automation-key='Environment']", GetEnvironments).Result;
-
-        Console.WriteLine(JsonSerializer.Serialize(matches));
-    }
-
-    public static async Task<IEnumerable<ExpandoObject>> GetEnvironments(IEnumerable<Microsoft.Playwright.ILocator> matches) {
-        var results = new List<ExpandoObject>();
-
-
-        foreach ( var match in matches ) {
-            dynamic result = new ExpandoObject();
-            var host = await match.Locator(".ms-TooltipHost div").AllInnerTextsAsync();
-            result.EnvironmentUrl = host.FirstOrDefault();
-
-            String val  = await (await match.Locator("a").AllAsync()).First().GetAttributeAsync("href");
-            result.Id = val.Replace("/environments/environment/","").Split('/')[0];
-            
-            var link = await match.Locator(".ms-Link").AllInnerTextsAsync();
-            result.Name = link.FirstOrDefault();
-            
-            results.Add(result);
-        }
-
-        return results;
     }
 
     /// <summary>
