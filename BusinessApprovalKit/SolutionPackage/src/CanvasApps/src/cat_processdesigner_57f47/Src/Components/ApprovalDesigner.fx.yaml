@@ -2271,7 +2271,8 @@ ApprovalDesigner As CanvasComponent:
                 )
             OnChange: =
             OnSelect: |-
-                =Switch(
+                =// Supressing an unknown error - TODO: remove suppress
+                IfError(Switch(
                     Self.Selected.ItemKey,
                     "edit",
                     Set(_selectedStage, ThisItem);
@@ -2288,7 +2289,7 @@ ApprovalDesigner As CanvasComponent:
                         ThisItem.'Business Approval Stage',
                         false
                     )
-                )
+                ),"")
             Theme: =AppThemeJson
             Width: =35
             X: =Parent.TemplateWidth - Self.Width - 2
