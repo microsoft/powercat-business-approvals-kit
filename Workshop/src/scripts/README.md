@@ -11,7 +11,7 @@ The instructor guide makes use of the PowerShell scripts to provision developer 
 This command will setup the workshop in a Development environment for a user. If the user does not exist it will be created.
 
 ```pwsh
-Invoke-SetupUserForWorkshop "first.last@contoso.onmicrosoft.com"
+Invoke-SetupUserForWorkshop (Get-SecureValue DEMO_USER)
 ```
 
 ### Reset-UserDevelopmentEnvironment
@@ -19,7 +19,7 @@ Invoke-SetupUserForWorkshop "first.last@contoso.onmicrosoft.com"
 This command will setup the workshop in a Development environment for a user. If a development environment exists it will be deleted and recreated.
 
 ```pwsh
-Reset-UserDevelopmentEnvironment "first.last@contoso.onmicrosoft.com"
+Reset-UserDevelopmentEnvironment (Get-SecureValue DEMO_USER)
 ```
 
 ### Integration Tests
