@@ -7643,7 +7643,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galStageConditions_1",
-      "ParentIndex": 17,
+      "ParentIndex": 19,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7939,7 +7939,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galStageNodes",
-      "ParentIndex": 15,
+      "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -17898,7 +17898,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblNoNodeInStage_1",
-      "ParentIndex": 18,
+      "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -18221,7 +18221,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageConditionText_1",
-      "ParentIndex": 19,
+      "ParentIndex": 15,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
