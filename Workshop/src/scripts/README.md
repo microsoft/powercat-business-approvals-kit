@@ -27,7 +27,7 @@ Reset-UserDevelopmentEnvironment (Get-SecureValue DEMO_USER)
 Assuming that the workshop had been completed with a multistage approvals and Cloud Flow.
 
 ```pwsh
-Invoke-ValidateTwoStageMachineRequestApproval "first.last@contoso.onmicrosoft.com"
+Invoke-ValidateTwoStageMachineRequestApproval (Get-SecureValue DEMO_USER)
 ```
 
 The [Tests README](./tests/README.md) also includes instructions on how to run Pester PowerShell integration tests
@@ -60,10 +60,11 @@ The scripts and samples here are not intended as a replacement of the Power Apps
 |--------|------------------------|-----------------------|
 |Scope   | Testing of Power Platform Applications | Support setup of Demo environments for workshop and integration testing of deployed solution |
 | Languages | Power Fx + Yaml | Power Shell, C# and Playwright |
-| Playwright USage | Wrapped inside Power Fx commands | Direct C# Access to page |
+| Playwright Usage | Wrapped inside Power Fx commands | Direct C# Access to page |
 | Interaction Model | Headless access to Power Apps JavaScript Object model | Headless and Interactive Document Object model |
 | Pages | Power Apps page only | Automate multiple Portal and Power Apps
-| Dataverse
+| Dataverse | Use Power Fx commands and Tables | Use Dataverse REST API |
+| Record and replay | Download recorded tests from Test Studio [read more](https://learn.microsoft.com/power-apps/developer/test-engine/overview#download-recorded-tests-from-test-studio) | Use the Playwright DevTools console
 
 The C# Script files can be called via the PowerShell script Invoke-PlaywrightScript which will login as the provided used using secure value DEMO_PASSWORD
 
