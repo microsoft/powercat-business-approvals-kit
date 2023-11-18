@@ -1600,9 +1600,29 @@ function Update-ApprovalsKitCustomConnector {
 
         $connectors.value[0].connectionparameters = ($parameters | ConvertTo-Json -Depth 100 -compress)
 
+        $assetsPath = [System.IO.Path]::Combine($PSScriptRoot,"..", "..", "assets")
+        if ( -not (Test-Path($assetsPath)) ) {
+            $assetsPath = [System.IO.Path]::Combine($PSScriptRoot, "..", "assets")
+        }
+
+        $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
+
+        if ( $files.Count -le 0 ) {
+            Write-Error "Unable to find install solution file"
+            return
+        }
+
+        $sourceFile = [System.IO.Path]::Combine( $assetsPath, $files[0].Name )
+        
+        $definition = Get-ZipContents $sourceFile "Connector/cat_approvals-20kit_openapidefinition.json"
+        $apiDefinition = ($definition | ConvertFrom-Json)
+        $domain = [System.Uri]$Environment.EnvironmentUrl
+        $apiDefinition.host = $domain.Host
+        $definition = ($apiDefinition | ConvertTo-Json -Depth 100 -compress)
+
         $body = (@{ 
             "@odata.etag" = ($connectors.value[0] | Select-Object -ExpandProperty "@odata.etag" )
-            openapidefinition = $connectors.value[0].openapidefinition
+            openapidefinition = $definition
             connectionparameters = $connectors.value[0].connectionparameters 
         } | ConvertTo-Json -Depth 100 -compress)
 
