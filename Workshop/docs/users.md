@@ -31,18 +31,10 @@ Invoke-SetupUserForWorkshop "AdeleV@contoso.OnMicrosoft.com"
 1. Create a development environment
 
 ```pwsh
-$devEnv = Invoke-UserDevelopmentEnvironment "first.last@contoso.onmicrosoft.com"
+$devEnv = Invoke-UserDevelopmentEnvironment (Get-SecureValue DEMO_USER)
 ```
 
-2. Enable Custom Control in the development environment
-
-When enabling Custom Controls in a canvas application an environment level setting is required. The following example will query and enable the setting if it is currently disabled.
-
-```pwsh
-Enable-DevelopmentEnvironmentCustomControls $devEnv
-```
-
-3. Install the Creator Kit
+2. Install the Creator Kit
 
 Ensure that creator kit is installed
 
@@ -50,13 +42,13 @@ Ensure that creator kit is installed
 Install-CreatorKit $devEnv
 ```
 
-4. Enable approvals in the development environment
+3. Enable approvals in the development environment
 
 ```pwsh
-Enable-Approvals "first.last@contoso.onmicrosoft.com" $devEnv
+Enable-Approvals (Get-SecureValue DEMO_USER) $devEnv
 ``````
 
-5. (Optional) Start Browser as user to investigate setup
+4. (Optional) Start Browser as user to investigate setup
 
 ```pwsh
 Invoke-StartBrowser $devEnv

@@ -493,10 +493,9 @@ function Invoke-ApprovalsKitPostInstall {
 
     Invoke-ActivateFlows $UserUPN $Environment "BusinessApprovalKit" 
 
-    # TODO
-    # - Enable Child Flows improvements
-    # - pac data import
-    # - Convert to package?
+    Invoke-UpdateCustomConnectorReplyUrl $Environment
+
+    Update-ApprovalsKitCustomConnector $Environment
 }
 
 function Install-ContosoCoffee {
@@ -1473,9 +1472,160 @@ function Reset-UserDevelopmentEnvironment {
         $UserUPN
     )
 
+    if ( [System.String]::IsNullOrEmpty($UserUPN)) {
+        $UserUPN = (Get-SecureValue "DEMO_USER")
+    }
+
     Remove-UserDevelopmentEnvironment $UserUPN
 
     $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
 
     Invoke-SetupUserForWorkshop $UserUPN $Environment
+}
+
+<#
+.SYNOPSIS
+Updates the  redirect URL for a Approvals Kit custom connector in an Azure environment.
+
+.DESCRIPTION
+This function updates the redirect URL for a custom connector in an Azure environment. It first retrieves the Microsoft Entra application that corresponds to the specified client ID, and then checks if the redirect URL for the custom connector is already added to the application's web redirect URIs. If the redirect URL is not present, it adds it to the web redirect URIs.
+
+.PARAMETER Environment
+The Power Platform environment to update the custom connector in.
+
+.PARAMETER UserUPN
+The user's UPN, if available. If not specified, the function retrieves the development environment for the demo user.
+
+.NOTES
+This function requires that the user has Azure App Owner rights to update the app. The user must also be logged in to the Azure CLI.
+
+.EXAMPLE
+Invoke-UpdateCustomConnectorReplyUrl -Environment "" -UserUPN "johndoe@contoso.com"
+Updates the redirect URL for the custom connector in the development environment for the user with the specified UPN.
+
+#>
+function Invoke-UpdateCustomConnectorReplyUrl {
+    param (
+        [Parameter(Mandatory)] $Environment,
+        $UserUPN
+    )
+
+    if ( [System.String]::IsNullOrEmpty($Environment) -and (-not [System.String]::IsNullOrEmpty($UserUPN))) {
+        $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    }
+
+    if ( [System.String]::IsNullOrEmpty($Environment) -and ( [System.String]::IsNullOrEmpty($UserUPN))) {
+        $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
+    }
+
+    $clientId = (Get-SecureValue CLIENT_ID)
+
+    $app = (az ad app show --id $clientId | ConvertFrom-Json)
+
+    $token=(az account get-access-token --resource=$($Environment.EnvironmentUrl) --query accessToken --output tsv)
+    $headers = @{Authorization="Bearer $token"}
+    $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+    
+    if ( $connectors.value.length -eq 1 ) {
+        $redirectUrl = ($connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
+        Write-Host  $redirectUrl 
+
+        if ( -not $app.web.redirectUris.Contains($redirectUrl) ) {
+            Write-Host "Adding web redirect"
+            $newRedirects = New-Object System.Collections.ArrayList
+            $newRedirects.AddRange($app.web.redirectUris) | Out-Null
+            $newRedirects.Add($redirectUrl) | Out-Null
+            $app.web.redirectUris = $newRedirects.ToArray()
+
+            $update = @{ web = @{ redirectUris = $newRedirects.ToArray() }}
+
+            $updatedApp = ($update  | ConvertTo-Json -Depth 100 -compress)
+            $updatedApp = $updatedApp -replace "`"", "\`""
+            $appId = $app.id
+            $restApi = "https://graph.microsoft.com/v1.0/applications/$appId"
+            az rest --method patch --headers "Content-Type=application/json" --body "$updatedApp" --uri "$restApi" 
+        } else {
+            Write-Host "Web redirect already exists"
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+Updates the custom connector for the ApprovalsKit app in the specified environment.
+
+.DESCRIPTION
+This function updates the custom connector for the ApprovalsKit app in the specified environment. If the environment is not specified, it will attempt to determine the user's development environment based on their UPN or a default demo user.
+
+.PARAMETER Environment
+The environment to update the custom connector in.
+
+.PARAMETER UserUPN
+The UPN of the user to determine the development environment for, if the environment is not specified.
+
+.EXAMPLE
+Update-ApprovalsKitCustomConnector -Environment "" -UserUPN "user@example.com"
+Updates the custom connector for the ApprovalsKit app using the specified user's development environment.
+
+.NOTES
+This function requires the Azure CLI to be installed
+#>
+function Update-ApprovalsKitCustomConnector {
+    param (
+        [Parameter(Mandatory )] $Environment,
+        $UserUPN
+    )
+
+    if ( [System.String]::IsNullOrEmpty($Environment) -and (-not [System.String]::IsNullOrEmpty($UserUPN))) {
+        $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    }
+
+    if ( [System.String]::IsNullOrEmpty($Environment) -and ( [System.String]::IsNullOrEmpty($UserUPN))) {
+        $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
+    }
+
+    $token=(az account get-access-token --resource=$($Environment.EnvironmentUrl) --query accessToken --output tsv)
+    $headers = @{Authorization="Bearer $token"}
+    $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+    
+    if ( $connectors.value.length -eq 1 ) {
+        Write-Host "Updating Approvals Kit custom connector"
+        $parameters = ($connectors.value[0].connectionparameters | ConvertFrom-Json )
+        
+        $parameters.token.oAuthSettings.clientId = (Get-SecureValue "CLIENT_ID")
+        $parameters.token.oAuthSettings | Add-Member -NotePropertyName clientSecret -NotePropertyValue (Get-SecureValue "CLIENT_SECRET")
+        $parameters.token.oAuthSettings.properties.AzureActiveDirectoryResourceId = $Environment.EnvironmentUrl
+        $parameters.token.oAuthSettings.customParameters.tenantId.value = (az account show | ConvertFrom-Json).tenantId
+        $parameters.token.oAuthSettings.customParameters.resourceUri.value = $Environment.EnvironmentUrl
+
+        $connectors.value[0].connectionparameters = ($parameters | ConvertTo-Json -Depth 100 -compress)
+
+        $assetsPath = [System.IO.Path]::Combine($PSScriptRoot,"..", "..", "assets")
+        if ( -not (Test-Path($assetsPath)) ) {
+            $assetsPath = [System.IO.Path]::Combine($PSScriptRoot, "..", "assets")
+        }
+
+        $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
+
+        if ( $files.Count -le 0 ) {
+            Write-Error "Unable to find install solution file"
+            return
+        }
+
+        $sourceFile = [System.IO.Path]::Combine( $assetsPath, $files[0].Name )
+        
+        $definition = Get-ZipContents $sourceFile "Connector/cat_approvals-20kit_openapidefinition.json"
+        $apiDefinition = ($definition | ConvertFrom-Json)
+        $domain = [System.Uri]$Environment.EnvironmentUrl
+        $apiDefinition.host = $domain.Host
+        $definition = ($apiDefinition | ConvertTo-Json -Depth 100 -compress)
+
+        $body = (@{ 
+            "@odata.etag" = ($connectors.value[0] | Select-Object -ExpandProperty "@odata.etag" )
+            openapidefinition = $definition
+            connectionparameters = $connectors.value[0].connectionparameters 
+        } | ConvertTo-Json -Depth 100 -compress)
+
+        Invoke-RestMethod -Method PATCH -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors($($connectors.value[0].connectorid))" -ContentType "application/json" -Body "$body"
+    }
 }
