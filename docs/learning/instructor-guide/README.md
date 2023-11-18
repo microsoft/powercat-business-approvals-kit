@@ -1,15 +1,15 @@
 # Overview
 
-These set of documents provide instructions on how to use provide a set of development environments for learners to carry out the [Approvals Kit in Power Automate workshop](https://aka.ms/approvals-kit/learn).
+These documents provide instructions on how to set up a development environment for learners to complete the [Approvals Kit in Power Automate workshop](https://aka.ms/approvals-kit/learn).
 
 > [!IMPORTANT]
-> This instructor guide has been currently scoped to work with a demo environment setup where the following conditions are true:
+> Please note that these instructions have been scoped to work with a demo environment setup where the following conditions are true:
 >
-> 1. The logged in Azure User has Global Administrator rights
+> 1. The logged-in Azure user has Global Administrator rights.
 >
-> 2. User password is stored in local secure file with a key of DEMO_PASSWORD
+> 2. The user password for workshop users is known and can be stored in a local secure file with a key of DEMO_PASSWORD.
 >
-> Further work would be required to investigate and expand the scope to apply the automated setup scripts to other environments scenarios with where least privileges are applied.
+> It is important to note that further work would be required to investigate and expand the scope to apply the automated setup scripts to other environment scenarios where least privileges are needed or an interactive login is required for setup.
 
 ## Instructor Guide Content
 
