@@ -164,7 +164,7 @@ You can optionally create users via the automated scripts for demonstration tena
 1. Setup a user with the value that is securely stored in the value **DEMO_PASSWORD**
 
 ```pwsh
-Reset-User "first.last@contoso.OnMicrosoft.com"
+Reset-User (Get-SecureValue DEMO_USER)
 ```
 
   > NOTE: Either delegated scope **User.ReadWrite.All** or **Directory.AccessAsUser.All** is required to reset a user's password. In addition to the correct scope, the signed-in user would need sufficient privileges to reset another user's password.
