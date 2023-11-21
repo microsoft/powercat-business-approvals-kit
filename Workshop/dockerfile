@@ -5,7 +5,11 @@ WORKDIR /setup
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN dotnet tool install Microsoft.PowerApps.CLI.Tool --tool-path /bin
 RUN dotnet tool install --global PowerShell
-RUN dotnet tool install --global SecureStore.Client
+RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+RUN chmod +x ./dotnet-install.sh
+RUN ./dotnet-install.sh --channel 6.0 -InstallDir /usr/share/dotnet
+RUN dotnet tool install SecureStore.Client --tool-path /bin
+RUN pwsh -c "Install-Module -Name Pester -Force -SkipPublisherCheck"
 
 COPY src/install/. ./install
 RUN cd /setup/install ; dotnet build

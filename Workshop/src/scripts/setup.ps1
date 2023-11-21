@@ -4,9 +4,10 @@ param([string] $user)
 . $PSScriptRoot\users.ps1
 . $PSScriptRoot\security.ps1
 . $PSScriptRoot\common.ps1
+. $PSScriptRoot\test.ps1
 
 Push-Location
-$appPath = [System.IO.Path]::Combine($PSScriptRoot,"..","..")
+$appPath = [System.IO.Path]::Combine((Get-AssetPath),"..")
 Set-Location $appPath
 
 $domain=(az account show --query "user.name" -o tsv).Split('@')[1]

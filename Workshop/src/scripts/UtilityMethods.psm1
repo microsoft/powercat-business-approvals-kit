@@ -51,6 +51,7 @@ class UtilityMethods {
     static [string] GetSecureValue([String] $Name) {
         $secureFolder = @(
             [System.IO.Path]::Combine($PSScriptRoot, "..", "..","secure"),
+            [System.IO.Path]::Combine($PSScriptRoot, "..","secure"),
             [System.IO.Path]::Combine((Get-Location),"secure")
         )
         foreach ($folder in $secureFolder) {

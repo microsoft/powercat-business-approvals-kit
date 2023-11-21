@@ -70,7 +70,42 @@ Overall, the Docker based install is a helpful tool for developers and system ad
 ### Setup steps
 
 ```pwsh
+cd Workshop
 docker build . -t automation-kit-setup
+```
+
+### Getting started
+
+Once a docker image is created the following commands are examples of using the docker image.
+
+1. Start the docker image
+
+```pwsh
+docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure automation-kit-setup pwsh
+```
+
+> [!NOTE] This command assumes the following:
+> - You have a folder named **dockerazure** that will be used to store Azure CLI state
+> - You have a folder named **secure** that will be used to store secure values used by the setup process
+
+2. In the docker image import the users script
+
+```pwsh
+. .\scripts\users.ps1
+```
+
+3. Verify that can read configured secure values by running the following PowerShell command inside the docker container. See [User setup](./user-setup.md) for more information on secure values
+
+```pwsh
+Invoke-AzureLogin
+Get-SecureValue CLIENT_ID
+```
+
+4. Optional step to run inside the docker container pwsh after setting up and completing the two stage approval for DEMO_USER. 
+
+```pwsh
+cd scripts
+Invoke-Pester
 ```
 
 ## Azure Cloud Virtual Machine
@@ -139,7 +174,6 @@ ssh -i ~/.ssh/azurevm-$vmName "accadmin@$ip" -t -l bash
 ```
 
 1. Install the required tools inside the Virtual Machine bash shell
-
 
 |Command  |Description  |
 |---------|---------|
@@ -216,4 +250,3 @@ pwsh --version
 ```powershell
 SecureStore --version
 ```
-
