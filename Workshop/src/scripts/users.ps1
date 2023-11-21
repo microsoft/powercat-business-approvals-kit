@@ -516,12 +516,12 @@ function Install-ContosoCoffee {
     Write-Host "Checking if contoso coffee solution exists"
     $installed = Invoke-SolutionInstalled $Environment "ContosoCoffee"
     if ( -not $installed ) {
-        $packageZip = [System.IO.Path]::Combine($PSScriptRoot,"..","..", "AppinaDay Trainer Package.zip")
+        $packageZip = [System.IO.Path]::Combine((Get-AssetPath),"..", "AppinaDay Trainer Package.zip")
         if ( -not (Test-Path $packageZip) ) {
             Write-Host "Downloading App In a Day Trainer Package"
             Invoke-WebRequest -Uri "https://aka.ms/appinadayTrainer" -OutFile $packageZip
         }
-        $installZip = [System.IO.Path]::Combine($PSScriptRoot,"..","..", "ContosoCoffee_1_0_0_2.zip")
+        $installZip = [System.IO.Path]::Combine((Get-AssetPath),"..", "ContosoCoffee_1_0_0_2.zip")
         
         if ( -not (Test-Path $installZip) ) {
             Invoke-ExtractZipContents $packageZip "Completed Lab Solution for students/Module 2/ContosoCoffee_1_0_0_2.zip" $installZip
@@ -1102,7 +1102,7 @@ function Invoke-OpenBrowser {
             return
         }
 
-        $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+        $workshopPath = [System.IO.Path]::Join((Get-AssetPath), "..")
 
         Push-Location
         Set-Location $workshopPath

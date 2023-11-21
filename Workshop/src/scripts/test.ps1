@@ -126,7 +126,7 @@ function Invoke-PlaywrightScript {
     # Base64 Encode content 
     $dataEncoded = [System.Convert]::ToBase64String($dataBytes)
 
-    $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+    $workshopPath = [System.IO.Path]::Join((Get-AssetPath), "..")
 
     Push-Location
     Set-Location $workshopPath
