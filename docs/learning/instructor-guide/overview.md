@@ -33,9 +33,9 @@ Support delivery of this learning module requires:
 
 If you would rather perform a single environment install of the workshop without using the command line tool approach, the following instructions can be followed:
 
-1. Install of the Approvals Kit using [Setup instructions](../../setup.md)
+1. Install of the Approvals Kit using [Setup instructions](https://aka.ms/approvals-kit/setup)
 
-1. Install of the Contoso Coffee solution using [Import Contoso Coffee](../workshop/import-contoso-coffee.md)
+1. Install of the Contoso Coffee solution using [Import Contoso Coffee](https://learn.microsoft.com/en-us/training/modules/approvals-kit-workshop/import-contoso-coffee). You can also review [Create a machine ordering app with Power Apps - Online Workshop](https://learn.microsoft.com/en-us/training/paths/power-apps-online-workshop/) as a learning path to build the Contoso coffee application.
 
 ## Assumptions
 
