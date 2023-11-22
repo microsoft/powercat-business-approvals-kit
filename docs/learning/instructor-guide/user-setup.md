@@ -146,6 +146,12 @@ SecureStore create secrets.json --keyfile secret.key
 
 1. Store the values for your setup
 
+ > [!NOTE]
+ >
+ > 1. ADMIN_USER and ADMIN_PASSWORD are optional values. They can be used if want to open browser as admin. For example Invoke-OpenBrowser "" $True
+ >
+ > 2. ADMIN_APP_ID and ADMIN_APP_SECRET unless want to use Get-AdminAccessToken 
+
 ```pwsh
 SecureStore set ADMIN_USER "admin@contoso.onmicrosoft.com" --keyfile secret.key
 SecureStore set ADMIN_PASSWORD "SomeValue" --keyfile secret.key
