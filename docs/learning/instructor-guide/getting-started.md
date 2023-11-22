@@ -213,7 +213,7 @@ sudo apt update
 12. Install the required tools inside the Virtual Machine bash shell
 
 ```bash
-sudo sudo apt install -y dotnet-runtime-6.0 dotnet-sdk-8.0 unzip
+sudo sudo apt install -y dotnet-runtime-6.0 dotnet-runtime-7.0 dotnet-sdk-8.0 unzip
 dotnet tool install --global Microsoft.PowerApps.CLI.Tool
 dotnet tool install --global SecureStore.Client
 
@@ -234,9 +234,9 @@ EOF
 
 11. Install PowerShell using steps from https://learn.microsoft.com/powershell/scripting/install/install-ubuntu
 
-12. Close the ssh script and reopen a new session using ```./start.sh```
+12. Close the ssh session and reopen a new session using ```./start.sh``` from the Azure Cloud shell
 
-13. Clone the Approvals Kit GitHub repository
+13. Clone the Approvals Kit GitHub repository inside the ssh session.
 
 ```bash
 git clone https://www.github.com/microsoft/powercat-business-approvals-kit.git
