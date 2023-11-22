@@ -36,9 +36,9 @@ if ( Test-Path $user ) {
 } else {
     Write-Host "Single user setup"
     if ( $reset -eq "Y") {
-        Reset-UserDevelopmentEnvironment "$line@$domain"
+        Reset-UserDevelopmentEnvironment "$user@$domain"
     } else {
-        Invoke-SetupUserForWorkshop "$line@$domain"
+        Invoke-SetupUserForWorkshop "$user@$domain"
     }
 }
 
