@@ -110,6 +110,24 @@ cd scripts
 Invoke-Pester
 ```
 
+5. Optional setup a Azure login using container
+
+```pwsh
+docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure automation-kit-setup
+```
+
+6. Optional setup a demo workshop environment for a user using environment variable INSTALL_USER
+
+```pwsh
+docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure -e INSTALL_USER=adelev automation-kit-setup
+```
+
+7. Optional reset a demo workshop environment for a user using RESET environment variable of Y.
+
+```pwsh
+docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure -e INSTALL_USER=adelev -e RESET=Y automation-kit-setup
+```
+
 ## Azure Cloud Virtual Machine
 
 One approach to allow you to create development environments for learners is to use a small Azure Linux based Virtual machine to assist you.
