@@ -24,4 +24,4 @@ if ( $NULL -eq $account -or $NULL -eq $account.id ) {
     Write-Host "Logged into Azure CLI as $($account.user.name)"
 }
 
-Invoke-ConfigureUser $env:DEMO_USER
+Invoke-ConfigureUser (Get-SecureValue DEMO_USER)

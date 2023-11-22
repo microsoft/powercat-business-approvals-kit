@@ -25,12 +25,51 @@ To create the developer environment, use these steps to automate setup:
 
 1. Perform post-install steps of publishing applications and enabling flows.
 
-## Single user setup (Bash Script)
+## Power Shell Scripts
 
-1. Copy start script
+Use can use the following PowerShell scripts to provision developer environments for workshop users.
+
+> [!NOTE]
+> These commands assume that the powershell scripts have been imported from the Workshop folder
+>
+> . .\src\scripts\test.ps1
+
+### Invoke-SetupUserForWorkshop
+
+This command will setup the workshop in a Development environment for a user. If the user does not exist it will be created.
+
+```pwsh
+Invoke-SetupUserForWorkshop (Get-SecureValue DEMO_USER)
+```
+
+### Reset-UserDevelopmentEnvironment
+
+This command will setup the workshop in a Development environment for a user. If a development environment exists it will be deleted and recreated.
+
+```pwsh
+Reset-UserDevelopmentEnvironment (Get-SecureValue DEMO_USER)
+```
+
+### Integration Tests
+
+Assuming that the workshop had been completed with a multistage approvals and Cloud Flow.
+
+```pwsh
+Invoke-ValidateTwoStageMachineRequestApproval (Get-SecureValue DEMO_USER)
+```
+
+The [Tests README](../../../Workshop/src/scripts/tests/README.md) also includes instructions on how to run Pester PowerShell integration tests
+
+## Azure VM Setup
+
+The following steps discuss how to setup en environment using an Azure VM. This approach can be useful when setting up many development environments unattended.
+
+### Single user setup (Bash Script)
+
+1. Copy setup script
 
 ```bash
-cp ~/powercat-business-approvals-kit/Workshop/src/scripts/start.sh .
+cp ~/powercat-business-approvals-kit/Workshop/src/scripts/setup.sh .
 ```
 
 1. Enable execution of setup
@@ -51,7 +90,7 @@ chmod +x ~/setup.sh
 tail -100 nohup.out
 ```
 
-## Multiple user setup (Bash Script)
+### Multiple user setup (Bash Script)
 
 1. Create a new text file with users names on each new line
 
@@ -91,7 +130,7 @@ EOF
 tail -100 nohup.out
 ```
 
-## Reset Developer Environments
+### Reset Developer Environments
 
 1. Reset a single user
 
