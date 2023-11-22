@@ -228,12 +228,10 @@ rm packages-microsoft-prod.deb
 sudo apt update
 ```
 
-12. Install the required tools inside the Virtual Machine bash shell
+12. Install the .Net runtime and SDK inside the Virtual Machine bash shell
 
 ```bash
-sudo sudo apt install -y dotnet-runtime-6.0 dotnet-runtime-7.0 dotnet-sdk-8.0 unzip
-dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-dotnet tool install --global SecureStore.Client
+sudo apt install -y dotnet-runtime-6.0 dotnet-sdk-7.0 unzip
 
 cat << \EOF >> ~/.bash_profile
 # Add .NET Core SDK tools
@@ -245,16 +243,31 @@ EOF
 > |Command  |Description  |
 > |---------|---------|
 > |`sudo`    |This command is used to run a command with elevated privileges. It allows a user to execute a command as the root user or another user with higher privileges.      |
-> |`apt remove`     |This command is used to remove a package from your system. It removes all the files associated with the package, and any configuration files that were created when the package was installed.        |
-> |`apt remove`     |This command is used to remove a package from your system. It removes all the files associated with the package, and any configuration files that were created when the package was installed.       |
 > |`dotnet tool install`    |This command is used to install a .NET Core global tool. Global tools are .NET Core console applications that are installed on your system and can be accessed from any directory in the command prompt.         |
 > |`.bash_profile`| This file is a script that is executed whenever a new terminal session is started in Bash. Use it to set environment variables, define aliases, and perform other customizations to the shell environment.|
 
-11. Install PowerShell using steps from https://learn.microsoft.com/powershell/scripting/install/install-ubuntu
+13. Close the ssh session and reopen. Install the required tools inside the Virtual Machine bash shell
 
-12. Close the ssh session and reopen a new session using ```./start.sh``` from the Azure Cloud shell
+```bash
+dotnet tool install --global PowerShell --version 7.3.10
+dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+dotnet tool install --global SecureStore.Client
+```
 
-13. Clone the Approvals Kit GitHub repository inside the ssh session.
+> [!NOTE]
+> 1. Version 7.3.10 is used to work with .Net 7.0 SDK
+>
+> 2. Command notes
+>
+> |Command  |Description  |
+> |---------|---------|
+> |`dotnet tool install`    |This command is used to install a .NET Core global tool. Global tools are .NET Core console applications that are installed on your system and can be accessed from any directory in the command prompt.         |
+
+14. Install PowerShell using steps from https://learn.microsoft.com/powershell/scripting/install/install-ubuntu
+
+15. Close the ssh session and reopen a new session using ```./start.sh``` from the Azure Cloud shell
+
+16. Clone the Approvals Kit GitHub repository inside the ssh session.
 
 ```bash
 git clone https://www.github.com/microsoft/powercat-business-approvals-kit.git
@@ -263,7 +276,7 @@ git clone https://www.github.com/microsoft/powercat-business-approvals-kit.git
 > [!NOTE]
 > If git clone is not an option, you could download the repository as a zip file upload the zip file to your Cloud Shell. Then use ```scp -i ~/.ssh/azurevm-$vmName powercat-business-approvals-kit-main.zip "accadmin@$ip":/home/accadmin```
 
-14. Set up the installer app and install dependencies
+17. Set up the installer app and install dependencies
 
 > [!NOTE]
 > Playwright is an open-source solution for automating web browsers. It is used by the installer to automate interactive tasks as a workshop user account. [Playwright documentation](https://playwright.dev/docs/intro) provides official documentation for Playwright. It provides a comprehensive guide to using the library, including installation instructions, API reference, and examples
