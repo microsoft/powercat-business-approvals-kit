@@ -15,6 +15,8 @@ The installer components are based on cross platform tools. The required tools i
 
 Perform a local install using the following steps:
 
+1. Install .NET Runtime 6.0 from [Download .NET](https://dotnet.microsoft.com/download)
+
 1. Install .NET SDK 7.0 from [Download .NET](https://dotnet.microsoft.com/download)
 
 1. Azure CLI is installed. One option using .NET is
@@ -120,7 +122,7 @@ Setup for a class of 20 + students could take up to 20 minutes for each user env
 
 1. Inside the [Azure portal](https://portal.azure.com), start a new bash based Azure Cloud Shell.
 
-> NOTE: If Azure Cloud Shell is new to you can use [Overview of Azure Cloud Shell](/azure/cloud-shell/overview)an the [Quickstart](/azure/cloud-shell/quickstart) as useful starting points.
+> NOTE: If Azure Cloud Shell is new to you can use [Overview of Azure Cloud Shell](/azure/cloud-shell/overview) and the [Quickstart](/azure/cloud-shell/quickstart) as useful starting points.
 
 2. Use the following Bash script inside the Azure Cloud Shell to create a resource group, create and start a Virtual Machine (VM)
 
@@ -147,48 +149,72 @@ then
 fi
 ```
 
-1. Create an ssh session to get command line to your virtual machine
+3. Create bash script to start a ssh session to get command line to your virtual machine
 
 ```bash
+cat << \EOF > start.sh
 vmName="ApprovalsKitSetupVM"
 ip=`az vm list-ip-addresses --resource-group ApprovalsKitSetup --name $vmName --query "[].virtualMachine.network.publicIpAddresses[0].ipAddress" --output tsv`
 ssh -i ~/.ssh/azurevm-$vmName "accadmin@$ip" -t -l bash
+EOF
 ```
 
-1. Install the Azure CLI using the following script inside the SSH connection of your linux VM.
+4. Make start script executable
+
+```bash
+chmod +x start.sh
+```
+
+5. Start ssh session
+
+```bash
+./start.sh
+```
+
+6. In the SSH session install the Azure CLI using the following script .
 
 ```bash
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
 
-1. Restart you virtual machine.
+7. Restart you virtual machine.
 
-1. Wait for your machine to start again and have a status of running.
+8. Wait for your machine to start again and have a status of running.
 
-1. In the Azure Cloud Shell sign in to virtual machine using ssh.
+9. Create a start script.
 
 ```bash
-vmName="ApprovalsKitSetupVM"
-ip=`az vm list-ip-addresses --resource-group ApprovalsKitSetup --name $vmName --query "[].virtualMachine.network.publicIpAddresses[0].ipAddress" --output tsv`
-ssh -i ~/.ssh/azurevm-$vmName "accadmin@$ip" -t -l bash
+./start.sh
 ```
 
-1. Install the required tools inside the Virtual Machine bash shell
+10. Install updates
 
-|Command  |Description  |
-|---------|---------|
-|`sudo`    |This command is used to run a command with elevated privileges. It allows a user to execute a command as the root user or another user with higher privileges.      |
-|`apt remove`     |This command is used to remove a package from your system. It removes all the files associated with the package, and any configuration files that were created when the package was installed.        |
-|`apt remove`     |This command is used to remove a package from your system. It removes all the files associated with the package, and any configuration files that were created when the package was installed.       |
-|`dotnet tool install`    |This command is used to install a .NET Core global tool. Global tools are .NET Core console applications that are installed on your system and can be accessed from any directory in the command prompt.         |
-|`.bash_profile`| This file is a script that is executed whenever a new terminal session is started in Bash. Use it to set environment variables, define aliases, and perform other customizations to the shell environment.|
+```bash
+sudo apt update
+sudo apt-get dist-upgrade
+```
+
+10. Remove any existing dotnet
 
 ```bash
 sudo apt remove -y 'dotnet*' 'aspnet*' 'netstandard*'
 sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
-sudo sudo apt install -y dotnet-sdk-7.0 dotnet-runtime-6.0 unzip
+```
+
+11. Install Microsoft package repositoryand update
+
+```bash
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt update
+```
+
+12. Install the required tools inside the Virtual Machine bash shell
+
+```bash
+sudo sudo apt install -y dotnet-runtime-6.0 dotnet-sdk-8.0 unzip
 dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-dotnet tool install --global PowerShell
 dotnet tool install --global SecureStore.Client
 
 cat << \EOF >> ~/.bash_profile
@@ -197,21 +223,35 @@ export PATH="$PATH:/home/accadmin/.dotnet/tools"
 EOF
 ```
 
-1. Clone the Approvals Kit GitHub repository
+> [!NOTE]
+> |Command  |Description  |
+> |---------|---------|
+> |`sudo`    |This command is used to run a command with elevated privileges. It allows a user to execute a command as the root user or another user with higher privileges.      |
+> |`apt remove`     |This command is used to remove a package from your system. It removes all the files associated with the package, and any configuration files that were created when the package was installed.        |
+> |`apt remove`     |This command is used to remove a package from your system. It removes all the files associated with the package, and any configuration files that were created when the package was installed.       |
+> |`dotnet tool install`    |This command is used to install a .NET Core global tool. Global tools are .NET Core console applications that are installed on your system and can be accessed from any directory in the command prompt.         |
+> |`.bash_profile`| This file is a script that is executed whenever a new terminal session is started in Bash. Use it to set environment variables, define aliases, and perform other customizations to the shell environment.|
+
+11. Install PowerShell using steps from https://learn.microsoft.com/powershell/scripting/install/install-ubuntu
+
+12. Close the ssh script and reopen a new session using ```./start.sh```
+
+13. Clone the Approvals Kit GitHub repository
 
 ```bash
-git clone https://www.github/microsoft/powercat-business-approvals-kit.git
+git clone https://www.github.com/microsoft/powercat-business-approvals-kit.git
 ```
 
 > [!NOTE]
 > If git clone is not an option, you could download the repository as a zip file upload the zip file to your Cloud Shell. Then use ```scp -i ~/.ssh/azurevm-$vmName powercat-business-approvals-kit-main.zip "accadmin@$ip":/home/accadmin```
 
-1. Set up the installer app and install dependencies
+14. Set up the installer app and install dependencies
 
 > [!NOTE]
 > Playwright is an open-source solution for automating web browsers. It is used by the installer to automate interactive tasks as a workshop user account. [Playwright documentation](https://playwright.dev/docs/intro) provides official documentation for Playwright. It provides a comprehensive guide to using the library, including installation instructions, API reference, and examples
 
 ```pwsh
+pwsh
 Push-Location
 cd powercat-business-approvals-kit/Workshop/src/install
 dotnet build
@@ -250,3 +290,7 @@ pwsh --version
 ```powershell
 SecureStore --version
 ```
+
+## Next
+
+Now that you have either local, docker or Azure VM environment ready move to [Tenant Setup](./tenant-setup.md) to create tenants and apply DLP.

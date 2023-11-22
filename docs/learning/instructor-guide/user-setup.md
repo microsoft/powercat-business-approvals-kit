@@ -3,6 +3,12 @@
 
 Once complete with the [Tenant Setup](./tenant-setup.md) section of the workshop, the next stage is to get ready to create user account setup. In this section, we cover how to set up users to create Power Platform Developer environments. It's important to ensure that licenses are assigned via a security group to ensure that users have the appropriate access to the Power Platform. Let's dive in and get started!
 
+> [!NOTE]
+>
+> 1. For local or Azure VM Setup it is assumed that any scripts are executed in the **Workshop** folder.
+>
+> 2. For docker setup it is assumed that workshop contents are included in /setup folder
+
 ## Development / Trial Licenses
 
 If you select a tenant that doesn't have access to [Power Apps licenses](https://powerapps.microsoft.com/pricing/) one option for development / test of the Approvals Kit for nonproduction scenarios is the [Power Apps Developer Plan](/power-platform/developer/plan). The learn page has more information on the Power Apps Developer Plan and how to sign up for a Developer Plan.
@@ -33,7 +39,7 @@ pwsh
 . .\src\scripts\security.ps1
 ```
 
-1. Sign in to Azure as the Administrator of the Entra ID tenant. Use the PowerShell script to call Azure CLI to sign in
+1. Sign in to Azure as the Global Administrator of the Entra ID tenant. Use the PowerShell script to call Azure CLI to sign in
 
 ```pwsh
 Invoke-AzureLogin

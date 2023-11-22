@@ -97,3 +97,7 @@ The options provided a high-level overview of the various options available for 
 However, if your organization already has an existing tenant with available licenses then it can provide the most long-term path for building a community of learners and scaling knowledge. By using an existing tenant, you can bring in cohorts of learners over time and take advantage of the Approvals Kit without incurring extra costs or administrative overhead.
 
 Once you have a tenant, consider the Data Loss Prevention Policy steps as an example of how you can limit the connectors used in the workshop to a defined list.
+
+## Next
+
+Now that you tenant created and DLP configured move to [User Setup](./user-setup.md) to development environments for learners.

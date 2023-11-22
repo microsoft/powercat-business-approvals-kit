@@ -1,5 +1,5 @@
 #Must be the first statement in your script (not counting comments)
-param([string] $user)
+param([string] $user, [string] $reset)
 
 . $PSScriptRoot\users.ps1
 . $PSScriptRoot\security.ps1
@@ -24,12 +24,22 @@ if ( Test-Path $user ) {
             Write-Host "$index of $total - $(Get-Date)"
             Write-Host "$line@$domain"
             Write-Host "---------------------------------------------"
-            Invoke-SetupUserForWorkshop "$line@$domain"
+
+            if ( $reset -eq "Y") {
+                Reset-UserDevelopmentEnvironment "$line@$domain"
+            } else {
+                Invoke-SetupUserForWorkshop "$line@$domain"
+            }
+            
         }
     }
 } else {
     Write-Host "Single user setup"
-    Invoke-SetupUserForWorkshop "$user@$domain"
+    if ( $reset -eq "Y") {
+        Reset-UserDevelopmentEnvironment "$line@$domain"
+    } else {
+        Invoke-SetupUserForWorkshop "$line@$domain"
+    }
 }
 
 
