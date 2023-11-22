@@ -295,3 +295,90 @@ function Get-ApprovalKitContosoCoffeeState {
         SolutionComponents = $components
     }
 }
+
+function Invoke-ValidateEnvironments {
+    param (
+        [Parameter(Mandatory)] $UsersListFile
+    )
+
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( Test-Path $UsersListFile ) {
+        Write-Host "Found user file"
+        $lines = Get-Content $UsersListFile
+        $total = $lines.Length
+        $index = 0
+        foreach($line in $lines) {
+            if ( -not [System.String]::IsNullOrEmpty($line) ) {
+                $index = $index + 1
+                Write-Host "---------------------------------------------"
+                Write-Host "$index of $total - $(Get-Date)"
+                Write-Host "$line@$domain"
+                Write-Host "---------------------------------------------"
+                $result = Invoke-ValidateEnvironment "$line@$domain"
+                if ( -not $result.valid ) {
+                    Write-Host "Not Valid"
+                } else {
+                    Write-Host "Valid"
+                }
+            }
+        }
+    }
+}
+
+function Invoke-ValidateEnvironment {
+    param (
+        [Parameter(Mandatory)] $UserUPN
+    )
+
+    if ( -not ([System.String]::IsNullOrEmpty($UserUPN)) ) {
+        $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    } else {
+        $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
+    }
+
+    $token=(az account get-access-token --resource=$($Environment.EnvironmentUrl) --query accessToken --output tsv)
+    $headers = @{Authorization="Bearer $token"}
+    $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+    
+    $clientId = (Get-SecureValue CLIENT_ID)
+
+    $app = (az ad app show --id $clientId | ConvertFrom-Json)
+
+    $result = @{
+        connectorCount = $connectors.value.length
+        environmentUrl = $Environment.EnvironmentUrl
+        clientId = ""
+        resourceId = ""
+        redirectUrl = ""
+        redirectFound = $False
+        valid = $False
+    }
+
+    if ( $connectors.value.length -eq 1 ) {
+        $parameters = ($connectors.value[0].connectionparameters | ConvertFrom-Json )
+        $result.clientId = $parameters.token.oAuthSettings.clientId
+        $result.azureResourceId = $parameters.token.oAuthSettings.properties.AzureActiveDirectoryResourceId = $Environment.EnvironmentUrl
+        $result.tenantId = $parameters.token.oAuthSettings.customParameters.tenantId.value
+        $result.resourceUri = $parameters.token.oAuthSettings.customParameters.resourceUri.value 
+        $result.redirectUrl = ( $connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
+        $result.redirectFound = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
+    }
+
+    if ( $result.redirectUrl.Length -gt 0 -and -not ($result.redirectFound) ) {
+        Invoke-UpdateCustomConnectorReplyUrl $Environment $UserUPN
+        $app = (az ad app show --id $clientId | ConvertFrom-Json)
+        $result.redirectFound = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
+    }
+
+    if ( `
+        $result.clientId -eq (Get-SecureValue "CLIENT_ID") `
+        -and $result.azureResourceId -eq $Environment.EnvironmentUrl `
+        -and $result.resourceUri -eq $Environment.EnvironmentUrl `
+        -and $result.redirectFound
+    ) {
+        $result.valid = $true
+    }
+
+    return $result
+}
