@@ -451,8 +451,19 @@ function Install-ApprovalsKit {
         $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
 
         if ( $files.Count -le 0 ) {
-            Write-Error "Unable to find install solution file"
-            return
+            Write-Host "Downloading latest managed release of Approvals Kit"
+            $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/microsoft/powercat-business-approvals-kit/releases/latest" -ContentType "application/json"
+            $download = $releases.assets | Where-Object { $_.name.indexOf('_managed.zip') -ge 0 } | Select-Object -First 1
+           
+            $assetFile = [System.IO.Path]::Combine($assetsPath,[System.IO.Path]::GetFileName($download.browser_download_url))
+            Invoke-WebRequest -Uri $download.browser_download_url -Dest $assetFile
+            
+            $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
+
+            if ( $files.Count -le 0 ) {
+                Write-Error "Unable to find install solution file"
+                return
+            }
         }
 
         $sourceFile = [System.IO.Path]::Combine( $assetsPath, $files[0].Name )

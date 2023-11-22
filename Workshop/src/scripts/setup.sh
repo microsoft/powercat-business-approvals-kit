@@ -1,2 +1,2 @@
 #!/bin/bash
-nohup pwsh -Command ~/powercat-business-approvals-kit/Workshop/src/scripts/start.ps1 -user $1 &
+nohup pwsh -Command ~/powercat-business-approvals-kit/Workshop/src/scripts/start.ps1 -user $1 -reset $2 &

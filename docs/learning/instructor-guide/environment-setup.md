@@ -90,3 +90,17 @@ EOF
 ```bash
 tail -100 nohup.out
 ```
+
+## Reset Developer Environments
+
+1. Reset a single user
+
+```bash
+~/setup.sh adelev "Y"
+```
+
+2. Start reset for users passing in the name of the file containing users to reset
+
+```bash
+~/setup.sh ~/users.txt "Y"
+```
