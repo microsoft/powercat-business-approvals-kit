@@ -456,7 +456,7 @@ function Install-ApprovalsKit {
             $download = $releases.assets | Where-Object { $_.name.indexOf('_managed.zip') -ge 0 } | Select-Object -First 1
            
             $assetFile = [System.IO.Path]::Combine($assetsPath,[System.IO.Path]::GetFileName($download.browser_download_url))
-            Invoke-WebRequest -Uri $download.browser_download_url -Dest $assetFile
+            Invoke-WebRequest -Uri $download.browser_download_url -OutFile $assetFile
             
             $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
 
