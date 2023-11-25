@@ -40,7 +40,7 @@ Licensed under the MIT License.
 #> 
 function Invoke-AzureLogin {
     az logout | Out-Null
-    az login --allow-no-subscriptions
+    az login --allow-no-subscriptions --use-device-code
 }
 
 <#

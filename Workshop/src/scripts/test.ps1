@@ -113,7 +113,8 @@ function Invoke-PlaywrightScript {
         [Parameter(Mandatory)] [String] $UserUPN,
         [Parameter(Mandatory)] [String] $EnvironmentId,
         [Parameter(Mandatory)] [String] $ScriptFile,
-        [Parameter(Mandatory)] [String] $Data
+        [Parameter(Mandatory)] [String] $Data,
+        [Parameter(Mandatory)] [String] $Headless = "Y"
     )
 
     if ( -not [System.IO.Path]::IsPathRooted($ScriptFile) ) {
@@ -131,7 +132,7 @@ function Invoke-PlaywrightScript {
     Push-Location
     Set-Location $workshopPath
     $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-    dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless "Y" --record "Y"
+    dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless $Headless --record "Y"
     Pop-Location
 }
 
@@ -381,4 +382,55 @@ function Invoke-ValidateEnvironment {
     }
 
     return $result
+}
+
+function Invoke-CreateKeys {
+    param (
+        [Parameter(Mandatory)] $UsersListFile
+    )
+
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    $keyPath = [System.IO.Path]::Combine( (Get-AssetPath),"keys" )
+    $domainKeyPath = [System.IO.Path]::Combine($keyPath, $domain)
+
+    if ( -not (Test-Path $keyPath )) {
+        New-Item -Path (Get-AssetPath) -Name "keys" -ItemType Directory
+    }
+
+    if ( -not (Test-Path $domainKeyPath )) {
+        New-Item -Path $keyPath -Name $domain -ItemType Directory
+    }
+
+    $environmentFile = [System.IO.Path]::Combine( $domainKeyPath,"environments.txt" )
+    if ( (Test-Path $environmentFile) ) {
+        Remove-Item $environmentFile
+    }
+
+    if ( Test-Path $UsersListFile ) {
+        Write-Host "Found user file"
+        $lines = Get-Content $UsersListFile
+        $total = $lines.Length
+        $index = 0
+        foreach($line in $lines) {
+            if ( -not [System.String]::IsNullOrEmpty($line) ) {
+                $index = $index + 1
+                $keyFile = [System.IO.Path]::Combine($domainKeyPath,"$line.key")
+                Write-Host "---------------------------------------------"
+                Write-Host "$index of $total - $(Get-Date)"
+                Write-Host "$line@$domain"
+                Write-Host "---------------------------------------------"
+                $Key = New-Object Byte[] 16   # You can use 16, 24, or 32 for AES
+                [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($Key)
+                $Key | out-file $keyFile
+
+                $PasswordFile = [System.IO.Path]::Combine($domainKeyPath,"$line.txt")
+                $Password = (Get-SecureValue DEMO_PASSWORD) | ConvertTo-SecureString -AsPlainText -Force
+                $Password | ConvertFrom-SecureString -key $Key | Out-File $PasswordFile
+
+                $Environment = Invoke-UserDevelopmentEnvironment "$line@$domain"
+                "$line,https://make.powerapps.com/environments/$($Environment.EnvironmentId)" | Add-Content -Path $environmentFile
+            }
+        }
+    }
 }

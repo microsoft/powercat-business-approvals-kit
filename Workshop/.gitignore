@@ -7,8 +7,10 @@
 **/videos# SecureStore key file ignore rule:
 /secure/secret.key
 /secure/secrets.json
+/secure/**
 /AppinaDay Trainer Package.zip
 /ContosoCoffee_1_0_0_2.zip
 **/config.dev.json
 **/testResults.xml
 **/users.txt
+**/assets/keys/**

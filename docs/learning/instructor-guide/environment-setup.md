@@ -81,7 +81,7 @@ chmod +x ~/setup.sh
 1. Setup user
 
 ```bash
-~/setup.sh adelev
+~/setup.sh adelev N
 ```
 
 1. Monitor the background task
@@ -123,7 +123,7 @@ EOF
 1. Start setup for users passing in the name of the file containing users to set up
 
 ```bash
-~/setup.sh ~/users.txt
+~/setup.sh ~/users.txt N
 ```
 
 ```bash
