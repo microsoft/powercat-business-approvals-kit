@@ -114,7 +114,8 @@ function Invoke-PlaywrightScript {
         [Parameter(Mandatory)] [String] $EnvironmentId,
         [Parameter(Mandatory)] [String] $ScriptFile,
         [Parameter(Mandatory)] [String] $Data,
-        [Parameter(Mandatory)] [String] $Headless = "Y"
+        [String] $Headless = "Y",
+        [String] $Json = "N"
     )
 
     if ( -not [System.IO.Path]::IsPathRooted($ScriptFile) ) {
@@ -132,7 +133,20 @@ function Invoke-PlaywrightScript {
     Push-Location
     Set-Location $workshopPath
     $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-    dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless $Headless --record "Y"
+    if ( $Json -eq "Y" ) {
+        $result = dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless $Headless --record "Y" | Out-String
+        $start = $result.IndexOf("{")
+        $end = $result.LastIndexOf("}")
+        if ( ($start -ge 0  ) -and ($end -gt $start) ) {
+            $data = $result.Substring($start,$end-$start+1)
+        } else {
+            $data = @{ error = "No response" } | ConvertTo-Json -Depth 100
+        }
+        
+        return $data
+    } else {
+        dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless $Headless --record "Y"
+    }
     Pop-Location
 }
 
@@ -354,6 +368,7 @@ function Invoke-ValidateEnvironment {
         redirectUrl = ""
         redirectFound = $False
         valid = $False
+        operations = ""
     }
 
     if ( $connectors.value.length -eq 1 ) {
@@ -372,11 +387,22 @@ function Invoke-ValidateEnvironment {
         $result.redirectFound = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
     }
 
+    if ( $connectors.value.length -eq 1 ) {
+        $connectionId = $connectors.value[0].connectorinternalid
+        $environmentId = $Environment.EnvironmentId
+        $data = (@{
+            editUrl = "https://make.powerautomate.com/environments/$environmentId/connections/available/custom/$connectionId/edit/general"
+        } | ConvertTo-Json -Depth 100 -Compress )
+        $connectorResult = (Invoke-PlaywrightScript $UserUPN $environmentId "validate-approvals-kit-custom-connector.csx" $data "Y" "Y" | ConvertFrom-Json)
+        $result.operations = $connectorResult.operations
+    }
+
     if ( `
         $result.clientId -eq (Get-SecureValue "CLIENT_ID") `
         -and $result.azureResourceId -eq $Environment.EnvironmentUrl `
         -and $result.resourceUri -eq $Environment.EnvironmentUrl `
-        -and $result.redirectFound
+        -and $result.redirectFound `
+        -and $result.operations.Length -gt 0
     ) {
         $result.valid = $true
     }

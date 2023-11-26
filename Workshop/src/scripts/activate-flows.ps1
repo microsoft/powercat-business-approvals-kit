@@ -166,6 +166,12 @@ function Invoke-ActivateFlow {
 
     $solutionId = $flowsToActivate[0].solutionid
 
+    $workshopPath = [System.IO.Path]::Join((Get-AssetPath), "..")
+
+    Push-Location
+    Set-Location $workshopPath
+    
+
     # Activate the flow via Playwright as the active user. Reasons:
     # - The user has permissions to the connections
     # - Can work even if the connection is not shared with the service principal
@@ -174,4 +180,5 @@ function Invoke-ActivateFlow {
     # - Share the connections with ServicePrincipal and then Active Flow as Service Principal by changing the statecode of the workflow to 1 using dataverse REST API
     $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
     dotnet $appPath flow activate --upn $UserUPN --env $Environment.EnvironmentId --solution $solutionId --id $flowFile # --headless "N"
+    Pop-Location
 }

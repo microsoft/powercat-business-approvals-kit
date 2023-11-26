@@ -1076,7 +1076,7 @@ function Invoke-OpenBrowser {
             return
         }
 
-        $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+        $workshopPath = [System.IO.Path]::Join((Get-AssetPath), "..")
 
         Push-Location
         Set-Location $workshopPath
@@ -1679,6 +1679,6 @@ function Invoke-ConfigureApprovalsKitConnector {
         }
         $data = ( $data | ConvertTo-Json -Depth 100 -compress )
         $environmentId = $Environment.EnvironmentId
-        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "N"
+        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "Y"
     }
 }
