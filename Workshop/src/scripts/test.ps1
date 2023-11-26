@@ -347,6 +347,10 @@ function Invoke-ValidateEnvironment {
     )
 
     if ( -not ([System.String]::IsNullOrEmpty($UserUPN)) ) {
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
         $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
     } else {
         $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
@@ -366,9 +370,9 @@ function Invoke-ValidateEnvironment {
         clientId = ""
         resourceId = ""
         redirectUrl = ""
-        redirectFound = $False
         valid = $False
         operations = ""
+        checks = @{}
     }
 
     if ( $connectors.value.length -eq 1 ) {
@@ -378,31 +382,44 @@ function Invoke-ValidateEnvironment {
         $result.tenantId = $parameters.token.oAuthSettings.customParameters.tenantId.value
         $result.resourceUri = $parameters.token.oAuthSettings.customParameters.resourceUri.value 
         $result.redirectUrl = ( $connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
-        $result.redirectFound = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
+        $result.checks["Redirect Found"] = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
     }
 
     if ( $result.redirectUrl.Length -gt 0 -and -not ($result.redirectFound) ) {
         Invoke-UpdateCustomConnectorReplyUrl $Environment $UserUPN
         $app = (az ad app show --id $clientId | ConvertFrom-Json)
-        $result.redirectFound = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
+        $result.checks["Redirect Found"] = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
     }
 
     if ( $connectors.value.length -eq 1 ) {
         $connectionId = $connectors.value[0].connectorinternalid
         $environmentId = $Environment.EnvironmentId
+        $connections = Get-Connections($Environment)
+
         $data = (@{
+            user = $UserUPN
+            approvalsConnectionCount = ( $connections | Where-Object { $_.API.IndexOf("shared_cat-5fapprovals-20kit") -gt 0 -and $_.Status -eq "Connected" }).Count.ToString()
             editUrl = "https://make.powerautomate.com/environments/$environmentId/connections/available/custom/$connectionId/edit/general"
         } | ConvertTo-Json -Depth 100 -Compress )
         $connectorResult = (Invoke-PlaywrightScript $UserUPN $environmentId "validate-approvals-kit-custom-connector.csx" $data "Y" "Y" | ConvertFrom-Json)
         $result.operations = $connectorResult.operations
+        $result.checks["Found connector"] = $True
+        $result.checks["Found operations"] = $result.operations -eq "CreateWorkflowInstance, GetApprovalDataFields"
+        $result.checks["Get Workflows"] = $connectorResult.status -eq "(200)"
+    } else {
+        $result.checks["Found connector"] = $False
     }
 
+    $result.checks["Client Id Match"] = $result.clientId -eq (Get-SecureValue "CLIENT_ID")
+    $result.checks["Resource Id Match"] = $result.azureResourceId -eq $Environment.EnvironmentUrl
+    $result.checks["Resource Uri"] = $result.azureResourceId -eq $Environment.EnvironmentUrl
+
     if ( `
-        $result.clientId -eq (Get-SecureValue "CLIENT_ID") `
-        -and $result.azureResourceId -eq $Environment.EnvironmentUrl `
-        -and $result.resourceUri -eq $Environment.EnvironmentUrl `
-        -and $result.redirectFound `
-        -and $result.operations.Length -gt 0
+        (
+            $result.checks.GetEnumerator() | Where-Object {
+                $_.Value -eq $False
+            }
+        ).Count -eq 0
     ) {
         $result.valid = $true
     }

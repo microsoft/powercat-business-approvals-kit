@@ -145,6 +145,12 @@ class UtilityMethods {
 
     #>
     static [string] GetOrCreateDevelopmentEnvironment($UserUPN) {
+
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
+
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
         $displayName = $user[0].displayName
         $environmentName = "$displayName Dev"
@@ -700,9 +706,17 @@ function Get-SecureValue {
     return [UtilityMethods]::GetSecureValue($Name)     
 }
 
+function Get-Connections {
+    param (
+        $Environment
+    )
+    return [UtilityMethods]::GetConnections($Environment)
+}
+
 Export-ModuleMember -Function Invoke-GetDeveloperEnvironment
 Export-ModuleMember -Function Invoke-GetOrCreateDevelopmentEnvironment 
 Export-ModuleMember -Function Install-ConnectionSetup
 Export-ModuleMember -Function Invoke-DevEnvironmentAuthUtility
 Export-ModuleMember -Function Get-SecureValue
+Export-ModuleMember -Function Get-Connections
 

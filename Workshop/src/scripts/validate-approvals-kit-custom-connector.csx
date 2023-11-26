@@ -38,8 +38,71 @@ public class PlaywrightScript {
         await page.GetByRole(AriaRole.Menuitem, new() { Name = "5. Code" }).ClickAsync();
         await page.GetByRole(AriaRole.Heading, new() { Name = "Code" }).Nth(0).ClickAsync();
         
-        await page.PauseAsync();
-        result.Add("operations", new System.IO.StringReader(await page.Locator("//react-dropdown").Nth(0).InnerTextAsync()).ReadLine());
+        var operations = new System.IO.StringReader(await page.Locator("//react-dropdown").Nth(0).InnerTextAsync()).ReadLine();
+        result.Add("operations", operations);
+
+        if ( operations.Length > 0 ) {
+            await page.GetByLabel("5. Code").ClickAsync();
+            await page.GetByRole(AriaRole.Menuitem, new() { Name = "6. Test" }).ClickAsync();
+            await page.GetByRole(AriaRole.Heading, new() { Name = "Test operation" }).Nth(0).ClickAsync();
+
+            int connectionCounts = int.Parse(values["approvalsConnectionCount"]);
+
+            var connection = await page.Locator("#customApiTestTab-connections").AllAsync();
+            if ( connection.Count > 0 ) {
+                var inner = await connection[0].Locator(".ms-Dropdown-title").AllAsync();
+                if ( inner.Count > 0 ) {
+                    var connectionName = await inner[0].InnerTextAsync();
+                    var started = DateTime.Now;
+                    while ( String.IsNullOrEmpty(connectionName) && DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+                        connectionName = await inner[0].InnerTextAsync();
+                    }
+                    
+                    // Check if no connection exists
+                    if ( connectionName == "None" && connectionCounts == 0 ) {
+                        await page.GetByLabel("New connection").ClickAsync();
+                        
+                        started = DateTime.Now;
+                        var found = false;
+                        // Create Connection
+                        while ( !found && DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+                            try {
+                                foreach ( var other in page.Context.Pages ) {
+                                    var title = await other.TitleAsync();
+                                    if ( title == "Sign in to your account" ) {
+                                        var email = values["user"].ToLower();
+                                        var match = await other.Locator($"[data-test-id=\"{email}\"]").AllAsync();
+                                        if ( match.Count > 0 ) {
+                                            await match[0].ClickAsync();
+                                            found = true;
+                                        }
+                                    }
+                                }
+                            } catch {
+
+                            }
+                        }
+                    }
+
+                    // Wait until connection exists
+                    while ( connectionName == "None" && DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+                        connectionName = await inner[0].InnerTextAsync();
+                    }
+                }
+                
+                await page.GetByText("2 GetPublishedWorkflows").ClickAsync();
+                await page.GetByLabel("Test operation").ClickAsync();
+
+                await page.GetByRole(AriaRole.Tab, new() { Name = "Response" }).ClickAsync();
+
+                var status = await page.Locator("#customApiTestTab-responseStatus").AllAsync();
+                if ( status.Count > 0 ) {
+                    var statusText = await status[0].InnerTextAsync();
+                    result.Add("status", statusText.Trim());
+                }
+            }
+            
+        }
 
         string json = JsonSerializer.Serialize(result);
 
