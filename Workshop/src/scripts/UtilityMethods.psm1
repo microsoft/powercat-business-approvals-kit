@@ -145,6 +145,12 @@ class UtilityMethods {
 
     #>
     static [string] GetOrCreateDevelopmentEnvironment($UserUPN) {
+
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
+
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
         $displayName = $user[0].displayName
         $environmentName = "$displayName Dev"
@@ -470,6 +476,14 @@ class UtilityMethods {
         return $items
     }
 
+    static [String] GetAssetPath() {
+        $assetsPath = [System.IO.Path]::Combine($PSScriptRoot,"..", "..", "assets")
+        if ( -not (Test-Path($assetsPath)) ) {
+            $assetsPath = [System.IO.Path]::Combine($PSScriptRoot, "..", "assets")
+        }
+        return $assetsPath
+    }
+
     
 <#
     .DESCRIPTION
@@ -511,9 +525,11 @@ class UtilityMethods {
             return $match[0]
         }
 
+        $workshopPath = [System.IO.Path]::Join([UtilityMethods]::GetAssetPath(), "..")
+
         $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
         Push-Location
-        Set-Location ([System.IO.Path]::Join($PSScriptRoot,"..", ".."))
+        Set-Location ($workshopPath)
         dotnet $appPath connection create --upn $UserUPN --env $Environment.EnvironmentId --connector $ConnectorName --signIn $waitForSignIn --record Y
         Pop-Location
 
@@ -690,9 +706,17 @@ function Get-SecureValue {
     return [UtilityMethods]::GetSecureValue($Name)     
 }
 
+function Get-Connections {
+    param (
+        $Environment
+    )
+    return [UtilityMethods]::GetConnections($Environment)
+}
+
 Export-ModuleMember -Function Invoke-GetDeveloperEnvironment
 Export-ModuleMember -Function Invoke-GetOrCreateDevelopmentEnvironment 
 Export-ModuleMember -Function Install-ConnectionSetup
 Export-ModuleMember -Function Invoke-DevEnvironmentAuthUtility
 Export-ModuleMember -Function Get-SecureValue
+Export-ModuleMember -Function Get-Connections
 

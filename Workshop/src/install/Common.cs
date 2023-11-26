@@ -3,6 +3,7 @@ using System.CommandLine.Parsing;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using Microsoft.Playwright;
 using Microsoft.PowerApps.TestEngine.Config;
 using Microsoft.PowerApps.TestEngine.TestInfra;
 using Microsoft.PowerPlatform.Config;
@@ -56,6 +57,19 @@ namespace Microsoft.PowerPlatform.Demo
             await _playwright.ClickAsync("button.add");
             if ( waitForSignIn ) {
                 await _playwright.ClickIfAppearAsync(10000, new PlaywrightCondition { Selector = $".table[data-test-id='{user.ToLower()}']", Final = true, MaxClick = 1 } );
+            }
+            var start = DateTime.Now;
+            var complete = false;
+            while ( DateTime.Now.Subtract(start).TotalMinutes <= 5 && !complete ) {
+                ILocator matches = _playwright.Page.Locator(".create-connection");
+
+                var pageMatch = await matches.IsVisibleAsync();
+
+                if (  !pageMatch ) { 
+                    complete = true;
+                } else {
+                    System.Threading.Thread.Sleep(1000);
+                }
             }
             await _playwright.PauseAsync();
         }

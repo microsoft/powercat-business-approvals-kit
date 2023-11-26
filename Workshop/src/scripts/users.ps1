@@ -506,7 +506,7 @@ function Invoke-ApprovalsKitPostInstall {
 
     Invoke-UpdateCustomConnectorReplyUrl $Environment
 
-    Update-ApprovalsKitCustomConnector $Environment
+    Invoke-ConfigureApprovalsKitConnector $Environment $UserUPN
 }
 
 function Install-ContosoCoffee {
@@ -1076,7 +1076,7 @@ function Invoke-OpenBrowser {
             return
         }
 
-        $workshopPath = [System.IO.Path]::Join($PSScriptRoot,"..", "..")
+        $workshopPath = [System.IO.Path]::Join((Get-AssetPath), "..")
 
         Push-Location
         Set-Location $workshopPath
@@ -1551,7 +1551,9 @@ function Invoke-UpdateCustomConnectorReplyUrl {
             $update = @{ web = @{ redirectUris = $newRedirects.ToArray() }}
 
             $updatedApp = ($update  | ConvertTo-Json -Depth 100 -compress)
-            $updatedApp = $updatedApp -replace "`"", "\`""
+            if ( -not $IsLinux ) {
+                $updatedApp = $updatedApp -replace "`"", "\`""
+            }
             $appId = $app.id
             $restApi = "https://graph.microsoft.com/v1.0/applications/$appId"
             az rest --method patch --headers "Content-Type=application/json" --body "$updatedApp" --uri "$restApi" 
@@ -1600,6 +1602,9 @@ function Update-ApprovalsKitCustomConnector {
     $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
     
     if ( $connectors.value.length -eq 1 ) {
+        # NOTE: This approach is still work in progress and needs further testing to update 
+        # the custom connector to a working state
+        
         Write-Host "Updating Approvals Kit custom connector"
         $parameters = ($connectors.value[0].connectionparameters | ConvertFrom-Json )
         
@@ -1634,9 +1639,46 @@ function Update-ApprovalsKitCustomConnector {
         $body = (@{ 
             "@odata.etag" = ($connectors.value[0] | Select-Object -ExpandProperty "@odata.etag" )
             openapidefinition = $definition
+            scriptoperations = "['CreateWorkflowInstance','GetApprovalDataFields']"
             connectionparameters = $connectors.value[0].connectionparameters 
         } | ConvertTo-Json -Depth 100 -compress)
 
         Invoke-RestMethod -Method PATCH -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors($($connectors.value[0].connectorid))" -ContentType "application/json" -Body "$body"
+    }
+}
+
+
+function Invoke-ConfigureApprovalsKitConnector {
+    param (
+        [Parameter(Mandatory )] $Environment,
+        $UserUPN
+    )
+
+    if ( [System.String]::IsNullOrEmpty($Environment) -and (-not [System.String]::IsNullOrEmpty($UserUPN))) {
+        $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    }
+
+    if ( [System.String]::IsNullOrEmpty($Environment) -and ( [System.String]::IsNullOrEmpty($UserUPN))) {
+        $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
+    }
+
+    $token=(az account get-access-token --resource=$($Environment.EnvironmentUrl) --query accessToken --output tsv)
+    $headers = @{Authorization="Bearer $token"}
+    $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+
+    if ( $connectors.value.length -eq 1 ) {
+        Write-Host "Updating Approvals Kit custom connector"
+        $connectionId = $connectors.value[0].connectorinternalid
+        $environmentId = $Environment.EnvironmentId
+        $data = @{
+            host = (( [System.UriBuilder]$Environment.EnvironmentURL ).Host )
+            resourceUrl = $Environment.EnvironmentURL
+            clientId = (Get-SecureValue "CLIENT_ID")
+            clientSecret = (Get-SecureValue "CLIENT_SECRET")
+            editUrl = "https://make.powerautomate.com/environments/$environmentId/connections/available/custom/$connectionId/edit/general"
+        }
+        $data = ( $data | ConvertTo-Json -Depth 100 -compress )
+        $environmentId = $Environment.EnvironmentId
+        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "Y"
     }
 }

@@ -31,7 +31,7 @@ namespace Microsoft.PowerApps.TestEngine.TestInfra
         private IPlaywright PlaywrightObject { get; set; }
         private IBrowser Browser { get; set; }
         private IBrowserContext BrowserContext { get; set; }
-        private IPage Page { get; set; }
+        public IPage Page { get; set; }
 
         private List<string> PagesOfInterest { get;set;} = new List<string>();
 
