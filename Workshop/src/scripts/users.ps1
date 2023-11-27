@@ -257,18 +257,13 @@ function Enable-Approvals {
     if ( -not $flowApprovalsInstalled ) {
        
         Write-Host "Approvals need to be enabled"
-        if (  ( Get-ConfigValue "Approvals.Install" ) -eq "pac") {
-            pac application install --environment $Environment.EnvironmentId --application-name "msdyn_FlowApprovals"
-            $flowApprovalsInstalled = Invoke-SolutionInstalled $Environment "msdyn_FlowApprovals"
-            if ( $flowApprovalsInstalled ) {
-                Write-Host "Setup completed successfully"
-            } else {
-                Write-Host "Setup failed"
-            }
-        }
-        else
-        {
-            Write-Host "Skipping Approvals Setup"
+        
+        pac application install --environment $Environment.EnvironmentId --application-name "msdyn_FlowApprovals"
+        $flowApprovalsInstalled = Invoke-SolutionInstalled $Environment "msdyn_FlowApprovals"
+        if ( $flowApprovalsInstalled ) {
+            Write-Host "Setup completed successfully"
+        } else {
+            Write-Host "Setup failed"
         }
     } else {
         Write-Host "Approvals are enabled"
@@ -407,14 +402,10 @@ function Install-ApprovalsKit {
         $Environment = ($Environment | ConvertFrom-Json)
     }
 
-    if ( ( (Get-ConfigValue "Feature.CreatorKit") -eq "Y") ) {
-        Install-CreatorKit $Environment
-    }
-
-    if ( ( (Get-ConfigValue "Feature.Approvals") -eq "Y") ) {
-        Enable-Approvals $UserUPN $Environment
-    }
-
+    Install-CreatorKit $Environment
+    
+    Enable-Approvals $UserUPN $Environment
+    
     Write-Host "Checking if Approvals kit solution installed"
 
     $assetsPath = [System.IO.Path]::Combine($PSScriptRoot,"..", "..", "assets")
@@ -1683,7 +1674,6 @@ function Update-ApprovalsKitCustomConnector {
         $definition = ($apiDefinition | ConvertTo-Json -Depth 100 -compress)
 
         $body = (@{ 
-            "@odata.etag" = ($connectors.value[0] | Select-Object -ExpandProperty "@odata.etag" )
             openapidefinition = $definition
             scriptoperations = "['CreateWorkflowInstance','GetApprovalDataFields']"
             connectionparameters = $connectors.value[0].connectionparameters 

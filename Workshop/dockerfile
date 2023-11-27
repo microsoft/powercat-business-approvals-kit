@@ -4,7 +4,7 @@ WORKDIR /setup
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN dotnet tool install Microsoft.PowerApps.CLI.Tool --tool-path /bin
-RUN dotnet tool install --global PowerShell
+RUN dotnet tool install --version 7.3.10 --global PowerShell 
 RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 RUN chmod +x ./dotnet-install.sh
 RUN ./dotnet-install.sh --channel 6.0 -InstallDir /usr/share/dotnet

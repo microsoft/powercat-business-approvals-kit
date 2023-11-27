@@ -14,7 +14,16 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License.
 #>
 
-. $PSScriptRoot\users.ps1
+. $PSScriptRoot\test.ps1
+
+$workShopPath = [System.IO.Path]::Combine((Get-AssetPath),"..")
+Set-Location $workShopPath
+
+$validate = $env:VALIDATE -eq "Y"
+if ( $validate ) {
+    Invoke-Pester
+    Invoke-Command -ScriptBlock { Exit }
+}
 
 $account = (az account show | ConvertFrom-Json )
 if ( $NULL -eq $account -or $NULL -eq $account.id ) {
