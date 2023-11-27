@@ -37,4 +37,12 @@ Describe 'Approval Kit Install Tests' {
             -and $_.consentType -eq "AllPrincipals" `
             -and $_.scope -eq "user_impersonation" }).Count | Should -Be 1
     }
+
+    It 'Admin Client Id has admin consent for Dataverse' -Tag "Install" {
+        $grants = (az ad app permission list-grants --id  (Get-SecureValue ADMIN_APP_ID) --show-resource-name) | ConvertFrom-Json
+        ($grants | Where-Object { `
+            $_.resourceDisplayName -eq "Dataverse" `
+            -and $_.consentType -eq "AllPrincipals" `
+            -and $_.scope -eq "user_impersonation" }).Count | Should -Be 1
+    }
 }
