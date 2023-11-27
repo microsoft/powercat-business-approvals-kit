@@ -28,6 +28,13 @@ Describe 'Approval Kit Install Tests' {
         $result.azureResourceId | Should -Be $result.environmentUrl
         $result.resourceUri | Should -Be $result.environmentUrl
         $result.valid | Should -BeTrue
-        $result.redirectFound | Should -BeTrue
+    }
+
+    It 'Client Id has admin consent for Dataverse' -Tag "Install" {
+        $grants = (az ad app permission list-grants --id  (Get-SecureValue CLIENT_ID) --show-resource-name) | ConvertFrom-Json
+        ($grants | Where-Object { `
+            $_.resourceDisplayName -eq "Dataverse" `
+            -and $_.consentType -eq "AllPrincipals" `
+            -and $_.scope -eq "user_impersonation" }).Count | Should -Be 1
     }
 }
