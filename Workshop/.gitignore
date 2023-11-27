@@ -13,4 +13,5 @@
 **/config.dev.json
 **/testResults.xml
 **/users.txt
+**/users?.txt
 **/assets/keys/**
