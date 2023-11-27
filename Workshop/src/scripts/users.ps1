@@ -44,6 +44,12 @@ function Invoke-UserDevelopmentEnvironment {
         [Parameter(Mandatory)] [String] $UserUPN
     )
 
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( $UserUPN.IndexOf("@") -lt 0 ) {
+        $UserUPN = "$UserUPN@$domain"
+    }
+
     return Invoke-GetOrCreateDevelopmentEnvironment $UserUPN
 }
 
@@ -51,6 +57,12 @@ function Remove-UserDevelopmentEnvironment {
     param (
         [Parameter(Mandatory)] [String] $UserUPN
     )
+
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( $UserUPN.IndexOf("@") -lt 0 ) {
+        $UserUPN = "$UserUPN@$domain"
+    }
 
     $envs = Invoke-GetDeveloperEnvironment $UserUPN
     if ( $envs.Count -gt 0 ) {
@@ -551,7 +563,15 @@ function Invoke-SetupUserForWorkshop {
         $Environment
     )
 
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( $UserUPN.IndexOf("@") -lt 0 ) {
+        $UserUPN = "$UserUPN@$domain"
+    }
+
     if ( $NULL -eq $Environment ) {
+        
+
         Invoke-ConfigureUser $UserUPN
         $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
     }
@@ -1493,6 +1513,32 @@ function Reset-UserDevelopmentEnvironment {
 
     Invoke-SetupUserForWorkshop $UserUPN $Environment
 }
+
+function Reset-UserDevelopmentEnvironments {
+    param (
+        [Parameter(Mandatory)] $UsersListFile
+    )
+
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( Test-Path $UsersListFile ) {
+        Write-Host "Found user file"
+        $lines = Get-Content $UsersListFile
+        $total = $lines.Length
+        $index = 0
+        foreach($line in $lines) {
+            if ( -not [System.String]::IsNullOrEmpty($line) ) {
+                $index = $index + 1
+                Write-Host "---------------------------------------------"
+                Write-Host "$index of $total - $(Get-Date)"
+                Write-Host "$line@$domain"
+                Write-Host "---------------------------------------------"
+                Reset-UserDevelopmentEnvironment "$line@$domain"
+            }
+        }
+    }
+}
+
 
 <#
 .SYNOPSIS

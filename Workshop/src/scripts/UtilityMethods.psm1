@@ -50,9 +50,9 @@ class UtilityMethods {
     #>
     static [string] GetSecureValue([String] $Name) {
         $secureFolder = @(
-            [System.IO.Path]::Combine($PSScriptRoot, "..", "..","secure"),
-            [System.IO.Path]::Combine($PSScriptRoot, "..","secure"),
-            [System.IO.Path]::Combine((Get-Location),"secure")
+            [System.IO.Path]::Combine($PSScriptRoot, "..", "..", "secure"),
+            [System.IO.Path]::Combine($PSScriptRoot, "..", "secure"),
+            [System.IO.Path]::Combine((Get-Location), "secure")
         )
         foreach ($folder in $secureFolder) {
             if ( Test-Path $folder ) {
@@ -108,12 +108,12 @@ class UtilityMethods {
         pac auth create --name User --username $UserUPN --password $password
     
         $auth = (pac auth list)
-        if ( $auth -like  "*No profiles were found on this computer*" ) {
+        if ( $auth -like "*No profiles were found on this computer*" ) {
             return  '{"error":"Login failed"}'
         }
     
         $environmentName = "$displayName Dev"
-        $envs = ((pac admin list --json | ConvertFrom-Json) | Where-Object { $_.DisplayName -eq $environmentName  })
+        $envs = ((pac admin list --json | ConvertFrom-Json) | Where-Object { $_.DisplayName -eq $environmentName })
     
         return $envs | ConvertTo-Json
     }
@@ -147,7 +147,7 @@ class UtilityMethods {
     static [string] GetOrCreateDevelopmentEnvironment($UserUPN) {
 
         if ( $UserUPN.IndexOf("@") -lt 0 ) {
-            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $domain = (az account show --query "user.name" -o tsv).Split('@')[1]
             $UserUPN = "$UserUPN@$domain"
         }
 
@@ -155,13 +155,12 @@ class UtilityMethods {
         $displayName = $user[0].displayName
         $environmentName = "$displayName Dev"
     
-        if ( ([UtilityMethods]::GetConfigValue("Feature.ResetUserPassword")) -eq "Y" ) 
-        {
+        if ( ([UtilityMethods]::GetConfigValue("Feature.ResetUserPassword")) -eq "Y" ) {
             Write-Host "Reset user"
             Reset-User $UserUPN | Out-Null
         }
     
-        $envs = ([UtilityMethods]::GetDeveloperEnvironment($UserUPN,$displayName) | ConvertFrom-Json)
+        $envs = ([UtilityMethods]::GetDeveloperEnvironment($UserUPN, $displayName) | ConvertFrom-Json)
 
         if (Get-Member -inputobject $envs -name "error" -Membertype Properties) {
             return $envs | ConvertTo-Json
@@ -170,23 +169,24 @@ class UtilityMethods {
         if (  $NULL -eq $envs -or $envs.Count -eq 0 ) {
             Write-Host "Creating development environment $environmentName"
             pac admin create --name $environmentName --type Developer
-            $envs = (pac admin list --json | ConvertFrom-Json) | Where-Object { $_.DisplayName -eq $environmentName  }
+            $envs = (pac admin list --json | ConvertFrom-Json) | Where-Object { $_.DisplayName -eq $environmentName }
             if ( $envs.Count -eq 0 ) {
                 Write-Error "Unable to create $environmentName"
                 return @{
                     error = "Unable to create $environmentName"
                 } | ConvertTo-Json
             }
-            [UtilityMethods]::DevEnvironmentAuth($UserUPN,$envs[0])
+            [UtilityMethods]::DevEnvironmentAuth($UserUPN, $envs[0])
             return $envs[0] | ConvertTo-Json
-        } else {
+        }
+        else {
             if ( $envs.Count -gt 1 ) {
                 return @{
                     error = "Duplicate environments exist"
                 } | ConvertTo-Json
             }
             Write-Host "$environmentName Exists"
-            [UtilityMethods]::DevEnvironmentAuth($UserUPN,$envs[0])
+            [UtilityMethods]::DevEnvironmentAuth($UserUPN, $envs[0])
             return $envs[0] | ConvertTo-Json
         }
     }
@@ -218,7 +218,7 @@ class UtilityMethods {
         [UtilityMethods]::DevEnvironmentAuth("user@contoso.com", $env)
 
     #>
-    static [string]DevEnvironmentAuth($UserUPN,$Environment) {
+    static [string]DevEnvironmentAuth($UserUPN, $Environment) {
         $existingAuth = (pac auth list)
     
         $user = [UtilityMethods]::ValidateUser($UserUPN) | ConvertFrom-Json
@@ -233,7 +233,8 @@ class UtilityMethods {
         if ( $match.Count -eq 0 ) {
             $password = [UtilityMethods]::GetSecureValue("DEMO_PASSWORD")
             pac auth create -n User -un $UserUPN -p $password -env $Environment.EnvironmentId
-        } else {
+        }
+        else {
             Write-Host "Already authenticated with environment $developmentEnvironmentName"
         }
     
@@ -242,7 +243,8 @@ class UtilityMethods {
         $match = $existingAuth | Where-Object { $_.IndexOf($developmentEnvironmentName) -gt 0 -and $_.IndexOf("*") -gt 0 }
         if ( $match.Count -eq 0 ) {
             return "false"
-        } else {
+        }
+        else {
             return "true"
         }
     }
@@ -266,7 +268,7 @@ class UtilityMethods {
     #>
     static [string] GetConfigValue($Name) {
 
-        $configFile = [System.IO.Path]::Join( ( Get-Location ),"config.json")
+        $configFile = [System.IO.Path]::Join( ( Get-Location ), "config.json")
         if ( Test-Path $configFile ) {
             $config = Get-Content $configFile | ConvertFrom-Json
             return ( $config | Select-Object -ExpandProperty $Name )
@@ -296,8 +298,7 @@ class UtilityMethods {
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
         if ( $NULL -eq $user ) {
             Write-Host "Unable to find user $UserUPN"
-            if ( [UtilityMethods]::GetConfigValue("Feature.ResetUserPassword") -eq "Y" ) 
-            {
+            if ( [UtilityMethods]::GetConfigValue("Feature.ResetUserPassword") -eq "Y" ) {
                 return [UtilityMethods]::ResetUser($UserUPN)
             }
         }
@@ -341,10 +342,10 @@ class UtilityMethods {
         if ( [System.String]::IsNullOrEmpty($First) ) {
             $parts = $UserUPN -Split "@"
             $firstLast = $parts[0] -Split "\."
-            $First =  $firstLast[0].ToLower()
-            $First = $First.Substring(0,1).ToUpper() + $First.Substring(1)
-            $Last =  $firstLast[1].ToLower()
-            $Last = $Last.Substring(0,1).ToUpper() + $Last.Substring(1)
+            $First = $firstLast[0].ToLower()
+            $First = $First.Substring(0, 1).ToUpper() + $First.Substring(1)
+            $Last = $firstLast[1].ToLower()
+            $Last = $Last.Substring(0, 1).ToUpper() + $Last.Substring(1)
         }
     
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
@@ -357,18 +358,18 @@ class UtilityMethods {
     
         $userId = $($user[0].id)
 
-        $graphToken=(az account get-access-token --resource=https://graph.windows.net/ --query accessToken --output tsv)
+        $graphToken = (az account get-access-token --resource=https://graph.windows.net/ --query accessToken --output tsv)
         $graphHeaders = @{
-            Authorization="Bearer $graphToken"
+            Authorization = "Bearer $graphToken"
         }
 
         # https://learn.microsoft.com/previous-versions/azure/ad/graph/api/users-operations#get-a-user--
         $userInfo = Invoke-RestMethod -Method GET -Headers $graphHeaders -Uri "https://graph.windows.net/myorganization/users('$userId')?api-version=1.6-internal"
         
         if ( $NULL -eq $userInfo.strongAuthenticationDetail.verificationDetail ) {
-            $azureToken=(az account get-access-token --resource=74658136-14ec-4630-ad9b-26e160ff0fc6 --query accessToken --output tsv)
+            $azureToken = (az account get-access-token --resource=74658136-14ec-4630-ad9b-26e160ff0fc6 --query accessToken --output tsv)
             $azureHeader = @{
-                Authorization="Bearer $azureToken"
+                Authorization = "Bearer $azureToken"
             }
             Write-Host "Adding Phone Authentication"
             # TODO: Review and determine alternate method to set Mfa Properties for Phone number
@@ -377,10 +378,10 @@ class UtilityMethods {
     
         Write-Host "Reset Name and Location"
     
-        $token=(az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
+        $token = (az account get-access-token --resource=https://graph.microsoft.com --query accessToken --output tsv)
         $headers = @{
-            Authorization="Bearer $token"
-            ConsistencyLevel="eventual"
+            Authorization    = "Bearer $token"
+            ConsistencyLevel = "eventual"
         }
     
         # https://learn.microsoft.com/previous-versions/azure/ad/graph/api/users-operations#ResetUserPassword
@@ -393,18 +394,18 @@ class UtilityMethods {
         Write-Host "Reset Password"
     
         $headers = @{
-            Authorization="Bearer $token"
+            Authorization = "Bearer $token"
         }
     
         # https://learn.microsoft.com/previous-versions/azure/ad/graph/api/users-operations#ResetUserPassword
-        $graphToken=(az account get-access-token --resource=https://graph.windows.net/ --query accessToken --output tsv)
+        $graphToken = (az account get-access-token --resource=https://graph.windows.net/ --query accessToken --output tsv)
         $graphHeaders = @{
-            Authorization="Bearer $graphToken"
+            Authorization = "Bearer $graphToken"
         }
         $body = @{
             passwordProfile = @{
-                password = $password
-                forceChangePasswordNextLogin =  $false
+                password                     = $password
+                forceChangePasswordNextLogin = $false
             }
         } | ConvertTo-Json
     
@@ -452,8 +453,7 @@ class UtilityMethods {
         
         if ( $connections.Count -gt 1 ) {
             $index = 0
-            foreach ($connection in $connections)
-            {
+            foreach ($connection in $connections) {
                 if ( $connection -like "*Error:*") {
                     return [System.Collections.ArrayList]@()
                 }
@@ -461,9 +461,9 @@ class UtilityMethods {
                     $parts = ($connection.Split(' ')).Trim() | Where-Object { $_ }
                     if ( $parts.Count -ge 4) {
                         $connectionInfo = [PSCustomObject]@{ 
-                            Id = $parts[0]
-                            Name = $parts[1]
-                            API = $parts[2]
+                            Id     = $parts[0]
+                            Name   = $parts[1]
+                            API    = $parts[2]
                             Status = $parts[3]
                         }
                         $items.Add($connectionInfo) | out-null
@@ -477,7 +477,7 @@ class UtilityMethods {
     }
 
     static [String] GetAssetPath() {
-        $assetsPath = [System.IO.Path]::Combine($PSScriptRoot,"..", "..", "assets")
+        $assetsPath = [System.IO.Path]::Combine($PSScriptRoot, "..", "..", "assets")
         if ( -not (Test-Path($assetsPath)) ) {
             $assetsPath = [System.IO.Path]::Combine($PSScriptRoot, "..", "assets")
         }
@@ -485,7 +485,7 @@ class UtilityMethods {
     }
 
     
-<#
+    <#
     .DESCRIPTION
     This PowerShell function adds a new connection of a specified type to a development environment for a given user. It takes three parameters: `$UserUPN`, `$Environment`, and `$ConnectorName`, which are the user's UPN, the development environment object, and the name of the connector to create, respectively.
 
@@ -515,7 +515,7 @@ class UtilityMethods {
     Adds a new connection of type "MyConnector" to the specified development environment for the specified user.
 
     #> 
-    static [object] AddConnection([String] $UserUPN,$Environment, [String] $ConnectorName, $waitForSignIn) {
+    static [object] AddConnection([String] $UserUPN, $Environment, [String] $ConnectorName, $waitForSignIn) {
         $connections = [UtilityMethods]::GetConnections($Environment)
 
         $match = $connections | Where-Object { $_.API.IndexOf("shared_$ConnectorName") -gt 0 -and $_.Status -eq "Connected" }
@@ -527,7 +527,7 @@ class UtilityMethods {
 
         $workshopPath = [System.IO.Path]::Join([UtilityMethods]::GetAssetPath(), "..")
 
-        $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
+        $appPath = [System.IO.Path]::Join($PSScriptRoot, "..", "install", "bin", "Debug", "net7.0", "install.dll")
         Push-Location
         Set-Location ($workshopPath)
         dotnet $appPath connection create --upn $UserUPN --env $Environment.EnvironmentId --connector $ConnectorName --signIn $waitForSignIn --record Y
@@ -537,11 +537,13 @@ class UtilityMethods {
         $waiting = (Get-Date).Subtract($started).TotalMinutes
         while ( $True ) {
             $connections = [UtilityMethods]::GetConnections($Environment)
-            $match = $connections | Where-Object { $_.API.IndexOf("shared_$ConnectorName") }
+            $sharedName = $ConnectorName.ToLower()
+            $match = $connections | Where-Object { $_.API.IndexOf("shared_$sharedName") }
 
             if ( $match.Count -gt 0 ) {
                 return $match[0]
-            } else {
+            }
+            else {
                 $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
                 Write-Host "Waiting for connection. Executing $diff"
                 Start-Sleep -Seconds 2
@@ -556,7 +558,7 @@ class UtilityMethods {
 
         if ( $match.Count -eq 0 ) {
             Write-Error "Unable to create $ConnectorName"
-            return @{ error = "Unable to create $ConnectorName"}
+            return @{ error = "Unable to create $ConnectorName" }
         }
 
         return $match[0]
@@ -602,7 +604,7 @@ class UtilityMethods {
 
         $attempt = 0
         while ( $match.Count -eq 0 -and $attempt -le 5 ) {
-            [UtilityMethods]::AddConnection($UserUPN,$Environment,$connector,$waitForSignIn)
+            [UtilityMethods]::AddConnection($UserUPN, $Environment, $connector, $waitForSignIn)
 
             $connections = [UtilityMethods]::GetConnections($Environment)
             $match = $connections | Where-Object { $_.API.IndexOf("shared_${connector}") -gt 0 }
@@ -627,7 +629,8 @@ class UtilityMethods {
             return @{
                 Id = $match[0].Id
             } | ConvertTo-Json
-        } else {
+        }
+        else {
             return @{
                 error = "Unable to find ${connector} connection"
             } | ConvertTo-Json
@@ -639,15 +642,15 @@ function Invoke-DevEnvironmentAuthUtility {
     param (
         $UserUPN, $Environment
     )
-    $result = [UtilityMethods]::DevEnvironmentAuth($UserUPN,$Environment) | ConvertFrom-Json
+    $result = [UtilityMethods]::DevEnvironmentAuth($UserUPN, $Environment) | ConvertFrom-Json
     return $result
 }
 
-function Invoke-GetDeveloperEnvironment{
+function Invoke-GetDeveloperEnvironment {
     param (
         $UserUPN, $displayName
     )
-    $result = [UtilityMethods]::GetDeveloperEnvironment($UserUPN,$displayName) | ConvertFrom-Json
+    $result = [UtilityMethods]::GetDeveloperEnvironment($UserUPN, $displayName) | ConvertFrom-Json
     return $result
 }
 
@@ -706,10 +709,59 @@ function Get-SecureValue {
     return [UtilityMethods]::GetSecureValue($Name)     
 }
 
+function Get-AuthenticatedEnvironments {
+    $items = [System.Collections.ArrayList]@()
+
+    # TODO - Replace with pac pac auth list --json when supported
+    $auth = (pac auth list)
+
+    $index = 0
+    foreach ($item in $auth) {
+        if ( $connection -like "*Error:*") {
+            return [System.Collections.ArrayList]@()
+        }
+        if ( [System.String]::IsNullOrEmpty($item) ) {
+            continue
+        }
+        if ( $index -eq 0) {
+            $active = $auth[0].IndexOf("Active")
+            $kind = $auth[0].IndexOf("Kind")
+            $name = $auth[0].IndexOf("Name")
+            $friendlyName = $auth[0].IndexOf("Friendly Name")
+            $url = $auth[0].IndexOf("Url")
+            $user = $auth[0].IndexOf("User")
+            $cloud = $auth[0].IndexOf("Cloud")
+            $type = $auth[0].IndexOf("Type")
+        }
+
+        if ( $index -gt 0) {
+            $authItem = [PSCustomObject]@{ 
+                Index          = $item.Substring(0, $active).Trim()
+                Active         = $item.Substring($active, $kind - $active).Trim() -eq "*"
+                Kind           = $item.Substring($kind, $name - $kind).Trim()
+                FriendlyName   = $item.Substring($friendlyName, $url - $friendlyName).Trim()
+                EnvironmentUrl = $item.Substring($url, $user - $url).Trim()
+                User           = $item.Substring($user, $cloud - $user).Trim()
+                Cloud          = $item.Substring($cloud, $type - $cloud).Trim()
+                Type           = $item.Substring($type, $item.Length - $type).Trim()
+            }
+            $items.Add($authItem) | out-null
+        }
+        $index = $index + 1
+    }
+    
+    return $items
+}
+
 function Get-Connections {
     param (
         $Environment
     )
+
+    if ( $NULL -eq $Environment ) {
+        $auth = Get-AuthenticatedEnvironments
+        $Environment = [UtilityMethods]::GetOrCreateDevelopmentEnvironment($auth[0].User) | ConvertFrom-Json
+    }
     return [UtilityMethods]::GetConnections($Environment)
 }
 
@@ -719,4 +771,5 @@ Export-ModuleMember -Function Install-ConnectionSetup
 Export-ModuleMember -Function Invoke-DevEnvironmentAuthUtility
 Export-ModuleMember -Function Get-SecureValue
 Export-ModuleMember -Function Get-Connections
+Export-ModuleMember -Function Get-AuthenticatedEnvironments
 
