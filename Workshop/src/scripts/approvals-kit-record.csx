@@ -19,19 +19,20 @@ public class PlaywrightScript {
         var page = context.Pages.First();
         var values = new Dictionary<string, string>();
 
+        
         if ( ! String.IsNullOrEmpty(json) ) {
             values = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
         }
+        
+        // var request = new MachineRequest();
+        // await request.Submit(values, page, logger);
 
-        var request = new MachineRequest();
-        await request.Submit(values, page, logger);
+        //var app = new PowerApp();
+        //await app.Open(values, page, logger, values["businessApprovalManager"]);
 
-        var approval = new ApprovalResponse();
+        //TODO check if record exists
 
-        // Confirm the Self Approval
-        if ( await approval.Approve(values, page, logger) ) {
-            // Confirm the Manager Request
-            await approval.Approve(values, page, logger);
-        }
+        //var kit = new ApprovalKit();
+        //await kit.CreateSingleStage(values, page, logger);
     }
 }

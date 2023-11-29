@@ -84,11 +84,11 @@ namespace Microsoft.PowerPlatform.Demo
         /// <param name="environment">The environment id to login to</param>
         /// <returns></returns>
         /// <summary>
-        public async Task<PlaywrightTestInfraFunctions> Login(string user, string environment = "") {
+        public async Task<PlaywrightTestInfraFunctions> Login(string user, string environment = "", Dictionary<string,string> values = null) {
             if ( _playwright == null ) {
                 var config = new BrowserConfiguration() { Browser = "Chromium", Commands = _commands };
                 var playwright = new PlaywrightTestInfraFunctions(config, _logger, null);
-                await playwright.SetupAsync();
+                await playwright.SetupAsync(values);
 
                 var desiredUrl = string.IsNullOrEmpty(environment) ? "https://make.powerapps.com" : $"https://make.powerapps.com/environments/{environment}";
                 if ( string.IsNullOrEmpty(environment) && environment.StartsWith("https://") ) {

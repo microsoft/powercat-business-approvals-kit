@@ -20,6 +20,8 @@
     <PackageReference Include="ReadablePassphrase" Version="1.3.0" />
     <PackageReference Include="SecureStore" Version="1.2.0" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

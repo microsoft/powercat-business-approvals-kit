@@ -43,7 +43,13 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
 
     Process 
     {
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
+
         if ( [System.String]::IsNullOrEmpty($EnvironmentUrl) ) {
+            Write-Host "Query environments"
             $envs = Get-Environments
     
             if ( [System.String]::IsNullOrEmpty($EnvironmentName) ) {
@@ -58,8 +64,9 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
                 return
             }
         
+            Write-Host "Found environment"
             $dataverse = $devEnv.EnvironmentUrl
-            $environmentId = $devEnv.Id
+            $environmentId = $devEnv.EnvironmentId
         } else {
             $dataverse = $EnvironmentUrl
             $environmentId = $EnvironmentId
@@ -67,6 +74,7 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
     
         $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
     
+        Write-Host "Searching for Contoso Coffee in $dataverse"
         $solution = (Get-Solution $token $dataverse "ContosoCoffee")
     
         if ( $solution.value.count -eq 0 ) {
@@ -83,7 +91,7 @@ function Invoke-ValidateTwoStageMachineRequestApproval {
             powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
         } | ConvertTo-Json)
     
-        Invoke-PlaywrightScript $UserUPN $environmentId "contoso-coffee-submit-machine-request.csx" $data    
+        Invoke-PlaywrightScript $UserUPN $environmentId "contoso-coffee-submit-machine-request.csx" $data N    
     }
 }
 
@@ -120,7 +128,11 @@ function Invoke-PlaywrightScript {
 
     if ( -not [System.IO.Path]::IsPathRooted($ScriptFile) ) {
         $ScriptFile = [System.IO.Path]::Join($PSScriptRoot,$ScriptFile)
-        
+    }
+
+    if ( $UserUPN.IndexOf("@") -eq -1 ) {
+        $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+        $UserUPN = "$UserUPN@$domain"
     }
 
     #Get the bytes of the data with encode      
@@ -223,6 +235,10 @@ function Get-Solution {
 
     $headers = @{Authorization = "Bearer $token" }
 
+    if ( -not $environmentUrl.EndsWith("/") ) {
+        $environmentUrl = $environmentUrl + "/"
+    }
+
     return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${environmentUrl}api/data/v9.2/solutions?`$select=uniquename,solutionid&`$filter=uniquename eq '$uniqueName'" )
 }
 
@@ -253,7 +269,11 @@ function Get-SolutionComponents {
 
     $headers = @{Authorization = "Bearer $token" }
 
-    return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${environmentUrl}api/data/v9.2/msdyn_solutioncomponentsummaries?`$filter=msdyn_solutionid eq $solutionId&`$select=msdyn_displayname,msdyn_objectid" )
+    if ( -not $environmentUrl.EndsWith("/") ) {
+        $environmentUrl = $environmentUrl + "/"
+    }
+
+    return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${environmentUrl}api/data/v9.2/msdyn_solutioncomponentsummaries?`$filter=msdyn_solutionid eq $solutionId&`$select=msdyn_displayname,msdyn_objectid,msdyn_componenttype" )
 }
 
 function Get-ApprovalsKitProcess {
@@ -266,6 +286,10 @@ function Get-ApprovalsKitProcess {
     $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
 
     $headers = @{Authorization = "Bearer $token" }
+
+    if ( -not $dataverse.EndsWith("/") ) {
+        $environmentUrl = $environmentUrl + "/"
+    }
 
     return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${dataverse}api/data/v9.2/cat_businessapprovalprocesses?`$select=cat_businessapprovalprocessid,cat_name&`$filter=cat_name eq '$workflowName'" )
 }
@@ -280,6 +304,10 @@ function Get-ApprovalsKitPublishedVersion {
     $token = (az account get-access-token --resource=$dataverse --query accessToken --output tsv)
 
     $headers = @{Authorization = "Bearer $token" }
+    
+    if ( -not $dataverse.EndsWith("/") ) {
+        $environmentUrl = $environmentUrl + "/"
+    }
 
     return (Invoke-RestMethod -Method GET -Headers $headers -Uri "${dataverse}api/data/v9.2/cat_businessapprovalversions?`$select=cat_businessapprovalversionid,cat_name,cat_version,cat_publishingstatus&`$filter=cat_name eq '$workflowName'" )
 }
@@ -425,6 +453,60 @@ function Invoke-ValidateEnvironment {
     }
 
     return $result
+}
+
+function Invoke-RecordDemo {
+    param (
+        [Parameter(Mandatory)] $UserUPN
+    )
+
+    if ( -not ([System.String]::IsNullOrEmpty($UserUPN)) ) {
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
+        $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    } else {
+        $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
+    }
+
+    $dataverse = $Environment.EnvironmentUrl
+    if ( $NULL -eq $dataverse -and -not $dataverse.EndsWith("/") ) {
+        $dataverse = $dataverse + "/"
+    }
+
+    $token=(az account get-access-token --resource=$($Environment.EnvironmentUrl) --query accessToken --output tsv)
+    $headers = @{Authorization="Bearer $token"}
+    $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "${dataverse}api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+    
+    $environmentId = $Environment.EnvironmentId
+
+    Write-Host "Searching for Contoso Coffee in $dataverse"
+    $solution = (Get-Solution $token $dataverse "ContosoCoffee")
+    $solutionComponents = (Get-SolutionComponents $token $dataverse $solution.value[0].solutionid) 
+    $appId = ($solutionComponents.value | Where-Object { $_.msdyn_displayname -eq "Machine Ordering App"} | Select-Object -First 1).msdyn_objectid
+
+    $solutionBusinessApprovalKit = (Get-Solution $token $dataverse "BusinessApprovalKit")
+    $solutionBusinessApprovalKitComponents = (Get-SolutionComponents $token $dataverse $solutionBusinessApprovalKit.value[0].solutionid) 
+    
+    $modelDrivenAppComponentType = 80
+    $kitAppId = ($solutionBusinessApprovalKitComponents.value | Where-Object { $_.msdyn_displayname -eq "Business Approval Management" -and $_.msdyn_componenttype -eq $modelDrivenAppComponentType} | Select-Object -First 1).msdyn_objectid
+
+    $environmentUrl = $Environment.EnvironmentUrl
+    if ( -not $environmentUrl.EndsWith("/")) {
+        $environmentUrl = $environmentUrl + "/"
+    }
+
+    if ( $connectors.value.length -eq 1 ) {
+        $data = (@{
+            # ScreenWidth = "1920"
+            # ScreenHeight = "1080"
+            contosoCoffeeApplication = "https://apps.powerapps.com/play/e/${environmentId}/a/${appId}"
+            businessApprovalManager = "${environmentUrl}main.aspx?appid=$kitAppId"
+            powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
+        } | ConvertTo-Json)
+        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-record.csx" $data "N" "N" # | Out-Null
+    }
 }
 
 function Invoke-CreateKeys {
