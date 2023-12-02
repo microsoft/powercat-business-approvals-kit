@@ -1,3 +1,19 @@
+/*
+ * This class is experimental and very likely to change until the demo feature is completed.
+ * Use at your own risk.
+ *
+ * Ideal end state: The ability to automate the Approval of requests.
+ *
+ * This class represents an ApprovalResponse and contains a method, Approve, that approves an approval
+ * using Playwright and the Power Automate Portal.
+ *
+ * Key steps
+ * - Once an approval request appears, the method clicks the first radio button 
+ * - Clicks the "Approve", "Confirm", and "Done" buttons to approve the request.
+ * - If the approval is successfully confirmed, the method returns true.
+ * - If not, it returns false and logs an error message.
+ *
+ */
 using System.Collections.Generic;
 using Microsoft.Playwright;
 using Microsoft.Extensions.Logging;
@@ -11,27 +27,29 @@ namespace Microsoft.PowerPlatform.Demo {
 
             while ( DateTime.Now.Subtract(started).Minutes < 5 && !confirmed ) {
                 try {
-                    await page.GetByRole(AriaRole.Radio).Nth(0).ClickAsync();
-                    
-                    await page.GetByLabel("Approve", new() { Exact = true }).Nth(0).ClickAsync();
+                    var rows = await page.GetByRole(AriaRole.Row).AllAsync();
 
-                    await page.GetByRole(AriaRole.Button, new() { Name = "Confirm" }).ClickAsync();
+                    if ( rows.Count() > 0 ) {
+                        await page.GetByRole(AriaRole.Radio).Nth(0).ClickAsync();
+                        
+                        await page.GetByLabel("Approve", new() { Exact = true }).Nth(0).ClickAsync();
 
-                    await page.GetByRole(AriaRole.Button, new() { Name = "Done" }).ClickAsync();
+                        await page.GetByRole(AriaRole.Button, new() { Name = "Confirm" }).ClickAsync();
 
-                    confirmed = true;
+                        await page.GetByRole(AriaRole.Button, new() { Name = "Done" }).ClickAsync();
 
-                    logger.LogInformation("Approval Confirmed");
+                        confirmed = true;
 
-                    await page.ReloadAsync();
+                        logger.LogInformation("Approval Confirmed");
+
+                        await page.ReloadAsync();
+                    } else {
+                        await page.ReloadAsync();
+                        Console.WriteLine("Waiting 30 seconds");
+                        System.Threading.Thread.Sleep(30 * 1000);
+                    }
                 } catch {
                     
-                }
-
-                if ( ! confirmed ) {
-                    Console.WriteLine("Waiting 30 seconds");
-                    System.Threading.Thread.Sleep(30 * 1000);
-                    await page.ReloadAsync();
                 }
             }
 

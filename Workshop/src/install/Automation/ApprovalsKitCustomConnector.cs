@@ -1,9 +1,25 @@
+/*
+ * This class is experimental and very likely to change until the demo feature is completed.
+ * Use at your own risk.
+ *
+ * Ideal end state: to validate the Approvals Kit custom connector
+ *
+ */
+
 using System.Collections.Generic;
 using Microsoft.Playwright;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.PowerPlatform.Demo {
     public class ApprovalsKitCustomConnector {
+
+        /// <summary>
+        /// Update the Approvals Kit OAuth Settings
+        /// </summary>
+        /// <param name="values">The values with editURl, clientId, clientSecret and resourceUrl</param>
+        /// <param name="page">The current authenticated page</param>
+        /// <param name="logger">Open logging instance</param>
+        /// <returns><c>True</c> if updated</returns>
         public async Task Update(Dictionary<string, string> values, IPage page, ILogger logger) {
             await page.GotoAsync(values["editUrl"]);
     
@@ -17,9 +33,7 @@ namespace Microsoft.PowerPlatform.Demo {
             await page.GetByPlaceholder("********").FillAsync(values["clientSecret"]);
             await page.GetByPlaceholder("Resource URL").FillAsync(values["resourceUrl"]);
 
-            if ( await page.GetByLabel("Automation in a Day").IsVisibleAsync() ) {
-                await page.GetByLabel("Automation in a Day").GetByLabel("Close").ClickAsync();
-            }
+            await PowerAutomate.CloseAutomationInADayIfVisible(page);
 
             await page.GetByLabel("Update connector").ClickAsync(new() { Force = true });
 
@@ -43,6 +57,13 @@ namespace Microsoft.PowerPlatform.Demo {
             }
         }
 
+        /// <summary>
+        /// Read data from connector and return information found
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="page"></param>
+        /// <param name="logger"></param>
+        /// <returns></returns>
         public async Task<IDictionary<string, Object>> Get(Dictionary<string, string> values, IPage page, ILogger logger) {
             await page.GotoAsync(values["editUrl"]);
 

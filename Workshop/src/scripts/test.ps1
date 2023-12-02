@@ -471,7 +471,7 @@ function Invoke-RecordDemo {
     }
 
     $dataverse = $Environment.EnvironmentUrl
-    if ( $NULL -eq $dataverse -and -not $dataverse.EndsWith("/") ) {
+    if ( $NULL -ne $dataverse -and -not $dataverse.EndsWith("/") ) {
         $dataverse = $dataverse + "/"
     }
 
@@ -504,6 +504,10 @@ function Invoke-RecordDemo {
             contosoCoffeeApplication = "https://apps.powerapps.com/play/e/${environmentId}/a/${appId}"
             businessApprovalManager = "${environmentUrl}main.aspx?appid=$kitAppId"
             powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
+            powerAutomatePortal = "https://make.powerautomate.com/environments/${environmentId}"
+            userEmail = $UserUPN
+            token = $token
+            environmentUrl = $dataverse
         } | ConvertTo-Json)
         Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-record.csx" $data "N" "N" # | Out-Null
     }

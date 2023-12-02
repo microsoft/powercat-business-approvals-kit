@@ -1,3 +1,11 @@
+/*
+ * This class is experimental and very likely to change until the demo feature is completed.
+ * Use at your own risk.
+ *
+ * Ideal end state: Ability to automate the Canvas app using the JavaScript Model
+ *
+ */
+ 
 using System.Collections.Generic;
 using Microsoft.Playwright;
 using Microsoft.Extensions.Logging;
@@ -21,7 +29,7 @@ namespace Microsoft.PowerPlatform.Demo {
         private async Task HandleConsentDialog(IPage page, ILogger logger) {
             var started = DateTime.Now;
             var compete = false;
-            while ( !compete && DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+            while ( !compete && DateTime.Now.Subtract(started).TotalSeconds < 30 ) {
                 try {
                     foreach ( var frame in page.Frames ) {
                         var found = false;

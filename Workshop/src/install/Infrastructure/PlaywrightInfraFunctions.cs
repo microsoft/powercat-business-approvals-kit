@@ -122,6 +122,10 @@ namespace Microsoft.PowerApps.TestEngine.TestInfra
             }
 
             BrowserContext = await Browser.NewContextAsync(contextOptions);
+
+            // 2 Minute timeout
+            BrowserContext.SetDefaultTimeout(2 * 60 * 1000);
+            
             _logger.LogInformation("Browser context created");
         }
 

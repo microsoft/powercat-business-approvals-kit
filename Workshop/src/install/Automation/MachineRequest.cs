@@ -1,3 +1,11 @@
+/*
+ * This class is experimental and very likely to change until the demo feature is completed.
+ * Use at your own risk.
+ *
+ * Ideal end state: Ability to automate the Canvas app using the JavaScript Model
+ *
+ */
+
 using System.Collections.Generic;
 using Microsoft.Playwright;
 using Microsoft.Extensions.Logging;
@@ -5,7 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.PowerPlatform.Demo {
     public class MachineRequest {
         /// <summary>
-        /// Submit a Machine Order Request in the Contofo Coffee application
+        /// Submit a Machine Order Request in the Contoso Coffee application
         /// </summary>
         /// <param name="values">Dictionary of values that could be used by the action</param>
         /// <param name="page">The current logged in authenticated page</param>
