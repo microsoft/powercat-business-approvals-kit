@@ -169,8 +169,8 @@ jobs:
             echo "Area - OneCatTools\\ApprovalsKit\\Backlog"
             echo "AREA=OneCatTools\\ApprovalsKit\\Backlog" >> $GITHUB_OUTPUT
           else
-            echo "Area - OneCatTools\\ApprovalsKit"
-            echo "AREA=OneCatTools\\ApprovalsKit" >> $GITHUB_OUTPUT
+            echo "Area - OneCatTools\\ApprovalsKit\\Develop"
+            echo "AREA=OneCatTools\\ApprovalsKit\\Develop" >> $GITHUB_OUTPUT
           fi   
 
   alertEnhancementAK:
