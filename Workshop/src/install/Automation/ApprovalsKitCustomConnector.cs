@@ -12,26 +12,31 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.PowerPlatform.Demo {
     public class ApprovalsKitCustomConnector {
+        Dictionary<string, string> _values;
+        ILogger _logger;
+
+        public ApprovalsKitCustomConnector(Dictionary<string, string> values, ILogger logger) {
+            _values = values;
+            _logger = logger;
+        }
 
         /// <summary>
         /// Update the Approvals Kit OAuth Settings
         /// </summary>
-        /// <param name="values">The values with editURl, clientId, clientSecret and resourceUrl</param>
         /// <param name="page">The current authenticated page</param>
-        /// <param name="logger">Open logging instance</param>
         /// <returns><c>True</c> if updated</returns>
-        public async Task Update(Dictionary<string, string> values, IPage page, ILogger logger) {
-            await page.GotoAsync(values["editUrl"]);
+        public async Task Update(IPage page) {
+            await page.GotoAsync(_values["editUrl"]);
     
-            await page.GetByPlaceholder("api.contoso.com").FillAsync(values["host"]);
+            await page.GetByPlaceholder("api.contoso.com").FillAsync(_values["host"]);
 
             await OpenTab(page, "1. General", "2. Security", "Security");
 
             await page.GetByLabel("Edit").Nth(1).ClickAsync();
 
-            await page.GetByPlaceholder("Client ID").FillAsync(values["clientId"]);
-            await page.GetByPlaceholder("********").FillAsync(values["clientSecret"]);
-            await page.GetByPlaceholder("Resource URL").FillAsync(values["resourceUrl"]);
+            await page.GetByPlaceholder("Client ID").FillAsync(_values["clientId"]);
+            await page.GetByPlaceholder("********").FillAsync(_values["clientSecret"]);
+            await page.GetByPlaceholder("Resource URL").FillAsync(_values["resourceUrl"]);
 
             await PowerAutomate.CloseAutomationInADayIfVisible(page);
 
@@ -64,8 +69,8 @@ namespace Microsoft.PowerPlatform.Demo {
         /// <param name="page"></param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        public async Task<IDictionary<string, Object>> Get(Dictionary<string, string> values, IPage page, ILogger logger) {
-            await page.GotoAsync(values["editUrl"]);
+        public async Task<IDictionary<string, Object>> Get(IPage page) {
+            await page.GotoAsync(_values["editUrl"]);
 
             var result = new System.Dynamic.ExpandoObject() as IDictionary<string, Object>;
             
@@ -84,7 +89,7 @@ namespace Microsoft.PowerPlatform.Demo {
             if ( operations.Length > 0 ) {
                 await OpenTab(page, "5. Code", "6. Test", "Test operation");
 
-                int connectionCounts = int.Parse(values["approvalsConnectionCount"]);
+                int connectionCounts = int.Parse(_values["approvalsConnectionCount"]);
 
                 var connection = await page.Locator("#customApiTestTab-connections").AllAsync();
                 if ( connection.Count > 0 ) {
@@ -108,7 +113,7 @@ namespace Microsoft.PowerPlatform.Demo {
                                     foreach ( var other in page.Context.Pages ) {
                                         var title = await other.TitleAsync();
                                         if ( title == "Sign in to your account" ) {
-                                            var email = values["user"].ToLower();
+                                            var email = _values["user"].ToLower();
                                             var match = await other.Locator($"[data-test-id=\"{email}\"]").AllAsync();
                                             if ( match.Count > 0 ) {
                                                 await match[0].ClickAsync();
@@ -148,7 +153,7 @@ namespace Microsoft.PowerPlatform.Demo {
         private async Task OpenTab(IPage page, string current, string nextTab, string newHeading) {
             await page.GetByLabel(current).ClickAsync();
             await page.GetByRole(AriaRole.Menuitem, new() { Name = nextTab }).ClickAsync();
-            await page.GetByRole(AriaRole.Heading, new() { Name = newHeading }).ClickAsync();
+            await page.GetByRole(AriaRole.Heading, new() { Name = newHeading }).Nth(0).ClickAsync();
         }
     }
 }

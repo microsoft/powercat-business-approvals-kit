@@ -20,8 +20,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.PowerPlatform.Demo {
     public class ApprovalResponse {
-        public async Task<bool> Approve(Dictionary<string, string> values, IPage page, ILogger logger) {
-            await page.GotoAsync(values["powerAutomateApprovals"]);
+        Dictionary<string, string> _values;
+        ILogger _logger;
+
+        public ApprovalResponse(Dictionary<string, string> values, ILogger logger) {
+            _values = values;
+            _logger = logger;
+        }
+
+        public async Task<bool> Approve(IPage page) {
+            await page.GotoAsync(_values["powerAutomateApprovals"]);
             var started = DateTime.Now;
             var confirmed = false;
 
@@ -40,7 +48,7 @@ namespace Microsoft.PowerPlatform.Demo {
 
                         confirmed = true;
 
-                        logger.LogInformation("Approval Confirmed");
+                        _logger.LogInformation("Approval Confirmed");
 
                         await page.ReloadAsync();
                     } else {
@@ -54,7 +62,7 @@ namespace Microsoft.PowerPlatform.Demo {
             }
 
             if ( ! confirmed ) {
-                logger.LogError("Unable to confirm Approval");
+                _logger.LogError("Unable to confirm Approval");
             }
 
             return confirmed;

@@ -12,6 +12,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.PowerPlatform.Demo {
     public class PowerApp {
+        
+        Dictionary<string, string> _values;
+        ILogger _logger;
+
+        public PowerApp(Dictionary<string, string> values, ILogger logger) {
+            _values = values;
+            _logger = logger;
+        }
+
         /// <summary>
         /// Open a Power Platform Power App handling optional consent dialog
         /// </summary>
@@ -20,13 +29,13 @@ namespace Microsoft.PowerPlatform.Demo {
         /// <param name="logger">Logger to provide feedback</param>
         /// <param name="url">The Power App Url to open</param>
         /// <returns></returns>
-        public async Task Open(Dictionary<string, string> values, IPage page, ILogger logger, string url) {
+        public async Task Open(IPage page, string url) {
             await page.GotoAsync(url);
 
-            await HandleConsentDialog(page, logger);
+            await HandleConsentDialog(page);
         }
 
-        private async Task HandleConsentDialog(IPage page, ILogger logger) {
+        private async Task HandleConsentDialog(IPage page) {
             var started = DateTime.Now;
             var compete = false;
             while ( !compete && DateTime.Now.Subtract(started).TotalSeconds < 30 ) {

@@ -45,36 +45,82 @@ public class PlaywrightScript {
         // - Ability to choose which scenarios to execute (selected or all)
         // - Skip sections?
         // - Add time code index to make easier to import and edit later
-        
-        // var request = new MachineRequest();
-        // await request.Submit(values, page, logger);
 
-        //var app = new PowerApp();
-        //await app.Open(values, page, logger, values["businessApprovalManager"]);
+        var dataverse = new ApprovalsKitDataverse(values, logger);
 
-        //TODO check if record exists
+        var workflowId = await dataverse.GetApprovalWorkflowId("Machine Requests");
 
-        //var kit = new ApprovalKit();
-        //await kit.CreateSingleStage(values, page, logger);
+        var createWorkflow = true;
+        var createRequests = true;
+        var editDefinition = true;
+        var editCloudFlow = true;
+        var demoTwoStage = true;
 
-        //var automate = new PowerAutomate();
-        //await automate.CreateContosoCoffeeApprovalsSolution(values, page, logger);
+        MachineRequest request = new MachineRequest(values, logger);
+        ApprovalKit kit = new ApprovalKit(values, logger);
+        PowerApp app = new PowerApp(values, logger);
+        PowerAutomate automate = new PowerAutomate(values, logger);
+        ApprovalResponse approval = new ApprovalResponse(values, logger);
 
-        //var request = new MachineRequest();
-        //await request.Submit(values, page, logger);
+        if ( createWorkflow || String.IsNullOrEmpty(workflowId) ) {
+            if ( createRequests ) {
+                await request.Submit(page);
+            }
 
-        //var approval = new ApprovalResponse();
+            await app.Open(page, values["businessApprovalManager"]);
 
-        //// Confirm the Self Approval
-        //await approval.Approve(values, page, logger);
+            await kit.CreateSingleStage(page);
+            workflowId = await dataverse.GetApprovalWorkflowId("Machine Requests");
+        }
 
-        var kit = new ApprovalKit();
-        await kit.OpenWorkflow(values, page, logger);
+        await page.PauseAsync();
 
-        
-        await page.GetByLabel("Process Designer").ClickAsync();
+        var solutionId = await dataverse.GetSolutionId("Contoso Coffee Approvals");
 
-        await kit.CreateConditionalStage(page, "Manager Approval", logger);
+        if ( String.IsNullOrEmpty(solutionId) ) {
+            await automate.CreateContosoCoffeeApprovalsSolution(page);
+            solutionId = await dataverse.GetSolutionId("Contoso Coffee Approvals");
+        }
+
+        await page.PauseAsync();
+
+        if ( createRequests ) {
+            await request.Submit(page);
+
+            // Confirm the Self Approval (Assume single stage approval)
+            await approval.Approve(page);
+        }
+
+        await page.PauseAsync();
+
+        if ( !String.IsNullOrEmpty(workflowId) && editDefinition ) {
+            await kit.OpenWorkflow(page);
+
+            await page.GetByLabel("Process Designer").ClickAsync();
+
+            await kit.CreateConditionalStage(page, "Manager Approval"); 
+        }
+
+        await page.PauseAsync();
+
+        var cloudFlowId = await dataverse.GetCloudFlowId("Machine Requests", solutionId);
+
+        if ( !String.IsNullOrEmpty(cloudFlowId) && editCloudFlow ) {
+            await automate.OpenExistingCloudFlow(page);
+            await automate.UpdateCloudFlow(page);
+        }
+
+        await page.PauseAsync();
+
+        if ( await dataverse.IsTwoStageWorkflowPublishedAndCloudFlowSaved(workflowId, cloudFlowId) && demoTwoStage ) {
+            await request.Submit(page);
+
+            // Confirm the Self Approval (Assume single stage approval)
+            await approval.Approve(page);
+
+            // Confirm the Manager Approval
+            await approval.Approve(page);
+        }
 
         await page.PauseAsync();
     }

@@ -1,6 +1,6 @@
 #r "Microsoft.Playwright.dll"
 #r "Microsoft.Extensions.Logging.dll"
-#r ""
+#r "install.dll"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.Extensions.Logging;
+using Microsoft.PowerPlatform.Demo;
 
 public class PlaywrightScript {
     public static void Run(IBrowserContext context, string base64Data, ILogger logger) {
@@ -22,8 +23,7 @@ public class PlaywrightScript {
             values = JsonSerializer.Deserialize<Dictionary<string, string>>(base64Data);
         }
 
-        var connector = new ApprovalsKitCustomConnector();
-        await connector.Update(page, values, logger);
-        string json = JsonSerializer.Serialize(result);
+        var connector = new ApprovalsKitCustomConnector(values, logger);
+        await connector.Update(page);
     }
 }

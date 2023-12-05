@@ -10,9 +10,19 @@
 using System.Collections.Generic;
 using Microsoft.Playwright;
 using Microsoft.Extensions.Logging;
+using Microsoft.PowerPlatform.Dataverse.Client;
+using Microsoft.Xrm.Sdk.Query;
 
 namespace Microsoft.PowerPlatform.Demo {
     public class PowerAutomate {
+        Dictionary<string, string> _values;
+        ILogger _logger;
+
+        public PowerAutomate(Dictionary<string, string> values, ILogger logger) {
+            _values = values;
+            _logger = logger;
+        }
+
         /// <summary>
         /// Open Power Automate Portal and create Contoso Coffee Approvals Solution
         /// </summary>
@@ -20,8 +30,8 @@ namespace Microsoft.PowerPlatform.Demo {
         /// <param name="page">The current logged in authenticated page</param>
         /// <param name="logger">Logger to provide feedback</param>
         /// <returns></returns>
-        public async Task CreateContosoCoffeeApprovalsSolution(Dictionary<string, string> values, IPage page, ILogger logger) {
-            Uri baseUri = new Uri(values["powerAutomatePortal"]);
+        public async Task CreateContosoCoffeeApprovalsSolution(IPage page) {
+            Uri baseUri = new Uri(_values["powerAutomatePortal"]);
             await page.GotoAsync(Append(baseUri, "solutions").ToString());
 
             var solutionFrame = page.FrameLocator("iframe[name=\"widgetIFrame\"]");
@@ -40,9 +50,9 @@ namespace Microsoft.PowerPlatform.Demo {
 
             await AddApprovalsKitCustomConnector(flowFrame);
 
-            await SignInApprovalsKitConnector(page, flowFrame, values["userEmail"]);
+            await SignInApprovalsKitConnector(page, flowFrame, _values["userEmail"]);
 
-            await ConfigureApprovalsConnector(flowFrame, "Machine Requests (v1)", logger);
+            await ConfigureApprovalsConnector(flowFrame, "Machine Requests (v1)");
 
             System.Threading.Thread.Sleep(1000);
 
@@ -69,7 +79,25 @@ namespace Microsoft.PowerPlatform.Demo {
             }
         }
 
-        private async Task ConfigureApprovalsConnector(IFrameLocator solutionFrame, string workflowName, ILogger logger)
+        private async Task SaveCloudFlow(ILocator flowFrame)
+        {
+            var saveButton = flowFrame.GetByLabel("Save").Nth(0);
+            await saveButton.ClickAsync();
+
+            var running = false;
+            while ( !running ) {
+                if ( ! await saveButton.IsEnabledAsync() ) {
+                    running = true;
+                }
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            while ( ! await saveButton.IsEnabledAsync() ) {
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        private async Task ConfigureApprovalsConnector(IFrameLocator solutionFrame, string workflowName)
         {
             await solutionFrame.GetByLabel("Show options").ClickAsync();
 
@@ -90,7 +118,7 @@ namespace Microsoft.PowerPlatform.Demo {
                     
                 System.Threading.Thread.Sleep(1000); 
                 if ( DateTime.Now.Subtract(started).TotalSeconds > 30 ) {
-                    logger.LogError("Unable to select workflow");
+                    _logger.LogError("Unable to select workflow");
                     break;
                 }
             }
@@ -124,19 +152,78 @@ namespace Microsoft.PowerPlatform.Demo {
             await StartCloudFlowWizard(page, solutionFrame);
         }
 
+        public async Task OpenExistingCloudFlow(IPage page)
+        {   
+            var dataverse = new ApprovalsKitDataverse(_values, _logger);
+
+            var solutionId = await dataverse.GetSolutionId("Contoso Coffee Approvals");
+            var cloudFlowId = await dataverse.GetCloudFlowId("Machine Requests", solutionId);
+
+            var powerAutomatePortal = _values["powerAutomatePortal"];
+
+            // Open classic designer - Still need to test new modern designer
+            var editCloudFlow = $"{powerAutomatePortal}/solutions/{solutionId}/flows/{cloudFlowId}?v3=false";
+
+            await page.GotoAsync(editCloudFlow);
+        }
+
+        public async Task UpdateCloudFlow(IPage page)
+        {   
+            await page.GetByLabel("Start business approval process", new() { Exact = true }).GetByRole(AriaRole.Button, new() { Name = "Start business approval process" }).ClickAsync();
+
+            await page.GetByLabel("Machine Requests (v2)").Last.ClickAsync();
+
+            await page.GetByLabel("Name", new() { Exact = true }).Locator("div").Nth(2).ClickAsync();
+
+            await page.GetByPlaceholder("Search dynamic content").ClickAsync();
+
+            await page.GetByPlaceholder("Search dynamic content").FillAsync("name");
+
+            await page.GetByRole(AriaRole.Button, new() { Name = "Machine Name" }).ClickAsync();
+
+            await page.GetByLabel("Price").Locator("div").Nth(2).ClickAsync();
+
+            await page.GetByPlaceholder("Search dynamic content").ClickAsync();
+
+            await page.GetByPlaceholder("Search dynamic content").FillAsync("price");
+
+            await page.GetByRole(AriaRole.Button, new() { Name = "Price Machine Price" }).ClickAsync();
+        
+            var container = await page.Locator(".main-container").AllAsync();
+
+            if ( container.Count > 0 ) {
+                await SaveCloudFlow(container[0]);
+            }
+        }
+
         private async Task SignInApprovalsKitConnector(IPage page, IFrameLocator solutionFrame, string user)
         {
-            // Check if Sign in is required
-            if ( await solutionFrame.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).IsVisibleAsync() ) {
-                var dialogPage = await page.RunAndWaitForPopupAsync(async () =>
-                {
-                    await solutionFrame.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
-                });
+            var started = DateTime.Now;
+            while ( DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+                var optionsVisible = await solutionFrame.GetByLabel("Show options").IsVisibleAsync();
+                if ( optionsVisible ) {
+                    return;
+                }
 
-                await dialogPage.GotoAsync("https://login.microsoftonline.com/common/oauth2/authorize?client_id=322ba649-b53c-46ef-88bf-2f84e8c705a1&response_type=code&redirect_uri=https%3a%2f%2fglobal.consent.azure-apim.net%2fredirect%2fcat-5fapprovals-20kit-5f416fa96192e41eeb&resource=https%3a%2f%2forgdd3da207.crm.dynamics.com%2f&prompt=select_account&state=2ecfe8c8-aaea-40b4-be39-7843f1d8177b_unitedstates-002_azure-apim.net");
+                // Check if Sign in is required
+                if ( await solutionFrame.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).IsVisibleAsync() ) {
+                    var dialogPage = await page.RunAndWaitForPopupAsync(async () =>
+                    {
+                        await solutionFrame.GetByRole(AriaRole.Button, new() { Name = "Sign in" }).ClickAsync();
+                    });
 
-                await dialogPage.Locator($"[data-test-id=\"{user.ToLower()}\"]").ClickAsync();
+                    await dialogPage.GotoAsync("https://login.microsoftonline.com/common/oauth2/authorize?client_id=322ba649-b53c-46ef-88bf-2f84e8c705a1&response_type=code&redirect_uri=https%3a%2f%2fglobal.consent.azure-apim.net%2fredirect%2fcat-5fapprovals-20kit-5f416fa96192e41eeb&resource=https%3a%2f%2forgdd3da207.crm.dynamics.com%2f&prompt=select_account&state=2ecfe8c8-aaea-40b4-be39-7843f1d8177b_unitedstates-002_azure-apim.net");
+
+                    await dialogPage.Locator($"[data-test-id=\"{user.ToLower()}\"]").ClickAsync();
+
+                    System.Threading.Thread.Sleep(1000);
+                    return;
+                }
+
+                System.Threading.Thread.Sleep(1000);
             }
+
+            _logger.LogError("Unable to find 'Sign In' or 'Show options");
         }
 
         private async Task AddApprovalsKitCustomConnector(IFrameLocator solutionFrame)

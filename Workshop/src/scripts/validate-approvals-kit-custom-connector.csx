@@ -23,10 +23,10 @@ public class PlaywrightScript {
             values = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
         }
 
-        var connector = new ApprovalsKitCustomConnector();
-        var result = await connector.Get(page, values, logger);
-        string json = JsonSerializer.Serialize(result);
+        var connector = new ApprovalsKitCustomConnector(values, logger);
+        var result = await connector.Get(page);
+        string resultJson = JsonSerializer.Serialize(result);
 
-        Console.WriteLine(json);
+        Console.WriteLine(resultJson);
     }
 }

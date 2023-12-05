@@ -32,49 +32,37 @@ namespace Microsoft.PowerPlatform.Demo
     /// </summary>
     public class ApprovalKit
     {
-        public async Task OpenWorkflow(Dictionary<string, string> values, IPage page, ILogger logger)
+        Dictionary<string, string> _values;
+        ILogger _logger;
+
+        public ApprovalKit(Dictionary<string, string> values, ILogger logger) {
+            _values = values;
+            _logger = logger;
+        }
+
+        public async Task OpenWorkflow(IPage page)
         {
             // NOTE: Needs to be refactored to use JavaScript object model
 
-            var businessApprovalManager = values["businessApprovalManager"];
-            var workflowId = values.ContainsKey("workflowId") ? values["workflowId"] : "";
+            var businessApprovalManager = _values["businessApprovalManager"];
+            var workflowId = _values.ContainsKey("workflowId") ? _values["workflowId"] : "";
 
             if (string.IsNullOrEmpty(workflowId))
             {
-                var client = new ServiceClient(new Uri(values["environmentUrl"]), (env) => Task.FromResult(values["token"]), true, logger);
-
-                // Use logical names
-                QueryExpression qryAccounts = new QueryExpression("cat_businessapprovalprocess")
-                {
-                    ColumnSet = new ColumnSet("cat_businessapprovalprocessid", "cat_name")
-                };
-                qryAccounts.AddOrder("createdon", OrderType.Descending);
-                qryAccounts.TopCount = 1;
-                qryAccounts.Criteria.AddCondition("cat_name", ConditionOperator.Equal, "Machine Requests");
-
-                var process = await client.RetrieveMultipleAsync(qryAccounts);
-
-                if (process.Entities.Count > 0)
-                {
-                    var match = process.Entities[0];
-                    workflowId = match["cat_businessapprovalprocessid"]?.ToString();
-                    if (!String.IsNullOrEmpty(workflowId))
-                    {
-                        values.Add("workflowId", workflowId);
-                    }
-                }
+                var dataverse = new ApprovalsKitDataverse(_values, _logger);
+                workflowId = await dataverse.GetApprovalWorkflowId("Machine Requests");
             }
 
             var worflowUrl = $"{businessApprovalManager}&pagetype=entityrecord&etn=cat_businessapprovalprocess&id={workflowId}";
 
-            var app = new PowerApp();
-            await app.Open(values, page, logger, worflowUrl);
+            var app = new PowerApp(_values, _logger);
+            await app.Open(page, worflowUrl);
 
             var customPage = new CustomPage();
             await customPage.Setup(page);
         }
 
-        public async Task CreateSingleStage(Dictionary<string, string> values, IPage page, ILogger logger)
+        public async Task CreateSingleStage(IPage page)
         {
             // NOTE: Needs to be refactored to use JavaScript object model
 
@@ -94,15 +82,18 @@ namespace Microsoft.PowerPlatform.Demo
                 }
             }
 
-            await AddStage(page, "Self Approval", logger, () => Task.CompletedTask);
+            await AddStage(page, "Self Approval", () => Task.CompletedTask);
 
-            await AddNode(page, "Alex Wilber", logger);
+            await AddNode(page, "Alex Wilber");
 
-            await PublishVersion(page, logger);
+            await PublishVersion(page);
         }
 
-        public async Task AddStage(IPage page, string name, ILogger logger, Func<Task> actions)
+        public async Task AddStage(IPage page, string name, Func<Task> actions)
         {
+            var custom = new CustomPage();
+            await custom.Setup(page);
+
             // NOTE: Needs to be refactored to use JavaScript object model
 
             var child = page.Locator("[data-icon-name='CircleAdditionSolid']");
@@ -119,9 +110,9 @@ namespace Microsoft.PowerPlatform.Demo
             await page.GetByText("Save").Nth(1).ClickAsync();
         }
 
-        public async Task CreateConditionalStage(IPage page, string name, ILogger logger)
+        public async Task CreateConditionalStage(IPage page, string name)
         {
-            await AddStage(page, name, logger, async () =>
+            await AddStage(page, name, async () =>
             {
                 
                 await UpdateControlStaticItems(page, "ddlStageCondition_2", "SelectedItems", "If/Else");
@@ -138,7 +129,7 @@ namespace Microsoft.PowerPlatform.Demo
 
                 await UpdateControlStaticItems(page, "ddlStageOperand_2", "SelectedItems", "Greater Than or Equals (>=)");
 
-                Console.WriteLine("Complete the stage");
+                Console.WriteLine("Complete the stage and and leave panel open to save");
 
                 // System.Threading.Thread.Sleep(1000);
                 // await UpdateControlStaticItems(page, "ddlConditionTarget_2", "SelectedItems", "Static Value");
@@ -150,9 +141,11 @@ namespace Microsoft.PowerPlatform.Demo
 
                 await page.PauseAsync();
             });
+
+            // TODO - Publish workflow
         }
 
-        private async Task AddNode(IPage page, string approver, ILogger logger)
+        private async Task AddNode(IPage page, string approver)
         {
             // NOTE: Needs to be refactored to use JavaScript object model
 
@@ -176,24 +169,24 @@ namespace Microsoft.PowerPlatform.Demo
 
             System.Threading.Thread.Sleep(1000);
 
-            await ClickButtonInArea(page, ".ms-Panel-contentInner", "Save", logger);
+            await ClickButtonInArea(page, ".ms-Panel-contentInner", "Save");
         }
 
-        private async Task PublishVersion(IPage page, ILogger logger)
+        private async Task PublishVersion(IPage page)
         {
             // NOTE: Needs to be refactored to use JavaScript object model
 
-            logger.LogInformation("Publishing");
+            _logger.LogInformation("Publishing");
 
             await page.GetByRole(AriaRole.Menuitem, new() { Name = "Publish" }).ClickAsync();
 
             System.Threading.Thread.Sleep(4000);
 
-            await ClickButtonInArea(page, ".ms-Panel-contentInner", "Publish", logger);
+            await ClickButtonInArea(page, ".ms-Panel-contentInner", "Publish");
 
-            logger.LogInformation("Waiting for published version");
-            await WaitUntilPublished(page, logger);
-            logger.LogInformation("Published");
+            _logger.LogInformation("Waiting for published version");
+            await WaitUntilPublished(page);
+            _logger.LogInformation("Published");
 
             System.Threading.Thread.Sleep(2000);
         }
@@ -267,7 +260,7 @@ namespace Microsoft.PowerPlatform.Demo
             }
         }
 
-        public async Task WaitUntilPublished(IPage page, ILogger logger)
+        public async Task WaitUntilPublished(IPage page)
         {
             // NOTE: Needs to be refactored to use JavaScript object model
             var published = false;
@@ -276,8 +269,8 @@ namespace Microsoft.PowerPlatform.Demo
             {
                 System.Threading.Thread.Sleep(30000);
                 var diff = DateTime.Now.Subtract(started);
-                logger.LogInformation($"Polling .... {diff.Hours.ToString("00")}:{diff.Minutes.ToString("00")}.{diff.Seconds.ToString("00")}");
-                await ClickButtonInArea(page, ".ms-Panel-contentInner", "Refresh", logger);
+                _logger.LogInformation($"Polling .... {diff.Hours.ToString("00")}:{diff.Minutes.ToString("00")}.{diff.Seconds.ToString("00")}");
+                await ClickButtonInArea(page, ".ms-Panel-contentInner", "Refresh");
                 var table = await GetDataTable(page, ".ms-Panel-contentInner", "VersionNo,CreatedBy,Created,PubStatus,Status");
                 published = (from row in table.AsEnumerable() where row.Field<string>("PubStatus") == "Published" select row).Count() > 0;
             }
@@ -330,7 +323,7 @@ namespace Microsoft.PowerPlatform.Demo
             return table;
         }
 
-        private async Task ClickButtonInArea(IPage page, string areaLocator, string button, ILogger logger)
+        private async Task ClickButtonInArea(IPage page, string areaLocator, string button)
         {
             // NOTE: Needs to be refactored to use JavaScript object model
 
@@ -338,24 +331,28 @@ namespace Microsoft.PowerPlatform.Demo
 
             if (panelArea.X == 0)
             {
-                logger.LogError($"Unable to find {areaLocator}");
+                _logger.LogError($"Unable to find {areaLocator}");
                 return;
             }
 
-            var controls = await page.Locator("//button").AllAsync();
-            foreach (var control in controls)
-            {
-                var text = await control.InnerTextAsync();
-                var buttonLocation = await control.BoundingBoxAsync();
-                if ((
-                         text == button
-                         ||
-                         text.EndsWith(button)
-                     )
-                     && await ContainedIn(control, panelArea))
+            var started = DateTime.Now;
+            while ( DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+                var controls = await page.Locator("//button").AllAsync();
+                foreach (var control in controls)
                 {
-                    await control.ClickAsync();
+                    var text = await control.InnerTextAsync();
+                    if ((
+                            text == button
+                            ||
+                            text.EndsWith(button)
+                        )
+                        && await ContainedIn(control, panelArea))
+                    {
+                        await control.ClickAsync();
+                        break;
+                    }
                 }
+                System.Threading.Thread.Sleep(1000);
             }
         }
 

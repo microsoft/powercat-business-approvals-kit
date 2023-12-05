@@ -16,14 +16,20 @@ namespace Microsoft.PowerPlatform.Demo {
         {
             await page.AddScriptTagAsync(new () { Content = @"
 function getAppMagic() {
-    if ( typeof AppDependencyHandler === ""undefined"" || typeof AppDependencyHandler.containers === ""undefined"") {
+    if ( typeof AppDependencyHandler === 'undefined' || typeof AppDependencyHandler.containers === 'undefined' ) {
         return undefined;
     }
     var key = Object.keys(AppDependencyHandler.containers).filter(k => k != AppDependencyHandler.prebuiltContainerId)
     if ( key.length == 0) {
         return undefined;
     }
-    return AppDependencyHandler.containers[key[0]].AppMagic;
+    for (let i = 0; i < key.length; i++) {
+        var container = AppDependencyHandler.containers[key[i]]
+        if ( container != null && typeof container.AppMagic !== 'undefined' ) {
+            return container.AppMagic;
+        }
+    }
+    throw new Error('App Magic not found') 
 }
 function parseControl(controlName, controlObject) {
     var propertiesList = [];
@@ -227,6 +233,17 @@ function interactWithControl(itemPath, value) {
 }
 
             " });
+
+            var started = DateTime.Now;
+            while ( DateTime.Now.Subtract(started).TotalMinutes < 1 ) {
+                try {
+                    await page.EvaluateAsync<object>("getAppMagic()");
+                    return;
+                } catch {
+
+                }
+                System.Threading.Thread.Sleep(1000);
+            }
         }
     }
 }

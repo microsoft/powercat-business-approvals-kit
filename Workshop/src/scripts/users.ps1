@@ -494,6 +494,11 @@ function Invoke-ApprovalsKitPostInstall {
         $Environment
     )
 
+    if ( $UserUPN.IndexOf("@") -lt 0 ) {
+        $domain = (az account show --query "user.name" -o tsv).Split('@')[1]
+        $UserUPN = "$UserUPN@$domain"
+    }
+
     if ( $NULL -eq $Environment ) {
         Invoke-ConfigureUser $UserUPN
         $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
@@ -1113,7 +1118,15 @@ function Invoke-OpenBrowser {
         $displayName = $user.displayName
         $environmentName = "$displayName Dev"
         pac auth clear
-        pac auth create -n User -un $UserUPN -p $password
+
+        if ( $IsLinux ) {
+            pac auth create -n User -un ${user} -p ${password}
+        } else {
+            location = (Get-Command pac).Source
+            $pacPath = [System.IO.Path]::GetDirectoryName($location)
+            $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+            & $pacLauncher auth create -n User -un ${user} -p ${password}
+        }
 
         $envs = (pac admin list --json | ConvertFrom-Json) | Where-Object { $_.DisplayName -eq $environmentName  }
         if ( $envs.Count -eq 1 ) {

@@ -12,6 +12,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.PowerPlatform.Demo {
     public class MachineRequest {
+        
+        Dictionary<string, string> _values;
+        ILogger _logger;
+
+        public MachineRequest(Dictionary<string, string> values, ILogger logger) {
+            _values = values;
+            _logger = logger;
+        }
+
         /// <summary>
         /// Submit a Machine Order Request in the Contoso Coffee application
         /// </summary>
@@ -19,9 +28,9 @@ namespace Microsoft.PowerPlatform.Demo {
         /// <param name="page">The current logged in authenticated page</param>
         /// <param name="logger">Logger to provide feedback</param>
         /// <returns></returns>
-        public async Task Submit(Dictionary<string, string> values, IPage page, ILogger logger) {
-            var app = new PowerApp();
-            await app.Open(values, page, logger, values["contosoCoffeeApplication"]);
+        public async Task Submit(IPage page) {
+            var app = new PowerApp(_values, _logger);
+            await app.Open(page, _values["contosoCoffeeApplication"]);
             
             var appFrame = page.FrameLocator("iframe[name=\"fullscreen-app-host\"]");
             
@@ -33,7 +42,7 @@ namespace Microsoft.PowerPlatform.Demo {
 
             await appFrame.GetByRole(AriaRole.Button, new() { Name = "OK" }).ClickAsync();
 
-            logger.LogInformation("Machine request created");
+            _logger.LogInformation("Machine request created");
         }
     }
 }
