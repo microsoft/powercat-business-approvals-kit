@@ -556,6 +556,7 @@ function Invoke-ManualRecordVideo {
     }
 
     if ( $connectors.value.length -eq 1 ) {
+        $connectionId = $connectors.value[0].connectorinternalid
         $data = (@{
             ScreenWidth = "1920"
             ScreenHeight = "1080"
@@ -563,6 +564,7 @@ function Invoke-ManualRecordVideo {
             businessApprovalManager = "${environmentUrl}main.aspx?appid=$kitAppId"
             powerAutomateApprovals = "https://make.powerautomate.com/environments/${environmentId}/approvals/received"
             powerAutomatePortal = "https://make.powerautomate.com/environments/${environmentId}"
+            customConnectorUrl = "https://make.powerautomate.com/environments/$environmentId/connections/available/custom/$connectionId/edit/general"
             userEmail = $UserUPN
             token = $token
             environmentUrl = $dataverse

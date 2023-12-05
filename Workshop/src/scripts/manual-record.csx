@@ -31,6 +31,28 @@ public class PlaywrightScript {
 
     public static async Task RunAsync(IBrowserContext context, string json, ILogger logger) {
         var page = context.Pages.First();
+        var values = new Dictionary<string, string>();
+
+        if ( ! String.IsNullOrEmpty(json) ) {
+            values = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+        }
+
+        // Open the Power Automate Environment
+        Uri baseUri = new Uri(values["powerAutomatePortal"]);
+        await page.GotoAsync(values["powerAutomatePortal"]);
+
+        // Add a new page for Power Apps Portal
+        var powerAppsPortal = await page.Context.NewPageAsync();
+        await powerAppsPortal.GotoAsync(values["powerAutomatePortal"].Replace("powerautomate","powerapps"));
+        
+        // Open the Business Approval Management App
+        var appPage = await page.Context.NewPageAsync();
+        PowerApp app = new PowerApp(values, logger);
+        await app.Open(appPage, values["businessApprovalManager"]);
+
+        // Open the Custom Connector
+        var connectorPage = await page.Context.NewPageAsync();
+        await connectorPage.GotoAsync(values["customConnectorUrl"]);
 
         await page.PauseAsync();
     }
