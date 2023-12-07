@@ -353,3 +353,5 @@ site/**
 **/assets/connector/**
 **/BusinessApprovalKit*.zip
 **/ContosoCoffee*.zip
+**/scripts/key
+**/scripts/region

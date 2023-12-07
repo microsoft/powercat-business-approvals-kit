@@ -92,6 +92,11 @@ class UtilityMethods {
 
     #>
     static [string]GetDeveloperEnvironment($UserUPN, $displayName) {
+        # if ( $UserUPN.IndexOf("@") -lt 0 ) {
+        #     $domain = (az account show --query "user.name" -o tsv).Split('@')[1]
+        #     $UserUPN = "$UserUPN@$domain"
+        # }
+        
         if ( [System.String]::IsNullOrEmpty($displayName)) {
             $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
             $displayName = $user[0].displayName
@@ -105,8 +110,16 @@ class UtilityMethods {
 
         Write-Host "Authenticating pac cli as $displayName"
         pac auth clear
-        pac auth create --name User --username $UserUPN --password $password
-    
+
+        if ( $global:IsLinux ) {
+            pac auth create --name User --username $UserUPN --password $password
+        } else {
+            $location = (Get-Command pac).Source
+            $pacPath = [System.IO.Path]::GetDirectoryName($location)
+            $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+            & $pacLauncher auth create --name User --username $UserUPN --password $password
+        }
+
         $auth = (pac auth list)
         if ( $auth -like "*No profiles were found on this computer*" ) {
             return  '{"error":"Login failed"}'
@@ -229,10 +242,17 @@ class UtilityMethods {
         $displayName = $user[0].displayName
         $developmentEnvironmentName = "$displayName Dev"
         $match = $existingAuth | Where-Object { $_.IndexOf($developmentEnvironmentName) -gt 0 }
-    
+
         if ( $match.Count -eq 0 ) {
             $password = [UtilityMethods]::GetSecureValue("DEMO_PASSWORD")
-            pac auth create -n User -un $UserUPN -p $password -env $Environment.EnvironmentId
+            if ( $global:IsLinux ) {
+                pac auth create -n User -un $UserUPN -p $password -env $Environment.EnvironmentId
+            } else {
+                $location = (Get-Command pac).Source
+                $pacPath = [System.IO.Path]::GetDirectoryName($location)
+                $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+                & $pacLauncher pac auth create -n User -un $UserUPN -p $password -env $Environment.EnvironmentId
+            }
         }
         else {
             Write-Host "Already authenticated with environment $developmentEnvironmentName"

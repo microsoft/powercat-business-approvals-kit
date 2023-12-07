@@ -33,4 +33,11 @@ If the application was used in production environment, there would be several is
 ## Assumptions
 
 1. Use of known secure value DEMO_PASSWORD or ADMIN_PASSWORD is available to login as interactive user
-1. The automation assumed that the user is not configured with Multi Factor Authentication (MFA)
+2. The automation assumed that the user is not configured with Multi Factor Authentication (MFA)
+
+## Automation Classes
+
+> [!IMPORTANT] Expect changes in the Automation namespace and should be considered experimental
+>
+
+The Automation classes are used by the CSharp Script (csx) files. Some of the code in the classes needs to be refector to take advantage of JavaScript object model when interacting with Model Driven apps and Custom Pages.

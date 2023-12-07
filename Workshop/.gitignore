@@ -15,3 +15,5 @@
 **/users.txt
 **/users?.txt
 **/assets/keys/**
+**/scripts/audio/**
+**/scripts/*.log

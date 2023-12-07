@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Emit;
@@ -53,7 +54,7 @@ namespace Microsoft.PowerApps.TestEngine.TestInfra
             BrowserContext = browserContext;
         }
 
-        public async Task SetupAsync()
+        public async Task SetupAsync(Dictionary<string,string> values = null)
         {
             if (_config == null)
             {
@@ -104,16 +105,27 @@ namespace Microsoft.PowerApps.TestEngine.TestInfra
                 contextOptions.RecordVideoDir = videoPath;
             }
 
-            if (_config.ScreenWidth != null && _config.ScreenHeight != null)
+            int? width = values != null && values.ContainsKey("ScreenWidth") ? int.Parse(values["ScreenWidth"]) : _config.ScreenWidth;
+            int? height = values != null && values.ContainsKey("ScreenHeight") ? int.Parse(values["ScreenHeight"]) : _config.ScreenHeight;
+            if ( width.HasValue && height.HasValue )
             {
                 contextOptions.ViewportSize = new ViewportSize()
                 {
-                    Width = _config.ScreenWidth.Value,
-                    Height = _config.ScreenHeight.Value
+                    Width = (int)width,
+                    Height = (int)height
                 };
+                contextOptions.RecordVideoSize = new RecordVideoSize() { 
+                    Width = (int)width, 
+                    Height = (int)height };
+            } else {
+                _logger.LogInformation("Using default viewport");
             }
 
             BrowserContext = await Browser.NewContextAsync(contextOptions);
+
+            // 2 Minute timeout
+            BrowserContext.SetDefaultTimeout(2 * 60 * 1000);
+            
             _logger.LogInformation("Browser context created");
         }
 
@@ -311,7 +323,7 @@ namespace Microsoft.PowerApps.TestEngine.TestInfra
             return results;
         }
 
-        public async Task ExecuteScript(string base64Data, string scriptFile) {
+        public void ExecuteScript(string base64Data, string scriptFile) {
             byte[] assemblyBinaryContent;
 
             var script = File.ReadAllText(scriptFile);

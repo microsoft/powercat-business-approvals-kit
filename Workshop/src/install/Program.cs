@@ -3,6 +3,7 @@ using System.CommandLine.Parsing;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.PowerApps.TestEngine.TestInfra;
@@ -174,8 +175,25 @@ class Program
         }
 
         var common = new Common(logger, commands);
-        var playwright = common.Login(user).Result;
-        playwright.ExecuteScript(data, script).Wait();
+
+        logger.LogInformation("Start script");
+
+        Dictionary<string, string> values = new Dictionary<string, string>();
+        if ( !string.IsNullOrEmpty(data) ) {
+            var json = Base64Decode(data);
+            if ( json.Length > 0 ) {
+                values = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+            }
+        }
+
+        var playwright = common.Login(user, "", values).Result;
+        playwright.ExecuteScript(data, script);
+    }
+
+    private static string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+        return Encoding.UTF8.GetString(base64EncodedBytes);
     }
 
      /// <summary>
