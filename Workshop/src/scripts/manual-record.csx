@@ -16,6 +16,7 @@
 #r "Microsoft.Extensions.Logging.dll"
 #r "install.dll"
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -42,8 +43,11 @@ public class PlaywrightScript {
         await page.GotoAsync(values["powerAutomatePortal"]);
 
         // Add a new page for Power Apps Portal
-        var powerAppsPortal = await page.Context.NewPageAsync();
-        await powerAppsPortal.GotoAsync(values["powerAutomatePortal"].Replace("powerautomate","powerapps"));
+        //var powerAppsPortal = await page.Context.NewPageAsync();
+        //await powerAppsPortal.GotoAsync(values["powerAutomatePortal"].Replace("powerautomate","powerapps"));
+
+        var contosoCoffeeApplication = await page.Context.NewPageAsync();
+        await contosoCoffeeApplication.GotoAsync(values["contosoCoffeeApplication"]);
         
         // Open the Business Approval Management App
         var appPage = await page.Context.NewPageAsync();
@@ -54,6 +58,49 @@ public class PlaywrightScript {
         var connectorPage = await page.Context.NewPageAsync();
         await connectorPage.GotoAsync(values["customConnectorUrl"]);
 
-        await page.PauseAsync();
+        var approvalsPage = await page.Context.NewPageAsync();
+        await approvalsPage.GotoAsync(values["powerAutomatePortal"] + "/approvals/received");
+
+        var completed = false;
+
+        page.Close += async (_, page) => {
+            logger.LogInformation("Page closed");
+            completed = true;
+        };   
+
+
+        var videoPath = Path.GetDirectoryName(await page.Video.PathAsync());
+
+        logger.LogInformation("==============================================");
+        logger.LogInformation("Manual session ready.");
+        logger.LogInformation("----------------------------------------------");
+        logger.LogInformation("When completed recording your session close the browser");
+        logger.LogInformation($"Saved videos will be in {videoPath}");
+        logger.LogInformation("----------------------------------------------");
+        while ( ! completed ) {
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        var saveTime = DateTime.Now.ToString("yyyy-MM-dd-HH.mm");
+
+        logger.LogInformation("Saving videos");
+
+        logger.LogInformation("Power Automate Portal");
+        await page.Video.SaveAsAsync(Path.Combine(videoPath, $"PowerAutomatePortal-{saveTime}.webm"));
+
+        //logger.LogInformation("Power Apps Portal");
+        //await powerAppsPortal.Video.SaveAsAsync(Path.Combine(videoPath, $"PowerAppsPortal-{saveTime}.webm"));
+
+        logger.LogInformation("Contoso Coffee Application");
+        await contosoCoffeeApplication.Video.SaveAsAsync(Path.Combine(videoPath, $"ContosoCoffeeApplication-{saveTime}.webm"));
+        
+        logger.LogInformation("Business Approval Manager");
+        await appPage.Video.SaveAsAsync(Path.Combine(videoPath, $"BusinessApprovalManager-{saveTime}.webm"));
+        
+        logger.LogInformation("Approvals Connector");
+        await connectorPage.Video.SaveAsAsync(Path.Combine(videoPath, $"ApprovalsConnector-{saveTime}.webm"));
+
+        logger.LogInformation("Approvals Portal");
+        await approvalsPage.Video.SaveAsAsync(Path.Combine(videoPath, $"ApprovalsPortal-{saveTime}.webm"));
     }
 }
