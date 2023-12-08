@@ -1565,6 +1565,7 @@ scrProcessEditor As screen:
         HoverBorderColor: =
         HoverFillColor: =
         HoverTextColor: =
+        OnChange: =false
         OnSelect: |-
             =//Passing record ID from main view
                 Set(_selectedProcess,

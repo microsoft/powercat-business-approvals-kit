@@ -9,7 +9,18 @@
                     isPanelOpen: true,
                     isPanelVisible: true
                 });
-        
+        If(
+                IsBlankOrError(_selectedProcess),
+                Set(
+                    _selectedProcess,
+                    Patch(
+                        'Business Approval Processes',
+                        Defaults('Business Approval Processes'),
+                        {Name: txtInputProcessName.Value}
+                    )
+                )
+        );
+            
         /*******Publish Process starts*******/
         //check last published version
         With({ 
@@ -271,6 +282,7 @@
                                     Refresh('Business Approval Nodes');
                                     Refresh('Business Approval Conditions');
                                     UpdateContext({isPanelVisible: false});
+                                    If(ToggleModernDesigner.Checked,Set(varRefreshDesigner,"Refresh"&Rand()));
                                     ,
                                     "variables",
                                     UpdateContext(
@@ -465,10 +477,10 @@
                             Y: =0
                             ZIndex: =1
 
-        DesginerContainer As groupContainer.verticalAutoLayoutContainer:
+        DesignerContainer As groupContainer.verticalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.SetByContainer
             BorderStyle: =BorderStyle.None
-            Fill: =RGBA(245, 245, 245, 1)
+            Fill: =If(!ToggleModernDesigner.Checked,RGBA(245, 245, 245, 1),ColorValue(AppTheme.palette.white))
             Height: =Parent.Height
             LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
@@ -497,7 +509,7 @@
                 PaddingLeft: =12
                 Size: =10
                 Text: ="No Approval Stage defined. Click (+) to configure your first Approval stage."
-                Visible: =ApprovalDesignerEdit_2.TotalStages = 0
+                Visible: =!ToggleModernDesigner.Checked
                 Width: =Parent.Width 
                 Wrap: =false
                 Y: =30
@@ -560,7 +572,6 @@
                         }
                     );
                     
-                AlignInContainer: =AlignInContainer.Stretch
                 AssignedHeight: =Parent.Height - 120
                 EditNode: |-
                     =UpdateContext(
@@ -759,7 +770,7 @@
                         );
                         Patch('Business Approval Stages', currentStage, { Order: If(IsMoveUp, currentStage.Order - 1, currentStage.Order + 1) }) 
                     )
-                Visible: =Self.TotalStages > 0
+                Visible: =Self.TotalStages > 0 && !ToggleModernDesigner.Checked
                 Width: =Parent.Width - 10
                 Y: =70
                 ZIndex: =2
@@ -897,11 +908,153 @@
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Theme: =AppThemeJson
                 Tooltip: ="Add Stage"
-                Visible: =true
+                Visible: =!ToggleModernDesigner.Checked
                 Width: =30
                 X: =Parent.Width / 2 - Self.Width / 2
                 Y: =
                 ZIndex: =3
+
+            "ProcessDesignerCanvas1 As 'Process Designer'":
+                AlignInContainer: =AlignInContainer.Stretch
+                DisplayMode: =DisplayMode.Edit
+                FillPortions: =1
+                Height: =Parent.Height
+                LayoutMinHeight: =480
+                LayoutMinWidth: =640
+                OnAddNode: |-
+                    =UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true
+                            }
+                        );
+                    Clear(_nodeApprovers);    
+                    Set(_selectedNode, Blank());
+                    Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(Self.StageID)));
+                    Set(_currentStageIndex,_selectedStage.Order);
+                    Set(_currentNodeIndex, Self.RowIndex);
+                    Set(_currentPathIndex, Self.PathIndex);
+                    UpdateContext({isPanelOpen:true,panelHeaderText:"Create Node", showNodeContainer:true});
+                    Reset(radNodeType_4);
+                OnAddStage: |+
+                    =//Save the process   
+                    Concurrent(
+                        If(
+                            IsBlankOrError(_selectedProcess),
+                            Set(
+                                _selectedProcess,
+                                Patch(
+                                    'Business Approval Processes',
+                                    Defaults('Business Approval Processes'),
+                                    {Name: txtInputProcessName.Value}
+                                )
+                            )
+                        ),
+                        UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true,
+                                showStageContainer: false
+                            }
+                        )
+                    );
+                    Set(
+                        _selectedStage,
+                        Blank()
+                    );
+                    Set(
+                        _currentStageIndex,
+                        Self.TotalStages + 1
+                    );
+                    UpdateContext(
+                        {
+                            isPanelOpen: true,
+                            panelHeaderText: "Create Stage",
+                            showStageContainer: true,
+                            stageName: Blank(),
+                            stageDesc: Blank()
+                        }
+                    );
+                    
+                OnEditNode: |-
+                    =UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true
+                            }
+                        );
+                    
+                    Concurrent(
+                        Set(_selectedNode, LookUp('Business Approval Nodes', 'Business Approval Node' = GUID(Self.NodeID))),
+                        Set(_selectedStage, LookUp('Business Approval Stages', 'Business Approval Stage' = GUID(Self.StageID)))
+                    );
+                    Concurrent(
+                    Set(_currentNodeIndex, _selectedNode.'Row Index'),
+                    Set(_currentPathIndex, _selectedNode.'Path Index'),
+                    Set(_currentStageIndex, _selectedStage.Order));
+                    
+                    
+                    //load approvers for Node edit
+                    If(!IsBlank(_selectedNode),
+                        ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending))
+                    );
+                    
+                    //check if this is on a parallel path, disable conditional nodes if it is
+                    UpdateContext({ isParallelPath:
+                        !IsBlank(
+                            LookUp('Business Approval Conditions', Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage' && 
+                            'Is Parallel' = 'Is Parallel (Business Approval Conditions)'.Yes && 'Path Index' = _currentPathIndex)
+                        )
+                    });
+                    
+                    
+                    If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
+                    );
+                OnEditStage: |
+                    =Set(
+                        _selectedStage,
+                        LookUp(
+                            'Business Approval Stages',
+                            'Business Approval Stage' = GUID(Self.StageID)
+                        )
+                    );
+                    UpdateContext(
+                            {
+                                isPanelOpen: false,
+                                isPanelVisible: true,
+                                showStageContainer: false
+                            }
+                        );
+                    Concurrent(
+                        Set(
+                            _currentStageIndex,
+                            _selectedStage.Order
+                        );
+                        ,
+                        UpdateContext(
+                            {
+                                stageName: _selectedStage.Name,
+                                stageDesc: _selectedStage.Description
+                            }
+                        )
+                    );
+                    UpdateContext(
+                        {
+                            isPanelOpen: true,
+                            isPanelVisible: true,
+                            panelHeaderText: "Edit Stage",
+                            showStageContainer: true
+                        }
+                    );
+                ProcessID: =_selectedProcess.'Business Approval Process'
+                RefreshDesigner: =varRefreshDesigner
+                Visible: =ToggleModernDesigner.Checked && !IsBlank(_selectedProcess.'Business Approval Process')
+                Width: =Parent.Width
+                X: =40
+                Y: =40
+                ZIndex: =4
 
     "FluentPanel As 'Fluent Panel'":
         DisplayMode: =DisplayMode.Edit
@@ -944,8 +1097,11 @@
                     isPanelVisible: false
                 }
             );
+        OnDismissed: =false
+        OnLightDismissClick: =false
         OnOpen: =
         OnOpened: =
+        OnOuterClick: =false
         PanelType: ='PowerCAT.Panel.PanelType'.ExtraLarge
         ShowBorder: =false
         TrapPanel: =true
@@ -1161,6 +1317,7 @@
                         Refresh('Business Approval Stages');
                         Refresh('Business Approval Nodes');
                         Refresh('Business Approval Conditions');
+                        If(ToggleModernDesigner.Checked,Set(varRefreshDesigner,"Refresh"&Rand()));
                         //Reset all fields
                         Reset(txtStageName_2);
                         Reset(txtStageDesc_2);
@@ -3540,6 +3697,7 @@
                                 isPanelVisible: false
                             }
                         );
+                        If(ToggleModernDesigner.Checked,Set(varRefreshDesigner,"Refresh"&Rand()));
                         Reset(txtNodeName_4);
                         Reset(txtNodeDesc_4);
                         Reset(radNodeType_4);
@@ -4912,6 +5070,7 @@
                             _isBusy,
                             false
                         );
+                        If(ToggleModernDesigner.Checked,Set(varRefreshDesigner,"Refresh"&Rand()));
                         Reset(radNodeType_5);
                         Reset(txtNodeName_5);
                         Reset(txtNodeDesc_5);
@@ -6062,6 +6221,7 @@
                 HoverBorderColor: =
                 HoverFillColor: =
                 HoverTextColor: =
+                OnChange: =false
                 OnSelect: =Back()
                 PressedBorderColor: =
                 PressedFillColor: =
@@ -6171,6 +6331,7 @@
                 HoverBorderColor: =
                 HoverFillColor: =ColorFade(ColorValue(AppTheme.palette.themePrimary),10%)
                 HoverTextColor: =
+                OnChange: =false
                 OnSelect: |
                     =If(
                         variableExist, Notify(txtAppDataName_2.Text & " variable already exist. Please select another name.",NotificationType.Error),
@@ -6676,4 +6837,18 @@
         Visible: =_isBusy
         Width: =Parent.Width
         ZIndex: =7
+
+    ToggleModernDesigner As Toggle:
+        BasePaletteColor: =
+        Checked: =true
+        DisplayMode: =DisplayMode.Edit
+        Height: =35
+        Label: ="Modern Process Designer"
+        OnCheck: =false
+        OnUncheck: =false
+        Visible: =!BusyScreen_10.Visible && !FluentPanel.Visible
+        Width: =235
+        X: =DesignerContainer.Width - Self.Width
+        Y: =DesignerContainer.Y 
+        ZIndex: =8
 

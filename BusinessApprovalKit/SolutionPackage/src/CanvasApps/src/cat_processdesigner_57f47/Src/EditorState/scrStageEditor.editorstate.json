@@ -104,6 +104,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "bcProcessStage",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -409,6 +410,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnResetConditions",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 13,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -663,6 +665,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "BusyScreen_3",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -775,6 +778,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CommandBar2",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -899,6 +903,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "ConfirmDialog_3",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1023,6 +1028,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container1_4",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1321,6 +1327,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlConditionTarget",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1747,6 +1754,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlRequestDataCondition",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 21,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2166,6 +2174,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlStageCondition",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 12,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2592,6 +2601,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlStageConditionSource",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 19,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3018,6 +3028,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlStageOperand",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 25,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3445,6 +3456,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlTargetRequestData",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3748,6 +3760,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Dependencies",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3970,6 +3983,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galConditions",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 26,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4117,6 +4131,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate5",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4144,6 +4159,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate8",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4253,6 +4269,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galStageDeps",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4476,6 +4493,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "imgWorkflowDiagram",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4743,6 +4761,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblConditionTarget",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5060,6 +5079,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblFirstStageNoCondition",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 15,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5427,6 +5447,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblIsParallel",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5749,6 +5770,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblParallelConditions",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 27,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6066,6 +6088,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblRequestDataCondition",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 20,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6384,6 +6407,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblRequestDataDetails",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 23,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6713,6 +6737,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblRequestDataIsEmpty",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 22,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7066,6 +7091,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblResetConditions",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 10,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7381,6 +7407,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageCondition",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 11,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7692,6 +7719,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageConditionHeader",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8021,6 +8049,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageConditionSource",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8347,6 +8376,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageDepNodeCond",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8683,6 +8713,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageDepNodeName",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9019,6 +9050,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageDepStageName",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9338,6 +9370,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageDesc",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9642,6 +9675,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageHasDeps",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9946,6 +9980,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageName",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -10258,6 +10293,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageOperand",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 24,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -10576,6 +10612,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblStageTargetRequestDataNotFound",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -10898,6 +10935,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSwitchPaths",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 14,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -11272,6 +11310,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "radSwitchPaths",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 16,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -11564,6 +11603,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Rectangle3",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -11680,6 +11720,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "scrStageEditor",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -11823,6 +11864,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "tblStageDeps",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -12078,6 +12120,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "txtStageDesc",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -12456,6 +12499,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "txtStageName",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -12849,6 +12893,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "txtTargetStatic",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [

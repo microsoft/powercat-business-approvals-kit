@@ -168,7 +168,7 @@
     <appMagic:propertyDependency input="Items" output="SelectedText" />
     <appMagic:propertyDependency input="Default" output="SelectedText" />
   </appMagic:propertyDependencies>
-  <appMagic:insertMetadata>
+  <appMagic:insertMetadata isDeviceOptimized="true">
     <appMagic:category name="Input" priority="90" />
     <appMagic:category name="ClassicControls" priority="90" />
   </appMagic:insertMetadata>

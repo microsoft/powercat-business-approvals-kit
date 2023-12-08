@@ -165,6 +165,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "ApprovalDesignerEdit",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -448,6 +449,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "bcProcess",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -749,6 +751,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CommandBar1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -880,6 +883,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1173,6 +1177,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblNoStage",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1419,6 +1424,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "scrWorkflowEditor",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [

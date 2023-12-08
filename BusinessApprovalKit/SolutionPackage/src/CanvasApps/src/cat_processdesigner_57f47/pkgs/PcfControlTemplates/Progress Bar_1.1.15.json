@@ -1,73 +1,7 @@
 {
   "AuthConfigProperties": [
     {
-      "Align": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 1,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "AutoHeight": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 1,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "Height": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "Size",
-        "PropertyKind": 2,
-        "SectionIndex": 2,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "Italic": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "Style",
-        "PropertyKind": 2,
-        "SectionIndex": 1,
-        "SectionName": null,
-        "Type": 35,
-        "WizardStep": null
-      },
-      "Size": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 1,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "Strikethrough": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "Style",
-        "PropertyKind": 2,
-        "SectionIndex": 1,
-        "SectionName": null,
-        "Type": 37,
-        "WizardStep": null
-      },
-      "Text": {
+      "AccessibleLabel": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
@@ -78,18 +12,40 @@
         "Type": 0,
         "WizardStep": null
       },
-      "Underline": {
+      "BasePaletteColor": {
+        "EnabledForFlyout": false,
+        "HelperUI": "color",
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 2,
+        "SectionName": null,
+        "Type": 32,
+        "WizardStep": null
+      },
+      "Height": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
-        "PropertyGroupName": "Style",
+        "PropertyGroupName": "Size",
         "PropertyKind": 2,
-        "SectionIndex": 1,
+        "SectionIndex": 3,
         "SectionName": null,
-        "Type": 36,
+        "Type": 0,
         "WizardStep": null
       },
-      "VerticalAlign": {
+      "Indeterminate": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 0,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Max": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
@@ -100,13 +56,57 @@
         "Type": 0,
         "WizardStep": null
       },
-      "Weight": {
+      "ProgressColor": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 0,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Shape": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 0,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Thickness": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 0,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Value": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
         "PropertyGroupName": "",
         "PropertyKind": 1,
         "SectionIndex": 1,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Visible": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 3,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -117,18 +117,7 @@
         "Hidden": false,
         "PropertyGroupName": "Size",
         "PropertyKind": 2,
-        "SectionIndex": 2,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "Wrap": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 1,
+        "SectionIndex": 3,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -139,7 +128,7 @@
         "Hidden": false,
         "PropertyGroupName": "Position",
         "PropertyKind": 2,
-        "SectionIndex": 2,
+        "SectionIndex": 3,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -150,16 +139,26 @@
         "Hidden": false,
         "PropertyGroupName": "Position",
         "PropertyKind": 2,
-        "SectionIndex": 2,
+        "SectionIndex": 3,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
       }
     }
   ],
-  "ControlConstructor": "TextCanvas",
+  "CommonEvents": [
+    {
+      "Description": "",
+      "DisplayName": "OnChange",
+      "Hidden": false,
+      "IsPrimaryInput": false,
+      "Name": "OnChange",
+      "PfxDefaultValue": null
+    }
+  ],
+  "ControlConstructor": "Progress",
   "ControlNamespace": "PowerApps.CoreControls",
-  "DisplayNameKey": "TextCanvas",
+  "DisplayNameKey": "ProgressBar_Display_Key",
   "IncludedProperties": [
     {
       "Category": "design",
@@ -219,7 +218,7 @@
     },
     {
       "Category": "design",
-      "DefaultValue": "96",
+      "DefaultValue": "450",
       "Description": "",
       "DescriptionResourceString": "",
       "DisplayName": "Width",
@@ -238,12 +237,40 @@
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": null,
-      "PhoneDefaultValue": "96",
+      "PhoneDefaultValue": "450",
       "Required": false,
       "ShouldAutoBind": false,
       "Type": 2,
       "Usage": 2,
-      "WebDefaultValue": "96"
+      "WebDefaultValue": "450"
+    },
+    {
+      "Category": "design",
+      "DefaultValue": "45",
+      "Description": "",
+      "DescriptionResourceString": "",
+      "DisplayName": "Height",
+      "DisplayNameResourceString": "Height",
+      "HelperUI": "",
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": false,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": false,
+      "IsResettableToManifestDefault": false,
+      "Name": "Height",
+      "NullDefaultValue": "0",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": null,
+      "PhoneDefaultValue": "45",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 2,
+      "Usage": 2,
+      "WebDefaultValue": "45"
     },
     {
       "Category": "design",
@@ -302,43 +329,15 @@
       "WebDefaultValue": ""
     }
   ],
-  "Name": "Text",
+  "Name": "Progress Bar",
   "Properties": [
     {
       "Category": "data",
-      "DefaultValue": "Text",
-      "Description": "Text that appears on a control.",
-      "DescriptionResourceString": "TextCanvas_Text_Desc",
-      "DisplayName": "Text",
-      "DisplayNameResourceString": "TextCanvas_Text",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": true,
-      "IsPrimaryOutput": true,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Text",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": true,
-      "Type": 6,
-      "Usage": 2,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "14",
-      "Description": "Display text using the selected font sizes.",
-      "DescriptionResourceString": "TextCanvas_Size_Desc",
-      "DisplayName": "Font size",
-      "DisplayNameResourceString": "TextCanvas_Size",
+      "DefaultValue": "",
+      "Description": "Aria label text of the component",
+      "DescriptionResourceString": "ProgressBar_AccessibleLabel_Desc_Key",
+      "DisplayName": "Accessibility Label",
+      "DisplayNameResourceString": "ProgressBar_AccessibleLabel_Display_Key",
       "EnumValues": [],
       "HelperUI": null,
       "Hidden": false,
@@ -349,7 +348,63 @@
       "IsPrimaryOutput": false,
       "IsResettable": false,
       "IsResettableToManifestDefault": false,
-      "Name": "Size",
+      "Name": "AccessibleLabel",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": "",
+      "PhoneDefaultValue": "",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 6,
+      "Usage": 0,
+      "WebDefaultValue": ""
+    },
+    {
+      "Category": "data",
+      "DefaultValue": "50",
+      "Description": "Value",
+      "DescriptionResourceString": "ProgressBar_Value_Display_Key",
+      "DisplayName": "Value",
+      "DisplayNameResourceString": "ProgressBar_Value_Display_Key",
+      "EnumValues": [],
+      "HelperUI": null,
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": false,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": false,
+      "IsResettableToManifestDefault": false,
+      "Name": "Value",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": "",
+      "PhoneDefaultValue": "",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 15,
+      "Usage": 2,
+      "WebDefaultValue": ""
+    },
+    {
+      "Category": "data",
+      "DefaultValue": "100",
+      "Description": "Max description of Progress Bar",
+      "DescriptionResourceString": "ProgressBar_Max_Desc_Key",
+      "DisplayName": "Max",
+      "DisplayNameResourceString": "ProgressBar_Max_Display_Key",
+      "EnumValues": [],
+      "HelperUI": null,
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": false,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": false,
+      "IsResettableToManifestDefault": false,
+      "Name": "Max",
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": "",
@@ -362,39 +417,25 @@
     },
     {
       "Category": "data",
-      "DefaultValue": "Regular",
-      "Description": "Display text using the selected font weights.",
-      "DescriptionResourceString": "TextCanvas_Weight_Desc",
-      "DisplayName": "Font weight",
-      "DisplayNameResourceString": "TextCanvas_Weight",
+      "DefaultValue": "Medium",
+      "Description": "Define thickness of the Progress Bar",
+      "DescriptionResourceString": "ProgressBar_Thickness_Desc_Key",
+      "DisplayName": "Thickness",
+      "DisplayNameResourceString": "ProgressBar_Thickness_Display_Key",
       "EnumValues": [
         {
           "Description": "Medium",
           "DisplayName": "Medium",
-          "IsDefaultValue": false,
+          "IsDefaultValue": true,
           "Name": "Medium",
           "Value": "Medium"
         },
         {
-          "Description": "Regular",
-          "DisplayName": "Regular",
-          "IsDefaultValue": true,
-          "Name": "Regular",
-          "Value": "Regular"
-        },
-        {
-          "Description": "Semibold",
-          "DisplayName": "Semibold",
+          "Description": "Large",
+          "DisplayName": "Large",
           "IsDefaultValue": false,
-          "Name": "Semibold",
-          "Value": "Semibold"
-        },
-        {
-          "Description": "Bold",
-          "DisplayName": "Bold",
-          "IsDefaultValue": false,
-          "Name": "Bold",
-          "Value": "Bold"
+          "Name": "Large",
+          "Value": "Large"
         }
       ],
       "HelperUI": null,
@@ -406,52 +447,38 @@
       "IsPrimaryOutput": false,
       "IsResettable": false,
       "IsResettableToManifestDefault": false,
-      "Name": "Weight",
+      "Name": "Thickness",
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": "",
-      "PhoneDefaultValue": "Regular",
+      "PhoneDefaultValue": "Medium",
       "Required": false,
       "ShouldAutoBind": false,
       "Type": 1,
-      "Usage": 2,
-      "WebDefaultValue": "Regular"
+      "Usage": 0,
+      "WebDefaultValue": "Medium"
     },
     {
       "Category": "data",
-      "DefaultValue": "Start",
-      "Description": "Display text using the selected text alignment.",
-      "DescriptionResourceString": "TextCanvas_Align_Desc",
-      "DisplayName": "Align",
-      "DisplayNameResourceString": "TextCanvas_Align",
+      "DefaultValue": "Rounded",
+      "Description": "Shape of Progress Bar component",
+      "DescriptionResourceString": "ProgressBar_Shape_Desc_Key",
+      "DisplayName": "Shape",
+      "DisplayNameResourceString": "ProgressBar_Shape_Display_Key",
       "EnumValues": [
         {
-          "Description": "Start",
-          "DisplayName": "Start",
+          "Description": "Rounded",
+          "DisplayName": "Rounded",
           "IsDefaultValue": true,
-          "Name": "Start",
-          "Value": "Start"
+          "Name": "Rounded",
+          "Value": "Rounded"
         },
         {
-          "Description": "End",
-          "DisplayName": "End",
+          "Description": "Square",
+          "DisplayName": "Square",
           "IsDefaultValue": false,
-          "Name": "End",
-          "Value": "End"
-        },
-        {
-          "Description": "Center",
-          "DisplayName": "Center",
-          "IsDefaultValue": false,
-          "Name": "Center",
-          "Value": "Center"
-        },
-        {
-          "Description": "Justify",
-          "DisplayName": "Justify",
-          "IsDefaultValue": false,
-          "Name": "Justify",
-          "Value": "Justify"
+          "Name": "Square",
+          "Value": "Square"
         }
       ],
       "HelperUI": null,
@@ -463,45 +490,80 @@
       "IsPrimaryOutput": false,
       "IsResettable": false,
       "IsResettableToManifestDefault": false,
-      "Name": "Align",
+      "Name": "Shape",
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": "",
-      "PhoneDefaultValue": "Start",
+      "PhoneDefaultValue": "Rounded",
       "Required": false,
       "ShouldAutoBind": false,
       "Type": 1,
-      "Usage": 2,
-      "WebDefaultValue": "Start"
+      "Usage": 0,
+      "WebDefaultValue": "Rounded"
     },
     {
       "Category": "data",
-      "DefaultValue": "Middle",
-      "Description": "Display text using the selected text verlitcal alignment.",
-      "DescriptionResourceString": "TextCanvas_VerticalAlign_Desc",
-      "DisplayName": "Vertical align",
-      "DisplayNameResourceString": "TextCanvas_VerticalAlign",
+      "DefaultValue": "false",
+      "Description": "Indeterminate Progress bar",
+      "DescriptionResourceString": "ProgressBar_Indeterminate_Desc_Key",
+      "DisplayName": "Indeterminate",
+      "DisplayNameResourceString": "ProgressBar_Indeterminate_Display_Key",
+      "EnumValues": [],
+      "HelperUI": null,
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": false,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": false,
+      "IsResettableToManifestDefault": false,
+      "Name": "Indeterminate",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": "",
+      "PhoneDefaultValue": "",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 20,
+      "Usage": 0,
+      "WebDefaultValue": ""
+    },
+    {
+      "Category": "data",
+      "DefaultValue": "Brand",
+      "Description": "Color of Progress Bar",
+      "DescriptionResourceString": "ProgressBar_ProgressColor_Desc_Key",
+      "DisplayName": "Progress Color",
+      "DisplayNameResourceString": "ProgressBar_ProgressColor_Display_Key",
       "EnumValues": [
         {
-          "Description": "Top",
-          "DisplayName": "Top",
-          "IsDefaultValue": false,
-          "Name": "Top",
-          "Value": "Top"
-        },
-        {
-          "Description": "Middle",
-          "DisplayName": "Middle",
+          "Description": "Brand",
+          "DisplayName": "Brand",
           "IsDefaultValue": true,
-          "Name": "Middle",
-          "Value": "Middle"
+          "Name": "Brand",
+          "Value": "Brand"
         },
         {
-          "Description": "Bottom",
-          "DisplayName": "Bottom",
+          "Description": "Success",
+          "DisplayName": "Success",
           "IsDefaultValue": false,
-          "Name": "Bottom",
-          "Value": "Bottom"
+          "Name": "Success",
+          "Value": "Success"
+        },
+        {
+          "Description": "Warning",
+          "DisplayName": "Warning",
+          "IsDefaultValue": false,
+          "Name": "Warning",
+          "Value": "Warning"
+        },
+        {
+          "Description": "Error",
+          "DisplayName": "Error",
+          "IsDefaultValue": false,
+          "Name": "Error",
+          "Value": "Error"
         }
       ],
       "HelperUI": null,
@@ -513,184 +575,16 @@
       "IsPrimaryOutput": false,
       "IsResettable": false,
       "IsResettableToManifestDefault": false,
-      "Name": "VerticalAlign",
+      "Name": "ProgressColor",
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": "",
-      "PhoneDefaultValue": "Middle",
+      "PhoneDefaultValue": "Brand",
       "Required": false,
       "ShouldAutoBind": false,
       "Type": 1,
-      "Usage": 2,
-      "WebDefaultValue": "Middle"
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "false",
-      "Description": "Container height will adjust to text content.",
-      "DescriptionResourceString": "TextCanvas_AutoHeight_Desc",
-      "DisplayName": "Auto height",
-      "DisplayNameResourceString": "TextCanvas_AutoHeight",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "AutoHeight",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 20,
-      "Usage": 2,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "design",
-      "DefaultValue": "32",
-      "Description": "The height of the control.",
-      "DescriptionResourceString": "TextCanvas_Height_Desc",
-      "DisplayName": "Text height",
-      "DisplayNameResourceString": "TextCanvas_Height",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Height",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 16,
-      "Usage": 2,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "false",
-      "Description": "Display text using the italic font style.",
-      "DescriptionResourceString": "TextCanvas_Italic_Desc",
-      "DisplayName": "Italic",
-      "DisplayNameResourceString": "TextCanvas_Italic",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Italic",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 20,
-      "Usage": 2,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "false",
-      "Description": "Display text using the strikethrough font style.",
-      "DescriptionResourceString": "TextCanvas_Strikethrough_Desc",
-      "DisplayName": "Strikethrough",
-      "DisplayNameResourceString": "TextCanvas_Strikethrough",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Strikethrough",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 20,
-      "Usage": 2,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "false",
-      "Description": "Display text using the underline font style.",
-      "DescriptionResourceString": "TextCanvas_Underline_Desc",
-      "DisplayName": "Underline",
-      "DisplayNameResourceString": "TextCanvas_Underline",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Underline",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 20,
-      "Usage": 2,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "true",
-      "Description": "Display overflow text as wrapped.",
-      "DescriptionResourceString": "TextCanvas_Wrap_Desc",
-      "DisplayName": "Wrap",
-      "DisplayNameResourceString": "TextCanvas_Wrap",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Wrap",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 20,
-      "Usage": 2,
-      "WebDefaultValue": ""
+      "Usage": 0,
+      "WebDefaultValue": "Brand"
     },
     {
       "Category": "design",
@@ -738,6 +632,34 @@
       "IsResettable": false,
       "IsResettableToManifestDefault": false,
       "Name": "Tooltip",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": "",
+      "PhoneDefaultValue": "",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 6,
+      "Usage": 0,
+      "WebDefaultValue": ""
+    },
+    {
+      "Category": "data",
+      "DefaultValue": "",
+      "Description": "You can provide a different color palette for the selected item by specifying a base palette color. This color generates a set of similar colors that are then applied to different aspects of the item, most commonly: fill, border, and interaction states. A blank value indicates the item will use the color palette of the app's theme.",
+      "DescriptionResourceString": "Base_Palette_Color_description",
+      "DisplayName": "Base palette color",
+      "DisplayNameResourceString": "Base_Palette_Color",
+      "EnumValues": [],
+      "HelperUI": "color",
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": true,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": false,
+      "IsResettableToManifestDefault": true,
+      "Name": "BasePaletteColor",
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": "",
@@ -824,35 +746,35 @@
       "IsControlSpecific": false,
       "LoadingOrder": 7,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"ManifestTemplate\",\"Data\":{\"ConstructorName\":\"PowerApps.CoreControls.TextCanvas\",\"CustomControlId\":\"PowerApps.CoreControls.TextCanvas\",\"IsVirtual\":true,\"Properties\":{\"Resources\":[{\"Name\":\"/PCF/prop-types.js\",\"LoadOrder\":1,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/react-fela.js\",\"LoadOrder\":2,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela.js\",\"LoadOrder\":3,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela-dom.js\",\"LoadOrder\":4,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PCFControls/js/PCFControlWrapper.js\",\"LoadOrder\":6,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\",\"LoadOrder\":7,\"Type\":0,\"LibraryName\":null}],\"GroupDefinitions\":null,\"DataSetDefinitions\":{},\"Properties\":{\"Text\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"Text\"},\"Size\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"14\"},\"Weight\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"Regular\"},\"Align\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"Start\"},\"VerticalAlign\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"Middle\"},\"AutoHeight\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"false\"},\"Height\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"32\"},\"Italic\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"false\"},\"Strikethrough\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"false\"},\"Underline\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"false\"},\"Wrap\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"true\"},\"TabIndex\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Tooltip\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"}},\"FeatureUsage\":[{\"IsRequired\":true,\"Name\":\"ExplicitCommonEvents\"}]},\"Events\":null,\"CommonEvents\":null,\"DesignMap\":null,\"PropertyDependencies\":[],\"Children\":null}}",
+      "Path": "{\"Id\":\"ManifestTemplate\",\"Data\":{\"ConstructorName\":\"PowerApps.CoreControls.Progress\",\"CustomControlId\":\"PowerApps.CoreControls.Progress\",\"IsVirtual\":true,\"Properties\":{\"Resources\":[{\"Name\":\"/PCF/prop-types.js\",\"LoadOrder\":1,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/react-fela.js\",\"LoadOrder\":2,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela.js\",\"LoadOrder\":3,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela-dom.js\",\"LoadOrder\":4,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PCFControls/js/PCFControlWrapper.js\",\"LoadOrder\":6,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\",\"LoadOrder\":7,\"Type\":0,\"LibraryName\":null}],\"GroupDefinitions\":null,\"DataSetDefinitions\":{},\"Properties\":{\"AccessibleLabel\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Value\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"50\"},\"Max\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"100\"},\"Thickness\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"Medium\"},\"Shape\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"Rounded\"},\"Indeterminate\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"false\"},\"ProgressColor\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"Brand\"},\"TabIndex\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Tooltip\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"BasePaletteColor\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"}},\"FeatureUsage\":null},\"Events\":null,\"CommonEvents\":null,\"DesignMap\":null,\"PropertyDependencies\":[],\"Children\":null}}",
       "Type": 3
     },
     {
       "IsControlSpecific": false,
       "LoadingOrder": 8,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"ManifestPropertyTypes\",\"Data\":{\"Properties\":[{\"Name\":\"Text\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"None\",\"IsPrimary\":true,\"IsIncluded\":false},{\"Name\":\"Size\",\"Type\":\"Whole_None\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Weight\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Align\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"VerticalAlign\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"AutoHeight\",\"Type\":\"TwoOptions\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Height\",\"Type\":\"Whole_None\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Italic\",\"Type\":\"TwoOptions\",\"ComplexType\":\"Italics\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Strikethrough\",\"Type\":\"TwoOptions\",\"ComplexType\":\"Strikethrough\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Underline\",\"Type\":\"TwoOptions\",\"ComplexType\":\"Underline\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Wrap\",\"Type\":\"TwoOptions\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"TabIndex\",\"Type\":\"Whole_None\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Tooltip\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"PCFTeamsTheme\",\"Type\":\"String\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"X\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Y\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Width\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Visible\",\"Type\":\"Boolean\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"DisplayMode\",\"Type\":\"DisplayMode\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true}]}}",
+      "Path": "{\"Id\":\"ManifestPropertyTypes\",\"Data\":{\"Properties\":[{\"Name\":\"AccessibleLabel\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Value\",\"Type\":\"FP\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Max\",\"Type\":\"Whole_None\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Thickness\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Shape\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Indeterminate\",\"Type\":\"TwoOptions\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"ProgressColor\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"TabIndex\",\"Type\":\"Whole_None\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Tooltip\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"BasePaletteColor\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"FillColor\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"PCFTeamsTheme\",\"Type\":\"String\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"X\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Y\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Width\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Height\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Visible\",\"Type\":\"Boolean\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"DisplayMode\",\"Type\":\"DisplayMode\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true}]}}",
       "Type": 3
     },
     {
       "IsControlSpecific": false,
       "LoadingOrder": 9,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"0.0.16\",\"IsFirstParty\":true}}",
+      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"1.1.15\",\"IsFirstParty\":true}}",
       "Type": 3
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 10,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/TextCanvas.js",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/bundle.js",
       "Type": 0
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 9,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1033.resx",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1033.resx",
       "Type": 2
     },
     {
@@ -866,322 +788,322 @@
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1025.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1025.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1026.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1026.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1027.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1027.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1028.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1028.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1029.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1029.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1030.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1030.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1031.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1031.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1032.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1032.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1033.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1033.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1035.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1035.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1036.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1036.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1037.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1037.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1038.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1038.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1040.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1040.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1041.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1041.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1042.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1042.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1043.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1043.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1044.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1044.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1045.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1045.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1046.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1046.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1048.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1048.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1049.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1049.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1050.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1050.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1051.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1051.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1053.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1053.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1054.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1054.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1055.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1055.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1057.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1057.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1058.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1058.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1060.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1060.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1061.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1061.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1062.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1062.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1063.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1063.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1066.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1066.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1069.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1069.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1081.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1081.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1086.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1086.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1087.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1087.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1110.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.1110.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2052.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.2052.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2070.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.2070.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2074.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.2074.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3076.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.3076.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3082.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.3082.json",
       "Type": 5
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3098.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Progress/strings/Progress.3098.json",
       "Type": 5
     },
     {
       "IsControlSpecific": false,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"LocalizedStrings\",\"Data\":{\"LocStrings\":{\"TextCanvas\":\"Text\",\"TextCanvas_VerticalAlign\":\"Vertical align\",\"TextCanvas_VerticalAlign_Desc\":\"Display text using the selected text verlitcal alignment.\",\"TextCanvas_VerticalAlign_Top\":\"Top\",\"TextCanvas_VerticalAlign_Middle\":\"Middle\",\"TextCanvas_VerticalAlign_Bottom\":\"Bottom\",\"TextCanvas_Height\":\"Text height\",\"TextCanvas_Height_Desc\":\"The height of the control.\",\"TextCanvas_Align\":\"Align\",\"TextCanvas_Align_Desc\":\"Display text using the selected text alignment.\",\"TextCanvas_Align_Start\":\"Start\",\"TextCanvas_Align_End\":\"End\",\"TextCanvas_Align_Center\":\"Center\",\"TextCanvas_Align_Justify\":\"Justify\",\"TextCanvas_Desc\":\"Display text\",\"TextCanvas_AutoHeight\":\"Auto height\",\"TextCanvas_AutoHeight_Desc\":\"Container height will adjust to text content.\",\"TextCanvas_Italic\":\"Italic\",\"TextCanvas_Italic_Desc\":\"Display text using the italic font style.\",\"TextCanvas_Size\":\"Font size\",\"TextCanvas_Size_Desc\":\"Display text using the selected font sizes.\",\"TextCanvas_Strikethrough\":\"Strikethrough\",\"TextCanvas_Strikethrough_Desc\":\"Display text using the strikethrough font style.\",\"TextCanvas_Text\":\"Text\",\"TextCanvas_Text_Desc\":\"Text that appears on a control.\",\"TextCanvas_Underline\":\"Underline\",\"TextCanvas_Underline_Desc\":\"Display text using the underline font style.\",\"TextCanvas_Weight\":\"Font weight\",\"TextCanvas_Weight_Desc\":\"Display text using the selected font weights.\",\"TextCanvas_Weight_Medium\":\"Medium\",\"TextCanvas_Weight_Regular\":\"Regular\",\"TextCanvas_Weight_Semibold\":\"Semibold\",\"TextCanvas_Weight_Bold\":\"Bold\",\"TextCanvas_Wrap\":\"Wrap\",\"TextCanvas_Wrap_Desc\":\"Display overflow text as wrapped.\"}}}",
+      "Path": "{\"Id\":\"LocalizedStrings\",\"Data\":{\"LocStrings\":{\"ProgressBar_Display_Key\":\"Progress Bar\",\"ProgressBar_Desc_Key\":\"Let users visualise Progress Bar effect\",\"ProgressBar_Shape_Display_Key\":\"Shape\",\"ProgressBar_Shape_Desc_Key\":\"Shape of Progress Bar component\",\"ProgressBar_AccessibleLabel_Display_Key\":\"Accessibility Label\",\"ProgressBar_AccessibleLabel_Desc_Key\":\"Aria label text of the component\",\"ProgressBar_ProgressColor_Display_Key\":\"Progress Color\",\"ProgressBar_ProgressColor_Desc_Key\":\"Color of Progress Bar\",\"ProgressBar_Thickness_Display_Key\":\"Thickness\",\"ProgressBar_Thickness_Desc_Key\":\"Define thickness of the Progress Bar\",\"ProgressBar_Max_Display_Key\":\"Max\",\"ProgressBar_Max_Desc_Key\":\"Max description of Progress Bar\",\"ProgressBar_Value_Display_Key\":\"Value\",\"ProgressBar_Value_Desc_Key\":\"A decimal number between 0 and 100 (or Max if given) which specifies how much of the task has been compeleted.\",\"ProgressBar_Thickness_Medium\":\"Medium\",\"ProgressBar_Thickness_Large\":\"Large\",\"ProgressBar_Shape_Square\":\"Square\",\"ProgressBar_Shape_Rounded\":\"Rounded\",\"ProgressBar_Rounded_Desc_Key\":\"Shape of the progress bar to be rounded\",\"ProgressBar_Color_Success\":\"Success\",\"ProgressBar_Color_Brand\":\"Brand\",\"ProgressBar_Color_Warning\":\"Warning\",\"ProgressBar_Color_Error\":\"Error\",\"ProgressBar_Indeterminate_Display_Key\":\"Indeterminate\",\"ProgressBar_Indeterminate_Desc_Key\":\"Indeterminate Progress bar\",\"Base_Palette_Color\":\"Base palette color\",\"Base_Palette_Color_description\":\"You can provide a different color palette for the selected item by specifying a base palette color. This color generates a set of similar colors that are then applied to different aspects of the item, most commonly: fill, border, and interaction states. A blank value indicates the item will use the color palette of the app's theme.\"}}}",
       "Type": 3
     },
     {
@@ -1195,9 +1117,16 @@
       "IsControlSpecific": false,
       "LoadingOrder": 0,
       "ModifiedPath": "",
+      "Path": "React/16.8.6/16.8.6",
+      "Type": 4
+    },
+    {
+      "IsControlSpecific": false,
+      "LoadingOrder": 0,
+      "ModifiedPath": "",
       "Path": "Fluent/9.4.0/9.4.0",
       "Type": 4
     }
   ],
-  "Version": "0.0.16"
+  "Version": "1.1.15"
 }
