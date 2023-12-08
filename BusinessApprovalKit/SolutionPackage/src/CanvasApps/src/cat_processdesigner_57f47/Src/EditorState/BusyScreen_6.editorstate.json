@@ -27,6 +27,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "BusyScreen_6",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -147,6 +148,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Image2_2",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -402,6 +404,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label1_2",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [

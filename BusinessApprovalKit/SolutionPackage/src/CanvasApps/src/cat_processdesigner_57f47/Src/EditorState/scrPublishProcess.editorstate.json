@@ -106,6 +106,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnPublish",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -355,6 +356,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "busyPublish",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -464,6 +466,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container1_10",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -667,6 +670,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Gallery4",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -814,6 +818,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate9",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -946,6 +951,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Icon4",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1185,6 +1191,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Image3",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1426,6 +1433,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Image4",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1679,6 +1687,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label5",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1981,6 +1990,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label6",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2287,6 +2297,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label9",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2603,6 +2614,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblActivateOnPublish",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2919,6 +2931,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblPublishedVersionInfo",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3190,6 +3203,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Progress1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3305,6 +3319,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Rectangle4",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3421,6 +3436,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "scrPublishProcess",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3579,6 +3595,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "tggActivate",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [

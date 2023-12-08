@@ -114,6 +114,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnActivate",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -406,6 +407,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnRefreshPublishedVersions",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -663,6 +665,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CommandBar2_3",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -777,6 +780,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container1_11",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -899,6 +903,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate9_1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1015,6 +1020,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galProcessVersion",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1264,6 +1270,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoRefreshPubStatus",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1531,6 +1538,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoViewApprovalVersion",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1803,6 +1811,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoViewRuntimeProcess",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2050,6 +2059,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label6_1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2355,6 +2365,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label6_2",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2680,6 +2691,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblVersionCreated",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3010,6 +3022,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblVersionCreatedBy",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3325,6 +3338,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblVersionNo",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3650,6 +3664,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblVersionPubStatus",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4009,6 +4024,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblVersionStatus",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4305,6 +4321,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Rectangle4_1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 10,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4421,6 +4438,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "scrProcessVersion",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4564,6 +4582,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "TableHeader_2",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [

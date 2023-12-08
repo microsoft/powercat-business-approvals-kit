@@ -40,6 +40,7 @@ App As appinfo:
             )
         );
         // Set themeing
+        /*
         Set(
             AppTheme,
             {
@@ -69,9 +70,11 @@ App As appinfo:
                 }
             }
         );
-        // Set themeing
+        // Set themeing 
+        */
+        
         Set(
-            DefaultTheme,
+            AppTheme,
             /* START THEME OBJECT */
             {
                 palette: {
@@ -130,7 +133,7 @@ App As appinfo:
         )
         */
     StartScreen: =scrWorkflowDesignerScreen
-    Theme: =SteelTheme
+    Theme: =PowerAppsTheme
 
     Host As hostControl.DefaultHostControlVariant:
         OnCancel: =false

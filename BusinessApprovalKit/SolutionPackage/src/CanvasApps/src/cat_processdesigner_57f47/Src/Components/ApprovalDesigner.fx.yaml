@@ -2331,6 +2331,7 @@ ApprovalDesigner As CanvasComponent:
         DisplayMode: =DisplayMode.Edit
         FontSize: =0
         Height: =40
+        OnSelect: =false
         Visible: =galProcessStages_1.AllItemsCount > 1
         Width: =40
         X: =textProcessDesigner.X+ textProcessDesigner.Width -30

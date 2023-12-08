@@ -68,6 +68,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnNo",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -242,6 +243,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnNo1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -486,6 +488,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnYes",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -657,6 +660,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnYes1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -911,6 +915,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "conConfirmButtons",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1062,6 +1067,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ConfirmDialog",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1222,6 +1228,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblConfirmMessage",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [

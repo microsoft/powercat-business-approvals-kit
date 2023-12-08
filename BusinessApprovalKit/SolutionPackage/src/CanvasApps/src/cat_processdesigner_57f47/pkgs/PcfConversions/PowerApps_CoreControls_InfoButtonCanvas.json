@@ -20,7 +20,21 @@
       ],
       "From": "0.0.17",
       "To": "0.0.18"
+    },
+    {
+      "Action": [
+        {
+          "Name": "OnSelect",
+          "Type": "add"
+        },
+        {
+          "Name": "OnChange",
+          "Type": "remove"
+        }
+      ],
+      "From": "0.0.20",
+      "To": "0.0.21"
     }
   ],
-  "Version": "0.0.20"
+  "Version": "0.0.22"
 }

@@ -7,7 +7,7 @@
         "Hidden": false,
         "PropertyGroupName": "",
         "PropertyKind": 1,
-        "SectionIndex": 2,
+        "SectionIndex": 0,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -18,56 +18,12 @@
         "Hidden": false,
         "PropertyGroupName": "",
         "PropertyKind": 1,
-        "SectionIndex": 3,
+        "SectionIndex": 1,
         "SectionName": null,
         "Type": 32,
         "WizardStep": null
       },
-      "DisplayMode": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 2,
-        "SectionName": null,
-        "Type": 27,
-        "WizardStep": null
-      },
-      "FontSize": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 3,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "Height": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "Size",
-        "PropertyKind": 2,
-        "SectionIndex": 4,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "IsSearchable": {
-        "EnabledForFlyout": false,
-        "HelperUI": null,
-        "Hidden": false,
-        "PropertyGroupName": "",
-        "PropertyKind": 1,
-        "SectionIndex": 1,
-        "SectionName": null,
-        "Type": 0,
-        "WizardStep": null
-      },
-      "Items": {
+      "Checked": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
@@ -78,7 +34,7 @@
         "Type": 0,
         "WizardStep": null
       },
-      "SelectMultiple": {
+      "FontSize": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
@@ -89,13 +45,57 @@
         "Type": 0,
         "WizardStep": null
       },
+      "Height": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "Size",
+        "PropertyKind": 2,
+        "SectionIndex": 2,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Label": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 0,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "LabelPosition": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 0,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
+      "Visible": {
+        "EnabledForFlyout": false,
+        "HelperUI": null,
+        "Hidden": false,
+        "PropertyGroupName": "",
+        "PropertyKind": 1,
+        "SectionIndex": 2,
+        "SectionName": null,
+        "Type": 0,
+        "WizardStep": null
+      },
       "Width": {
         "EnabledForFlyout": false,
         "HelperUI": null,
         "Hidden": false,
         "PropertyGroupName": "Size",
         "PropertyKind": 2,
-        "SectionIndex": 4,
+        "SectionIndex": 2,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -106,7 +106,7 @@
         "Hidden": false,
         "PropertyGroupName": "Position",
         "PropertyKind": 2,
-        "SectionIndex": 4,
+        "SectionIndex": 2,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -117,7 +117,7 @@
         "Hidden": false,
         "PropertyGroupName": "Position",
         "PropertyKind": 2,
-        "SectionIndex": 4,
+        "SectionIndex": 2,
         "SectionName": null,
         "Type": 0,
         "WizardStep": null
@@ -127,15 +127,34 @@
   "CommonEvents": [
     {
       "Description": "",
-      "DisplayName": "OnChange",
+      "DisplayName": "OnSelect",
       "Hidden": false,
       "IsPrimaryInput": false,
-      "Name": "OnChange"
+      "Name": "OnSelect",
+      "PfxDefaultValue": null
     }
   ],
-  "ControlConstructor": "ComboboxCanvas",
+  "ControlConstructor": "Toggle",
   "ControlNamespace": "PowerApps.CoreControls",
-  "DisplayNameKey": "ComboboxCanvas",
+  "DisplayNameKey": "Toggle_Display_Key",
+  "Events": [
+    {
+      "Description": "OnCheck",
+      "DisplayName": "OnCheck",
+      "Hidden": false,
+      "IsPrimaryInput": false,
+      "Name": "OnCheck",
+      "PfxDefaultValue": null
+    },
+    {
+      "Description": "OnUncheck",
+      "DisplayName": "OnUncheck",
+      "Hidden": false,
+      "IsPrimaryInput": false,
+      "Name": "OnUncheck",
+      "PfxDefaultValue": null
+    }
+  ],
   "IncludedProperties": [
     {
       "Category": "design",
@@ -195,7 +214,7 @@
     },
     {
       "Category": "design",
-      "DefaultValue": "320",
+      "DefaultValue": "110",
       "Description": "",
       "DescriptionResourceString": "",
       "DisplayName": "Width",
@@ -214,16 +233,16 @@
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": null,
-      "PhoneDefaultValue": "320",
+      "PhoneDefaultValue": "110",
       "Required": false,
       "ShouldAutoBind": false,
       "Type": 2,
       "Usage": 2,
-      "WebDefaultValue": "320"
+      "WebDefaultValue": "110"
     },
     {
       "Category": "design",
-      "DefaultValue": "32",
+      "DefaultValue": "35",
       "Description": "",
       "DescriptionResourceString": "",
       "DisplayName": "Height",
@@ -242,12 +261,12 @@
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": null,
-      "PhoneDefaultValue": "32",
+      "PhoneDefaultValue": "35",
       "Required": false,
       "ShouldAutoBind": false,
       "Type": 2,
       "Usage": 2,
-      "WebDefaultValue": "32"
+      "WebDefaultValue": "35"
     },
     {
       "Category": "design",
@@ -306,15 +325,71 @@
       "WebDefaultValue": ""
     }
   ],
-  "Name": "Combobox",
+  "Name": "Toggle",
   "Properties": [
     {
       "Category": "data",
       "DefaultValue": "",
-      "Description": "Label for screen readers.",
-      "DescriptionResourceString": "ComboboxCanvas_AccessibleLabel_Desc",
-      "DisplayName": "Accessible label",
-      "DisplayNameResourceString": "ComboboxCanvas_AccessibleLabel",
+      "Description": "To set Toggle checked state",
+      "DescriptionResourceString": "Toggle_Checked_Desc_Key",
+      "DisplayName": "Checked",
+      "DisplayNameResourceString": "Toggle_Checked_Display_Key",
+      "EnumValues": [],
+      "HelperUI": null,
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": false,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": true,
+      "IsResettableToManifestDefault": false,
+      "Name": "Checked",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": "",
+      "PhoneDefaultValue": "",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 20,
+      "Usage": 2,
+      "WebDefaultValue": ""
+    },
+    {
+      "Category": "data",
+      "DefaultValue": "Label",
+      "Description": "Label for Toggle",
+      "DescriptionResourceString": "Toggle_Label_Desc_Key",
+      "DisplayName": "Label",
+      "DisplayNameResourceString": "Toggle_Label_Display_Key",
+      "EnumValues": [],
+      "HelperUI": null,
+      "Hidden": false,
+      "IsDataSourceProperty": false,
+      "IsLinkableToParentTheme": false,
+      "IsPrimaryBehavioral": false,
+      "IsPrimaryInput": false,
+      "IsPrimaryOutput": false,
+      "IsResettable": false,
+      "IsResettableToManifestDefault": false,
+      "Name": "Label",
+      "ParentDataSetName": "",
+      "PassThroughProperty": "",
+      "PfxDefaultValue": "",
+      "PhoneDefaultValue": "",
+      "Required": false,
+      "ShouldAutoBind": false,
+      "Type": 6,
+      "Usage": 0,
+      "WebDefaultValue": ""
+    },
+    {
+      "Category": "data",
+      "DefaultValue": "",
+      "Description": "Accessibility Label for Toggle component",
+      "DescriptionResourceString": "Toggle_AccessibleLabel_Desc_Key",
+      "DisplayName": "Accessibility Label",
+      "DisplayNameResourceString": "Toggle_AccessibleLabel_Display_Key",
       "EnumValues": [],
       "HelperUI": null,
       "Hidden": false,
@@ -338,12 +413,34 @@
     },
     {
       "Category": "data",
-      "DefaultValue": "false",
-      "Description": "Whether this control allows the selection of more than one item at a time.",
-      "DescriptionResourceString": "ComboboxCanvas_SelectMultiple_Desc",
-      "DisplayName": "Allow multiple selections",
-      "DisplayNameResourceString": "ComboboxCanvas_SelectMultiple",
-      "EnumValues": [],
+      "DefaultValue": "After",
+      "Description": "Define position for the label around the Toggle",
+      "DescriptionResourceString": "Toggle_LabelPosition_Desc_Key",
+      "DisplayName": "Label Position",
+      "DisplayNameResourceString": "Toggle_LabelPosition_Display_Key",
+      "EnumValues": [
+        {
+          "Description": "Before",
+          "DisplayName": "Before",
+          "IsDefaultValue": false,
+          "Name": "Before",
+          "Value": "Before"
+        },
+        {
+          "Description": "After",
+          "DisplayName": "After",
+          "IsDefaultValue": true,
+          "Name": "After",
+          "Value": "After"
+        },
+        {
+          "Description": "Above",
+          "DisplayName": "Above",
+          "IsDefaultValue": false,
+          "Name": "Above",
+          "Value": "Above"
+        }
+      ],
       "HelperUI": null,
       "Hidden": false,
       "IsDataSourceProperty": false,
@@ -353,128 +450,16 @@
       "IsPrimaryOutput": false,
       "IsResettable": false,
       "IsResettableToManifestDefault": false,
-      "Name": "SelectMultiple",
+      "Name": "LabelPosition",
       "ParentDataSetName": "",
       "PassThroughProperty": "",
       "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
+      "PhoneDefaultValue": "After",
       "Required": false,
       "ShouldAutoBind": false,
-      "Type": 20,
+      "Type": 1,
       "Usage": 0,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": ", ",
-      "Description": "Text used to separate selected item values when the control allows multiple selections.",
-      "DescriptionResourceString": "ComboboxCanvas_MultiValueDelimiter_Desc",
-      "DisplayName": "Multiple value delimiter",
-      "DisplayNameResourceString": "ComboboxCanvas_MultiValueDelimiter",
-      "EnumValues": [],
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "MultiValueDelimiter",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 6,
-      "Usage": 0,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "true",
-      "Description": "Allow searching for items.",
-      "DescriptionResourceString": "ComboboxCanvas_IsSearchable_Desc",
-      "DisplayName": "Allow searching",
-      "DisplayNameResourceString": "ComboboxCanvas_IsSearchable",
-      "EnumValues": [],
-      "HelperUI": null,
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "IsSearchable",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 20,
-      "Usage": 0,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "Find items",
-      "Description": "The placeholder text of the combo box.",
-      "DescriptionResourceString": "ComboboxCanvas_InputTextPlaceholder_Desc",
-      "DisplayName": "Placeholder text",
-      "DisplayNameResourceString": "ComboboxCanvas_InputTextPlaceholder",
-      "EnumValues": [],
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "InputTextPlaceholder",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 6,
-      "Usage": 0,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "",
-      "Description": "Text used to search the list of items.",
-      "DescriptionResourceString": "ComboboxCanvas_SearchText_Desc",
-      "DisplayName": "Search text",
-      "DisplayNameResourceString": "ComboboxCanvas_SearchText",
-      "EnumValues": [],
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "SearchText",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 6,
-      "Usage": 1,
-      "WebDefaultValue": ""
+      "WebDefaultValue": "After"
     },
     {
       "Category": "data",
@@ -533,49 +518,6 @@
       "WebDefaultValue": ""
     },
     {
-      "Category": "data",
-      "DefaultValue": "None",
-      "Description": "The current status of the combo box, with regard to validation.",
-      "DescriptionResourceString": "ComboboxCanvas_ValidationState_Desc",
-      "DisplayName": "Validation state",
-      "DisplayNameResourceString": "ComboboxCanvas_ValidationState",
-      "EnumValues": [
-        {
-          "Description": "Error",
-          "DisplayName": "Error",
-          "IsDefaultValue": false,
-          "Name": "Error",
-          "Value": "Error"
-        },
-        {
-          "Description": "None",
-          "DisplayName": "None",
-          "IsDefaultValue": true,
-          "Name": "None",
-          "Value": "None"
-        }
-      ],
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "ValidationState",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "None",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 1,
-      "Usage": 2,
-      "WebDefaultValue": "None"
-    },
-    {
       "Category": "design",
       "DefaultValue": "",
       "Description": "NA",
@@ -632,118 +574,6 @@
       "WebDefaultValue": ""
     },
     {
-      "Category": "data",
-      "DefaultValue": "",
-      "Description": "The source of data that contains the items that appear in the control.",
-      "DescriptionResourceString": "The source of data that contains the items that appear in the control.",
-      "DisplayName": "Data Source(##PCFDatasetItems##)",
-      "DisplayNameResourceString": "Data Source",
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": true,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": true,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "Items",
-      "NullDefaultValue": "",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "",
-      "PfxDefaultValue": null,
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 26,
-      "Usage": 0,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "",
-      "Description": "The source of data that contains the items that appear in the control.",
-      "DescriptionResourceString": "The source of data that contains the items that appear in the control.",
-      "DisplayName": "Data Source(##PCFDatasetSelected##)",
-      "DisplayNameResourceString": "Data Source",
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": true,
-      "IsResettableToManifestDefault": false,
-      "Name": "Selected",
-      "NullDefaultValue": "",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "Items",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 5,
-      "Usage": 1,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "",
-      "Description": "The source of data that contains the items that appear in the control.",
-      "DescriptionResourceString": "The source of data that contains the items that appear in the control.",
-      "DisplayName": "Data Source(##PCFDatasetSelectedItems##)",
-      "DisplayNameResourceString": "Data Source",
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": true,
-      "IsResettableToManifestDefault": false,
-      "Name": "SelectedItems",
-      "NullDefaultValue": "",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "Items",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 26,
-      "Usage": 1,
-      "WebDefaultValue": ""
-    },
-    {
-      "Category": "data",
-      "DefaultValue": "",
-      "Description": "The source of data that contains the items that appear in the control.",
-      "DescriptionResourceString": "The source of data that contains the items that appear in the control.",
-      "DisplayName": "Data Source(##PCFDatasetDefaultSelectedItems##)",
-      "DisplayNameResourceString": "Data Source",
-      "HelperUI": "",
-      "Hidden": false,
-      "IsDataSourceProperty": false,
-      "IsLinkableToParentTheme": false,
-      "IsPrimaryBehavioral": false,
-      "IsPrimaryInput": false,
-      "IsPrimaryOutput": false,
-      "IsResettable": false,
-      "IsResettableToManifestDefault": false,
-      "Name": "DefaultSelectedItems",
-      "NullDefaultValue": "",
-      "ParentDataSetName": "",
-      "PassThroughProperty": "Items",
-      "PfxDefaultValue": "",
-      "PhoneDefaultValue": "",
-      "Required": false,
-      "ShouldAutoBind": false,
-      "Type": 26,
-      "Usage": 0,
-      "WebDefaultValue": ""
-    },
-    {
       "Category": "design",
       "DefaultValue": "",
       "Description": "",
@@ -770,28 +600,6 @@
       "Type": 3,
       "Usage": 0,
       "WebDefaultValue": ""
-    }
-  ],
-  "PropertyDependencies": [
-    {
-      "Input": "DefaultSelectedItems",
-      "Output": "Selected",
-      "RequiredFor": ""
-    },
-    {
-      "Input": "DefaultSelectedItems",
-      "Output": "SelectedItems",
-      "RequiredFor": ""
-    },
-    {
-      "Input": "Items",
-      "Output": "Selected",
-      "RequiredFor": ""
-    },
-    {
-      "Input": "Items",
-      "Output": "SelectedItems",
-      "RequiredFor": ""
     }
   ],
   "Resources": [
@@ -841,35 +649,35 @@
       "IsControlSpecific": false,
       "LoadingOrder": 7,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"ManifestTemplate\",\"Data\":{\"ConstructorName\":\"PowerApps.CoreControls.ComboboxCanvas\",\"CustomControlId\":\"PowerApps.CoreControls.ComboboxCanvas\",\"IsVirtual\":true,\"Properties\":{\"Resources\":[{\"Name\":\"/PCF/prop-types.js\",\"LoadOrder\":1,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/react-fela.js\",\"LoadOrder\":2,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela.js\",\"LoadOrder\":3,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela-dom.js\",\"LoadOrder\":4,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PCFControls/js/PCFControlWrapper.js\",\"LoadOrder\":6,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\",\"LoadOrder\":7,\"Type\":0,\"LibraryName\":null}],\"GroupDefinitions\":null,\"DataSetDefinitions\":{\"Items\":{\"DisplayName\":\"Data Source\",\"Type\":\"Grid\",\"Columns\":{},\"Primary\":true,\"InitialDataSetFetch\":true,\"CDSDataSetOptions\":null}},\"Properties\":{\"AccessibleLabel\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"SelectMultiple\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"false\"},\"MultiValueDelimiter\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\", \"},\"IsSearchable\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"true\"},\"InputTextPlaceholder\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"Find items\"},\"SearchText\":{\"Required\":true,\"Usage\":2,\"DefaultValue\":\"\"},\"BasePaletteColor\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"FontSize\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"ValidationState\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"None\"},\"TabIndex\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Tooltip\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Items\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Selected\":{\"Required\":true,\"Usage\":2,\"DefaultValue\":\"\"},\"SelectedItems\":{\"Required\":true,\"Usage\":2,\"DefaultValue\":\"\"},\"DefaultSelectedItems\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"}},\"FeatureUsage\":[{\"IsRequired\":true,\"Name\":\"ExplicitCommonEvents\"}]},\"Events\":null,\"CommonEvents\":{\"OnChange\":{\"EventName\":\"OnChange\"}},\"DesignMap\":null,\"PropertyDependencies\":[{\"Input\":\"DefaultSelectedItems\",\"Output\":\"Selected\",\"RequiredFor\":\"\"},{\"Input\":\"DefaultSelectedItems\",\"Output\":\"SelectedItems\",\"RequiredFor\":\"\"},{\"Input\":\"Items\",\"Output\":\"Selected\",\"RequiredFor\":\"\"},{\"Input\":\"Items\",\"Output\":\"SelectedItems\",\"RequiredFor\":\"\"}],\"Children\":null}}",
+      "Path": "{\"Id\":\"ManifestTemplate\",\"Data\":{\"ConstructorName\":\"PowerApps.CoreControls.Toggle\",\"CustomControlId\":\"PowerApps.CoreControls.Toggle\",\"IsVirtual\":true,\"Properties\":{\"Resources\":[{\"Name\":\"/PCF/prop-types.js\",\"LoadOrder\":1,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/react-fela.js\",\"LoadOrder\":2,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela.js\",\"LoadOrder\":3,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/PCF/fela-dom.js\",\"LoadOrder\":4,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PCFControls/js/PCFControlWrapper.js\",\"LoadOrder\":6,\"Type\":0,\"LibraryName\":null},{\"Name\":\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\",\"LoadOrder\":7,\"Type\":0,\"LibraryName\":null}],\"GroupDefinitions\":null,\"DataSetDefinitions\":{},\"Properties\":{\"Checked\":{\"Required\":true,\"Usage\":0,\"DefaultValue\":\"\"},\"Label\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"Label\"},\"AccessibleLabel\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"LabelPosition\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"After\"},\"BasePaletteColor\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"FontSize\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"TabIndex\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"},\"Tooltip\":{\"Required\":true,\"Usage\":1,\"DefaultValue\":\"\"}},\"FeatureUsage\":[{\"IsRequired\":true,\"Name\":\"ExplicitCommonEvents\"}]},\"Events\":{\"OnCheck\":{\"EventName\":\"OnCheck\"},\"OnUncheck\":{\"EventName\":\"OnUncheck\"}},\"CommonEvents\":{\"OnSelect\":{\"EventName\":\"OnSelect\"}},\"DesignMap\":null,\"PropertyDependencies\":[],\"Children\":null}}",
       "Type": 3
     },
     {
       "IsControlSpecific": false,
       "LoadingOrder": 8,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"ManifestPropertyTypes\",\"Data\":{\"Properties\":[{\"Name\":\"AccessibleLabel\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"SelectMultiple\",\"Type\":\"TwoOptions\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"MultiValueDelimiter\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"IsSearchable\",\"Type\":\"TwoOptions\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"InputTextPlaceholder\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"SearchText\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"BasePaletteColor\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"FillColor\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"FontSize\",\"Type\":\"Whole_None\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"ValidationState\",\"Type\":\"Enum\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"TabIndex\",\"Type\":\"Whole_None\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Tooltip\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Items\",\"Type\":\"DataSet\",\"ComplexType\":\"None\",\"IsPrimary\":true,\"IsIncluded\":false},{\"Name\":\"Selected\",\"Type\":\"Object\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"SelectedItems\",\"Type\":\"DataSet\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"DefaultSelectedItems\",\"Type\":\"DataSet\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"PCFTeamsTheme\",\"Type\":\"String\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"X\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Y\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Width\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Height\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Visible\",\"Type\":\"Boolean\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"DisplayMode\",\"Type\":\"DisplayMode\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true}]}}",
+      "Path": "{\"Id\":\"ManifestPropertyTypes\",\"Data\":{\"Properties\":[{\"Name\":\"Checked\",\"Type\":\"TwoOptions\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Label\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"AccessibleLabel\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"LabelPosition\",\"Type\":\"Enum\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"BasePaletteColor\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"FillColor\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"FontSize\",\"Type\":\"Whole_None\",\"ComplexType\":\"None\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"TabIndex\",\"Type\":\"Whole_None\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"Tooltip\",\"Type\":\"SingleLine_Text\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":false},{\"Name\":\"PCFTeamsTheme\",\"Type\":\"String\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"X\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Y\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Width\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Height\",\"Type\":\"Number\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"Visible\",\"Type\":\"Boolean\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true},{\"Name\":\"DisplayMode\",\"Type\":\"DisplayMode\",\"ComplexType\":\"\",\"IsPrimary\":false,\"IsIncluded\":true}]}}",
       "Type": 3
     },
     {
       "IsControlSpecific": false,
       "LoadingOrder": 9,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"0.0.19\",\"IsFirstParty\":true}}",
+      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"1.0.19\",\"IsFirstParty\":true}}",
       "Type": 3
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 10,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_ComboboxCanvas/ComboboxCanvas.js",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/bundle.js",
       "Type": 0
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 9,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_ComboboxCanvas/strings/ComboboxCanvas.1033.resx",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1033.resx",
       "Type": 2
     },
     {
@@ -883,14 +691,322 @@
       "IsControlSpecific": true,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "/PCFControls/PowerApps_CoreControls_ComboboxCanvas/strings/ComboboxCanvas.1033.json",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1025.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1026.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1027.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1028.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1029.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1030.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1031.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1032.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1033.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1035.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1036.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1037.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1038.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1040.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1041.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1042.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1043.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1044.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1045.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1046.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1048.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1049.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1050.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1051.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1053.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1054.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1055.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1057.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1058.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1060.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1061.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1062.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1063.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1066.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1069.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1081.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1086.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1087.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.1110.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.2052.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.2070.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.2074.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.3076.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.3082.json",
+      "Type": 5
+    },
+    {
+      "IsControlSpecific": true,
+      "LoadingOrder": 13,
+      "ModifiedPath": "",
+      "Path": "/PCFControls/PowerApps_CoreControls_Toggle/strings/Toggle.3098.json",
       "Type": 5
     },
     {
       "IsControlSpecific": false,
       "LoadingOrder": 13,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"LocalizedStrings\",\"Data\":{\"LocStrings\":{\"ComboboxCanvas\":\"Combobox\",\"ComboboxCanvas_AccessibleLabel\":\"Accessible label\",\"ComboboxCanvas_AccessibleLabel_Desc\":\"Label for screen readers.\",\"ComboboxCanvas_Desc\":\"Let users pick one or more values from a set of options.\",\"ComboboxCanvas_Items\":\"Data Source\",\"ComboboxCanvas_Items_Desc\":\"The source of data that contains the items that appear in the control.\",\"ComboboxCanvas_SelectMultiple\":\"Allow multiple selections\",\"ComboboxCanvas_SelectMultiple_Desc\":\"Whether this control allows the selection of more than one item at a time.\",\"ComboboxCanvas_MultiValueDelimiter\":\"Multiple value delimiter\",\"ComboboxCanvas_MultiValueDelimiter_Desc\":\"Text used to separate selected item values when the control allows multiple selections.\",\"ComboboxCanvas_IsSearchable\":\"Allow searching\",\"ComboboxCanvas_IsSearchable_Desc\":\"Allow searching for items.\",\"ComboboxCanvas_InputTextPlaceholder\":\"Placeholder text\",\"ComboboxCanvas_InputTextPlaceholder_Desc\":\"The placeholder text of the combo box.\",\"ComboboxCanvas_SearchText\":\"Search text\",\"ComboboxCanvas_SearchText_Desc\":\"Text used to search the list of items.\",\"Base_Palette_Color\":\"Base palette color\",\"Base_Palette_Color_description\":\"You can provide a different color palette for the selected item by specifying a base palette color. This color generates a set of similar colors that are then applied to different aspects of the item, most commonly: fill, border, and interaction states. A blank value indicates the item will use the color palette of the app's theme.\",\"Font_Size\":\"Font size\",\"Font_Size_description\":\"Set the font size for displayed text.\",\"ComboboxCanvas_ValidationState\":\"Validation state\",\"ComboboxCanvas_ValidationState_Desc\":\"The current status of the combo box, with regard to validation.\",\"ComboboxCanvas_ValidationState_None\":\"None\",\"ComboboxCanvas_ValidationState_Error\":\"Error\"}}}",
+      "Path": "{\"Id\":\"LocalizedStrings\",\"Data\":{\"LocStrings\":{\"Toggle_Display_Key\":\"Toggle\",\"Toggle_Desc_Key\":\"Let users visualise Toggle control\",\"Toggle_Label_Display_Key\":\"Label\",\"Toggle_Label_Desc_Key\":\"Label for Toggle\",\"Toggle_AccessibleLabel_Display_Key\":\"Accessibility Label\",\"Toggle_AccessibleLabel_Desc_Key\":\"Accessibility Label for Toggle component\",\"Toggle_LabelPosition_Display_Key\":\"Label Position\",\"Toggle_LabelPosition_Desc_Key\":\"Define position for the label around the Toggle\",\"Toggle_LabelPosition_Before\":\"Before\",\"Toggle_LabelPosition_After\":\"After\",\"Toggle_LabelPosition_Above\":\"Above\",\"Toggle_Checked_Display_Key\":\"Checked\",\"Toggle_Checked_Desc_Key\":\"To set Toggle checked state\",\"Base_Palette_Color\":\"Base palette color\",\"Base_Palette_Color_description\":\"You can provide a different color palette for the selected item by specifying a base palette color. This color generates a set of similar colors that are then applied to different aspects of the item, most commonly: fill, border, and interaction states. A blank value indicates the item will use the color palette of the app's theme.\",\"Font_Size\":\"Font size\",\"Font_Size_description\":\"Set the font size for displayed text.\"}}}",
       "Type": 3
     },
     {
@@ -899,6 +1015,20 @@
       "ModifiedPath": "",
       "Path": "/PCF/fluentui-react.js",
       "Type": 0
+    },
+    {
+      "IsControlSpecific": false,
+      "LoadingOrder": 0,
+      "ModifiedPath": "",
+      "Path": "React/16.8.6/16.8.6",
+      "Type": 4
+    },
+    {
+      "IsControlSpecific": false,
+      "LoadingOrder": 0,
+      "ModifiedPath": "",
+      "Path": "Fluent/9.2.0/9.4.0",
+      "Type": 4
     }
   ],
   "SubscribedFunctionalities": {
@@ -906,5 +1036,5 @@
     "supportResettableProperties": "true",
     "supportSetFocus": "true"
   },
-  "Version": "0.0.19"
+  "Version": "1.0.19"
 }

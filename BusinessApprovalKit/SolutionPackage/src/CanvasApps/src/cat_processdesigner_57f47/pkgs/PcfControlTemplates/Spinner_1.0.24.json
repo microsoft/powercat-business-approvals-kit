@@ -141,7 +141,8 @@
       "DisplayName": "OnChange",
       "Hidden": false,
       "IsPrimaryInput": false,
-      "Name": "OnChange"
+      "Name": "OnChange",
+      "PfxDefaultValue": null
     }
   ],
   "ControlConstructor": "Spinner",
@@ -755,7 +756,7 @@
       "IsControlSpecific": false,
       "LoadingOrder": 9,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"1.0.22\",\"IsFirstParty\":true}}",
+      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"1.0.24\",\"IsFirstParty\":true}}",
       "Type": 3
     },
     {
@@ -1123,5 +1124,5 @@
       "Type": 4
     }
   ],
-  "Version": "1.0.22"
+  "Version": "1.0.24"
 }
