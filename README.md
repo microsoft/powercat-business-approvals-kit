@@ -12,7 +12,11 @@ conditional branching, delegation, admin overrides and more – all without the
 need to write a single code – empowering every person in your organization to
 "do more with less" for your organizations approval needs.
 
-# About this GitHub repo
+## Office Hours
+
+Review regular [office hours](./OFFICEHOURS.md) to join monthly hours to review new features, roadmap and question and answer session.
+
+## About this GitHub repo
 
 The Business Approvals kit GitHub Repo contains the source, releases, issues and backlog items of all components that are part of the Business Approvals kit.
 
