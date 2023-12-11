@@ -88,6 +88,15 @@ namespace Microsoft.PowerPlatform.Demo
             if ( _playwright == null ) {
                 var config = new BrowserConfiguration() { Browser = "Chromium", Commands = _commands };
                 var playwright = new PlaywrightTestInfraFunctions(config, _logger, null);
+
+                if ( values == null ) {
+                    values = new Dictionary<string, string>();
+                }
+
+                if ( !string.IsNullOrEmpty(_commands.GetCommandValue<string>(ParseCommand.Width, String.Empty)) ) {
+                    values.Add("ScreenWidth", _commands.GetCommandValue<string>(ParseCommand.Width, String.Empty));
+                }
+
                 await playwright.SetupAsync(values);
 
                 var desiredUrl = string.IsNullOrEmpty(environment) ? "https://make.powerapps.com" : $"https://make.powerapps.com/environments/{environment}";

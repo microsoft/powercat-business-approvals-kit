@@ -1097,7 +1097,7 @@ function Invoke-OpenBrowser {
         Push-Location
         Set-Location $workshopPath
         $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-        dotnet $appPath user start --upn $UserUPN --env "https://aka.ms/ppac" --admin "Y" --headless "N" --record "N"
+        dotnet $appPath user start --upn $UserUPN --env "https://aka.ms/ppac" --admin "Y" --headless "N" --record "N" --width "1920" --height "1080" 
         Pop-Location
         return
     }
@@ -1122,7 +1122,7 @@ function Invoke-OpenBrowser {
         if ( $IsLinux ) {
             pac auth create -n User -un ${user} -p ${password}
         } else {
-            location = (Get-Command pac).Source
+            $location = (Get-Command pac).Source
             $pacPath = [System.IO.Path]::GetDirectoryName($location)
             $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
             & $pacLauncher auth create -n User -un ${user} -p ${password}
