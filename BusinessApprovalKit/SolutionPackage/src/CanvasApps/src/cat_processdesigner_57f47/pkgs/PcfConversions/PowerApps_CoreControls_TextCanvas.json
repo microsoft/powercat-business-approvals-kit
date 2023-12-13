@@ -61,7 +61,36 @@
       ],
       "From": "0.0.14",
       "To": "0.0.15"
+    },
+    {
+      "Action": [
+        {
+          "Name": "Font",
+          "Type": "add"
+        },
+        {
+          "Name": "FontColor",
+          "Type": "add"
+        },
+        {
+          "Name": "Italic",
+          "NewName": "FontItalic",
+          "Type": "rename"
+        },
+        {
+          "Name": "Strikethrough",
+          "NewName": "FontStrikethrough",
+          "Type": "rename"
+        },
+        {
+          "Name": "Underline",
+          "NewName": "FontUnderline",
+          "Type": "rename"
+        }
+      ],
+      "From": "0.0.17",
+      "To": "0.0.18"
     }
   ],
-  "Version": "0.0.17"
+  "Version": "0.0.20"
 }

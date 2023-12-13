@@ -48,7 +48,13 @@ BusyScreen As CanvasComponent:
     Spinner1 As Spinner:
         BasePaletteColor: =
         DisplayMode: =DisplayMode.Edit
+        Font: =""
+        FontColor: =
+        FontItalic: =false
         FontSize: =0
+        FontStrikethrough: =false
+        FontUnderline: =false
+        FontWeight: =""
         Height: =Parent.Height
         Label: =Parent.BusyMessage
         Width: =Parent.Width

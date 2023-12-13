@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="RetrieveProcessMetadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d45e5ea3a3459213" PluginAssemblyId="c18776e1-befa-444f-8467-03a8ddf8da6c" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/RetrieveProcessMetadata-C18776E1-BEFA-444F-8467-03A8DDF8DA6C/RetrieveProcessMetadata.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="RetrieveProcessMetadata.GetProcessParameters, RetrieveProcessMetadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d45e5ea3a3459213" PluginTypeId="68c3981a-84a7-4606-a091-022203454465" Name="RetrieveProcessMetadata.GetProcessParameters">
+      <FriendlyName>107574ff-c218-4c27-9e8f-0b680a206982</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>
