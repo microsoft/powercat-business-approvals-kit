@@ -6,6 +6,7 @@
     "IsSampleData": false,
     "IsWritable": true,
     "LogicalName": "systemuser",
+    "MaxGetRowsCount": 500,
     "Name": "Users",
     "NativeCDSDataSourceInfoNameMapping": {
       "accessmode": "Access Mode",

@@ -166,6 +166,7 @@
       <RootComponent type="61" schemaName="cat_businessapprovers" behavior="0" />
       <RootComponent type="62" schemaName="cat_BusinessApprovalManagement" behavior="0" />
       <RootComponent type="66" schemaName="cat_PowerCAT.Panel" behavior="0" />
+      <RootComponent type="66" schemaName="cat_PowerCAT.ProcessDesigner" behavior="0" />
       <RootComponent type="80" schemaName="cat_BusinessApprovalManagement" behavior="0" />
       <RootComponent type="9" schemaName="cat_bizappr_approvaltype" behavior="0" />
       <RootComponent type="9" schemaName="cat_bizappr_approvertype" behavior="0" />

@@ -1753,7 +1753,7 @@ ApprovalDesigner As CanvasComponent:
         galStageConditions_1 As gallery.galleryVertical:
             AccessibleLabel: ="Conditions"
             BorderColor: =RGBA(166, 166, 166, 1)
-            Height: =If(Self.Visible, 62, 0)
+            Height: =If(ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None, 62, 0)
             Items: |-
                 =AddColumns(
                     SortByColumns(

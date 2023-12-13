@@ -182,7 +182,7 @@
         RadiusTopLeft: =4
         RadiusTopRight: =4
         Width: =Parent.Width
-        ZIndex: =1
+        ZIndex: =2
 
         HeaderContainer1 As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.SetByContainer
@@ -989,7 +989,7 @@
                 Y: =
                 ZIndex: =3
 
-            "ProcessDesignerCanvas1 As 'Process Designer'":
+            "ProcessDesigner1 As 'Process Designer'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =Parent.Height
                 LayoutMinHeight: =480
@@ -1020,7 +1020,8 @@
                     Set(componentSelectedNodeIndex, 0);
                     Set(componentSelectedPathIndex, 0);
                 OnAddStage: |-
-                    =//Save the process   
+                    =
+                    //Save the process   
                     Concurrent(
                         If(
                             IsBlankOrError(_selectedProcess),
@@ -1315,14 +1316,12 @@
                     Set(componentSelectedPathIndex, 0);
                 PathIndex: =componentSelectedPathIndex
                 ProcessID: =_selectedProcess.'Business Approval Process'
-                RefreshDesigner: =varRefreshDesigner
                 RowIndex: =componentSelectedNodeIndex
                 StageID: =componentSelectedStage
-                StageIndex: =
                 Visible: =ToggleModernDesigner.Checked && !IsBlank(_selectedProcess.'Business Approval Process')
                 Width: =Parent.Width
-                X: =40
-                Y: =40
+                X: =0
+                Y: =0
                 ZIndex: =4
 
     ToggleModernDesigner As Toggle:
@@ -1343,13 +1342,14 @@
         Width: =235
         X: =DesignerContainer.Width - Self.Width
         Y: =DesignerContainer.Y 
-        ZIndex: =2
+        ZIndex: =3
 
     "FluentPanel As 'Fluent Panel'":
         DisplayMode: =DisplayMode.Edit
         HasCloseButton: =true
         HeaderText: =panelHeaderText
         Height: =Parent.Height
+        IsFooterAtBottom: =false
         IsOpen: =isPanelOpen
         OnChange: =
         OnDismiss: |-
@@ -1396,7 +1396,7 @@
         Width: =Parent.Width
         X: =0
         Y: =0
-        ZIndex: =3
+        ZIndex: =4
 
     CommandBarDeleteContainer As groupContainer.manualLayoutContainer:
         BorderColor: =ColorValue(AppTheme.palette.themePrimary)
@@ -1411,7 +1411,7 @@
         Width: =CommandBarDelete.Width
         X: =CommandBarDelete.X + 7
         Y: =CommandBarDelete.Y
-        ZIndex: =4
+        ZIndex: =5
 
     "CommandBarDelete As 'Fluent Command Bar (1.0.22)'.pcfdataset":
         DisplayMode: =DisplayMode.Edit
@@ -1484,7 +1484,7 @@
         Width: =25
         X: =PanelContainer.X + 120
         Y: =PanelContainer.Y - Self.Height -10
-        ZIndex: =5
+        ZIndex: =6
 
     PanelContainer As groupContainer.manualLayoutContainer:
         Height: =FluentPanel.ContentHeight + 40
@@ -1504,7 +1504,7 @@
         Width: =FluentPanel.ContentWidth - Self.PaddingLeft * 2                                                     
         X: =FluentPanel.Width - FluentPanel.ContentWidth + Self.PaddingLeft 
         Y: =55
-        ZIndex: =6
+        ZIndex: =7
 
         StageContainer As groupContainer:
             Height: =Parent.Height 
@@ -7274,7 +7274,7 @@
             )
         Visible: =_showConfirmDeleteStage
         Width: =Parent.Width
-        ZIndex: =7
+        ZIndex: =8
 
     ConfirmDialogNode As ConfirmDialog:
         ConfirmText: =confirmMessageNodeDelete
@@ -7313,7 +7313,7 @@
             );
         Visible: =_showConfirmNode
         Width: =Parent.Width
-        ZIndex: =8
+        ZIndex: =9
 
     ConfirmDialogAppDataDelete As ConfirmDialog:
         ConfirmText: =confirmMessage
@@ -7344,7 +7344,7 @@
             Set(_showConfirm, false);
         Visible: =_showConfirm
         Width: =Parent.Width
-        ZIndex: =9
+        ZIndex: =10
 
     BusyContainer As groupContainer.manualLayoutContainer:
         DropShadow: =DropShadow.Light
@@ -7356,7 +7356,7 @@
         RadiusTopRight: =4
         Visible: =isBusy || _isBusy
         Width: =App.Width
-        ZIndex: =10
+        ZIndex: =11
 
         spinnerLoader As Spinner:
             BasePaletteColor: =

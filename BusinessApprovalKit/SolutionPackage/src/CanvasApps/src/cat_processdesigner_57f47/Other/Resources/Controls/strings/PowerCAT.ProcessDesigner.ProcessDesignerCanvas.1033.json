@@ -1,0 +1,13 @@
+{
+  "ProcessDesigner_Desc_Key": "Let users specify stages and nodes",
+  "ProcessDesigner_Display_Key": "Process Designer",
+  "ProcessDesigner_NodeID_Display_Key": "Node ID",
+  "ProcessDesigner_PathIndex_Display_Key": "Path Index",
+  "ProcessDesigner_ProcessID_Display_Key": "Process ID",
+  "ProcessDesigner_RefreshDesigner_Desc_Key": "Use PowerFx -  Refresh&Rand() to refresh the component",
+  "ProcessDesigner_RefreshDesigner_Display_Key": "Refresh Designer",
+  "ProcessDesigner_RowIndex_Display_Key": "Row Index",
+  "ProcessDesigner_StageID_Display_Key": "Stage ID",
+  "ProcessDesigner_StageIndex_Display_Key": "Stage Index",
+  "ProcessDesigner_TotalStages_Display_Key": "Total Stages"
+}
