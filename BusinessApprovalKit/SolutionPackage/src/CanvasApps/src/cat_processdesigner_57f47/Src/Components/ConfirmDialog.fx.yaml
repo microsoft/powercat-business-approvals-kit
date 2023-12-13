@@ -31,7 +31,7 @@ ConfirmDialog As CanvasComponent:
         ZIndex: =1
 
     conConfirmButtons As groupContainer:
-        Height: =30
+        Height: =40
         Width: =250
         X: =Parent.Width / 2 - Self.Width / 2
         Y: =lblConfirmMessage.Y + lblConfirmMessage.Height + 30
@@ -96,7 +96,13 @@ ConfirmDialog As CanvasComponent:
         btnYes As Button:
             BasePaletteColor: =
             DisplayMode: =DisplayMode.Edit
+            Font: =""
+            FontColor: =
+            FontItalic: =false
             FontSize: =0
+            FontStrikethrough: =false
+            FontUnderline: =false
+            FontWeight: =""
             Height: =32
             OnSelect: =ConfirmDialog.OnClick(true)
             Text: =If(ConfirmDialog.OkOnly, "Ok", "Yes")
@@ -109,7 +115,13 @@ ConfirmDialog As CanvasComponent:
             Appearance: ='ButtonCanvas.Appearance'.Secondary
             BasePaletteColor: =
             DisplayMode: =DisplayMode.Edit
+            Font: =""
+            FontColor: =
+            FontItalic: =false
             FontSize: =0
+            FontStrikethrough: =false
+            FontUnderline: =false
+            FontWeight: =""
             Height: =32
             OnSelect: =ConfirmDialog.OnClick(false)
             Text: ="No"

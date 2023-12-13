@@ -848,7 +848,7 @@
       "MetaDataIDKey": "",
       "Name": "Business Owner Email_DataCard1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 6,
+      "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -2044,7 +2044,7 @@
       "MetaDataIDKey": "",
       "Name": "Created On_DataCard1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 10,
+      "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -6948,7 +6948,7 @@
       "MetaDataIDKey": "",
       "Name": "Default Approver Email_DataCard1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 8,
+      "ParentIndex": 10,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -9553,7 +9553,8 @@
           "IsLockable": false,
           "NameMapSourceSchema": "?"
         },
-        "ZIndex"
+        "ZIndex",
+        "MaxTemplateSize"
       ],
       "GalleryTemplateChildName": "galleryTemplate4_1",
       "HasDynamicProperties": false,
@@ -9688,6 +9689,11 @@
         {
           "Category": "Design",
           "PropertyName": "LoadingSpinnerColor",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "MaxTemplateSize",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -12765,7 +12771,7 @@
       "MetaDataIDKey": "",
       "Name": "Modified On_DataCard1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 9,
+      "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -13593,7 +13599,7 @@
       "MetaDataIDKey": "",
       "Name": "Secondary Owner Email_DataCard1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 7,
+      "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

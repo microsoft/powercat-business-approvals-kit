@@ -112,7 +112,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ConfirmDialog_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 712,
+        "PublishOrderIndex": 716,
         "Rules": [
           {
             "Category": "Data",
@@ -485,7 +485,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "conConfirmButtons_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 714,
+            "PublishOrderIndex": 718,
             "Rules": [
               {
                 "Category": "Data",
@@ -832,7 +832,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "conConfirmButtons_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 715,
+            "PublishOrderIndex": 719,
             "Rules": [
               {
                 "Category": "Data",
@@ -1138,7 +1138,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ConfirmDialog_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 713,
+        "PublishOrderIndex": 717,
         "Rules": [
           {
             "Category": "Design",
@@ -1311,7 +1311,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638376505287244679",
+    "LastModifiedTimestamp": "638379797382939987",
     "Name": "ConfirmDialog_6",
     "Rules": [
       {
@@ -1442,7 +1442,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638376505287244679",
+  "LastModifiedTimestamp": "638379797382939987",
   "Name": "cbb468bacf8f4bfeb2655fa55313fbdf",
   "OverridableProperties": {},
   "TemplateOriginalName": "7b1eab7f21764779b658df214f56f16c",

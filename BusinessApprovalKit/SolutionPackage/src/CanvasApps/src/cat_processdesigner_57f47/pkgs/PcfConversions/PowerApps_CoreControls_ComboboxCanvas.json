@@ -58,7 +58,37 @@
       ],
       "From": "0.0.16",
       "To": "0.0.17"
+    },
+    {
+      "Action": [
+        {
+          "Name": "Font",
+          "Type": "add"
+        },
+        {
+          "Name": "FontColor",
+          "Type": "add"
+        },
+        {
+          "Name": "FontWeight",
+          "Type": "add"
+        },
+        {
+          "Name": "FontItalic",
+          "Type": "add"
+        },
+        {
+          "Name": "FontUnderline",
+          "Type": "add"
+        },
+        {
+          "Name": "FontStrikethrough",
+          "Type": "add"
+        }
+      ],
+      "From": "0.0.20",
+      "To": "0.0.21"
     }
   ],
-  "Version": "0.0.20"
+  "Version": "0.0.24"
 }

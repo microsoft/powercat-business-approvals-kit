@@ -17,12 +17,12 @@
   <isgrouptitlehidden>0</isgrouptitlehidden>
   <location>1</location>
   <name>ProcessDesigner!958f0f84e75f463b8e94605042db4de6</name>
-  <onclickeventjavascriptfunctionname>RunOnSelected</onclickeventjavascriptfunctionname>
-  <onclickeventjavascriptparameters>[{"type":24},{"type":22}]</onclickeventjavascriptparameters>
-  <onclickeventjavascriptwebresourceid>
-    <webresourceid>b9b6535e-3bb2-ed11-83fe-0022482a97de</webresourceid>
-  </onclickeventjavascriptwebresourceid>
-  <onclickeventtype>2</onclickeventtype>
+  <onclickeventformulacomponentlibraryid>
+    <name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</name>
+  </onclickeventformulacomponentlibraryid>
+  <onclickeventformulacomponentname>2e3fc015965e418eb78e0cd299dbc128</onclickeventformulacomponentname>
+  <onclickeventformulafunctionname>OnSelect</onclickeventformulafunctionname>
+  <onclickeventtype>1</onclickeventtype>
   <sequence>1000100007.5000000000</sequence>
   <statecode>0</statecode>
   <statuscode>1</statuscode>

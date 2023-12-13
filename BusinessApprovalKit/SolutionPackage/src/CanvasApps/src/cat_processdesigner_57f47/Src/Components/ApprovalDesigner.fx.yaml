@@ -2314,10 +2314,13 @@ ApprovalDesigner As CanvasComponent:
 
     textProcessDesigner As Text:
         DisplayMode: =DisplayMode.Edit
+        Font: =""
+        FontColor: =
+        FontItalic: =false
+        FontStrikethrough: =false
+        FontUnderline: =true
         Height: =34
-        Italic: =false
         Text: ="Process Designer"
-        Underline: =true
         Weight: ='TextCanvas.Weight'.Semibold
         Width: =138
         Wrap: =true
@@ -2329,7 +2332,13 @@ ApprovalDesigner As CanvasComponent:
         BasePaletteColor: =
         Content: ="Please make use of refresh option, incase, approval conditions does not appear immediately aftering creating a stage with condition."
         DisplayMode: =DisplayMode.Edit
+        Font: =""
+        FontColor: =
+        FontItalic: =false
         FontSize: =0
+        FontStrikethrough: =false
+        FontUnderline: =false
+        FontWeight: =""
         Height: =40
         OnSelect: =false
         Visible: =galProcessStages_1.AllItemsCount > 1
