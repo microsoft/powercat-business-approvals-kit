@@ -2271,7 +2271,8 @@ ApprovalDesigner As CanvasComponent:
                 )
             OnChange: =
             OnSelect: |-
-                =Switch(
+                =// Supressing an unknown error - TODO: remove suppress
+                IfError(Switch(
                     Self.Selected.ItemKey,
                     "edit",
                     Set(_selectedStage, ThisItem);
@@ -2288,7 +2289,7 @@ ApprovalDesigner As CanvasComponent:
                         ThisItem.'Business Approval Stage',
                         false
                     )
-                )
+                ),"")
             Theme: =AppThemeJson
             Width: =35
             X: =Parent.TemplateWidth - Self.Width - 2
@@ -2313,10 +2314,13 @@ ApprovalDesigner As CanvasComponent:
 
     textProcessDesigner As Text:
         DisplayMode: =DisplayMode.Edit
+        Font: =""
+        FontColor: =
+        FontItalic: =false
+        FontStrikethrough: =false
+        FontUnderline: =true
         Height: =34
-        Italic: =false
         Text: ="Process Designer"
-        Underline: =true
         Weight: ='TextCanvas.Weight'.Semibold
         Width: =138
         Wrap: =true
@@ -2328,8 +2332,15 @@ ApprovalDesigner As CanvasComponent:
         BasePaletteColor: =
         Content: ="Please make use of refresh option, incase, approval conditions does not appear immediately aftering creating a stage with condition."
         DisplayMode: =DisplayMode.Edit
+        Font: =""
+        FontColor: =
+        FontItalic: =false
         FontSize: =0
+        FontStrikethrough: =false
+        FontUnderline: =false
+        FontWeight: =""
         Height: =40
+        OnSelect: =false
         Visible: =galProcessStages_1.AllItemsCount > 1
         Width: =40
         X: =textProcessDesigner.X+ textProcessDesigner.Width -30

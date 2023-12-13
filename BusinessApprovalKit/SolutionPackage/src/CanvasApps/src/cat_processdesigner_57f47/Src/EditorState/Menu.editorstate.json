@@ -177,6 +177,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnMenuItem",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -384,6 +385,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -466,7 +468,8 @@
           "InvariantPropertyName": "AccessibleLabel",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "MaxTemplateSize"
       ],
       "GalleryTemplateChildName": "galleryTemplate1",
       "HasDynamicProperties": false,
@@ -479,6 +482,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galMenu",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -611,6 +615,11 @@
           "Category": "Design",
           "PropertyName": "ShowScrollbar",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "MaxTemplateSize",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "defaultGalleryStyle",
@@ -730,6 +739,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoHamburger",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1077,6 +1087,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoMenuItem",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1271,6 +1282,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Menu",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1391,6 +1403,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "picIsActiveScreen",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [

@@ -18,7 +18,7 @@
       "Name": "BusyMessage",
       "PropertyDataTypeKey": "String",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     }
   ],
   "FirstParty": true,
@@ -29,7 +29,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638356634084388020",
+  "LastModifiedTimestamp": "638380627749646378",
   "Name": "ed04155a4c23468ba025cafdb088e127",
   "OverridableProperties": {},
   "TemplateOriginalName": "4e3d033bed1a42ba924b30cc5d251c78",

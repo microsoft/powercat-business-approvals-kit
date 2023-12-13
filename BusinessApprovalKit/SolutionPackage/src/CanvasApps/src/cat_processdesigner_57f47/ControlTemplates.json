@@ -84,7 +84,7 @@
     "Name": "PowerApps_CoreControls_ComboboxCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Combobox",
-    "Version": "0.0.19"
+    "Version": "0.0.24"
   },
   "Date picker": {
     "CustomGroupControlTemplateName": "",
@@ -208,7 +208,7 @@
           "Name": "Root",
           "Type": []
         },
-        "Version": "1.335"
+        "Version": "1.336"
       },
       "SearchText": {
         "Type": {
@@ -217,69 +217,19 @@
           "Name": "Root",
           "Type": []
         },
-        "Version": "1.335"
+        "Version": "1.336"
       },
       "SelectedPeople": {
         "Type": {
           "EnumString": "",
-          "Kind": "Table",
+          "Kind": "Record",
           "Name": "Root",
-          "Type": [
-            {
-              "EnumString": "",
-              "Kind": "String",
-              "Name": "PersonaImageAlt",
-              "Type": []
-            },
-            {
-              "EnumString": "",
-              "Kind": "Image",
-              "Name": "PersonaImgUrl",
-              "Type": []
-            },
-            {
-              "EnumString": "",
-              "Kind": "String",
-              "Name": "PersonaKey",
-              "Type": []
-            },
-            {
-              "EnumString": "",
-              "Kind": "String",
-              "Name": "PersonaName",
-              "Type": []
-            },
-            {
-              "EnumString": "",
-              "Kind": "String",
-              "Name": "PersonaPresence",
-              "Type": []
-            },
-            {
-              "EnumString": "",
-              "Kind": "String",
-              "Name": "PersonaRole",
-              "Type": []
-            }
-          ]
+          "Type": []
         },
-        "Version": "1.335"
+        "Version": "1.336"
       }
     },
-    "PCFDynamicSchemaForIRRetrieval": {
-      "AutoHeight": {
-        "DynamicSchema": "{\"type\":\"number\"}",
-        "PCFSkipValidation": false
-      },
-      "SearchText": {
-        "DynamicSchema": "{\"type\":\"string\"}",
-        "PCFSkipValidation": false
-      },
-      "SelectedPeople": {
-        "DynamicSchema": "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"PersonaKey\":{\"type\":\"string\"},\"PersonaName\":{\"type\":\"string\"},\"PersonaImgUrl\":{\"type\":\"string\",\"format\":\"uri\",\"x-ms-media-kind\":\"image\"},\"PersonaImageAlt\":{\"type\":\"string\"},\"PersonaRole\":{\"type\":\"string\"},\"PersonaPresence\":{\"type\":\"string\"}}}}",
-        "PCFSkipValidation": false
-      }
-    },
+    "PCFDynamicSchemaForIRRetrieval": {},
     "TemplateDisplayName": "Fluent PeoplePicker (1.0.22) Preview",
     "Version": "1.0.22"
   },
@@ -324,7 +274,7 @@
     "LastModifiedTimestamp": "0",
     "Name": "gallery",
     "OverridableProperties": {},
-    "Version": "2.13.2"
+    "Version": "2.14.0"
   },
   "galleryTemplate": {
     "CustomGroupControlTemplateName": "",
@@ -424,7 +374,7 @@
     "Name": "PowerApps_CoreControls_InfoButtonCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Information button",
-    "Version": "0.0.20"
+    "Version": "0.0.25"
   },
   "label": {
     "CustomGroupControlTemplateName": "",
@@ -454,6 +404,21 @@
     "OverridableProperties": {},
     "Version": "1.4.0"
   },
+  "Process Designer": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": false,
+    "Id": "http://microsoft.com/appmagic/powercontrol/cat_PowerCAT.ProcessDesigner",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": true,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "cat_PowerCAT.ProcessDesigner",
+    "OverridableProperties": {},
+    "TemplateDisplayName": "Process Designer",
+    "Version": "1.0.30"
+  },
   "Progress Bar": {
     "CustomGroupControlTemplateName": "",
     "FirstParty": true,
@@ -467,7 +432,7 @@
     "Name": "PowerApps_CoreControls_Progress",
     "OverridableProperties": {},
     "TemplateDisplayName": "Progress Bar",
-    "Version": "1.1.13"
+    "Version": "1.1.16"
   },
   "radio": {
     "CustomGroupControlTemplateName": "",
@@ -524,7 +489,7 @@
     "Name": "PowerApps_CoreControls_Spinner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Spinner",
-    "Version": "1.0.22"
+    "Version": "1.0.27"
   },
   "text": {
     "CustomGroupControlTemplateName": "",
@@ -553,7 +518,7 @@
     "Name": "PowerApps_CoreControls_TextCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Text",
-    "Version": "0.0.16"
+    "Version": "0.0.20"
   },
   "Text box": {
     "CustomGroupControlTemplateName": "",
@@ -583,7 +548,22 @@
     "Name": "PowerApps_CoreControls_TextInputCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Text input",
-    "Version": "0.0.20"
+    "Version": "0.0.24"
+  },
+  "Toggle": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/powercontrol/PowerApps_CoreControls_Toggle",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": true,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "PowerApps_CoreControls_Toggle",
+    "OverridableProperties": {},
+    "TemplateDisplayName": "Toggle",
+    "Version": "1.0.21"
   },
   "toggleSwitch": {
     "CustomGroupControlTemplateName": "",
