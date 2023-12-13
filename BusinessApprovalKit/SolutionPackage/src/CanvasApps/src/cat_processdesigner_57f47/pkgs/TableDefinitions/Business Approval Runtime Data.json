@@ -333,14 +333,6 @@
         "PCFExternalServiceUsageAllowed": false
       },
       "ComponentName": "CustomControl",
-      "Identifier": "cat_PowerCAT.ProcessDesignerCanvas",
-      "IdentifierType": 0
-    },
-    {
-      "Capabilities": {
-        "PCFExternalServiceUsageAllowed": false
-      },
-      "ComponentName": "CustomControl",
       "Identifier": "cat_PowerCAT.Icon",
       "IdentifierType": 0
     },
@@ -414,6 +406,14 @@
       },
       "ComponentName": "CustomControl",
       "Identifier": "cat_PowerCAT.Icon",
+      "IdentifierType": 0
+    },
+    {
+      "Capabilities": {
+        "PCFExternalServiceUsageAllowed": false
+      },
+      "ComponentName": "CustomControl",
+      "Identifier": "cat_PowerCAT.ProcessDesigner",
       "IdentifierType": 0
     }
   ],
