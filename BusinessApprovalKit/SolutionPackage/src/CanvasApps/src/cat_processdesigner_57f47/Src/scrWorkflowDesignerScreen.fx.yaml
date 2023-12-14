@@ -1316,6 +1316,7 @@
                     Set(componentSelectedPathIndex, 0);
                 PathIndex: =componentSelectedPathIndex
                 ProcessID: =_selectedProcess.'Business Approval Process'
+                RefreshDesigner: =varRefreshDesigner
                 RowIndex: =componentSelectedNodeIndex
                 StageID: =componentSelectedStage
                 Visible: =ToggleModernDesigner.Checked && !IsBlank(_selectedProcess.'Business Approval Process')

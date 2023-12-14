@@ -1111,6 +1111,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "ApprovalDesigner",
+                "type": "ApprovalDesigner.galProcessStages_1.galStageConditions_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 5
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageNodes.TabIndex"
                 }
               ],
@@ -1274,36 +1304,6 @@
                 "member": "TabIndex",
                 "module": "ApprovalDesigner",
                 "type": "ApprovalDesigner.galProcessStages_1.galStageNodes.icoEditNodePath2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "ApprovalDesigner",
-                "type": "ApprovalDesigner.galProcessStages_1.galStageConditions_1"
               }
             }
           ],
@@ -7405,36 +7405,6 @@
           },
           "ruleId": "acc-AccessibleLabelNeeded",
           "ruleIndex": 4
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "App.varRefreshDesigner"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "App.varRefreshDesigner",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "varRefreshDesigner",
-                "module": "App",
-                "type": "App"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 6
         },
         {
           "locations": [

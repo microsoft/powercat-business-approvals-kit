@@ -1320,7 +1320,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638380627749625661",
+    "LastModifiedTimestamp": "638381295996861142",
     "Name": "TableHeader",
     "Rules": [
       {
@@ -1563,7 +1563,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638380627749625661",
+  "LastModifiedTimestamp": "638381295996861142",
   "Name": "dfb803d08d96465e8c5dbfb0db6e415f",
   "OverridableProperties": {},
   "TemplateOriginalName": "aa0875a670a94270be8812d8637fbaba",
