@@ -50120,6 +50120,14 @@
           "InvariantPropertyName": "NodeID",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
+        },
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "\"\"",
+          "InvariantPropertyName": "RefreshDesigner",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
         }
       ],
       "DynamicProperties": [
@@ -50197,6 +50205,11 @@
         {
           "Category": "Data",
           "PropertyName": "NodeID",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "RefreshDesigner",
           "RuleProviderType": "Unknown"
         },
         {
