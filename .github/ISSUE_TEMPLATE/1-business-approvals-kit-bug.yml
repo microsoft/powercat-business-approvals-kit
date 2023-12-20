@@ -2,7 +2,7 @@ name: 🐞 [Business Approvals Kit] Bug report
 description: File a bug report for the Business Approvals Kit
 title: "[Business Approvals Kit - BUG] ISSUE TITLE"
 labels: ["bug"]
-assignees: taiki-yoshida
+assignees: 
 body:
 - type: textarea
   attributes:
