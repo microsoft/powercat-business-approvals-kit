@@ -27,7 +27,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 681,
+            "PublishOrderIndex": 657,
             "Rules": [
               {
                 "Category": "Design",
@@ -241,7 +241,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 682,
+            "PublishOrderIndex": 658,
             "Rules": [
               {
                 "Category": "Data",
@@ -600,7 +600,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 683,
+            "PublishOrderIndex": 659,
             "Rules": [
               {
                 "Category": "Design",
@@ -899,7 +899,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "TableHeader",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 680,
+        "PublishOrderIndex": 656,
         "Rules": [
           {
             "Category": "Data",
@@ -1157,7 +1157,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "TableHeader",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 684,
+        "PublishOrderIndex": 660,
         "Rules": [
           {
             "Category": "Design",
@@ -1320,7 +1320,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638381295996861142",
+    "LastModifiedTimestamp": "638388343178400201",
     "Name": "TableHeader",
     "Rules": [
       {
@@ -1563,7 +1563,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638381295996861142",
+  "LastModifiedTimestamp": "638388343178400201",
   "Name": "dfb803d08d96465e8c5dbfb0db6e415f",
   "OverridableProperties": {},
   "TemplateOriginalName": "aa0875a670a94270be8812d8637fbaba",

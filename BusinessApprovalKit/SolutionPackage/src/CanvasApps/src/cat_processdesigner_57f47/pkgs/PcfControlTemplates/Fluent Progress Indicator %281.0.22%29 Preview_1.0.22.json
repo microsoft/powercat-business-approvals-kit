@@ -755,7 +755,7 @@
     {
       "IsControlSpecific": true,
       "LoadingOrder": 10,
-      "ModifiedPath": "https://docserverpwaprodwus.blob.core.windows.net/03360230-a7ea-4ae7-a624-1e95b9c7aac2-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App990work035tqkqsx.mcp020S0Resources0Controls0PowerCAT.ProgressIndicator.bundle.js?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-12T10%3A44%3A45Z&ske=2023-12-13T10%3A59%3A45Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-13T10%3A59%3A45Z&sr=b&sp=r&sig=CXB9O4yNdbGSkQ7RV6Gjaau%2BBF2JN%2FpSC0wkj0VkUqw%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0PowerCAT.ProgressIndicator.bundle.js?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A02Z&ske=2023-12-23T05%3A40%3A02Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A02Z&sr=b&sp=r&sig=H7%2F7WJxOd8wz2AIxhKzKxZjwqe7%2BJjTPbdrwV9E3Rrw%3D",
       "Path": "/PCFControls/cat_PowerCAT.ProgressIndicator/PowerCAT.ProgressIndicator.bundle.js",
       "Type": 0
     },
@@ -776,7 +776,7 @@
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
-      "ModifiedPath": "https://docserverpwaprodwus.blob.core.windows.net/03360230-a7ea-4ae7-a624-1e95b9c7aac2-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App990work035tqkqsx.mcp020S0Resources0Controls0strings%252fPowerCAT.ProgressIndicator.ProgressIndicator.1033.json?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-12T10%3A44%3A46Z&ske=2023-12-13T10%3A59%3A46Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-13T10%3A59%3A46Z&sr=b&sp=r&sig=rvzl%2BGzZHF7YsGBtNu3gA7qX3PaelUzO9rTlQ4h6%2Btk%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0strings%252fPowerCAT.ProgressIndicator.ProgressIndicator.1033.json?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A02Z&ske=2023-12-23T05%3A40%3A02Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A02Z&sr=b&sp=r&sig=lrU3jZdbxFKbfX7eMWVZQ62WrFnGwrk1UABGWdRU1JI%3D",
       "Path": "/PCFControls/cat_PowerCAT.ProgressIndicator/strings/PowerCAT.ProgressIndicator.ProgressIndicator.1033.json",
       "Type": 5
     },

@@ -412,6 +412,28 @@
     "WebhookUrls":  [
 
                     ],
+    "OrgSettings":  [
+                        {
+                            "SchemaName":  "inactivitytimeoutenabled",
+                            "Value":  "#{orgsetting.inactivitytimeoutenabled}#"
+                        },
+                        {
+                            "SchemaName":  "isauditenabled",
+                            "Value":  "#{orgsetting.isauditenabled}#"
+                        },
+                        {
+                            "SchemaName":  "isautosaveenabled",
+                            "Value":  "#{orgsetting.isautosaveenabled}#"
+                        },
+                        {
+                            "SchemaName":  "iscustomcontrolsincanvasappsenabled",
+                            "Value":  "#{orgsetting.iscustomcontrolsincanvasappsenabled}#"
+                        },
+                        {
+                            "SchemaName":  "isduplicatedetectionenabled",
+                            "Value":  "#{orgsetting.isduplicatedetectionenabled}#"
+                        }
+                    ],
     "SDKMessages":  [
 
                     ]

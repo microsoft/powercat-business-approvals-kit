@@ -187,7 +187,7 @@
     "Name": "cat_PowerCAT.Panel",
     "OverridableProperties": {},
     "TemplateDisplayName": "Fluent Panel",
-    "Version": "0.0.1"
+    "Version": "0.0.8"
   },
   "Fluent PeoplePicker (1.0.22) Preview": {
     "CustomGroupControlTemplateName": "",
@@ -417,7 +417,7 @@
     "Name": "cat_PowerCAT.ProcessDesigner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Process Designer",
-    "Version": "1.0.30"
+    "Version": "1.0.42"
   },
   "Progress Bar": {
     "CustomGroupControlTemplateName": "",

@@ -932,7 +932,7 @@ ApprovalDesigner As CanvasComponent:
                 Color: =RGBA(255, 255, 255, 1)//RGBA(51, 51, 51, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
+                Fill: =ColorFade(ColorValue(AppTheme.palette.themeSecondary),30%)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
@@ -958,7 +958,7 @@ ApprovalDesigner As CanvasComponent:
                 Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
+                Fill: =ColorFade(ColorValue(AppTheme.palette.themeSecondary),30%)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
@@ -984,7 +984,7 @@ ApprovalDesigner As CanvasComponent:
                 Color: =RGBA(255, 255, 255, 1)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
-                Fill: =ColorValue(AppTheme.palette.themeSecondary)//RGBA(225, 228, 229, 1)
+                Fill: =ColorFade(ColorValue(AppTheme.palette.themeSecondary),30%)//RGBA(225, 228, 229, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Height: =28
@@ -1757,8 +1757,8 @@ ApprovalDesigner As CanvasComponent:
             Items: |-
                 =AddColumns(
                     SortByColumns(
-                        ThisItem.'Business Approval Conditions (cat_BusinessApprovalCondition_Stage_cat_B)',
-                        //Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage'), 
+                        //ThisItem.'Business Approval Conditions (cat_BusinessApprovalCondition_Stage_cat_B)',
+                        Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage'), 
                         "cat_pathindex"
                     ),
                    "StageSelection", ThisItem
@@ -1945,7 +1945,7 @@ ApprovalDesigner As CanvasComponent:
         conFalsePath_1 As groupContainer:
             BorderColor: =RGBA(105, 121, 126, 1)
             Height: =galStageConditions_1.Height
-            Visible: =ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else' && icoToggleStage_1.Icon = Icon.ChevronUp
+            Visible: =galStageConditions_1.Visible && ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else' 
             Width: =galStageConditions_1.TemplateWidth
             X: =galStageConditions_1.X + galStageConditions_1.Width / 2
             Y: =galStageConditions_1.Y
