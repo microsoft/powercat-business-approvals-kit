@@ -14,25 +14,6 @@ App As appinfo:
                 )
             )
         );
-        Concurrent(
-        If(
-            IsBlank(varRecordId),
-            Set(
-                _selectedProcess,
-                Patch(
-                    'Business Approval Processes',
-                    Defaults('Business Approval Processes'),
-                    {Name: txtInputProcessName.Value}
-                )
-            ),
-            Set(
-                _selectedProcess,
-                LookUp(
-                    'Business Approval Processes',
-                    'Business Approval Process' = varRecordId
-                )
-            )
-        ),
         Set(
             AppTheme,
             /* START THEME OBJECT */
@@ -63,7 +44,7 @@ App As appinfo:
                 }
             }
             /* END THEME OBJECT */
-        ));
+        );
         Set(
             AppThemeJson,
             JSON(
