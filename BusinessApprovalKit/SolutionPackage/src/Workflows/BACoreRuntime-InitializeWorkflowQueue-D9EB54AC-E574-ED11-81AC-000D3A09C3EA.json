@@ -2,6 +2,9 @@
   "properties": {
     "connectionReferences": {
       "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
         "runtimeSource": "embedded",
         "connection": {
           "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"

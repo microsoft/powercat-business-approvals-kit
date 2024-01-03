@@ -44,7 +44,8 @@
               "subscriptionRequest/entityname": "cat_businessapprovalinstance",
               "subscriptionRequest/scope": 4,
               "subscriptionRequest/filteringattributes": "cat_instancestatus",
-              "subscriptionRequest/runas": 1
+              "subscriptionRequest/runas": 1,
+              "subscriptionRequest/name": "bf11ca75-9d8d-ec11-8d20-000d3a09d351"
             },
             "authentication": "@parameters('$authentication')"
           }
@@ -59,6 +60,9 @@
               "actions": {
                 "Get_Other_Approval_Instances": {
                   "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "6e546375-74be-44eb-aa48-ed60fbea7d81"
+                  },
                   "type": "OpenApiConnection",
                   "inputs": {
                     "host": {
@@ -92,6 +96,9 @@
                               "actions": {
                                 "Cancel_by_creating_override": {
                                   "runAfter": {},
+                                  "metadata": {
+                                    "operationMetadataId": "96c7ca40-e75c-4852-80b0-c24a53f1c229"
+                                  },
                                   "type": "OpenApiConnection",
                                   "inputs": {
                                     "host": {
@@ -110,6 +117,9 @@
                                 }
                               },
                               "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "4062e6c7-9ab4-478d-b8ef-83f2d5c882d7"
+                              },
                               "type": "Foreach",
                               "runtimeConfiguration": {
                                 "concurrency": {
@@ -122,6 +132,9 @@
                                 "Each_Running_Approval_Instances": [
                                   "Succeeded"
                                 ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "f709b0b9-38b3-4a29-8aa8-f86612c4ade3"
                               },
                               "type": "OpenApiConnection",
                               "inputs": {
@@ -147,6 +160,9 @@
                                 "actions": {
                                   "Update_Node_Instance_to_Complete_-_No_more_running_instances": {
                                     "runAfter": {},
+                                    "metadata": {
+                                      "operationMetadataId": "6467e9cb-2b50-4fd1-8b91-70c84809559b"
+                                    },
                                     "type": "OpenApiConnection",
                                     "inputs": {
                                       "host": {
@@ -171,6 +187,9 @@
                                     0
                                   ]
                                 },
+                                "metadata": {
+                                  "operationMetadataId": "b8e89964-b05f-4414-a497-a53ed18d47d3"
+                                },
                                 "type": "If"
                               }
                             }
@@ -191,6 +210,9 @@
                               }
                             ]
                           },
+                          "metadata": {
+                            "operationMetadataId": "ddad12dd-2e9d-4d68-8cac-a263601f2c1b"
+                          },
                           "type": "If",
                           "description": "Approve/Reject - Everyone (809,060,000), Approve/Reject - First (809,060,001), Custom - Everyone (809,060,002), Custom - First (809,060,003)"
                         }
@@ -206,6 +228,9 @@
                               "actions": {
                                 "Cancel_by_creating_override_2": {
                                   "runAfter": {},
+                                  "metadata": {
+                                    "operationMetadataId": "767a37dc-a4a5-486b-b44d-2419f21a4404"
+                                  },
                                   "type": "OpenApiConnection",
                                   "inputs": {
                                     "host": {
@@ -224,6 +249,9 @@
                                 }
                               },
                               "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "91f751db-641c-4b8d-a059-d76506980e66"
+                              },
                               "type": "Foreach",
                               "runtimeConfiguration": {
                                 "concurrency": {
@@ -236,6 +264,9 @@
                                 "Each_Running_Approval_Instances_2": [
                                   "Succeeded"
                                 ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "95b3730d-59ff-4e7a-8c46-d01031d5e3de"
                               },
                               "type": "OpenApiConnection",
                               "inputs": {
@@ -261,6 +292,9 @@
                                 "actions": {
                                   "Update_Node_Instance_to_Cancelled_-_No_more_running_instances_2": {
                                     "runAfter": {},
+                                    "metadata": {
+                                      "operationMetadataId": "7a79590e-74c8-4526-9ce3-a2a757b5bc2b"
+                                    },
                                     "type": "OpenApiConnection",
                                     "inputs": {
                                       "host": {
@@ -285,6 +319,9 @@
                                     0
                                   ]
                                 },
+                                "metadata": {
+                                  "operationMetadataId": "721e5ec8-e53c-4f3a-b299-f13fc3d7dcb1"
+                                },
                                 "type": "If"
                               }
                             }
@@ -295,6 +332,9 @@
                               ""
                             ]
                           },
+                          "metadata": {
+                            "operationMetadataId": "b3eaec08-2b3c-4102-8045-95de450329c5"
+                          },
                           "type": "If"
                         }
                       }
@@ -304,6 +344,9 @@
                     "actions": {}
                   },
                   "expression": "@triggerOutputs()?['body/cat_outcome']",
+                  "metadata": {
+                    "operationMetadataId": "79384aff-aa29-4f8b-ab00-627c190ae1f0"
+                  },
                   "type": "Switch",
                   "description": "If approved, will go and complete the node. If rejected, will go and cancel the node. (20221219 TY)"
                 }

@@ -2060,7 +2060,7 @@
                     Defaults('Business Approval Versions'),
                     {
                         Process: _selectedProcess,
-                        Name: _selectedProcess.Name,
+                        Name: txtInputProcessName.Value,
                         Version: If(
                             IsBlank(lastPublished),
                             1,
