@@ -16,6 +16,7 @@
           <cell name="createdby" width="100" />
           <cell name="createdon" width="100" />
           <cell name="modifiedon" width="100" />
+          <cell name="cat_requestedby" width="119" />
         </row>
       </grid>
     </layoutxml>
@@ -35,6 +36,7 @@
             <condition attribute="cat_instancestatus" operator="ne" value="809060002" />
           </filter>
           <attribute name="modifiedon" />
+          <attribute name="cat_requestedby" />
         </entity>
       </fetch>
     </fetchxml>

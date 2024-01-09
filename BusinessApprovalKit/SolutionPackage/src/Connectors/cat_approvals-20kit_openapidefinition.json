@@ -2,7 +2,7 @@
   "basePath": "/",
   "consumes": [],
   "definitions": {},
-  "host": "@environmentVariables(\"cat_ApprovalKitOrgUrl\")",
+  "host": "orgc08dc7f0.crm.dynamics.com",
   "info": {
     "description": "",
     "title": "Approvals kit Connector",

@@ -80,7 +80,7 @@
                         <labels>
                           <label description="Process Version" languagecode="1033" />
                         </labels>
-                        <control id="cat_processversion" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_processversion" disabled="false" />
+                        <control id="cat_processversion" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_processversion" disabled="true" />
                       </cell>
                     </row>
                     <row>
@@ -88,15 +88,15 @@
                         <labels>
                           <label description="Additional Information" languagecode="1033" />
                         </labels>
-                        <control id="cat_additionalinformation" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_additionalinformation" disabled="false" />
+                        <control id="cat_additionalinformation" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_additionalinformation" disabled="true" />
                       </cell>
                     </row>
                     <row>
-                      <cell id="{3bb61578-8ba2-4d00-9fff-c218c7a6ed92}">
+                      <cell id="{3bb72326-e9fd-4a29-95aa-1066a4171e16}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="Owner" languagecode="1033" />
+                          <label description="" languagecode="1033" />
                         </labels>
-                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                        <control id="cat_requestedby" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_requestedby" disabled="true" />
                       </cell>
                     </row>
                     <row>
@@ -139,6 +139,12 @@
               <labels>
                 <label description="" languagecode="1033" />
               </labels>
+            </cell>
+            <cell id="{3bb61578-8ba2-4d00-9fff-c218c7a6ed92}" colspan="1" rowspan="1">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
             </cell>
           </row>
         </rows>

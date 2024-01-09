@@ -11,7 +11,7 @@
   },
   "Properties": {
     "AppCreationSource": "AppFromConvergedAppDesigner",
-    "AppDescription": "",
+    "AppDescription": "added auto refresh",
     "AppPreviewFlagsMap": {
       "aibuilderserviceenrollment": false,
       "allowmultiplescreensincanvaspages": true,

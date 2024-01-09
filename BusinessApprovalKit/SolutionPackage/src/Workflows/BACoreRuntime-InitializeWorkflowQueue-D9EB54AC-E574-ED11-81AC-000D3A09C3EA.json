@@ -2,6 +2,9 @@
   "properties": {
     "connectionReferences": {
       "shared_commondataserviceforapps_1": {
+        "impersonation": {
+          "source": "invoker"
+        },
         "runtimeSource": "embedded",
         "connection": {
           "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
@@ -174,7 +177,8 @@
             "parameters": {
               "entityName": "cat_businessapprovalworkflows",
               "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{outputs('Get_Business_Approval_version_record')?['body/cat_businessapprovalversionid']})",
-              "item/cat_additionalinformation": "@variables('var_AdditionalInformation')"
+              "item/cat_additionalinformation": "@variables('var_AdditionalInformation')",
+              "item/cat_requestedby": "@variables('var_RequestedBy')"
             },
             "authentication": "@parameters('$authentication')"
           }
@@ -272,10 +276,40 @@
                 "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
               },
               "type": "If"
+            },
+            "Condition_3": {
+              "actions": {
+                "Set_variable_RequestedBy": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "769aaf5c-8811-4b1d-982a-538045753ddb"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "var_RequestedBy",
+                    "value": "@items('Apply_to_each_')['value']"
+                  }
+                }
+              },
+              "runAfter": {
+                "Condition_2": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "equals": [
+                  "@items('Apply_to_each_')['id']",
+                  "Requested By"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
+              },
+              "type": "If"
             }
           },
           "runAfter": {
-            "Initialize_variable": [
+            "Initialize_variable_RequestedBy": [
               "Succeeded"
             ]
           },
@@ -323,6 +357,25 @@
                 ]
               }
             }
+          }
+        },
+        "Initialize_variable_RequestedBy": {
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3ecffc39-5bb9-429b-ab1d-ff9572407228"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "var_RequestedBy",
+                "type": "string"
+              }
+            ]
           }
         }
       }

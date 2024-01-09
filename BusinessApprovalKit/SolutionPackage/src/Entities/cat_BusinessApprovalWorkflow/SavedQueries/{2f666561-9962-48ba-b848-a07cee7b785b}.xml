@@ -16,6 +16,7 @@
           <cell name="cat_instancestatus" width="100" />
           <cell name="createdby" width="100" />
           <cell name="createdon" width="125" />
+          <cell name="cat_requestedby" width="119" />
         </row>
       </grid>
     </layoutxml>
@@ -34,6 +35,7 @@
           <attribute name="createdby" />
           <order attribute="createdon" descending="true" />
           <attribute name="cat_instancestatus" />
+          <attribute name="cat_requestedby" />
         </entity>
       </fetch>
     </fetchxml>

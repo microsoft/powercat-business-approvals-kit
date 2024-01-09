@@ -213,6 +213,11 @@ scrSettingsNew As screen:
 
                 TextCanvas1 As Text:
                     DisplayMode: =DisplayMode.Edit
+                    Font: =""
+                    FontColor: =
+                    FontItalic: =false
+                    FontStrikethrough: =false
+                    FontUnderline: =false
                     Height: =32
                     Text: =
                     Width: =96
@@ -455,7 +460,6 @@ scrSettingsNew As screen:
                     PaddingLeft: =12
                     Size: =10
                     Text: ="Delegates cannot be yourself, and the main and backup delegate cannot be the same person."
-                    Underline: =true
                     Width: =582
                     X: =184
                     Y: =23
@@ -569,6 +573,8 @@ scrSettingsNew As screen:
                     HoverCheckboxBackgroundFill: =
                     HoverCheckboxBorderColor: =
                     Label: =If(Self.Checked,"Enabled","Disabled")
+                    OnCheck: =false
+                    OnUncheck: =false
                     UncheckedCheckboxBackgroundFill: =
                     UncheckedCheckboxBorderColor: =
                     Width: =160

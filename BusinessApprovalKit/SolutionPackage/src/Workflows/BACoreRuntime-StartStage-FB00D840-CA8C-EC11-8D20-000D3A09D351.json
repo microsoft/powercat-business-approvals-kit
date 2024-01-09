@@ -232,7 +232,8 @@
                       "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimestageinstanceid']})",
                       "item/cat_start": "@utcNow()",
                       "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
-                      "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']"
+                      "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                      "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
                     },
                     "authentication": "@parameters('$authentication')"
                   },

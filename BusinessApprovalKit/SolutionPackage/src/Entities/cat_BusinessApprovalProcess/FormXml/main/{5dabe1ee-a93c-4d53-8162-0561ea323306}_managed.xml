@@ -118,27 +118,6 @@
                   </labels>
                   <rows>
                     <row>
-                      <cell rowspan="1" id="{620a397e-b0ec-428d-aa32-0db4c653316b}" showlabel="false" colspan="1">
-                        <labels>
-                          <label description="HTML Business Approval Designer" languagecode="1033" />
-                        </labels>
-                        <control id="WebResource_new_1" classid="{9FDF5F91-88B1-47F4-AD53-C11EFC01A01D}">
-                          <parameters>
-                            <Url>cat_businessapproval_designerinstructions</Url>
-                            <PassParameters>false</PassParameters>
-                            <Security>false</Security>
-                            <Scrolling>no</Scrolling>
-                            <Border>false</Border>
-                            <ShowOnMobileClient>false</ShowOnMobileClient>
-                            <WebResourceId>{5ed70bf2-0e07-ed11-82e6-000d3a09c3ea}</WebResourceId>
-                          </parameters>
-                        </control>
-                        <events>
-                          <event name="onload" application="false" active="false" />
-                        </events>
-                      </cell>
-                    </row>
-                    <row>
                       <cell locklevel="0" id="{541af6d0-536b-47e2-a237-f442af91f62f}" rowspan="4" colspan="1" auto="false">
                         <labels>
                           <label description="Stages" languagecode="1033" />
