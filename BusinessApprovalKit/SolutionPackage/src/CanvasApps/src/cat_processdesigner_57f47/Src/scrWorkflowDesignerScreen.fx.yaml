@@ -2060,7 +2060,7 @@
                     Defaults('Business Approval Versions'),
                     {
                         Process: _selectedProcess,
-                        Name: _selectedProcess.Name,
+                        Name: txtInputProcessName.Value,
                         Version: If(
                             IsBlank(lastPublished),
                             1,
@@ -2096,7 +2096,8 @@
                         _isBusy: false,
                         showPublishProcessContainer: false,
                         showFooterButton: false,
-                        showProcessVersionContainer: true
+                        showProcessVersionContainer: true,
+                        automaticRefreshVersion: true
                     }
                 );
             //save publish configuration - ends
@@ -2176,7 +2177,8 @@
                     showPublishProcessContainer: false,
                     showVariableContainer: false,
                     isPanelVisible: false,
-                    _showDeleteOption: false
+                    _showDeleteOption: false,
+                    automaticRefreshVersion:false
                 }
             );
         OnDismissed: =
@@ -5691,7 +5693,22 @@
                                 Filter('Business Approval Versions', 'Business Approval Versions (Views)'.'All Versions'),
                                 Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
                             )
-                        )
+                            
+                        );
+                        //Reset auto refresh version timer
+                            UpdateContext(
+                                {
+                                    automaticRefreshVersion:false
+                                }
+                            );
+                        // Reset timer
+                        Reset(Timer1);
+                        //Set autorefreshVersion timer
+                        UpdateContext(
+                                {
+                                    automaticRefreshVersion:true
+                                }
+                            );
                     )
                 Theme: =AppThemeJson
                 Width: =Parent.Width
@@ -5952,7 +5969,9 @@
                 Size: =10
                 Text: ="Published versions for " & _selectedProcess.Name
                 Width: =Parent.Width
-                Y: =CommandBar2_15.Height
+                Y: |-
+                    =//CommandBar2_15.Height
+                    'Publish message'.Height+ Self.Height
                 ZIndex: =3
 
             btnRefreshPublishedVersions_2 As button:
@@ -6021,6 +6040,61 @@
                 X: =galProcessVersion_2.X
                 Y: =galProcessVersion_2.Y
                 ZIndex: =6
+
+            Timer1 As timer:
+                AutoStart: =automaticRefreshVersion
+                BorderColor: =RGBA(0, 120, 212, 1)
+                BorderStyle: =BorderStyle.None
+                DisabledBorderColor: =RGBA(244, 244, 244, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Duration: =15000
+                Fill: =RGBA(0, 120, 212, 1)
+                FocusedBorderThickness: =2
+                Font: =Font.'Segoe UI'
+                Height: =32
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -10%)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =ColorFade(RGBA(0, 120, 212, 1), -10%)
+                OnTimerEnd: |-
+                    =Refresh('Business Approval Versions');
+                            ClearCollect(_colPublishedVersions, 
+                            Filter(
+                                Filter('Business Approval Versions', 'Business Approval Versions (Views)'.'All Versions'),
+                                Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                            )
+                        );
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                Repeat: =automaticRefreshVersion
+                Size: =10.5
+                Visible: =false
+                Width: =50
+                X: =1050
+                Y: =612
+                ZIndex: =7
+
+            "'Publish message' As label":
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: |-
+                    =If(panelHeaderText = "Publish",40,0)
+                    //40
+                PaddingLeft: =12
+                Size: =10
+                Text: ="This process may take up to 1 minute to complete."
+                Visible: =If(panelHeaderText = "Publish",true,false)
+                Width: =Parent.Width
+                Y: =CommandBar2_15.Height
+                ZIndex: =8
 
         VariableContainer As groupContainer:
             Height: =Parent.Height - Self.Y

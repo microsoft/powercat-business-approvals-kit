@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>cat_processdesigner_57f47</Name>
-  <AppVersion>2023-12-22T11:05:07Z</AppVersion>
+  <AppVersion>2024-01-09T02:27:51Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.23122.17.0</CreatedByClientVersion>
   <MinClientVersion>3.23122.17.0</MinClientVersion>
-  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23122.17","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20231222T104942Z-3.23122.17.0","showStatusBar":"false","offlineLargeFilesSupport":"false"}</Tags>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23122.17","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20231226T072935Z-3.23122.17.0","showStatusBar":"false","offlineLargeFilesSupport":"false"}</Tags>
   <IsCdsUpgraded>0</IsCdsUpgraded>
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
   <DisplayName>Process Designer</DisplayName>
-  <Description xsi:nil="true"></Description>
+  <Description>added auto refresh</Description>
   <CommitMessage xsi:nil="true"></CommitMessage>
   <Publisher xsi:nil="true"></Publisher>
   <AuthorizationReferences>[]</AuthorizationReferences>

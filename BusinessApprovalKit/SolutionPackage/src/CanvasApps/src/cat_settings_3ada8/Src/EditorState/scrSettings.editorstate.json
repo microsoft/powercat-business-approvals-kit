@@ -140,6 +140,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnFri",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 23,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -462,6 +463,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnMon",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 19,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -784,6 +786,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnSat",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 24,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1106,6 +1109,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnSun",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1428,6 +1432,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnThu",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 22,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1750,6 +1755,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnTue",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 20,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2072,6 +2078,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "btnWed",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 21,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2316,6 +2323,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "BusyScreen_5",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2515,6 +2523,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "cboApproverBackupDelegate",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2903,6 +2912,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "cboApproverDelegate",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3245,6 +3255,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "cboOutOfOffice",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 14,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3519,6 +3530,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ck_CommandBar",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3637,6 +3649,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ck_Spinner",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3807,6 +3820,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlPreferredNotification",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 12,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4135,6 +4149,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ddlWorkProfile",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 16,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4368,6 +4383,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate6",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4463,7 +4479,8 @@
           "InvariantPropertyName": "BorderThickness",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "MaxTemplateSize"
       ],
       "GalleryTemplateChildName": "galleryTemplate6",
       "HasDynamicProperties": false,
@@ -4476,6 +4493,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galPublicHolidays",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 27,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4603,6 +4621,11 @@
           "Category": "Design",
           "PropertyName": "DisabledFill",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "MaxTemplateSize",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "defaultGalleryStyle",
@@ -4703,6 +4726,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "HeaderContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4916,6 +4940,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Label8",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5225,6 +5250,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblApprovalDel",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5529,6 +5555,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblApproverDelBackup",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5848,6 +5875,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblBackupDelegateError",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 10,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6172,6 +6200,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblDelegateError",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6481,6 +6510,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblDelegateNote",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6785,6 +6815,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblHolidayCalendar",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 25,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7089,6 +7120,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblHolidayCalendarName",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 26,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7393,6 +7425,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblOutOfOffice",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 13,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7697,6 +7730,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblPreferredNotification",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 11,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7988,6 +8022,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblPublicHoliday",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8297,6 +8332,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSelectProfile",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8608,6 +8644,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSettingsHeading",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8919,6 +8956,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSettingsWorkProfile",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 15,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9214,6 +9252,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "MainContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9365,6 +9404,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "scrSettings",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9517,6 +9557,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "SubContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9711,6 +9752,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "Toolbar_7",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [

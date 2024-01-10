@@ -88,7 +88,7 @@
                         <labels>
                           <label description="Outcome" languagecode="1033" />
                         </labels>
-                        <control id="cat_outcome" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_outcome" disabled="false" />
+                        <control id="cat_outcome" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_outcome" disabled="true" />
                       </cell>
                     </row>
                     <row>
@@ -116,6 +116,14 @@
                       </cell>
                     </row>
                     <row>
+                      <cell id="{88bfd597-c426-42df-a192-5aa799b5f191}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Requested By" languagecode="1033" />
+                        </labels>
+                        <control id="cat_requestedby" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_requestedby" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell id="{85589e8a-52d3-418b-b732-8130c194e70d}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Time-out Counter" languagecode="1033" />
@@ -132,11 +140,11 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{c7f28db9-1bb4-4b41-97bc-1ab7a47a47f8}">
+                      <cell id="{c7f28db9-1bb4-4b41-97bc-1ab7a47a47f8}" colspan="1" rowspan="1">
                         <labels>
                           <label description="Owner" languagecode="1033" />
                         </labels>
-                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                        <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
                     </row>
                     <row>
@@ -186,7 +194,7 @@
               <labels>
                 <label description="Instance Status" languagecode="1033" />
               </labels>
-              <control id="header_cat_instancestatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_instancestatus" disabled="false" />
+              <control id="header_cat_instancestatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_instancestatus" disabled="true" />
             </cell>
           </row>
         </rows>

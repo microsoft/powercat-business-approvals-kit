@@ -43,17 +43,12 @@
                         <labels>
                           <label description="Workflow Process" languagecode="1033" />
                         </labels>
-                        <control id="cat_processversion" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_processversion" disabled="false">
+                        <control id="cat_processversion" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_processversion" disabled="true">
                           <parameters>
                             <DisableMru>true</DisableMru>
                             <DisableViewPicker>true</DisableViewPicker>
                           </parameters>
                         </control>
-                      </cell>
-                      <cell locklevel="0" id="{9060e310-99b9-453d-9f2f-8e7bc5271b74}" showlabel="false">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
                       </cell>
                     </row>
                     <row>
@@ -74,7 +69,7 @@
                         <labels>
                           <label description="Additional Information" languagecode="1033" />
                         </labels>
-                        <control id="cat_additionalinformation" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_additionalinformation" disabled="false" />
+                        <control id="cat_additionalinformation" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_additionalinformation" disabled="true" />
                       </cell>
                       <cell locklevel="0" id="{dec8fa4c-4306-484c-9af4-088811dcbd38}" showlabel="false">
                         <labels>
@@ -83,13 +78,13 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{e104c10b-f5ab-43ab-95d0-aa252bd61c29}">
+                      <cell id="{e5bbf0a4-14ad-4f05-9507-17fd0d6f0cc0}" locklevel="0" rowspan="1" colspan="1">
                         <labels>
-                          <label description="Owner" languagecode="1033" />
+                          <label description="Requested By" languagecode="1033" />
                         </labels>
-                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                        <control id="cat_requestedby" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_requestedby" disabled="true" />
                       </cell>
-                      <cell locklevel="0" id="{607f8aa0-ec54-44f9-b02a-253f2bb8ac3d}">
+                      <cell locklevel="0" id="{a67c3e43-5380-4dc7-9e63-28086b72ea36}">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
@@ -158,6 +153,7 @@
                       <cell locklevel="0" id="{7833e892-7060-478a-83bd-a118df2887b1}" rowspan="1" colspan="1">
                         <labels>
                           <label description="New SG control 1644839146736" languagecode="1033" />
+                          <label description="一括削除の失敗 " languagecode="1041" />
                         </labels>
                         <control id="Subgrid_2" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                           <parameters>
@@ -238,6 +234,12 @@
               <labels>
                 <label description="" languagecode="1033" />
               </labels>
+            </cell>
+            <cell id="{e104c10b-f5ab-43ab-95d0-aa252bd61c29}" colspan="1" rowspan="1">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
             </cell>
           </row>
         </rows>

@@ -79,8 +79,8 @@
                   "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
                   "ApprovalCreationInput/details": "@triggerOutputs()?['body/cat_additionalinformation']",
                   "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
-                  "ApprovalCreationInput/requestor": "@{outputs('Get_Owner_Email')?['body/internalemailaddress']};",
-                  "ApprovalCreationInput/enableNotifications": "@equals(body('Get_a_row_by_ID')?['cat_notification'],'809060000')",
+                  "ApprovalCreationInput/requestor": "@{triggerOutputs()?['body/cat_requestedby']};",
+                  "ApprovalCreationInput/enableNotifications": "@equals(triggerOutputs()?['body/cat_notification'],'809060000')",
                   "ApprovalCreationInput/enableReassignment": false
                 },
                 "authentication": "@parameters('$authentication')"
@@ -115,8 +115,8 @@
                     "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
                     "ApprovalCreationInput/details": "@triggerOutputs()?['body/cat_additionalinformation']",
                     "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
-                    "ApprovalCreationInput/requestor": "@{outputs('Get_Owner_Email')?['body/internalemailaddress']};",
-                    "ApprovalCreationInput/enableNotifications": "@equals(body('Get_a_row_by_ID')?['cat_notification'],'809060000')",
+                    "ApprovalCreationInput/requestor": "@{triggerOutputs()?['body/cat_requestedby']};",
+                    "ApprovalCreationInput/enableNotifications": "@equals(triggerOutputs()?['body/cat_notification'],'809060000')",
                     "ApprovalCreationInput/enableReassignment": false
                   },
                   "authentication": "@parameters('$authentication')"
@@ -251,11 +251,7 @@
           }
         },
         "varApprovalCompleted": {
-          "runAfter": {
-            "Get_a_row_by_ID": [
-              "Succeeded"
-            ]
-          },
+          "runAfter": {},
           "metadata": {
             "operationMetadataId": "06e5447f-6065-4443-a084-bce28b4304bd"
           },
@@ -502,49 +498,6 @@
             "operationMetadataId": "348ec275-0af6-4980-bd12-fff837e454cc"
           },
           "type": "If"
-        },
-        "Get_a_row_by_ID": {
-          "runAfter": {
-            "Get_Owner_Email": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "07ae2bb1-e74f-41c3-818f-87608de66416"
-          },
-          "type": "OpenApiConnection",
-          "inputs": {
-            "host": {
-              "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "GetItem",
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-            },
-            "parameters": {
-              "entityName": "cat_businessapprovalinstances",
-              "recordId": "@triggerOutputs()?['body/cat_businessapprovalinstanceid']",
-              "$select": "cat_notification"
-            },
-            "authentication": "@parameters('$authentication')"
-          }
-        },
-        "Get_Owner_Email": {
-          "runAfter": {},
-          "metadata": {
-            "operationMetadataId": "18de8da1-023c-44a4-9472-151365c0016f"
-          },
-          "type": "OpenApiConnection",
-          "inputs": {
-            "host": {
-              "connectionName": "shared_commondataserviceforapps_1",
-              "operationId": "GetItem",
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-            },
-            "parameters": {
-              "entityName": "systemusers",
-              "recordId": "@triggerOutputs()?['body/_ownerid_value']"
-            },
-            "authentication": "@parameters('$authentication')"
-          }
         }
       }
     },
