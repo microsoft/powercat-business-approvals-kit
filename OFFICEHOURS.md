@@ -6,7 +6,7 @@ Join the Approvals Kit Office hours held on the second Monday of each month betw
 
 [JOIN TEAM CALL NOW](https://aka.ms/ApprovalsKit/OfficeHours/Join)
 
-[Download calendar file to add to Calendar](./officehours.ics)
+[Download calendar file to add to Calendar](https://microsoft.github.io/powercat-business-approvals-kit/officehours.ics)
 
 ## Description
 
