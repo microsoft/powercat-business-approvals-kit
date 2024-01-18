@@ -1,0 +1,10 @@
+IgnoreProperties:
+  - ItemKey
+  - ItemIconName
+  - IconName
+  - Image
+  - FieldName
+  - FieldType
+
+IgnoreFunctions:
+  - SortByColumns
