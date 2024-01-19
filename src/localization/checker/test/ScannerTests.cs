@@ -3,9 +3,9 @@ using Xunit.Abstractions;
 
 namespace test;
 
-public class UnitTest1
+public class ScannerTests
 {
-    public UnitTest1(ITestOutputHelper output)
+    public ScannerTests(ITestOutputHelper output)
     {
         var converter = new Converter(output);
         Console.SetOut(converter);

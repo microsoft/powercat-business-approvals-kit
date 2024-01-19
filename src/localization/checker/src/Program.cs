@@ -1,11 +1,19 @@
 ﻿using System.CommandLine;
 using Microsoft.PowerCAT.Localization;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+using IHost host = Host.CreateApplicationBuilder(args).Build();
+
+var logger = host.Services.GetRequiredService<ILogger<Program>>();
 
 var rootCommand = new RootCommand("Localization checker");
 
-
- var fileOption = new Option<string>(
+var fileOption = new Option<string>(
             name: "--file",
             description: "The file to read");
 
@@ -27,20 +35,14 @@ scanCommand.SetHandler((file, config) =>
         var configStream = System.IO.File.Exists(config)? File.Open(config, FileMode.Open): null;
         var results = scanner.Scan(File.Open(file, FileMode.Open), configStream);
 
-        if ( results.Count == 0 ) {
-            Console.WriteLine("No string literals found");
-            return;
+        var analytics = new Analytics(logger);
+
+        if ( ! Directory.Exists("data") ) {
+            Directory.CreateDirectory("data");
         }
 
-        if ( results.Count > 0 ) {
-            Console.WriteLine($"Found {results.Count} string literals");
+        analytics.Generate(results, new FileStream($"data\\results-{DateTime.Now.ToString("yyyy-MM-dd hhmm")}.csv",FileMode.OpenOrCreate,FileAccess.Write));
 
-            foreach ( var match in results ) {
-                var control = match.Control.Split('.');
-                Console.WriteLine($"> {control[control.Length-1]}.{match.Property}");
-                Console.WriteLine("  " + String.Join(',', match.Text));
-            }
-        }
     },
     fileOption, configOption);
 

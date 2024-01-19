@@ -4,6 +4,6 @@ namespace Microsoft.PowerCAT.Localization {
     public class ScanResult {
         public string Control {get;set;}
         public string Property { get;set;}
-        public List<string> Text { get; private set; } = new List<string>();
+        public List<string> Text { get; set; } = new List<string>();
     }
 }
