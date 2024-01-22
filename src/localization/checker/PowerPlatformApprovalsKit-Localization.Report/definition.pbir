@@ -2,7 +2,7 @@
   "version": "1.0",
   "datasetReference": {
     "byPath": {
-      "path": "../report.Dataset"
+      "path": "../PowerPlatformApprovalsKit-Localization.Dataset"
     },
     "byConnection": null
   }

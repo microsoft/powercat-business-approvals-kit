@@ -50,7 +50,7 @@ The path to the data needs to be an absolute location. Given the location that y
 2. Change to the checker folder
 
 ```cmd
-cd src\localization\checker
+cd src\localization\checker\src\data
 ```
 
 3. Substitute R: with the current folder
@@ -59,4 +59,4 @@ cd src\localization\checker
 subst R: .
 ```
 
-4. Open the report.pbip in the Power BI Desktop
+4. Open the PowerPlatformApprovalsKit-Localization.pbip in the Power BI Desktop
