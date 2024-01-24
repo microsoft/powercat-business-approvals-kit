@@ -12,5 +12,7 @@ public class ScanConfig {
 
     public List<string> IgnoreVariableSetup {get;set;} = new List<string>();
 
+    public List<string> IgnoreValues {get;set;} = new List<string>();
+
     public List<string> IgnoreFunctions {get;set;} = new List<string>();
 }

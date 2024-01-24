@@ -29,6 +29,10 @@ public class StringLiteralVisitor : TexlVisitor {
             return;
         }
 
+        if ( _config.IgnoreValues.Contains(node.Value) ) {
+            return;
+        }
+
         if (_config.Settings.IgnoreColors && HasCallParent(node, "ColorValue") ) {
             string regex = @"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
             if ( Regex.IsMatch(node.Value, regex) ) {

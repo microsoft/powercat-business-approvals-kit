@@ -66,6 +66,7 @@ public class ScannerTests
     [Theory]
     [MemberData(nameof(IgnoreColorsTestCases))]
     [MemberData(nameof(IgnoreRecordTestCases))]
+    [MemberData(nameof(IgnoreStringLiteralsTestCases))]
     public void NoResultsWithConfig(string yaml, string config)
     {
         // Arrange
@@ -101,6 +102,13 @@ public class ScannerTests
         new object[] { "Test:\r\n  OnVisible: |-\r\n    = Set(Constant, {a: \"value\"})", "IgnoreVariableSetup:\r\n  - Constant"},
         // Ignore number record value
         new object[] { "Test:\r\n  OnVisible: |-\r\n    = Set(Constant, {a: 1)", "IgnoreVariableSetup:\r\n  - Constant"}
+    };
+
+    public static IEnumerable<object[]> IgnoreStringLiteralsTestCases =>
+    new List<object[]>
+    {
+        // Ignore variable with non text value
+        new object[] { "Test:\r\n  ItemKey: = \"Value\"", "IgnoreValues:\r\n  - Value"}
     };
     
     [Theory]
