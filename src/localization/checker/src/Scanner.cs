@@ -40,7 +40,14 @@ public class Scanner {
                     new ExpandoNodeTypeResolver(), 
                     ls => ls.InsteadOf<DefaultContainersNodeTypeResolver>())
                 .Build();
-            dynamic result = deserializer.Deserialize(yaml);
+
+            dynamic result = null;
+            try {
+                result = deserializer.Deserialize(yaml);
+            } catch (Exception ex){
+                Console.WriteLine(yaml);
+                throw ex;
+            }
 
             var toProcess = new Queue<KeyValuePair<string,System.Collections.Generic.IDictionary<string,object>>>();
 
@@ -52,10 +59,13 @@ public class Scanner {
                 toProcess.Enqueue(new KeyValuePair<string,System.Collections.Generic.IDictionary<string,object>>(item.Keys.First(),item));
             }
 
-            var engine = new RecalcEngine();
+            var fxConfig = new PowerFxConfig();
+            fxConfig.EnableSetFunction();
+
+            var engine = new RecalcEngine(fxConfig);
             var options = new ParserOptions();
             options.AllowsSideEffects = true;
-
+            
             while ( toProcess.Count > 0 ) {
                 var item = toProcess.Dequeue();
 

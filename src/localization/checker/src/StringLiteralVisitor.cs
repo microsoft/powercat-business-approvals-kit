@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.PowerFx.Syntax;
 using Microsoft.PowerCAT.Localization;
 
@@ -24,6 +25,22 @@ public class StringLiteralVisitor : TexlVisitor {
             return;
         }
 
+        if ( !String.IsNullOrEmpty(node.Value) && node.Value.Trim().Length == 0 ) {
+            return;
+        }
+
+        if (_config.Settings.IgnoreColors && HasCallParent(node, "ColorValue") ) {
+            string regex = @"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+            if ( Regex.IsMatch(node.Value, regex) ) {
+                return;
+            }
+        }
+
+        if ( IsStringPartOfIgnoreVariableSetup(node) ) {
+            return;
+        }
+
+
         if ( IsPartOfIgnore(node) ) {
             return;
         }
@@ -31,11 +48,46 @@ public class StringLiteralVisitor : TexlVisitor {
         if ( IgnoreRecordProperty(node) ) {
             return;
         }
-
-        
-        
+         
         Match.Add(node.Value);
         FoundMatch = true;
+    }
+
+    private bool IsStringPartOfIgnoreVariableSetup(StrLitNode node) {
+        // Check if can find parent Set Function
+        CallNode setNode = FindCallNode(node,"Set");
+        if ( setNode == null ) {
+            return false;
+        }
+
+        // Should only have 2 arguments
+        var args = setNode.Args;
+        if ( args.Count != 2 ) {
+            return false;
+        }
+
+        // check if not a name identifier
+        var firstArg = args.ChildNodes[0];
+        if ( !( firstArg is FirstNameNode ) ) {
+            return false;
+        }
+
+        // Check if the identifier should be ignored
+        var nameNode = firstArg as FirstNameNode;
+        return _config.IgnoreVariableSetup.Contains(nameNode.Ident.Name.Value);
+    }
+
+    private CallNode FindCallNode(TexlNode node, string name) {
+        if ( node is CallNode ) {
+           var call = node as CallNode;
+           if ( name.Equals(call.Head.Name) ) {
+                return call;
+           }
+        } 
+        if ( node == null ) {
+            return null;
+        }
+        return FindCallNode(node.Parent, name);
     }
 
     private bool IsPartOfIgnore(TexlNode node) {
@@ -49,6 +101,19 @@ public class StringLiteralVisitor : TexlVisitor {
             return false;
         }
         return IsPartOfIgnore(node.Parent);
+    }
+
+    private bool HasCallParent(TexlNode node, string name) {
+        if ( node is CallNode ) {
+            var call = node as CallNode;
+            if ( name.Equals(call.Head.Name) ) {
+                return true;
+            }
+        } 
+        if ( node == null ) {
+            return false;
+        }
+        return HasCallParent(node.Parent, name);
     }
 
     private bool IgnoreRecordProperty(TexlNode node) {
@@ -77,7 +142,7 @@ public class StringLiteralVisitor : TexlVisitor {
     /// <param name="node">The visited node.</param>
     public override void Visit(ErrorNode node) {
 
-    }
+    }   
 
     /// <summary>
     /// Visit <see cref="BlankNode" /> leaf node.
@@ -196,7 +261,7 @@ public class StringLiteralVisitor : TexlVisitor {
     /// </summary>
     /// <param name="node">The visited node.</param>
     public override void PostVisit(RecordNode node) {
-
+        
     }
 
     /// <summary>

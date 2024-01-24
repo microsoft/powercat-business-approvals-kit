@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Sample File\",\"DataPath\",\"Transform Sample File\",\"Transform File\",\"data\",\"Sample File (2)\",\"Parameter1\",\"Transform Sample File (2)\",\"Transform File (2)\"]"
+        "value": "[\"Sample File\",\"DataPath\",\"Transform Sample File\",\"Transform File\",\"data\",\"Sample File (2)\",\"Parameter1\",\"Transform Sample File (2)\",\"Transform File (2)\",\"Errors in data\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -64,10 +64,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Text"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "expression": "\"R:\\\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
@@ -196,6 +192,39 @@
         "kind": "m",
         "lineageTag": "3eb19a1d-7b06-4917-829d-df2b5a1aa6c4",
         "queryGroup": "Transform File from Query1\\Helper Queries (2)"
+      },
+      {
+        "name": "Errors in data",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "Source = data,",
+          "  #\"Detected Type Mismatches\" = let",
+          "    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),",
+          "    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),",
+          "    fieldNames = Record.FieldNames(recordTypeFields),",
+          "    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),",
+          "    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = \"The type of the value does not match the type of the column.\", Detail = v], fieldTypes{i}})",
+          "in",
+          "    Table.TransformColumns(Source, pairs),",
+          "  #\"Added Index\" = Table.AddIndexColumn(#\"Detected Type Mismatches\", \"Row Number\" ,1),",
+          "  #\"Kept Errors\" = Table.SelectRowsWithErrors(#\"Added Index\", {\"Source.Name\", \"Scanned\", \"control\", \"parent\", \"property\", \"text\"}),",
+          "  #\"Reordered Columns\" = Table.ReorderColumns(#\"Kept Errors\", {\"Row Number\", \"Source.Name\", \"Scanned\", \"control\", \"parent\", \"property\", \"text\"})",
+          "in",
+          "  #\"Reordered Columns\""
+        ],
+        "kind": "m",
+        "lineageTag": "4e87dabd-7ccb-4ca0-a5b5-ce98a1af6d54",
+        "queryGroup": "Query Errors - 1/23/2024 8:40:45 PM"
       }
     ],
     "queryGroups": [
@@ -234,6 +263,16 @@
           }
         ],
         "folder": "Transform File from Query1\\Helper Queries (2)"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "4"
+          }
+        ],
+        "description": "Errors in queries that were loaded on 1/23/2024 8:40:45 PM.",
+        "folder": "Query Errors - 1/23/2024 8:40:45 PM"
       }
     ],
     "relationships": [
@@ -472,6 +511,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [

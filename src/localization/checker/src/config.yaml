@@ -1,3 +1,9 @@
+Settings:
+  IgnoreColors: True
+
+IgnoreVariableSetup:
+  - Constants
+
 IgnoreProperties:
   - ItemKey
   - ItemIconName

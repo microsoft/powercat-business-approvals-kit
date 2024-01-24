@@ -4,7 +4,14 @@ This application is an experimental application that will parse the preview yaml
 
 ## Prerequisites
 
-The sample assumed that you have the .Net 7.0 SDK installed
+The sample assumes that you have the .Net 8.0 SDK installed. You have exported and unpacked the solution to check using the pac cli. For example for the unmanaged version of the Approvals Kit commands similar to the following could be used
+
+```cmd
+pac auth clear
+pac auth create --environment https://contoso.crm.dynamics.com/  
+pac solution export --path approvals.zip --name BusinessApprovalKit --managed "false"
+pac solution unpack --zipfile approvals.zip --folder .\BusinessApprovalKit\ --processCanvasApps --localize
+```
 
 ## Getting started
 
