@@ -83,6 +83,14 @@ public class Scanner {
                         var parseResult = engine.Parse(val, options);
 
                         var containsLiteralText = ContainsStringLiteral(parseResult.Root, scanConfig);
+
+                        if ( 
+                            scanConfig.Settings.IgnoreTextIfNotVisible 
+                            && containsLiteralText.Count > 0 
+                            && item.Value.ContainsKey("Visible") 
+                            && item.Value["Visible"].Equals("=false")) {
+                                continue;
+                        }
                         
                         if ( containsLiteralText.Count > 0 && !scanConfig.IgnoreProperties.Contains(key) ) {
                             var scanResult = new ScanResult();

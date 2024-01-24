@@ -1,5 +1,6 @@
 Settings:
   IgnoreColors: True
+  IgnoreTextIfNotVisible: True
 
 IgnoreVariableSetup:
   - Constants
@@ -12,5 +13,13 @@ IgnoreProperties:
   - FieldName
   - FieldType
 
+IgnoreValues:
+  - SuggestionKey
+  - SuggestionName
+  - SuggestionRole
+
 IgnoreFunctions:
   - SortByColumns
+  - ShowColumns
+  - Trace
+  - LookUp

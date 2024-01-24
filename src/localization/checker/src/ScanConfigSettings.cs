@@ -6,5 +6,7 @@ namespace Microsoft.PowerCAT.Localization;
 /// 
 /// </summary>
 public class ScanConfigSettings {
-    public bool IgnoreColors {get;set;}
+    public bool IgnoreColors { get;set; }
+
+    public bool IgnoreTextIfNotVisible { get;set; }
 }

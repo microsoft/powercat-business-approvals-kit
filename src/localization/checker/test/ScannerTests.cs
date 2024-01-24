@@ -107,8 +107,10 @@ public class ScannerTests
     public static IEnumerable<object[]> IgnoreStringLiteralsTestCases =>
     new List<object[]>
     {
-        // Ignore variable with non text value
-        new object[] { "Test:\r\n  ItemKey: = \"Value\"", "IgnoreValues:\r\n  - Value"}
+        // Ignore variable if in list
+        new object[] { "Test:\r\n  ItemKey: = \"Value\"", "IgnoreValues:\r\n  - Value"},
+        // Ignore variable if not visible
+        new object[] { "Test:\r\n  ItemKey: = \"Value\"\r\n  Visible: =false", "Settings:\r\n  IgnoreTextIfNotVisible: true"}
     };
     
     [Theory]
