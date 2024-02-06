@@ -9,6 +9,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -20,6 +21,7 @@
         "PropertyKind": 1,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 27,
         "WizardStep": null
       },
@@ -31,6 +33,7 @@
         "PropertyKind": 2,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -42,6 +45,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -53,6 +57,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "dataset",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -64,6 +69,7 @@
         "PropertyKind": 1,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -75,6 +81,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -86,6 +93,7 @@
         "PropertyKind": 1,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -97,6 +105,7 @@
         "PropertyKind": 1,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -108,6 +117,7 @@
         "PropertyKind": 2,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -119,6 +129,7 @@
         "PropertyKind": 2,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -130,6 +141,7 @@
         "PropertyKind": 2,
         "SectionIndex": 2,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       }
@@ -1080,14 +1092,14 @@
     {
       "IsControlSpecific": true,
       "LoadingOrder": 10,
-      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0PowerCAT.CommandBar.bundle.js?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A00Z&ske=2023-12-23T05%3A40%3A00Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A00Z&sr=b&sp=r&sig=ga0AGHrWEZSpI11%2FRUSJ59%2FR9F10q2jiF6Evoe0ah8g%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/b1d5414b-25aa-434b-b498-553f6d0d1a9c-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work03vl4bvdr.y0m020S0Resources0Controls0PowerCAT.CommandBar.bundle.js?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2024-02-05T06%3A50%3A54Z&ske=2024-02-06T07%3A05%3A54Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2024-02-06T07%3A05%3A54Z&sr=b&sp=r&sig=FDmnRRlA2cMXbyK2zMsy%2FgzHLtmI1MfrJ%2B1o%2F6tHFG0%3D",
       "Path": "/PCFControls/cat_PowerCAT.CommandBar/PowerCAT.CommandBar.bundle.js",
       "Type": 0
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 10,
-      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0css%252fPowerCAT.CommandBar.CommandBar.css?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A00Z&ske=2023-12-23T05%3A40%3A00Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A00Z&sr=b&sp=r&sig=pVSAQUmJQX87uPKRyhtctR80F8YTt1mh6DwW8hcwvEc%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/b1d5414b-25aa-434b-b498-553f6d0d1a9c-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work03vl4bvdr.y0m020S0Resources0Controls0css%252fPowerCAT.CommandBar.CommandBar.css?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2024-02-05T06%3A50%3A54Z&ske=2024-02-06T07%3A05%3A54Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2024-02-06T07%3A05%3A54Z&sr=b&sp=r&sig=hJ0APi%2FBkPNrcrWN7%2BrAjpmOowZyp34mhYbxaMxDu0Y%3D",
       "Path": "/PCFControls/cat_PowerCAT.CommandBar/css/PowerCAT.CommandBar.CommandBar.css",
       "Type": 1
     },
@@ -1108,7 +1120,7 @@
     {
       "IsControlSpecific": true,
       "LoadingOrder": 14,
-      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0strings%252fPowerCAT.CommandBar.CommandBar.1033.json?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A00Z&ske=2023-12-23T05%3A40%3A00Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A00Z&sr=b&sp=r&sig=OfvTOUqjE2DQO0iE2C%2Bw%2Bp1OjUFVoABO4AcmQOacANk%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/b1d5414b-25aa-434b-b498-553f6d0d1a9c-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work03vl4bvdr.y0m020S0Resources0Controls0strings%252fPowerCAT.CommandBar.CommandBar.1033.json?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2024-02-05T06%3A50%3A54Z&ske=2024-02-06T07%3A05%3A54Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2024-02-06T07%3A05%3A54Z&sr=b&sp=r&sig=7RRePB03A1qzCKq5MlC9mwlDxQ9TfrCX51%2FaQ3yArSM%3D",
       "Path": "/PCFControls/cat_PowerCAT.CommandBar/strings/PowerCAT.CommandBar.CommandBar.1033.json",
       "Type": 5
     },

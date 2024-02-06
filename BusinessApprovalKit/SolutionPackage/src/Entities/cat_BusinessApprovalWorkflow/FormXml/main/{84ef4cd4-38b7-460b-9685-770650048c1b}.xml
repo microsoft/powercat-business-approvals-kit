@@ -90,6 +90,19 @@
                         </labels>
                       </cell>
                     </row>
+                    <row>
+                      <cell id="{c0d3f3b6-7a91-4e0b-8ddd-7ef2b1498b67}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="External Reference" languagecode="1033" />
+                        </labels>
+                        <control id="cat_externalreference" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_externalreference" disabled="true" />
+                      </cell>
+                      <cell locklevel="0" id="{e9b7d64b-f61c-4a51-bd33-e880f5d4ea7c}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
                   </rows>
                 </section>
                 <section name="null_section_3" id="42862b66-4cd0-4a21-b439-45fdff37670b" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">

@@ -29,6 +29,11 @@
       "Kind": "Page",
       "Name": "Home page",
       "Value": "custompage:cat_homepagereimagined_709bf"
+    },
+    {
+      "Kind": "Page",
+      "Name": "Home page - copy",
+      "Value": "custompage:cat_homepagecopy_6f1c6"
     }
   ]
 }

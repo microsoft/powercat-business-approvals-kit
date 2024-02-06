@@ -1,0 +1,813 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="nodeRuContainerLblNodeDescription" xml:space="preserve">
+    <value>Description</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblNodeDescription</comment>
+  </data>
+  <data name="nodeRuContainerLblNodeName" xml:space="preserve">
+    <value>Name</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblNodeName</comment>
+  </data>
+  <data name="nodeRuContainerLblNodeType" xml:space="preserve">
+    <value>Node Type</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblNodeType</comment>
+  </data>
+  <data name="nodeRuContainerLblReset" xml:space="preserve">
+    <value>Currently editing a node with Conditions defined. To change condition type, click 'Edit' to change existing definitions. You can 'Reset' to undo.</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblReset</comment>
+  </data>
+  <data name="nodeRuContainerBtnReset" xml:space="preserve">
+    <value>Reset</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerBtnReset</comment>
+  </data>
+  <data name="nodeRuContainerBtnResetEdit" xml:space="preserve">
+    <value>Edit</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerBtnResetEdit</comment>
+  </data>
+  <data name="nodeRuContainerLblNodeOperand" xml:space="preserve">
+    <value>Operand</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblNodeOperand</comment>
+  </data>
+  <data name="nodeRuContainerLblRequestDataEmpty" xml:space="preserve">
+    <value>No request data available. Create new request data in the process edit screen.</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblRequestDataEmpty</comment>
+  </data>
+  <data name="nodeRuContainerLblRequestData" xml:space="preserve">
+    <value>Request Data</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblRequestData</comment>
+  </data>
+  <data name="nodeRuContainerLblSource" xml:space="preserve">
+    <value>Source</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblSource</comment>
+  </data>
+  <data name="nodeRuContainerLblNodeCondition" xml:space="preserve">
+    <value>Condition</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblNodeCondition</comment>
+  </data>
+  <data name="nodeRuContainerLblTargetReqDataT1" xml:space="preserve">
+    <value>No other data field found of similar data type for</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblTargetReqDataT1</comment>
+  </data>
+  <data name="nodeRuContainerLblTargetReqDataT2" xml:space="preserve">
+    <value>(</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblTargetReqDataT2</comment>
+  </data>
+  <data name="nodeRuContainerLblTargetReqDataT3" xml:space="preserve">
+    <value>)</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblTargetReqDataT3</comment>
+  </data>
+  <data name="nodeRuContainerLblCondTarget" xml:space="preserve">
+    <value>If</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblCondTarget</comment>
+  </data>
+  <data name="nodeRuContainerLblGoToStage" xml:space="preserve">
+    <value>Go to Stage</value>
+    <comment>ProcessDesignerLoc.nodeRuContainerLblGoToStage</comment>
+  </data>
+  <data name="pubContainerLblActivateOnPublish" xml:space="preserve">
+    <value>Activate process when published:</value>
+    <comment>ProcessDesignerLoc.pubContainerLblActivateOnPublish</comment>
+  </data>
+  <data name="pubContainerLblPublishInfo" xml:space="preserve">
+    <value>Activating this version will automatically de-activate all previous versions if exist. De-activated processes will continue to run but will not be available for new workflow instances.</value>
+    <comment>ProcessDesignerLoc.pubContainerLblPublishInfo</comment>
+  </data>
+  <data name="pubContainerLblVersionInfoFirstPublish" xml:space="preserve">
+    <value>This is the first time this process is being published.</value>
+    <comment>ProcessDesignerLoc.pubContainerLblVersionInfoFirstPublish</comment>
+  </data>
+  <data name="pubContainerLblVersionInfoVersionText1" xml:space="preserve">
+    <value>Last version:</value>
+    <comment>ProcessDesignerLoc.pubContainerLblVersionInfoVersionText1</comment>
+  </data>
+  <data name="pubContainerLblVersionInfoVersionText2" xml:space="preserve">
+    <value>, published on:</value>
+    <comment>ProcessDesignerLoc.pubContainerLblVersionInfoVersionText2</comment>
+  </data>
+  <data name="pubContainerLblVersionInfoVersionText3" xml:space="preserve">
+    <value>. Publishing new version:</value>
+    <comment>ProcessDesignerLoc.pubContainerLblVersionInfoVersionText3</comment>
+  </data>
+  <data name="pubContainerProgressIndicatorText" xml:space="preserve">
+    <value>Validating process -</value>
+    <comment>ProcessDesignerLoc.pubContainerProgressIndicatorText</comment>
+  </data>
+  <data name="pubContainerTglActivateFalseText" xml:space="preserve">
+    <value>No</value>
+    <comment>ProcessDesignerLoc.pubContainerTglActivateFalseText</comment>
+  </data>
+  <data name="pubContainerTglActivateTrueText" xml:space="preserve">
+    <value>Yes</value>
+    <comment>ProcessDesignerLoc.pubContainerTglActivateTrueText</comment>
+  </data>
+  <data name="varContainerAppDataDeleteBusyMessage" xml:space="preserve">
+    <value>Checking dependencies...</value>
+    <comment>ProcessDesignerLoc.varContainerAppDataDeleteBusyMessage</comment>
+  </data>
+  <data name="varContainerAppDataDeleteDependancyError" xml:space="preserve">
+    <value>This field cannot be deleted because of the following dependencies:</value>
+    <comment>ProcessDesignerLoc.varContainerAppDataDeleteDependancyError</comment>
+  </data>
+  <data name="varContainerAppDataDeleteDependentNode" xml:space="preserve">
+    <value>Nodes:</value>
+    <comment>ProcessDesignerLoc.varContainerAppDataDeleteDependentNode</comment>
+  </data>
+  <data name="varContainerAppDataDeleteDependentStage" xml:space="preserve">
+    <value>Stages:</value>
+    <comment>ProcessDesignerLoc.varContainerAppDataDeleteDependentStage</comment>
+  </data>
+  <data name="varContainerBtnSaveAppDataAddText" xml:space="preserve">
+    <value>+ Add</value>
+    <comment>ProcessDesignerLoc.varContainerBtnSaveAppDataAddText</comment>
+  </data>
+  <data name="varContainerBtnSaveAppDataTooltip" xml:space="preserve">
+    <value>Enter the Field Name and Date Type</value>
+    <comment>ProcessDesignerLoc.varContainerBtnSaveAppDataTooltip</comment>
+  </data>
+  <data name="varContainerBtnSaveAppDataUpdateText" xml:space="preserve">
+    <value>Update</value>
+    <comment>ProcessDesignerLoc.varContainerBtnSaveAppDataUpdateText</comment>
+  </data>
+  <data name="varContainerCancelEditVarText" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>ProcessDesignerLoc.varContainerCancelEditVarText</comment>
+  </data>
+  <data name="varContainerDeleteIconToolttipText" xml:space="preserve">
+    <value>Delete </value>
+    <comment>ProcessDesignerLoc.varContainerDeleteIconToolttipText</comment>
+  </data>
+  <data name="varContainerDeleteVariableTextPostfix" xml:space="preserve">
+    <value>. Are you sure?</value>
+    <comment>ProcessDesignerLoc.varContainerDeleteVariableTextPostfix</comment>
+  </data>
+  <data name="varContainerDeleteVariableTextPrefix" xml:space="preserve">
+    <value>This will delete Application Data field </value>
+    <comment>ProcessDesignerLoc.varContainerDeleteVariableTextPrefix</comment>
+  </data>
+  <data name="varContainerEditIconTooltipText" xml:space="preserve">
+    <value>Edit</value>
+    <comment>ProcessDesignerLoc.varContainerEditIconTooltipText</comment>
+  </data>
+  <data name="varContainerLblAppDataDescriptionText" xml:space="preserve">
+    <value>Define input data from consuming application that will be used for approval conditions.</value>
+    <comment>ProcessDesignerLoc.varContainerLblAppDataDescriptionText</comment>
+  </data>
+  <data name="varContainerLblAppDataHeaderText" xml:space="preserve">
+    <value>Variables (Application Data)</value>
+    <comment>ProcessDesignerLoc.varContainerLblAppDataHeaderText</comment>
+  </data>
+  <data name="varContainerLblProcessNotSavedText" xml:space="preserve">
+    <value>Click 'Save' to save the new process before adding Variables(Application Data definitions).</value>
+    <comment>ProcessDesignerLoc.varContainerLblProcessNotSavedText</comment>
+  </data>
+  <data name="varContainerSaveAppDataVariableExistsText" xml:space="preserve">
+    <value>variable already exist. Please select another name.</value>
+    <comment>ProcessDesignerLoc.varContainerSaveAppDataVariableExistsText</comment>
+  </data>
+  <data name="varContainerTblHeaderDataType" xml:space="preserve">
+    <value>Data Type</value>
+    <comment>ProcessDesignerLoc.varContainerTblHeaderDataType</comment>
+  </data>
+  <data name="varContainerTblHeaderDefaultValue" xml:space="preserve">
+    <value>Default Value</value>
+    <comment>ProcessDesignerLoc.varContainerTblHeaderDefaultValue</comment>
+  </data>
+  <data name="varContainerTblHeaderDescription" xml:space="preserve">
+    <value>Description</value>
+    <comment>ProcessDesignerLoc.varContainerTblHeaderDescription</comment>
+  </data>
+  <data name="varContainerTblHeaderFieldName" xml:space="preserve">
+    <value>Field Name</value>
+    <comment>ProcessDesignerLoc.varContainerTblHeaderFieldName</comment>
+  </data>
+  <data name="verContainerBtnActivateText" xml:space="preserve">
+    <value>Activate</value>
+    <comment>ProcessDesignerLoc.verContainerBtnActivateText</comment>
+  </data>
+  <data name="verContainerLblNoPublishVersion" xml:space="preserve">
+    <value>No published version found.</value>
+    <comment>ProcessDesignerLoc.verContainerLblNoPublishVersion</comment>
+  </data>
+  <data name="verContainerPublishText" xml:space="preserve">
+    <value>This process may take up to 1 minute to complete.</value>
+    <comment>ProcessDesignerLoc.verContainerPublishText</comment>
+  </data>
+  <data name="verContainerRefreshText" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>ProcessDesignerLoc.verContainerRefreshText</comment>
+  </data>
+  <data name="verContainerTableHeaderActivationStatus" xml:space="preserve">
+    <value>Activation Status</value>
+    <comment>ProcessDesignerLoc.verContainerTableHeaderActivationStatus</comment>
+  </data>
+  <data name="verContainerTableHeaderCreatedBy" xml:space="preserve">
+    <value>Created By</value>
+    <comment>ProcessDesignerLoc.verContainerTableHeaderCreatedBy</comment>
+  </data>
+  <data name="verContainerTableHeaderCreatedOn" xml:space="preserve">
+    <value>Created On</value>
+    <comment>ProcessDesignerLoc.verContainerTableHeaderCreatedOn</comment>
+  </data>
+  <data name="verContainerTableHeaderPublishingStatus" xml:space="preserve">
+    <value>Publishing Status</value>
+    <comment>ProcessDesignerLoc.verContainerTableHeaderPublishingStatus</comment>
+  </data>
+  <data name="verContainerTableHeaderVersion" xml:space="preserve">
+    <value>Version</value>
+    <comment>ProcessDesignerLoc.verContainerTableHeaderVersion</comment>
+  </data>
+  <data name="verContainerVersionTitle" xml:space="preserve">
+    <value>Published versions for</value>
+    <comment>ProcessDesignerLoc.verContainerVersionTitle</comment>
+  </data>
+  <data name="lblDelete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>ProcessDesignerLoc.lblDelete</comment>
+  </data>
+  <data name="nodeContApproverHintText" xml:space="preserve">
+    <value>Search approvers</value>
+    <comment>ProcessDesignerLoc.nodeContApproverHintText</comment>
+  </data>
+  <data name="nodeContApproverSearchTermToShortMsg" xml:space="preserve">
+    <value>Continue Typing...</value>
+    <comment>ProcessDesignerLoc.nodeContApproverSearchTermToShortMsg</comment>
+  </data>
+  <data name="nodeContApproverSuggestionsHeader" xml:space="preserve">
+    <value>Suggested People</value>
+    <comment>ProcessDesignerLoc.nodeContApproverSuggestionsHeader</comment>
+  </data>
+  <data name="nodeContBtnAddUser" xml:space="preserve">
+    <value>Add</value>
+    <comment>ProcessDesignerLoc.nodeContBtnAddUser</comment>
+  </data>
+  <data name="nodeContCustomResponseHintText" xml:space="preserve">
+    <value>Enter list of custom responses, seperated by comma (Response1, Response2)</value>
+    <comment>ProcessDesignerLoc.nodeContCustomResponseHintText</comment>
+  </data>
+  <data name="nodeContLblApprovalConfigText" xml:space="preserve">
+    <value>Approval Configuration</value>
+    <comment>ProcessDesignerLoc.nodeContLblApprovalConfigText</comment>
+  </data>
+  <data name="nodeContLblApprovalType" xml:space="preserve">
+    <value>Approval Type</value>
+    <comment>ProcessDesignerLoc.nodeContLblApprovalType</comment>
+  </data>
+  <data name="nodeContLblCustomResponses" xml:space="preserve">
+    <value>Responses</value>
+    <comment>ProcessDesignerLoc.nodeContLblCustomResponses</comment>
+  </data>
+  <data name="nodeContLblDelegationRule" xml:space="preserve">
+    <value>Delegation Rule</value>
+    <comment>ProcessDesignerLoc.nodeContLblDelegationRule</comment>
+  </data>
+  <data name="nodeContLblDelegationRuleDesc" xml:space="preserve">
+    <value>Delegate is configured as an Approver setting. If no delegate is configured, delegation rules will be ignored for the approver. 
+Time Out: Delegation will be triggered upon a specified time period. Out of office: Delegation will be triggered if the approver is out of office at the time the approval is received.</value>
+    <comment>ProcessDesignerLoc.nodeContLblDelegationRuleDesc</comment>
+  </data>
+  <data name="nodeContLblDescription" xml:space="preserve">
+    <value>Description</value>
+    <comment>ProcessDesignerLoc.nodeContLblDescription</comment>
+  </data>
+  <data name="nodeContLblNodeApprover" xml:space="preserve">
+    <value>Approver</value>
+    <comment>ProcessDesignerLoc.nodeContLblNodeApprover</comment>
+  </data>
+  <data name="nodeContLblNodeName" xml:space="preserve">
+    <value>Name</value>
+    <comment>ProcessDesignerLoc.nodeContLblNodeName</comment>
+  </data>
+  <data name="nodeContLblNotification" xml:space="preserve">
+    <value>Notification</value>
+    <comment>ProcessDesignerLoc.nodeContLblNotification</comment>
+  </data>
+  <data name="nodeContLblTimeOut" xml:space="preserve">
+    <value>Time Out Setting</value>
+    <comment>ProcessDesignerLoc.nodeContLblTimeOut</comment>
+  </data>
+  <data name="nodeContLblTimeoutDescription" xml:space="preserve">
+    <value>Business Days  will use the Approver's Work Profile and Holiday settings.</value>
+    <comment>ProcessDesignerLoc.nodeContLblTimeoutDescription</comment>
+  </data>
+  <data name="nodeContNodeType" xml:space="preserve">
+    <value>Node Type</value>
+    <comment>ProcessDesignerLoc.nodeContNodeType</comment>
+  </data>
+  <data name="nodeContNoReqDataFieldFound" xml:space="preserve">
+    <value>No request data field of type Email is available for this process.</value>
+    <comment>ProcessDesignerLoc.nodeContNoReqDataFieldFound</comment>
+  </data>
+  <data name="nodeContNoResultFoundMsg" xml:space="preserve">
+    <value>No results found</value>
+    <comment>ProcessDesignerLoc.nodeContNoResultFoundMsg</comment>
+  </data>
+  <data name="pubContainerBtnPublish" xml:space="preserve">
+    <value>Publishing Process</value>
+    <comment>ProcessDesignerLoc.pubContainerBtnPublish</comment>
+  </data>
+  <data name="stgContBtnReset" xml:space="preserve">
+    <value>Reset</value>
+    <comment>ProcessDesignerLoc.stgContBtnReset</comment>
+  </data>
+  <data name="stgContBtnResetEditText" xml:space="preserve">
+    <value>Edit</value>
+    <comment>ProcessDesignerLoc.stgContBtnResetEditText</comment>
+  </data>
+  <data name="stgContFirstStgNoCondition" xml:space="preserve">
+    <value>This is the first stage for the process. Conditional rules are not applicable.</value>
+    <comment>ProcessDesignerLoc.stgContFirstStgNoCondition</comment>
+  </data>
+  <data name="stgContLabelParallelCond" xml:space="preserve">
+    <value>Switch conditions are parallel rules. You can have one or more paths with the same condition to create parallel paths.</value>
+    <comment>ProcessDesignerLoc.stgContLabelParallelCond</comment>
+  </data>
+  <data name="stgContLblCondition" xml:space="preserve">
+    <value>Condition</value>
+    <comment>ProcessDesignerLoc.stgContLblCondition</comment>
+  </data>
+  <data name="stgContLblCondTargetT1" xml:space="preserve">
+    <value>Default</value>
+    <comment>ProcessDesignerLoc.stgContLblCondTargetT1</comment>
+  </data>
+  <data name="stgContLblCondTargetT2" xml:space="preserve">
+    <value>If</value>
+    <comment>ProcessDesignerLoc.stgContLblCondTargetT2</comment>
+  </data>
+  <data name="stgContLblEqual" xml:space="preserve">
+    <value>=</value>
+    <comment>ProcessDesignerLoc.stgContLblEqual</comment>
+  </data>
+  <data name="stgContLblRequestData" xml:space="preserve">
+    <value>Request Data</value>
+    <comment>ProcessDesignerLoc.stgContLblRequestData</comment>
+  </data>
+  <data name="stgContLblRequestDataDetailsT1" xml:space="preserve">
+    <value>Default value:</value>
+    <comment>ProcessDesignerLoc.stgContLblRequestDataDetailsT1</comment>
+  </data>
+  <data name="stgContLblRequestDataDetailsT2" xml:space="preserve">
+    <value>Not specified.</value>
+    <comment>ProcessDesignerLoc.stgContLblRequestDataDetailsT2</comment>
+  </data>
+  <data name="stgContLblRequstDataEmpty" xml:space="preserve">
+    <value>No Variables (Business Data) available. Create new variable using the Variables option provide on the top of designer screen</value>
+    <comment>ProcessDesignerLoc.stgContLblRequstDataEmpty</comment>
+  </data>
+  <data name="stgContLblSource" xml:space="preserve">
+    <value>Source</value>
+    <comment>ProcessDesignerLoc.stgContLblSource</comment>
+  </data>
+  <data name="stgContLblStageHasDependancy" xml:space="preserve">
+    <value>This stage has the following dependencies and cannot be deleted until the dependencies are removed.</value>
+    <comment>ProcessDesignerLoc.stgContLblStageHasDependancy</comment>
+  </data>
+  <data name="stgContLblStgCondnHeader" xml:space="preserve">
+    <value>Conditions</value>
+    <comment>ProcessDesignerLoc.stgContLblStgCondnHeader</comment>
+  </data>
+  <data name="stgContLblStgDescription" xml:space="preserve">
+    <value>Description</value>
+    <comment>ProcessDesignerLoc.stgContLblStgDescription</comment>
+  </data>
+  <data name="stgContLblStgName" xml:space="preserve">
+    <value>Name</value>
+    <comment>ProcessDesignerLoc.stgContLblStgName</comment>
+  </data>
+  <data name="stgContLblStgOperand" xml:space="preserve">
+    <value>Operand</value>
+    <comment>ProcessDesignerLoc.stgContLblStgOperand</comment>
+  </data>
+  <data name="stgContLblSwitchPaths" xml:space="preserve">
+    <value>Paths</value>
+    <comment>ProcessDesignerLoc.stgContLblSwitchPaths</comment>
+  </data>
+  <data name="stgContLblTargetReqDataFoundT1" xml:space="preserve">
+    <value>No other data field found of similar data type for</value>
+    <comment>ProcessDesignerLoc.stgContLblTargetReqDataFoundT1</comment>
+  </data>
+  <data name="stgContLblTargetReqDataFoundT2" xml:space="preserve">
+    <value>(</value>
+    <comment>ProcessDesignerLoc.stgContLblTargetReqDataFoundT2</comment>
+  </data>
+  <data name="stgContLblTargetReqDataFoundT3" xml:space="preserve">
+    <value>)</value>
+    <comment>ProcessDesignerLoc.stgContLblTargetReqDataFoundT3</comment>
+  </data>
+  <data name="stgContTblStgDepsCondition" xml:space="preserve">
+    <value>Condition</value>
+    <comment>ProcessDesignerLoc.stgContTblStgDepsCondition</comment>
+  </data>
+  <data name="stgContTblStgDepsNode" xml:space="preserve">
+    <value>Node</value>
+    <comment>ProcessDesignerLoc.stgContTblStgDepsNode</comment>
+  </data>
+  <data name="stgContTblStgDepsStage" xml:space="preserve">
+    <value>Stage</value>
+    <comment>ProcessDesignerLoc.stgContTblStgDepsStage</comment>
+  </data>
+  <data name="stgContTxtLblInfo" xml:space="preserve">
+    <value>Currently editing a stage with Conditions defined. Click 'Edit' to change and 'Reset' to undo. Warning: Removing conditions removes the corresponding paths and its nodes.</value>
+    <comment>ProcessDesignerLoc.stgContTxtLblInfo</comment>
+  </data>
+  <data name="ApprovalTxt" xml:space="preserve">
+    <value>Approval</value>
+    <comment>ProcessDesignerLoc.ApprovalTxt</comment>
+  </data>
+  <data name="CancelTxt" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>ProcessDesignerLoc.CancelTxt</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+    <comment>ProcessDesignerLoc.Close</comment>
+  </data>
+  <data name="cnfrmDialogDeleteAppDataMsg" xml:space="preserve">
+    <value>Deleting app data field</value>
+    <comment>ProcessDesignerLoc.cnfrmDialogDeleteAppDataMsg</comment>
+  </data>
+  <data name="cnfrmDialogDeleteDeactivateProcess" xml:space="preserve">
+    <value>Deactivating process</value>
+    <comment>ProcessDesignerLoc.cnfrmDialogDeleteDeactivateProcess</comment>
+  </data>
+  <data name="cnfrmDialogDeleteStgMsg" xml:space="preserve">
+    <value>Deleting Stage -</value>
+    <comment>ProcessDesignerLoc.cnfrmDialogDeleteStgMsg</comment>
+  </data>
+  <data name="cnfrmDialogNodeBusyMsg" xml:space="preserve">
+    <value>Deleting node -</value>
+    <comment>ProcessDesignerLoc.cnfrmDialogNodeBusyMsg</comment>
+  </data>
+  <data name="fluentPnlDynmicApprovr" xml:space="preserve">
+    <value>Manager of</value>
+    <comment>ProcessDesignerLoc.fluentPnlDynmicApprovr</comment>
+  </data>
+  <data name="fluentPnlOnSaveSavingNode" xml:space="preserve">
+    <value>Saving node -</value>
+    <comment>ProcessDesignerLoc.fluentPnlOnSaveSavingNode</comment>
+  </data>
+  <data name="fluentPnlOnSaveSavingStg" xml:space="preserve">
+    <value>Saving Stage -</value>
+    <comment>ProcessDesignerLoc.fluentPnlOnSaveSavingStg</comment>
+  </data>
+  <data name="fluentPnlOnSaveUpdatingCondns" xml:space="preserve">
+    <value>Updating Conditions...</value>
+    <comment>ProcessDesignerLoc.fluentPnlOnSaveUpdatingCondns</comment>
+  </data>
+  <data name="fluentPnlPublishMsg" xml:space="preserve">
+    <value>Publishing Process</value>
+    <comment>ProcessDesignerLoc.fluentPnlPublishMsg</comment>
+  </data>
+  <data name="fluentPnlTrcMsgNewlyAddedApprovr" xml:space="preserve">
+    <value>newly added approvers count:</value>
+    <comment>ProcessDesignerLoc.fluentPnlTrcMsgNewlyAddedApprovr</comment>
+  </data>
+  <data name="fluentPnlTrcMsgRemovedApprovr" xml:space="preserve">
+    <value>_removedApprovers count:</value>
+    <comment>ProcessDesignerLoc.fluentPnlTrcMsgRemovedApprovr</comment>
+  </data>
+  <data name="iconAddStgTooltip" xml:space="preserve">
+    <value>Add Stage</value>
+    <comment>ProcessDesignerLoc.iconAddStgTooltip</comment>
+  </data>
+  <data name="iconBckToolTip" xml:space="preserve">
+    <value>Go back</value>
+    <comment>ProcessDesignerLoc.iconBckToolTip</comment>
+  </data>
+  <data name="lblNoStage" xml:space="preserve">
+    <value>No Approval Stage defined. Click (+) to configure your first Approval stage.</value>
+    <comment>ProcessDesignerLoc.lblNoStage</comment>
+  </data>
+  <data name="mainCmdBarVariable" xml:space="preserve">
+    <value>Variables</value>
+    <comment>ProcessDesignerLoc.mainCmdBarVariable</comment>
+  </data>
+  <data name="mainCmdBarVersions" xml:space="preserve">
+    <value>Versions</value>
+    <comment>ProcessDesignerLoc.mainCmdBarVersions</comment>
+  </data>
+  <data name="nodePanelHeaderEditTxt" xml:space="preserve">
+    <value>Edit Node</value>
+    <comment>ProcessDesignerLoc.nodePanelHeaderEditTxt</comment>
+  </data>
+  <data name="nodePanelHeaderTxt" xml:space="preserve">
+    <value>Create Node</value>
+    <comment>ProcessDesignerLoc.nodePanelHeaderTxt</comment>
+  </data>
+  <data name="processSaveMsg" xml:space="preserve">
+    <value>Process saved successfully</value>
+    <comment>ProcessDesignerLoc.processSaveMsg</comment>
+  </data>
+  <data name="PublishTxt" xml:space="preserve">
+    <value>Publish</value>
+    <comment>ProcessDesignerLoc.PublishTxt</comment>
+  </data>
+  <data name="RefreshTxt" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>ProcessDesignerLoc.RefreshTxt</comment>
+  </data>
+  <data name="SaveTxt" xml:space="preserve">
+    <value>Save</value>
+    <comment>ProcessDesignerLoc.SaveTxt</comment>
+  </data>
+  <data name="scrOnVisLoadMsg" xml:space="preserve">
+    <value>Loading...</value>
+    <comment>ProcessDesignerLoc.scrOnVisLoadMsg</comment>
+  </data>
+  <data name="scrOnVisValidtionCheck1" xml:space="preserve">
+    <value>First approval stage must not have any condition</value>
+    <comment>ProcessDesignerLoc.scrOnVisValidtionCheck1</comment>
+  </data>
+  <data name="scrOnVisValidtionCheck2" xml:space="preserve">
+    <value>First node in first stage must not have any condition</value>
+    <comment>ProcessDesignerLoc.scrOnVisValidtionCheck2</comment>
+  </data>
+  <data name="scrOnVisValidtionCheck3" xml:space="preserve">
+    <value>Approval stage must have at least one Node</value>
+    <comment>ProcessDesignerLoc.scrOnVisValidtionCheck3</comment>
+  </data>
+  <data name="scrOnVisValidtionCheck4" xml:space="preserve">
+    <value>No stage is inaccessible</value>
+    <comment>ProcessDesignerLoc.scrOnVisValidtionCheck4</comment>
+  </data>
+  <data name="stagePanelHeaderEditTxt" xml:space="preserve">
+    <value>Edit Stage</value>
+    <comment>ProcessDesignerLoc.stagePanelHeaderEditTxt</comment>
+  </data>
+  <data name="stagePanelHeaderTxt" xml:space="preserve">
+    <value>Create Stage</value>
+    <comment>ProcessDesignerLoc.stagePanelHeaderTxt</comment>
+  </data>
+  <data name="stgContSwitchLblDefault" xml:space="preserve">
+    <value>Default (Other values)</value>
+    <comment>ProcessDesignerLoc.stgContSwitchLblDefault</comment>
+  </data>
+  <data name="stgContTxtStgDescPlaceholder" xml:space="preserve">
+    <value>Stage description</value>
+    <comment>ProcessDesignerLoc.stgContTxtStgDescPlaceholder</comment>
+  </data>
+  <data name="stgContTxtStgNamePlaceholder" xml:space="preserve">
+    <value>Stage name</value>
+    <comment>ProcessDesignerLoc.stgContTxtStgNamePlaceholder</comment>
+  </data>
+  <data name="tglModernDesignerLbl" xml:space="preserve">
+    <value>Modern Process Designer</value>
+    <comment>ProcessDesignerLoc.tglModernDesignerLbl</comment>
+  </data>
+  <data name="varContBtnCancelEditTooltip" xml:space="preserve">
+    <value>Cancel update</value>
+    <comment>ProcessDesignerLoc.varContBtnCancelEditTooltip</comment>
+  </data>
+  <data name="varContIcoClearDefaultTooltip" xml:space="preserve">
+    <value>Clear default</value>
+    <comment>ProcessDesignerLoc.varContIcoClearDefaultTooltip</comment>
+  </data>
+  <data name="varPanelHeaderTxt" xml:space="preserve">
+    <value>Set Variables</value>
+    <comment>ProcessDesignerLoc.varPanelHeaderTxt</comment>
+  </data>
+  <data name="addedApproversTrace" xml:space="preserve">
+    <value>newly added approvers count:</value>
+    <comment>ProcessDesignerLoc.addedApproversTrace</comment>
+  </data>
+  <data name="nodeDeleteText2" xml:space="preserve">
+    <value>. This cannot be undone. Are you sure?</value>
+    <comment>ProcessDesignerLoc.nodeDeleteText2</comment>
+  </data>
+  <data name="processDefaultName" xml:space="preserve">
+    <value>Untitled</value>
+    <comment>ProcessDesignerLoc.processDefaultName</comment>
+  </data>
+  <data name="pubContLblPublishVerInfoDateFormat" xml:space="preserve">
+    <value>dd mmm yyyy hh:mm AM/PM</value>
+    <comment>ProcessDesignerLoc.pubContLblPublishVerInfoDateFormat</comment>
+  </data>
+  <data name="removedApproversTrace" xml:space="preserve">
+    <value>_removedApprovers count:</value>
+    <comment>ProcessDesignerLoc.removedApproversTrace</comment>
+  </data>
+  <data name="stgContDdlReqDataCondAccLblTxt" xml:space="preserve">
+    <value>Variables(Request Data)</value>
+    <comment>ProcessDesignerLoc.stgContDdlReqDataCondAccLblTxt</comment>
+  </data>
+  <data name="stgContDdlStgCondnSourceTxt" xml:space="preserve">
+    <value>Choose source</value>
+    <comment>ProcessDesignerLoc.stgContDdlStgCondnSourceTxt</comment>
+  </data>
+  <data name="stgContDdlStgCondnTxt" xml:space="preserve">
+    <value>Choose condition</value>
+    <comment>ProcessDesignerLoc.stgContDdlStgCondnTxt</comment>
+  </data>
+  <data name="stgContLblIsPrallelTooltip" xml:space="preserve">
+    <value>Parallel paths</value>
+    <comment>ProcessDesignerLoc.stgContLblIsPrallelTooltip</comment>
+  </data>
+  <data name="stgDeleteText2" xml:space="preserve">
+    <value>. This will also delete all approval nodes in this stage and it cannot be undone. Are you sure?</value>
+    <comment>ProcessDesignerLoc.stgDeleteText2</comment>
+  </data>
+  <data name="varContBtnSaveAppDataDateFormat" xml:space="preserve">
+    <value>dd mmm yyyy</value>
+    <comment>ProcessDesignerLoc.varContBtnSaveAppDataDateFormat</comment>
+  </data>
+  <data name="verContLblVersionCreatedOnDateFormat" xml:space="preserve">
+    <value>dd mmm yyyy hh:mm AM/PM</value>
+    <comment>ProcessDesignerLoc.verContLblVersionCreatedOnDateFormat</comment>
+  </data>
+  <data name="cnvsComLblStgCondnTxt" xml:space="preserve">
+    <value>If</value>
+    <comment>ProcessDesignerLoc.cnvsComLblStgCondnTxt</comment>
+  </data>
+  <data name="cnvsCompAddNode" xml:space="preserve">
+    <value>Add Node</value>
+    <comment>ProcessDesignerLoc.cnvsCompAddNode</comment>
+  </data>
+  <data name="cnvsCompDeleteNode" xml:space="preserve">
+    <value>Delete Node</value>
+    <comment>ProcessDesignerLoc.cnvsCompDeleteNode</comment>
+  </data>
+  <data name="cnvsCompIcoFirstFalseNodeTooltipT1" xml:space="preserve">
+    <value>Create node under</value>
+    <comment>ProcessDesignerLoc.cnvsCompIcoFirstFalseNodeTooltipT1</comment>
+  </data>
+  <data name="cnvsCompIcoFirstFalseNodeTooltipT2" xml:space="preserve">
+    <value>for false condition</value>
+    <comment>ProcessDesignerLoc.cnvsCompIcoFirstFalseNodeTooltipT2</comment>
+  </data>
+  <data name="cnvsCompIcoFirstTrueNodeTooltipT1" xml:space="preserve">
+    <value>Create node under</value>
+    <comment>ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT1</comment>
+  </data>
+  <data name="cnvsCompIcoFirstTrueNodeTooltipT2" xml:space="preserve">
+    <value>for true condition</value>
+    <comment>ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT2</comment>
+  </data>
+  <data name="cnvsCompIcoFirstTrueNodeTooltipT3" xml:space="preserve">
+    <value>for</value>
+    <comment>ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT3</comment>
+  </data>
+  <data name="cnvsCompInfoBtnContent" xml:space="preserve">
+    <value>Please make use of refresh option, incase, approval conditions does not appear immediately aftering creating a stage with condition.</value>
+    <comment>ProcessDesignerLoc.cnvsCompInfoBtnContent</comment>
+  </data>
+  <data name="cnvsCompLblFalse" xml:space="preserve">
+    <value>FALSE</value>
+    <comment>ProcessDesignerLoc.cnvsCompLblFalse</comment>
+  </data>
+  <data name="cnvsCompLblNoNodeInStg" xml:space="preserve">
+    <value>No node configured for this stage. Click '+' to add first node.</value>
+    <comment>ProcessDesignerLoc.cnvsCompLblNoNodeInStg</comment>
+  </data>
+  <data name="cnvsCompLblStage" xml:space="preserve">
+    <value>Stage</value>
+    <comment>ProcessDesignerLoc.cnvsCompLblStage</comment>
+  </data>
+  <data name="cnvsCompProcessDesingerTxt" xml:space="preserve">
+    <value>Process Designer</value>
+    <comment>ProcessDesignerLoc.cnvsCompProcessDesingerTxt</comment>
+  </data>
+  <data name="cnvsCompStgCmdBarDelete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>ProcessDesignerLoc.cnvsCompStgCmdBarDelete</comment>
+  </data>
+  <data name="cnvsCompStgCmdBarEdit" xml:space="preserve">
+    <value>Edit</value>
+    <comment>ProcessDesignerLoc.cnvsCompStgCmdBarEdit</comment>
+  </data>
+  <data name="cnvsCompStgCmdBarMoveDown" xml:space="preserve">
+    <value>Move Down</value>
+    <comment>ProcessDesignerLoc.cnvsCompStgCmdBarMoveDown</comment>
+  </data>
+  <data name="cnvsCompStgCmdBarMoveUp" xml:space="preserve">
+    <value>Move Up</value>
+    <comment>ProcessDesignerLoc.cnvsCompStgCmdBarMoveUp</comment>
+  </data>
+  <data name="cnvsCompTrue" xml:space="preserve">
+    <value>TRUE</value>
+    <comment>ProcessDesignerLoc.cnvsCompTrue</comment>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>False</value>
+    <comment>ProcessDesignerLoc.False</comment>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>True</value>
+    <comment>ProcessDesignerLoc.True</comment>
+  </data>
+</root>

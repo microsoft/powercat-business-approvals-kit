@@ -79,12 +79,12 @@ scrSettingsNew As screen:
                             },
                             {
                                 ItemKey: "Save",
-                                ItemDisplayName: "Save",
+                                ItemDisplayName: SettingsLoc.SaveTxt,//Save
                                 ItemIconName: "Save"
                             },
                             {
                                 ItemKey: "Reset",
-                                ItemDisplayName: "Reset",
+                                ItemDisplayName: SettingsLoc.ResetTxt,//"Reset"
                                 ItemIconName: "Undo"
                             }
                         )
@@ -177,7 +177,7 @@ scrSettingsNew As screen:
                                         NotificationType.Error
                                     ),
                                     Notify(
-                                        "Settings saved successfully.",
+                                       SettingsLoc.settingsSaveMsg ,//"Settings saved successfully."
                                         NotificationType.Success
                                     )
                                 );
@@ -262,7 +262,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Out of Office"
+                    Text: |-
+                        =//"Out of Office"
+                        SettingsLoc.lblOutOfOffice
                     Width: =lblApprovalDel_1.Width
                     X: =19
                     Y: =251
@@ -281,7 +283,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =12
-                    Text: ="My Settings"
+                    Text: |-
+                        =//"My Settings"
+                        SettingsLoc.lblSettingsHeader
                     Width: =Parent.Width - Self.X - 5
                     X: =19
                     Y: =26
@@ -299,7 +303,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Approval Delegate"
+                    Text: |-
+                        =//"Approval Delegate"
+                        SettingsLoc.lblApprovalDelegate
                     Width: =300
                     X: =19
                     Y: =124
@@ -317,7 +323,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Backup Delegate"
+                    Text: |-
+                        =//"Backup Delegate"
+                        SettingsLoc.lblApprvrBckpDelegate
                     Width: =lblApprovalDel_1.Width
                     X: =19
                     Y: =164
@@ -335,7 +343,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Enable Outlook Notification"
+                    Text: |-
+                        =//"Enable Outlook Notification"
+                        SettingsLoc.lblPreferredNotification
                     Width: =lblApprovalDel_1.Width
                     X: =19
                     Y: =204
@@ -354,7 +364,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="My Work Profile"
+                    Text: |-
+                        =//"My Work Profile"
+                        SettingsLoc.lblSettingsWorkProfile
                     Width: =lblApprovalDel_1.Width
                     X: =19
                     Y: =304
@@ -372,7 +384,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Select Profile"
+                    Text: |-
+                        =//"Select Profile"
+                        SettingsLoc.lblSelectProfile
                     Width: =lblApprovalDel_1.Width
                     X: =19
                     Y: =357
@@ -390,7 +404,9 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Associated Public Holiday Calendar"
+                    Text: |-
+                        =//"Associated Public Holiday Calendar"
+                        SettingsLoc.lblHolidayCalendar
                     Width: =lblApprovalDel_1.Width
                     X: =14
                     Y: =420
@@ -459,7 +475,9 @@ scrSettingsNew As screen:
                     Height: =28
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Delegates cannot be yourself, and the main and backup delegate cannot be the same person."
+                    Text: |-
+                        =//"Delegates cannot be yourself, and the main and backup delegate cannot be the same person."
+                        SettingsLoc.lblDelegateNote
                     Width: =582
                     X: =184
                     Y: =23
@@ -477,7 +495,7 @@ scrSettingsNew As screen:
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: =If(!IsBlankOrError(ck_PeoplePicker_ApprovalDelegate.SelectedPeople),If(First(ck_PeoplePicker_ApprovalDelegate.SelectedPeople).PersonaKey = _myUPN, "You cannot be your own delegate."))
+                    Text: =If(!IsBlankOrError(ck_PeoplePicker_ApprovalDelegate.SelectedPeople),If(First(ck_PeoplePicker_ApprovalDelegate.SelectedPeople).PersonaKey = _myUPN, SettingsLoc.lblDelegateErrorMsg))//You cannot be your own delegate.
                     Visible: =If(Len(Self.Text) > 0,true,false)
                     Width: =300
                     X: =740
@@ -505,9 +523,9 @@ scrSettingsNew As screen:
                                     CountRows(ck_PeoplePicker_ApprovalDelegate.SelectedPeople) > 0,
                                     If(
                                         selected = _myUPN,
-                                        "You cannot be your own backup delegate.",
+                                        SettingsLoc.lblBckpDelegateErrorMsg1,//"You cannot be your own backup delegate."
                                         First(ck_PeoplePicker_ApprovalDelegate.SelectedPeople).PersonaKey = selected,
-                                        "Delegates cannot be the same person."
+                                        SettingsLoc.lblBckpDelegateErrorMsg2//"Delegates cannot be the same person."
                                     )
                                 )
                             )
@@ -572,7 +590,9 @@ scrSettingsNew As screen:
                     Height: =32
                     HoverCheckboxBackgroundFill: =
                     HoverCheckboxBorderColor: =
-                    Label: =If(Self.Checked,"Enabled","Disabled")
+                    Label: |-
+                        =//If(Self.Checked,"Enabled","Disabled")
+                        If(Self.Checked,SettingsLoc.cbxOutOfOfficeEnabledLbl,SettingsLoc.cbxOutOfOfficeDisabledLbl)
                     OnCheck: =false
                     OnUncheck: =false
                     UncheckedCheckboxBackgroundFill: =
@@ -688,7 +708,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Sun"
+                        Text: |-
+                            =//"Sun"
+                            SettingsLoc.btnSundayTxt
                         Width: =40
                         X: =2
                         Y: =5
@@ -715,7 +737,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Mon"
+                        Text: |-
+                            =//"Mon"
+                            SettingsLoc.btnMondayTxt
                         Width: =40
                         X: =52
                         Y: =5
@@ -742,7 +766,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Tue"
+                        Text: |-
+                            =//"Tue"
+                            SettingsLoc.btnTuesdayTxt
                         Width: =40
                         X: =105
                         Y: =5
@@ -769,7 +795,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Wed"
+                        Text: |-
+                            =//"Wed"
+                            SettingsLoc.btnWednesdayTxt
                         Width: =40
                         X: =158
                         Y: =5
@@ -796,7 +824,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Thu"
+                        Text: |-
+                            =//"Thu"
+                            SettingsLoc.btnThursdayTxt
                         Width: =40
                         X: =211
                         Y: =5
@@ -823,7 +853,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Fri"
+                        Text: |-
+                            =//"Fri"
+                            SettingsLoc.btnFridayTxt
                         Width: =40
                         X: =262
                         Y: =5
@@ -850,7 +882,9 @@ scrSettingsNew As screen:
                         RadiusTopLeft: =40
                         RadiusTopRight: =40
                         Size: =9
-                        Text: ="Sat"
+                        Text: |-
+                            =//"Sat"
+                            SettingsLoc.btnSaturdayTxt
                         Width: =40
                         X: =318
                         Y: =5
@@ -870,7 +904,9 @@ scrSettingsNew As screen:
                     ZIndex: =35
 
     BusyScreen_1 As BusyScreen:
-        BusyMessage: ="Saving..."
+        BusyMessage: |-
+            =//"Saving..."
+            SettingsLoc.busyMsg
         Fill: =RGBA(0, 0, 0, 0.05)
         Height: =Parent.Height
         Visible: =_isBusy

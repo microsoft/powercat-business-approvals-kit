@@ -9,6 +9,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -20,6 +21,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -31,6 +33,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -42,6 +45,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -53,6 +57,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -64,6 +69,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -75,6 +81,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 27,
         "WizardStep": null
       },
@@ -86,6 +93,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -97,6 +105,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -108,6 +117,7 @@
         "PropertyKind": 2,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -119,6 +129,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -130,6 +141,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -141,6 +153,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -152,6 +165,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -163,6 +177,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -174,6 +189,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -185,6 +201,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -196,6 +213,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -207,6 +225,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -218,6 +237,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -229,6 +249,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -240,6 +261,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -251,6 +273,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -262,6 +285,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -273,6 +297,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -284,6 +309,7 @@
         "PropertyKind": 1,
         "SectionIndex": 0,
         "SectionName": "data",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -295,6 +321,7 @@
         "PropertyKind": 1,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -306,6 +333,7 @@
         "PropertyKind": 2,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -317,6 +345,7 @@
         "PropertyKind": 2,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       },
@@ -328,6 +357,7 @@
         "PropertyKind": 2,
         "SectionIndex": 1,
         "SectionName": "design",
+        "SectionType": null,
         "Type": 0,
         "WizardStep": null
       }
@@ -1410,13 +1440,13 @@
       "IsControlSpecific": false,
       "LoadingOrder": 9,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"0.0.8\",\"IsFirstParty\":false}}",
+      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"0.0.9\",\"IsFirstParty\":false}}",
       "Type": 3
     },
     {
       "IsControlSpecific": true,
       "LoadingOrder": 10,
-      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0PowerCAT.Panel.bundle.js?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A01Z&ske=2023-12-23T05%3A40%3A01Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A01Z&sr=b&sp=r&sig=EpK8kHSLZnPb6xn5Dp%2FxJTpZ%2FOFGllbZPpC6I0g%2B%2BtQ%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/b1d5414b-25aa-434b-b498-553f6d0d1a9c-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work03vl4bvdr.y0m020S0Resources0Controls0PowerCAT.Panel.bundle.js?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2024-02-05T06%3A50%3A56Z&ske=2024-02-06T07%3A05%3A56Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2024-02-06T07%3A05%3A56Z&sr=b&sp=r&sig=gcRkjpDACqi8J1czaYV%2BcDjX9iu23CkFLHaGj94Z03k%3D",
       "Path": "/PCFControls/cat_PowerCAT.Panel/PowerCAT.Panel.bundle.js",
       "Type": 0
     },
@@ -1437,7 +1467,7 @@
     {
       "IsControlSpecific": true,
       "LoadingOrder": 13,
-      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/1a61e0d8-1bf2-4829-a1fa-3a6709587430-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work0dn0nb3jy.cju020S0Resources0Controls0strings%252fPowerCAT.Panel.FluentPanel.1033.json?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2023-12-22T05%3A25%3A01Z&ske=2023-12-23T05%3A40%3A01Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2023-12-23T05%3A40%3A01Z&sr=b&sp=r&sig=F6C1ccwTLbHyYQImSZNJoaZ4Uhsh%2BJmFhVpuF4KuG34%3D",
+      "ModifiedPath": "https://docserverpwaprodeus.blob.core.windows.net/b1d5414b-25aa-434b-b498-553f6d0d1a9c-1/appdynamicresources/D%253a0SvcFab0_App0PowerApps.WebAuthoringType_App1000work03vl4bvdr.y0m020S0Resources0Controls0strings%252fPowerCAT.Panel.FluentPanel.1033.json?skoid=58690ece-ec83-4ce2-9ce8-883d4d6a54ee&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skt=2024-02-05T06%3A50%3A56Z&ske=2024-02-06T07%3A05%3A56Z&sks=b&skv=2022-11-02&sv=2022-11-02&spr=https&se=2024-02-06T07%3A05%3A56Z&sr=b&sp=r&sig=CJR7pqxelOL1Y2OTXmgWmQwDZ%2FuZiAJ79zCKv6LR%2BIk%3D",
       "Path": "/PCFControls/cat_PowerCAT.Panel/strings/PowerCAT.Panel.FluentPanel.1033.json",
       "Type": 5
     },
@@ -1470,5 +1500,5 @@
       "Type": 4
     }
   ],
-  "Version": "0.0.8"
+  "Version": "0.0.9"
 }

@@ -13,7 +13,7 @@
                 Patch(
                     'Business Approval Processes',
                     Defaults('Business Approval Processes'),
-                    {Name: "Untitled"}
+                    {Name: ProcessDesignerLoc.processDefaultName}//Untitled
                 )
             ),
             Set(
@@ -26,8 +26,8 @@
         ));
         Concurrent(
         UpdateContext(
-            {
-                busyMessage: "Loading...",
+            {//Loading...
+                busyMessage: ProcessDesignerLoc.scrOnVisLoadMsg,
                 isPanelOpen: true,
                 isPanelVisible: true,
                 contentHeight: 500
@@ -60,27 +60,31 @@
             IsEmpty(_validationChecks),
             ClearCollect(
                 _validationChecks,
+                //"First approval stage must not have any condition"
                 {
                     Id: 1,
-                    Check: "First approval stage must not have any condition",
+                    Check: ProcessDesignerLoc.scrOnVisValidtionCheck1,
                     Status: Blank(),
                     Details: ""
                 },
                 {
+                    //"First node in first stage must not have any condition"
                     Id: 2,
-                    Check: "First node in first stage must not have any condition",
+                    Check: ProcessDesignerLoc.scrOnVisValidtionCheck2,
                     Status: Blank(),
                     Details: ""
                 },
                 {
+                    //"Approval stage must have at least one Node"
                     Id: 3,
-                    Check: "Approval stage must have at least one Node",
+                    Check: ProcessDesignerLoc.scrOnVisValidtionCheck3,
                     Status: Blank(),
                     Details: ""
                 },
                 {
+                    //"No stage is inaccessible"
                     Id: 4,
-                    Check: "No stage is inaccessible",
+                    Check: ProcessDesignerLoc.scrOnVisValidtionCheck4,
                     Status: true,
                     Details: ""
                 }
@@ -173,8 +177,8 @@
         ClearCollect( ApproverCollection, AddColumns(
             Office365Users.SearchUser({ searchTerm: "", top: 500 }),
             "SuggestionKey", UserPrincipalName, 
-            "SuggestionName", DisplayName,
-            "SuggestionRole", JobTitle
+            "SuggestionName", DisplayName, 
+            "SuggestionRole", JobTitle 
         ) );
         Concurrent(
         UpdateContext(
@@ -257,14 +261,18 @@
                     OnChange: =Back()
                     TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                     Theme: =AppThemeJson
-                    Tooltip: ="Go back"
+                    Tooltip: |-
+                        =//"Go back"
+                        ProcessDesignerLoc.iconBckToolTip
                     Width: =35
                     X: =0
                     Y: =0
                     ZIndex: =8
 
                 "txtInputProcessName As 'Text input'":
-                    Align: ="Start"
+                    Align: |-
+                        =//"Start"
+                        const.Start
                     BasePaletteColor: =
                     DisplayMode: =DisplayMode.Edit
                     Font: =""
@@ -277,8 +285,10 @@
                     Height: =32
                     LayoutMinHeight: =32
                     LayoutMinWidth: =320
-                    ValidationState: ="None"
-                    Value: =If(IsBlankOrError(_selectedProcess.Name),"Untitled",_selectedProcess.Name)
+                    ValidationState: |-
+                        =//"None"
+                        const.None
+                    Value: =If(IsBlankOrError(_selectedProcess.Name),ProcessDesignerLoc.processDefaultName,_selectedProcess.Name)//Untitled
                     Width: =320
                     X: =iconCKBack.Width + 2
                     Y: =0
@@ -334,34 +344,34 @@
                             Items: |-
                                 =Table({
                                         ItemKey: "refresh",
-                                        ItemDisplayName: "Refresh",
+                                        ItemDisplayName: ProcessDesignerLoc.RefreshTxt,//Refresh
                                         ItemIconName: "Refresh",
                                         ItemVisible: ApprovalDesignerEdit_2.TotalStages > 1
                                     },{
                                         ItemKey: "variables",
-                                        ItemDisplayName: "Variables",
+                                        ItemDisplayName: ProcessDesignerLoc.mainCmdBarVariable,//Variables
                                         ItemIconName: "VariableGroup"
                                     },
                                     {
                                         ItemKey: "versions",
-                                        ItemDisplayName: "Versions",
+                                        ItemDisplayName: ProcessDesignerLoc.mainCmdBarVersions,//Versions
                                         ItemIconName: "DependencyAdd"
                                     },
                                     {
                                         ItemKey: "save",
-                                        ItemDisplayName: "Save",
+                                        ItemDisplayName: ProcessDesignerLoc.SaveTxt,//Save
                                         ItemIconName: "Save"
                                     },
                                     {
                                         ItemKey: "publish",
-                                        ItemDisplayName: "Publish",
+                                        ItemDisplayName: ProcessDesignerLoc.PublishTxt,//Publish
                                         ItemIconName: "PublishContent",
                                         ItemEnabled: If(ApprovalDesignerEdit_2.TotalStages = 0, false, true)
                                     }
                                 )
                             OnSelect: |-
                                 =If(
-                                    Self.Selected.ItemKey <> "save",
+                                    Self.Selected.ItemKey <> const.Save,//"save",
                                     UpdateContext(
                                         {
                                             isPanelOpen: false,
@@ -369,6 +379,7 @@
                                         }
                                     )
                                 );
+                                /*
                                 If(
                                     IsBlankOrError(_selectedProcess),
                                     Set(
@@ -383,49 +394,86 @@
                                         'Business Approval Processes',
                                         _selectedProcess,
                                         {Name: txtInputProcessName.Value}
+                                    );
+                                    Set(_selectedProcess,
+                                                        LookUp('Business Approval Processes', 'Business Approval Process' = _selectedProcess.'Business Approval Process'))
+                                );*/
+                                With(
+                                    {
+                                        selectedProcess: LookUp(
+                                            'Business Approval Processes',
+                                            'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                                        )
+                                    },
+                                    If(
+                                        IsBlankOrError(selectedProcess),
+                                        Set(
+                                            _selectedProcess,
+                                            Patch(
+                                                'Business Approval Processes',
+                                                Defaults('Business Approval Processes'),
+                                                {Name: txtInputProcessName.Value}
+                                            )
+                                        ),
+                                        Set(
+                                            _selectedProcess,
+                                            Patch(
+                                                'Business Approval Processes',
+                                                selectedProcess,
+                                                {Name: txtInputProcessName.Value}
+                                            )
+                                        )
                                     )
                                 );
                                 Switch(
                                     Self.Selected.ItemKey,
-                                    "refresh",
+                                    const.Refresh,//refresh
                                     Reset(ApprovalDesignerEdit_2);
                                     Refresh('Business Approval Stages');
                                     Refresh('Business Approval Nodes');
                                     Refresh('Business Approval Conditions');
                                     UpdateContext({isPanelVisible: false});
-                                    If(ToggleModernDesigner.Checked,Set(varRefreshDesigner,"Refresh"&Rand()));
-                                    ,
-                                    "variables",
+                                    If(
+                                        ToggleModernDesigner.Checked,
+                                        Set(
+                                            varRefreshDesigner,
+                                            Proper(const.Refresh) & Rand()
+                                        )
+                                    );
+                                    //Refresh
+                                ,
+                                    const.Variables,//variables
                                     UpdateContext(
                                         {
                                             isPanelOpen: true,
-                                            panelHeaderText: "Set Variables",
-                                            showVariableContainer: true,
+                                            panelHeaderText: ProcessDesignerLoc.varPanelHeaderTxt,
+                                            //Set Variables
+                                showVariableContainer: true,
                                             showFooterButton: true,
-                                            showSaveButton: true,            
+                                            showSaveButton: true,
                                             disableSaveButton: false,
                                             disableCancelButton: false,
                                             showCancelButton: false,
-                                            savebuttonText: "Close"
+                                            savebuttonText: ProcessDesignerLoc.Close//Close
                                         }
                                     );
                                     SetFocus(txtAppDataName_2),
-                                    "save",
+                                    const.Save,//"save",
                                     If(
                                         !IsBlankOrError(_selectedProcess),
                                         Notify(
-                                            "Process saved successfully",
+                                            ProcessDesignerLoc.processSaveMsg,//"Process saved successfully"
                                             NotificationType.Success
                                         )
                                     ),
-                                    "versions",
+                                    const.Versions,//versions
                                     Refresh('Business Approval Versions');
                                     UpdateContext(
                                         {
                                             isPanelOpen: true,
                                             showProcessVersionContainer: true,
                                             showFooterButton: false,
-                                            panelHeaderText: "Versions"
+                                            panelHeaderText: ProcessDesignerLoc.mainCmdBarVersions//Versions
                                         }
                                     );
                                     ClearCollect(
@@ -439,8 +487,8 @@
                                         )
                                     );
                                     ,
-                                    "publish",
-                                    //check last published version
+                                    const.Publish,//publish
+                                //check last published version
                                     With(
                                         {
                                             publishedVersions: SortByColumns(
@@ -464,14 +512,16 @@
                                 UpdateContext(
                                         {
                                             isPanelOpen: true,
-                                            panelHeaderText: "Publish",
-                                            showFooterButton: true,
+                                            panelHeaderText: ProcessDesignerLoc.PublishTxt,
+                                            //Publish
+                                showFooterButton: true,
                                             showSaveButton: true,
                                             showCancelButton: false,
                                             disableSaveButton: true,
                                             disableCancelButton: false,
-                                            savebuttonText: "Publish",
-                                            showPublishProcessContainer: true,
+                                            savebuttonText: ProcessDesignerLoc.PublishTxt,
+                                            //Publish
+                                showPublishProcessContainer: true,
                                             isPublishReady: false
                                         }
                                     );
@@ -484,26 +534,30 @@
                                         _validationChecks,
                                         {
                                             Id: 1,
-                                            Check: "First approval stage must not have any condition",
-                                            Status: Blank(),
+                                            Check: ProcessDesignerLoc.scrOnVisValidtionCheck1,
+                                            //"First approval stage must not have any condition"
+                                Status: Blank(),
                                             Details: ""
                                         },
                                         {
                                             Id: 2,
-                                            Check: "First node in first stage must not have any condition",
-                                            Status: Blank(),
+                                            Check: ProcessDesignerLoc.scrOnVisValidtionCheck2,
+                                            //"First node in first stage must not have any condition"
+                                Status: Blank(),
                                             Details: ""
                                         },
                                         {
                                             Id: 3,
-                                            Check: "Approval stage must have at least one Node",
-                                            Status: Blank(),
+                                            Check: ProcessDesignerLoc.scrOnVisValidtionCheck3,
+                                            //"Approval stage must have at least one Node"
+                                Status: Blank(),
                                             Details: ""
                                         },
                                         {
                                             Id: 4,
-                                            Check: "No stage is inaccessible",
-                                            Status: true,
+                                            Check: ProcessDesignerLoc.scrOnVisValidtionCheck4,
+                                            //"No stage is inaccessible"
+                                Status: true,
                                             Details: ""
                                         }
                                     );
@@ -591,7 +645,19 @@
                                             ) = 0
                                         }
                                     );
-                                    UpdateContext({isPublishReady: true, disableSaveButton:If(Sum(_validationChecks, Status) = 4, false, true)});
+                                    UpdateContext(
+                                        {
+                                            isPublishReady: true,
+                                            disableSaveButton: If(
+                                                Sum(
+                                                    _validationChecks,
+                                                    Status
+                                                ) = 4,
+                                                false,
+                                                true
+                                            )
+                                        }
+                                    );
                                     
                                 )
                             Theme: =AppThemeJson
@@ -631,8 +697,10 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="No Approval Stage defined. Click (+) to configure your first Approval stage."
-                Visible: =!ToggleModernDesigner.Checked
+                Text: |-
+                    =//"No Approval Stage defined. Click (+) to configure your first Approval stage."
+                    ProcessDesignerLoc.lblNoStage
+                Visible: =!ToggleModernDesigner.Checked && ApprovalDesignerEdit_2.TotalStages = 0
                 Width: =Parent.Width 
                 Wrap: =false
                 Y: =30
@@ -649,8 +717,8 @@
                                 showCancelButton: true,
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt, //Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt //Cancel
                             }
                         );
                     Clear(_nodeApprovers);    
@@ -660,7 +728,7 @@
                     Set(_currentStageIndex, StageIndex);
                     Set(_currentNodeIndex, Row);
                     Set(_currentPathIndex, Path);
-                    UpdateContext({isPanelOpen:true,panelHeaderText:"Create Node", showNodeContainer:true});
+                    UpdateContext({isPanelOpen:true,panelHeaderText:ProcessDesignerLoc.nodePanelHeaderTxt, showNodeContainer:true});//"Create Node"
                     Reset(radNodeType_4);
                 AddStage: |
                     =//Save the process   
@@ -690,8 +758,8 @@
                                 showCancelButton: true,
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt, //Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt //Cancel
                             }
                         )
                     );
@@ -757,7 +825,7 @@
                     UpdateContext(
                         {
                             isPanelOpen: true,
-                            panelHeaderText: "Create Stage",
+                            panelHeaderText: ProcessDesignerLoc.stagePanelHeaderTxt,//"Create Stage"
                             showStageContainer: true,
                             stageName: Blank(),
                             stageDesc: Blank()
@@ -774,8 +842,8 @@
                                 showCancelButton: true,
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                             }
                         );
                     
@@ -836,10 +904,10 @@
                     });
                     
                     SetFocus(txtNodeName_4);
-                    //Node editor logic ends*************/
+                    //Node editor logic ends*************///"Edit Node"
                     If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: ProcessDesignerLoc.nodePanelHeaderEditTxt,showNodeContainer:true}),
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: ProcessDesignerLoc.nodePanelHeaderEditTxt,showNodeRuleEditorContainer:true});
                     );
                 EditStage: |
                     =UpdateContext(
@@ -852,8 +920,8 @@
                             showCancelButton: true,
                             disableSaveButton: false,
                             disableCancelButton: false,
-                            savebuttonText: "Save",
-                            cancelbuttonText: "Cancel"
+                            savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                            cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                         }
                     );
                     Set(
@@ -951,7 +1019,7 @@
                         {
                             isPanelOpen: true,
                             isPanelVisible: true,
-                            panelHeaderText: "Edit Stage",
+                            panelHeaderText: ProcessDesignerLoc.stagePanelHeaderEditTxt,//"Edit Stage"
                             showStageContainer: true
                         }
                     );
@@ -1008,8 +1076,8 @@
                                 showFooterButton: true,
                                 showSaveButton: true,
                                 showCancelButton: true,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                             }
                         )
                     );
@@ -1079,7 +1147,7 @@
                     UpdateContext(
                         {
                             isPanelOpen: true,
-                            panelHeaderText: "Create Stage",
+                            panelHeaderText: ProcessDesignerLoc.stagePanelHeaderTxt,//Create Stage
                             showStageContainer: true,
                             stageName: Blank(),
                             stageDesc: Blank()
@@ -1088,7 +1156,9 @@
                     // Add Stage 
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Theme: =AppThemeJson
-                Tooltip: ="Add Stage"
+                Tooltip: |-
+                    =//"Add Stage"
+                    ProcessDesignerLoc.iconAddStgTooltip
                 Visible: =!ToggleModernDesigner.Checked
                 Width: =30
                 X: =Parent.Width / 2 - Self.Width / 2
@@ -1111,8 +1181,8 @@
                                 showCancelButton: true,            
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                             }
                         );
                     Clear(_nodeApprovers);     
@@ -1122,7 +1192,7 @@
                     Set(_currentStageIndex,_selectedStage.Order);
                     Set(_currentNodeIndex, Self.RowIndex);
                     Set(_currentPathIndex, Self.PathIndex);
-                    UpdateContext({isPanelOpen:true,panelHeaderText:"Create Node", showNodeContainer:true});
+                    UpdateContext({isPanelOpen:true,panelHeaderText:ProcessDesignerLoc.nodePanelHeaderTxt, showNodeContainer:true});//Create Node
                     Reset(radNodeType_4);
                     
                     // We reset Property of PCF Process Designer to Random number
@@ -1160,8 +1230,8 @@
                                 showCancelButton: true,
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                             }
                         )
                     );
@@ -1231,7 +1301,7 @@
                     UpdateContext(
                         {
                             isPanelOpen: true,
-                            panelHeaderText: "Create Stage",
+                            panelHeaderText: ProcessDesignerLoc.stagePanelHeaderTxt,//Create Stage
                             showStageContainer: true,
                             stageName: Blank(),
                             stageDesc: Blank()
@@ -1266,8 +1336,8 @@
                                 showCancelButton: true,
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                             }
                         );
                     
@@ -1299,8 +1369,8 @@
                     
                     
                     If(_selectedNode.'Node Condition' = 'Business Approval Stage Condition'.None && IsBlank(_selectedNode.'Go To Stage'),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeContainer:true}),
-                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: "Edit Node",showNodeRuleEditorContainer:true});
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: ProcessDesignerLoc.nodePanelHeaderEditTxt,showNodeContainer:true}),//Edit Node
+                        UpdateContext({isPanelOpen:true, isPanelVisible:true, panelHeaderText: ProcessDesignerLoc.nodePanelHeaderEditTxt,showNodeRuleEditorContainer:true});//Edit Node
                     );
                     
                     // We reset Property of PCF Process Designer to Random number
@@ -1328,8 +1398,8 @@
                                 showCancelButton: true,            
                                 disableSaveButton: false,
                                 disableCancelButton: false,
-                                savebuttonText: "Save",
-                                cancelbuttonText: "Cancel"
+                                savebuttonText: ProcessDesignerLoc.SaveTxt,//Save
+                                cancelbuttonText: ProcessDesignerLoc.CancelTxt//Cancel
                             }
                         );
                     Concurrent(
@@ -1429,7 +1499,7 @@
                         {
                             isPanelOpen: true,
                             isPanelVisible: true,
-                            panelHeaderText: "Edit Stage",
+                            panelHeaderText: ProcessDesignerLoc.stagePanelHeaderEditTxt,//Edit Stage
                             showStageContainer: true
                         }
                     );
@@ -1463,15 +1533,18 @@
         FontUnderline: =false
         FontWeight: =""
         Height: =35
-        Label: ="Modern Process Designer"
-        OnCheck: =Set(varRefreshDesigner,"Refresh"&Rand())
+        Label: |-
+            =//"Modern Process Designer"
+            ProcessDesignerLoc.tglModernDesignerLbl
+        OnCheck: =Set(varRefreshDesigner,Proper(const.Refresh) & Rand());//Refresh
         OnUncheck: |-
             =    Reset(ApprovalDesignerEdit_2);
                 Refresh('Business Approval Stages');
                 Refresh('Business Approval Nodes');
                 Refresh('Business Approval Conditions');
         Visible: =!BusyContainer.Visible && !FluentPanel.Visible
-        Width: =235
+        Width: |
+            =235
         X: =DesignerContainer.Width - Self.Width
         Y: =DesignerContainer.Y 
         ZIndex: =3
@@ -1552,8 +1625,8 @@
             =Switch(
                 true,
                 showStageContainer,
-            //save stage configuration - starts
-                UpdateContext({busyMessage: "Saving Stage - " & txtStageName_2.Value});
+            //save stage configuration - starts busyMsg:Saving Stage -
+                UpdateContext({busyMessage: ProcessDesignerLoc.fluentPnlOnSaveSavingStg & " " & txtStageName_2.Value});
                 Set(
                     isBusy,
                     true
@@ -1613,7 +1686,7 @@
             Clear(_addedConditions);
                 If(
                     CountRows(_conditions) > 0,
-                    UpdateContext({busyMessage: "Updating Conditions..."})
+                    UpdateContext({busyMessage: ProcessDesignerLoc.fluentPnlOnSaveUpdatingCondns}) //Updating Conditions...
                 );
                 ForAll(
                     _conditions As conds,
@@ -1710,7 +1783,7 @@
                     ToggleModernDesigner.Checked,
                     Set(
                         varRefreshDesigner,
-                        "Refresh" & Rand()
+                        Proper(const.Refresh) & Rand()  //"Refresh"
                     )
                 );
                 
@@ -1728,7 +1801,7 @@
             ,
                 showNodeContainer,
             //save node configuration - starts
-                UpdateContext({busyMessage: "Saving node - " & txtNodeName_4.Text});
+                UpdateContext({busyMessage: ProcessDesignerLoc.fluentPnlOnSaveSavingNode & " " & txtNodeName_4.Text});//Saving node -
                 Set(
                     isBusy,
                     true
@@ -1770,7 +1843,7 @@
                             Approvers: Concat(
                                 _nodeApprovers,
                                 Name,
-                                ", "
+                                const.Comma//", "
                             )
                         }
                     )
@@ -1786,7 +1859,7 @@
                     Concurrent(
                             //unrelate removed approvers
                         Trace(
-                            "_removedApprovers count: " & CountRows(_removedApprovers),
+                            ProcessDesignerLoc.fluentPnlTrcMsgRemovedApprovr & " " & CountRows(_removedApprovers),//_removedApprovers count:
                             TraceSeverity.Information
                         );
                         ForAll(
@@ -1809,7 +1882,7 @@
                                 )
                             },
                             Trace(
-                                "newly added approvers count: " & CountRows(addedApprovers),
+                                ProcessDesignerLoc.fluentPnlTrcMsgNewlyAddedApprovr & " " & CountRows(addedApprovers),//newly added approvers count:
                                 TraceSeverity.Information
                             );
                             ForAll(
@@ -1828,7 +1901,7 @@
                                         {
                                             Name: If(
                                                 appr.'Dynamic Approver Type' = 'Business Approval Dynamic Approver Type'.'Manager of [Request data field]',
-                                                "Manager of " & appr.'Request Data'.Name,
+                                                ProcessDesignerLoc.fluentPnlDynmicApprovr & " " & appr.'Request Data'.Name,//Manager of
                                                 appr.'Dynamic Approver Type' = 'Business Approval Dynamic Approver Type'.'Use Request Data Field',
                                                 appr.'Request Data'.Name,
                                                 appr.Name
@@ -1868,7 +1941,7 @@
                     ToggleModernDesigner.Checked,
                     Set(
                         varRefreshDesigner,
-                        "Refresh" & Rand()
+                        Proper(const.Refresh) & Rand()// Refresh
                     )
                 );
                 UpdateContext({nodeType: Blank()});
@@ -1884,7 +1957,7 @@
                 //save node configuration - ends
                 showNodeRuleEditorContainer,
                 //save node rule configuration - starts
-                UpdateContext({busyMessage: "Saving node - " & txtNodeName_5.Text});
+                UpdateContext({busyMessage: ProcessDesignerLoc.fluentPnlOnSaveSavingNode &  " " & txtNodeName_5.Text});//Saving node -
                 Set(
                     isBusy,
                     true
@@ -1942,7 +2015,7 @@
             Clear(_addedConditions);
                 If(
                     CountRows(_conditions) > 0,
-                    UpdateContext({busyMessage: "Updating Conditions..."})
+                    UpdateContext({busyMessage: ProcessDesignerLoc.fluentPnlOnSaveUpdatingCondns})//Updating Conditions...
                 );
                 ForAll(
                     _conditions As conds,
@@ -2020,7 +2093,7 @@
                     ToggleModernDesigner.Checked,
                     Set(
                         varRefreshDesigner,
-                        "Refresh" & Rand()
+                        Proper(const.Refresh) & Rand() //Refresh
                     )
                 );
                 UpdateContext({nodeType: Blank()});
@@ -2051,7 +2124,7 @@
                 );
                 UpdateContext(
                     {
-                        busyMessage: "Publishing Process " & _selectedProcess.Name,
+                        busyMessage: ProcessDesignerLoc.fluentPnlPublishMsg & " " & _selectedProcess.Name,//Publishing Process 
                         _isBusy: true
                     }
                 );
@@ -2223,17 +2296,19 @@
         Items: |-
             =Table({
                     ItemKey: "delete",
-                    ItemDisplayName: "Delete",
+                    ItemDisplayName: ProcessDesignerLoc.lblDelete, //"Delete"
                     ItemIconName: "Delete"
                 }
             )
         ItemVisible: =
         OnChange: =false
         OnSelect: |-
-            =If(Self.Selected.ItemKey,"delete",
-            If(showStageContainer, Set(confirmActionDelete,"delete");Set(confirmMessageDeteleStage, "Deleting Stage - " & _selectedStage.Name & ". This will also delete all approval nodes in this stage and it cannot be undone. Are you sure?");Set(_showConfirmDeleteStage, true));
+            =If(Self.Selected.ItemKey,const.Delete,//delete
+            //Deleting Stage - stgName. This will also delete all approval nodes in this stage and it cannot be undone. Are you sure?
+            If(showStageContainer, Set(confirmActionDelete,const.Delete);Set(confirmMessageDeteleStage, ProcessDesignerLoc.cnfrmDialogDeleteStgMsg & " " & _selectedStage.Name & ProcessDesignerLoc.stgDeleteText2);Set(_showConfirmDeleteStage, true));
             If(showNodeContainer, Set(_showConfirmNode,true);
-                Set(confirmMessageNodeDelete,"Deleting node - " & _selectedNode.Name & ". This cannot be undone. Are you sure?");
+            //Deleting node - nodeName. This cannot be undone. Are you sure?
+                Set(confirmMessageNodeDelete,ProcessDesignerLoc.cnfrmDialogNodeBusyMsg & " " & _selectedNode.Name & ProcessDesignerLoc.nodeDeleteText2);
                 //
                     //increment node index for any nodes after this node in this path, if exists
                     UpdateIf('Business Approval Nodes', 
@@ -2263,8 +2338,8 @@
                                                 Name: 
                                                     If(
                                                         appr.'Dynamic Approver Type' = 
-                                                        'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', 
-                                                        "Manager of " & appr.'Request Data'.Name,
+                                                        'Business Approval Dynamic Approver Type'.'Manager of [Request data field]', //Manager of
+                                                        ProcessDesignerLoc.fluentPnlDynmicApprovr & " " & appr.'Request Data'.Name,
             
                                                         appr.'Dynamic Approver Type' =
                                                         'Business Approval Dynamic Approver Type'.'Use Request Data Field',
@@ -2284,7 +2359,9 @@
                     );
                     Set(_isBusy, false);))
         Theme: =AppThemeJson
-        Visible: =_showDeleteOption && ToggleModernDesigner.Checked && (If(panelHeaderText="Edit Node",showNodeContainer) ||If(panelHeaderText="Edit Stage",showStageContainer))
+        Visible: |-
+            =//_showDeleteOption && ToggleModernDesigner.Checked && (If(panelHeaderText="Edit Node",showNodeContainer) ||If(panelHeaderText="Edit Stage",showStageContainer))
+            _showDeleteOption && ToggleModernDesigner.Checked && (If(panelHeaderText=ProcessDesignerLoc.nodePanelHeaderEditTxt,showNodeContainer) ||If(panelHeaderText=ProcessDesignerLoc.stagePanelHeaderEditTxt,showStageContainer))
         Width: =25
         X: =PanelContainer.X + 120
         Y: =PanelContainer.Y - Self.Height -10
@@ -2329,7 +2406,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Name"
+                Text: |-
+                    =//"Name"
+                    ProcessDesignerLoc.stgContLblStgName
                 Width: =120
                 X: =20
                 Y: =20
@@ -2347,7 +2426,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Description"
+                Text: |-
+                    =//"Description"
+                    ProcessDesignerLoc.stgContLblStgDescription
                 Width: =120
                 X: =lblStageName_4.X
                 Y: =lblStageName_4.Y + lblStageName_4.Height + 10
@@ -2366,7 +2447,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Conditions"
+                Text: |-
+                    =//"Conditions"
+                    ProcessDesignerLoc.stgContLblStgCondnHeader
                 Underline: =true
                 Width: =txtStageName_2.X - Self.X
                 Wrap: =false
@@ -2386,7 +2469,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Condition"
+                Text: |-
+                    =//"Condition"
+                    ProcessDesignerLoc.stgContLblCondition
                 Width: =120
                 X: =lblStageName_4.X
                 Y: =lblStageConditionHeader_2.Y + txtLabelInfo.Height+ 5
@@ -2522,7 +2607,7 @@
                                         LookUp(_removedConditions, Path = Value),
                                         { 
                                             ConditionId: Blank(), TargetData: Blank(), StaticValue: "", TargetStage: Blank(),
-                                            Path: Value, Text: "Path " & Value, 
+                                            Path: Value, Text: const.Path & Value, //"Path "
                                             Target: 'Business Approval Condition Target Data'.'Static value',
                                             IsDefault: false, IsParallel: false
                                         }
@@ -2536,7 +2621,7 @@
                         //clear any condition from default, if exist
                         UpdateIf(_conditions, IsDefault, { IsDefault: false, StaticValue: ""});
                         //update last path to default
-                        Patch(_conditions, Last(_conditions), { IsDefault: true, StaticValue: "Default (Other values)" })
+                        Patch(_conditions, Last(_conditions), { IsDefault: true, StaticValue: ProcessDesignerLoc.stgContSwitchLblDefault })//Default (Other values)
                     );
                 PaddingBottom: =0
                 PaddingTop: =2
@@ -2564,7 +2649,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Paths"
+                Text: |-
+                    =//"Paths"
+                    ProcessDesignerLoc.stgContLblSwitchPaths
                 Visible: =ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch
                 Width: =120
                 X: =lblStageCondition_2.X
@@ -2584,7 +2671,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="This is the first stage for the process. Conditional rules are not applicable."
+                Text: |-
+                    =//"This is the first stage for the process. Conditional rules are not applicable."
+                    ProcessDesignerLoc.stgContFirstStgNoCondition
                 Visible: =_currentStageIndex < 2
                 Width: =txtStageDesc_2.Width
                 X: =txtStageDesc_2.X
@@ -2603,7 +2692,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Source"
+                Text: |-
+                    =//"Source"
+                    ProcessDesignerLoc.stgContLblSource
                 Visible: =ddlStageCondition_2.DisplayMode = DisplayMode.Edit && ddlStageCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None
                 Width: =120
                 X: =lblStageName_4.X
@@ -2622,7 +2713,9 @@
                 Height: =If(Self.Visible, 30, 0)
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Request Data"
+                Text: |-
+                    =//"Request Data"
+                    ProcessDesignerLoc.stgContLblRequestData
                 Visible: =ddlStageConditionSource_2.Selected.Value = 'Business Approval Condition Source Data'.'Request Data' && ddlStageConditionSource_2.Visible
                 Width: =120
                 X: =lblStageName_4.X
@@ -2642,7 +2735,8 @@
                 PaddingLeft: =12
                 Size: =10
                 Text: |-
-                    ="Default value: " & Coalesce(ddlRequestDataCondition_2.Selected.'Default Value', "Not specified.")
+                    =//"Default value: " & Coalesce(ddlRequestDataCondition_2.Selected.'Default Value', "Not specified.")
+                    ProcessDesignerLoc.stgContLblRequestDataDetailsT1 & " " & Coalesce(ddlRequestDataCondition_2.Selected.'Default Value', ProcessDesignerLoc.stgContLblRequestDataDetailsT2)
                 Visible: =ddlRequestDataCondition_2.Visible && !lblRequestDataIsEmpty_2.Visible && IsBlank(ddlRequestDataCondition_2.Selected.'Business Approval Data')
                 Width: =Parent.Width - Self.X - 100
                 X: =ddlRequestDataCondition_2.X + ddlRequestDataCondition_2.Width
@@ -2661,7 +2755,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Switch conditions are parallel rules. You can have one or more paths with the same condition to create parallel paths."
+                Text: |-
+                    =//"Switch conditions are parallel rules. You can have one or more paths with the same condition to create parallel paths."
+                    ProcessDesignerLoc.stgContLabelParallelCond
                 Visible: =galConditions_1.Visible && ddlStageCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch
                 Width: =galConditions_1.Width
                 X: =lblStageName_4.X
@@ -2680,7 +2776,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Operand"
+                Text: |-
+                    =//"Operand"
+                    ProcessDesignerLoc.stgContLblStgOperand
                 Visible: =lblStageConditionSource_2.Visible
                 Width: =120
                 X: =lblStageName_4.X
@@ -2768,12 +2866,20 @@
                         ZIndex: =3
 
                 tblStageDeps_2 As TableHeader:
-                    ColumnOnClick: ="Text"
+                    ColumnOnClick: |-
+                        =//"Text"
+                        const.Text
                     Columns: |-
-                        =Table(
+                        =/*Table(
                             { Index: 1, Text: "Stage", Column: "Stage", Width: Self.Width / 4, Offset: 0, EnableSort: false },    
                             { Index: 2, Text: "Node", Column: "Name", Width: Self.Width / 4, Offset: -Self.Width / 4, EnableSort: false },
                             { Index: 3, Text: "Condition", Column: "Condition", Width: Self.Width / 2, Offset: -Self.Width / 2, EnableSort: false }
+                        )*/
+                        
+                        Table(
+                            { Index: 1, Text: ProcessDesignerLoc.stgContTblStgDepsStage, Column: "Stage", Width: Self.Width / 4, Offset: 0, EnableSort: false },    
+                            { Index: 2, Text: ProcessDesignerLoc.stgContTblStgDepsNode, Column: "Name", Width: Self.Width / 4, Offset: -Self.Width / 4, EnableSort: false },
+                            { Index: 3, Text: ProcessDesignerLoc.stgContTblStgDepsCondition, Column: "Condition", Width: Self.Width / 2, Offset: -Self.Width / 2, EnableSort: false }
                         )
                     EnableSort: =false
                     Width: =galStageDeps_2.Width
@@ -2793,7 +2899,9 @@
                     FontWeight: =FontWeight.Lighter
                     Height: =30
                     Size: =10
-                    Text: ="This stage has the following dependencies and cannot be deleted until the dependencies are removed."
+                    Text: |-
+                        =//"This stage has the following dependencies and cannot be deleted until the dependencies are removed."
+                        ProcessDesignerLoc.stgContLblStageHasDependancy
                     Width: =Parent.Width
                     ZIndex: =3
 
@@ -2819,9 +2927,14 @@
                         ClearCollect(_conditions, _savedConditions);
                         Clear(_savedConditions); Clear(_removedConditions);
                         Reset(ddlStageCondition_2);
+                        Reset(ddlStageOperand_2);
+                        Reset(ddlRequestDataCondition_2);
+                        Reset(ddlStageConditionSource_2);
                         UpdateContext({ allowUpdateConditionType: false, isCleared: false })
                     )
-                Text: =If(isCleared, "Reset", "Edit")
+                Text: |-
+                    =//If(isCleared, "Reset", "Edit")
+                    If(isCleared, ProcessDesignerLoc.stgContBtnReset, ProcessDesignerLoc.stgContBtnResetEditText)
                 Visible: =(!allowUpdateConditionType || isCleared) && _currentStageIndex > 1
                 Width: =96
                 X: =490
@@ -2873,7 +2986,7 @@
                             })
                         );
                         //set last condition as default for switch types
-                        Patch(_conditions, Last(_conditions), { IsDefault: true, StaticValue: "Default (Other values)"}),
+                        Patch(_conditions, Last(_conditions), { IsDefault: true, StaticValue: ProcessDesignerLoc.stgContSwitchLblDefault}),
                     
                         //--- Case = None ---
                         'Business Approval Stage Condition'.None, 
@@ -2883,8 +2996,12 @@
                             Clear(_conditions)
                         )
                     );
+                    //Resetting to default
+                    Reset(ddlRequestDataCondition_2);
                     Reset(ddlStageOperand_2);
-                Text: ="Choose condition"
+                Text: |-
+                    =//"Choose condition"
+                    ProcessDesignerLoc.stgContDdlStgCondnTxt
                 Visible: =true
                 Width: =320
                 X: =140
@@ -2892,7 +3009,9 @@
                 ZIndex: =19
 
                 Value3 As pcfDataField.textualColumn:
-                    FieldDisplayName: ="Value"
+                    FieldDisplayName: |-
+                        =//"Value"
+                        const.Value
                     FieldName: ="Value"
                     FieldType: ="l"
                     FieldVariantName: ="textualColumn"
@@ -2901,7 +3020,8 @@
 
             ddlStageConditionSource_2 As Combobox.pcfdataset:
                 BasePaletteColor: =
-                DefaultSelectedItems: =[If(!IsBlankOrError(_selectedStage.'Source Data Type'),LookUp(Choices('Business Approval Condition Source Data'),Value = _selectedStage.'Source Data Type'),LookUp(Choices('Business Approval Condition Source Data'),Value = 'Business Approval Condition Source Data'.'Request Data'))]
+                DefaultSelectedItems: |
+                    =[If(!IsBlankOrError(_selectedStage.'Source Data Type'),LookUp(Choices('Business Approval Condition Source Data'),Value = _selectedStage.'Source Data Type'),LookUp(Choices('Business Approval Condition Source Data'),Value = 'Business Approval Condition Source Data'.'Request Data'))]
                 DisplayMode: =DisplayMode.Edit
                 Font: =""
                 FontItalic: =false
@@ -2910,10 +3030,14 @@
                 FontUnderline: =false
                 FontWeight: =""
                 Height: =32
-                InputTextPlaceholder: ="Choose source"
+                InputTextPlaceholder: |-
+                    =//"Choose source"
+                    ProcessDesignerLoc.stgContDdlStgCondnSourceTxt
                 Items: =Choices('Business Approval Condition Source Data')
                 OnChange: =Reset(ddlStageOperand_2)
-                ValidationState: ="None"
+                ValidationState: |
+                    =//"None"
+                    const.None
                 Visible: =lblStageConditionSource_2.Visible
                 Width: =320
                 X: =140
@@ -2921,7 +3045,9 @@
                 ZIndex: =20
 
                 Value1 As pcfDataField.textualColumn:
-                    FieldDisplayName: ="Value"
+                    FieldDisplayName: |-
+                        =//"Value"
+                        const.Value
                     FieldName: ="Value"
                     FieldType: ="l"
                     FieldVariantName: ="textualColumn"
@@ -2993,7 +3119,8 @@
                 FontUnderline: =false
                 Height: =44
                 Text: |-
-                    ="Currently editing a stage with Conditions defined. Click 'Edit' to change and 'Reset' to undo. Warning: Removing conditions removes the corresponding paths and its nodes."
+                    =//"Currently editing a stage with Conditions defined. Click 'Edit' to change and 'Reset' to undo. Warning: Removing conditions removes the corresponding paths and its nodes."
+                    ProcessDesignerLoc.stgContTxtLblInfo
                 Visible: =btnResetConditions_2.Visible
                 Width: =615
                 X: =140
@@ -3001,12 +3128,22 @@
                 ZIndex: =23
 
             "ddlRequestDataCondition_2 As 'Combo box'.pcfdataset":
-                AccessibleLabel: ="Variables(Request Data)"
-                DefaultSelectedItems: |-
-                    =If(!IsBlankOrError(_selectedStage.'Source Data'),[LookUp(Filter(
+                AccessibleLabel: |-
+                    =//"Variables(Request Data)"
+                    ProcessDesignerLoc.stgContDdlReqDataCondAccLblTxt
+                DefaultSelectedItems: |
+                    =/*If(!IsBlankOrError(_selectedStage.'Source Data'),
+                        [LookUp(Filter(
                         Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
                         Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
-                    ), "cat_name" = _selectedStage.'Source Data'.Name)])
+                    ), "cat_name" = _selectedStage.'Source Data'.Name)])*/
+                    
+                    [If(
+                        !IsBlankOrError(_selectedStage.'Source Data'),
+                        
+                            _selectedStage.'Source Data', Blank()
+                       // First(Choices('Business Approval Stage Condition'))
+                    )]
                 DisplayMode: =DisplayMode.Edit
                 FillColor: =RGBA(245, 245, 245, 1)
                 Height: =32
@@ -3024,7 +3161,9 @@
                 ZIndex: =24
 
                 Name1 As pcfDataField.textualColumn:
-                    FieldDisplayName: ="Name"
+                    FieldDisplayName: |-
+                        =//"Name"
+                        const.Name
                     FieldName: ="cat_name"
                     FieldType: ="s"
                     FieldVariantName: ="textualColumn"
@@ -3032,7 +3171,9 @@
                     ZIndex: =36
 
                 "'Data Type1' As pcfDataField.textualColumn":
-                    FieldDisplayName: ="Data Type"
+                    FieldDisplayName: |-
+                        =//"Data Type"
+                        const.DataType
                     FieldName: ="cat_datatype"
                     FieldType: ="l"
                     FieldVariantName: ="textualColumn"
@@ -3040,7 +3181,9 @@
                     ZIndex: =37
 
                 "'Created On1' As pcfDataField.textualColumn":
-                    FieldDisplayName: ="Created On"
+                    FieldDisplayName: |-
+                        =//"Created On"
+                        const.CreatedOn
                     FieldName: ="createdon"
                     FieldType: ="d"
                     FieldVariantName: ="textualColumn"
@@ -3054,7 +3197,9 @@
                 Height: =32
                 OnChange: |-
                     =UpdateContext({stageName:Self.Value});
-                Placeholder: ="Stage name"
+                Placeholder: |-
+                    =//"Stage name"
+                    ProcessDesignerLoc.stgContTxtStgNamePlaceholder
                 Value: =_selectedStage.Name
                 Width: =(Parent.Width - Self.X) / 2
                 X: =140
@@ -3069,7 +3214,9 @@
                 Mode: ='TextBox.Mode'.Multiline
                 OnChange: |-
                     =UpdateContext({stageDesc:Self.Value});
-                Placeholder: ="Stage description"
+                Placeholder: |-
+                    =//"Stage description"
+                    ProcessDesignerLoc.stgContTxtStgDescPlaceholder
                 Value: =_selectedStage.Description
                 Width: =(Parent.Width - Self.X) / 2
                 X: =txtStageName_2.X
@@ -3087,7 +3234,9 @@
                 Font: =Font.'Segoe UI'
                 Height: =ddlRequestDataCondition_2.Height
                 Size: =10
-                Text: ="No Variables (Business Data) available. Create new variable using the Variables option provide on the top of designer screen"
+                Text: |-
+                    =//"No Variables (Business Data) available. Create new variable using the Variables option provide on the top of designer screen"
+                    ProcessDesignerLoc.stgContLblRequstDataEmpty
                 Visible: |-
                     =With({ condData:
                          Filter(
@@ -3150,10 +3299,15 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =9
-                    Text: |-
-                        =If(ThisItem.IsDefault, "Default", "If " & 
+                    Text: |
+                        =/*If(ThisItem.IsDefault, "Default", "If " & 
                             If(ddlRequestDataCondition.Visible, ddlRequestDataCondition.Selected.Name, ddlStageConditionSource.Selected.Value) & " " &
                             ddlStageOperand.Selected.Value
+                        )*/
+                        
+                        If(ThisItem.IsDefault, ProcessDesignerLoc.stgContLblCondTargetT1, ProcessDesignerLoc.stgContLblCondTargetT2 & " " & 
+                            If(ddlRequestDataCondition_2.Visible, ddlRequestDataCondition_2.Selected.Name, ddlStageConditionSource_2.Selected.Value) & " " &
+                            ddlStageOperand_2.Selected.Value
                         )
                     Width: =Parent.TemplateWidth
                     X: =Parent.TemplateWidth / 2 - Self.Width / 2
@@ -3253,6 +3407,9 @@
                     DisplayMode: =If(ThisItem.IsDefault, DisplayMode.Disabled, DisplayMode.Edit)
                     FocusedBorderThickness: =1
                     Font: =Font.'Segoe UI'
+                    Format: |-
+                        =//TextFormat.Text
+                        If(ddlRequestDataCondition_2.Selected.'Data Type' = 'Business Approval Data Type'.Number, TextFormat.Number, TextFormat.Text)
                     Height: =30
                     HoverBorderColor: =Self.BorderColor
                     HoverColor: =RGBA(51, 51, 51, 1)
@@ -3288,7 +3445,9 @@
                     Height: =ddlTargetRequestData_1.Height
                     OnSelect: =Select(Parent)
                     Size: =10
-                    Text: ="No other data field found of similar data type for " & ddlRequestDataCondition.Selected.Name & " (" & ddlRequestDataCondition.Selected.'Data Type' & ")"
+                    Text: |-
+                        =/*"No other data field found of similar data type for " & ddlRequestDataCondition.Selected.Name & " (" & ddlRequestDataCondition.Selected.'Data Type' & ")"*/
+                        ProcessDesignerLoc.stgContLblTargetReqDataFoundT1 & " " & ddlRequestDataCondition.Selected.Name & " " & ProcessDesignerLoc.stgContLblTargetReqDataFoundT2 & ddlRequestDataCondition.Selected.'Data Type' & ProcessDesignerLoc.stgContLblTargetReqDataFoundT3
                     Visible: |-
                         =With({ conditionData: Filter(
                             Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
@@ -3314,8 +3473,12 @@
                     FontWeight: =FontWeight.Semibold
                     Height: =lblConditionTarget_1.Height - 5
                     Size: =lblConditionTarget_1.Size
-                    Text: ="="
-                    Tooltip: ="Parallel paths"
+                    Text: |-
+                        =//"="
+                        ProcessDesignerLoc.stgContLblEqual
+                    Tooltip: |-
+                        =//"Parallel paths"
+                        ProcessDesignerLoc.stgContLblIsPrallelTooltip
                     Visible: |-
                         =!IsBlank(LookUp(_conditions, Path <> ThisItem.Path && Target = ThisItem.Target && IsDefault = false &&
                             If(ThisItem.Target = 'Business Approval Condition Target Data'.'Static value',
@@ -3346,7 +3509,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Node Type"
+                Text: |-
+                    =//"Node Type"
+                    ProcessDesignerLoc.nodeContNodeType
                 Width: =120
                 X: =20
                 Y: =20
@@ -3357,7 +3522,9 @@
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =2
                 Color: =RGBA(51, 51, 51, 1)
-                Default: =If(IsBlank(nodeType),If(IsBlank(_selectedNode.'Node Type'),"Approval",_selectedNode.'Node Type'),nodeType)
+                Default: |-
+                    =//If(IsBlank(nodeType),If(IsBlank(_selectedNode.'Node Type'),"Approval",_selectedNode.'Node Type'),nodeType)
+                    If(IsBlank(nodeType),If(IsBlank(_selectedNode.'Node Type'),ProcessDesignerLoc.ApprovalTxt,_selectedNode.'Node Type'),nodeType)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisplayMode: =If(_currentNodeIndex > 0 && IsBlank(_selectedNode) && (_currentStageIndex + _currentNodeIndex > 2) && !isParallelPath, DisplayMode.Edit, DisplayMode.Disabled)
@@ -3401,7 +3568,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Name"
+                Text: |-
+                    =//"Name"
+                    ProcessDesignerLoc.nodeContLblNodeName
                 Width: =120
                 X: =20
                 Y: =lblNodeType_4.Height + 30
@@ -3450,7 +3619,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Description"
+                Text: |-
+                    =//"Description"
+                    ProcessDesignerLoc.nodeContLblDescription
                 Width: =120
                 X: =lblStageName_5.X
                 Y: =lblStageName_5.Y + lblStageName_5.Height + 5
@@ -3508,7 +3679,9 @@
                     Height: =30
                     PaddingLeft: =0
                     Size: =10
-                    Text: ="Approval Configuration"
+                    Text: |-
+                        =//"Approval Configuration"
+                        ProcessDesignerLoc.nodeContLblApprovalConfigText
                     Width: =Parent.Width - Self.X - 20
                     Wrap: =false
                     X: =20
@@ -3526,7 +3699,9 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Approval Type"
+                    Text: |-
+                        =//"Approval Type"
+                        ProcessDesignerLoc.nodeContLblApprovalType
                     Width: =120
                     X: =lblNodeType_4.X
                     Y: =lblApprovalConfiguration_2.Y + lblApprovalConfiguration_2.Height + 5
@@ -3579,7 +3754,9 @@
                     FocusedBorderThickness: =1
                     Font: =Font.'Segoe UI'
                     Height: =30
-                    HintText: ="Enter list of custom responses, seperated by comma (Response1, Response2)"
+                    HintText: |-
+                        =//"Enter list of custom responses, seperated by comma (Response1, Response2)"
+                        ProcessDesignerLoc.nodeContCustomResponseHintText
                     HoverBorderColor: =Self.BorderColor
                     HoverColor: =RGBA(51, 51, 51, 1)
                     HoverFill: =RGBA(255, 255, 255, 1)
@@ -3612,8 +3789,12 @@
                     Height: =If(Self.Visible, 30, 0)
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Responses"
-                    Visible: =StartsWith(ddlNodeApprovalType_2.Selected.Value, "Custom Responses")
+                    Text: |-
+                        =//"Responses"
+                        ProcessDesignerLoc.nodeContLblCustomResponses
+                    Visible: |-
+                        =//StartsWith(ddlNodeApprovalType_2.Selected.Value, "Custom Responses")
+                        If(ddlNodeApprovalType_2.Selected.Value = 'Business Approval Type'.'Custom Responses - Wait for all responses' || ddlNodeApprovalType_2.Selected.Value = 'Business Approval Type'.'Custom Responses - Wait for one response', true, false )
                     Width: =lblNodeApprovalType_2.Width
                     X: =lblNodeType_4.X
                     Y: =lblNodeApprovalType_2.Y + lblNodeApprovalType_2.Height + 4
@@ -3631,7 +3812,9 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Approver"
+                    Text: |-
+                        =//"Approver"
+                        ProcessDesignerLoc.nodeContLblNodeApprover
                     Width: =lblNodeApprovalType_2.Width
                     X: =lblNodeType_4.X
                     Y: =lblCustomResponses_2.Y + lblCustomResponses_2.Height + 4
@@ -3642,7 +3825,9 @@
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =2
                     Color: =RGBA(51, 51, 51, 1)
-                    Default: ="User"
+                    Default: |-
+                        =//"User"
+                        'Business Approver Type'.User
                     DisabledBorderColor: =RGBA(0, 0, 0, 0)
                     DisabledColor: =RGBA(166, 166, 166, 1)
                     FocusedBorderThickness: =4
@@ -3705,14 +3890,14 @@
                             //for dynamic type, check approver id and request data
                             With({ id: 
                                 If(ddlRequestDataField_2.Visible, //request data is referenced
-                                    ddlRequestDataField_2.Selected.'Business Approval Data' & "@") & ddlApproverDynamic_2.Selected.Value },
+                                    ddlRequestDataField_2.Selected.'Business Approval Data' & const.AtSymbol) & ddlApproverDynamic_2.Selected.Value },
                                 Patch(_nodeApprovers, Defaults(_nodeApprovers),
                                 { 
                                     'Approver Id': id, 
                                     Name: 
                                         Switch(ddlApproverDynamic_2.Selected.Value,
-                                            'Business Approval Dynamic Approver Type'.'Manager of [Request data field]',
-                                            "Manager of " & ddlRequestDataField_2.Selected.Name,
+                                            'Business Approval Dynamic Approver Type'.'Manager of [Request data field]',//Manager of
+                                            ProcessDesignerLoc.fluentPnlDynmicApprovr & " " & ddlRequestDataField_2.Selected.Name,
                                             'Business Approval Dynamic Approver Type'.'Use Request Data Field',
                                             ddlRequestDataField_2.Selected.Name, ddlApproverDynamic_2.Selected.Value
                                         ), 
@@ -3730,7 +3915,9 @@
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Size: =10
-                    Text: ="Add"
+                    Text: |-
+                        =//"Add"
+                        ProcessDesignerLoc.nodeContBtnAddUser
                     Width: =105
                     X: =ddlNodeApprovalType_2.X
                     Y: =If(radApproverType_2.Selected.Value = 'Business Approver Type'.User,ApproverPeoplePicker.Y + If(!IsError(ApproverPeoplePicker.AutoHeight),ApproverPeoplePicker.AutoHeight,35) + 10,ddlRequestDataField_2.Y + ddlRequestDataField_2.Height + 10)
@@ -3755,7 +3942,7 @@
                     HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
                     HoverColor: =RGBA(51, 51, 51, 1)
                     HoverFill: =RGBA(212, 212, 212, 1)
-                    InputTextPlaceholder: ="Find user(s)"
+                    InputTextPlaceholder: =//"Find user(s)"
                     IsSearchable: =false
                     Items: |-
                         =Office365Users.SearchUser({ searchTerm: Self.SearchText })
@@ -3828,7 +4015,9 @@
                         Height: =30
                         PaddingLeft: =12
                         Size: =10
-                        Text: ="Delegation Rule"
+                        Text: |-
+                            =//"Delegation Rule"
+                            ProcessDesignerLoc.nodeContLblDelegationRule
                         Width: =lblNodeApprovalType_2.Width
                         X: =lblNodeApprovalType_2.X
                         Y: =lblNotificationType_2.Y + lblNotificationType_2.Height + 5
@@ -3881,8 +4070,12 @@
                         Height: =30
                         PaddingLeft: =12
                         Size: =10
-                        Text: ="Time Out Setting"
-                        Visible: =StartsWith(ddlDelegationRule_2.Selected.Value, "Time-out")
+                        Text: |-
+                            =//"Time Out Setting"
+                            ProcessDesignerLoc.nodeContLblTimeOut
+                        Visible: |-
+                            =//StartsWith(ddlDelegationRule_2.Selected.Value, "Time-out")
+                            If(ddlDelegationRule_2.Selected.Value = 'Business Approval Delegation Rule'.'Time-out' || ddlDelegationRule_2.Selected.Value = 'Business Approval Delegation Rule'.'Time-out or Out of Office',true, false)
                         Width: =lblNodeApprovalType_2.Width
                         X: =lblNodeApprovalType_2.X
                         Y: =lblDelegationRuleDescription_2.Y + lblDelegationRuleDescription_2.Height+ 10
@@ -3970,8 +4163,9 @@
                         PaddingLeft: =12
                         Size: =10
                         Text: |-
-                            ="Delegate is configured as an Approver setting. If no delegate is configured, delegation rules will be ignored for the approver. 
-                            Time Out: Delegation will be triggered upon a specified time period. Out of office: Delegation will be triggered if the approver is out of office at the time the approval is received."
+                            =/*"Delegate is configured as an Approver setting. If no delegate is configured, delegation rules will be ignored for the approver. 
+                            Time Out: Delegation will be triggered upon a specified time period. Out of office: Delegation will be triggered if the approver is out of office at the time the approval is received."*/
+                            ProcessDesignerLoc.nodeContLblDelegationRuleDesc
                         Width: =Parent.Width - Self.X - 10
                         X: =lblDelegationRule_2.X
                         Y: =lblDelegationRule_2.Y + lblDelegationRule_2.Height + 20
@@ -3990,7 +4184,9 @@
                         FontWeight: =FontWeight.Lighter
                         PaddingLeft: =12
                         Size: =10
-                        Text: ="Business Days  will use the Approver's Work Profile and Holiday settings."
+                        Text: |-
+                            =//"Business Days  will use the Approver's Work Profile and Holiday settings."
+                            ProcessDesignerLoc.nodeContLblTimeoutDescription
                         Visible: =lblTimeOut_2.Visible
                         Width: =Parent.Width - Self.X - 10
                         X: =lblTimeOut_2.X
@@ -4009,7 +4205,9 @@
                         Height: =30
                         PaddingLeft: =12
                         Size: =10
-                        Text: ="Notification"
+                        Text: |-
+                            =//"Notification"
+                            ProcessDesignerLoc.nodeContLblNotification
                         Width: =lblNodeApprovalType_2.Width
                         X: =lblNodeApprovalType_2.X
                         Y: =5
@@ -4107,7 +4305,9 @@
                     Font: =Font.'Segoe UI'
                     Height: =ddlRequestDataField_2.Height
                     Size: =8
-                    Text: ="No request data field of type Email is available for this process."
+                    Text: |-
+                        =//"No request data field of type Email is available for this process."
+                        ProcessDesignerLoc.nodeContNoReqDataFieldFound
                     Visible: =!ddlRequestDataField_2.Visible
                     Width: =ddlRequestDataField_2.Width
                     X: =ddlRequestDataField_2.X
@@ -4251,15 +4451,21 @@
                     DisplayMode: =DisplayMode.Edit
                     Error: =false
                     Height: =If(!IsError(Self.AutoHeight),Self.AutoHeight,35)
-                    HintText: ="Search approvers"
+                    HintText: |-
+                        =//"Search approvers"
+                        ProcessDesignerLoc.nodeContApproverHintText
                     Items: =DefaultUserCollection 
                     MaxPeople: =30
                     MinimumSearchTermLength: =3
+                    NoResultFoundMessage: |-
+                        =//"No results found"
+                        ProcessDesignerLoc.nodeContNoResultFoundMsg
                     OnBlur: =false
                     OnChange: =false
                     OnFocus: =false
                     OnSearch: |-
-                        =ClearCollect(
+                        =//Notify(Self.SearchText);
+                        ClearCollect(
                             ApproverCollection,
                             AddColumns(
                                     Office365Users.SearchUser(
@@ -4286,8 +4492,14 @@
                             )
                         )
                     PeoplePickerType: ='PowerCAT.PeoplePicker.PeoplePickerType'.NormalPeoplePicker
+                    SearchTermToShortMessage: |-
+                        =//"Continue Typing..."
+                        ProcessDesignerLoc.nodeContApproverSearchTermToShortMsg
                     ShowSecondaryText: =true
                     Suggestions_Items: =ApproverCollection
+                    SuggestionsHeaderText: |-
+                        =//"Suggested People"
+                        ProcessDesignerLoc.nodeContApproverSuggestionsHeader
                     Theme: =AppThemeJson
                     Visible: =radApproverType_2.Selected.Value = 'Business Approver Type'.User
                     Width: =ddlNodeApprovalType_2.Width
@@ -4441,7 +4653,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Node Type"
+                Text: |-
+                    =//"Node Type"
+                    ProcessDesignerLoc.nodeRuContainerLblNodeType
                 Width: =120
                 X: =bcProcessStage_8.X
                 Y: =20
@@ -4452,7 +4666,9 @@
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =2
                 Color: =RGBA(51, 51, 51, 1)
-                Default: =If(IsBlank(nodeType),If(IsBlank(_selectedNode.'Node Type'),"Go to Stage",_selectedNode.'Node Type'),nodeType)
+                Default: |-
+                    =//If(IsBlank(nodeType),If(IsBlank(_selectedNode.'Node Type'),"Go to Stage",_selectedNode.'Node Type'),nodeType)
+                    If(IsBlank(nodeType),If(IsBlank(_selectedNode.'Node Type'),'Business Approval Node Type'.'Go to Stage',_selectedNode.'Node Type'),nodeType)
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisplayMode: =If(_currentNodeIndex > 0 && IsBlank(_selectedNode), DisplayMode.Edit, DisplayMode.Disabled)
@@ -4497,7 +4713,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Name"
+                Text: |-
+                    =//"Name"
+                    ProcessDesignerLoc.nodeRuContainerLblNodeName
                 Width: =120
                 X: =bcProcessStage_8.X
                 Y: =70
@@ -4546,7 +4764,9 @@
                 Height: =30
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Description"
+                Text: |-
+                    =//"Description"
+                    ProcessDesignerLoc.nodeRuContainerLblNodeDescription
                 Width: =120
                 X: =lblNodeNameCondition_2.X
                 Y: =lblNodeNameCondition_2.Y + lblNodeNameCondition_2.Height + 5
@@ -4603,7 +4823,9 @@
                     Height: =30
                     PaddingLeft: =0
                     Size: =10
-                    Text: ="Conditions"
+                    Text: |-
+                        =//"Conditions"
+                        ProcessDesignerLoc.stgContLblStgCondnHeader
                     Width: =txtNodeName_5.X - Self.X
                     Wrap: =false
                     X: =bcProcessStage_8.X
@@ -4621,7 +4843,9 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Go to Stage"
+                    Text: |-
+                        =//"Go to Stage"
+                        ProcessDesignerLoc.nodeRuContainerLblGoToStage
                     Visible: |-
                         =ddlNodeCondition_2.Selected.Value = 'Business Approval Stage Condition'.None || 
                         (
@@ -4684,7 +4908,9 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Condition"
+                    Text: |-
+                        =//"Condition"
+                        ProcessDesignerLoc.nodeRuContainerLblNodeCondition
                     Width: =120
                     X: =lblNodeNameCondition_2.X
                     Y: =lblNodeConditionHeader_2.Y + lblNodeConditionHeader_2.Height + 10
@@ -4818,7 +5044,7 @@
                                             LookUp(_removedConditions, Path = Value),
                                             { 
                                                 ConditionId: Blank(), TargetData: Blank(), StaticValue: "", TargetStage: Blank(),
-                                                Path: Value, Text: "Path " & Value, Target: 'Business Approval Condition Target Data'.'Static value'
+                                                Path: Value, Text: const.Path & Value, Target: 'Business Approval Condition Target Data'.'Static value'
                                             }
                                         )
                                     )
@@ -4854,7 +5080,9 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Paths"
+                    Text: |-
+                        =//"Paths"
+                        ProcessDesignerLoc.stgContLblSwitchPaths
                     Visible: =ddlNodeCondition_2.Selected.Value = 'Business Approval Stage Condition'.Switch
                     Width: =120
                     X: =lblNodeCondition_2.X
@@ -4873,7 +5101,9 @@
                     Height: =30
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Source"
+                    Text: |-
+                        =//"Source"
+                        ProcessDesignerLoc.nodeRuContainerLblSource
                     Visible: =ddlNodeCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None && ddlNodeCondition_2.Visible
                     Width: =120
                     X: =lblNodeNameCondition_2.X
@@ -4928,7 +5158,9 @@
                     Height: =If(Self.Visible, 30, 0)
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Request Data"
+                    Text: |-
+                        =//"Request Data"
+                        ProcessDesignerLoc.nodeRuContainerLblRequestData
                     Visible: =ddlNodeConditionSource_2.Selected.Value = 'Business Approval Condition Source Data'.'Request Data' && ddlNodeConditionSource_2.Visible
                     Width: =120
                     X: =lblNodeNameCondition_2.X
@@ -4988,7 +5220,9 @@
                     Font: =Font.'Segoe UI'
                     Height: =ddlNodeSourceData_2.Height
                     Size: =10
-                    Text: ="No request data available. Create new request data in the process edit screen."
+                    Text: |-
+                        =//"No request data available. Create new request data in the process edit screen."
+                        ProcessDesignerLoc.nodeRuContainerLblRequestDataEmpty
                     Visible: |-
                         =IsEmpty(
                             Filter(
@@ -5045,7 +5279,9 @@
                         Font: =Font.'Segoe UI'
                         Height: =30
                         Size: =9
-                        Text: ="Go to Stage"
+                        Text: |-
+                            =//"Go to Stage"
+                            ProcessDesignerLoc.nodeRuContainerLblGoToStage
                         Visible: =!lblNodeTargetRequestDataNotFound_2.Visible
                         Width: =80
                         X: =txtTargetStatic_5.X
@@ -5103,9 +5339,11 @@
                         PaddingLeft: =12
                         Size: =9
                         Text: |-
-                            ="If " & 
+                            =ProcessDesignerLoc.nodeRuContainerLblCondTarget & " " & 
                                 If(ddlNodeSourceData_2.Visible, ddlNodeSourceData_2.Selected.Name, ddlNodeConditionSource_2.Selected.Value) & " " &
                                 ddlNodeOperand_2.Selected.Value
+                            
+                            //If
                         Width: =Parent.TemplateWidth
                         X: =Parent.TemplateWidth / 2 - Self.Width / 2
                         Y: =5
@@ -5210,7 +5448,9 @@
                         Height: =ddlNodeTargetRequestData_2.Height
                         OnSelect: =Select(Parent)
                         Size: =10
-                        Text: ="No other data field found of similar data type for " & ddlNodeSourceData_2.Selected.Name & " (" & ddlNodeSourceData_2.Selected.'Data Type' & ")"
+                        Text: |-
+                            =//"No other data field found of similar data type for " & ddlNodeSourceData_2.Selected.Name & " (" & ddlNodeSourceData_2.Selected.'Data Type' & ")"
+                            ProcessDesignerLoc.nodeRuContainerLblTargetReqDataT1 & " " & ddlNodeSourceData_2.Selected.Name & " " & ProcessDesignerLoc.nodeRuContainerLblTargetReqDataT2 & ddlNodeSourceData_2.Selected.'Data Type' & ProcessDesignerLoc.nodeRuContainerLblTargetReqDataT3
                         Visible: |-
                             =With({ conditionData: Filter(
                                 Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
@@ -5271,7 +5511,9 @@
                     Height: =If(Self.Visible, 30, 0)
                     PaddingLeft: =12
                     Size: =10
-                    Text: ="Operand"
+                    Text: |-
+                        =//"Operand"
+                        ProcessDesignerLoc.nodeRuContainerLblNodeOperand
                     Visible: =lblNodeConditionSource_2.Visible && ddlNodeCondition_2.Selected.Value = 'Business Approval Stage Condition'.'If/Else'
                     Width: =120
                     X: =lblNodeNameCondition_2.X
@@ -5347,7 +5589,7 @@
                     HoverColor: =RGBA(255, 255, 255, 1)
                     HoverFill: =ColorFade(RGBA(105, 121, 126, 1), -10%)
                     OnSelect: |-
-                        =If(Self.Text = "Edit",
+                        =If(Self.Text = ProcessDesignerLoc.nodeRuContainerBtnResetEdit,//Edit
                             //saves current condition in memory
                             ClearCollect(_savedConditions, _conditions);
                             UpdateContext({ allowUpdateConditionType: true, isCleared: true }),
@@ -5366,7 +5608,9 @@
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Size: =10
-                    Text: =If(isCleared, "Reset", "Edit")
+                    Text: |-
+                        =//If(isCleared, "Reset", "Edit")
+                        If(isCleared, ProcessDesignerLoc.nodeRuContainerBtnReset, ProcessDesignerLoc.nodeRuContainerBtnResetEdit)
                     Visible: =(!allowUpdateConditionType || isCleared) && _currentNodeIndex > 1
                     Width: =90
                     X: =ddlNodeCondition_2.X + ddlNodeCondition_2.Width + 20
@@ -5386,7 +5630,9 @@
                     Height: =30
                     PaddingLeft: =0
                     Size: =10
-                    Text: ="Currently editing a node with Conditions defined. To change condition type, click 'Edit' to change existing definitions. You can 'Reset' to undo."
+                    Text: |-
+                        =//"Currently editing a node with Conditions defined. To change condition type, click 'Edit' to change existing definitions. You can 'Reset' to undo."
+                        ProcessDesignerLoc.nodeRuContainerLblReset
                     Visible: =btnResetNodeConditions_2.Visible
                     Width: =Parent.Width - Self.X - 20
                     X: =txtNodeName_5.X
@@ -5510,8 +5756,8 @@
                             )
                         },
                         UpdateContext({ lastPublished: First(publishedVersions) })
-                    );
-                    UpdateContext({ busyMessage: "Publishing Process " & _selectedProcess.Name, _isBusy: true });
+                    );//Publishing Process
+                    UpdateContext({ busyMessage: ProcessDesignerLoc.pubContainerBtnPublish & " " & _selectedProcess.Name, _isBusy: true });
                     
                     Patch(
                         'Business Approval Versions', 
@@ -5538,7 +5784,9 @@
                 RadiusTopLeft: =0
                 RadiusTopRight: =0
                 Size: =10
-                Text: ="Publish"
+                Text: |-
+                    =//"Publish"
+                    ProcessDesignerLoc.PublishTxt
                 Visible: =false
                 Width: =120
                 X: =20
@@ -5557,10 +5805,15 @@
                 Font: =Font.'Segoe UI'
                 Size: =10
                 Text: |-
-                    =If(IsBlank(lastPublished), 
+                    =/*If(IsBlank(lastPublished), 
                         "This is the first time this process is being published.", 
                         "Last version: " & lastPublished.Version & ", published on: " & Text(lastPublished.'Created On', "dd mmm yyyy hh:mm AM/PM") & 
                         ". Publishing new version: " & lastPublished.Version + 1
+                    )*/
+                    If(IsBlank(lastPublished), 
+                        ProcessDesignerLoc.pubContainerLblVersionInfoFirstPublish, 
+                        ProcessDesignerLoc.pubContainerLblVersionInfoVersionText1 & " " & lastPublished.Version & ProcessDesignerLoc.pubContainerLblVersionInfoVersionText2 & " " & Text(lastPublished.'Created On', ProcessDesignerLoc.pubContLblPublishVerInfoDateFormat) & 
+                        ProcessDesignerLoc.pubContainerLblVersionInfoVersionText3 & " " & lastPublished.Version + 1
                     )
                 Visible: =!disableSaveButton
                 Width: =Parent.Width - Self.X - 20
@@ -5580,7 +5833,8 @@
                 Height: =30
                 Size: =10
                 Text: |-
-                    ="Activate process when published: "
+                    =//"Activate process when published: "
+                    ProcessDesignerLoc.pubContainerLblActivateOnPublish & " "
                 Visible: =!disableSaveButton
                 Width: =215
                 X: =btnPublish_2.X
@@ -5595,7 +5849,9 @@
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 FalseFill: =RGBA(102, 102, 102, 1)
                 FalseHoverFill: =RGBA(33, 33, 33, 1)
-                FalseText: ="No"
+                FalseText: |-
+                    =//"No"
+                    ProcessDesignerLoc.pubContainerTglActivateFalseText
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 HandleFill: =RGBA(255, 255, 255, 1)
@@ -5605,7 +5861,9 @@
                 Size: =10
                 TrueFill: =RGBA(105, 121, 126, 1)
                 TrueHoverFill: =ColorFade(RGBA(105, 121, 126, 1), -30%)
-                TrueText: ="Yes"
+                TrueText: |-
+                    =//"Yes"
+                    ProcessDesignerLoc.pubContainerTglActivateTrueText
                 Visible: =!disableSaveButton
                 Width: =90
                 X: =lblActivateOnPublish_2.X + lblActivateOnPublish_2.Width + 5
@@ -5624,7 +5882,9 @@
                 Font: =Font.'Segoe UI'
                 Height: =45
                 Size: =10
-                Text: ="Activating this version will automatically de-activate all previous versions if exist. De-activated processes will continue to run but will not be available for new workflow instances."
+                Text: |-
+                    =//"Activating this version will automatically de-activate all previous versions if exist. De-activated processes will continue to run but will not be available for new workflow instances."
+                    ProcessDesignerLoc.pubContainerLblPublishInfo
                 Visible: =btnPublish_2.DisplayMode = DisplayMode.Edit
                 Width: =2 * (Parent.Width / 3)
                 X: =btnPublish_2.X
@@ -5634,7 +5894,9 @@
             "ProgressIndicator1 As 'Fluent Progress Indicator (1.0.22) Preview'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =55
-                Label: ="Validating process - " & _selectedProcess.Name
+                Label: |-
+                    =//"Validating process - " & _selectedProcess.Name
+                    ProcessDesignerLoc.pubContainerProgressIndicatorText & " " & _selectedProcess.Name
                 Theme: =AppThemeJson
                 TypeofIndicator: ='PowerCAT.ProgressIndicator.TypeofIndicator'.IndeterminateIndicator
                 Visible: =!isPublishReady
@@ -5672,21 +5934,27 @@
                             ItemIconName: "Refresh"
                         }
                     )*/
-                    Table({
+                    /*Table({
                             ItemKey: "refresh",
                             ItemDisplayName: "Refresh",
+                            ItemIconName: "Refresh"
+                        }
+                    )*/
+                    Table({
+                            ItemKey: "refresh",
+                            ItemDisplayName: ProcessDesignerLoc.verContainerRefreshText,//"Refresh",
                             ItemIconName: "Refresh"
                         }
                     )
                 OnSelect: |-
                     =Switch(Self.Selected.ItemKey, 
-                        "back",
+                       /* "back",
                             Back(),
                         "workflow",
                             Navigate(scrWorkflowEditor),
                         "process",
-                            Navigate(scrProcessEditor),
-                        "refresh",
+                            Navigate(scrProcessEditor),*/
+                        const.Refresh,//refresh
                             Refresh('Business Approval Versions');
                             ClearCollect(_colPublishedVersions, 
                             Filter(
@@ -5795,7 +6063,8 @@
                     PaddingLeft: =12
                     Size: =10
                     Text: |-
-                        =Text(ThisItem.'Created On', "dd mmm yyyy hh:mm AM/PM")
+                        =//Text(ThisItem.'Created On', "dd mmm yyyy hh:mm AM/PM")
+                        Text(ThisItem.'Created On', ProcessDesignerLoc.verContLblVersionCreatedOnDateFormat)
                     Width: =200
                     Wrap: =false
                     X: =lblVersionCreatedBy_2.X + lblVersionCreatedBy_2.Width
@@ -5862,6 +6131,9 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
                     PressedFill: =RGBA(0, 0, 0, 0)
+                    Visible: |-
+                        =//true
+                        false
                     Width: =Self.Height
                     X: =lblVersionStatus_2.X + lblVersionStatus_2.Width + 5
                     ZIndex: =7
@@ -5949,7 +6221,9 @@
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Size: =10
-                    Text: ="Activate"
+                    Text: |-
+                        =//"Activate"
+                        ProcessDesignerLoc.verContainerBtnActivateText
                     Visible: =ThisItem.Status = 'Status (Business Approval Versions)'.Inactive
                     Width: =100
                     X: =icoViewApprovalVersion_2.X + icoViewApprovalVersion_2.Width + 10
@@ -5967,7 +6241,9 @@
                 Font: =Font.'Segoe UI'
                 PaddingLeft: =12
                 Size: =10
-                Text: ="Published versions for " & _selectedProcess.Name
+                Text: |-
+                    =//"Published versions for " & _selectedProcess.Name
+                    ProcessDesignerLoc.verContainerVersionTitle & " " & _selectedProcess.Name
                 Width: =Parent.Width
                 Y: |-
                     =//CommandBar2_15.Height
@@ -6009,14 +6285,23 @@
                 ZIndex: =4
 
             VersionTableHeader As TableHeader:
-                ColumnOnClick: ="Text"
+                ColumnOnClick: |-
+                    =//"Text"
+                    const.Text
                 Columns: |-
-                    =Table(
+                    =/*Table(
                         { Index: 1, Text: "Version", Column: "cat_version", Width: 60, Offset: 0, EnableSort: false },    
                         { Index: 2, Text: "Created By", Column: "Createdby", Width: 250, Offset: -150, EnableSort: false },
                         { Index: 3, Text: "Created On", Column: "Createdon", Width: 250, Offset: -150, EnableSort: true },
                         { Index: 4, Text: "Publishing Status", Column: "cat_publishingstatus", Width: 120, Offset: -202, EnableSort: false },
                         { Index: 5, Text: "Activation Status", Column: "status", Width: 120, Offset: -305, EnableSort: false }
+                    )*/
+                    Table(
+                        { Index: 1, Text: ProcessDesignerLoc.verContainerTableHeaderVersion, Column: "cat_version", Width: 60, Offset: 0, EnableSort: false },    
+                        { Index: 2, Text: ProcessDesignerLoc.verContainerTableHeaderCreatedBy, Column: "Createdby", Width: 250, Offset: -150, EnableSort: false },
+                        { Index: 3, Text: ProcessDesignerLoc.verContainerTableHeaderCreatedOn, Column: "Createdon", Width: 250, Offset: -150, EnableSort: true },
+                        { Index: 4, Text: ProcessDesignerLoc.verContainerTableHeaderPublishingStatus, Column: "cat_publishingstatus", Width: 120, Offset: -202, EnableSort: false },
+                        { Index: 5, Text: ProcessDesignerLoc.verContainerTableHeaderActivationStatus, Column: "status", Width: 120, Offset: -305, EnableSort: false }
                     )
                 EnableSort: =false
                 Width: =Parent.Width - 50
@@ -6034,7 +6319,9 @@
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
                 Size: =10
-                Text: ="No published version found."
+                Text: |-
+                    =//"No published version found."
+                    ProcessDesignerLoc.verContainerLblNoPublishVersion
                 Visible: =!galProcessVersion_2.Visible
                 Width: =Parent.Width - Self.X
                 X: =galProcessVersion_2.X
@@ -6086,12 +6373,17 @@
                 Font: =Font.'Segoe UI'
                 FontWeight: =FontWeight.Semibold
                 Height: |-
-                    =If(panelHeaderText = "Publish",40,0)
+                    =
+                    If(panelHeaderText = ProcessDesignerLoc.PublishTxt,40,0)
                     //40
                 PaddingLeft: =12
                 Size: =10
-                Text: ="This process may take up to 1 minute to complete."
-                Visible: =If(panelHeaderText = "Publish",true,false)
+                Text: |-
+                    =//"This process may take up to 1 minute to complete."
+                    ProcessDesignerLoc.verContainerPublishText
+                Visible: |-
+                    =//If(panelHeaderText = "Publish",true,false)
+                    If(panelHeaderText = ProcessDesignerLoc.PublishTxt,true,false)
                 Width: =Parent.Width
                 Y: =CommandBar2_15.Height
                 ZIndex: =8
@@ -6121,7 +6413,9 @@
                 Height: =30
                 PaddingLeft: =0
                 Size: =10
-                Text: ="Variables (Application Data)"
+                Text: |-
+                    =//"Variables (Application Data)"
+                    ProcessDesignerLoc.varContainerLblAppDataHeaderText
                 Width: =Parent.Width - Self.X - 20
                 Wrap: =false
                 X: =30
@@ -6140,7 +6434,9 @@
                 Height: =If(Self.Visible, 30, 0)
                 PaddingLeft: =0
                 Size: =10
-                Text: ="Click 'Save' to save the new process before adding Variables(Application Data definitions)."
+                Text: |-
+                    =//"Click 'Save' to save the new process before adding Variables(Application Data definitions)."
+                    ProcessDesignerLoc.varContainerLblProcessNotSavedText
                 Visible: =IsBlank(_selectedProcess)
                 Width: =lblAppDataHeader_3.Width
                 Wrap: =false
@@ -6160,7 +6456,9 @@
                 Height: =30
                 PaddingLeft: =0
                 Size: =10
-                Text: ="Define input data from consuming application that will be used for approval conditions."
+                Text: |-
+                    =//"Define input data from consuming application that will be used for approval conditions."
+                    ProcessDesignerLoc.varContainerLblAppDataDescriptionText
                 Width: =lblAppDataHeader_3.Width
                 Wrap: =false
                 X: =lblProcessNotSaved_2.X
@@ -6168,13 +6466,21 @@
                 ZIndex: =3
 
             TableHeader_8 As TableHeader_7:
-                ColumnOnClick: ="Text"
+                ColumnOnClick: |-
+                    =//"Text"
+                    const.Text
                 Columns: |-
-                    =Table(
+                    =/*Table(
                         { Index: 1, Text: "Field Name", Column: "cat_name", Width: 250, Offset: 0, EnableSort: true },    
                         { Index: 2, Text: "Data Type", Column: "cat_datatype", Width: 180, Offset: 0, EnableSort: true },
                         { Index: 3, Text: "Default Value", Column: "cat_defaultvalue", Width: 180, Offset: -70, EnableSort: false },
                         { Index: 3, Text: "Description", Column: "cat_description", Width: 250, Offset: -140, EnableSort: false }
+                    )*/
+                    Table(
+                        { Index: 1, Text: ProcessDesignerLoc.varContainerTblHeaderFieldName, Column: "cat_name", Width: 250, Offset: 0, EnableSort: true },    
+                        { Index: 2, Text: ProcessDesignerLoc.varContainerTblHeaderDataType, Column: "cat_datatype", Width: 180, Offset: 0, EnableSort: true },
+                        { Index: 3, Text: ProcessDesignerLoc.varContainerTblHeaderDefaultValue, Column: "cat_defaultvalue", Width: 180, Offset: -70, EnableSort: false },
+                        { Index: 3, Text: ProcessDesignerLoc.varContainerTblHeaderDescription, Column: "cat_description", Width: 250, Offset: -140, EnableSort: false }
                     )
                 Width: =Max(Parent.Width - Self.X - 30, 920)
                 X: =lblAppDataHeader_3.X
@@ -6259,7 +6565,9 @@
                 ZIndex: =7
 
                 Value1_4 As pcfDataField.textualColumn:
-                    FieldDisplayName: ="Value"
+                    FieldDisplayName: |-
+                        =//"Value"
+                        const.Value
                     FieldName: ="Value"
                     FieldType: ="l"
                     FieldVariantName: ="textualColumn"
@@ -6276,7 +6584,7 @@
                 DisplayMode: =txtAppDataName_2.DisplayMode
                 FocusedBorderThickness: =1
                 Font: =Font.'Segoe UI'
-                Format: =If(ddlDataType_2.Selected.Value = 'Business Approval Data Type'.Number, TextFormat.Number, TextFormat.Text)
+                Format: =If(ddlDataType_3.Selected.Value = 'Business Approval Data Type'.Number, TextFormat.Number, TextFormat.Text)
                 Height: =30
                 HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
                 HoverColor: =RGBA(51, 51, 51, 1)
@@ -6300,7 +6608,9 @@
                 BorderThickness: =1
                 CalendarHeaderFill: =ColorFade(RGBA(105, 121, 126, 1), -30%)
                 Color: =RGBA(51, 51, 51, 1)
-                DefaultDate: =If(isDefaultDataClear, Blank(), varAppDataItem.'Default Value')
+                DefaultDate: |-
+                    =//If(isDefaultDataClear, Blank(), varAppDataItem.'Default Value')
+                    If(isDefaultDataClear, Blank(), If(varAppDataItem.'Data Type' = 'Business Approval Data Type'.Date,varAppDataItem.'Default Value',Blank()))
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -6325,7 +6635,9 @@
                 Height: =32
                 IconFill: =ColorValue(AppTheme.palette.themePrimary)
                 TextColor: =
-                Value: =If(isDefaultDataClear, Blank(), varAppDataItem.'Default Value')
+                Value: |-
+                    =//If(isDefaultDataClear, Blank(), varAppDataItem.'Default Value')
+                    If(isDefaultDataClear, Blank(), If(varAppDataItem.'Data Type' = 'Business Approval Data Type'.Date,varAppDataItem.'Default Value',Blank()))
                 Visible: =ddlDataType_3.Selected.Value = 'Business Approval Data Type'.Date
                 Width: =178
                 X: =466
@@ -6353,7 +6665,21 @@
                 HoverBorderColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
                 HoverColor: =RGBA(51, 51, 51, 1)
                 HoverFill: =RGBA(212, 212, 212, 1)
-                Items: =[ "", "True", "False" ]
+                Items: |
+                    =//[ "", "True", "False"]
+                    //[ "", ProcessDesignerLoc.True, ProcessDesignerLoc.False]
+                    Table(
+                       {
+                            ItemKey: "True",
+                            ItemDisplayName: ProcessDesignerLoc.True
+                            //ItemIconName: "Edit"
+                        },
+                        {
+                            ItemKey: "False",
+                            ItemDisplayName: ProcessDesignerLoc.False
+                            //ItemIconName: "Delete"
+                        }
+                    )
                 PaddingBottom: =5
                 PaddingLeft: =12
                 PaddingRight: =5
@@ -6363,7 +6689,9 @@
                 PressedFill: =RGBA(105, 121, 126, 1)
                 SelectionFill: =RGBA(105, 121, 126, 1)
                 Size: =10
-                Visible: =ddlDataType_2.Selected.Value = 'Business Approval Data Type'.Boolean
+                Visible: |-
+                    =//ddlDataType_2.Selected.Value = 'Business Approval Data Type'.Boolean
+                    ddlDataType_3.Selected.Value = 'Business Approval Data Type'.Boolean
                 Width: =txtAppDataDefault_2.Width
                 X: =txtAppDataDefault_2.X
                 Y: =txtAppDataDefault_2.Y
@@ -6390,7 +6718,9 @@
                 PressedBorderColor: =RGBA(0, 0, 0, 0)
                 PressedColor: =ColorFade(RGBA(105, 121, 126, 1), -30%)
                 PressedFill: =RGBA(0, 0, 0, 0)
-                Tooltip: ="Clear default"
+                Tooltip: |-
+                    =//"Clear default"
+                    ProcessDesignerLoc.varContIcoClearDefaultTooltip
                 Visible: =dtAppDataDefault_2.Visible && !IsBlank(varAppDataItem)
                 Width: =Self.Height
                 X: =txtAppDataDefault_2.X + txtAppDataDefault_2.Width - Self.Width
@@ -6447,7 +6777,9 @@
                 PressedBorderColor: =
                 PressedFillColor: =
                 PressedTextColor: =
-                Text: ="Cancel"
+                Text: |-
+                    =//"Cancel"
+                    ProcessDesignerLoc.varContainerCancelEditVarText
                 TextColor: =
                 Visible: =!IsBlank(varAppDataItem)
                 Width: =80
@@ -6478,7 +6810,7 @@
                             Name: txtAppDataName_2.Text, 'Data Type': ddlDataType_2.Selected.Value, 
                             'Default Value': 
                                 Switch(ddlDataType_2.Selected.Value,
-                                    'Business Approval Data Type'.Boolean, ddlAppDataDefault_2.Selected.Value,
+                                    'Business Approval Data Type'.Boolean, ddlAppDataDefault_2.Selected.ItemKey,
                                     'Business Approval Data Type'.Date, Text(dtAppDataDefault_3.Value, "dd mmm yyyy"), 
                                     txtAppDataDefault_2.Text
                                 ), 
@@ -6497,7 +6829,9 @@
                 RadiusTopLeft: =0
                 RadiusTopRight: =0
                 Size: =10
-                Text: =If(IsBlank(varAppDataItem), "+ Add", "Update")
+                Text: |-
+                    =//If(IsBlank(varAppDataItem), "+ Add", "Update")
+                    If(IsBlank(varAppDataItem), ProcessDesignerLoc.varContainerBtnSaveAppDataAddText, ProcessDesignerLoc.varContainerBtnSaveAppDataUpdateText)
                 Visible: =false
                 Width: =80
                 X: =txtAppDataDesc_2.X + txtAppDataDesc_2.Width + 8
@@ -6528,8 +6862,12 @@
                 RadiusTopLeft: =0
                 RadiusTopRight: =0
                 Size: =10
-                Text: ="Cancel"
-                Tooltip: ="Cancel update"
+                Text: |-
+                    =//"Cancel"
+                    ProcessDesignerLoc.varContainerCancelEditVarText
+                Tooltip: |-
+                    =//"Cancel update"
+                    ProcessDesignerLoc.varContBtnCancelEditTooltip
                 Visible: =false
                 Width: =80
                 X: =btnSaveAppData_2.X + btnSaveAppData_2.Width + 8
@@ -6555,7 +6893,8 @@
                 OnChange: =false
                 OnSelect: |
                     =If(
-                        variableExist, Notify(txtAppDataName_2.Text & " variable already exist. Please select another name.",NotificationType.Error),
+                        //variable already exist. Please select another name.
+                        variableExist, Notify(txtAppDataName_2.Text & " " & ProcessDesignerLoc.varContainerSaveAppDataVariableExistsText,NotificationType.Error),
                         Patch(
                             'Business Approval Data',
                             If(
@@ -6569,11 +6908,11 @@
                                 'Default Value': Switch(
                                     ddlDataType_3.Selected.Value,
                                     'Business Approval Data Type'.Boolean,
-                                    ddlAppDataDefault_2.Selected.Value,
+                                    ddlAppDataDefault_2.Selected.ItemDisplayName,
                                     'Business Approval Data Type'.Date,
                                     Text(
                                         dtAppDataDefault_3.Value,
-                                        "dd mmm yyyy"
+                                       ProcessDesignerLoc.varContBtnSaveAppDataDateFormat//dd mmm yyyy
                                     ),
                                     txtAppDataDefault_2.Text
                                 ),
@@ -6590,14 +6929,19 @@
                         Reset(txtAppDataName_2);
                         Reset(ddlDataType_3);
                         Reset(txtAppDataDefault_2);
-                        Reset(txtAppDataDesc_2)
+                        Reset(txtAppDataDesc_2);
+                        Reset(ddlAppDataDefault_2);
                     );
                 PressedBorderColor: =
                 PressedFillColor: =
                 PressedTextColor: =
-                Text: =If(IsBlank(varAppDataItem), "+ Add", "Update")
+                Text: |-
+                    =//If(IsBlank(varAppDataItem), "+ Add", "Update")
+                    If(IsBlank(varAppDataItem), ProcessDesignerLoc.varContainerBtnSaveAppDataAddText, ProcessDesignerLoc.varContainerBtnSaveAppDataUpdateText)
                 TextColor: =
-                Tooltip: =If(Self.DisplayMode = DisplayMode.Disabled,"Enter the Field Name and Date Type")
+                Tooltip: |-
+                    =//If(Self.DisplayMode = DisplayMode.Disabled,"Enter the Field Name and Date Type")
+                    If(Self.DisplayMode = DisplayMode.Disabled,ProcessDesignerLoc.varContainerBtnSaveAppDataTooltip)
                 Visible: =true
                 Width: =80
                 X: =txtAppDataDesc_2.X + txtAppDataDesc_2.Width + 8
@@ -6731,7 +7075,7 @@
                     Icon: =Icon.Trash
                     OnSelect: |-
                         =Reset(ConfirmDialog_7);
-                        UpdateContext({ busyMessage: "Checking dependencies..."});
+                        UpdateContext({ busyMessage: ProcessDesignerLoc.varContainerAppDataDeleteBusyMessage});//Checking dependencies...
                         Set(_isBusy, true);
                         Concurrent(
                             ClearCollect(_stDeps,
@@ -6752,7 +7096,8 @@
                                 //confirm deletion
                                 UpdateContext({ 
                                     varAppDataItem: ThisItem, confirmMode: "DeleteAppData",
-                                    confirmMessage: "This will delete Application Data field '" & ThisItem.Name & "'. Are you sure?" 
+                                    //This will delete Application Data field 
+                                    confirmMessage: ProcessDesignerLoc.varContainerDeleteVariableTextPrefix & " " & ThisItem.Name & " " &ProcessDesignerLoc.varContainerDeleteVariableTextPostfix 
                                 }),
                         
                                 //show dependencies    
@@ -6764,9 +7109,10 @@
                                 );    
                                 UpdateContext({ 
                                     confirmMode: "AckDeps",
-                                    confirmMessage: "This field cannot be deleted because of the following dependencies: " & Char(10) &
-                                        If(!IsEmpty(_stDeps), Char(10) & "Stages: " & Concat(_stDeps, cat_name, ", ")) &
-                                        If(!IsEmpty(_ndDeps), Char(10) & "Nodes: " & Concat(_ndDeps, cat_name, ", "))
+                                    //This field cannot be deleted because of the following dependencies: 
+                                    confirmMessage: ProcessDesignerLoc.varContainerAppDataDeleteDependancyError & " " & Char(10) &
+                                        If(!IsEmpty(_stDeps), Char(10) & ProcessDesignerLoc.varContainerAppDataDeleteDependentStage & " " & Concat(_stDeps, cat_name, ", ")) &
+                                        If(!IsEmpty(_ndDeps), Char(10) & ProcessDesignerLoc.varContainerAppDataDeleteDependentNode & " " & Concat(_ndDeps, cat_name, ", "))
                                 })
                             )
                         );
@@ -6791,7 +7137,9 @@
                     OnChange: |-
                         =UpdateContext({ varAppDataItem: ThisItem })
                     Theme: =AppThemeJson
-                    Tooltip: ="Edit " &ThisItem.Name
+                    Tooltip: |-
+                        =//"Edit " &ThisItem.Name
+                        ProcessDesignerLoc.varContainerEditIconTooltipText & " " & ThisItem.Name
                     Width: =32
                     X: =879
                     Y: =0
@@ -6803,9 +7151,10 @@
                     IconName: ="Delete"
                     OnChange: |-
                         =Reset(ConfirmDialog_7);
-                        Set(confirmAction,"deleteAppData");
-                        UpdateContext({ busyMessage: "Checking dependencies..."});
-                        UpdateContext({confirmMode:"DeleteAppData"});
+                        Set(confirmAction,const.DeleteAppDataCmlCase);//deleteAppData
+                        //"Checking dependencies..."
+                        UpdateContext({ busyMessage: ProcessDesignerLoc.varContainerAppDataDeleteBusyMessage});
+                        UpdateContext({confirmMode:const.DeleteAppDataPsclCase});//DeleteAppData
                         Set(_isBusy, true);
                         Concurrent(
                             ClearCollect(_stDeps,
@@ -6825,8 +7174,9 @@
                             If(countSt + countNd + countCd = 0,
                                 //confirm deletion
                                 UpdateContext({ 
-                                    varAppDataItem: ThisItem, confirmAction: "DeleteAppData",
-                                    confirmMessage: "This will delete Application Data field '" & ThisItem.Name & "'. Are you sure?" 
+                                    varAppDataItem: ThisItem, confirmAction: const.DeleteAppDataPsclCase,//DeleteAppData
+                                    //"This will delete Application Data field & " " & ThisItem.Name & ". Are you sure?"
+                                    confirmMessage: ProcessDesignerLoc.varContainerDeleteVariableTextPrefix & " " & ThisItem.Name & ProcessDesignerLoc.varContainerDeleteVariableTextPostfix
                                 }),
                         
                                 //show dependencies    
@@ -6837,17 +7187,20 @@
                                     )
                                 );    
                                 UpdateContext({ 
-                                    confirmAction: "AckDeps",
-                                    confirmMessage: "This field cannot be deleted because of the following dependencies: " & Char(10) &
-                                        If(!IsEmpty(_stDeps), Char(10) & "Stages: " & Concat(_stDeps, cat_name, ", ")) &
-                                        If(!IsEmpty(_ndDeps), Char(10) & "Nodes: " & Concat(_ndDeps, cat_name, ", "))
+                                    confirmAction: const.AckDeps,//AckDeps
+                                    //This field cannot be deleted because of the following dependencies: 
+                                    confirmMessage: ProcessDesignerLoc.varContainerAppDataDeleteDependancyError & " " & Char(10) &
+                                        If(!IsEmpty(_stDeps), Char(10) & ProcessDesignerLoc.varContainerAppDataDeleteDependentStage & " " & Concat(_stDeps, cat_name, const.Comma)) &
+                                        If(!IsEmpty(_ndDeps), Char(10) & ProcessDesignerLoc.varContainerAppDataDeleteDependentNode & " " & Concat(_ndDeps, cat_name, const.Comma))
                                 })
                             )
                         );
                         Set(_isBusy, false); 
                         Set(_showConfirm, true)
                     Theme: =AppThemeJson
-                    Tooltip: ="Delete " &ThisItem.Name
+                    Tooltip: |-
+                        =//"Delete" & " " &ThisItem.Name
+                        ProcessDesignerLoc.varContainerDeleteIconToolttipText &" " &ThisItem.Name
                     Width: =32
                     X: =920
                     Y: =0
@@ -6869,15 +7222,16 @@
                     =If(IsConfirmed,
                         Switch(confirmMode,
                             "Deactivate",
-                                UpdateContext({ busyMessage: "Deactivating process " & _selectedProcess.Name });
+                            //Deactivating process
+                                UpdateContext({ busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteDeactivateProcess & " " & _selectedProcess.Name });
                                 Set(_isBusy, true);
                                 Patch('Business Approval Processes', _selectedProcess, { Status: 'Status (Business Approval Processes)'.Inactive });   
                                 Set(_selectedProcess, Blank()); 
                                 Set(_isBusy, false);
                                 Navigate('Business Approval Processes (Views)'.'Active Business Approval Processes'),
                     
-                            "DeleteAppData",
-                                UpdateContext({ busyMessage: "Deleting app data field " & varAppDataItem.Name });
+                            "DeleteAppData",//Deleting app data field
+                                UpdateContext({ busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteAppDataMsg & " " & varAppDataItem.Name });
                                 Set(_isBusy, true);
                                 Remove('Business Approval Data', varAppDataItem);
                                 UpdateContext({ varAppDataItem: Blank() });
@@ -6901,8 +7255,9 @@
                 IsConfirmed,
                 Switch(
                     confirmActionDelete,
-                    "Deactivate",
-                    UpdateContext({busyMessage: "Deactivating process " & _selectedProcess.Name});
+                    const.Deactivate,//Deactivate
+                    //Deactivating process
+                    UpdateContext({busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteDeactivateProcess & " " & _selectedProcess.Name});//Deactivating process
                     Set(
                         isBusy,
                         true
@@ -6921,8 +7276,9 @@
                         false
                     );
                     Navigate('Business Approval Processes (Views)'.'Active Business Approval Processes'),
-                    "DeleteAppData",
-                    UpdateContext({busyMessage: "Deleting app data field " & varAppDataItem.Name});
+                    const.DeleteAppDataPsclCase,//DeleteAppData
+                    //Deleting app data field
+                    UpdateContext({busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteAppDataMsg & " " & varAppDataItem.Name});
                     Set(
                         isBusy,
                         true
@@ -6936,12 +7292,12 @@
                         isBusy,
                         false
                     ),
-                    "AckDeps",
+                    const.AckDeps,//AckDeps
                         //clear all placeholder collections
                     Clear(_stDeps);
                     Clear(_ndDeps),
-                    "delete",
-                    UpdateContext({busyMessage: "Deleting Stage - " & _selectedStage.Name});
+                    const.Delete,//delete
+                    UpdateContext({busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteStgMsg & " " & _selectedStage.Name});
                     Set(
                         isBusy,
                         true
@@ -6995,7 +7351,7 @@
                         );
                         Set(
                             varRefreshDesigner,
-                            "Refresh" & Rand()
+                            Proper(const.Refresh) & Rand() //"Refresh"
                         )
                     );
                 ),
@@ -7012,8 +7368,8 @@
         ConfirmText: =confirmMessageNodeDelete
         Height: =Parent.Height
         OnClick: |-
-            =If(IsConfirmed,
-                UpdateContext({ busyMessage: "Deleting node - " & _selectedNode.Name });
+            =If(IsConfirmed,//Deleting node - 
+                UpdateContext({ busyMessage: ProcessDesignerLoc.cnfrmDialogNodeBusyMsg & " " & _selectedNode.Name });
                 Set(isBusy, true);
                 Concurrent(
                     //update other nodes after this node on the same path to move up by 1 position
@@ -7037,7 +7393,7 @@
                             isPanelVisible: false
                         }
                     );
-                Set(varRefreshDesigner,"Refresh"&Rand()));
+                Set(varRefreshDesigner,Proper(const.Refresh) & Rand()));//Refresh
                 Set(_selectedNode, Blank());
                 Set(isBusy, false);
                 Set(_showConfirmNode, false),
@@ -7053,22 +7409,24 @@
         OnClick: |-
             =If(IsConfirmed,
                 Switch(confirmMode,
-                    "Deactivate",
-                        UpdateContext({ busyMessage: "Deactivating process " & _selectedProcess.Name });
+                    const.Deactivate,//Deactivate
+                        //Deactivating process
+                        UpdateContext({ busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteDeactivateProcess & " " & _selectedProcess.Name });
                         Set(_isBusy, true);
                         Patch('Business Approval Processes', _selectedProcess, { Status: 'Status (Business Approval Processes)'.Inactive });   
                         Set(_selectedProcess, Blank()); 
                         Set(_isBusy, false);
                         Navigate('Business Approval Processes (Views)'.'Active Business Approval Processes'),
             
-                    "DeleteAppData",
-                        UpdateContext({ busyMessage: "Deleting app data field " & varAppDataItem.Name });
+                    const.DeleteAppDataPsclCase,//DeleteAppData
+                    //Deleting app data field
+                        UpdateContext({ busyMessage: ProcessDesignerLoc.cnfrmDialogDeleteAppDataMsg & " " & varAppDataItem.Name });
                         Set(_isBusy, true);
                         Remove('Business Approval Data', varAppDataItem);
                         UpdateContext({ varAppDataItem: Blank() });
                         Set(_isBusy, false),
                     
-                    "AckDeps",
+                    const.AckDeps,//AckDeps
                         //clear all placeholder collections
                         Clear(_stDeps);Clear(_ndDeps)
                 )
