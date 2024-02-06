@@ -94,11 +94,12 @@
       "useexperimentalsqlconnector": true,
       "useguiddatatypes": true,
       "usenonblockingonstartrule": false,
+      "userdefinedfunctions": false,
       "webbarcodescanner": false,
       "zeroalltabindexes": true
     },
     "Author": "",
-    "BindingErrorCount": 22,
+    "BindingErrorCount": 0,
     "ContainsThirdPartyPcfControls": true,
     "DefaultConnectedDataSourceMaxGetRowsCount": 500,
     "DocumentAppType": "DesktopOrTablet",
@@ -116,7 +117,7 @@
     "ManualOfflineProfileId": "",
     "Name": "Process Designer",
     "OriginatingVersion": "1.327",
-    "ParserErrorCount": 0,
+    "ParserErrorCount": 1,
     "ShowStatusBar": false
   },
   "PublishInfo": {

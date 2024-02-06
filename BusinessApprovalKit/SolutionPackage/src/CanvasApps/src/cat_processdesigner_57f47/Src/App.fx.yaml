@@ -1,6 +1,30 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |
+    Formulas: |-
+        =const = {
+            Delete: "delete",
+            Save: "save",
+            Refresh: "refresh",
+            Variables: "variables",
+            Versions: "versions",
+            Publish: "publish",
+            Deactivate:"Deactivate",
+            DeleteAppDataCmlCase: "deleteAppData",
+            DeleteAppDataPsclCase: "DeleteAppData",
+            AckDeps: "AckDeps",
+            Comma: ", ",
+            None:"None",
+            Text:"Text",
+            CreatedOn:"Created On",
+            DataType:"Data Type",
+            Name:"Name",
+            Value:"Value",
+            AtSymbol:"@",
+            Start:"Start",
+            Path:"Path "
+            
+        };
+    OnStart: |+
         =Concurrent(
             Set(
                 isBusy,
@@ -52,6 +76,7 @@ App As appinfo:
                 JSONFormat.IndentFour
             )
         );
+        
     StartScreen: =scrWorkflowDesignerScreen
     Theme: =PowerAppsTheme
 

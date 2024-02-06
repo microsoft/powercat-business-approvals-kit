@@ -81,10 +81,10 @@
                 string runtimeId = "";
                 foreach (var _object in _property)
                 {
-                    if(_object["title"].ToString() != "Additional Information")
+                    if (_object["title"].ToString() != "Additional Information")
                     {
                         _object["x-ms-visibility"] = "important";
-                        runtimeId = _object["title"].ToString();
+                        runtimeId = _object["title"].ToString() != "External Reference" ? _object["title"].ToString() : "externalreference";
                         //_object["id"] = _property.Name;
                     }
                     else
@@ -97,7 +97,7 @@
                 }
 
                 customizedProperties.Add(new JProperty(runtimeId, _property.Value));
-                if(runtimeId != "additionalinformation")
+                if (runtimeId != "additionalinformation" && runtimeId != "externalreference")
                 {
                     requiredFieldsList.Add(runtimeId);
                 }

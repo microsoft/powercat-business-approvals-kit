@@ -70,13 +70,16 @@ ApprovalDesigner As CanvasComponent:
         AccessibleLabel: ="Process stages"
         BorderColor: =RGBA(166, 166, 166, 1)
         DelayItemLoading: =false//true
-        Height: =ApprovalDesigner.AssignedHeight //galStageNodes.Height * Self.AllItemsCount + galStageConditions_1.Height* Self.AllItemsCount + Self.TemplatePadding + 50
+        Height: |-
+            =//755
+            ApprovalDesigner.AssignedHeight
+             //galStageNodes.Height * Self.AllItemsCount + galStageConditions_1.Height* Self.AllItemsCount + Self.TemplatePadding + 50
         Items: |-
             =Filter(
                 Filter('Business Approval Stages', 'Business Approval Stages (Views)'.'Active Business Approval Stages'),
                 Process.'Business Approval Process' = GUID(Parent.ProcessId)
             )
-            //"56c54a79-9682-ee11-8179-0022482a91f4"
+            //"31765dd4-56bb-ee11-a568-000d3a4e5673"
             //Parent.ProcessId
         Layout: =Layout.Vertical
         LoadingSpinner: =LoadingSpinner.Data
@@ -722,7 +725,9 @@ ApprovalDesigner As CanvasComponent:
                 RadiusTopRight: =20
                 Size: =12
                 Text: ="+"
-                Tooltip: ="Add Node"
+                Tooltip: |-
+                    =//"Add Node"
+                    ProcessDesignerLoc.cnvsCompAddNode
                 Visible: =conNodeBoxPath1.Visible
                 Width: =20
                 X: =conNodeBoxPath1.X + conNodeBoxPath1.Width / 2 - Self.Width / 2
@@ -941,7 +946,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 5)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
-                            node.Name, "If " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
+                            node.Name, ProcessDesignerLoc.cnvsComLblStgCondnTxt & " " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
                         )
                     )
                 Tooltip: =Self.Text
@@ -967,7 +972,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 4)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
-                            node.Name, "If " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
+                            node.Name, ProcessDesignerLoc.cnvsComLblStgCondnTxt & " " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
                         )
                     )
                 Tooltip: =Self.Text
@@ -993,7 +998,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 3)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
-                            node.Name, "If " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
+                            node.Name, ProcessDesignerLoc.cnvsComLblStgCondnTxt & " " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
                         )
                     )
                 Tooltip: =Self.Text
@@ -1019,7 +1024,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 2)},
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
-                            node.Name, "If " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
+                            node.Name, ProcessDesignerLoc.cnvsComLblStgCondnTxt & " " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
                         )
                     )
                 Tooltip: =Self.Text
@@ -1045,7 +1050,7 @@ ApprovalDesigner As CanvasComponent:
                 Text: |-
                     =With({ node: LookUp(ThisItem.Nodes, 'Path Index' = 1)},   
                         If(node.'Node Condition' = 'Business Approval Stage Condition'.None, 
-                            node.Name, "If " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
+                            node.Name, ProcessDesignerLoc.cnvsComLblStgCondnTxt & " " & Coalesce(node.'Source Data Name Value', node.'Source Data Type') & " " & node.Operand
                         )
                     )
                 Tooltip: =Self.Text
@@ -1910,12 +1915,13 @@ ApprovalDesigner As CanvasComponent:
                     PaddingTop: =0
                     Size: =8
                     Text: |-
-                        =If(ThisItem.StageSelection.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else', "TRUE",
+                        =If(ThisItem.StageSelection.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else', ProcessDesignerLoc.cnvsCompTrue,
                             If(ThisItem.'Condition Data Type' = 'Business Approval Condition Target Data'.'Request Data',
                                 ThisItem.'Condition Data'.Name, 
                                 ThisItem.'Condition Value Display'
                             )
                         )
+                        //"TRUE"
                     Tooltip: =Self.Text
                     Width: =Parent.Width
                     X: =
@@ -1934,9 +1940,10 @@ ApprovalDesigner As CanvasComponent:
                 Tooltip: |-
                     =If(
                         ThisItem.StageSelection.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else',
-                        "Create node under " & ThisItem.'Stage Name Value' &" for true condition",
-                        "Create node under " & ThisItem.'Stage Name Value' &" for "& ThisItem.'Condition Value Display'
+                        ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT1 & " " & ThisItem.'Stage Name Value' & " " & ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT2,
+                        ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT1 & " " & ThisItem.'Stage Name Value' &" " & ProcessDesignerLoc.cnvsCompIcoFirstTrueNodeTooltipT3 & " " & ThisItem.'Condition Value Display'
                     )
+                    //T-1Create node under, T2- for true condition T3- For
                 Width: =25
                 X: =Parent.TemplateWidth / 2 - Self.Width / 2
                 Y: =conConditionLabel.Y + conConditionLabel.Height
@@ -2039,7 +2046,9 @@ ApprovalDesigner As CanvasComponent:
                     Height: =28
                     PaddingTop: =0
                     Size: =9
-                    Text: ="FALSE"
+                    Text: |-
+                        =//"FALSE"
+                        ProcessDesignerLoc.cnvsCompLblFalse
                     Tooltip: =Self.Text
                     Width: =Parent.Width
                     Y: =5
@@ -2054,7 +2063,7 @@ ApprovalDesigner As CanvasComponent:
                 OnChange: =ApprovalDesigner.AddNode(2, 1, ThisItem.Order, ThisItem.'Business Approval Stage')
                 TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                 Theme: =AppThemeJson
-                Tooltip: ="Create node under " & ThisItem.Name & " for false condition"
+                Tooltip: =ProcessDesignerLoc.cnvsCompIcoFirstFalseNodeTooltipT1 & " " & ThisItem.Name & " " & ProcessDesignerLoc.cnvsCompIcoFirstFalseNodeTooltipT2
                 Width: =25
                 X: =Parent.Width / 2 - Self.Width / 2
                 Y: =conConditionLabelFalse.Y + conConditionLabelFalse.Height + 3
@@ -2191,7 +2200,9 @@ ApprovalDesigner As CanvasComponent:
             Height: =If(Self.Visible, 30, 0)
             OnSelect: =Select(Parent)
             Size: =9
-            Text: ="No node configured for this stage. Click '+' to add first node."
+            Text: |-
+                =//"No node configured for this stage. Click '+' to add first node."
+                ProcessDesignerLoc.cnvsCompLblNoNodeInStg
             Visible: =btnAddFirstNode_1.Visible
             Width: =Parent.TemplateWidth
             X: =btnAddFirstNode_1.X + btnAddFirstNode_1.Width / 2 - Self.Width / 2
@@ -2212,7 +2223,7 @@ ApprovalDesigner As CanvasComponent:
             OnSelect: =Select(Parent)
             Size: =8
             Text: |-
-                ="If " & If(ThisItem.'Source Data Type' = 'Business Approval Condition Source Data'.'Request Data', 
+                =ProcessDesignerLoc.cnvsComLblStgCondnTxt & " " & If(ThisItem.'Source Data Type' = 'Business Approval Condition Source Data'.'Request Data', 
                     ThisItem.'Source Data Name Value', ThisItem.'Source Data Type') & " " & ThisItem.Operand & 
                 If(ThisItem.'Stage Condition' = 'Business Approval Stage Condition'.'If/Else', " " & 
                     First(Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage')).'Condition Value Display'
@@ -2238,7 +2249,7 @@ ApprovalDesigner As CanvasComponent:
             PaddingLeft: =8
             Size: =10
             Text: |-
-                ="Stage: " & ThisItem.Name
+                =ProcessDesignerLoc.cnvsCompLblStage & ": " & ThisItem.Name
             Tooltip: =Self.Text
             Width: =icoMoveUp.X
             Wrap: =false
@@ -2249,24 +2260,46 @@ ApprovalDesigner As CanvasComponent:
             DisplayMode: =DisplayMode.Edit
             Height: =35
             Items: |-
-                =Table(
+                =/*Table(
                    {
                         ItemKey: "edit",
-                        ItemDisplayName: "Edit",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarEdit,//Edit
                         ItemIconName: "Edit"
                     },
                     {
                         ItemKey: "delete",
-                        ItemDisplayName: "Delete",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarDelete,//Delete
                         ItemIconName: "Delete"
                     },{
                         ItemKey: "up",
-                        ItemDisplayName: "Move Up",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarMoveUp,//Move Up
                         ItemIconName: "Up"
                     },{
                         ItemKey: "down",
-                        ItemDisplayName: "Move Down",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarMoveDown,//Move Down
                         ItemIconName: "Down"
+                    }
+                )*/
+                Table(
+                   {
+                        ItemKey: "edit",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarEdit,//Edit
+                        ItemIconName: "Edit"
+                    },
+                    {
+                        ItemKey: "delete",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarDelete,//Delete
+                        ItemIconName: "Delete"
+                    },{
+                        ItemKey: "up",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarMoveUp,//Move Up
+                        ItemIconName: "Up",
+                        ItemEnabled: ThisItem.Order>2
+                    },{
+                        ItemKey: "down",
+                        ItemDisplayName: ProcessDesignerLoc.cnvsCompStgCmdBarMoveDown,//Move Down
+                        ItemIconName: "Down",
+                        ItemEnabled: ThisItem.Order>1 && Parent.AllItemsCount <> ThisItem.Order
                     }
                 )
             OnChange: =
@@ -2320,7 +2353,9 @@ ApprovalDesigner As CanvasComponent:
         FontStrikethrough: =false
         FontUnderline: =true
         Height: =34
-        Text: ="Process Designer"
+        Text: |-
+            =//"Process Designer"
+            ProcessDesignerLoc.cnvsCompProcessDesingerTxt
         Weight: ='TextCanvas.Weight'.Semibold
         Width: =138
         Wrap: =true
@@ -2330,7 +2365,9 @@ ApprovalDesigner As CanvasComponent:
 
     "InfoButtonCanvas1 As 'Information button'":
         BasePaletteColor: =
-        Content: ="Please make use of refresh option, incase, approval conditions does not appear immediately aftering creating a stage with condition."
+        Content: |-
+            =//"Please make use of refresh option, incase, approval conditions does not appear immediately aftering creating a stage with condition."
+            ProcessDesignerLoc.cnvsCompInfoBtnContent
         DisplayMode: =DisplayMode.Edit
         Font: =""
         FontColor: =

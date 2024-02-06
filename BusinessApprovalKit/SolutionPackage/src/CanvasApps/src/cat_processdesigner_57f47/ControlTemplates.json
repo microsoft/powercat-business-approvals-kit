@@ -187,7 +187,7 @@
     "Name": "cat_PowerCAT.Panel",
     "OverridableProperties": {},
     "TemplateDisplayName": "Fluent Panel",
-    "Version": "0.0.8"
+    "Version": "0.0.9"
   },
   "Fluent PeoplePicker (1.0.22) Preview": {
     "CustomGroupControlTemplateName": "",
@@ -222,14 +222,64 @@
       "SelectedPeople": {
         "Type": {
           "EnumString": "",
-          "Kind": "Record",
+          "Kind": "Table",
           "Name": "Root",
-          "Type": []
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "PersonaImageAlt",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Image",
+              "Name": "PersonaImgUrl",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "PersonaKey",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "PersonaName",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "PersonaPresence",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "PersonaRole",
+              "Type": []
+            }
+          ]
         },
         "Version": "1.336"
       }
     },
-    "PCFDynamicSchemaForIRRetrieval": {},
+    "PCFDynamicSchemaForIRRetrieval": {
+      "AutoHeight": {
+        "DynamicSchema": "{\"type\":\"number\"}",
+        "PCFSkipValidation": false
+      },
+      "SearchText": {
+        "DynamicSchema": "{\"type\":\"string\"}",
+        "PCFSkipValidation": false
+      },
+      "SelectedPeople": {
+        "DynamicSchema": "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"PersonaKey\":{\"type\":\"string\"},\"PersonaName\":{\"type\":\"string\"},\"PersonaImgUrl\":{\"type\":\"string\",\"format\":\"uri\",\"x-ms-media-kind\":\"image\"},\"PersonaImageAlt\":{\"type\":\"string\"},\"PersonaRole\":{\"type\":\"string\"},\"PersonaPresence\":{\"type\":\"string\"}}}}",
+        "PCFSkipValidation": false
+      }
+    },
     "TemplateDisplayName": "Fluent PeoplePicker (1.0.22) Preview",
     "Version": "1.0.22"
   },
@@ -417,7 +467,7 @@
     "Name": "cat_PowerCAT.ProcessDesigner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Process Designer",
-    "Version": "1.0.42"
+    "Version": "1.0.44"
   },
   "Progress Bar": {
     "CustomGroupControlTemplateName": "",
@@ -432,7 +482,7 @@
     "Name": "PowerApps_CoreControls_Progress",
     "OverridableProperties": {},
     "TemplateDisplayName": "Progress Bar",
-    "Version": "1.1.16"
+    "Version": "1.1.17"
   },
   "radio": {
     "CustomGroupControlTemplateName": "",
@@ -489,7 +539,7 @@
     "Name": "PowerApps_CoreControls_Spinner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Spinner",
-    "Version": "1.0.27"
+    "Version": "1.0.28"
   },
   "text": {
     "CustomGroupControlTemplateName": "",
@@ -577,7 +627,7 @@
     "Name": "PowerApps_CoreControls_Toggle",
     "OverridableProperties": {},
     "TemplateDisplayName": "Toggle",
-    "Version": "1.0.21"
+    "Version": "1.0.22"
   },
   "toggleSwitch": {
     "CustomGroupControlTemplateName": "",

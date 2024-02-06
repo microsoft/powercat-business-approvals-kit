@@ -64,28 +64,34 @@ App As appinfo:
             JSON(AppTheme)
         );
         Set(
-            Title,
-            "Approvals Kit"
-        );
+            Title,   
+            //"Approvals Kit" 
+            HomePageLoc.approvalsKitTitle);
         Set(
-            Subtitle,
-            "Welcome to the approvals portal"
+            Subtitle,    
+            //"Welcome to the approvals portal"
+            HomePageLoc.approvalsKitSubTitle
         );
         Set(
             NewFeatures,
-            "Learn how to use the kit"
+            //"Learn how to use the kit"
+            HomePageLoc.newFeatures
         );
         Set(
             Experimental,
-            "Experimental"
+            //"Experimental"
+            HomePageLoc.experimental
         );
         Set(
             SubmittedWorkflowTitle,
-            "My Submitted workflows"
+            //"My Submitted workflows"
+            HomePageLoc.mySubmittedWorkflowText
+            
         );
         Set(
             ReceivedApprovalRequestTitle,
-            "Received approval requests"
+            //"Received approval requests"
+            HomePageLoc.receivedApprovalRequestText
         );
     StartScreen: =
     Theme: =PowerAppsTheme

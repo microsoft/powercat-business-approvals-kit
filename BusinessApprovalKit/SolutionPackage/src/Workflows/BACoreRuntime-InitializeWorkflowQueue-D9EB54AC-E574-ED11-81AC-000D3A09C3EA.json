@@ -178,6 +178,7 @@
               "entityName": "cat_businessapprovalworkflows",
               "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{outputs('Get_Business_Approval_version_record')?['body/cat_businessapprovalversionid']})",
               "item/cat_additionalinformation": "@variables('var_AdditionalInformation')",
+              "item/cat_externalreference": "@variables('var_ExternalReference')",
               "item/cat_requestedby": "@variables('var_RequestedBy')"
             },
             "authentication": "@parameters('$authentication')"
@@ -306,10 +307,40 @@
                 "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
               },
               "type": "If"
+            },
+            "Condition_4": {
+              "actions": {
+                "Set_variable_ExternalReference": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "769aaf5c-8811-4b1d-982a-538045753ddb"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "var_ExternalReference",
+                    "value": "@items('Apply_to_each_')['value']"
+                  }
+                }
+              },
+              "runAfter": {
+                "Condition_3": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "equals": [
+                  "@items('Apply_to_each_')['id']",
+                  "externalreference"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
+              },
+              "type": "If"
             }
           },
           "runAfter": {
-            "Initialize_variable_RequestedBy": [
+            "Initialize_variable_External_Reference": [
               "Succeeded"
             ]
           },
@@ -373,6 +404,25 @@
             "variables": [
               {
                 "name": "var_RequestedBy",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_External_Reference": {
+          "runAfter": {
+            "Initialize_variable_RequestedBy": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3ecffc39-5bb9-429b-ab1d-ff9572407228"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "var_ExternalReference",
                 "type": "string"
               }
             ]

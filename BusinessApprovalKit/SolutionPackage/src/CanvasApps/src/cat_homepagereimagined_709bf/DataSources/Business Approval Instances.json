@@ -42,6 +42,7 @@
       "cat_outcome": "Outcome",
       "cat_OverrideApprover": "Override Approver",
       "cat_ProcessVersion": "Process Version",
+      "cat_requestedby": "Requested By",
       "cat_Stage": "Stage",
       "cat_start": "Start",
       "cat_timeoutcounter": "Time-out Counter",
