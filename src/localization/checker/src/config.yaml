@@ -12,6 +12,7 @@ IgnoreProperties:
   - Image
   - FieldName
   - FieldType
+  - Column
 
 IgnoreValues:
   - SuggestionKey
