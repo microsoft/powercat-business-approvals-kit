@@ -28,6 +28,19 @@ To create a Microsoft Entra Application, follow these steps:
 6. Under "Redirect URI," select "Web" and enter the following URL: `https://global.consent.azure-apim.net/redirect` as a place holder. We will update this value later using information from the custom connector security tab.
 7. Select "Register" button to create your application.
 
+## App Registration Permissions
+
+To make sure your application has the necessary permissions
+
+1. Open the Microsoft Entra application registration you have created
+2. Select **API Permissions** from the left navigation
+3. Under API permission, select Add a permission and choose Dynamic CRM.
+4. Choose Delegated permission and select user_impersonation.
+5. Select Add Permissions.
+6. Follow [Grant Admin Consent](https://learn.microsoft.com/entra/identity/enterprise-apps/grant-admin-consent?pivots=portal) to grant administration consent to the application
+
+## Collect App Registration Information
+
 Once you've created your application, you'll need to gather a few pieces of information to use in your custom connector:
 
 1. Application (client) ID: This is the unique identifier for your application. You can find it on the "Overview" page of your application in the Azure portal.
@@ -63,32 +76,37 @@ The next step is to update and validate Approvals kit custom connector to use th
 
 4. Select the **Edit** menu item
 
-5. Under the Security tab, modify the following:
+5. Under the General tab, modify the following:
+
+   - Set the **Host**. This will be in the format yourenvironment.crm\[x\].dynamics.com
+
+6. Under the Security tab, modify the following:
 
    - Select Authentication type as OAuth 2.0.
-   - Enter the Client ID, Secret noted in previous section.
-   - Specify the environment URL under Resource URL section.
+   - Enter the Client ID from the Microsoft Entra App Registration overview section
+   - Enter the Secret rom the Microsoft Entra App Registration secret section
+   - Specify the environment URL under Resource URL section you obtained from the session details
    - Copy the Redirect URL
 
-6. Open the created Entra App Registration
+7. Open the created Entra App Registration
 
-7. Select Authentication
+8. Select Authentication
 
-8. In the Web Redirect URIs add the Redirect URL
+9. In the Web Redirect URIs add the Redirect URL
 
-9. Select Save to update the App Registration
+10. Select Save to update the App Registration
 
-10. Switch back to the custom connector.
+11. Switch back to the custom connector.
 
-11. Select Update connector.
+12. Select Update connector.
 
-12. Under the Test tab, create a New connection.
+13. Under the Test tab, create a New connection.
 
-13. Specify the account details for the connection and allow access if prompted.
+14. Specify the account details for the connection and allow access if prompted.
 
-14. Edit the Custom connector again and test the **GetPublishedWorkflow** operation.
+15. Edit the Custom connector again and test the **GetPublishedWorkflow** operation.
 
-15. The operation should run successfully with status as 200.
+16. The operation should run successfully with status as 200.
 
   > [!IMPORTANT]
   > Selecting the **GetPublishedWorkflow** action is an important step as it does not require any parameters. If you select other options without supplying parameters an error will be generated.
