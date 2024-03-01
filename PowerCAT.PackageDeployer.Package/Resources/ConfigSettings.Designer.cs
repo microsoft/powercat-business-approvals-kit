@@ -62,11 +62,36 @@ namespace PowerCAT.PackageDeployer.Package.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///  &quot;name&quot;: &quot;powercat-business-approvals-kit&quot;,
-        ///  &quot;description&quot;: &quot;powercat-business-approvals-kit&quot;,
+        ///  &quot;name&quot;: &quot;powercat-automation-kit&quot;,
+        ///  &quot;description&quot;: &quot;powercat-automation-kit&quot;,
         ///  &quot;solutions&quot;: [
         ///    {
+        ///      &quot;name&quot;: &quot;CreatorKitCore&quot;,
+        ///      &quot;importorder&quot;: &quot;1&quot;,
+        ///      &quot;publishworkflows-activate-plugins&quot;: &quot;true&quot;,
+        ///      &quot;overwrite-unmanaged-customizations&quot;: &quot;true&quot;,
+        ///      &quot;missing-dependency-behavior&quot;: &quot;skip&quot;,
+        ///      &quot;import-mode&quot;: &quot;async&quot;
+        ///    },
+        ///    {
         ///      &quot;name&quot;: &quot;AutomationCoEMain&quot;,
+        ///      &quot;importorder&quot;: &quot;2&quot;,
+        ///      &quot;publishworkflows-activate-plugins&quot;: &quot;true&quot;,
+        ///      &quot;overwrite-unmanaged-cus [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string powercat_automation_kit {
+            get {
+                return ResourceManager.GetString("powercat-automation-kit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;name&quot;: &quot;powercat-business-approvals-kit&quot;,
+        ///  &quot;description&quot;: &quot;powercat-business-approvals-kit&quot;,
+        ///  &quot;solutions&quot;: [  
+        ///    {
+        ///      &quot;name&quot;: &quot;BusinessApprovalKit&quot;,
         ///      &quot;importorder&quot;: &quot;1&quot;,
         ///      &quot;publishworkflows-activate-plugins&quot;: &quot;true&quot;,
         ///      &quot;overwrite-unmanaged-customizations&quot;: &quot;true&quot;,
@@ -78,8 +103,7 @@ namespace PowerCAT.PackageDeployer.Package.Resources {
         ///    {
         ///      &quot;settingname&quot;: &quot;iscustomcontrolsincanvasappsenabled&quot;,
         ///      &quot;value&quot;: &quot;true&quot;
-        ///    }
-        /// [rest of string was truncated]&quot;;.
+        ///    [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string powercat_business_approvals_kit {
             get {
