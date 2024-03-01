@@ -22,17 +22,17 @@ namespace PowerCAT.PackageDeployer.Package
         /// Name of the Import Package to Use
         /// </summary>
         /// <param name="plural">if true, return plural version</param>
-        public override string GetNameOfImport(bool plural) => "powercat-automation-kit";
+        public override string GetNameOfImport(bool plural) => "powercat-business-approvals-kit";
 
         /// <summary>
         /// Long name of the Import Package.
         /// </summary>
-        public override string GetLongNameOfImport => "PowerCATPackage";
+        public override string GetLongNameOfImport => "powercat-business-approvals-kit";
 
         /// <summary>
         /// Description of the package, used in the package selection UI
         /// </summary>
-        public override string GetImportPackageDescriptionText => "PowerCATPackage";
+        public override string GetImportPackageDescriptionText => "powercat-business-approvals-kit";
 
         #endregion
 
