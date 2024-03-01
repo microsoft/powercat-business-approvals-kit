@@ -105,3 +105,4 @@ steps:
     prepareAppSourcePackage: ${{parameters.PrepareAppSourcePackage}}
     preparePackageDeployerPackage: ${{parameters.PreparePackageDeployerPackage}}
     projectName: "powercat-business-approvals-kit"
+    packageConfigurationFilePath: "powercat-business-approvals-kit/PowerCAT.PackageDeployer.Package/PowerCAT.Package.Settings.json"
