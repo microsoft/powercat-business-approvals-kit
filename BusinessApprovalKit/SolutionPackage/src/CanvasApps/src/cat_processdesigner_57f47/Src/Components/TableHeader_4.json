@@ -27,7 +27,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 677,
+            "PublishOrderIndex": 678,
             "Rules": [
               {
                 "Category": "Design",
@@ -241,7 +241,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 678,
+            "PublishOrderIndex": 679,
             "Rules": [
               {
                 "Category": "Data",
@@ -600,7 +600,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 679,
+            "PublishOrderIndex": 680,
             "Rules": [
               {
                 "Category": "Design",
@@ -899,7 +899,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "TableHeader_4",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 676,
+        "PublishOrderIndex": 677,
         "Rules": [
           {
             "Category": "Data",
@@ -1157,7 +1157,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "TableHeader_4",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 680,
+        "PublishOrderIndex": 681,
         "Rules": [
           {
             "Category": "Design",
@@ -1320,7 +1320,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638427187628907101",
+    "LastModifiedTimestamp": "638448714204484817",
     "Name": "TableHeader_4",
     "Rules": [
       {
@@ -1438,7 +1438,7 @@
       "Name": "Columns",
       "PropertyDataTypeKey": "Table",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Column\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"EnableSort\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Index\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Offset\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Text\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Width\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]}]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Column\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"EnableSort\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Index\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Offset\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Text\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Width\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]}]}}"
     },
     {
       "Category": 0,
@@ -1447,7 +1447,7 @@
       "Name": "EnableSort",
       "PropertyDataTypeKey": "Boolean",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 0,
@@ -1456,7 +1456,7 @@
       "Name": "DefaultSortColumn",
       "PropertyDataTypeKey": "String",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 0,
@@ -1484,7 +1484,7 @@
               "ScopeVariableName": "Column"
             },
             "Tooltip": "A parameter",
-            "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+            "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
           },
           {
             "DisplayName": "SortColumn_SortAsc",
@@ -1503,12 +1503,12 @@
               "ScopeVariableName": "SortAsc"
             },
             "Tooltip": "A parameter",
-            "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
+            "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
           }
         ]
       },
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 2,
@@ -1532,7 +1532,7 @@
               "ScopeVariableName": "Column"
             },
             "Tooltip": "A parameter",
-            "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+            "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
           },
           {
             "DisplayName": "ColumnOnClick_SortAsc",
@@ -1547,12 +1547,12 @@
               "ScopeVariableName": "SortAsc"
             },
             "Tooltip": "A parameter",
-            "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
+            "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
           }
         ]
       },
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     }
   ],
   "FirstParty": true,
@@ -1563,7 +1563,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638427187628907101",
+  "LastModifiedTimestamp": "638448714204484817",
   "Name": "4f3f6dfbd9644a58be8fa71ef1e00f61",
   "OverridableProperties": {},
   "TemplateOriginalName": "aa0875a670a94270be8812d8637fbaba",
