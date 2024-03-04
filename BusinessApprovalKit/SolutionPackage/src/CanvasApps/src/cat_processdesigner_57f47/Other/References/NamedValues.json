@@ -12,18 +12,8 @@
     },
     {
       "Kind": "Page",
-      "Name": "Home page - Old",
-      "Value": "custompage:cat_homepage_96ece"
-    },
-    {
-      "Kind": "Page",
       "Name": "Settings",
       "Value": "custompage:cat_settings_3ada8"
-    },
-    {
-      "Kind": "Page",
-      "Name": "Process Designer Reimagined",
-      "Value": "custompage:cat_processdesignerreimagined_2478d"
     },
     {
       "Kind": "Page",
@@ -32,8 +22,18 @@
     },
     {
       "Kind": "Page",
+      "Name": "Home page - Old",
+      "Value": "custompage:cat_homepage_96ece"
+    },
+    {
+      "Kind": "Page",
       "Name": "Home page - copy",
       "Value": "custompage:cat_homepagecopy_6f1c6"
+    },
+    {
+      "Kind": "Page",
+      "Name": "Process Designer Reimagined",
+      "Value": "custompage:cat_processdesignerreimagined_2478d"
     }
   ]
 }
