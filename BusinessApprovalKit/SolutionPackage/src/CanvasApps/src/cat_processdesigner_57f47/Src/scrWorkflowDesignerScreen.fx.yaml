@@ -256,8 +256,6 @@
                     Height: =35
                     IconName: ="Back"
                     IconSize: =0
-                    LayoutMinHeight: =200
-                    LayoutMinWidth: =200
                     OnChange: =Back()
                     TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                     Theme: =AppThemeJson
@@ -1102,8 +1100,6 @@
                 Height: =45
                 IconName: ="CircleAdditionSolid"
                 IconSize: =35
-                LayoutMinHeight: =200
-                LayoutMinWidth: =200
                 OnChange: |
                     =//Save the process   
                     Concurrent(
@@ -1222,8 +1218,6 @@
             "ProcessDesigner1 As 'Process Designer'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =Parent.Height
-                LayoutMinHeight: =480
-                LayoutMinWidth: =640
                 NodeID: =componentSelectedNode
                 OnAddNode: |-
                     =UpdateContext(
@@ -7640,13 +7634,35 @@
                     );
                     IfError(
                         Concurrent(
-                            //update other nodes after this node on the same path to move up by 1 position
+                            //update other stages after this stage to move up by 1 position
                     UpdateIf('Business Approval Stages', 
                             Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' &&
                             Order > _selectedStage.Order,
                             { Order : Order - 1}            
-                    );
-                    //remove stage
+                    ),
+                    //
+            
+            //remove node conditions
+                            RemoveIf(
+                                'Business Approval Conditions',
+                                Node.'Business Approval Node' in _selectedStage.'Business Approval Nodes (cat_BusinessApprovalNode_Stage_cat_Busine)'.'Business Approval Node'
+                            );
+            RemoveIf(
+                                'Business Approval Conditions',
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
+                            );
+                            RemoveIf(
+                                'Business Approval Nodes',
+                                Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
+                            );
+                           /* Remove(
+                                'Business Approval Stages',
+                                _selectedStage
+                            )*/
+            
+                            
+                    //
+               /*     //remove stage
                             Remove(
                                 'Business Approval Stages',
                                 _selectedStage
@@ -7657,18 +7673,22 @@
                                 Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
                             ),
                     //remove node conditions
-                            RemoveIf(
+                       /*     RemoveIf(
                                 'Business Approval Conditions',
                                 Node.'Business Approval Node' in _selectedStage.'Business Approval Nodes (cat_BusinessApprovalNode_Stage_cat_Busine)'.'Business Approval Node'
-                            );
+                            );*/
                     //remove stage conditions
-            RemoveIf(
+            /*RemoveIf(
                                 'Business Approval Conditions',
                                 Stage.'Business Approval Stage' = _selectedStage.'Business Approval Stage'
-                            )
+                            )*/
                         ),
                         ""
                     );
+                    Remove(
+                                'Business Approval Stages',
+                                _selectedStage
+                            );
                     Set(
                         _selectedStage,
                         Blank()

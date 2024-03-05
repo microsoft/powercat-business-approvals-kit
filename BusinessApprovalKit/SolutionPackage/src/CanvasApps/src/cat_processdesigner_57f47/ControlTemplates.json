@@ -467,7 +467,7 @@
     "Name": "cat_PowerCAT.ProcessDesigner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Process Designer",
-    "Version": "1.0.53"
+    "Version": "1.0.54"
   },
   "Progress Bar": {
     "CustomGroupControlTemplateName": "",
