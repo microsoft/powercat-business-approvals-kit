@@ -303,6 +303,143 @@
           },
           "description": "Default path set to 2 (for If/Else branch, if no conditions evaluated to true, this will be on a false path)"
         },
+        "Response": {
+          "runAfter": {
+            "If_Source_Data_Type_Is_Previous_Node_Outcome": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "19aebee7-6ada-4440-8881-f49973e675e0"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": "@variables('varConditions')",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "stageid": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "objectid",
+                  "path"
+                ]
+              }
+            }
+          }
+        },
+        "varConditions": {
+          "runAfter": {
+            "varSourceData": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7da47591-f61d-4030-8e7c-9781637c37d2"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varConditions",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "If_Source_Data_Type_Is_Previous_Node_Outcome": {
+          "actions": {
+            "Apply_to_each": {
+              "foreach": "@outputs('Get_Node_or_Stage_Conditions')?['body/value']",
+              "actions": {
+                "Condition_4": {
+                  "actions": {
+                    "Set_varCondition": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "5172208c-c0b3-4693-9e87-0ec8a294d9dc"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varConditions",
+                        "value": [
+                          {
+                            "stageid": "@{if(equals(triggerBody()['text_1'],'Stage Instance'),'', items('Apply_to_each')?['_cat_gotostage_value'])}",
+                            "path": "@items('Apply_to_each')?['cat_pathindex']"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "else": {
+                    "actions": {
+                      "Set_varCondition_Default_path": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "67d6733a-bfa0-43cd-8dc3-8754e8515f45"
+                        },
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varConditions",
+                          "value": [
+                            {
+                              "stageid": "",
+                              "path": "@triggerBody()['number_2']"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "equals": [
+                      "@items('Apply_to_each')?['cat_conditionvalue']",
+                      "@variables('varSourceData')['value']"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "e51c1747-9894-42fe-965f-a371d6e0a893"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "ffd32618-115b-4f14-b5a4-fd314c4af4fa"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "If_Comparison_Operands": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@triggerBody()['number_1']",
+              809060001
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "af977073-7b7f-4150-8fe6-0649332ac4b8"
+          },
+          "type": "If",
+          "description": "If Source Data Type == 'Previous Node Outcome'"
+        },
         "If_Comparison_Operands": {
           "actions": {
             "Matched_Operand": {
@@ -392,7 +529,7 @@
                       "inputs": {
                         "name": "varConditions",
                         "value": {
-                          "stageid": "@{outputs('Matched_Condition')['items']?['_cat_gotostage_value']}",
+                          "stageid": "@{if(equals(triggerBody()['text_1'],'Stage Instance'),'',outputs('Matched_Condition')['items']['_cat_gotostage_value'])}",
                           "path": "@outputs('Matched_Condition')['items']['cat_pathindex']"
                         }
                       }
@@ -510,7 +647,7 @@
                       "name": "varConditions",
                       "value": {
                         "stageid": "@{first(body('Evaluate_Each_Condition'))['stageid']}",
-                        "path": "@if(equals(length(outputs('Get_Rule_Result')),0),2, 1)"
+                        "path": "@if(equals(outputs('Get_Rule_Result'),'false'),2, 1)"
                       }
                     },
                     "description": "For non equal operand, it can only be if/else type. If evaluated condition is true, it is always Path = 1. If no result found, default to Path = 2."
@@ -536,62 +673,6 @@
           },
           "type": "If",
           "description": "For operands that are not StartsWith/EndsWith, Contains, Is Blank/Not Blank"
-        },
-        "Response": {
-          "runAfter": {
-            "If_Comparison_Operands": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "19aebee7-6ada-4440-8881-f49973e675e0"
-          },
-          "type": "Response",
-          "kind": "Http",
-          "inputs": {
-            "statusCode": 200,
-            "headers": {
-              "Content-Type": "application/json"
-            },
-            "body": "@variables('varConditions')",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stageid": {
-                    "type": "string"
-                  },
-                  "path": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "objectid",
-                  "path"
-                ]
-              }
-            }
-          }
-        },
-        "varConditions": {
-          "runAfter": {
-            "varSourceData": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "7da47591-f61d-4030-8e7c-9781637c37d2"
-          },
-          "type": "InitializeVariable",
-          "inputs": {
-            "variables": [
-              {
-                "name": "varConditions",
-                "type": "array"
-              }
-            ]
-          }
         }
       }
     },

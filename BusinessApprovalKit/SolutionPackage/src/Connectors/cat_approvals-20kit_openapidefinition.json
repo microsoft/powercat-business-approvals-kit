@@ -2,9 +2,9 @@
   "basePath": "/",
   "consumes": [],
   "definitions": {},
-  "host": "@environmentVariables(\"cat_ApprovalKitOrgUrl\")",
+  "host": "orgc08dc7f0.crm.dynamics.com",
   "info": {
-    "description": "",
+    "description": "Custom connector for business approvals kit",
     "title": "Approvals kit Connector",
     "version": "1.0"
   },

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{a5ae10f4-09b1-ee11-a569-0022482a9369}</WebResourceId>
+  <Name>cat_HomePageLoc.1041.resx</Name>
+  <DisplayName>HomePageLoc</DisplayName>
+  <LanguageCode>1041</LanguageCode>
+  <WebResourceType>12</WebResourceType>
+  <IntroducedVersion>1.1.0.11</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/cat_HomePageLoc1041resxA5AE10F4-09B1-EE11-A569-0022482A9369</FileName>
+</WebResource>

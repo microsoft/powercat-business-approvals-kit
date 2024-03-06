@@ -24,6 +24,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Additional Information1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -160,6 +161,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "AKHeader",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -434,6 +436,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "AKHeaderTextContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -719,6 +722,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ApprovalOptionContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -942,6 +946,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ApprovalRequestsContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1083,6 +1088,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Approver1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1244,6 +1250,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "AutoWidthLabel1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1325,6 +1332,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Business Approval Instance1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1406,6 +1414,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Business Approval Workflow1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1574,6 +1583,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CardActionContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1775,6 +1785,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CardElevation",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -1934,6 +1945,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CardInnerContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2165,6 +2177,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CardTagList",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2306,6 +2319,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CardTitleContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2532,6 +2546,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2811,6 +2826,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "CreateActionIcon",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -2922,6 +2938,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Created By1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3003,6 +3020,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Created On1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3084,6 +3102,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Created On2",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3235,7 +3254,8 @@
           "InvariantPropertyName": "TabIndex",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "MaxTemplateSize"
       ],
       "DynamicProperties": [
         {
@@ -3300,6 +3320,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "FeaturedGallery",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3446,6 +3467,11 @@
         {
           "Category": "Design",
           "PropertyName": "TabIndex",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "MaxTemplateSize",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -3597,6 +3623,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "FluentDetailsListApprovalRequest",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -3869,6 +3896,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "FluentDetailsListSubmittedWorkflows",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4006,6 +4034,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "galleryTemplate1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4151,6 +4180,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "HeaderRootContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4305,6 +4335,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "HomeScreen",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4492,6 +4523,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "imgHeader",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4673,6 +4705,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Instance No1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4754,6 +4787,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Instance Status1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4835,6 +4869,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ItemDisplayName1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -4916,6 +4951,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ItemKey1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5051,7 +5087,8 @@
           "InvariantPropertyName": "Wrap",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -5108,6 +5145,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lbCardDescription",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5174,6 +5212,11 @@
         {
           "Category": "Design",
           "PropertyName": "X",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -5251,7 +5294,8 @@
           "IsLockable": false,
           "NameMapSourceSchema": "?"
         },
-        "Color"
+        "Color",
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -5301,6 +5345,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblCardTitle",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5368,6 +5413,11 @@
           "Category": "Design",
           "PropertyName": "X",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "",
@@ -5421,7 +5471,8 @@
           "InvariantPropertyName": "Visible",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -5485,6 +5536,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblMaturity",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5541,6 +5593,11 @@
         {
           "Category": "Design",
           "PropertyName": "Visible",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -5603,7 +5660,8 @@
           "InvariantPropertyName": "Color",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -5667,6 +5725,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblNewFeatureHeader",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5729,6 +5788,11 @@
           "Category": "Design",
           "PropertyName": "Height",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "",
@@ -5790,7 +5854,8 @@
           "InvariantPropertyName": "Color",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -5854,6 +5919,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblReceivedApprovalRequest",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -5916,6 +5982,11 @@
           "Category": "Design",
           "PropertyName": "Width",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "",
@@ -5977,7 +6048,8 @@
           "InvariantPropertyName": "Color",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -6041,6 +6113,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSubmittedWorkflow",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6102,6 +6175,11 @@
         {
           "Category": "Design",
           "PropertyName": "Width",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -6223,7 +6301,8 @@
           "InvariantPropertyName": "TextRole",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
-        }
+        },
+        "OnChange"
       ],
       "DynamicProperties": [
         {
@@ -6273,6 +6352,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSubtext",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6349,6 +6429,11 @@
         {
           "Category": "Design",
           "PropertyName": "ZIndex",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Behavior",
+          "PropertyName": "OnChange",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -6506,6 +6591,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "LeanMoreIcon",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6734,6 +6820,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "MainContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -6900,6 +6987,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Modified On1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7120,6 +7208,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "MySubmittedWorkflowContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7286,6 +7375,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Name1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7463,6 +7553,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "NewFeaturesContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7624,6 +7715,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Node1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7705,6 +7797,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Notification1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7786,6 +7879,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Original Approver1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7867,6 +7961,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Process Version Number1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -7948,6 +8043,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Process Version1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8168,6 +8264,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "ReceivedApprovalRequests",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8420,6 +8517,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "rectCardDivider",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8691,6 +8789,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "RootContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8857,6 +8956,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Stage1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -8995,6 +9095,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "SubmittedRequestsContainer",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9232,6 +9333,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "SubmittedWorkflowHeaderContiner",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -9489,6 +9591,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "SubmittedWorkflowHeaderContiner_1",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [

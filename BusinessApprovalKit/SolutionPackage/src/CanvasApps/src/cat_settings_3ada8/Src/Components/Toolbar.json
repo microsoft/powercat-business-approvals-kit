@@ -24,6 +24,7 @@
             "LayoutName": "",
             "MetaDataIDKey": "",
             "Name": "galleryTemplate2",
+            "OptimizeForDevices": "Off",
             "Parent": "Gallery1",
             "PersistMetaDataIDKey": false,
             "PublishOrderIndex": 77,
@@ -237,6 +238,7 @@
             "LayoutName": "",
             "MetaDataIDKey": "",
             "Name": "btnToolbarItem",
+            "OptimizeForDevices": "Off",
             "Parent": "Gallery1",
             "PersistMetaDataIDKey": false,
             "PublishOrderIndex": 78,
@@ -631,6 +633,7 @@
             "LayoutName": "",
             "MetaDataIDKey": "",
             "Name": "Icon1",
+            "OptimizeForDevices": "Off",
             "Parent": "Gallery1",
             "PersistMetaDataIDKey": false,
             "PublishOrderIndex": 79,
@@ -915,7 +918,8 @@
             "InvariantPropertyName": "TabIndex",
             "IsLockable": false,
             "NameMapSourceSchema": "?"
-          }
+          },
+          "MaxTemplateSize"
         ],
         "ControlUniqueId": "5",
         "HasDynamicProperties": false,
@@ -928,6 +932,7 @@
         "LayoutName": "",
         "MetaDataIDKey": "",
         "Name": "Gallery1",
+        "OptimizeForDevices": "Off",
         "Parent": "Toolbar",
         "PersistMetaDataIDKey": false,
         "PublishOrderIndex": 76,
@@ -1087,6 +1092,12 @@
             "InvariantScript": "0",
             "Property": "TabIndex",
             "RuleProviderType": "Unknown"
+          },
+          {
+            "Category": "Design",
+            "InvariantScript": "5000",
+            "Property": "MaxTemplateSize",
+            "RuleProviderType": "Unknown"
           }
         ],
         "StyleName": "defaultGalleryStyle",
@@ -1100,7 +1111,7 @@
           "LastModifiedTimestamp": "0",
           "Name": "gallery",
           "OverridableProperties": {},
-          "Version": "2.13.2"
+          "Version": "2.14.0"
         },
         "Type": "ControlInfo",
         "VariantName": "galleryHorizontal"
@@ -1147,7 +1158,7 @@
       },
       "DisabledItems"
     ],
-    "LastModifiedTimestamp": "638354867357111823",
+    "LastModifiedTimestamp": "638415140364445757",
     "Name": "Toolbar",
     "Rules": [
       {
@@ -1235,7 +1246,7 @@
       "Name": "ToolbarItems",
       "PropertyDataTypeKey": "Table",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Icon\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Offset\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Text\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}]}}"
+      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Icon\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Offset\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]},{\"Name\":\"Text\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}]}}"
     },
     {
       "Category": 2,
@@ -1259,12 +1270,12 @@
               "ScopeVariableName": "MenuItem"
             },
             "Tooltip": "A parameter",
-            "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+            "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
           }
         ]
       },
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 0,
@@ -1273,7 +1284,7 @@
       "Name": "TemplateWidth",
       "PropertyDataTypeKey": "Number",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Number\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 0,
@@ -1282,7 +1293,7 @@
       "Name": "DisabledItems",
       "PropertyDataTypeKey": "Table",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Value\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}]}}"
+      "Type": "{\"Version\":\"1.336\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Table\",\"EnumString\":\"\",\"Type\":[{\"Name\":\"Value\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}]}}"
     }
   ],
   "FirstParty": true,
@@ -1293,7 +1304,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638354867357111823",
+  "LastModifiedTimestamp": "638415140364445757",
   "Name": "a8d013202bde4e4a8ddf0de3d99372ef",
   "OverridableProperties": {},
   "TemplateOriginalName": "d6be7b8d5f164056966e832ffef8ae1d",

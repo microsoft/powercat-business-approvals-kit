@@ -14,6 +14,7 @@
           <cell name="cat_processversion" width="100" />
           <cell name="createdon" width="125" />
           <cell name="modifiedon" width="100" />
+          <cell name="cat_requestedby" width="119" />
         </row>
       </grid>
     </layoutxml>
@@ -30,6 +31,7 @@
           </filter>
           <attribute name="modifiedon" />
           <attribute name="cat_processversion" />
+          <attribute name="cat_requestedby" />
         </entity>
       </fetch>
     </fetchxml>

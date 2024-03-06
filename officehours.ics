@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+PRODID:adamgibbons/ics
+METHOD:PUBLISH
+X-PUBLISHED-TTL:PT1H
+BEGIN:VEVENT
+UID:VbqKdTdVUtyUA79X5pEcg
+SUMMARY:Approvals Kit - Office Hours
+DTSTAMP:20231211T174643Z
+DTSTART:20231211T150000Z
+DESCRIPTION:https://aka.ms/ApprovalsKit/OfficeHours/Join\n\nThis meeting is
+	 a regular open forum for customers and partners to learn and ask question
+	s about the Business Approvals Kit for Power Platform. Come prepared to as
+	k questions about existing features\, learn how something works and new fe
+	atures you'd like to see. \nPlease note:\n1. This session will be attended
+	 by multiple customers and partners and will be recorded.\n2. By attending
+	 this session\, you consent to the recording being used for public recordi
+	ngs on YouTube. If you do not wish to be recorded\, please let us know bef
+	ore the session starts.\n3. Please state any questions with the appropriat
+	e level of detail for this broader audience.\n4. While sections of this ma
+	y cover introduction or overview session you can leverage our learning con
+	tent https://aka.ms/approvals-kit and https://aka.ms/approvals-kit/learn t
+	o get started.
+URL:https://aka.ms/ApprovalsKit/OfficeHours/Join
+ORGANIZER;DIR="https://linkedin.com/in/grantarchibald";CN=grant Archibald
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+RRULE:FREQ=MONTHLY;INTERVAL=1;BYDAY=MO;BYSETPOS=2
+DURATION:PT1H
+END:VEVENT
+END:VCALENDAR

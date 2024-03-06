@@ -148,7 +148,7 @@
           "Name": "Root",
           "Type": []
         },
-        "Version": "1.335"
+        "Version": "1.336"
       },
       "SearchText": {
         "Type": {
@@ -157,7 +157,7 @@
           "Name": "Root",
           "Type": []
         },
-        "Version": "1.335"
+        "Version": "1.336"
       },
       "SelectedPeople": {
         "Type": {
@@ -203,7 +203,7 @@
             }
           ]
         },
-        "Version": "1.335"
+        "Version": "1.336"
       }
     },
     "PCFDynamicSchemaForIRRetrieval": {
@@ -250,7 +250,7 @@
     "LastModifiedTimestamp": "0",
     "Name": "gallery",
     "OverridableProperties": {},
-    "Version": "2.13.2"
+    "Version": "2.14.0"
   },
   "galleryTemplate": {
     "CustomGroupControlTemplateName": "",
@@ -364,7 +364,7 @@
     "Name": "PowerApps_CoreControls_Spinner",
     "OverridableProperties": {},
     "TemplateDisplayName": "Spinner",
-    "Version": "1.0.22"
+    "Version": "1.0.28"
   },
   "Text": {
     "CustomGroupControlTemplateName": "",
@@ -379,6 +379,6 @@
     "Name": "PowerApps_CoreControls_TextCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Text",
-    "Version": "0.0.16"
+    "Version": "0.0.20"
   }
 }

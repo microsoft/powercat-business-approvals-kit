@@ -224,6 +224,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "ApprovalDesigner",
+                "type": "ApprovalDesigner.galProcessStages_1.galStageConditions_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageNodes.TabIndex"
                 }
               ],
@@ -387,36 +417,6 @@
                 "member": "TabIndex",
                 "module": "ApprovalDesigner",
                 "type": "ApprovalDesigner.galProcessStages_1.galStageNodes.icoEditNodePath2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "ApprovalDesigner",
-                "type": "ApprovalDesigner.galProcessStages_1.galStageConditions_1"
               }
             }
           ],
@@ -3854,6 +3854,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.BusyContainer.spinnerLoader.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.BusyContainer.spinnerLoader.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.BusyContainer.spinnerLoader"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.txtStageName_2.AccessibleLabel"
                 }
               ],
@@ -4287,66 +4317,6 @@
                 "member": "AccessibleLabel",
                 "module": "scrWorkflowDesignerScreen",
                 "type": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.galConditions_1.txtTargetStatic_2"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.PanelFooter.btnSaveStage.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.PanelFooter.btnSaveStage.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.PanelFooter.btnSaveStage"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.PanelFooter.btnCancelStage.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.PanelFooter.btnCancelStage.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.PanelFooter.btnCancelStage"
               }
             }
           ],
@@ -4904,66 +4874,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.PanelFooter_1.btnSaveNode.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.PanelFooter_1.btnSaveNode.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.PanelFooter_1.btnSaveNode"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.PanelFooter_1.btnCancelNode.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.PanelFooter_1.btnCancelNode.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.PanelFooter_1.btnCancelNode"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.radNodeType_5.AccessibleLabel"
                 }
               ],
@@ -5067,6 +4977,36 @@
                 "member": "AccessibleLabel",
                 "module": "scrWorkflowDesignerScreen",
                 "type": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.conNodeCondition_2.ddlNodeCondition_2"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.conNodeCondition_2.btnResetConditions_3.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.conNodeCondition_2.btnResetConditions_3.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.conNodeCondition_2.btnResetConditions_3"
               }
             }
           ],
@@ -5444,66 +5384,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.PanelFooter_2.btnSaveNode_1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.PanelFooter_2.btnSaveNode_1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.PanelFooter_2.btnSaveNode_1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.PanelFooter_2.btnCancelNode_1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.PanelFooter_2.btnCancelNode_1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeRuleEditorContainer.PanelFooter_2.btnCancelNode_1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.PublishProcessContainer.Gallery4_2.AccessibleLabel"
                 }
               ],
@@ -5607,36 +5487,6 @@
                 "member": "AccessibleLabel",
                 "module": "scrWorkflowDesignerScreen",
                 "type": "scrWorkflowDesignerScreen.PanelContainer.PublishProcessContainer.tggActivate_3"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.PublishProcessContainer.btnPublishWorkflow.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.PublishProcessContainer.btnPublishWorkflow.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.PublishProcessContainer.btnPublishWorkflow"
               }
             }
           ],
@@ -6434,19 +6284,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "App.DefaultTheme"
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ToggleModernDesigner.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "App.DefaultTheme",
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ToggleModernDesigner.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
-                "member": "DefaultTheme",
-                "module": "App",
-                "type": "App"
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.ToggleModernDesigner"
               }
             }
           ],
@@ -6456,8 +6306,8 @@
           "properties": {
             "level": "Medium"
           },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 3
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -6643,36 +6493,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen._isBusy"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen._isBusy",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "_isBusy",
-                "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.confirmAction"
                 }
               ],
@@ -6703,19 +6523,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.ddlStageOperand_2.DefaultSelectedItems"
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.contentHeight"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.ddlStageOperand_2.DefaultSelectedItems",
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.contentHeight",
                   "relativeAddress": 0
                 }
               },
               "properties": {
-                "member": "DefaultSelectedItems",
+                "member": "contentHeight",
                 "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.ddlStageOperand_2"
+                "type": "scrWorkflowDesignerScreen"
               }
             }
           ],
@@ -6725,27 +6545,27 @@
           "properties": {
             "level": "Medium"
           },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 5
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
         },
         {
           "locations": [
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.galConditions_1.lblConditionTarget_1.Text"
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.contentWidth"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.galConditions_1.lblConditionTarget_1.Text",
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.contentWidth",
                   "relativeAddress": 0
                 }
               },
               "properties": {
-                "member": "Text",
+                "member": "contentWidth",
                 "module": "scrWorkflowDesignerScreen",
-                "type": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.galConditions_1.lblConditionTarget_1"
+                "type": "scrWorkflowDesignerScreen"
               }
             }
           ],
@@ -6755,8 +6575,68 @@
           "properties": {
             "level": "Medium"
           },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 5
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.stageDesc"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.stageDesc",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "stageDesc",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.stageName"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.stageName",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "stageName",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -6970,7 +6850,7 @@
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"scrWorkflowDesignerScreen\" is 441, which exceeds the maximum threshold recommended (300)."
+                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"scrWorkflowDesignerScreen\" is 422, which exceeds the maximum threshold recommended (300)."
               }
             },
             {
@@ -6991,7 +6871,7 @@
               }
             }
           ],
-          "version": "1.335"
+          "version": "1.337"
         }
       }
     }

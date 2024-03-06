@@ -1,77 +1,45 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |-
-        =Set(_isBusy,true);
-        //Passing record ID from main view
-        Set(inputParameters,Param("recordId"));
-        Set(props, Match(inputParameters, "\""prop1"":""(?<prop1>[^""]*)"",""prop2"":""(?<prop2>[^""]*)"));
-        Set(
-            varRecordIdParameter,
-            If(props.prop2 = "form",
-                Match(props.prop1,"\{(?<guid>.+?)\}").guid,
-                props.prop1
-            )
-        );
-        Set(
-            varRecordId,
-            GUID(varRecordIdParameter)
-        );
-        If(
-            IsBlankOrError(
-                LookUp(
-                    'Business Approval Processes',
-                    'Business Approval Process' = varRecordId
-                )
+    Formulas: |-
+        =const = {
+            Delete: "delete",
+            Save: "save",
+            Refresh: "refresh",
+            Variables: "variables",
+            Versions: "versions",
+            Publish: "publish",
+            Deactivate:"Deactivate",
+            DeleteAppDataCmlCase: "deleteAppData",
+            DeleteAppDataPsclCase: "DeleteAppData",
+            AckDeps: "AckDeps",
+            Comma: ", ",
+            None:"None",
+            Text:"Text",
+            CreatedOn:"Created On",
+            DataType:"Data Type",
+            Name:"Name",
+            Value:"Value",
+            AtSymbol:"@",
+            Start:"Start",
+            Path:"Path "
+            
+        };
+    OnStart: |+
+        =Concurrent(
+            Set(
+                isBusy,
+                true
             ),
-            Set(_selectedProcess,
-                /* LookUp(
-                    'Business Approval Processes',
-                    'Business Approval Process' = GUID("a24bac16-cfb1-ed11-83fe-0022482a97de")
-                ) 
-                */
-                Blank(); 
-            );
-            NewForm(frmProcess);,
-            Set(_selectedProcess,
-                LookUp(
-                    'Business Approval Processes',
-                    'Business Approval Process' = varRecordId
+            If(
+                !IsBlank(Param("id")),
+                Set(
+                    varRecordId,
+                    GUID(Param("id"))
                 )
             )
         );
-        // Set themeing
         Set(
             AppTheme,
-            {
-                palette: {
-                    themePrimary: "#0880a8",
-                    themeLighterAlt: "#f2f9fc",
-                    themeLighter: "#cce8f1",
-                    themeLight: "#a4d5e5",
-                    themeTertiary: "#57aecb",
-                    themeSecondary: "#1d8db3",
-                    themeDarkAlt: "#087397",
-                    themeDark: "#066280",
-                    themeDarker: "#05485e",
-                    neutralLighterAlt: "#faf9f8",
-                    neutralLighter: "#f3f2f1",
-                    neutralLight: "#edebe9",
-                    neutralQuaternaryAlt: "#e1dfdd",
-                    neutralQuaternary: "#d0d0d0",
-                    neutralTertiaryAlt: "#c8c6c4",
-                    neutralTertiary: "#a19f9d",
-                    neutralSecondary: "#605e5c",
-                    neutralPrimaryAlt: "#3b3a39",
-                    neutralPrimary: "#323130",
-                    neutralDark: "#201f1e",
-                    black: "#000000",
-                    white: "#ffffff"
-                }
-            }
-        );
-        // Set themeing
-        Set(
-            DefaultTheme,
             /* START THEME OBJECT */
             {
                 palette: {
@@ -93,7 +61,7 @@ App As appinfo:
                     neutralTertiary: "#a19f9d",
                     neutralSecondary: "#605e5c",
                     neutralPrimaryAlt: "#3b3a39",
-                    neutralPrimary:"#323130",
+                    neutralPrimary: "#323130",
                     neutralDark: "#201f1e",
                     black: "#000000",
                     white: "#ffffff"
@@ -109,28 +77,8 @@ App As appinfo:
             )
         );
         
-        /* Set(
-            varRecordIds,
-            ForAll(
-                Split(varRecordIdParameter,","),
-                GUID(ThisRecord.Result)
-            )
-        );
-        */
-        /*
-        ClearCollect(colBusinessApprovalOverrides,
-            ForAll(Filter('Business Approval Instances', 'Business Approval Instance' in varRecordIds),
-                {
-                    id:ThisRecord.'Business Approval Instance',
-                    instanceno:ThisRecord.'Instance No',
-                    approver:ThisRecord.'Approver UPN',
-                    instancestatus:'Instance Status'
-                }
-            )
-        )
-        */
     StartScreen: =scrWorkflowDesignerScreen
-    Theme: =SteelTheme
+    Theme: =PowerAppsTheme
 
     Host As hostControl.DefaultHostControlVariant:
         OnCancel: =false

@@ -59,6 +59,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Header",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -300,6 +301,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoBack",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -646,6 +648,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "icoRefresh",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
@@ -923,6 +926,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblTitle",
+      "OptimizeForDevices": "Off",
       "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [

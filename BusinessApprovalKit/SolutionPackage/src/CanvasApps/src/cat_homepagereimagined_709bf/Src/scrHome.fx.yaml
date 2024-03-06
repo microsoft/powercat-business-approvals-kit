@@ -99,6 +99,7 @@
                         Height: =70
                         LayoutMinHeight: =32
                         LayoutMinWidth: =320
+                        OnChange: =false
                         Text: =Subtitle
                         TextRole: ='Label.TextRole'.Heading1
                         VerticalAlignment: =VerticalAlign.Top
@@ -139,7 +140,7 @@
                     Height: =32
                     LayoutMinHeight: =200
                     LayoutMinWidth: =200
-                    Text: ="Learn how to use the kit"
+                    Text: =HomePageLoc.learnHowToUseKit
                     Tooltip: =""
                     Width: =Parent.Width
                     X: =0
@@ -230,7 +231,8 @@
                                     Height: =32
                                     LayoutMinHeight: =32
                                     LayoutMinWidth: =320
-                                    Text: ="Configure a Workflow"
+                                    OnChange: =false
+                                    Text: =HomePageLoc.configureWorkflowTitle
                                     TextRole: ='Label.TextRole'.Heading1
                                     VerticalAlignment: =VerticalAlign.Middle
                                     Width: =250
@@ -247,7 +249,8 @@
                                     Height: =70
                                     LayoutMinHeight: =32
                                     LayoutMinWidth: =320
-                                    Text: ="Learn how to configure a new workflow with Approvals kit"
+                                    OnChange: =false
+                                    Text: =HomePageLoc.configureWorkflowDescitption
                                     VerticalAlignment: =VerticalAlign.Top
                                     Width: =320
                                     Wrap: =true
@@ -339,7 +342,8 @@
                                     Height: =32
                                     LayoutMinHeight: =32
                                     LayoutMinWidth: =320
-                                    Text: ="Link a workflow"
+                                    OnChange: =false
+                                    Text: =HomePageLoc.linkWorkflowTitle
                                     TextRole: ='Label.TextRole'.Heading1
                                     VerticalAlignment: =VerticalAlign.Middle
                                     Width: =Parent.Width
@@ -356,7 +360,8 @@
                                     Height: =70
                                     LayoutMinHeight: =32
                                     LayoutMinWidth: =320
-                                    Text: ="Learn how to link your workflow with another workflow using Approvals kit"
+                                    OnChange: =false
+                                    Text: =HomePageLoc.linkWorkflowDescription
                                     VerticalAlignment: =VerticalAlign.Top
                                     Width: =320
                                     Wrap: =true
@@ -451,7 +456,8 @@
                                     Height: =32
                                     LayoutMinHeight: =32
                                     LayoutMinWidth: =320
-                                    Text: ="Configure basic settings"
+                                    OnChange: =false
+                                    Text: =HomePageLoc.configureBasicSettingsTitle
                                     TextRole: ='Label.TextRole'.Heading1
                                     VerticalAlignment: =VerticalAlign.Middle
                                     Width: =250
@@ -468,7 +474,8 @@
                                     Height: =70
                                     LayoutMinHeight: =32
                                     LayoutMinWidth: =320
-                                    Text: ="Learn how to configure a new workflow with Approvals kit"
+                                    OnChange: =false
+                                    Text: =HomePageLoc.configureBasicSettingsDescription
                                     VerticalAlignment: =VerticalAlign.Top
                                     Width: =320
                                     Wrap: =true
@@ -505,7 +512,7 @@
                     Height: =32
                     LayoutMinHeight: =200
                     LayoutMinWidth: =200
-                    Text: ="My submitted workflow"
+                    Text: =HomePageLoc.mySubmittedWorkflowText
                     Tooltip: =""
                     Width: =Parent.Width
                     X: =0
@@ -549,12 +556,16 @@
                             AlternateRowColor: |-
                                 ="#f5f5f5"
                             ColSortable: =""
-                            columns_Items: |
+                            columns_Items: |-
                                 =Table(
-                                    {ColName:"cat_name",ColDisplayName:"Name",ColCellType:"link",ColWidth:350,ColSortable:false,ColResizable:true,ColRowHeader:true},
-                                    {ColName:"cat_ProcessVersion",ColDisplayName:"Process",ColWidth:200,ColSortable:false,ColResizable:true,ColRowHeader:true},
-                                    {ColName:"cat_version",ColDisplayName:"Project Version Number",ColWidth:200,ColSortable:false,ColResizable:true,ColRowHeader:true},
-                                    {ColName:"createdby",ColDisplayName:"Created By",ColWidth:Self.Width-850,ColSortable:false,ColResizable:true,ColRowHeader:true}
+                                    {ColName:"cat_name",ColDisplayName:"Name",ColCellType:"link",ColWidth:Self.Width*.19,ColSortable:false,ColResizable:true,ColRowHeader:true},
+                                    {ColName:"cat_ProcessVersion",ColDisplayName:"Process",ColWidth:Self.Width*.19,ColSortable:false,ColResizable:true,ColRowHeader:true},
+                                    {ColName:"cat_version",ColDisplayName:"Process Version Number",ColWidth:Self.Width*.175,ColSortable:false,ColResizable:true,ColRowHeader:true},
+                                    {ColName:"cat_requestedby",ColDisplayName:"Requested By",ColWidth:Self.Width*.19,ColSortable:false,ColResizable:true,ColRowHeader:true},
+                                    
+                                    {ColName:"createdon",ColDisplayName:"Created On",ColWidth:Self.Width*.19,ColSortable:false,ColResizable:true,ColRowHeader:true}
+                                    //{ColName:"createdby",ColDisplayName:"Created By",ColWidth:Self.Width*.19,ColSortable:false,ColResizable:true,ColRowHeader:true}
+                                    
                                 )
                             Compact: =true
                             CurrentSortColumn: =ctxSortCol
@@ -565,7 +576,9 @@
                             DisplayMode: =DisplayMode.Edit
                             Height: =220
                             InputEvent: =
-                            Items: =LastN('Business Approval Workflows',5)
+                            Items: |
+                                =//LastN('Business Approval Workflows',5)
+                                FirstN(Filter('Business Approval Workflows', 'Business Approval Workflows (Views)'.'Active Business Approval Workflows'),5)
                             LargeDatasetPaging: =false
                             LayoutMinHeight: =200
                             LayoutMinWidth: =200
@@ -586,7 +599,7 @@
                                 Set(ctxSortCol,Self.SortEventColumn);
                                 Set(ctxSortAsc,If(Self.SortEventDirection='PowerCAT.FluentDetailsList.SortEventDirection'.Ascending,true,false));
                                 );
-                            OnSelect: =Notify("OnSelect " & Self.EventRowKey)
+                            OnSelect: =//Notify("OnSelect " & Self.EventRowKey)
                             PageSize: =5
                             RaiseOnRowSelectionChangeEvent: =true
                             RecordCanSelect: =
@@ -640,14 +653,6 @@
                                 Order: =6
                                 ZIndex: =27
 
-                            "'Process Version1_1' As pcfDataField":
-                                FieldDisplayName: ="Process Version"
-                                FieldName: ="cat_ProcessVersion"
-                                FieldType: ="E"
-                                FieldVariantName: ="complexTypeColumn"
-                                Order: =6
-                                ZIndex: =28
-
                             "'Business Approval Workflow1_1' As pcfDataField.textualColumn":
                                 FieldDisplayName: ="Business Approval Workflow"
                                 FieldName: ="cat_businessapprovalworkflowid"
@@ -655,6 +660,22 @@
                                 FieldVariantName: ="textualColumn"
                                 Order: =7
                                 ZIndex: =29
+
+                            "'Requested By1' As pcfDataField.textualColumn":
+                                FieldDisplayName: ="Requested By"
+                                FieldName: ="cat_requestedby"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =7
+                                ZIndex: =32
+
+                            "'Process Version2' As pcfDataField":
+                                FieldDisplayName: ="Process Version"
+                                FieldName: ="cat_ProcessVersion"
+                                FieldType: ="E"
+                                FieldVariantName: ="complexTypeColumn"
+                                Order: =8
+                                ZIndex: =33
 
                 "OptionHeaderAutoWidthLabel_2 As 'Auto Width Label (1.0.22)'":
                     DisplayMode: =DisplayMode.Edit
@@ -664,7 +685,7 @@
                     Height: =32
                     LayoutMinHeight: =200
                     LayoutMinWidth: =200
-                    Text: ="Received approval request"
+                    Text: =HomePageLoc.receivedApprovalRequestText
                     Width: =Parent.Width
                     X: =0
                     Y: =0
@@ -706,16 +727,17 @@
                         "FluentDetailsListApprovalRequest_1 As 'Fluent Details List (1.0.22)'.pcfdataset":
                             AlternateRowColor: |-
                                 ="#f5f5f5"
-                            columns_Items: |
+                            columns_Items: |-
                                 =Table(
-                                    {ColName:"cat_name",ColDisplayName:"Instance No.",ColCellType:"link",ColWidth:200,ColSortable:false,ColResizable:true,ColRowHeader:true},
-                                    {ColName:"cat_Approver",ColDisplayName:"Approver",ColWidth:200,ColSortable:true,ColResizable:false,ColRowHeader:true},
-                                    {ColName:"cat_Stage",ColDisplayName:"Stage",ColWidth:150,ColSortable:true,ColResizable:false,ColRowHeader:true},
-                                    {ColName:"cat_Node",ColDisplayName:"Node",ColWidth:150, ColSortable:true,ColResizable:false,ColRowHeader:true}, 
-                                    {ColName:"cat_OriginalApprover",ColDisplayName:"Original Approver",ColWidth:150, ColSortable:false,ColResizable:true},
-                                    {ColName:"cat_Notification",ColDisplayName:"Notification",ColWidth:200, ColSortable:false,ColResizable:true},
-                                    {ColName:"cat_additionalinformation",ColDisplayName:"Additional Information",ColWidth:200, ColSortable:false,ColResizable:true,ColRowHeader:true},
-                                    {ColName:"cat_instancestatus",ColDisplayName:"Instance Status",ColWidth:Parent.Width - 1200,ColSortable:true,ColResizable:false,ColRowHeader:true}
+                                    {ColName:"cat_name",ColDisplayName:"Instance No.",ColCellType:"link",ColWidth:Self.Width*.13,ColSortable:false,ColResizable:true,ColRowHeader:true},
+                                    {ColName:"cat_Approver",ColDisplayName:"Approver",ColWidth:Self.Width*.13,ColSortable:true,ColResizable:false,ColRowHeader:true},
+                                    {ColName:"cat_Stage",ColDisplayName:"Stage",ColWidth:Self.Width*.13,ColSortable:true,ColResizable:false,ColRowHeader:true},
+                                    {ColName:"cat_Node",ColDisplayName:"Node",ColWidth:Self.Width*.13, ColSortable:true,ColResizable:false,ColRowHeader:true}, 
+                                    //{ColName:"cat_OriginalApprover",ColDisplayName:"Original Approver",ColWidth:Self.Width*.16, ColSortable:false,ColResizable:true},
+                                    //{ColName:"cat_Notification",ColDisplayName:"Notification",ColWidth:Self.Width*.16, ColSortable:false,ColResizable:true},
+                                    {ColName:"cat_additionalinformation",ColDisplayName:"Additional Information",ColWidth:Self.Width*.15, ColSortable:false,ColResizable:true,ColRowHeader:true},
+                                    {ColName:"cat_instancestatus",ColDisplayName:"Instance Status",ColWidth:Self.Width*.11,ColSortable:true,ColResizable:false,ColRowHeader:true},
+                                    {ColName:"createdon",ColDisplayName:"Created On",ColWidth:Self.Width*.13,ColSortable:false,ColResizable:true,ColRowHeader:true}
                                 )
                             CurrentSortColumn: =ctxSortCol
                             CurrentSortDirection: |-
@@ -725,7 +747,9 @@
                             DisplayMode: =DisplayMode.Edit
                             Height: =220
                             InputEvent: =
-                            Items: =LastN('Business Approval Instances',5)
+                            Items: |-
+                                =//LastN('Business Approval Instances',5)
+                                FirstN(SortByColumns(Filter('Business Approval Instances','Business Approval Instances (Views)'.'Active Business Approval Instances'),"createdon",SortOrder.Descending),5)
                             LargeDatasetPaging: =false
                             LayoutMinHeight: =200
                             LayoutMinWidth: =200
@@ -808,14 +832,6 @@
                                 FieldVariantName: ="complexTypeColumn"
                                 Order: =7
                                 ZIndex: =20
-
-                            "'Original Approver1_1' As pcfDataField":
-                                FieldDisplayName: ="Original Approver"
-                                FieldName: ="cat_OriginalApprover"
-                                FieldType: ="E"
-                                FieldVariantName: ="complexTypeColumn"
-                                Order: =8
-                                ZIndex: =21
 
                             Node1_1 As pcfDataField:
                                 FieldDisplayName: ="Node"

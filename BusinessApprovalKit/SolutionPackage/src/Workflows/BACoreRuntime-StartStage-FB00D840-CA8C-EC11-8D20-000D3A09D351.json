@@ -143,7 +143,7 @@
                     "number": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_operand']",
                     "number_1": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_sourcedatatype']",
                     "number_2": "@outputs('Get_Runtime_Stage_Definition')?['body/cat_paths']",
-                    "text_3": "@outputs('Get_Runtime_Stage_Definition')?['body/_cat_sourcedata_value']"
+                    "text_3": "@if(equals(outputs('Get_Runtime_Stage_Definition')?['body/_cat_sourcedata_value'],null),'',outputs('Get_Runtime_Stage_Definition')?['body/_cat_sourcedata_value'])"
                   }
                 },
                 "description": "Returns a collection of Paths and Object Id. For Stage Instance conditions, only paths will be used."
@@ -232,7 +232,8 @@
                       "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimestageinstanceid']})",
                       "item/cat_start": "@utcNow()",
                       "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
-                      "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']"
+                      "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                      "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
                     },
                     "authentication": "@parameters('$authentication')"
                   },

@@ -4,7 +4,7 @@
     Fill: =RGBA(0, 0, 0, 0)
     Height: =0
     Icon: =SampleImage
-    OnSelect: =true
+    OnSelect: =Navigate('Process Designer')
     Selected: |-
         ={ Item: {}, AllItems:[], Unsaved: false, State: SelectedState.Edit }
     SelectionMax: =100

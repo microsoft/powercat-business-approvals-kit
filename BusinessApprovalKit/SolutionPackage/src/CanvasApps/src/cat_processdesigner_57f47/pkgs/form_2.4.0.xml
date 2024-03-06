@@ -139,7 +139,7 @@
     <appMagic:propertyDependency input="DefaultMode" output="Mode" />
     <appMagic:propertyDependency input="AcceptsFocus" output="TabIndex" />
   </appMagic:propertyDependencies>
-  <appMagic:insertMetadata>
+  <appMagic:insertMetadata isDeviceOptimized="true">
     <appMagic:category name="Popular" priority="20" />
     <appMagic:category name="Input" priority="150" />
   </appMagic:insertMetadata>
@@ -147,6 +147,8 @@
   <appMagic:displayMetadata>
     <appMagic:section>
       <appMagic:property name="DataSource" serverProvidesValue="true" computedValueType="ConnectedDataSourceName" dependentProperties="Fields" showInCommandBar="true" />
+      <appMagic:dataSourceSelectionCallout dataSourcePropertyName="DataSource" />
+      <appMagic:configureCdsViews propertyToReplace="DataSource" />
       <appMagic:wizardPropertyGroup>
         <appMagic:wizardStep label="##ControlSidebar_PropertiesPanel_Fields_DisplayName##" panelTitle="##ControlSidebar_PropertiesPanel_Fields_DisplayName##" linkedLocation="FieldSelection" computedValueType="FieldSummaryEditFields" propertyInvariantName="Fields" serverProvidesValue="true" showInCommandBar="true" />
       </appMagic:wizardPropertyGroup>
@@ -190,7 +192,7 @@
           <appMagic:previewFlag name="FluentV9ControlsPreview" />
         </appMagic:requiredConditions>
       </appMagic:requirementsMetadata>
-      <appMagic:insertMetadata>
+      <appMagic:insertMetadata isDeviceOptimized="true">
         <appMagic:category name="FluentV9" priority="100" />
       </appMagic:insertMetadata>
       <appMagic:overrideProperties>

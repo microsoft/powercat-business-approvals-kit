@@ -1,0 +1,11 @@
+[
+  {
+    "DataSetName": "default.cds",
+    "IsSampleData": false,
+    "IsWritable": false,
+    "LogicalName": "cat_SettingsLoc",
+    "Name": "SettingsLoc",
+    "Schema": "![ResetTxt:s, SaveTxt:s, btnFridayTxt:s, btnMondayTxt:s, btnSaturdayTxt:s, btnSundayTxt:s, btnThursdayTxt:s, btnTuesdayTxt:s, btnWednesdayTxt:s, busyMsg:s, cbxOutOfOfficeDisabledLbl:s, cbxOutOfOfficeEnabledLbl:s, lblApprovalDelegate:s, lblApprvrBckpDelegate:s, lblBckpDelegateErrorMsg1:s, lblBckpDelegateErrorMsg2:s, lblDelegateErrorMsg:s, lblDelegateNote:s, lblHolidayCalendar:s, lblOutOfOffice:s, lblPreferredNotification:s, lblSelectProfile:s, lblSettingsHeader:s, lblSettingsWorkProfile:s, settingsSaveMsg:s]",
+    "Type": "WebResourceInfo"
+  }
+]

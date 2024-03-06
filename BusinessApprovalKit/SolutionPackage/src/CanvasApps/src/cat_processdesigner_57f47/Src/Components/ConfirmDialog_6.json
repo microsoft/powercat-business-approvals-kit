@@ -109,9 +109,10 @@
         "LayoutName": "",
         "MetaDataIDKey": "",
         "Name": "lblConfirmMessage_2",
+        "OptimizeForDevices": "Off",
         "Parent": "ConfirmDialog_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 710,
+        "PublishOrderIndex": 695,
         "Rules": [
           {
             "Category": "Data",
@@ -481,9 +482,10 @@
             "LayoutName": "",
             "MetaDataIDKey": "",
             "Name": "btnYes_2",
+            "OptimizeForDevices": "Off",
             "Parent": "conConfirmButtons_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 712,
+            "PublishOrderIndex": 697,
             "Rules": [
               {
                 "Category": "Data",
@@ -827,9 +829,10 @@
             "LayoutName": "",
             "MetaDataIDKey": "",
             "Name": "btnNo_2",
+            "OptimizeForDevices": "Off",
             "Parent": "conConfirmButtons_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 713,
+            "PublishOrderIndex": 698,
             "Rules": [
               {
                 "Category": "Data",
@@ -1132,9 +1135,10 @@
         "LayoutName": "",
         "MetaDataIDKey": "",
         "Name": "conConfirmButtons_2",
+        "OptimizeForDevices": "Off",
         "Parent": "ConfirmDialog_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 711,
+        "PublishOrderIndex": 696,
         "Rules": [
           {
             "Category": "Design",
@@ -1307,7 +1311,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638358289386009331",
+    "LastModifiedTimestamp": "638452180047749673",
     "Name": "ConfirmDialog_6",
     "Rules": [
       {
@@ -1389,7 +1393,7 @@
       "Name": "ConfirmText",
       "PropertyDataTypeKey": "String",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 2,
@@ -1413,12 +1417,12 @@
               "ScopeVariableName": "IsConfirmed"
             },
             "Tooltip": "True if Yes is clicked",
-            "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
+            "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
           }
         ]
       },
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"String\",\"EnumString\":\"\",\"Type\":[]}}"
     },
     {
       "Category": 0,
@@ -1427,7 +1431,7 @@
       "Name": "OkOnly",
       "PropertyDataTypeKey": "Boolean",
       "Tooltip": "A custom property",
-      "Type": "{\"Version\":\"1.335\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
+      "Type": "{\"Version\":\"1.337\",\"Type\":{\"Name\":\"Root\",\"Kind\":\"Boolean\",\"EnumString\":\"\",\"Type\":[]}}"
     }
   ],
   "FirstParty": true,
@@ -1438,7 +1442,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638358289386009331",
+  "LastModifiedTimestamp": "638452180047749673",
   "Name": "cbb468bacf8f4bfeb2655fa55313fbdf",
   "OverridableProperties": {},
   "TemplateOriginalName": "7b1eab7f21764779b658df214f56f16c",
