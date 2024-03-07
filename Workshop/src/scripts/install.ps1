@@ -36,7 +36,6 @@ function Invoke-InstallChocoApp {
     }
 }
 
-Invoke-InstallChocoApp "dotnet-6.0-sdk"
 Invoke-InstallChocoApp "dotnet"
 
 try {
@@ -47,6 +46,8 @@ try {
 }
 
 winget install Microsoft.DotNet.SDK.8
+winget install Microsoft.DotNet.Runtime.7
+winget install Microsoft.DotNet.Runtime.6
 winget install -e --id Microsoft.AzureCLI
 dotnet tool install --global Microsoft.PowerApps.CLI.Tool
 dotnet tool install --global SecureStore.Client
