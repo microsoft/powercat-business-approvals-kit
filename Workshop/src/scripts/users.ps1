@@ -575,6 +575,72 @@ function Invoke-SetupUserForWorkshop {
     Install-ApprovalsKit $UserUPN $Environment
 }
 
+function Invoke-CloneEnvironmentForWorkshopUser {
+    param (
+        [Parameter(Mandatory)] [String] $FromUserUPN,
+        [Parameter(Mandatory)] [String] $ToUserUPN
+    )
+
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( $FromUserUPN.IndexOf("@") -lt 0 ) {
+        $FromUserUPN = "$FromUserUPN@$domain"
+    }
+
+    if ( $ToUserUPN.IndexOf("@") -lt 0 ) {
+        $ToUserUPN = "$ToUserUPN@$domain"
+    }
+
+    Invoke-ConfigureUser $FromUserUPN
+    $FromEnvironment = Invoke-UserDevelopmentEnvironment $FromUserUPN
+    $result = Invoke-WaitUnilEnvironmentExists $FromUserUPN $FromEnvironment
+    
+    $started = Get-Date
+    $waiting = (Get-Date).Subtract($started).TotalMinutes
+    while ( $result -ne "true" ) {
+        $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
+        Write-Host "Waiting for flow to complete. Executing $diff"
+        Start-Sleep -Seconds 30
+        $result = Invoke-WaitUnilEnvironmentExists $FromUserUPN $FromEnvironment
+        $waiting = (Get-Date).Subtract($started).TotalMinutes
+
+        if ( $waiting -gt 10 ) {
+            break
+        }
+    }
+
+    Invoke-ConfigureUser $ToUserUPN
+    $ToEnvironment = Invoke-UserDevelopmentEnvironment $ToUserUPN
+    $result = Invoke-WaitUnilEnvironmentExists $ToUserUPN $ToEnvironment
+
+    $started = Get-Date
+    $waiting = (Get-Date).Subtract($started).TotalMinutes
+    while ( $result -ne "true" ) {
+        $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
+        Write-Host "Waiting for flow to complete. Executing $diff"
+        Start-Sleep -Seconds 30
+        $result = Invoke-WaitUnilEnvironmentExists $ToUserUPN $ToEnvironment
+        $waiting = (Get-Date).Subtract($started).TotalMinutes
+
+        if ( $waiting -gt 10 ) {
+            break
+        }
+    }
+
+    pac auth clear
+
+    pac auth create -n Admin -un (Get-SecureValue ADMIN_USER) -p (Get-SecureValue ADMIN_PASSWORD) 
+
+    $source = $FromEnvironment.EnvironmentUrl
+    $dest = $ToEnvironment.EnvironmentUrl
+
+    pac admin copy --source-env $source --target-env $dest --type MinimalCopy
+
+    ## TODO
+    # Fix Connection References
+    # Change App / Flow Ownership
+}
+
 <#
 .SYNOPSIS
     Waits for a development environment to exist.
@@ -607,7 +673,7 @@ function Invoke-WaitUnilEnvironmentExists {
         try {
             $result = Invoke-DevEnvironmentAuthUtility $UserUPN $Environment
             if ( $result ) {
-                return
+                return $result
             } else {
                 $attempts = $attempts + 1
                 Write-Host "Waiting for development environment"
@@ -623,7 +689,7 @@ function Invoke-WaitUnilEnvironmentExists {
 
         if ( $waiting -gt 5 ) {
             Write-Error "Could not find development environment"
-            return
+            return "false"
         }
     }
 }

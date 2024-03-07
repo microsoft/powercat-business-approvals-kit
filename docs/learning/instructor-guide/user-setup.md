@@ -157,14 +157,14 @@ SecureStore create secrets.json --keyfile secret.key
  > 2. ADMIN_APP_ID and ADMIN_APP_SECRET unless want to use Get-AdminAccessToken 
 
 ```pwsh
-SecureStore set ADMIN_USER "admin@contoso.onmicrosoft.com" --keyfile secret.key
-SecureStore set ADMIN_PASSWORD "SomeValue" --keyfile secret.key
-SecureStore set DEMO_USER "first.last@contoso.onmicrosoft.com" --keyfile secret.key
-SecureStore set DEMO_PASSWORD "SomeValue" --keyfile secret.key
-SecureStore set CLIENT_ID "Azure Client id" --keyfile secret.key
-SecureStore set CLIENT_SECRET "Azure Client secret" --keyfile secret.key
-SecureStore set ADMIN_APP_ID "Azure Admin Client id" --keyfile secret.key
-SecureStore set ADMIN_APP_SECRET "Azure Admin Client secret value" --keyfile secret.key
+SecureStore set "ADMIN_USER=admin@contoso.onmicrosoft.com" --keyfile secret.key
+SecureStore set "ADMIN_PASSWORD=SomeValue" --keyfile secret.key
+SecureStore set "DEMO_USER=first.last@contoso.onmicrosoft.com" --keyfile secret.key
+SecureStore set "DEMO_PASSWORD=SomeValue" --keyfile secret.key
+SecureStore set "CLIENT_ID=Azure Client id" --keyfile secret.key
+SecureStore set "CLIENT_SECRET=Azure Client secret" --keyfile secret.key
+SecureStore set "ADMIN_APP_ID=Azure Admin Client id" --keyfile secret.key
+SecureStore set "ADMIN_APP_SECRET=Azure Admin Client secret value" --keyfile secret.key
 ```
 
 ## Creating Users

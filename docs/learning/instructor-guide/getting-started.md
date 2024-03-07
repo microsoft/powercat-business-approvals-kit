@@ -33,6 +33,9 @@ dotnet tool install --global PowerShell
 1. Install SecureStore one option using .NET is
 
 ```pwsh
+
+
+
 dotnet tool install --global SecureStore.Client
 ```
 
@@ -45,7 +48,7 @@ git clone https://www.github/microsoft/powercat-business-approvals-kit.git
 1. Build the .NET library and playwright on Windows
 
 ```pwsh
-cd .\powercat-business-approvals-kit\Workshop\src\installer
+cd .\powercat-business-approvals-kit\Workshop\src\install
 dotnet build
 ./bin/Debug/net7.0/playwright.ps1 install
 ```
@@ -70,7 +73,7 @@ Setup for a class of 20+ students could take up to 20 minutes for each user envi
 
 1. Inside the [Power Automate Portal](https://make.powerautomate.com), create a new hosted machine.
 
-2. Run the Approvals Kit Instructor Machine Setup Clof flow
+2. Run the Approvals Kit Instructor Machine Setup Cloud flow
 
 ## Next
 
