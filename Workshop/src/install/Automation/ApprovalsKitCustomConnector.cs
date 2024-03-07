@@ -30,6 +30,8 @@ namespace Microsoft.PowerPlatform.Demo {
     
             await page.GetByPlaceholder("api.contoso.com").FillAsync(_values["host"]);
 
+            await PowerAutomate.CloseGetStartedIfVisible(page);
+    
             await OpenTab(page, "1. General", "2. Security", "Security");
 
             await page.GetByLabel("Edit").Nth(1).ClickAsync();
@@ -38,7 +40,7 @@ namespace Microsoft.PowerPlatform.Demo {
             await page.GetByPlaceholder("********").FillAsync(_values["clientSecret"]);
             await page.GetByPlaceholder("Resource URL").FillAsync(_values["resourceUrl"]);
 
-            await PowerAutomate.CloseAutomationInADayIfVisible(page);
+            await PowerAutomate.CloseAlertDialog(page);
 
             await page.GetByLabel("Update connector").ClickAsync(new() { Force = true });
 

@@ -404,8 +404,6 @@ function Install-ApprovalsKit {
 
     Install-CreatorKit $Environment
     
-    Enable-Approvals $UserUPN $Environment
-    
     Write-Host "Checking if Approvals kit solution installed"
 
     $assetsPath = [System.IO.Path]::Combine($PSScriptRoot,"..", "..", "assets")
@@ -436,46 +434,44 @@ function Install-ApprovalsKit {
             return
         }
 
-        $settingsFile = [System.IO.Path]::Combine($assetsPath, "BusinessApprovalsKit.json")
+        $settingsFile = [System.IO.Path]::Combine($assetsPath, "BusinessApprovalsKitPackage.json")
 
         if ( -not (Test-Path($settingsFile)) ) {
-            Write-Error "Unable to find BusinessApprovalsKit.json"
+            Write-Error "Unable to find BusinessApprovalsKitPackage.json"
         }
 
         $settings = Get-Content $settingsFile
-        $settings = $settings.replace('#Environment.EnvironmentUrl#', ( [System.UriBuilder]$Environment.EnvironmentURL ).Host )
         $settings = $settings.replace('#shared_approvals#', $approvalConnectionId.Id)
         $settings = $settings.replace('#shared_commondataserviceforapps#', $dataverseConnectionId.Id)
         $settings = $settings.replace('#shared_office365users#', $office365usersConnectionId.Id)
 
-        $tempFile = [System.IO.Path]::Combine($assetsPath, "temp.json")
-        $settings | Set-Content $tempFile
+        $settingsInBytes = [System.Text.Encoding]::UTF8.GetBytes($settings)
+        $fileContentEncoded = [System.Convert]::ToBase64String($settingsInBytes)
 
-        $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
+        $files = (Get-ChildItem -Path $assetsPath -Filter "PowerCAT.PackageDeployer.Package.*.zip")
 
         if ( $files.Count -le 0 ) {
             Write-Host "Downloading latest managed release of Approvals Kit"
             $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/microsoft/powercat-business-approvals-kit/releases/latest" -ContentType "application/json"
-            $download = $releases.assets | Where-Object { $_.name.indexOf('_managed.zip') -ge 0 } | Select-Object -First 1
+            $download = $releases.assets | Where-Object { $_.name.indexOf('PowerCAT.PackageDeployer.Package') -ge 0 } | Select-Object -First 1
            
             $assetFile = [System.IO.Path]::Combine($assetsPath,[System.IO.Path]::GetFileName($download.browser_download_url))
             Invoke-WebRequest -Uri $download.browser_download_url -OutFile $assetFile
             
-            $files = (Get-ChildItem -Path $assetsPath -Filter "BusinessApprovalKit*.zip")
+            $files = (Get-ChildItem -Path $assetsPath -Filter "PowerCAT.PackageDeployer.Package.*.zip")
 
             if ( $files.Count -le 0 ) {
-                Write-Error "Unable to find install solution file"
+                Write-Error "Unable to find install package file"
                 return
             }
         }
 
-        $sourceFile = [System.IO.Path]::Combine( $assetsPath, $files[0].Name )
-        $installFile = [System.IO.Path]::Combine( $assetsPath, "temp.zip" )
-        Copy-Item $sourceFile -Destination $installFile
+        $packageFile = $files[0]
 
-        Invoke-UpdateOAuthSettings $installFile $Environment
+        $enviromentId = $Environment.EnvironmentId
 
-        pac solution import --path $installFile --settings-file $tempFile
+        # Note this commmand must be run on Windows PowerShell to import the package
+        pac package deploy --package  $packageFile --environment $enviromentId --settings BusinessApprovalKit_componentarguments=$fileContentEncoded
     } else {
         Write-Host "Approvals Kit is installed"
     }
@@ -512,9 +508,9 @@ function Invoke-ApprovalsKitPostInstall {
 
     Invoke-ActivateFlows $UserUPN $Environment "BusinessApprovalKit" 
 
-    Invoke-UpdateCustomConnectorReplyUrl $Environment
-
     Invoke-ConfigureApprovalsKitConnector $Environment $UserUPN
+
+    Invoke-UpdateCustomConnectorReplyUrl $Environment
 }
 
 function Install-ContosoCoffee {
@@ -579,6 +575,72 @@ function Invoke-SetupUserForWorkshop {
     Install-ApprovalsKit $UserUPN $Environment
 }
 
+function Invoke-CloneEnvironmentForWorkshopUser {
+    param (
+        [Parameter(Mandatory)] [String] $FromUserUPN,
+        [Parameter(Mandatory)] [String] $ToUserUPN
+    )
+
+    $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+
+    if ( $FromUserUPN.IndexOf("@") -lt 0 ) {
+        $FromUserUPN = "$FromUserUPN@$domain"
+    }
+
+    if ( $ToUserUPN.IndexOf("@") -lt 0 ) {
+        $ToUserUPN = "$ToUserUPN@$domain"
+    }
+
+    Invoke-ConfigureUser $FromUserUPN
+    $FromEnvironment = Invoke-UserDevelopmentEnvironment $FromUserUPN
+    $result = Invoke-WaitUnilEnvironmentExists $FromUserUPN $FromEnvironment
+    
+    $started = Get-Date
+    $waiting = (Get-Date).Subtract($started).TotalMinutes
+    while ( $result -ne "true" ) {
+        $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
+        Write-Host "Waiting for flow to complete. Executing $diff"
+        Start-Sleep -Seconds 30
+        $result = Invoke-WaitUnilEnvironmentExists $FromUserUPN $FromEnvironment
+        $waiting = (Get-Date).Subtract($started).TotalMinutes
+
+        if ( $waiting -gt 10 ) {
+            break
+        }
+    }
+
+    Invoke-ConfigureUser $ToUserUPN
+    $ToEnvironment = Invoke-UserDevelopmentEnvironment $ToUserUPN
+    $result = Invoke-WaitUnilEnvironmentExists $ToUserUPN $ToEnvironment
+
+    $started = Get-Date
+    $waiting = (Get-Date).Subtract($started).TotalMinutes
+    while ( $result -ne "true" ) {
+        $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
+        Write-Host "Waiting for flow to complete. Executing $diff"
+        Start-Sleep -Seconds 30
+        $result = Invoke-WaitUnilEnvironmentExists $ToUserUPN $ToEnvironment
+        $waiting = (Get-Date).Subtract($started).TotalMinutes
+
+        if ( $waiting -gt 10 ) {
+            break
+        }
+    }
+
+    pac auth clear
+
+    pac auth create -n Admin -un (Get-SecureValue ADMIN_USER) -p (Get-SecureValue ADMIN_PASSWORD) 
+
+    $source = $FromEnvironment.EnvironmentUrl
+    $dest = $ToEnvironment.EnvironmentUrl
+
+    pac admin copy --source-env $source --target-env $dest --type MinimalCopy
+
+    ## TODO
+    # Fix Connection References
+    # Change App / Flow Ownership
+}
+
 <#
 .SYNOPSIS
     Waits for a development environment to exist.
@@ -611,7 +673,7 @@ function Invoke-WaitUnilEnvironmentExists {
         try {
             $result = Invoke-DevEnvironmentAuthUtility $UserUPN $Environment
             if ( $result ) {
-                return
+                return $result
             } else {
                 $attempts = $attempts + 1
                 Write-Host "Waiting for development environment"
@@ -627,7 +689,7 @@ function Invoke-WaitUnilEnvironmentExists {
 
         if ( $waiting -gt 5 ) {
             Write-Error "Could not find development environment"
-            return
+            return "false"
         }
     }
 }
@@ -1097,7 +1159,7 @@ function Invoke-OpenBrowser {
         Push-Location
         Set-Location $workshopPath
         $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
-        dotnet $appPath user start --upn $UserUPN --env "https://aka.ms/ppac" --admin "Y" --headless "N" --record "N"
+        dotnet $appPath user start --upn $UserUPN --env "https://aka.ms/ppac" --admin "Y" --headless "N" --record "N" --width "1920" --height "1080" 
         Pop-Location
         return
     }
@@ -1119,13 +1181,15 @@ function Invoke-OpenBrowser {
         $environmentName = "$displayName Dev"
         pac auth clear
 
-        if ( $IsLinux ) {
-            pac auth create -n User -un ${user} -p ${password}
+        $location = (Get-Command pac).Source
+        $pacPath = [System.IO.Path]::GetDirectoryName($location)
+        $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+        $launchNotFound = Test-Path $pacLauncher
+
+        if ( $global:IsLinux -or (-not $launchNotFound) ) {
+            pac auth create -n User -un ${UserUPN} -p ${password}
         } else {
-            location = (Get-Command pac).Source
-            $pacPath = [System.IO.Path]::GetDirectoryName($location)
-            $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
-            & $pacLauncher auth create -n User -un ${user} -p ${password}
+            & $pacLauncher auth create -n User -un ${UserUPN} -p ${password}
         }
 
         $envs = (pac admin list --json | ConvertFrom-Json) | Where-Object { $_.DisplayName -eq $environmentName  }
@@ -1591,6 +1655,33 @@ function Invoke-UpdateCustomConnectorReplyUrl {
         $redirectUrl = ($connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
         Write-Host  $redirectUrl 
 
+        if ( $NULL -eq $redirectUrl ) {
+            $started = Get-Date
+            $waiting = (Get-Date).Subtract($started).TotalMinutes
+            while ( $success.Count -eq 0 ) {
+                $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
+                Write-Host "Waiting for redirect url. Executing $diff"
+                Start-Sleep -Seconds 30
+                $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+                if ( $connectors.value.length -eq 1 ) {
+                    $redirectUrl = ($connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
+                    if ( $NULL -eq $redirectUrl ) {
+                        break
+                    }
+                }
+                $waiting = (Get-Date).Subtract($started).TotalMinutes
+
+                if ( $waiting -gt 10 ) {
+                    break
+                }
+            }
+        }
+
+        if ( $NULL -eq $redirectUrl ) {
+            Write-Error "Missing redirect url in custom connector"
+            return
+        }
+
         if ( -not $app.web.redirectUris.Contains($redirectUrl) ) {
             Write-Host "Adding web redirect"
             $newRedirects = New-Object System.Collections.ArrayList
@@ -1728,6 +1819,73 @@ function Invoke-ConfigureApprovalsKitConnector {
         }
         $data = ( $data | ConvertTo-Json -Depth 100 -compress )
         $environmentId = $Environment.EnvironmentId
-        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "Y"
+        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "N"
     }
+}
+
+<#
+.SYNOPSIS
+Runs a Playwright script with the specified user UPN, environment ID, script file, and data.
+
+.PARAMETER UserUPN
+The user's UPN (user principal name) to run the script as.
+
+.PARAMETER EnvironmentId
+The ID of the environment to run the script in.
+
+.PARAMETER ScriptFile
+The path to the script file to run.
+
+.PARAMETER Data
+The data to pass to the script.
+
+.EXAMPLE
+Invoke-PlaywrightScript -UserUPN "user@example.com" -EnvironmentId "1234" -ScriptFile "C:\Scripts\myScript.ps1" -Data "{'key': 'value'}"
+Runs the Playwright script located at "C:\Scripts\myScript.ps1" with the user UPN "user@example.com", environment ID "1234", and data '{"key": "value"}'.
+
+#>
+function Invoke-PlaywrightScript {
+    param (
+        [Parameter(Mandatory)] [String] $UserUPN,
+        [Parameter(Mandatory)] [String] $EnvironmentId,
+        [Parameter(Mandatory)] [String] $ScriptFile,
+        [Parameter(Mandatory)] [String] $Data,
+        [String] $Headless = "Y",
+        [String] $Json = "N"
+    )
+
+    if ( -not [System.IO.Path]::IsPathRooted($ScriptFile) ) {
+        $ScriptFile = [System.IO.Path]::Join($PSScriptRoot,$ScriptFile)
+    }
+
+    if ( $UserUPN.IndexOf("@") -eq -1 ) {
+        $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+        $UserUPN = "$UserUPN@$domain"
+    }
+
+    #Get the bytes of the data with encode      
+    $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($Data)
+    # Base64 Encode content 
+    $dataEncoded = [System.Convert]::ToBase64String($dataBytes)
+
+    $workshopPath = [System.IO.Path]::Join((Get-AssetPath), "..")
+
+    Push-Location
+    Set-Location $workshopPath
+    $appPath = [System.IO.Path]::Join($PSScriptRoot,"..","install", "bin", "Debug", "net7.0", "install.dll")
+    if ( $Json -eq "Y" ) {
+        $result = dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless $Headless --record "Y" | Out-String
+        $start = $result.IndexOf("{")
+        $end = $result.LastIndexOf("}")
+        if ( ($start -ge 0  ) -and ($end -gt $start) ) {
+            $data = $result.Substring($start,$end-$start+1)
+        } else {
+            $data = @{ error = "No response" } | ConvertTo-Json -Depth 100
+        }
+        
+        return $data
+    } else {
+        dotnet $appPath user script --upn $UserUPN --env $EnvironmentId --file $ScriptFile --data  $dataEncoded --headless $Headless --record "Y"
+    }
+    Pop-Location
 }

@@ -4,6 +4,8 @@ namespace Microsoft.PowerPlatform.Config
         Record,
         Headless,
         Timeout,
-        Admin
+        Admin,
+        Width,
+        Height
     }
 }

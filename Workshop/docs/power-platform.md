@@ -10,10 +10,18 @@ It is important for a demo evaluation as it allows the assigned user of a Power 
 
 This allows developers to test and refine their applications before deploying them to the live environment, which can help to ensure that the application is stable and meets the needs of the business. Additionally, having a dedicated development environment can help to prevent conflicts between developers who may be working on different aspects of the same application.
 
-## Developer Environment Settings
+## Power Platform Setup
 
-Enabled development environment settings to enable features for dependent components to be installed
+You can use a Power Platform Hosted Machine to setup your workshop environment for multiple workshop users.
 
-|Settings | Description |
-|---------|-------------|
-|Enable PCF | Enabling PCF (PowerApps Component Framework) in a Power Platform environment allows developers to create custom controls for their Power Apps using web technologies. This feature provides access to the PCF Gallery and allows developers to create, test, and deploy custom controls within the environment, extending the capabilities of the Power Platform. |
+## Why is this important?
+
+If you want to setup a class size of 20+ students each environment setup could take up to 20 minutes. By using an Power Platform based Virtual Machine you could automate a set of machines without the need to have an active PC connected to the Internet using Power Automate Desktop.
+
+## Create the Machine
+
+In an environment [create a Hosted machine](https://learn.microsoft.com/power-automate/desktop-flows/hosted-machines#create-a-hosted-machine).
+
+## What next
+
+Use our low code Approvals Kit setup solution to use the Hosted machine to automate the setup of developer environments for each workshop user.

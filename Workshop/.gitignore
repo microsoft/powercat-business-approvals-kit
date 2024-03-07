@@ -17,3 +17,4 @@
 **/assets/keys/**
 **/scripts/audio/**
 **/scripts/*.log
+**/*.pdpkg.zip

@@ -27,4 +27,4 @@ These documents provide instructions on how to set up a development environment 
 
 - [Monitor Workshop Progress](./monitor-progress.md) - Discusses how to monitor the progress of workshop users as they complete the learning module
 
-- [Get Feedback](./get-feedback.md) - Discusses options to get feedback from learners on how they found the workshop and collect feedback to improve furture workshop sessions
+- [Get Feedback](./get-feedback.md) - Discusses options to get feedback from learners on how they found the workshop and collect feedback to improve future workshop sessions

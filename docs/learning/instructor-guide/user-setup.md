@@ -31,6 +31,7 @@ One way of managing access to power platform resources is via a Security group. 
 
 ```bash
 pwsh
+cd ./powercat-business-approvals-kit/Workshop
 ```
 
 1. Import the security PowerShell commands from where you install the Approvals Kit Workshop scripts
@@ -69,11 +70,11 @@ The instructor guide assumes that two Microsoft Entra applications are created.
 
 > NOTE: To learn more about [Create a Microsoft Entra application and service principal that can access resources](/entra/identity-platform/howto-create-service-principal-portal) for guidance on  permissions required to register an app.
 
-### Automation Kit Application
+### Approvals Kit Application
 
-The Automation Kit application is used by the Approvals Kit custom connector to provide delegated permissions to access Microsoft Dataverse. The results of this process should be stored in the **CLIENT_ID** and **CLIENT_SECRET** secure variables.
+The Approvals Kit application is used by the Approvals Kit custom connector to provide delegated permissions to access Microsoft Dataverse. The results of this process should be stored in the **CLIENT_ID** and **CLIENT_SECRET** secure variables.
 
-1. Create a new Application following [Register an application with Microsoft Entra ID and create a service principal](/entra/identity-platform/howto-create-service-principal-portal#register-an-application-with-microsoft-entra-id-and-create-a-service-principal)
+1. Create a new Application named **ApprovalsKit** following [Register an application with Microsoft Entra ID and create a service principal](/entra/identity-platform/howto-create-service-principal-portal#register-an-application-with-microsoft-entra-id-and-create-a-service-principal)
 
 1. The default URI of type **Web** and value of **https://global.consent.azure-apim.net/redirect**.
 
@@ -107,7 +108,10 @@ The Install Administration application is used by the instructor guide setup scr
 
 1. Select **Microsoft.Graph**
 
-1. Ensure that API permissions are of type **application** for **User.ReadWrite.Add** and **UserAuthenticationMethod.ReadWrite.All**
+1. Ensure that API permissions are of type **application** for **User.ReadWrite.All** and **UserAuthenticationMethod.ReadWrite.All**
+
+  > [!NOTE]
+  > The API permissions of type application is very important. Permissions of type delegate are the incorrect API permission type.
 
 1. Select grant admin consent for the application by selecting text similar to **Grant admin consent for Contoso**
 
@@ -153,14 +157,14 @@ SecureStore create secrets.json --keyfile secret.key
  > 2. ADMIN_APP_ID and ADMIN_APP_SECRET unless want to use Get-AdminAccessToken 
 
 ```pwsh
-SecureStore set ADMIN_USER "admin@contoso.onmicrosoft.com" --keyfile secret.key
-SecureStore set ADMIN_PASSWORD "SomeValue" --keyfile secret.key
-SecureStore set DEMO_USER "first.last@contoso.onmicrosoft.com" --keyfile secret.key
-SecureStore set DEMO_PASSWORD "SomeValue" --keyfile secret.key
-SecureStore set CLIENT_ID "Azure Client id" --keyfile secret.key
-SecureStore set CLIENT_SECRET "Azure Client secret" --keyfile secret.key
-SecureStore set ADMIN_APP_ID "Azure Admin Client id" --keyfile secret.key
-SecureStore set ADMIN_APP_SECRET "Azure Admin Client secret value" --keyfile secret.key
+SecureStore set "ADMIN_USER=admin@contoso.onmicrosoft.com" --keyfile secret.key
+SecureStore set "ADMIN_PASSWORD=SomeValue" --keyfile secret.key
+SecureStore set "DEMO_USER=first.last@contoso.onmicrosoft.com" --keyfile secret.key
+SecureStore set "DEMO_PASSWORD=SomeValue" --keyfile secret.key
+SecureStore set "CLIENT_ID=Azure Client id" --keyfile secret.key
+SecureStore set "CLIENT_SECRET=Azure Client secret" --keyfile secret.key
+SecureStore set "ADMIN_APP_ID=Azure Admin Client id" --keyfile secret.key
+SecureStore set "ADMIN_APP_SECRET=Azure Admin Client secret value" --keyfile secret.key
 ```
 
 ## Creating Users
@@ -170,6 +174,7 @@ You can optionally create users via the automated scripts for demonstration tena
 1. Ensure that you have the scripts imported
 
 ```pwsh
+cd ~/powercat-business-approvals-kit/Workshop
 . .\src\scripts\users.ps1
 ```
 
@@ -181,7 +186,7 @@ Reset-User (Get-SecureValue DEMO_USER)
 
   > NOTE: Either delegated scope **User.ReadWrite.All** or **Directory.AccessAsUser.All** is required to reset a user's password. In addition to the correct scope, the signed-in user would need sufficient privileges to reset another user's password.
 
-1. (Optional) To setup a group of users, assuming they have the same password the following PowerShell could be used
+1. (Optional) To reset a group of users, assuming they have the same password the following PowerShell could be used
 
 ```pwsh
 "LidiaH","LynneR" | Foreach-Object { 

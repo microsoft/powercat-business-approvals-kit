@@ -210,12 +210,18 @@ function Reset-User {
 
     $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
     if ( [System.String]::IsNullOrEmpty($First) ) {
-        $parts = $UserUPN -Split "@"
-        $firstLast = $parts[0] -Split "\."
-        $First = $firstLast[0].ToLower()
-        $First = $First.Substring(0, 1).ToUpper() + $First.Substring(1)
-        $Last = $firstLast[1].ToLower()
-        $Last = $Last.Substring(0, 1).ToUpper() + $Last.Substring(1)
+        if ( -not [System.String]::IsNullOrEmpty($user.givenName) ) {
+            $First = $user.givenName
+            $Last = $user.surname
+        } else {
+            # Assume that email in format first.last@org.onmicrosoft.com
+            $parts = $UserUPN -Split "@"
+            $firstLast = $parts[0] -Split "\."
+            $First = $firstLast[0].ToLower()
+            $First = $First.Substring(0, 1).ToUpper() + $First.Substring(1)
+            $Last = $firstLast[1].ToLower()
+            $Last = $Last.Substring(0, 1).ToUpper() + $Last.Substring(1)
+        }
     }
     
     if ( [System.String]::IsNullOrEmpty($First) ) {

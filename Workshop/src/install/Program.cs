@@ -39,6 +39,12 @@ class Program
         var headlessOption = new Option<string>("--headless", () => "", "Y to make headless, N if not. If missing will assume headless");
         rootCommand.AddGlobalOption(headlessOption);
 
+        var widthOption = new Option<string>("--width", () => "", "The screen width");
+        rootCommand.AddGlobalOption(widthOption);
+
+        var heightOption = new Option<string>("--height", () => "", "The screen height");
+        rootCommand.AddGlobalOption(heightOption);
+
         var timeoutOption = new Option<int?>("--timeout", () => 2 * 60 * 1000, "Timeout in minutes");
         rootCommand.AddGlobalOption(timeoutOption);
 

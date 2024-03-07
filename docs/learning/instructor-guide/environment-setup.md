@@ -1,7 +1,7 @@
 
 # Environment setup
 
-This section of the Power Platform Business Approvals kit focuses on creating isolated development environments for learners. 
+This section of the Power Platform Business Approvals kit focuses on creating isolated development environments for learners.
 
 ## Prerequisites
 
@@ -34,6 +34,11 @@ Use can use the following PowerShell scripts to provision developer environments
 >
 > . .\src\scripts\test.ps1
 
+```pwsh
+cd ~/powercat-business-approvals-kit/Workshop
+. .\src\scripts\test.ps1
+```
+
 ### Invoke-SetupUserForWorkshop
 
 This command will setup the workshop in a Development environment for a user. If the user does not exist it will be created.
@@ -42,9 +47,40 @@ This command will setup the workshop in a Development environment for a user. If
 Invoke-SetupUserForWorkshop (Get-SecureValue DEMO_USER)
 ```
 
+This setup process will take around 20 minutes to execute.
+
+## Verify Setup
+
+After the demo user has been setup using Invoke-SetupUserForWorkshop
+
+1. Open scripts folder
+
+```pwsh
+pwsh
+cd ~/powercat-business-approvals-kit/Workshop/src/scripts
+```
+
+2. Ensure Pester module installed
+
+```pwsh
+Get-Module -Name Pester -ListAvailable
+```
+
+3. If Pester module is not installed
+
+```pwsh
+Install-Module -Name Pester -Force
+```
+
+1. Run scripts
+
+```pwsh
+Invoke-Pester
+```
+
 ### Reset-UserDevelopmentEnvironment
 
-This command will setup the workshop in a Development environment for a user. If a development environment exists it will be deleted and recreated.
+This optional command will setup the workshop in a Development environment for a user. If a development environment exists it will be deleted and recreated.
 
 ```pwsh
 Reset-UserDevelopmentEnvironment (Get-SecureValue DEMO_USER)
@@ -69,7 +105,7 @@ The following steps discuss how to setup en environment using an Azure VM. This 
 1. Copy setup script
 
 ```bash
-cp ~/powercat-business-approvals-kit/Workshop/src/scripts/setup.sh .
+cp ~/powercat-business-approvals-kit/Workshop/src/scripts/setup.sh ~/
 ```
 
 1. Enable execution of setup
