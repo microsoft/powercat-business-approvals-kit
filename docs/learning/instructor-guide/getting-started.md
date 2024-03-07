@@ -6,10 +6,9 @@ The Automation kit includes a set of automation scripts to help you set up isola
 This guide assumes that you use one of the following methods to set up and run the automation scripts:
 
 - **Local install** - you have the ability to install the required components on your local environment.
-- **Docker install** - You have the ability to run and build a docker image to install components for learners.
-- **Azure Cloud Virtual Machine** - Use Azure Cloud Shell and Azure Virtual Machine to install setup components.
+- **Power Platform Hosted Machine** - Use Power Platform Hosted Machine to install setup components.
 
-The installer components are based on cross platform tools. The required tools include PowerShell, Azure CLI, Power Platform CLI and the .NET SDK you could make your choice from supported Windows, macOS or Linux based operating systems.
+The installer components are based on cross platform tools. The required tools include PowerShell, Azure CLI, Power Platform CLI and the .NET SDK. Some of the components like the package install require Windows.
 
 ## Local install
 
@@ -59,268 +58,19 @@ dotnet build
 
 1. Ensure that latest managed release of Business Approvals kit has been downloaded to the Workshop assets folder.
 
-## Docker install
+## Power Platform Hosted Machine
 
-A Docker setup is a way to run your application with a known set of tools in a contained environment. Using Docker ensures that your application runs consistently across different systems. For example, it helps provide isolation from underlying infrastructure like operating system or library versions.
-
-You don't need to install all the tools on your local computer because everything is contained within the Docker container.
-
-Another benefit of a Docker setup is that you can run multiple installations at the same time, as each installation is isolated within its own container. Multiple containers can improve efficiency and reduce the time needed to perform installations or updates.
-
-Overall, the Docker based install is a helpful tool for developers and system administrators who need to manage complex software environments across multiple systems.
-
-### Setup steps
-
-```pwsh
-cd Workshop
-docker build . -t automation-kit-setup
-```
-
-### Getting started
-
-Once a docker image is created the following commands are examples of using the docker image.
-
-1. Start the docker image
-
-```pwsh
-docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure automation-kit-setup pwsh
-```
-
-> [!NOTE] This command assumes the following:
-> - You have a folder named **dockerazure** that will be used to store Azure CLI state
-> - You have a folder named **secure** that will be used to store secure values used by the setup process
-
-2. In the docker image import the users script
-
-```pwsh
-. .\scripts\users.ps1
-```
-
-3. Verify that can read configured secure values by running the following PowerShell command inside the docker container. See [User setup](./user-setup.md) for more information on secure values
-
-```pwsh
-Invoke-AzureLogin
-Get-SecureValue CLIENT_ID
-```
-
-4. Optional step to run inside the docker container pwsh after setting up and completing the two stage approval for DEMO_USER. 
-
-```pwsh
-cd scripts
-Invoke-Pester
-```
-
-5. Optional setup a Azure login using container
-
-```pwsh
-docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure automation-kit-setup
-```
-
-6. Optional setup a demo workshop environment for a user using environment variable INSTALL_USER
-
-```pwsh
-docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure -e INSTALL_USER=adelev automation-kit-setup
-```
-
-7. Optional reset a demo workshop environment for a user using RESET environment variable of Y.
-
-```pwsh
-docker run -it --rm -v c:\Users\youruser\secure:/setup/secure -v C:\Users\youruser\dockerazure:/root/.azure -e INSTALL_USER=adelev -e RESET=Y automation-kit-setup
-```
-
-## Azure Cloud Virtual Machine
-
-One approach to allow you to create development environments for learners is to use a small Azure Linux based Virtual machine to assist you.
+One approach to allow you to create development environments for learners is to use a Power Platform Hosted Machine.
 
 ### Setup for scale
 
-Setup for a class of 20 + students could take up to 20 minutes for each user environment. Using an Azure Cloud based Virtual Machine, you can automate a setup of machines without the need to have an active PC connected to the Internet.
+Setup for a class of 20+ students could take up to 20 minutes for each user environment. Using an Power Platform Hosted Machine, you can automate a setup of machines without the need to have an active PC connected to the Internet.
 
 ### Installation steps
 
-1. Inside the [Azure portal](https://portal.azure.com), start a new bash based Azure Cloud Shell.
+1. Inside the [Power Automate Portal](https://make.powerautomate.com), create a new hosted machine.
 
-> NOTE: If Azure Cloud Shell is new to you can use [Overview of Azure Cloud Shell](/azure/cloud-shell/overview) and the [Quickstart](/azure/cloud-shell/quickstart) as useful starting points.
-
-2. Use the following Bash script inside the Azure Cloud Shell to create a resource group, create and start a Virtual Machine (VM)
-
-```bash
-vmName="ApprovalsKitSetupVM"
-exists=`az group exists --name ApprovalsKitSetup`
-if [ $exists = 'false' ];
-then
-  az group create --name ApprovalsKitSetup --location westus
-else
-  echo 'Group already exists'
-fi
-match=`az vm list -d -o table --query "[?name=='$vmName']"`
-if [ "$match" = "" ];
-then
-  az vm create --resource-group ApprovalsKitSetup --name "$vmName" --image "Canonical:0001-com-ubuntu-server-jammy:22_04-lts-gen2:latest" --size "Standard_B2s" --storage-sku Standard_LRS --os-disk-size-gb 63 --public-ip-sku Standard --admin-username accadmin --generate-ssh-keys --ssh-key-value ~/.ssh/azurevm-$vmName.pub --storage-sku Standard_LRS
-else
-  echo 'VM Already exists'
-fi
-$running=`az vm list -d --query "[?powerState=='VM running' && name=='$vmName']" -o table`
-if [  "$running" = "" ];
-then
-    az vm start  --resource-group ApprovalsKitSetup --name "$vmName"
-fi
-```
-
-3. Create bash script to start a ssh session to get command line to your virtual machine
-
-```bash
-cat << \EOF > start.sh
-vmName="ApprovalsKitSetupVM"
-ip=`az vm list-ip-addresses --resource-group ApprovalsKitSetup --name $vmName --query "[].virtualMachine.network.publicIpAddresses[0].ipAddress" --output tsv`
-ssh -i ~/.ssh/azurevm-$vmName "accadmin@$ip" -t -l bash
-EOF
-```
-
-4. Make start script executable
-
-```bash
-chmod +x start.sh
-```
-
-5. Start ssh session
-
-```bash
-./start.sh
-```
-
-6. In the SSH session install the Azure CLI using the following script .
-
-```bash
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-```
-
-7. Restart you virtual machine.
-
-8. Wait for your machine to start again and have a status of running.
-
-9. Create a start script.
-
-```bash
-./start.sh
-```
-
-10. Install updates
-
-```bash
-sudo apt update
-sudo apt-get dist-upgrade
-```
-
-10. Remove any existing dotnet
-
-```bash
-sudo apt remove -y 'dotnet*' 'aspnet*' 'netstandard*'
-sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
-```
-
-11. Install Microsoft package repositoryand update
-
-```bash
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-sudo apt update
-```
-
-12. Install the .Net runtime and SDK inside the Virtual Machine bash shell
-
-```bash
-sudo apt install -y dotnet-runtime-6.0 dotnet-sdk-7.0 unzip
-
-cat << \EOF >> ~/.bash_profile
-# Add .NET Core SDK tools
-export PATH="$PATH:/home/accadmin/.dotnet/tools"
-EOF
-```
-
-> [!NOTE]
-> |Command  |Description  |
-> |---------|---------|
-> |`sudo`    |This command is used to run a command with elevated privileges. It allows a user to execute a command as the root user or another user with higher privileges.      |
-> |`dotnet tool install`    |This command is used to install a .NET Core global tool. Global tools are .NET Core console applications that are installed on your system and can be accessed from any directory in the command prompt.         |
-> |`.bash_profile`| This file is a script that is executed whenever a new terminal session is started in Bash. Use it to set environment variables, define aliases, and perform other customizations to the shell environment.|
-
-13. Close the ssh session and reopen. Install the required tools inside the Virtual Machine bash shell
-
-```bash
-dotnet tool install --global PowerShell --version 7.3.10
-dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-dotnet tool install --global SecureStore.Client
-```
-
-> [!NOTE]
-> 1. Version 7.3.10 is used to work with .Net 7.0 SDK
->
-> 2. Command notes
->
-> |Command  |Description  |
-> |---------|---------|
-> |`dotnet tool install`    |This command is used to install a .NET Core global tool. Global tools are .NET Core console applications that are installed on your system and can be accessed from any directory in the command prompt.         |
-
-14. Install PowerShell using steps from https://learn.microsoft.com/powershell/scripting/install/install-ubuntu
-
-15. Close the ssh session and reopen a new session using ```./start.sh``` from the Azure Cloud shell
-
-16. Clone the Approvals Kit GitHub repository inside the ssh session.
-
-```bash
-git clone https://www.github.com/microsoft/powercat-business-approvals-kit.git
-```
-
-> [!NOTE]
-> If git clone is not an option, you could download the repository as a zip file upload the zip file to your Cloud Shell. Then use ```scp -i ~/.ssh/azurevm-$vmName powercat-business-approvals-kit-main.zip "accadmin@$ip":/home/accadmin```
-
-17. Set up the installer app and install dependencies
-
-> [!NOTE]
-> Playwright is an open-source solution for automating web browsers. It is used by the installer to automate interactive tasks as a workshop user account. [Playwright documentation](https://playwright.dev/docs/intro) provides official documentation for Playwright. It provides a comprehensive guide to using the library, including installation instructions, API reference, and examples
-
-```pwsh
-pwsh
-Push-Location
-cd powercat-business-approvals-kit/Workshop/src/install
-dotnet build
-pwsh ./bin/Debug/net7.0/playwright.ps1 install
-pwsh ./bin/Debug/net7.0/playwright.ps1 install-deps
-Pop-Location
-```
-
-> [!NOTE]
-> If you are using zip file copied via scp use the command ```unzip powercat-business-approvals-kit-main.zip``` and move the folder name ```mv powercat-business-approvals-kit-main powercat-business-approvals-kit```
-
-## Verify install
-
-Independent of which method you selected each of the following commands should be able to run to verify successful install of components needed to get started.
-
-1. Power Platform CLI is installed
-
-```pwsh
-pac --help
-```
-
-1. Azure CLI is installed
-
-```pwsh
-az --version
-```
-
-1. PowerShell is installed
-
-```pwsh
-pwsh --version
-```
-
-1. Secure Store is installed
-
-```powershell
-SecureStore --version
-```
+2. Run the Approvals Kit Instructor Machine Setup Clof flow
 
 ## Next
 

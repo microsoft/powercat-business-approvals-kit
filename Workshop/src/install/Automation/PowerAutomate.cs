@@ -128,7 +128,7 @@ namespace Microsoft.PowerPlatform.Demo {
         {
             await solutionFrame.Locator("[data-test-id=\"newSolution\"]").ClickAsync();
 
-            await CloseAutomationInADayIfVisible(page);
+            await CloseAlertDialog(page);
  
             var displayName = solutionFrame.Locator("[data-test-id=\"NewSolutionPanel\"]").GetByLabel("Display name");
             var solutionName = "Contoso Coffee Approvals";
@@ -299,21 +299,21 @@ namespace Microsoft.PowerPlatform.Demo {
             await solutionFrame.GetByLabel("Organization").ClickAsync();
         }
 
-        public static async Task CloseAutomationInADayIfVisible(IPage page) {
-            if ( await page.GetByLabel("Automation in a Day").IsVisibleAsync() ) {
-                await page.GetByLabel("Automation in a Day").GetByLabel("Close").ClickAsync();
-            }
-            if ( await page.GetByText("Automation in a Day").IsVisibleAsync() ) {
-                await page.GetByText("Automation in a Day").GetByLabel("Close").ClickAsync();
+        public static async Task CloseAlertDialog(IPage page) {
+            if ( await page.Locator("//*[@role='alertdialog']").IsVisibleAsync() ) {
+                await page.Locator("//*[@role='alertdialog']").GetByLabel("Close").ClickAsync();
             }
         }
 
-        public static async Task CloseAutomationInADayIfVisible(IFrameLocator page) {
-            if ( await page.GetByLabel("Automation in a Day").IsVisibleAsync() ) {
-                await page.GetByLabel("Automation in a Day").GetByLabel("Close").ClickAsync();
+         public static async Task CloseGetStartedIfVisible(IPage page) {
+            if ( await page.GetByLabel("Get started").IsVisibleAsync() ) {
+                await page.GetByLabel("Get started").ClickAsync();
             }
-            if ( await page.GetByText("Automation in a Day").IsVisibleAsync() ) {
-                await page.GetByText("Automation in a Day").GetByLabel("Close").ClickAsync();
+        }
+
+        public static async Task CloseAlertDialog(IFrameLocator page) {
+            if ( await page.Locator("//*[@role='alertdialog']").IsVisibleAsync() ) {
+                await page.Locator("//*[@role='alertdialog']").GetByLabel("Close").ClickAsync();
             }
         }
 

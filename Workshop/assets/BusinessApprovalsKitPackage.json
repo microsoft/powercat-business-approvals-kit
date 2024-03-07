@@ -1,0 +1,26 @@
+[
+    {
+        "@odata.type": "Microsoft.Dynamics.CRM.connectionreference",
+        "connectionReferenceDisplayName": "Business Approval Kit | Approvals",
+        "connectionReferenceLogicalName": "cat_BusinessApprovalKitApprovals",
+        "description": null,
+        "connectorId": "/providers/Microsoft.PowerApps/apis/shared_approvals",
+        "connectionId": "#shared_approvals#"
+    },
+    {
+        "@odata.type": "Microsoft.Dynamics.CRM.connectionreference",
+        "connectionReferenceDisplayName": "Business Approval Kit | Dataverse",
+        "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse",
+        "description": null,
+        "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+        "connectionId": "#shared_commondataserviceforapps#"
+    },
+    {
+        "@odata.type": "Microsoft.Dynamics.CRM.connectionreference",
+        "connectionReferenceDisplayName": "Business Approval Kit | O365 Users",
+        "connectionReferenceLogicalName": "cat_BusinessApprovalKitO365Users",
+        "description": null,
+        "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_office365users",
+        "connectionId": "#shared_office365users#"
+    }
+]

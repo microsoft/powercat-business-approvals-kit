@@ -111,12 +111,14 @@ class UtilityMethods {
         Write-Host "Authenticating pac cli as $displayName"
         pac auth clear
 
-        if ( $global:IsLinux ) {
+        $location = (Get-Command pac).Source
+        $pacPath = [System.IO.Path]::GetDirectoryName($location)
+        $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+        $launchNotFound = Test-Path $pacLauncher
+
+        if ( $global:IsLinux -or (-not $launchNotFound) ) {
             pac auth create --name User --username $UserUPN --password $password
-        } else {
-            $location = (Get-Command pac).Source
-            $pacPath = [System.IO.Path]::GetDirectoryName($location)
-            $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+        } else { 
             & $pacLauncher auth create --name User --username $UserUPN --password $password
         }
 
@@ -245,12 +247,15 @@ class UtilityMethods {
 
         if ( $match.Count -eq 0 ) {
             $password = [UtilityMethods]::GetSecureValue("DEMO_PASSWORD")
-            if ( $global:IsLinux ) {
+
+            $location = (Get-Command pac).Source
+            $pacPath = [System.IO.Path]::GetDirectoryName($location)
+            $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
+            $launchNotFound = Test-Path $pacLauncher
+    
+            if ( $global:IsLinux -or (-not $launchNotFound) ) {
                 pac auth create -n User -un $UserUPN -p $password -env $Environment.EnvironmentId
             } else {
-                $location = (Get-Command pac).Source
-                $pacPath = [System.IO.Path]::GetDirectoryName($location)
-                $pacLauncher = [System.IO.Path]::Combine($pacPath, "pac.launcher.exe")
                 & $pacLauncher pac auth create -n User -un $UserUPN -p $password -env $Environment.EnvironmentId
             }
         }
@@ -359,16 +364,30 @@ class UtilityMethods {
             }
         }
     
-        if ( [System.String]::IsNullOrEmpty($First) ) {
-            $parts = $UserUPN -Split "@"
-            $firstLast = $parts[0] -Split "\."
-            $First = $firstLast[0].ToLower()
-            $First = $First.Substring(0, 1).ToUpper() + $First.Substring(1)
-            $Last = $firstLast[1].ToLower()
-            $Last = $Last.Substring(0, 1).ToUpper() + $Last.Substring(1)
-        }
-    
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
+        if ( [System.String]::IsNullOrEmpty($First) ) {
+            if ( -not [System.String]::IsNullOrEmpty($user.givenName) ) {
+                $First = $user.givenName
+                $Last = $user.surname
+            } else {
+                # Assume that email in format first.last@org.onmicrosoft.com
+                $parts = $UserUPN -Split "@"
+                $firstLast = $parts[0] -Split "\."
+                $First = $firstLast[0].ToLower()
+                $First = $First.Substring(0, 1).ToUpper() + $First.Substring(1)
+                $Last = $firstLast[1].ToLower()
+                $Last = $Last.Substring(0, 1).ToUpper() + $Last.Substring(1)
+            }
+        }
+        
+        if ( [System.String]::IsNullOrEmpty($First) ) {
+            $name = "$First $Last"
+        } else {
+            if ( -not ($NULL -eq $user) ) {
+                $name = $user.displayName
+            }
+        }
+
         $name = "$First $Last"
         if ( $NULL -eq $user ) {
             Write-Host "Creating $name"

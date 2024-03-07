@@ -10,8 +10,8 @@ Thank you for choosing this workshop content to support your learning journey. I
 
 ## Further Reading
 
-- [Azure Setup](./docs/azure-setup.md) - Investigate using an Azure VM to assist you with setup
+- [Power Platform Setup](./docs/power-platform.md) - Investigate using an Power Platform to assist you with workshop setup
 - [Issues](./docs/issues.md) - Investigate or contribute to documentation issues with you may encounter as an instructor setting up and managing a workshop.
-- [Power Platform](./docs/power-platform.md) - Read further information on Power Platform setup and configration for the workshop.
+- [Power Platform](./docs/power-platform.md) - Read further information on Power Platform setup and configuration for the workshop.
 - [Security](./docs/security.md) - Investigate how to authenticate and setup for a workshop as instructor
 - [Users](./docs/) - Setup users and environments for workshop users.
