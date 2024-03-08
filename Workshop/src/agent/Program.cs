@@ -62,7 +62,7 @@ app.MapPost("/start", async (UserSetup info) => {
     job.OutputDataReceived += ResponseOutputHandler;
     job.Exited += (sender, args) => {
         Console.WriteLine("Exit");
-        current.Log.Dispose();
+        current?.Log.Dispose();
         data.Clear();
         current = null;
     };
