@@ -36,7 +36,6 @@ function Invoke-InstallChocoApp {
     }
 }
 
-Invoke-InstallChocoApp "dotnet-6.0-sdk"
 Invoke-InstallChocoApp "dotnet"
 
 try {
@@ -47,9 +46,24 @@ try {
 }
 
 winget install Microsoft.DotNet.SDK.8
+winget install Microsoft.DotNet.Runtime.7
+winget install Microsoft.DotNet.Runtime.6
 winget install -e --id Microsoft.AzureCLI
-dotnet tool install --global Microsoft.PowerApps.CLI.Tool
 dotnet tool install --global SecureStore.Client
+
+Push-Location
+cd $env:TEMP
+Invoke-WebRequest -Uri https://aka.ms/PowerAppsCLI
+            
+$files = (Get-ChildItem -Filter "powerapps-cli*.msi")
+
+if ($files.Length -gt 0) {
+    Write-Host "Installing PAC"
+    Msiexec /i $files[0] /qb! /l*v install.log 
+} else {
+    Write-Error "Unable to install pac"
+}
+Pop-Location
 
 try {
     pwsh --verion | Out-Null
