@@ -42,10 +42,15 @@ app.MapPost("/status", () => {
 
 app.MapPost("/stop", () => {
     if ( current != null ) {
-        current.Job.Kill();
+        current.Job?.Kill();
+    }
+    if ( validate != null ) {
+        validate.Job?.Kill();
     }
     data.Clear();
+    json.Clear();
     current = null;
+    validate = null;
 });
 
 app.MapPost("/validate", async (UserSetup info) => {
