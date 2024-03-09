@@ -1,7 +1,8 @@
 using System.Diagnostics;
 using System.Reflection;
+using System.Net;
 using System.Text;
-
+using System.Web.Http;
 
 if ( args.Length > 0 && args[0] == "kill" ) {
     var match = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
@@ -90,7 +91,7 @@ app.MapPost("/validate", async (UserSetup info) => {
    job?.BeginOutputReadLine();
 });
 
-app.MapPost("/result", () => {
+app.MapPost("/result", (HttpRequest request, HttpResponse response) => {
     if ( validate != null ) {
         throw new HttpResponseException(HttpStatusCode.NotFound);
     }
@@ -98,9 +99,7 @@ app.MapPost("/result", () => {
     var jsonResult = json.ToString();
     if (!string.IsNullOrEmpty(jsonResult) && jsonResult != "{}")
     {
-        var response = this.Request.CreateResponse(HttpStatusCode.OK);
-        response.Content = new StringContent(jsonResult, Encoding.UTF8, "application/json");
-        return response;
+        return Results.Text(jsonResult, "application/json");
     }
 
     throw new HttpResponseException(HttpStatusCode.NotFound);
