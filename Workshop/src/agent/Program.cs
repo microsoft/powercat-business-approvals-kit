@@ -54,6 +54,10 @@ app.MapPost("/stop", () => {
 });
 
 app.MapPost("/validate", async (UserSetup info) => {
+    if ( validate != null ) {
+        validate.Job?.Kill();
+    }
+
     string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
     json.Clear();
@@ -88,13 +92,25 @@ app.MapPost("/validate", async (UserSetup info) => {
 
 app.MapPost("/result", () => {
     if ( validate != null ) {
-        return Results.Json("{}"); 
-    } else {
-        return Results.Json(json.ToString()); 
+        throw new HttpResponseException(HttpStatusCode.NotFound);
     }
+
+    var jsonResult = json.ToString();
+    if (!string.IsNullOrEmpty(jsonResult) && jsonResult != "{}")
+    {
+        var response = this.Request.CreateResponse(HttpStatusCode.OK);
+        response.Content = new StringContent(jsonResult, Encoding.UTF8, "application/json");
+        return response;
+    }
+
+    throw new HttpResponseException(HttpStatusCode.NotFound);
 });
 
 app.MapPost("/start", async (UserSetup info) => {
+    if ( current != null ) {
+        current.Job?.Kill();
+    }
+
     string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
     var job = new Process()
