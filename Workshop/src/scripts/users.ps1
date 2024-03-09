@@ -504,6 +504,10 @@ function Invoke-ApprovalsKitPostInstall {
         Invoke-SaveUserEnvironment $UserUPN $Environment
     }
 
+    if (Get-Member -inputobject $Environment -name "error" -Membertype Properties) {
+        return $Environment | ConvertTo-Json
+    }
+
     Invoke-PublishModelDrivenApp $Environment "cat_BusinessApprovalManagement"
 
     Invoke-ActivateFlows $UserUPN $Environment "BusinessApprovalKit" 
@@ -526,6 +530,10 @@ function Install-ContosoCoffee {
             return $Environment | ConvertTo-Json
         } 
         Invoke-SaveUserEnvironment $UserUPN $Environment
+    }
+
+    if (Get-Member -inputobject $Environment -name "error" -Membertype Properties) {
+        return $Environment | ConvertTo-Json
     }
 
     Write-Host "Checking if contoso coffee solution exists"
@@ -562,10 +570,12 @@ function Invoke-SetupUserForWorkshop {
     }
 
     if ( $NULL -eq $Environment ) {
-        
-
         Invoke-ConfigureUser $UserUPN
         $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    }
+
+    if (Get-Member -inputobject $Environment -name "error" -Membertype Properties) {
+        return $Environment | ConvertTo-Json
     }
 
     Invoke-WaitUnilEnvironmentExists $UserUPN $Environment
@@ -573,6 +583,92 @@ function Invoke-SetupUserForWorkshop {
     Install-ContosoCoffee $UserUPN $Environment
 
     Install-ApprovalsKit $UserUPN $Environment
+}
+
+function Invoke-ValidateEnvironment {
+    param (
+        [Parameter(Mandatory)] $UserUPN
+    )
+
+    if ( -not ([System.String]::IsNullOrEmpty($UserUPN)) ) {
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
+        $Environment = Invoke-UserDevelopmentEnvironment $UserUPN
+    } else {
+        $Environment = Invoke-UserDevelopmentEnvironment (Get-SecureValue "DEMO_USER")
+    }
+
+    $token=(az account get-access-token --resource=$($Environment.EnvironmentUrl) --query accessToken --output tsv)
+    $headers = @{Authorization="Bearer $token"}
+    $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
+    
+    $clientId = (Get-SecureValue CLIENT_ID)
+
+    $app = (az ad app show --id $clientId | ConvertFrom-Json)
+
+    $result = @{
+        connectorCount = $connectors.value.length
+        environmentUrl = $Environment.EnvironmentUrl
+        clientId = ""
+        resourceId = ""
+        redirectUrl = ""
+        valid = $False
+        operations = ""
+        checks = @{}
+    }
+
+    if ( $connectors.value.length -eq 1 ) {
+        $parameters = ($connectors.value[0].connectionparameters | ConvertFrom-Json )
+        $result.clientId = $parameters.token.oAuthSettings.clientId
+        $result.azureResourceId = $parameters.token.oAuthSettings.properties.AzureActiveDirectoryResourceId = $Environment.EnvironmentUrl
+        $result.tenantId = $parameters.token.oAuthSettings.customParameters.tenantId.value
+        $result.resourceUri = $parameters.token.oAuthSettings.customParameters.resourceUri.value 
+        $result.redirectUrl = ( $connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
+        $result.checks["Redirect Found"] = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
+    }
+
+    if ( $result.redirectUrl.Length -gt 0 -and -not ($result.redirectFound) ) {
+        Invoke-UpdateCustomConnectorReplyUrl $Environment $UserUPN
+        $app = (az ad app show --id $clientId | ConvertFrom-Json)
+        $result.checks["Redirect Found"] = ($app.web.redirectUris | Where-Object { $_ -eq $result.redirectUrl}).Count -eq 1
+    }
+
+    if ( $connectors.value.length -eq 1 ) {
+        $connectionId = $connectors.value[0].connectorinternalid
+        $environmentId = $Environment.EnvironmentId
+        $connections = Get-Connections($Environment)
+
+        $data = (@{
+            user = $UserUPN
+            approvalsConnectionCount = ( $connections | Where-Object { $_.API.IndexOf("shared_cat-5fapprovals-20kit") -gt 0 -and $_.Status -eq "Connected" }).Count.ToString()
+            editUrl = "https://make.powerautomate.com/environments/$environmentId/connections/available/custom/$connectionId/edit/general"
+        } | ConvertTo-Json -Depth 100 -Compress )
+        $connectorResult = (Invoke-PlaywrightScript $UserUPN $environmentId "validate-approvals-kit-custom-connector.csx" $data "Y" "Y" | ConvertFrom-Json)
+        $result.operations = $connectorResult.operations
+        $result.checks["Found connector"] = $True
+        $result.checks["Found operations"] = $result.operations -eq "CreateWorkflowInstance, GetApprovalDataFields"
+        $result.checks["Get Workflows"] = $connectorResult.status -eq "(200)"
+    } else {
+        $result.checks["Found connector"] = $False
+    }
+
+    $result.checks["Client Id Match"] = $result.clientId -eq (Get-SecureValue "CLIENT_ID")
+    $result.checks["Resource Id Match"] = $result.azureResourceId -eq $Environment.EnvironmentUrl
+    $result.checks["Resource Uri"] = $result.azureResourceId -eq $Environment.EnvironmentUrl
+
+    if ( `
+        (
+            $result.checks.GetEnumerator() | Where-Object {
+                $_.Value -eq $False
+            }
+        ).Count -eq 0
+    ) {
+        $result.valid = $true
+    }
+
+    return $result
 }
 
 function Invoke-CloneEnvironmentForWorkshopUser {
@@ -1145,6 +1241,11 @@ function Invoke-OpenBrowser {
         $Environment,
         [System.Boolean] $Admin = $False
     )
+
+    if ( $UserUPN.IndexOf("@") -eq -1 ) {
+        $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
+        $UserUPN = "$UserUPN@$domain"
+    }
 
     if ( $Admin ) {
         $password = Get-SecureValue "ADMIN_PASSWORD"

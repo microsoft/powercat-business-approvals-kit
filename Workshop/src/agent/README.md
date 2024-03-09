@@ -52,3 +52,51 @@ Which will return JSON response similar to the following
 ```pwsh
  Invoke-RestMethod -Uri http://localhost:8000/stop -Method POST
 ```
+
+### Validate
+
+To start a workshop for user to validate the state you can start the check by posting the following message
+
+```pwsh
+$data = @{ User = "isaiahl" }
+Invoke-RestMethod -Uri http://localhost:8000/validate -Method POST -ContentType "application/json" -Body ($data|ConvertTo-Json)
+```
+
+### Validation Results
+
+Request validation results
+
+```pwsh
+Invoke-RestMethod -Uri http://localhost:8000/result -Method POST -ContentType "application/json"
+```
+
+Which will return empty object or response if results found
+
+```json
+{}
+```
+
+```json
+{  
+  "clientId": "a1230000-1111-2222-33333-444455556666",
+  "tenantId": "common",
+  "resourceUri": "https://yourenv.crm.dynamics.com",
+  "redirectUrl": "https://global.consent.azure-apim.net/redirect/cat-5fapprovals-20kit-123456789012345678",
+  "azureResourceId": "https://yourenv.crm.dynamics.com/",
+  "operations": "CreateWorkflowInstance, GetApprovalDataFields",
+  "checks": {
+        "checks": {
+            "Resource Id Match": true,
+            "Client Id Match": true,
+            "Redirect Found": true,
+            "Found connector": true,
+            "Get Workflows": true,
+            "Found operations": true,
+            "Resource Uri": true  
+          },
+          "connectorCount": 1,
+          "environmentUrl": "https://yourenv.crm.dynamics.com/",
+          "valid": true
+    }
+}
+```

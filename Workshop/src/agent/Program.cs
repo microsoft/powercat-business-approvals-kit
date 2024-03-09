@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
+
 
 if ( args.Length > 0 && args[0] == "kill" ) {
     var match = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
@@ -28,7 +30,9 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 CurrentJob? current = null;
+CurrentJob? validate = null;
 var data = new List<String>();
+var json = new StringBuilder();
 
 app.MapPost("/status", () => {
     SetupStatus status = new(current != null,String.Join('\r',data).Replace("\r","\r\n"), current?.Started);
@@ -42,6 +46,47 @@ app.MapPost("/stop", () => {
     }
     data.Clear();
     current = null;
+});
+
+app.MapPost("/validate", async (UserSetup info) => {
+    string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+    json.Clear();
+
+    var job = new Process()
+    {
+        StartInfo = new ProcessStartInfo() { 
+            FileName = "pwsh",
+            Arguments = $"./validate.ps1 {info.User}", 
+            WorkingDirectory = Path.Combine(assemblyFolder,"..","..", "..","..","scripts"),
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        },
+        EnableRaisingEvents = true
+    };
+    job.OutputDataReceived += ValidationResponseOutputHandler;
+    job.Exited += (sender, args) => {
+        Console.WriteLine("Exit");
+        validate?.Log.Dispose();
+        data.Clear();
+        validate = null;
+    };
+    
+    var startDate = DateTime.Now;
+    validate = new (job, startDate, info.User, new StreamWriter(startDate.ToString("yyyy-MM-dd HH-mm-ss") + ".txt"));
+
+    job?.Start();
+    
+   job?.BeginOutputReadLine();
+});
+
+app.MapPost("/result", () => {
+    if ( validate != null ) {
+        return Results.Json("{}"); 
+    } else {
+        return Results.Json(json.ToString()); 
+    }
 });
 
 app.MapPost("/start", async (UserSetup info) => {
@@ -82,6 +127,25 @@ void ResponseOutputHandler(object sender, DataReceivedEventArgs e)
         data.Add(e.Data);
         current.Log.WriteLine(e.Data);
         current.Log.Flush();
+        if ( data.Count > 50 ) {
+            data.RemoveAt(0);
+        }
+    }
+}
+
+void ValidationResponseOutputHandler(object sender, DataReceivedEventArgs e)
+{
+    Console.WriteLine(e.Data);
+    if ( ! String.IsNullOrEmpty(e.Data)) {
+        if ( e.Data.IndexOf("{") >= 0 ) {
+            json.Append(e.Data);
+        }
+        if ( json.Length > 0 ) {
+            json.Append(e.Data);
+        }
+        data.Add(e.Data);
+        validate.Log.WriteLine(e.Data);
+        validate.Log.Flush();
         if ( data.Count > 50 ) {
             data.RemoveAt(0);
         }

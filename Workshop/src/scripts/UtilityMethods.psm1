@@ -191,19 +191,23 @@ class UtilityMethods {
                     error = "Unable to create $environmentName"
                 } | ConvertTo-Json
             }
+            $envs = ([UtilityMethods]::GetDeveloperEnvironment($UserUPN, $displayName) | ConvertFrom-Json)
+        }
+
+        if (  $NULL -eq $envs -or $envs.Count -eq 0 ) {
+            return @{
+                error = "Environments not created exist"
+            } 
+        }
+
+        if ( $envs.Count -eq 1 ) {
             [UtilityMethods]::DevEnvironmentAuth($UserUPN, $envs[0])
             return $envs[0] | ConvertTo-Json
         }
-        else {
-            if ( $envs.Count -gt 1 ) {
-                return @{
-                    error = "Duplicate environments exist"
-                } | ConvertTo-Json
-            }
-            Write-Host "$environmentName Exists"
-            [UtilityMethods]::DevEnvironmentAuth($UserUPN, $envs[0])
-            return $envs[0] | ConvertTo-Json
-        }
+
+        return @{
+            error = "Duplicate environments exist"
+        } | ConvertTo-Json
     }
 
     <#
