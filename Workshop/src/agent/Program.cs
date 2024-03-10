@@ -93,7 +93,7 @@ app.MapPost("/validate", async (UserSetup info) => {
 
 app.MapPost("/result", (HttpRequest request, HttpResponse response) => {
     if ( validate != null ) {
-        throw new HttpResponseException(HttpStatusCode.NotFound);
+        return Results.Text("{}", "application/json");
     }
 
     var jsonResult = json.ToString();
@@ -102,7 +102,7 @@ app.MapPost("/result", (HttpRequest request, HttpResponse response) => {
         return Results.Text(jsonResult, "application/json");
     }
 
-    throw new HttpResponseException(HttpStatusCode.NotFound);
+    return Results.Text("{}", "application/json");
 });
 
 app.MapPost("/start", async (UserSetup info) => {
