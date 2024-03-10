@@ -77,26 +77,25 @@ Which will return empty object or response if results found
 ```
 
 ```json
-{  
-  "clientId": "a1230000-1111-2222-33333-444455556666",
-  "tenantId": "common",
-  "resourceUri": "https://yourenv.crm.dynamics.com",
-  "redirectUrl": "https://global.consent.azure-apim.net/redirect/cat-5fapprovals-20kit-123456789012345678",
-  "azureResourceId": "https://yourenv.crm.dynamics.com/",
+{
+  "connectorCount": 1,
+  "valid": true,
+  "resourceUri": "https://yourenv.crm.dynamics.com/",
+  "resourceId": "",
   "operations": "CreateWorkflowInstance, GetApprovalDataFields",
+  "environmentUrl": "https://yourenv.crm.dynamics.com/",
+  "redirectUrl": "https://global.consent.azure-apim.net/redirect/cat-5fapprovals-20kit-123456789012345678",
   "checks": {
-        "checks": {
-            "Resource Id Match": true,
-            "Client Id Match": true,
-            "Redirect Found": true,
-            "Found connector": true,
-            "Get Workflows": true,
-            "Found operations": true,
-            "Resource Uri": true  
-          },
-          "connectorCount": 1,
-          "environmentUrl": "https://yourenv.crm.dynamics.com/",
-          "valid": true
-    }
+    "Get Workflows": true,
+    "Client Id Match": true,
+    "Redirect Found": true,
+    "Found operations": true,
+    "Found connector": true,
+    "Resource Id Match": true,
+    "Resource Uri": true
+  },
+  "tenantId": "common",
+  "clientId": "a1230000-1111-2222-33333-444455556666",
+  "azureResourceId": "https://yourenv.crm.dynamics.com/"
 }
 ```
