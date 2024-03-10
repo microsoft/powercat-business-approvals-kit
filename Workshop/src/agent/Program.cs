@@ -157,12 +157,14 @@ void ValidationResponseOutputHandler(object sender, DataReceivedEventArgs e)
 {
     Console.WriteLine(e.Data);
     if ( ! String.IsNullOrEmpty(e.Data)) {
-        if ( e.Data.IndexOf("{") >= 0 ) {
+        if ( e.Data.IndexOf("{") >= 0 && json.Length == 0 ) {
             json.Append(e.Data);
+        } else {
+            if ( json.Length > 0 ) {
+                json.Append(e.Data);
+            }
         }
-        if ( json.Length > 0 ) {
-            json.Append(e.Data);
-        }
+        
         data.Add(e.Data);
         validate.Log.WriteLine(e.Data);
         validate.Log.Flush();
