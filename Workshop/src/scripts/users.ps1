@@ -563,6 +563,8 @@ function Invoke-SetupUserForWorkshop {
         $Environment
     )
 
+    pac auth clear
+
     $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
 
     if ( $UserUPN.IndexOf("@") -lt 0 ) {
