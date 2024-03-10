@@ -167,12 +167,18 @@ class UtilityMethods {
         }
 
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
+        if ( $user.Length -eq 0 ) {
+            Write-Host "Creating user"
+            [UtilityMethods]::ResetUser($UserUPN) | Out-Null
+            $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
+        }
+
         $displayName = $user[0].displayName
         $environmentName = "$displayName Dev"
-    
+
         if ( ([UtilityMethods]::GetConfigValue("Feature.ResetUserPassword")) -eq "Y" ) {
             Write-Host "Reset user"
-            Reset-User $UserUPN | Out-Null
+            [UtilityMethods]::ResetUser($UserUPN) | Out-Null
         }
     
         $envs = ([UtilityMethods]::GetDeveloperEnvironment($UserUPN, $displayName) | ConvertFrom-Json)
@@ -327,9 +333,7 @@ class UtilityMethods {
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
         if ( $NULL -eq $user ) {
             Write-Host "Unable to find user $UserUPN"
-            if ( [UtilityMethods]::GetConfigValue("Feature.ResetUserPassword") -eq "Y" ) {
-                return [UtilityMethods]::ResetUser($UserUPN)
-            }
+            return [UtilityMethods]::ResetUser($UserUPN)
         }
         return $user | ConvertTo-Json
     }
@@ -367,10 +371,15 @@ class UtilityMethods {
                 error = "Missing demo password"
             }
         }
+
+        if ( $UserUPN.IndexOf("@") -lt 0 ) {
+            $domain = (az account show --query "user.name" -o tsv).Split('@')[1]
+            $UserUPN = "$UserUPN@$domain"
+        }
     
         $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
         if ( [System.String]::IsNullOrEmpty($First) ) {
-            if ( -not [System.String]::IsNullOrEmpty($user.givenName) ) {
+            if ( -not ($NULL -eq $user) -and (-not [System.String]::IsNullOrEmpty($user.givenName)) ) {
                 $First = $user.givenName
                 $Last = $user.surname
             } else {

@@ -160,9 +160,7 @@ function Validate-User {
     $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
     if ( $NULL -eq $user ) {
         Write-Host "Unable to find user $UserUPN"
-        if ( Get-ConfigValue("Feature.ResetUserPassword") -eq "Y" ) {
-            return Reset-User $UserUPN
-        }
+        return Reset-User $UserUPN
     }
     return $user
 }
@@ -201,6 +199,11 @@ function Reset-User {
         $Last
     )
 
+    if ( $UserUPN.IndexOf("@") -lt 0 ) {
+        $domain = (az account show --query "user.name" -o tsv).Split('@')[1]
+        $UserUPN = "$UserUPN@$domain"
+    }
+
     $password = Get-SecureValue "DEMO_PASSWORD"
 
     if ( [System.String]::IsNullOrEmpty($password)) {
@@ -210,7 +213,7 @@ function Reset-User {
 
     $user = (az ad user list --upn $UserUPN | ConvertFrom-Json)
     if ( [System.String]::IsNullOrEmpty($First) ) {
-        if ( -not [System.String]::IsNullOrEmpty($user.givenName) ) {
+        if ( -not $NULL -eq $user -and (-not [System.String]::IsNullOrEmpty($user.givenName)) ) {
             $First = $user.givenName
             $Last = $user.surname
         } else {
@@ -224,7 +227,7 @@ function Reset-User {
         }
     }
     
-    if ( [System.String]::IsNullOrEmpty($First) ) {
+    if ( -not [System.String]::IsNullOrEmpty($First) ) {
         $name = "$First $Last"
     } else {
         if ( -not ($NULL -eq $user) ) {
