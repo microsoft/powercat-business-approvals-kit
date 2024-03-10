@@ -93,16 +93,16 @@ app.MapPost("/validate", async (UserSetup info) => {
 
 app.MapPost("/result", (HttpRequest request, HttpResponse response) => {
     if ( validate != null ) {
-        return Results.Text("{}", "application/json");
+        return Results.Content("{}", "application/json");
     }
 
     var jsonResult = json.ToString();
     if (!string.IsNullOrEmpty(jsonResult) && jsonResult != "{}")
     {
-        return Results.Text(jsonResult, "application/json");
+        return Results.Content(jsonResult, "application/json");
     }
 
-    return Results.Text("{}", "application/json");
+    return Results.Content("{}", "application/json");
 });
 
 app.MapPost("/start", async (UserSetup info) => {
