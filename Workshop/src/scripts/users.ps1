@@ -1770,7 +1770,7 @@ function Invoke-UpdateCustomConnectorReplyUrl {
                 $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
                 if ( $connectors.value.length -gt 0 ) {
                     foreach ( $connector in $connectors.value) {
-                        $redirectUrl = (.connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
+                        $redirectUrl = ($connector.connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
                         if ( $NULL -eq $redirectUrl ) {
                             break
                         }
