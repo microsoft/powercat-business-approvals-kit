@@ -1763,7 +1763,7 @@ function Invoke-UpdateCustomConnectorReplyUrl {
         if ( $NULL -eq $redirectUrl ) {
             $started = Get-Date
             $waiting = (Get-Date).Subtract($started).TotalMinutes
-            while ( $success.Count -eq 0 ) {
+            while ( $NULL -eq $redirectUrl ) {
                 $diff = (Get-Date).Subtract($started).ToString("hh\:mm\:ss")
                 Write-Host "Waiting for redirect url. Executing $diff"
                 Start-Sleep -Seconds 30
@@ -1771,7 +1771,7 @@ function Invoke-UpdateCustomConnectorReplyUrl {
                 if ( $connectors.value.length -gt 0 ) {
                     foreach ( $connector in $connectors.value) {
                         $redirectUrl = ($connector.connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
-                        if ( $NULL -eq $redirectUrl ) {
+                        if ( -not ($NULL -eq $redirectUrl) ) {
                             break
                         }
                     }
