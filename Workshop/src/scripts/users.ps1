@@ -1768,10 +1768,12 @@ function Invoke-UpdateCustomConnectorReplyUrl {
                 Write-Host "Waiting for redirect url. Executing $diff"
                 Start-Sleep -Seconds 30
                 $connectors = (Invoke-RestMethod -Method GET -Headers $headers -Uri "$($Environment.EnvironmentUrl)api/data/v9.2/connectors?`$filter=name eq 'cat_approvals-20kit'" )
-                if ( $connectors.value.length -eq 1 ) {
-                    $redirectUrl = ($connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
-                    if ( $NULL -eq $redirectUrl ) {
-                        break
+                if ( $connectors.value.length -gt 0 ) {
+                    foreach ( $connector in $connectors.value) {
+                        $redirectUrl = (.connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
+                        if ( $NULL -eq $redirectUrl ) {
+                            break
+                        }
                     }
                 }
                 $waiting = (Get-Date).Subtract($started).TotalMinutes
@@ -1781,7 +1783,7 @@ function Invoke-UpdateCustomConnectorReplyUrl {
                     $configured = $true
                 }
 
-                if ( $waiting -gt 10 ) {
+                if ( $waiting -gt 4 ) {
                     break
                 }
             }
