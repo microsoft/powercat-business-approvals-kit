@@ -68,13 +68,8 @@ One approach to allow you to create development environments for learners is to 
 ### Setup for scale
 
 Setup for a class of 20+ students could take up to 20 minutes for each user environment. Using an Power Platform Hosted Machine, you can automate a setup of machines without the need to have an active PC connected to the Internet.
-
-### Installation steps
-
-1. Inside the [Power Automate Portal](https://make.powerautomate.com), create a new hosted machine.
-
-2. Run the Approvals Kit Instructor Machine Setup Cloud flow
+You can tse the [Power Platform Setup](./power-platform.md) for the steps to use a Power Platform hosted Cloud PC to assist with the steup process.
 
 ## Next
 
-Now that you have either local, docker or Azure VM environment ready move to [Tenant Setup](./tenant-setup.md) to create tenants and apply DLP.
+Now that you have either local or a Power Platform hosted VM environment ready move to [Tenant Setup](./tenant-setup.md) to create tenants and apply DLP.

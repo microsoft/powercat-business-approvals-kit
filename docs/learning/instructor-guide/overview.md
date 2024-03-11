@@ -69,16 +69,6 @@ The Azure CLI is a command-line tool that allows you to manage Azure resources f
 
 The instructor guide setup scripts make use the Azure CLI to sign in, provide authentication tokens and automate steps of the setup process. These lower level command line tools are wrapped in PowerShell or bash scripts. When new to the Azure CLI, use the [Azure CLI documentation](/cli/azure/) to provide a comprehensive guide to using the CLI, including installation instructions, command reference, and examples.
 
-## Optional Azure Components
-
-Optional guides to help understand Azure Cloud Shell and Virtual Machines to help with setup of the workshop:
-
-- [Introduction to Azure Cloud Shell](/training/modules/intro-to-azure-cloud-shell/)
-
-- [Introduction to Linux on Azure](/training/modules/intro-to-linux-on-azure/)
-
-- [Get started with the Linux command line and the Shell](/training/paths/shell/)
-
 ## This instructor guide has the following sections
 
 ### [Getting Started](./getting-started.md)

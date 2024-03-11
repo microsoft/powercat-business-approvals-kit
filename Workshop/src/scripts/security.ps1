@@ -9,7 +9,7 @@
     Requires   : 
         PowerShell Core 7.1.3 or greater
         az cli 2.39.0 or greater
-        pac cli 1.27.6+g9f62afb or greater
+        pac cli 1.30.7 or greater
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License.

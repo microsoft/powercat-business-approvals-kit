@@ -5,9 +5,7 @@ Once complete with the [Tenant Setup](./tenant-setup.md) section of the workshop
 
 > [!NOTE]
 >
-> 1. For local or Azure VM Setup it is assumed that any scripts are executed in the **Workshop** folder.
->
-> 2. For docker setup it is assumed that workshop contents are included in /setup folder
+> 1. For local or Power Platform hosted Cloud hosted setup it is assumed that any scripts are executed in the **Workshop** folder.
 
 ## Development / Trial Licenses
 
