@@ -51,9 +51,22 @@ cd powercat-business-approvals-kit\Workshop\src\scripts
 PowerShell -Command ". .\install.ps1"
 ```
 
-6. Install the App Gateway using instructions https://powerapps.microsoft.com/en-us/downloads/ for On-Premises Data Gateway
+6. Build and install assistant
 
-7. Notes on install process are available from https://learn.microsoft.com/data-integration/gateway/service-gateway-install
+```cmd
+cd %TEMP%\powercat-business-approvals-kit\Workshop\src\install
+dotnet build
+```
+
+7. Install Playwright
+
+```cmd
+pwsh bin\Debug\net7.0\playwright.ps1 install
+```
+
+8. Install the App Gateway using instructions https://powerapps.microsoft.com/en-us/downloads/ for On-Premises Data Gateway
+
+9. Notes on install process are available from https://learn.microsoft.com/data-integration/gateway/service-gateway-install
 
 ## Agent Setup
 
