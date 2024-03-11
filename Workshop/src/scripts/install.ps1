@@ -48,12 +48,13 @@ try {
 winget install Microsoft.DotNet.SDK.8
 winget install Microsoft.DotNet.Runtime.7
 winget install Microsoft.DotNet.Runtime.6
+winget install --id Microsoft.Powershell --source winget
 winget install -e --id Microsoft.AzureCLI
 dotnet tool install --global SecureStore.Client
 
 Push-Location
 cd $env:TEMP
-Invoke-WebRequest -Uri https://aka.ms/PowerAppsCLI
+Invoke-WebRequest -Uri https://aka.ms/PowerAppsCLI -OutFile powerapps-cli-1.0.msi
             
 $files = (Get-ChildItem -Filter "powerapps-cli*.msi")
 

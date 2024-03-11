@@ -140,6 +140,42 @@ app.MapPost("/start", async (UserSetup info) => {
    job?.BeginOutputReadLine();
 });
 
+app.MapPost("/reset", async (UserSetup info) => {
+    if ( current != null ) {
+        current.Job?.Kill();
+    }
+
+    string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+    var job = new Process()
+    {
+        StartInfo = new ProcessStartInfo() { 
+            FileName = "pwsh",
+            Arguments = $"./reset.ps1 {info.User}", 
+            WorkingDirectory = Path.Combine(assemblyFolder,"..","..", "..","..","scripts"),
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        },
+        EnableRaisingEvents = true
+    };
+    job.OutputDataReceived += ResponseOutputHandler;
+    job.Exited += (sender, args) => {
+        Console.WriteLine("Exit");
+        current?.Log.Dispose();
+        data.Clear();
+        current = null;
+    };
+    
+    var startDate = DateTime.Now;
+    current = new (job, startDate, info.User, new StreamWriter(startDate.ToString("yyyy-MM-dd HH-mm-ss") + ".txt"));
+
+    job?.Start();
+    
+   job?.BeginOutputReadLine();
+});
+
+
 void ResponseOutputHandler(object sender, DataReceivedEventArgs e)
 {
     Console.WriteLine(e.Data);

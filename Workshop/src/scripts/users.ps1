@@ -514,7 +514,7 @@ function Invoke-ApprovalsKitPostInstall {
 
     Invoke-ConfigureApprovalsKitConnector $Environment $UserUPN
 
-    Invoke-UpdateCustomConnectorReplyUrl $Environment
+    Invoke-UpdateCustomConnectorReplyUrl $Environment $UserUPN
 }
 
 function Install-ContosoCoffee {
@@ -562,6 +562,8 @@ function Invoke-SetupUserForWorkshop {
         [Parameter(Mandatory)] [String] $UserUPN,
         $Environment
     )
+
+    pac auth clear
 
     $domain=(az account show --query "user.name" -o tsv).Split('@')[1]
 
@@ -1756,6 +1758,8 @@ function Invoke-UpdateCustomConnectorReplyUrl {
         $redirectUrl = ($connectors.value[0].connectionparameters | ConvertFrom-Json ).token.oAuthSettings.redirectUrl
         Write-Host  $redirectUrl 
 
+        $configured = $false
+
         if ( $NULL -eq $redirectUrl ) {
             $started = Get-Date
             $waiting = (Get-Date).Subtract($started).TotalMinutes
@@ -1771,6 +1775,11 @@ function Invoke-UpdateCustomConnectorReplyUrl {
                     }
                 }
                 $waiting = (Get-Date).Subtract($started).TotalMinutes
+
+                if ( $waiting -gt 2 -and -not $configured ) {
+                    Invoke-ConfigureApprovalsKitConnector $Environment $UserUPN
+                    $configured = $true
+                }
 
                 if ( $waiting -gt 10 ) {
                     break
@@ -1920,7 +1929,9 @@ function Invoke-ConfigureApprovalsKitConnector {
         }
         $data = ( $data | ConvertTo-Json -Depth 100 -compress )
         $environmentId = $Environment.EnvironmentId
-        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "N"
+        Invoke-PlaywrightScript $UserUPN $environmentId "approvals-kit-custom-connector.csx" $data -Headless "Y"
+    } else {
+        Write-Error "Connector not found"
     }
 }
 
