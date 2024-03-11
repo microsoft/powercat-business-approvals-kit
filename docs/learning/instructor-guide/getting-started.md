@@ -68,7 +68,8 @@ One approach to allow you to create development environments for learners is to 
 ### Setup for scale
 
 Setup for a class of 20+ students could take up to 20 minutes for each user environment. Using an Power Platform Hosted Machine, you can automate a setup of machines without the need to have an active PC connected to the Internet.
-You can tse the [Power Platform Setup](./power-platform.md) for the steps to use a Power Platform hosted Cloud PC to assist with the steup process.
+
+You can the the [Power Platform Setup](../../../Workshop/docs/power-platform.md) for the steps to use a Power Platform hosted Cloud PC to assist with the steup process.
 
 ## Next
 

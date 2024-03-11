@@ -41,7 +41,7 @@ cd %TEMP%
 4. Clone the repository
 
 ```cmd
-https://github.com/microsoft/powercat-business-approvals-kit.git
+git clone https://github.com/microsoft/powercat-business-approvals-kit
 ```
 
 5. Change to workshop scripts
