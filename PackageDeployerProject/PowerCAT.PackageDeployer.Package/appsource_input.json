@@ -1,38 +1,84 @@
 {
-  "Projects": [
+  "Project": [
     {
-      "Name": "powercat-business-approvals-kit",
-      "Configdatastorage": {
-        "Installsampledata": "false",
-        "Waitforsampledatatoinstall": "false",
-        "Crmmigdataimportfile": "data.zip",
-        "Solutions": [
-          {
-            "Name": "BusinessApprovalKit",
-            "Path": "Solutions\\BusinessApprovalKit\\BusinessApprovalKit.zip",
-            "Importorder": "1",
-            "overwriteunmanagedcustomizations": "false",
-            "publishworkflowsandactivateplugins": "true"
-          }
-        ]
-      }
+      "name": "powercat-business-approvals-kit",
+      "description": "powercat-business-approvals-kit",
+      "solutions": [
+        {
+          "name": "BusinessApprovalKit",
+          "importorder": "2",
+          "publishworkflows-activate-plugins": "true",
+          "overwrite-unmanaged-customizations": "true",
+          "missing-dependency-behavior": "skip",
+          "import-mode": "async"
+        },
+        {
+          "name": "Office365Integration",
+          "importorder": "1",
+          "publishworkflows-activate-plugins": "true",
+          "overwrite-unmanaged-customizations": "true",
+          "missing-dependency-behavior": "skip",
+          "import-mode": "async"
+        }        
+      ],
+      "PreDeploymentSettings": [
+        {
+          "settingname": "iscustomcontrolsincanvasappsenabled",
+          "value": "true"
+        }
+      ],
+      "PostDeploymentSettings": [
+      ],
+      "Packages": [
+        "msdyn_FlowApprovals"
+      ],
+      "FlowConfiguration": [
+      ]
     },
     {
-      "Name": "Project2",
-      "Configdatastorage": {
-        "Installsampledata": "true",
-        "Waitforsampledatatoinstall": "true",
-        "Crmmigdataimportfile": "data2.zip",
-        "Solutions": [
-          {
-            "Name": "BusinessApprovalKit",
-            "Path": "Solutions\\BusinessApprovalKit\\BusinessApprovalKit.zip",
-            "Importorder": "1",
-            "overwriteunmanagedcustomizations": "false",
-            "publishworkflowsandactivateplugins": "true"
-          }
-        ]
-      }
+      "name": "powercat-automation-kit",
+      "description": "powercat-automation-kit",
+      "solutions": [
+        {
+          "name": "AutomationCoEMain",
+          "importorder": "1",
+          "publishworkflows-activate-plugins": "true",
+          "overwrite-unmanaged-customizations": "true",
+          "missing-dependency-behavior": "skip",
+          "import-mode": "async"
+        },
+        {
+          "name": "AutomationCoESatellite",
+          "importorder": "2",
+          "publishworkflows-activate-plugins": "true",
+          "overwrite-unmanaged-customizations": "true",
+          "missing-dependency-behavior": "skip",
+          "import-mode": "async"
+        },
+        {
+          "name": "AutomationKitControlCenter",
+          "importorder": "3",
+          "publishworkflows-activate-plugins": "true",
+          "overwrite-unmanaged-customizations": "true",
+          "missing-dependency-behavior": "skip",
+          "import-mode": "async"
+        }
+      ],
+      "PreDeploymentSettings": [
+        {
+          "settingname": "iscustomcontrolsincanvasappsenabled",
+          "value": "true"
+        }
+      ],
+      "PostDeploymentSettings": [
+        {
+          "settingname": "isautodatacaptureenabled",
+          "value": "true"
+        }
+      ],
+      "Packages": [
+        "msdyn_FlowApprovals"
+      ]
     }
   ]
 }
