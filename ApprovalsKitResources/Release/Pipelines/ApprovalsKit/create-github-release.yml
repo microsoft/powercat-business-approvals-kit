@@ -50,6 +50,16 @@ steps:
     patterns: '**/BusinessApprovalKit*.zip'
   displayName: 'Download Business Approval Kit solution'
 
+# Download the artifacts from the latest deployment of Office365Integration to production.
+- task: DownloadPipelineArtifact@2
+  inputs:
+    source: 'specific'
+    project: 'powercat-business-approvals-kit'
+    pipeline: '11344' #Production buildId
+    runVersion: 'latest'
+    patterns: '**/Office365Integration*.zip'
+  displayName: 'Download Office365Integration solution'  
+
 - powershell: |
     New-Item -Path $(Pipeline.Workspace)\releaseassets -ItemType Directory
     New-Item -Path $(Pipeline.Workspace)\assetstaging -ItemType Directory
@@ -69,6 +79,7 @@ steps:
     New-Item -Path $(Pipeline.Workspace)\assetstaging -ItemType Directory
 
     Copy-Item '$(Pipeline.Workspace)/drop/BusinessApprovalKit*.zip' -Destination '$(Pipeline.Workspace)\assetstaging'    
+    Copy-Item '$(Pipeline.Workspace)/drop/Office365Integration*.zip' -Destination '$(Pipeline.Workspace)\assetstaging'    
     
     $compress = @{
       Path = '$(Pipeline.Workspace)\assetstaging\*.*'
