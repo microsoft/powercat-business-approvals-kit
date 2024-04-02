@@ -65,6 +65,7 @@
                       <cell locklevel="0" id="{0c6d7eff-8971-4eff-bf81-903ae92e29fd}" rowspan="1" colspan="1">
                         <labels>
                           <label description="New SG control 1642996522824" languagecode="1033" />
+                          <label description="一括削除の失敗 " languagecode="1041" />
                         </labels>
                         <control id="Subgrid_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}" indicationOfSubgrid="true">
                           <parameters>

@@ -389,8 +389,8 @@
                       "inputs": {
                         "name": "varApproverId",
                         "value": {
-                          "approverId": "@{first(body('Add_Approver_to_Table')?['value'])['cat_businessapproverid']}",
-                          "notificationType": "@first(body('Add_Approver_to_Table')?['value'])['cat_notificationtype']"
+                          "approverId": "@{outputs('Add_Approver_to_Table')?['body/cat_businessapproverid']}",
+                          "notificationType": "@outputs('Add_Approver_to_Table')?['body/cat_notificationtype']"
                         }
                       }
                     }
@@ -459,7 +459,7 @@
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }

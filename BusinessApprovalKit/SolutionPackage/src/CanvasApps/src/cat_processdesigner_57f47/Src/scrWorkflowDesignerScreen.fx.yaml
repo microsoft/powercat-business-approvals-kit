@@ -60,13 +60,14 @@
             IsEmpty(_validationChecks),
             ClearCollect(
                 _validationChecks,
+                //March
                 //"First approval stage must not have any condition"
-                {
+                /*{
                     Id: 1,
                     Check: ProcessDesignerLoc.scrOnVisValidtionCheck1,
                     Status: Blank(),
                     Details: ""
-                },
+                },*/
                 {
                     //"First node in first stage must not have any condition"
                     Id: 2,
@@ -106,7 +107,8 @@
         ));
         
         //check condition 1
-        UpdateIf(
+        //March
+        /*UpdateIf(
             _validationChecks,
             Id = 1,
             {
@@ -117,7 +119,7 @@
                     )
                 ) = 0
             }
-        );
+        );*/
         //check condition 2
         With(
             {
@@ -256,6 +258,8 @@
                     Height: =35
                     IconName: ="Back"
                     IconSize: =0
+                    LayoutMinHeight: =200
+                    LayoutMinWidth: =200
                     OnChange: =Back()
                     TextAlignment: ='PowerCAT.Icon.TextAlignment'.Center
                     Theme: =AppThemeJson
@@ -344,7 +348,8 @@
                                         ItemKey: "refresh",
                                         ItemDisplayName: ProcessDesignerLoc.RefreshTxt,//Refresh
                                         ItemIconName: "Refresh",
-                                        ItemVisible: ApprovalDesignerEdit_2.TotalStages > 1
+                                        //March
+                                        ItemVisible: ApprovalDesignerEdit_2.TotalStages > 0 //ApprovalDesignerEdit_2.TotalStages > 1
                                     },{
                                         ItemKey: "variables",
                                         ItemDisplayName: ProcessDesignerLoc.mainCmdBarVariable,//Variables
@@ -530,13 +535,14 @@
                                 //IsEmpty(_validationChecks),
                                 ClearCollect(
                                         _validationChecks,
-                                        {
+                                        //March
+                                        /*{
                                             Id: 1,
                                             Check: ProcessDesignerLoc.scrOnVisValidtionCheck1,
                                             //"First approval stage must not have any condition"
                                 Status: Blank(),
                                             Details: ""
-                                        },
+                                        },*/
                                         {
                                             Id: 2,
                                             Check: ProcessDesignerLoc.scrOnVisValidtionCheck2,
@@ -576,7 +582,8 @@
                                     );
                                     
                                 //check condition 1
-                                UpdateIf(
+                                //March commented validation-1
+                                /*UpdateIf(
                                         _validationChecks,
                                         Id = 1,
                                         {
@@ -588,6 +595,7 @@
                                             ) = 0
                                         }
                                     );
+                                    */
                                     
                                 //check condition 2
                                 With(
@@ -643,6 +651,7 @@
                                             ) = 0
                                         }
                                     );
+                                    //March updated 4 to 3
                                     UpdateContext(
                                         {
                                             isPublishReady: true,
@@ -650,7 +659,7 @@
                                                 Sum(
                                                     _validationChecks,
                                                     Status
-                                                ) = 4,
+                                                ) = 3,//previously 4
                                                 false,
                                                 true
                                             )
@@ -660,8 +669,13 @@
                                 )
                             Theme: =AppThemeJson
                             Visible: =true
-                            Width: =777
-                            X: =Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 1,445,360)
+                            Width: |-
+                                =//777
+                                Parent.Width
+                            X: |-
+                                =//Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 1,445,360)
+                                //March
+                                Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 0,445,360)
                             Y: =0
                             ZIndex: =1
 
@@ -1100,6 +1114,8 @@
                 Height: =45
                 IconName: ="CircleAdditionSolid"
                 IconSize: =35
+                LayoutMinHeight: =200
+                LayoutMinWidth: =200
                 OnChange: |
                     =//Save the process   
                     Concurrent(
@@ -1218,6 +1234,8 @@
             "ProcessDesigner1 As 'Process Designer'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =Parent.Height
+                LayoutMinHeight: =480
+                LayoutMinWidth: =640
                 NodeID: =componentSelectedNode
                 OnAddNode: |-
                     =UpdateContext(
@@ -2864,7 +2882,10 @@
                 Text: |-
                     =//"This is the first stage for the process. Conditional rules are not applicable."
                     ProcessDesignerLoc.stgContFirstStgNoCondition
-                Visible: =_currentStageIndex < 2
+                Visible: |-
+                    =//_currentStageIndex < 2
+                    //March
+                    false
                 Width: =txtStageDesc_2.Width
                 X: =txtStageDesc_2.X
                 Y: =lblStageConditionHeader_2.Y 
@@ -3125,7 +3146,10 @@
                 Text: |-
                     =//If(isCleared, "Reset", "Edit")
                     If(isCleared, ProcessDesignerLoc.stgContBtnReset, ProcessDesignerLoc.stgContBtnResetEditText)
-                Visible: =(!allowUpdateConditionType || isCleared) && _currentStageIndex > 1
+                Visible: |-
+                    =//(!allowUpdateConditionType || isCleared) && _currentStageIndex > 1
+                    //March
+                    (!allowUpdateConditionType || isCleared)
                 Width: =96
                 X: =490
                 Y: =lblStageCondition_2.Y
@@ -3143,7 +3167,10 @@
                         ,
                         First(Choices('Business Approval Stage Condition'))
                     )]
-                DisplayMode: =If(_currentStageIndex < 2 || !allowUpdateConditionType, DisplayMode.Disabled, DisplayMode.Edit)
+                DisplayMode: |-
+                    =//If(_currentStageIndex < 2 || !allowUpdateConditionType, DisplayMode.Disabled, DisplayMode.Edit)
+                    //March
+                    If(!allowUpdateConditionType, DisplayMode.Disabled, DisplayMode.Edit)
                 Height: =32
                 Items: =Choices('Business Approval Stage Condition')
                 OnChange: |-
@@ -3223,7 +3250,10 @@
                 InputTextPlaceholder: |-
                     =//"Choose source"
                     ProcessDesignerLoc.stgContDdlStgCondnSourceTxt
-                Items: =Choices('Business Approval Condition Source Data')
+                Items: |-
+                    =//Choices('Business Approval Condition Source Data')
+                    //March
+                    If(_currentStageIndex >1,Choices('Business Approval Condition Source Data'),['Business Approval Condition Source Data'.'Request Data'])
                 OnChange: =Reset(ddlStageOperand_2)
                 ValidationState: |
                     =//"None"

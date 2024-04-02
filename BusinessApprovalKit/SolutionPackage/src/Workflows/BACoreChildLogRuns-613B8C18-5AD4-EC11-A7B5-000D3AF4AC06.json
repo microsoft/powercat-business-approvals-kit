@@ -139,10 +139,13 @@
                   "item/cat_runhistory": "@triggerBody()['text_4']",
                   "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerBody()['text_2']})"
                 },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                },
                 "retryPolicy": {
                   "type": "none"
-                },
-                "authentication": "@parameters('$authentication')"
+                }
               }
             }
           },
@@ -242,10 +245,13 @@
                     "item/cat_runhistory": "https://flow.microsoft.com/manage/environments/@{workflow()?['tags']?['environmentName']}/flows/@{triggerOutputs()?['headers']?['x-ms-workflow-name']}/runs/@{triggerOutputs()?['headers']?['x-ms-workflow-run-id']}",
                     "item/cat_runid": "@triggerOutputs()?['headers']?['x-ms-workflow-run-id']"
                   },
+                  "authentication": {
+                    "type": "Raw",
+                    "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                  },
                   "retryPolicy": {
                     "type": "none"
-                  },
-                  "authentication": "@parameters('$authentication')"
+                  }
                 }
               }
             }

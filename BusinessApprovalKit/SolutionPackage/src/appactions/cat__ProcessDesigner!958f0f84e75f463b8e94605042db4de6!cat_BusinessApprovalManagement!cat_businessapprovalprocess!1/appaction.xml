@@ -14,6 +14,7 @@
   <fonticon>$clientsvg:TaskSequence</fonticon>
   <hidden>0</hidden>
   <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
   <isgrouptitlehidden>0</isgrouptitlehidden>
   <location>1</location>
   <name>ProcessDesigner!958f0f84e75f463b8e94605042db4de6</name>
@@ -22,7 +23,13 @@
   </onclickeventformulacomponentlibraryid>
   <onclickeventformulacomponentname>2e3fc015965e418eb78e0cd299dbc128</onclickeventformulacomponentname>
   <onclickeventformulafunctionname>OnSelect</onclickeventformulafunctionname>
+  <onclickeventjavascriptfunctionname>RunOnSelected</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":24}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>b9b6535e-3bb2-ed11-83fe-0022482a97de</webresourceid>
+  </onclickeventjavascriptwebresourceid>
   <onclickeventtype>1</onclickeventtype>
+  <origin>0</origin>
   <sequence>1000100007.5000000000</sequence>
   <statecode>0</statecode>
   <statuscode>1</statuscode>

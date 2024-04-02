@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="cat_OutOfOfficeCheckDays">
+  <defaultvalue>0</defaultvalue>
+  <description default="This variable will hold the difference in days permitted between a user's Out of Office (OOF) end date and the current date.">
+    <label description="This variable will hold the difference in days permitted between a user's Out of Office (OOF) end date and the current date." languagecode="1033" />
+  </description>
+  <displayname default="Out Of Office Check Days">
+    <label description="Out Of Office Check Days" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.1.0.13</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000001</type>
+</environmentvariabledefinition>
