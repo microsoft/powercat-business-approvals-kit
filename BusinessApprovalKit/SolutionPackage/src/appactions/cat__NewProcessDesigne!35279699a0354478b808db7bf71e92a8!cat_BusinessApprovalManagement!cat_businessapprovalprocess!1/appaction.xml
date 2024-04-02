@@ -22,6 +22,11 @@
   </onclickeventformulacomponentlibraryid>
   <onclickeventformulacomponentname>67abd62ed9ab42de8978fe1f3d97a27a</onclickeventformulacomponentname>
   <onclickeventformulafunctionname>OnSelect</onclickeventformulafunctionname>
+  <onclickeventjavascriptfunctionname>CreateNewProcess</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":21,"value":""}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>b9b6535e-3bb2-ed11-83fe-0022482a97de</webresourceid>
+  </onclickeventjavascriptwebresourceid>
   <onclickeventtype>1</onclickeventtype>
   <origin>0</origin>
   <sequence>1000100006.2500000000</sequence>

@@ -25,6 +25,13 @@
         "$authentication": {
           "defaultValue": {},
           "type": "SecureObject"
+        },
+        "Enable Office 365 Mailbox Settings (cat_EnableOffice365MailboxSettings)": {
+          "defaultValue": true,
+          "type": "Bool",
+          "metadata": {
+            "schemaName": "cat_EnableOffice365MailboxSettings"
+          }
         }
       },
       "staticResults": {
@@ -77,7 +84,7 @@
         },
         "varApproverInfo": {
           "runAfter": {
-            "varGotoStageId": [
+            "varApproverDetails": [
               "Succeeded"
             ]
           },
@@ -156,17 +163,9 @@
                             },
                             "If_Node_Rule_checks_for_OOF": {
                               "actions": {
-                                "Sequence_of_delegate,_Backup_and_Default_Approver": {
-                                  "runAfter": {},
-                                  "metadata": {
-                                    "operationMetadataId": "40aaa84b-ee2f-47e7-9eba-721d07921f41"
-                                  },
-                                  "type": "Compose",
-                                  "inputs": "[ { id: \"@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_businessapproverid']}\", approver: \"@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_approverid']}\", isOOF: \"@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_isoutofoffice']}\", notification: @{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_notificationtype']}, type: \"Delegate\"},\n{ id: \"@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_businessapproverid']}\", approver: \"@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_approverid']}\", isOOF:\" @{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_isoutofoffice']}\", notification: @{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_notificationtype']}, type: \"Backup Delegate\"},\n{ id: \"@{body('Get_Runtime_Node_Definition')?['cat_ProcessVersion']?['cat_DefaultApprover']?['cat_businessapproverid']}\", approver: \"@{body('Get_Runtime_Node_Definition')?['cat_ProcessVersion']?['cat_DefaultApprover']?['cat_approverid']}\", isOOF: \"@{body('Get_Runtime_Node_Definition')?['cat_ProcessVersion']?['cat_DefaultApprover']?['cat_isoutofoffice']}\", notification: @{body('Get_Runtime_Node_Definition')?['cat_ProcessVersion']?['cat_DefaultApprover']?['cat_notificationtype']}, type: \"Process Default\"}]"
-                                },
-                                "Get_Delegate,_Backup_or_Default_who_is_not_OOF": {
+                                "Get_Approver,_Delegate,_Backup_or_Default_who_is_not_OOF": {
                                   "runAfter": {
-                                    "Sequence_of_delegate,_Backup_and_Default_Approver": [
+                                    "Check_If_Enable_O365_Mailbox_Settings_is_true": [
                                       "Succeeded"
                                     ]
                                   },
@@ -175,13 +174,14 @@
                                   },
                                   "type": "Query",
                                   "inputs": {
-                                    "from": "@json(outputs('Sequence_of_delegate,_Backup_and_Default_Approver'))",
-                                    "where": "@not(equals(item()['isOOF'], True))"
-                                  }
+                                    "from": "@variables('varApproverDetails')",
+                                    "where": "@and(not(equals(item()?['isOOF'], 'true')), not(empty(item()?['isOOF'])))\n"
+                                  },
+                                  "description": "@and(not(equals(item()?['isOOF'], true)), not(empty(item()?['isOOF'])))"
                                 },
                                 "First_Not_OOF": {
                                   "runAfter": {
-                                    "Get_Delegate,_Backup_or_Default_who_is_not_OOF": [
+                                    "Get_Approver,_Delegate,_Backup_or_Default_who_is_not_OOF": [
                                       "Succeeded"
                                     ]
                                   },
@@ -189,11 +189,11 @@
                                     "operationMetadataId": "3b11437d-1c79-41d0-a9f2-f9d85e2b292f"
                                   },
                                   "type": "Compose",
-                                  "inputs": "@first(body('Get_Delegate,_Backup_or_Default_who_is_not_OOF'))"
+                                  "inputs": "@first(body('Get_Approver,_Delegate,_Backup_or_Default_who_is_not_OOF'))"
                                 },
-                                "If_found_Delegate": {
+                                "If_First_Not_OOF_found": {
                                   "actions": {
-                                    "Create_Delegate_Instance_(Delegate,_Backup_or_Default)": {
+                                    "Create_Delegate_Instance_(Approver,_Delegate,_Backup_or_Default)": {
                                       "runAfter": {},
                                       "metadata": {
                                         "operationMetadataId": "6b966b43-f38f-4c7d-9935-39a6fbd6cf98"
@@ -236,70 +236,196 @@
                                   },
                                   "else": {
                                     "actions": {
-                                      "Log_no_Delegate_found": {
+                                      "Get_Approver_Manager_Info": {
                                         "runAfter": {},
                                         "metadata": {
-                                          "operationMetadataId": "d9ce0965-2d02-4020-9ba9-b231017c8b22"
+                                          "operationMetadataId": "8d715ec8-a12d-4684-8896-298435b974b2"
                                         },
                                         "type": "Workflow",
                                         "inputs": {
                                           "host": {
-                                            "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+                                            "workflowReferenceName": "dcb75fef-35d6-ec11-a7b5-000d3af46350"
                                           },
                                           "body": {
-                                            "text": "Node",
-                                            "text_1": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
-                                            "text_2": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
-                                            "text_3": "Approver not found",
-                                            "text_5": "@workflow()?['tags']?['flowDisplayName']",
-                                            "text_4": "No delegate or default approver for this process found or all are OOF for Approver ID: @{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']}. Proceeding with current OOF approver."
+                                            "boolean": true,
+                                            "text": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
+                                            "text_1": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+                                            "text_2": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']"
                                           }
                                         }
                                       },
-                                      "Create_Approval_Instance_(no_Delegates_found)": {
+                                      "Set_Approver_Manager_Info_": {
                                         "runAfter": {
-                                          "Log_no_Delegate_found": [
+                                          "Get_Approver_Manager_Info": [
                                             "Succeeded"
                                           ]
                                         },
                                         "metadata": {
-                                          "operationMetadataId": "95dd45e2-d400-4f3e-902e-da073a965f91"
+                                          "operationMetadataId": "7f18bedd-6479-4ab2-915f-1f37a284e009"
                                         },
-                                        "type": "OpenApiConnection",
+                                        "type": "SetVariable",
                                         "inputs": {
-                                          "host": {
-                                            "connectionName": "shared_commondataserviceforapps_1",
-                                            "operationId": "CreateRecord",
-                                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                                          },
-                                          "parameters": {
-                                            "entityName": "cat_businessapprovalinstances",
-                                            "item/cat_Approver@odata.bind": "cat_businessapprovers(@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_businessapproverid']})",
-                                            "item/cat_instancestatus": 809060000,
-                                            "item/cat_NodeInstance@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']})",
-                                            "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
-                                            "item/cat_additionalinformation": "Approver is OOF but no delegates found.@{triggerOutputs()?['body/cat_additionalinformation']}",
-                                            "item/cat_approvaltype": "@outputs('Get_Runtime_Node_Definition')?['body/cat_approvaltype']",
-                                            "item/cat_approverupn": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']",
-                                            "item/cat_customresponses": "@outputs('Get_Runtime_Node_Definition')?['body/cat_customresponses']",
-                                            "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/_cat_node_value']})",
-                                            "item/cat_notification": "@outputs('Get_Runtime_Node_Definition')?['body/cat_notificationtype']",
-                                            "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{body('Get_Runtime_Node_Definition')['cat_processversion/cat_businessapprovalversionid']})",
-                                            "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']",
-                                            "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stage_value']})",
-                                            "item/cat_start": "@utcNow()",
-                                            "item/cat_timeoutcounter": "@outputs('Get_Runtime_Node_Definition')?['body/cat_timeout']",
-                                            "item/cat_timeoutupdate": "@utcNow()",
-                                            "item/cat_title": "@{outputs('Get_Runtime_Node_Definition')?['body/cat_processversion/cat_name']} Approval - @{triggerOutputs()?['body/cat_nodenamevalue']} "
-                                          },
-                                          "authentication": "@parameters('$authentication')"
-                                        },
-                                        "runtimeConfiguration": {
-                                          "staticResult": {
-                                            "staticResultOptions": "Disabled",
-                                            "name": "Create_Approval_Instance_(Approver_not_OOF)0"
+                                          "name": "varApproverInfo",
+                                          "value": {
+                                            "approverid": "@{body('Get_Approver_Manager_Info')?['approverid']}",
+                                            "upn": "@{body('Get_Approver_Manager_Info')?['upn']}",
+                                            "notificationType": "@body('Get_Approver_Manager_Info')?['notificationtype']",
+                                            "info": "Original Approver is OOF. Approver set to Manager of original Approver (@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']})"
                                           }
                                         }
+                                      },
+                                      "If_Manager_found": {
+                                        "actions": {
+                                          "Log_no_Delegate_found": {
+                                            "runAfter": {},
+                                            "metadata": {
+                                              "operationMetadataId": "d9ce0965-2d02-4020-9ba9-b231017c8b22"
+                                            },
+                                            "type": "Workflow",
+                                            "inputs": {
+                                              "host": {
+                                                "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+                                              },
+                                              "body": {
+                                                "text": "Node",
+                                                "text_1": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
+                                                "text_2": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+                                                "text_3": "Approver not found",
+                                                "text_5": "@workflow()?['tags']?['flowDisplayName']",
+                                                "text_4": "No delegate or default approver for this process found or all are OOF for Approver ID: @{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']}. Proceeding with current OOF approver's Manager."
+                                              }
+                                            }
+                                          },
+                                          "Create_Approval_Instance_(no_Delegates_found)": {
+                                            "runAfter": {
+                                              "Log_no_Delegate_found": [
+                                                "Succeeded"
+                                              ]
+                                            },
+                                            "metadata": {
+                                              "operationMetadataId": "95dd45e2-d400-4f3e-902e-da073a965f91"
+                                            },
+                                            "type": "OpenApiConnection",
+                                            "inputs": {
+                                              "host": {
+                                                "connectionName": "shared_commondataserviceforapps_1",
+                                                "operationId": "CreateRecord",
+                                                "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                              },
+                                              "parameters": {
+                                                "entityName": "cat_businessapprovalinstances",
+                                                "item/cat_Approver@odata.bind": "cat_businessapprovers(@{variables('varApproverInfo')['approverid']})",
+                                                "item/cat_instancestatus": 809060000,
+                                                "item/cat_NodeInstance@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']})",
+                                                "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
+                                                "item/cat_additionalinformation": "Approver is OOF but no delegates found.@{triggerOutputs()?['body/cat_additionalinformation']}",
+                                                "item/cat_approvaltype": "@outputs('Get_Runtime_Node_Definition')?['body/cat_approvaltype']",
+                                                "item/cat_approverupn": "@variables('varApproverInfo')['upn']",
+                                                "item/cat_customresponses": "@outputs('Get_Runtime_Node_Definition')?['body/cat_customresponses']",
+                                                "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/_cat_node_value']})",
+                                                "item/cat_notification": "@outputs('Get_Runtime_Node_Definition')?['body/cat_notificationtype']",
+                                                "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{body('Get_Runtime_Node_Definition')['cat_processversion/cat_businessapprovalversionid']})",
+                                                "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']",
+                                                "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stage_value']})",
+                                                "item/cat_start": "@utcNow()",
+                                                "item/cat_timeoutcounter": "@outputs('Get_Runtime_Node_Definition')?['body/cat_timeout']",
+                                                "item/cat_timeoutupdate": "@utcNow()",
+                                                "item/cat_title": "@{outputs('Get_Runtime_Node_Definition')?['body/cat_processversion/cat_name']} Approval - @{triggerOutputs()?['body/cat_nodenamevalue']} "
+                                              },
+                                              "authentication": "@parameters('$authentication')"
+                                            },
+                                            "runtimeConfiguration": {
+                                              "staticResult": {
+                                                "staticResultOptions": "Disabled",
+                                                "name": "Create_Approval_Instance_(Approver_not_OOF)0"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "runAfter": {
+                                          "Set_Approver_Manager_Info_": [
+                                            "Succeeded"
+                                          ]
+                                        },
+                                        "else": {
+                                          "actions": {
+                                            "Log_no_delegate,_backup_delegate_and_manager_found": {
+                                              "runAfter": {},
+                                              "metadata": {
+                                                "operationMetadataId": "14c7eb92-cd3c-4e8e-b9ca-4736b495b1ab"
+                                              },
+                                              "type": "Workflow",
+                                              "inputs": {
+                                                "host": {
+                                                  "workflowReferenceName": "613b8c18-5ad4-ec11-a7b5-000d3af4ac06"
+                                                },
+                                                "body": {
+                                                  "text": "Node",
+                                                  "text_1": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
+                                                  "text_2": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+                                                  "text_3": "Approver not found",
+                                                  "text_5": "@workflow()['tags/flowDisplayName']",
+                                                  "text_4": "No delegate or default approver for this process found or all are OOF for Approver ID: @{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']}. Proceeding with current OOF approver."
+                                                }
+                                              }
+                                            },
+                                            "Create_Approval_Instance_No_delegate,_backup_delegate_and_manager_found": {
+                                              "runAfter": {
+                                                "Log_no_delegate,_backup_delegate_and_manager_found": [
+                                                  "Succeeded"
+                                                ]
+                                              },
+                                              "metadata": {
+                                                "operationMetadataId": "bf65aaf5-4377-4634-b423-5800534b9d64"
+                                              },
+                                              "type": "OpenApiConnection",
+                                              "inputs": {
+                                                "host": {
+                                                  "connectionName": "shared_commondataserviceforapps_1",
+                                                  "operationId": "CreateRecord",
+                                                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                },
+                                                "parameters": {
+                                                  "entityName": "cat_businessapprovalinstances",
+                                                  "item/cat_Approver@odata.bind": "cat_businessapprovers(@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_businessapproverid']})",
+                                                  "item/cat_instancestatus": 809060000,
+                                                  "item/cat_NodeInstance@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']})",
+                                                  "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
+                                                  "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                                                  "item/cat_approvaltype": "@outputs('Get_Runtime_Node_Definition')?['body/cat_approvaltype']",
+                                                  "item/cat_approverupn": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']",
+                                                  "item/cat_customresponses": "@outputs('Get_Runtime_Node_Definition')?['body/cat_customresponses']",
+                                                  "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/_cat_node_value']})",
+                                                  "item/cat_notification": "@outputs('Get_Runtime_Node_Definition')?['body/cat_notificationtype']",
+                                                  "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{body('Get_Runtime_Node_Definition')['cat_processversion/cat_businessapprovalversionid']})",
+                                                  "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']",
+                                                  "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stage_value']})",
+                                                  "item/cat_start": "@utcNow()",
+                                                  "item/cat_timeoutcounter": "@outputs('Get_Runtime_Node_Definition')?['body/cat_timeout']",
+                                                  "item/cat_timeoutupdate": "@utcNow()",
+                                                  "item/cat_title": "@{outputs('Get_Runtime_Node_Definition')?['body/cat_processversion/cat_name']} Approval - @{triggerOutputs()?['body/cat_nodenamevalue']} "
+                                                },
+                                                "authentication": "@parameters('$authentication')"
+                                              },
+                                              "runtimeConfiguration": {
+                                                "staticResult": {
+                                                  "staticResultOptions": "Disabled",
+                                                  "name": "Create_Approval_Instance_(Approver_not_OOF)0"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "expression": {
+                                          "greater": [
+                                            "@length(variables('varApproverInfo')['approverid'])",
+                                            0
+                                          ]
+                                        },
+                                        "metadata": {
+                                          "operationMetadataId": "fad601ed-d33f-471c-8ade-7c1e605fa88e"
+                                        },
+                                        "type": "If"
                                       }
                                     }
                                   },
@@ -311,6 +437,125 @@
                                   },
                                   "metadata": {
                                     "operationMetadataId": "8c569a23-df35-482e-b4b1-f5696dc50cee"
+                                  },
+                                  "type": "If"
+                                },
+                                "Check_If_Enable_O365_Mailbox_Settings_is_true": {
+                                  "actions": {
+                                    "Get_MailboxSetting_for_Approver": {
+                                      "runAfter": {
+                                        "Set_varApproverDetails": [
+                                          "Succeeded"
+                                        ]
+                                      },
+                                      "metadata": {
+                                        "operationMetadataId": "809b5762-0c40-406a-a234-89b42345116a"
+                                      },
+                                      "type": "Workflow",
+                                      "inputs": {
+                                        "host": {
+                                          "workflowReferenceName": "a68e0a7e-37ec-ee11-904d-000d3a8edea8"
+                                        },
+                                        "body": {
+                                          "text": "@base64(string(variables('varApproverDetails')))"
+                                        }
+                                      }
+                                    },
+                                    "Set_varApproverDetails": {
+                                      "runAfter": {},
+                                      "metadata": {
+                                        "operationMetadataId": "c2164d31-7073-4863-9e13-44ced4263e94"
+                                      },
+                                      "type": "SetVariable",
+                                      "inputs": {
+                                        "name": "varApproverDetails",
+                                        "value": [
+                                          {
+                                            "id": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_businessapproverid']}",
+                                            "approver": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']}",
+                                            "isOOF": "",
+                                            "notification": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_notificationtype']",
+                                            "type": "Approver"
+                                          },
+                                          {
+                                            "id": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_businessapproverid']}",
+                                            "approver": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_approverid']}",
+                                            "isOOF": "",
+                                            "notification": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_notificationtype']",
+                                            "type": "Delegate"
+                                          },
+                                          {
+                                            "id": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_businessapproverid']}",
+                                            "approver": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_approverid']}",
+                                            "isOOF": "",
+                                            "notification": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_notificationtype']",
+                                            "type": "Backup Delegate"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "Set_OOF_settings_for_varApproverDetails_from_Mailbox": {
+                                      "runAfter": {
+                                        "Get_MailboxSetting_for_Approver": [
+                                          "Succeeded"
+                                        ]
+                                      },
+                                      "metadata": {
+                                        "operationMetadataId": "f55d2693-3264-4784-87ae-f8c39cfdbb98"
+                                      },
+                                      "type": "SetVariable",
+                                      "inputs": {
+                                        "name": "varApproverDetails",
+                                        "value": "@json(base64tostring(outputs('Get_MailboxSetting_for_Approver')?['Body']?['updated_user_details']))"
+                                      }
+                                    }
+                                  },
+                                  "runAfter": {},
+                                  "else": {
+                                    "actions": {
+                                      "Set_OOF_settings_for_varApproverDetails_from_Dataverse": {
+                                        "runAfter": {},
+                                        "metadata": {
+                                          "operationMetadataId": "c2164d31-7073-4863-9e13-44ced4263e94"
+                                        },
+                                        "type": "SetVariable",
+                                        "inputs": {
+                                          "name": "varApproverDetails",
+                                          "value": [
+                                            {
+                                              "id": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_businessapproverid']}",
+                                              "approver": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_approverid']}",
+                                              "isOOF": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_isoutofoffice']}",
+                                              "notification": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_notificationtype']",
+                                              "type": "Approver"
+                                            },
+                                            {
+                                              "id": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_businessapproverid']}",
+                                              "approver": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_approverid']}",
+                                              "isOOF": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_isoutofoffice']}",
+                                              "notification": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_delegate/cat_notificationtype']",
+                                              "type": "Delegate"
+                                            },
+                                            {
+                                              "id": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_businessapproverid']}",
+                                              "approver": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_approverid']}",
+                                              "isOOF": "@{outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_isoutofoffice']}",
+                                              "notification": "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_backupdelegate/cat_notificationtype']",
+                                              "type": "Backup Delegate"
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "expression": {
+                                    "equals": [
+                                      "@parameters('Enable Office 365 Mailbox Settings (cat_EnableOffice365MailboxSettings)')",
+                                      "@true"
+                                    ]
+                                  },
+                                  "metadata": {
+                                    "operationMetadataId": "25946ed4-617c-4ab3-83f1-420d70468e94"
                                   },
                                   "type": "If"
                                 }
@@ -379,16 +624,6 @@
                                         "equals": [
                                           "@outputs('Get_Runtime_Node_Definition')?['body/cat_delegationrule']",
                                           809060003
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "and": [
-                                      {
-                                        "equals": [
-                                          "@outputs('Get_Approver,_Delegate_and_Backup')?['body/cat_isoutofoffice']",
-                                          true
                                         ]
                                       }
                                     ]
@@ -1108,6 +1343,45 @@
               "text_5": "@workflow()['tags']['flowDisplayName']",
               "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/@{workflow()['run/name']}"
             }
+          }
+        },
+        "varApproverDetails": {
+          "runAfter": {
+            "varGotoStageId": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9e5073e2-cbf8-4c25-8de1-9c3297e86cb2"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varApproverDetails",
+                "type": "array",
+                "value": [
+                  {
+                    "id": "",
+                    "name": "Approver UPN",
+                    "UPN": "",
+                    "isOOF": ""
+                  },
+                  {
+                    "id": "",
+                    "name": "Delegate UPN",
+                    "UPN": "",
+                    "isOOF": ""
+                  },
+                  {
+                    "id": "",
+                    "name": "Backup Delegate UPN",
+                    "UPN": "",
+                    "isOOF": ""
+                  }
+                ]
+              }
+            ]
           }
         }
       }

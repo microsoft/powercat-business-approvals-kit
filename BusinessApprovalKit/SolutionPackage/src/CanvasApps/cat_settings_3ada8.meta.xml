@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>cat_settings_3ada8</Name>
-  <AppVersion>2024-01-22T11:08:15Z</AppVersion>
+  <AppVersion>2024-04-02T04:46:53Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.23123.15.0</CreatedByClientVersion>
   <MinClientVersion>3.23123.15.0</MinClientVersion>
@@ -10,11 +10,11 @@
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
   <DisplayName>Settings</DisplayName>
-  <Description xsi:nil="true"></Description>
-  <CommitMessage xsi:nil="true"></CommitMessage>
-  <Publisher xsi:nil="true"></Publisher>
+  <Description></Description>
+  <CommitMessage></CommitMessage>
+  <Publisher></Publisher>
   <AuthorizationReferences>[]</AuthorizationReferences>
-  <ConnectionReferences>{"3e7985e9-b67b-42bc-bbae-537b66bf1847":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1672/1.0.1672.3545/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["MyProfile_V2","SearchUserV2","SearchUser"]}}</ConnectionReferences>
+  <ConnectionReferences>{"3e7985e9-b67b-42bc-bbae-537b66bf1847":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1677/1.0.1677.3637/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["MyProfile_V2","SearchUserV2","SearchUser"]}}</ConnectionReferences>
   <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Business Approval Work Profiles":{"entitySetName":"cat_businessapprovalworkprofiles","logicalName":"cat_businessapprovalworkprofile"},"Business Approval Holiday Calendars":{"entitySetName":"cat_businessapprovalholidaycalendars","logicalName":"cat_businessapprovalholidaycalendar"},"Business Approver OOF":{"entitySetName":"cat_businessapproveroofs","logicalName":"cat_businessapproveroof"},"Business Approval Public Holidays":{"entitySetName":"cat_businessapprovalpublicholidayses","logicalName":"cat_businessapprovalpublicholidays"},"Business Approvers":{"entitySetName":"cat_businessapprovers","logicalName":"cat_businessapprover"}},"components":[{"componentName":"WebResource","identifier":"cat_SettingsLoc","identifierType":"LogicalName"},{"componentName":"CustomControl","identifier":"cat_PowerCAT.CommandBar","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Spinner","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.CommandBar","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Icon","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}}]}}</DatabaseReferences>
   <AppComponents>[]</AppComponents>
   <AppComponentDependencies>[]</AppComponentDependencies>
@@ -24,7 +24,7 @@
   <AdminControlBypassConsent>0</AdminControlBypassConsent>
   <EmbeddedApp xsi:nil="true"></EmbeddedApp>
   <IntroducedVersion>1.0</IntroducedVersion>
-  <CdsDependencies>{"cdsdependencies":[{"logicalname":"cat_businessapprovalworkprofile","componenttype":1},{"logicalname":"cat_businessapprovalholidaycalendar","componenttype":1},{"logicalname":"cat_businessapproveroof","componenttype":1},{"logicalname":"cat_businessapprovalpublicholidays","componenttype":1},{"logicalname":"cat_businessapprover","componenttype":1},{"dependencyid":"","logicalname":"cat_SettingsLoc","componenttype":61,"componenttypeplatformname":"WebResource"},{"dependencyid":"","logicalname":"cat_PowerCAT.CommandBar","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.Spinner","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.CommandBar","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.Icon","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.PeoplePicker","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.PeoplePicker","componenttype":66,"componenttypeplatformname":"CustomControl"}]}</CdsDependencies>
+  <CdsDependencies>{"cdsdependencies":[{"componenttype":1,"logicalname":"cat_businessapprovalworkprofile"},{"componenttype":1,"logicalname":"cat_businessapprovalholidaycalendar"},{"componenttype":1,"logicalname":"cat_businessapproveroof"},{"componenttype":1,"logicalname":"cat_businessapprovalpublicholidays"},{"componenttype":1,"logicalname":"cat_businessapprover"},{"componenttype":61,"logicalname":"cat_SettingsLoc","componenttypeplatformname":"WebResource"},{"componenttype":66,"logicalname":"cat_PowerCAT.CommandBar","componenttypeplatformname":"CustomControl"},{"componenttype":66,"logicalname":"cat_PowerCAT.Spinner","componenttypeplatformname":"CustomControl"},{"componenttype":66,"logicalname":"cat_PowerCAT.CommandBar","componenttypeplatformname":"CustomControl"},{"componenttype":66,"logicalname":"cat_PowerCAT.Icon","componenttypeplatformname":"CustomControl"},{"componenttype":66,"logicalname":"cat_PowerCAT.PeoplePicker","componenttypeplatformname":"CustomControl"},{"componenttype":66,"logicalname":"cat_PowerCAT.PeoplePicker","componenttypeplatformname":"CustomControl"}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
   <BackgroundImageUri>/CanvasApps/cat_settings_3ada8_BackgroundImageUri</BackgroundImageUri>
   <DocumentUri>/CanvasApps/cat_settings_3ada8_DocumentUri.msapp</DocumentUri>

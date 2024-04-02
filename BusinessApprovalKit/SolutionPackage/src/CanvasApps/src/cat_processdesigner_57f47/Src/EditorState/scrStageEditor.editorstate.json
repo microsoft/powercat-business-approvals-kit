@@ -105,7 +105,7 @@
       "MetaDataIDKey": "",
       "Name": "bcProcessStage",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 3,
+      "ParentIndex": 14,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -411,7 +411,7 @@
       "MetaDataIDKey": "",
       "Name": "btnResetConditions",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 13,
+      "ParentIndex": 26,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -1755,7 +1755,7 @@
       "MetaDataIDKey": "",
       "Name": "ddlRequestDataCondition",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 21,
+      "ParentIndex": 10,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -2175,7 +2175,7 @@
       "MetaDataIDKey": "",
       "Name": "ddlStageCondition",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 12,
+      "ParentIndex": 25,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -2602,7 +2602,7 @@
       "MetaDataIDKey": "",
       "Name": "ddlStageConditionSource",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 19,
+      "ParentIndex": 9,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -3029,7 +3029,7 @@
       "MetaDataIDKey": "",
       "Name": "ddlStageOperand",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 25,
+      "ParentIndex": 12,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -3761,7 +3761,7 @@
       "MetaDataIDKey": "",
       "Name": "Dependencies",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 6,
+      "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -3985,7 +3985,7 @@
       "MetaDataIDKey": "",
       "Name": "galConditions",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 26,
+      "ParentIndex": 15,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -4506,7 +4506,7 @@
       "MetaDataIDKey": "",
       "Name": "imgWorkflowDiagram",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 17,
+      "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -5092,7 +5092,7 @@
       "MetaDataIDKey": "",
       "Name": "lblFirstStageNoCondition",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 15,
+      "ParentIndex": 27,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -5783,7 +5783,7 @@
       "MetaDataIDKey": "",
       "Name": "lblParallelConditions",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 27,
+      "ParentIndex": 21,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -6101,7 +6101,7 @@
       "MetaDataIDKey": "",
       "Name": "lblRequestDataCondition",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 20,
+      "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -6420,7 +6420,7 @@
       "MetaDataIDKey": "",
       "Name": "lblRequestDataDetails",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 23,
+      "ParentIndex": 13,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -6750,7 +6750,7 @@
       "MetaDataIDKey": "",
       "Name": "lblRequestDataIsEmpty",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 22,
+      "ParentIndex": 11,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7104,7 +7104,7 @@
       "MetaDataIDKey": "",
       "Name": "lblResetConditions",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 10,
+      "ParentIndex": 23,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7420,7 +7420,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageCondition",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 11,
+      "ParentIndex": 24,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7732,7 +7732,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageConditionHeader",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 9,
+      "ParentIndex": 22,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -8062,7 +8062,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageConditionSource",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 18,
+      "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -9383,7 +9383,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageDesc",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 7,
+      "ParentIndex": 19,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -9993,7 +9993,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageName",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 4,
+      "ParentIndex": 16,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -10306,7 +10306,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageOperand",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 24,
+      "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -10948,7 +10948,7 @@
       "MetaDataIDKey": "",
       "Name": "lblSwitchPaths",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 14,
+      "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -11323,7 +11323,7 @@
       "MetaDataIDKey": "",
       "Name": "radSwitchPaths",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 16,
+      "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -12133,7 +12133,7 @@
       "MetaDataIDKey": "",
       "Name": "txtStageDesc",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 8,
+      "ParentIndex": 20,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -12512,7 +12512,7 @@
       "MetaDataIDKey": "",
       "Name": "txtStageName",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 5,
+      "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

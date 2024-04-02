@@ -1,0 +1,502 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f983b8802de813283_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitMicrosoftGraphMailboxSetting"
+        },
+        "api": {
+          "name": "shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f21dec655d73f3a8c",
+          "logicalName": "cat_5Fmicrosoft-20graph-20mailboxsetting"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Out Of Office Check Days (cat_OutOfOfficeCheckDays)": {
+          "defaultValue": 1,
+          "type": "Int",
+          "metadata": {
+            "schemaName": "cat_OutOfOfficeCheckDays",
+            "description": "This variable will hold the difference in days permitted between a user's Out of Office (OOF) end date and the current date"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "e7a25b6d-8f92-445d-8697-291bbda2e3c2"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "User Details Array",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "User Details Array",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "Convert_Updated_User_Details_Array_to_base64_string": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "bebeab3c-4a97-46d5-aa4d-a7845256d75b"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "updated_user_details": "@{outputs('Convert_Updated_User_Details_Array_to_base64_string')}"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "updated_user_details": {
+                  "title": "Updated User Details",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Initialize_variable_Updated_User_Details": {
+          "runAfter": {
+            "User_Details_Array": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3254bbc0-eb4a-4f6e-8460-fd324fce203f"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Updated User Details",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Each_User": {
+          "foreach": "@outputs('User_Details_Array')",
+          "actions": {
+            "User_Details": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "f13e4a40-16d2-4da1-92a9-fd3acbbc1aef"
+              },
+              "type": "Compose",
+              "inputs": "@items('Each_User')"
+            },
+            "If_Approver_UPN_exists": {
+              "actions": {
+                "Get_User_Timezone_Setting": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "bb78e810-8f93-4c19-a368-af2a9375c8d7"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f983b8802de813283_1",
+                      "operationId": "GetUserTimezoneSetting",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f21dec655d73f3a8c"
+                    },
+                    "parameters": {
+                      "user-upn": "@outputs('User_Details')['approver']"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "Parse_Timezone_Setting": {
+                  "runAfter": {
+                    "Get_User_Timezone_Setting": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "6ca0bfb8-fdb5-49e9-8f1e-66a8456c0db5"
+                  },
+                  "type": "ParseJson",
+                  "inputs": {
+                    "content": "@body('Get_User_Timezone_Setting')",
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "@@odata.context": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "Get_User_Automatic_Replies_Setting": {
+                  "runAfter": {
+                    "Parse_Timezone_Setting": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "84b3ba91-2fa0-4ae0-b83c-2f8df3635937"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f983b8802de813283_1",
+                      "operationId": "GetUserAutomaticRepliesSetting",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f21dec655d73f3a8c"
+                    },
+                    "parameters": {
+                      "user-upn": "@outputs('User_Details')['approver']"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "Parse_Automatic_Replies_Setting": {
+                  "runAfter": {
+                    "Get_User_Automatic_Replies_Setting": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "fae1bd9a-9c9c-4efa-b85c-b7ae2a2a2756"
+                  },
+                  "type": "ParseJson",
+                  "inputs": {
+                    "content": "@body('Get_User_Automatic_Replies_Setting')",
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "@@odata.context": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "externalAudience": {
+                          "type": "string"
+                        },
+                        "internalReplyMessage": {
+                          "type": "string"
+                        },
+                        "externalReplyMessage": {
+                          "type": "string"
+                        },
+                        "scheduledStartDateTime": {
+                          "type": "object",
+                          "properties": {
+                            "dateTime": {
+                              "type": "string"
+                            },
+                            "timeZone": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "scheduledEndDateTime": {
+                          "type": "object",
+                          "properties": {
+                            "dateTime": {
+                              "type": "string"
+                            },
+                            "timeZone": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Current_Date_of_User_Timezone": {
+                  "runAfter": {
+                    "Parse_Automatic_Replies_Setting": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "80a6f42a-495d-4ee8-90e8-e5bba5c5599c"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertFromUtc(utcNow(), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')",
+                  "description": "convertFromUtc(utcNow(), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')"
+                },
+                "Start_Date": {
+                  "runAfter": {
+                    "Current_Date_of_User_Timezone": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "357d4a14-0993-4208-9e17-c58a15982e58"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertFromUtc(concat(body('Parse_Automatic_Replies_Setting')?['scheduledStartDateTime']?['dateTime'], 'Z'), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')",
+                  "description": "convertFromUtc(concat(body('Parse_Automatic_Replies_Setting')?['scheduledStartDateTime']?['dateTime'], 'Z'), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')"
+                },
+                "End_Date": {
+                  "runAfter": {
+                    "Start_Date": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "3cf732c4-e247-4283-9a47-cd4d1149ff6b"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertFromUtc(concat(body('Parse_Automatic_Replies_Setting')?['scheduledEndDateTime']?['dateTime'], 'Z'), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')",
+                  "description": "convertFromUtc(concat(body('Parse_Automatic_Replies_Setting')?['scheduledEndDateTime']?['dateTime'], 'Z'), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')"
+                },
+                "dateDifference_-_Days": {
+                  "runAfter": {
+                    "End_Date": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "fa443c9e-9356-438b-bd69-9fe3b744c1dc"
+                  },
+                  "type": "Compose",
+                  "inputs": "@if(equals(split(dateDifference(convertFromUtc(utcNow(), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd'), convertFromUtc(concat(body('Parse_Automatic_Replies_Setting')?['scheduledEndDateTime']?['dateTime'], 'Z'), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')), '.')[0], '00:00:00'), 0, int(split(dateDifference(convertFromUtc(utcNow(), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd'), convertFromUtc(concat(body('Parse_Automatic_Replies_Setting')?['scheduledEndDateTime']?['dateTime'], 'Z'), body('Parse_Timezone_Setting')?['value'], 'yyyy-MM-dd')), '.')[0]))"
+                },
+                "Check_status_and_if_Current_Date_falls_between_start_and_end_date": {
+                  "actions": {
+                    "Append_to_array_current_user_isOOF_property_to_true": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "957c9341-50ed-4a35-9aba-07ec3f1e02da"
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "Updated User Details",
+                        "value": {
+                          "id": "@{outputs('User_Details')['id']}",
+                          "approver": "@{outputs('User_Details')['approver']}",
+                          "isOOF": "true",
+                          "notification": "@outputs('User_Details')['notification']",
+                          "type": "@{outputs('User_Details')['type']}"
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Condition": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {
+                      "Append_to_array_current_user_isOOF_property_to_false": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "957c9341-50ed-4a35-9aba-07ec3f1e02da"
+                        },
+                        "type": "AppendToArrayVariable",
+                        "inputs": {
+                          "name": "Updated User Details",
+                          "value": {
+                            "id": "@{outputs('User_Details')['id']}",
+                            "approver": "@{outputs('User_Details')['approver']}",
+                            "isOOF": "false",
+                            "notification": "@outputs('User_Details')['notification']",
+                            "type": "@{outputs('User_Details')['type']}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "and": [
+                      {
+                        "not": {
+                          "equals": [
+                            "@body('Parse_Automatic_Replies_Setting')?['status']",
+                            "disabled"
+                          ]
+                        }
+                      },
+                      {
+                        "and": [
+                          {
+                            "greaterOrEquals": [
+                              "@outputs('Current_Date_of_User_Timezone')",
+                              "@outputs('Start_Date')"
+                            ]
+                          },
+                          {
+                            "lessOrEquals": [
+                              "@outputs('Current_Date_of_User_Timezone')",
+                              "@outputs('End_Date')"
+                            ]
+                          },
+                          {
+                            "and": [
+                              {
+                                "greater": [
+                                  "@outputs('dateDifference_-_Days')",
+                                  "@parameters('Out Of Office Check Days (cat_OutOfOfficeCheckDays)')"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "bc57db12-f30a-43fd-89da-23bc0b33f3e7"
+                  },
+                  "type": "If",
+                  "description": "If Status != Disabled && (Current Date >= Start Date && Current Date <= End Date && dateDifference > Out Of Office Check Days)"
+                },
+                "Condition": {
+                  "actions": {},
+                  "runAfter": {
+                    "Compose": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "greater": [
+                      "@outputs('dateDifference_-_Days')",
+                      "@parameters('Out Of Office Check Days (cat_OutOfOfficeCheckDays)')"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "ee417076-4ef1-4114-9843-b87cde1a4a68"
+                  },
+                  "type": "If"
+                },
+                "Compose": {
+                  "runAfter": {
+                    "dateDifference_-_Days": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "4750fcff-9b1d-4429-a0db-b5c99aa80efc"
+                  },
+                  "type": "Compose",
+                  "inputs": "@parameters('Out Of Office Check Days (cat_OutOfOfficeCheckDays)')"
+                }
+              },
+              "runAfter": {
+                "User_Details": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Append_to_array_Updated_User_Details(Approver_upn_empty)": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "957c9341-50ed-4a35-9aba-07ec3f1e02da"
+                    },
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                      "name": "Updated User Details",
+                      "value": "@outputs('User_Details')"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@empty(outputs('User_Details')['approver'])",
+                  "@false"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "fce0c24e-162e-4962-ab5e-4bfa6968dffa"
+              },
+              "type": "If",
+              "description": "empty(outputs('User_Details')['Approver_UPN']) is equal to false. i.e. If Approver UPN is not empty"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_Updated_User_Details": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f33b6e7c-3387-4823-85e3-f2b6f989315e"
+          },
+          "type": "Foreach"
+        },
+        "User_Details_Array": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "5d1de4b3-9b0a-4555-885b-03e6663ed41a"
+          },
+          "type": "Compose",
+          "inputs": "@json(base64tostring(triggerBody()['text']))"
+        },
+        "Final_Updated_User_Details_Array": {
+          "runAfter": {
+            "Each_User": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4a1c857e-8ca8-4be5-b10f-1ce76dc29ed2"
+          },
+          "type": "Compose",
+          "inputs": "@variables('Updated User Details')"
+        },
+        "Convert_Updated_User_Details_Array_to_base64_string": {
+          "runAfter": {
+            "Final_Updated_User_Details_Array": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "09341286-cf21-4623-911f-b01f17be1887"
+          },
+          "type": "Compose",
+          "inputs": "@base64(string(variables('Updated User Details')))"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

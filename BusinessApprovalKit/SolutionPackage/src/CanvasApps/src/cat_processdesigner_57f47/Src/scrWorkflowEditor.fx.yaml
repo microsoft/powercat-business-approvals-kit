@@ -33,6 +33,8 @@ scrWorkflowEditor As screen:
                         ItemIconName: "PublishContent"
                     }
                 )
+            LayoutMinHeight: =200
+            LayoutMinWidth: =200
             OnSelect: |-
                 =Switch(Self.Selected.ItemKey,
                     "new", 

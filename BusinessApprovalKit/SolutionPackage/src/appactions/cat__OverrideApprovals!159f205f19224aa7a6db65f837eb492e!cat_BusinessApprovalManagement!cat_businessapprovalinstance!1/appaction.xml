@@ -14,6 +14,7 @@
   <fonticon>People</fonticon>
   <hidden>0</hidden>
   <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
   <isgrouptitlehidden>0</isgrouptitlehidden>
   <location>1</location>
   <name>OverrideApprovals!159f205f19224aa7a6db65f837eb492e</name>
@@ -23,6 +24,7 @@
     <webresourceid>984654e3-d374-ed11-81ac-000d3a09f6b0</webresourceid>
   </onclickeventjavascriptwebresourceid>
   <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
   <statecode>0</statecode>
   <statuscode>1</statuscode>
   <type>0</type>

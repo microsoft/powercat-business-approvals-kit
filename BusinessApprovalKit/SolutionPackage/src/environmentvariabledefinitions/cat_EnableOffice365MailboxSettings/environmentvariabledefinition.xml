@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="cat_EnableOffice365MailboxSettings">
+  <defaultvalue>no</defaultvalue>
+  <description default="Activate this feature by setting it to 'Yes' to retrieve Out-of-Office (OOF) and Working Hours settings from users' mailbox configurations.">
+    <label description="Activate this feature by setting it to 'Yes' to retrieve Out-of-Office (OOF) and Working Hours settings from users' mailbox configurations." languagecode="1033" />
+  </description>
+  <displayname default="Enable Office 365 Mailbox Settings">
+    <label description="Enable Office 365 Mailbox Settings" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.1.0.13</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000002</type>
+</environmentvariabledefinition>

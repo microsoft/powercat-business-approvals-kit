@@ -9,7 +9,6 @@
   <EntityRelationships />
   <OrganizationSettings />
   <optionsets />
-  <Dashboards />
   <WebResources />
   <CustomControls />
   <SolutionPluginAssemblies />
@@ -29,6 +28,17 @@
     <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitDataverse">
       <connectionreferencedisplayname>Business Approval Kit | Dataverse</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitMicrosoftGraphMailboxSetting">
+      <connectionreferencedisplayname>Business Approval Kit | Microsoft Graph MailboxSetting</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f21dec655d73f3a8c</connectorid>
+      <customconnectorid>
+        <connectorid>a6fa6a98-5844-49fa-aa1e-ac7ffcc1b1b8</connectorid>
+      </customconnectorid>
+      <description>Connection reference for custom connector Microsoft Graph MailboxSetting</description>
       <iscustomizable>1</iscustomizable>
       <statecode>0</statecode>
       <statuscode>1</statuscode>
