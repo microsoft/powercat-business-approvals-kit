@@ -1,0 +1,43 @@
+{
+  "token": {
+    "oAuthSettings": {
+      "clientId": "79fe818e-7f03-4b82-aed4-8091f728647d",
+      "customParameters": {
+        "enableOnbehalfOfLogin": {
+          "value": "false"
+        },
+        "loginUri": {
+          "value": "https://login.microsoftonline.com"
+        },
+        "resourceUri": {
+          "value": "https://graph.microsoft.com/"
+        },
+        "tenantId": {
+          "value": "common"
+        }
+      },
+      "identityProvider": "aad",
+      "properties": {
+        "AzureActiveDirectoryResourceId": "https://graph.microsoft.com/",
+        "IsFirstParty": "False",
+        "IsOnbehalfofLoginSupported": true
+      },
+      "redirectMode": "GlobalPerConnector",
+      "redirectUrl": "https://global.consent.azure-apim.net/redirect/cat-5fmicrosoft-20graph-20mailboxsetting-5f21dec655d73f3a8c",
+      "scopes": []
+    },
+    "type": "oauthSetting"
+  },
+  "token:TenantId": {
+    "metadata": {
+      "sourceType": "AzureActiveDirectoryTenant"
+    },
+    "type": "string",
+    "uiDefinition": {
+      "constraints": {
+        "hidden": "true",
+        "required": "false"
+      }
+    }
+  }
+}
