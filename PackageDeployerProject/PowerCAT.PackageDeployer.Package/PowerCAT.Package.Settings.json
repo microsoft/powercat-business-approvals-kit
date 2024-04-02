@@ -19,7 +19,7 @@
           "overwrite-unmanaged-customizations": "true",
           "missing-dependency-behavior": "skip",
           "import-mode": "async"
-        }        
+        }
       ],
       "PreDeploymentSettings": [
         {
