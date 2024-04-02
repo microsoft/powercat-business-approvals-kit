@@ -55,7 +55,7 @@ steps:
   inputs:
     source: 'specific'
     project: 'powercat-business-approvals-kit'
-    pipeline: '11344' #Production buildId
+    pipeline: '2325' #Production buildId
     runVersion: 'latest'
     patterns: '**/Office365Integration*.zip'
   displayName: 'Download Office365Integration solution'  
