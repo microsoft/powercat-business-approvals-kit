@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Connector xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <connectorid>a6fa6a98-5844-49fa-aa1e-ac7ffcc1b1b8</connectorid>
-  <description>Get User Mailbox settings using Graph API</description>
+  <description>Get User Mailbox settings using Microsoft Graph API</description>
   <displayname>Microsoft Graph MailboxSetting</displayname>
   <iconbrandcolor>#007ee5</iconbrandcolor>
   <name>cat_5Fmicrosoft-20graph-20mailboxsetting</name>

@@ -4,7 +4,7 @@
   "definitions": {},
   "host": "graph.microsoft.com",
   "info": {
-    "description": "Get User Mailbox settings using Graph API",
+    "description": "Get User Mailbox settings using Microsoft Graph API",
     "title": "Default title",
     "version": "1.0"
   },
