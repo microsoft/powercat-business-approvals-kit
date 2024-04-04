@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Business Approvals Kit PBI Project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d933b3fe-3d84-4b57-9d34-24e1fbf08b93"
+  }
+}

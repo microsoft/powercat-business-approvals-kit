@@ -293,3 +293,6 @@ generateItemSchemasMarkdown.yaml
 item-schemas/test*
 
 item-schemas/_internal
+
+localSettings.*
+cache.*
