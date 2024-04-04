@@ -1,9 +1,0 @@
-{
-  "version": "4.0",
-  "datasetReference": {
-    "byPath": {
-      "path": "../Business Approvals Kit PBI Project.SemanticModel"
-    },
-    "byConnection": null
-  }
-}
