@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 28,
+        "y": 454.13012310730642
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 296.92755734422161,
+            "y": 604.13012310730642
+          },
+          "nodeIndex": "cat_businessapprovalinstance",
+          "nodeLineageTag": "3459b0c8-6bf1-4f97-8547-93c52a6d0d22",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 857.62641080396816,
+            "y": 693.501768858191
+          },
+          "nodeIndex": "cat_businessapprovalruntimestageinstance",
+          "nodeLineageTag": "87b8be8c-635a-4452-9150-e3a52d5c4469",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 570.99488580587058,
+            "y": 957.76583049838018
+          },
+          "nodeIndex": "cat_businessapprovalversion",
+          "nodeLineageTag": "500c9e19-0612-4a7b-bb23-3b0f4c395329",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 601.1238488992276,
+            "y": 342.42650139736782
+          },
+          "nodeIndex": "cat_businessapprovalworkflow",
+          "nodeLineageTag": "0d978a98-1bcc-4f8e-9f81-d15d65845bda",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 924.26439960598225
+          },
+          "nodeIndex": "cat_businessapprover",
+          "nodeLineageTag": "22b236fa-e877-4305-9fec-db1bf610cba1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 97.333333333333343,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
