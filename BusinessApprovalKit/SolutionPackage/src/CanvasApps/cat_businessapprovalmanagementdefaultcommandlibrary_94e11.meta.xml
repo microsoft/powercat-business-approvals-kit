@@ -26,6 +26,6 @@
   <IntroducedVersion>1.0</IntroducedVersion>
   <CdsDependencies>{"cdsdependencies":[{"componenttype":1,"logicalname":"cat_businessapprovalinstance"},{"componenttype":1,"logicalname":"cat_businessapprovalprocess"}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
-  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl23853_BackgroundImageUri</BackgroundImageUri>
-  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl43270_DocumentUri.msapp</DocumentUri>
+  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl87927_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl35106_DocumentUri.msapp</DocumentUri>
 </CanvasApp>

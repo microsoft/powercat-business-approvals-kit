@@ -72,32 +72,6 @@
             "Completed_(809060002)": {
               "case": 809060002,
               "actions": {
-                "Get_Next_Node": {
-                  "runAfter": {},
-                  "metadata": {
-                    "operationMetadataId": "c30a096c-47ac-49d4-a0e7-150504fc91fa"
-                  },
-                  "type": "OpenApiConnection",
-                  "inputs": {
-                    "host": {
-                      "connectionName": "shared_commondataserviceforapps_1",
-                      "operationId": "ListRecords",
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                    },
-                    "parameters": {
-                      "entityName": "cat_businessapprovalruntimenodes",
-                      "$filter": "_cat_stage_value eq '@{triggerOutputs()?['body/_cat_stage_value']}'  and cat_rowindex eq @{add(triggerOutputs()?['body/cat_order'],1)} and cat_pathindex eq @{triggerOutputs()?['body/cat_path']}",
-                      "$top": 1
-                    },
-                    "authentication": "@parameters('$authentication')"
-                  },
-                  "runtimeConfiguration": {
-                    "staticResult": {
-                      "staticResultOptions": "Disabled",
-                      "name": "Get_Next_Node0"
-                    }
-                  }
-                },
                 "If_no_node_found": {
                   "actions": {
                     "Get_any_other_running_Node_Instances": {
@@ -169,8 +143,31 @@
                   },
                   "else": {
                     "actions": {
-                      "Create_new_Node_Instance": {
+                      "Get_Node_Due_Date_Request_Data": {
                         "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "e8d2ebca-a774-4fd3-b241-fd6b2e298ea4"
+                        },
+                        "type": "OpenApiConnection",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_commondataserviceforapps_1",
+                            "operationId": "ListRecords",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                          },
+                          "parameters": {
+                            "entityName": "cat_businessapprovaldatainstances",
+                            "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']}"
+                          },
+                          "authentication": "@parameters('$authentication')"
+                        }
+                      },
+                      "Create_new_Node_Instance": {
+                        "runAfter": {
+                          "Get_Node_Due_Date_Request_Data": [
+                            "Succeeded"
+                          ]
+                        },
                         "metadata": {
                           "operationMetadataId": "5e796899-63ec-4e72-9c01-f52253016805"
                         },
@@ -191,7 +188,7 @@
                             "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
                             "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
                             "item/cat_nodeduedatedatatype": "@first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype']",
-                            "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovalruntimedatas(',first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value'],')'),null)",
+                            "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovaldatainstances(',first(outputs('Get_Node_Due_Date_Request_Data')?['body/value'])?['cat_businessapprovaldatainstanceid'],')'),null)",
                             "item/cat_nodeduedatevalue": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060001),first(body('Get_Next_Node')['value'])?['cat_nodeduedatevalue'],null)",
                             "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
                           },
@@ -211,6 +208,32 @@
                   },
                   "type": "If",
                   "description": "End of current path"
+                },
+                "Get_Next_Node": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "c30a096c-47ac-49d4-a0e7-150504fc91fa"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "ListRecords",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovalruntimenodes",
+                      "$filter": "_cat_stage_value eq '@{triggerOutputs()?['body/_cat_stage_value']}'  and cat_rowindex eq @{add(triggerOutputs()?['body/cat_order'],1)} and cat_pathindex eq @{triggerOutputs()?['body/cat_path']}",
+                      "$top": 1
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runtimeConfiguration": {
+                    "staticResult": {
+                      "staticResultOptions": "Disabled",
+                      "name": "Get_Next_Node0"
+                    }
+                  }
                 }
               }
             },
