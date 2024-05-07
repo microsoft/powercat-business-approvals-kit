@@ -43,6 +43,7 @@ Menu As CanvasComponent:
         ZIndex: =1
 
     "galMenu As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Main menu"
         BorderColor: =RGBA(0, 18, 107, 1)
         Height: =Parent.Height - Self.Y

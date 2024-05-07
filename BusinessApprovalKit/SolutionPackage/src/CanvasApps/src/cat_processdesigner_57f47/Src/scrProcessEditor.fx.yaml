@@ -4,9 +4,9 @@ scrProcessEditor As screen:
         =With({ default: Lower(_selectedProcess.'Business Owner Email') }, 
             If(!IsBlank(default), UpdateContext({_selectedBusinessOwner:AddColumns(
                 Office365Users.SearchUser({searchTerm: default, top:1}),
-                "PersonaKey", Mail, 
-                "PersonaName", DisplayName,
-                "PersonaRole", JobTitle)}
+                PersonaKey, Mail, 
+                PersonaName, DisplayName,
+                PersonaRole, JobTitle)}
                 )
             )
         );
@@ -14,9 +14,9 @@ scrProcessEditor As screen:
         With({ default: _selectedProcess.'Secondary Owner Email' }, 
             If(!IsBlank(default), UpdateContext({_selectedSecondaryOwner:AddColumns(
                 Office365Users.SearchUser({searchTerm: default, top:1}),
-                "PersonaKey", Mail, 
-                "PersonaName", DisplayName,
-                "PersonaRole", JobTitle)}
+                PersonaKey, Mail, 
+                PersonaName, DisplayName,
+                PersonaRole, JobTitle)}
                 )
             )
         );
@@ -24,9 +24,9 @@ scrProcessEditor As screen:
         With({ default: _selectedProcess.'Default Approver Email' }, 
             If(!IsBlank(default), UpdateContext({_selectedDefaultApprover:AddColumns(
                 Office365Users.SearchUser({searchTerm: default, top:1}),
-                "PersonaKey", Mail, 
-                "PersonaName", DisplayName,
-                "PersonaRole", JobTitle)}
+                PersonaKey, Mail, 
+                PersonaName, DisplayName,
+                PersonaRole, JobTitle)}
                 )
             )
         );
@@ -79,7 +79,7 @@ scrProcessEditor As screen:
                 DisplayName: ="Default Approver"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_defaultapproverdisplayname")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_defaultapproverdisplayname)
                 Required: =false
                 Update: =First(PeoplePicker3.SelectedPeople).PersonaName
                 Width: =383
@@ -154,16 +154,16 @@ scrProcessEditor As screen:
                     Y: =DataCardKey13.Y
                     ZIndex: =4
 
-                "PeoplePicker3 As 'Fluent PeoplePicker (1.0.22) Preview'.pcfdataset":
+                "PeoplePicker3 As 'Fluent PeoplePicker (1.1.29) Preview'.pcfdataset":
                     DisplayMode: =DisplayMode.Edit
                     Height: =30
                     Items: |-
                         =If(!IsBlank(_selectedProcess.'Default Approver Email'),
                             AddColumns(
                                 Office365Users.SearchUser({searchTerm: _selectedProcess.'Default Approver Email', top:1}),
-                                "PersonaKey", Mail, 
-                                "PersonaName", DisplayName,
-                                "PersonaRole", JobTitle)
+                                PersonaKey, Mail, 
+                                PersonaName, DisplayName,
+                                PersonaRole, JobTitle)
                         )
                     MaxPeople: =1
                     OnSearch: |-
@@ -171,9 +171,9 @@ scrProcessEditor As screen:
                             UserCollection,
                             AddColumns(
                             Office365Users.SearchUser({ searchTerm: Self.SearchText, top: 500 }),
-                            "SuggestionKey", Mail, 
-                            "SuggestionName", DisplayName,
-                            "SuggestionRole", JobTitle
+                            SuggestionKey, Mail, 
+                            SuggestionName, DisplayName,
+                            SuggestionRole, JobTitle
                         )
                         )
                     Suggestions_Items: =UserCollection
@@ -188,10 +188,10 @@ scrProcessEditor As screen:
                 DataField: ="cat_businessowneremail"
                 Default: =ThisItem.'Business Owner Email'
                 DisplayMode: =Parent.DisplayMode
-                DisplayName: =DataSourceInfo([@'Business Approval Processes'],DataSourceInfo.DisplayName,"cat_businessowneremail")
+                DisplayName: =DataSourceInfo([@'Business Approval Processes'],DataSourceInfo.DisplayName,cat_businessowneremail)
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_businessowneremail")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_businessowneremail)
                 Required: =false
                 Update: |-
                     =//cboBusinessOwner.Selected.UserPrincipalName
@@ -208,10 +208,10 @@ scrProcessEditor As screen:
                 DataField: ="cat_secondaryowneremail"
                 Default: =ThisItem.'Secondary Owner Email'
                 DisplayMode: =Parent.DisplayMode
-                DisplayName: =DataSourceInfo([@'Business Approval Processes'],DataSourceInfo.DisplayName,"cat_secondaryowneremail")
+                DisplayName: =DataSourceInfo([@'Business Approval Processes'],DataSourceInfo.DisplayName,cat_secondaryowneremail)
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_secondaryowneremail")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_secondaryowneremail)
                 Required: =false
                 Update: =First(PeoplePicker2.SelectedPeople).PersonaKey
                 Visible: =false
@@ -226,10 +226,10 @@ scrProcessEditor As screen:
                 DataField: ="cat_defaultapproveremail"
                 Default: =ThisItem.'Default Approver Email'
                 DisplayMode: =Parent.DisplayMode
-                DisplayName: =DataSourceInfo([@'Business Approval Processes'],DataSourceInfo.DisplayName,"cat_defaultapproveremail")
+                DisplayName: =DataSourceInfo([@'Business Approval Processes'],DataSourceInfo.DisplayName,cat_defaultapproveremail)
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_defaultapproveremail")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_defaultapproveremail)
                 Required: =false
                 Update: =First(PeoplePicker3.SelectedPeople).PersonaKey
                 Visible: =false
@@ -247,7 +247,7 @@ scrProcessEditor As screen:
                 DisplayName: ="Name"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =83
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_name")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_name)
                 Required: =true
                 Update: =DataCardValue1.Text
                 Width: =383
@@ -362,7 +362,7 @@ scrProcessEditor As screen:
                 DisplayName: ="Category"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =83
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_category")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_category)
                 Required: =false
                 Update: =DataCardValue2.Text
                 Width: =383
@@ -591,7 +591,7 @@ scrProcessEditor As screen:
                 DisplayName: ="Business Owner"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =83
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_businessowner")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_businessowner)
                 Required: =false
                 Update: |-
                     =First(PeoplePicker1.SelectedPeople).PersonaName
@@ -668,16 +668,16 @@ scrProcessEditor As screen:
                     Y: =DataCardKey4.Y
                     ZIndex: =4
 
-                "PeoplePicker1 As 'Fluent PeoplePicker (1.0.22) Preview'.pcfdataset":
+                "PeoplePicker1 As 'Fluent PeoplePicker (1.1.29) Preview'.pcfdataset":
                     DisplayMode: =DisplayMode.Edit
                     Height: =30
                     Items: |-
                         =If(!IsBlank(_selectedProcess.'Business Owner Email'),
                             AddColumns(
                                 Office365Users.SearchUser({searchTerm: _selectedProcess.'Business Owner Email', top:1}),
-                                "PersonaKey", Mail, 
-                                "PersonaName", DisplayName,
-                                "PersonaRole", JobTitle)
+                                PersonaKey, Mail, 
+                                PersonaName, DisplayName,
+                                PersonaRole, JobTitle)
                         )
                     MaxPeople: =1
                     OnSearch: |-
@@ -685,9 +685,9 @@ scrProcessEditor As screen:
                             UserCollection,
                             AddColumns(
                             Office365Users.SearchUser({ searchTerm: Self.SearchText, top: 500 }),
-                            "SuggestionKey", Mail, 
-                            "SuggestionName", DisplayName,
-                            "SuggestionRole", JobTitle
+                            SuggestionKey, Mail, 
+                            SuggestionName, DisplayName,
+                            SuggestionRole, JobTitle
                         )
                         )
                     Suggestions_Items: =UserCollection
@@ -705,7 +705,7 @@ scrProcessEditor As screen:
                 DisplayName: ="Secondary Owner"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =83
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_secondaryowner")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_secondaryowner)
                 Required: =false
                 Update: =First(PeoplePicker2.SelectedPeople).PersonaName
                 Width: =383
@@ -780,16 +780,16 @@ scrProcessEditor As screen:
                     Y: =DataCardKey5.Y
                     ZIndex: =4
 
-                "PeoplePicker2 As 'Fluent PeoplePicker (1.0.22) Preview'.pcfdataset":
+                "PeoplePicker2 As 'Fluent PeoplePicker (1.1.29) Preview'.pcfdataset":
                     DisplayMode: =DisplayMode.Edit
                     Height: =30
                     Items: |-
                         =If(!IsBlank(_selectedProcess.'Secondary Owner Email'),
                             AddColumns(
                                 Office365Users.SearchUser({searchTerm: _selectedProcess.'Secondary Owner Email', top:1}),
-                                "PersonaKey", Mail, 
-                                "PersonaName", DisplayName,
-                                "PersonaRole", JobTitle)
+                                PersonaKey, Mail, 
+                                PersonaName, DisplayName,
+                                PersonaRole, JobTitle)
                         )
                     MaxPeople: =1
                     OnSearch: |-
@@ -797,9 +797,9 @@ scrProcessEditor As screen:
                             UserCollection,
                             AddColumns(
                             Office365Users.SearchUser({ searchTerm: Self.SearchText, top: 500 }),
-                            "SuggestionKey", Mail, 
-                            "SuggestionName", DisplayName,
-                            "SuggestionRole", JobTitle
+                            SuggestionKey, Mail, 
+                            SuggestionName, DisplayName,
+                            SuggestionRole, JobTitle
                         )
                         )
                     Suggestions_Items: =UserCollection
@@ -1292,6 +1292,7 @@ scrProcessEditor As screen:
             ZIndex: =14
 
         galAppRequestData As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             BorderColor: =RGBA(166, 166, 166, 1)
             Height: =Parent.Height - Self.Y - 20
             Items: |-
@@ -1420,15 +1421,15 @@ scrProcessEditor As screen:
                     Set(_isBusy, true);
                     Concurrent(
                         ClearCollect(_stDeps,
-                            ShowColumns(Filter('Business Approval Stages', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), "cat_name")
+                            ShowColumns(Filter('Business Approval Stages', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), Name)
                         ),
                         ClearCollect(_ndDeps, 
-                            ShowColumns(Filter('Business Approval Nodes', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), "cat_name")
+                            ShowColumns(Filter('Business Approval Nodes', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), Name)
                         ),
                         UpdateContext({cdDeps: 
                             ShowColumns(
                                 Filter('Business Approval Conditions', 'Condition Data'.'Business Approval Data' = ThisItem.'Business Approval Data'),
-                                "cat_stagenamevalue", "cat_nodenamevalue"
+                                'Stage Name Value', 'Node Name Value'
                             )
                         })
                     );
@@ -1500,7 +1501,7 @@ scrProcessEditor As screen:
             Width: =Parent.Width
             ZIndex: =16
 
-        "CommandBar2_4 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBar2_4 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =40
             Items: |-

@@ -3,6 +3,7 @@
   <WebResourceId>{e317321d-0fdb-ec11-a7b5-0022486dca48}</WebResourceId>
   <Name>cat_businessapproval_runtimecondition</Name>
   <DisplayName>Business Approval Runtime Conditions</DisplayName>
+  <LanguageCode>0</LanguageCode>
   <WebResourceType>11</WebResourceType>
   <IntroducedVersion>1.0.0.11</IntroducedVersion>
   <IsEnabledForMobileClient>1</IsEnabledForMobileClient>

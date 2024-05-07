@@ -52,7 +52,7 @@ scrNodeEditor As screen:
         Width: =Parent.Width - Self.X
         ZIndex: =1
 
-        "CommandBar2_1 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBar2_1 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =40
             Items: |-
@@ -952,6 +952,7 @@ scrNodeEditor As screen:
                 ZIndex: =13
 
             galApprovers As gallery.galleryHorizontal:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 FocusedBorderThickness: =0
                 Height: =50

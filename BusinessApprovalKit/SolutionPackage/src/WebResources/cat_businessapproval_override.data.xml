@@ -3,6 +3,7 @@
   <WebResourceId>{cad17b5e-0edb-ec11-a7b5-0022486dca48}</WebResourceId>
   <Name>cat_businessapproval_override</Name>
   <DisplayName>Business Approval Overrides</DisplayName>
+  <LanguageCode>0</LanguageCode>
   <WebResourceType>11</WebResourceType>
   <IntroducedVersion>1.0.0.11</IntroducedVersion>
   <IsEnabledForMobileClient>1</IsEnabledForMobileClient>

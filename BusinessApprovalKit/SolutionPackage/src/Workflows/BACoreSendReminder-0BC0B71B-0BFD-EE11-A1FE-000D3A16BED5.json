@@ -1,0 +1,562 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitO365Outlook"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      },
+      "shared_teams_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitMicrosoftTeams"
+        },
+        "api": {
+          "name": "shared_teams"
+        }
+      },
+      "shared_commondataserviceforapps_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cat_BusinessApprovalKitDataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "593424cf-2e78-4728-a84a-f3319ec5e6ac"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "cat_businessapprovalruntimenodeinstance",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "cat_nextremindernode",
+              "subscriptionRequest/filterexpression": "_cat_nextremindernode_value ne null"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_All_Running_Approval_Instances_for_the_Node": {
+          "runAfter": {
+            "Delay_until": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c5e3ee15-da78-4919-8e20-f877c625e36d"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalinstances",
+              "$filter": "_cat_node_value eq @{triggerOutputs()?['body/_cat_node_value']} and _cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and cat_instancestatus eq @{outputs('Instance_Status_Value')['Running']}",
+              "$expand": "cat_Approver($select=cat_businessapproverid,cat_approverid,cat_isoutofoffice,cat_notificationtype)"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Instance_Status_Value": {
+          "runAfter": {
+            "Initialize_Node_Due_Date": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1f1fbec9-0d17-475b-9c54-c00c2d17882f"
+          },
+          "type": "Compose",
+          "inputs": {
+            "New": 809060000,
+            "Running": 809060001,
+            "Completed": 809060002,
+            "Suspended": 809060003,
+            "Canceled": 809060004,
+            "Timed Out": 809060005,
+            "Error": 809060006
+          }
+        },
+        "Delay_until": {
+          "runAfter": {
+            "Get_Existing_Node_Reminder_Instance_record": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "104f3d3e-86de-41ee-8c53-145532cd7085"
+          },
+          "type": "Wait",
+          "inputs": {
+            "until": {
+              "timestamp": "@outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_reminderdatetime']"
+            }
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Each_Approver": {
+              "foreach": "@outputs('Get_All_Running_Approval_Instances_for_the_Node')?['body/value']",
+              "actions": {
+                "Switch": {
+                  "runAfter": {},
+                  "cases": {
+                    "Email": {
+                      "case": 809060000,
+                      "actions": {
+                        "Send_an_email_(V2)": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "98c54efb-6023-4783-8993-2c10d5e58b0f"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_office365",
+                              "operationId": "SendEmailV2",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                            },
+                            "parameters": {
+                              "emailMessage/To": "@items('Each_Approver')?['cat_approver/cat_approverid']",
+                              "emailMessage/Subject": "Reminder to approve pending approvals",
+                              "emailMessage/Body": "<p>@{outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_remindertext']}</p>",
+                              "emailMessage/Importance": "Normal"
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        }
+                      }
+                    },
+                    "Teams": {
+                      "case": 809060001,
+                      "actions": {
+                        "Post_message_in_a_chat_or_channel": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "5d93e042-776f-4a8f-b7e1-68aa09f3ed0e"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_teams_1",
+                              "operationId": "PostMessageToConversation",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+                            },
+                            "parameters": {
+                              "poster": "Flow bot",
+                              "location": "Chat with Flow bot",
+                              "body/recipient": "@{items('Each_Approver')?['cat_approver/cat_approverid']};",
+                              "body/messageBody": "<p>@{outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_remindertext']}</p>",
+                              "body/isAlert": true
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        }
+                      }
+                    },
+                    "Email_+_Teams": {
+                      "case": 809060002,
+                      "actions": {
+                        "Send_an_email_(V2)_2": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "05d6dc26-3d3a-46a4-9210-349e3f145a62"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_office365",
+                              "operationId": "SendEmailV2",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                            },
+                            "parameters": {
+                              "emailMessage/To": "@items('Each_Approver')?['cat_approver/cat_approverid']",
+                              "emailMessage/Subject": "Reminder to approve pending approvals",
+                              "emailMessage/Body": "<p>@{outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_remindertext']}</p>",
+                              "emailMessage/Importance": "Normal"
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        },
+                        "Post_message_in_a_chat_or_channel_2": {
+                          "runAfter": {
+                            "Send_an_email_(V2)_2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "cb23cdda-0077-41db-932f-6b7a66c6fe74"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_teams_1",
+                              "operationId": "PostMessageToConversation",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+                            },
+                            "parameters": {
+                              "poster": "Flow bot",
+                              "location": "Chat with Flow bot",
+                              "body/recipient": "@{items('Each_Approver')?['cat_approver/cat_approverid']};",
+                              "body/messageBody": "<p>@{outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_remindertext']}</p>",
+                              "body/isAlert": true
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "default": {
+                    "actions": {}
+                  },
+                  "expression": "@outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_reminderchannel']",
+                  "metadata": {
+                    "operationMetadataId": "2d046ffb-162f-4087-821c-fe165a4b13ee"
+                  },
+                  "type": "Switch"
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0e70f1e4-dc4e-462b-b1b9-5068e7a79ee7"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Get_All_Running_Approval_Instances_for_the_Node": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "greater": [
+              "@length(outputs('Get_All_Running_Approval_Instances_for_the_Node')?['body/value'])",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a7ee0c3e-443b-49c2-b783-eaf3b782ed53"
+          },
+          "type": "If"
+        },
+        "Initialize_Node_Due_Date": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "dfc46c51-5196-46fe-9415-1b15240aa93d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Node Due Date",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Get_Existing_Node_Reminder_Instance_record": {
+          "runAfter": {
+            "Get_Runtime_Node_Definition": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "dd2253bd-50eb-4686-991a-5c471b3c48c8"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalnodereminderinstances",
+              "recordId": "@triggerOutputs()?['body/_cat_nextremindernodeinstance_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Next_Runtime_Node_Reminder_Exists": {
+          "actions": {
+            "Update_Node_Instance": {
+              "runAfter": {
+                "Create_Next_Reminder_Node_Instance": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "aa72bb19-0c06-4778-99e7-e7a2bfefe2a0"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalruntimenodeinstances",
+                  "recordId": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
+                  "item/cat_NextReminderNode@odata.bind": "cat_businessapprovalruntimenodereminders(@{outputs('Next_Reminder_Node')?['cat_businessapprovalruntimenodereminderid']})",
+                  "item/cat_NextReminderNodeInstance@odata.bind": "cat_businessapprovalnodereminderinstances(@{outputs('Create_Next_Reminder_Node_Instance')?['body/cat_businessapprovalnodereminderinstanceid']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "description": "Update Next Reminder Node Instance"
+            },
+            "Create_Next_Reminder_Node_Instance": {
+              "runAfter": {
+                "Next_Reminder_DateTime": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "90368bdf-bcc9-4023-8fe8-8a8869ae27ce"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "cat_businessapprovalnodereminderinstances",
+                  "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodeinstances(@{triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']})",
+                  "item/cat_NodeReminder@odata.bind": "cat_businessapprovalruntimenodereminders(@{outputs('Next_Reminder_Node')?['cat_businessapprovalruntimenodereminderid']})",
+                  "item/cat_reminderchannel": "@outputs('Next_Reminder_Node')?['cat_reminderchannel']",
+                  "item/cat_reminderdatetime": "@outputs('Next_Reminder_DateTime')",
+                  "item/cat_reminderdays": "@outputs('Next_Reminder_Node')?['cat_reminderdays']",
+                  "item/cat_remindersent": false,
+                  "item/cat_remindertext": "@outputs('Next_Reminder_Node')?['cat_remindertext']",
+                  "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "If_Node_Due_Date_Data_Type_Equals_Request_Data": {
+              "actions": {
+                "Get_Node_Due_Date_": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "4d5902d8-0ed1-4215-8e4a-05aaab2ab445"
+                  },
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "c2534955-add4-ec11-a7b5-000d3af46350"
+                    },
+                    "body": {
+                      "text": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+                      "boolean": false,
+                      "text_2": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
+                      "text_1": "@outputs('Get_Runtime_Node_Definition')?['body/_cat_nodeduedaterequestdata_value']"
+                    }
+                  }
+                },
+                "Set_Node_Due_Date_Request_Data": {
+                  "runAfter": {
+                    "Get_Node_Due_Date_": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "dc2c6d0d-6fa8-49da-9064-a40c9df02c61"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "Node Due Date",
+                    "value": "@body('Get_Node_Due_Date_')?['raw']"
+                  }
+                }
+              },
+              "runAfter": {
+                "Next_Reminder_Node": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Set_Node_Due_Date_Value": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "9a735711-06db-4d79-9460-412d1325fede"
+                    },
+                    "type": "SetVariable",
+                    "inputs": {
+                      "name": "Node Due Date",
+                      "value": "@triggerOutputs()?['body/cat_nodeduedatevalue']"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@triggerOutputs()?['body/cat_nodeduedatedatatype']",
+                  809060000
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ce815ecd-aa74-4ab2-bb63-2fd25afa1db9"
+              },
+              "type": "If"
+            },
+            "Next_Reminder_Node": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "102b0d2b-19d1-4521-9467-36cd446bb005"
+              },
+              "type": "Compose",
+              "inputs": "@first(outputs('Get_Next_Runtime_Reminder_Node')?['body/value'])"
+            },
+            "Next_Reminder_DateTime": {
+              "runAfter": {
+                "If_Node_Due_Date_Data_Type_Equals_Request_Data": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "919ee2e9-5c9c-4320-9aff-1a6c426e0486"
+              },
+              "type": "Compose",
+              "inputs": "@subtractFromTime(variables('Node Due Date'), outputs('Next_Reminder_Node')?['cat_reminderdays'], 'Day')"
+            }
+          },
+          "runAfter": {
+            "Get_Next_Runtime_Reminder_Node": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "greater": [
+              "@length(outputs('Get_Next_Runtime_Reminder_Node')?['body/value'])",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5dea7d96-5b4b-4822-a175-d2a87ba92e54"
+          },
+          "type": "If"
+        },
+        "Get_Next_Runtime_Reminder_Node": {
+          "runAfter": {
+            "Update_Existing_Node_Reminder_Instance_record": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "127bb296-457c-43e2-bf3b-b63a5688aa0c"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimenodereminders",
+              "$filter": "cat_reminderdays le @{outputs('Get_Existing_Node_Reminder_Instance_record')?['body/cat_reminderdays']} and _cat_node_value eq @{triggerOutputs()?['body/_cat_node_value']} and cat_businessapprovalruntimenodereminderid ne @{outputs('Update_Existing_Node_Reminder_Instance_record')?['body/_cat_nodereminder_value']}",
+              "$orderby": "cat_reminderdays desc"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Update_Existing_Node_Reminder_Instance_record": {
+          "runAfter": {
+            "Condition": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b11ff4bf-a44b-4052-8bba-3a51a961f33d"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "UpdateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalnodereminderinstances",
+              "recordId": "@triggerOutputs()?['body/_cat_nextremindernodeinstance_value']",
+              "item/cat_remindersent": true
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Runtime_Node_Definition": {
+          "runAfter": {
+            "Instance_Status_Value": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6cf266d8-8cfe-47e6-8db4-dfd91046cb6f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimenodes",
+              "recordId": "@triggerOutputs()?['body/_cat_node_value']",
+              "$select": "cat_name, cat_approvaltype,cat_businessapprovalruntimenodeid, _cat_stage_value, cat_delegationrule, cat_nodetype, cat_notificationtype, cat_nodeduedatedatatype,cat_nodeduedatevalue,_cat_nodeduedaterequestdata_value"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

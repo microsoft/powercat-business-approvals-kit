@@ -67,6 +67,7 @@ ApprovalDesigner As CanvasComponent:
         ZIndex: =1
 
     galProcessStages_1 As gallery.variableTemplateHeightGallery:
+        '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Process stages"
         BorderColor: =RGBA(166, 166, 166, 1)
         DelayItemLoading: =false//true
@@ -237,7 +238,7 @@ ApprovalDesigner As CanvasComponent:
             Y: =icoMoveDown.Y
             ZIndex: =5
 
-        "stageBGElevation_1 As 'Fluent Elevation (1.0.22)'":
+        "stageBGElevation_1 As 'Fluent Elevation (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: |-
                 =Max(
@@ -278,6 +279,7 @@ ApprovalDesigner As CanvasComponent:
             ZIndex: =7
 
         galStageNodes As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             AccessibleLabel: ="Stage nodes"
             BorderColor: =RGBA(255, 0, 0, 1)
             DelayItemLoading: =true
@@ -288,8 +290,8 @@ ApprovalDesigner As CanvasComponent:
                         SortByColumns(
                             Filter('Business Approval Nodes', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage'), 
                             "cat_rowindex"
-                        ), "cat_rowindex", "Nodes"
-                    ), "Paths", ThisItem.Paths
+                        ), 'Row Index', Nodes
+                    ), Paths, ThisItem.Paths
                 )
             Layout: =Layout.Vertical
             LoadingSpinner: =LoadingSpinner.Data
@@ -305,7 +307,7 @@ ApprovalDesigner As CanvasComponent:
                 )
             ZIndex: =8
 
-            "elevationNodeBoxPath5 As 'Fluent Elevation (1.0.22)'":
+            "elevationNodeBoxPath5 As 'Fluent Elevation (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =88
                 HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
@@ -316,7 +318,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =
                 ZIndex: =1
 
-            "elevationNodeBoxPath4 As 'Fluent Elevation (1.0.22)'":
+            "elevationNodeBoxPath4 As 'Fluent Elevation (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =88
                 HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
@@ -327,7 +329,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =
                 ZIndex: =2
 
-            "elevationNodeBoxPath3 As 'Fluent Elevation (1.0.22)'":
+            "elevationNodeBoxPath3 As 'Fluent Elevation (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =88
                 HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
@@ -338,7 +340,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =
                 ZIndex: =3
 
-            "elevationNodeBoxPath2 As 'Fluent Elevation (1.0.22)'":
+            "elevationNodeBoxPath2 As 'Fluent Elevation (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =88
                 HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
@@ -349,7 +351,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =0
                 ZIndex: =4
 
-            "elevationNodeBoxPath1 As 'Fluent Elevation (1.0.22)'":
+            "elevationNodeBoxPath1 As 'Fluent Elevation (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =88
                 HoverDepth: ='PowerCAT.Elevation.HoverDepth'.Depth64
@@ -753,7 +755,7 @@ ApprovalDesigner As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -792,7 +794,7 @@ ApprovalDesigner As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -831,7 +833,7 @@ ApprovalDesigner As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -870,7 +872,7 @@ ApprovalDesigner As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -912,7 +914,7 @@ ApprovalDesigner As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate.Text & If(Len(cat_conditionvaluedisplay) > 0, $"<b>{ cat_conditionvaluedisplay }</b><br/>") & $"Go to <br/><b>{ cat_GoToStage.Name }</b></span></div>"
                                 )    
@@ -1216,7 +1218,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =36
 
-            "icoCKEditNodePath1_1 As 'Fluent Icon (1.0.22)'":
+            "icoCKEditNodePath1_1 As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themePrimary
@@ -1234,7 +1236,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =37
 
-            "icoCKEditNodePath2 As 'Fluent Icon (1.0.22)'":
+            "icoCKEditNodePath2 As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themePrimary
@@ -1252,7 +1254,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =38
 
-            "icoCKEditNodePath3 As 'Fluent Icon (1.0.22)'":
+            "icoCKEditNodePath3 As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themePrimary
@@ -1270,7 +1272,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =39
 
-            "icoCKEditNodePath4 As 'Fluent Icon (1.0.22)'":
+            "icoCKEditNodePath4 As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themePrimary
@@ -1288,7 +1290,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =40
 
-            "icoCKEditNodePath5 As 'Fluent Icon (1.0.22)'":
+            "icoCKEditNodePath5 As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themePrimary
@@ -1306,7 +1308,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =41
 
-            "commandbarCKEditNode2 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "commandbarCKEditNode2 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 Items: |-
@@ -1394,7 +1396,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath1.Y + lblNodeNamePath1.Height / 2 - Self.Height / 2
                 ZIndex: =42
 
-            "commandbarCKEditNode3 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "commandbarCKEditNode3 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 Items: |-
@@ -1491,7 +1493,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath3.Y + lblNodeNamePath3.Height / 2 - Self.Height / 2
                 ZIndex: =43
 
-            "commandbarCKEditNode4 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "commandbarCKEditNode4 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 Items: |-
@@ -1579,7 +1581,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath4.Y + lblNodeNamePath4.Height / 2 - Self.Height / 2
                 ZIndex: =44
 
-            "commandbarCKEditNode5 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "commandbarCKEditNode5 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 Items: |-
@@ -1667,7 +1669,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =lblNodeNamePath5.Y + lblNodeNamePath5.Height / 2 - Self.Height / 2
                 ZIndex: =45
 
-            "commandbarCKEditNode1 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "commandbarCKEditNode1 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 Items: |-
@@ -1756,6 +1758,7 @@ ApprovalDesigner As CanvasComponent:
                 ZIndex: =46
 
         galStageConditions_1 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             AccessibleLabel: ="Conditions"
             BorderColor: =RGBA(166, 166, 166, 1)
             Height: =If(ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None, 62, 0)
@@ -1766,7 +1769,7 @@ ApprovalDesigner As CanvasComponent:
                         Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage'), 
                         "cat_pathindex"
                     ),
-                   "StageSelection", ThisItem
+                   StageSelection, ThisItem
                 )
             Layout: =Layout.Vertical
             OnSelect: =
@@ -1928,7 +1931,7 @@ ApprovalDesigner As CanvasComponent:
                     Y: =10
                     ZIndex: =1
 
-            "icoCKFirstTrueNode As 'Fluent Icon (1.0.22)'":
+            "icoCKFirstTrueNode As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themeLighter
@@ -2054,7 +2057,7 @@ ApprovalDesigner As CanvasComponent:
                     Y: =5
                     ZIndex: =1
 
-            "icoCKFirstFalseNode As 'Fluent Icon (1.0.22)'":
+            "icoCKFirstFalseNode As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =25
                 HoverFillColor: =AppTheme.palette.themeLighter
@@ -2069,7 +2072,7 @@ ApprovalDesigner As CanvasComponent:
                 Y: =conConditionLabelFalse.Y + conConditionLabelFalse.Height + 3
                 ZIndex: =8
 
-        "icoEdit_1 As 'Fluent Icon (1.0.22)'":
+        "icoEdit_1 As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             FillColor: =
             FontColor: =
@@ -2088,7 +2091,7 @@ ApprovalDesigner As CanvasComponent:
             Y: =stageBackground_1.Y + 1
             ZIndex: =11
 
-        "icoToggle_1 As 'Fluent Icon (1.0.22)'":
+        "icoToggle_1 As 'Fluent Icon (1.1.29)'":
             AccessibilityLabel: =If(ThisItem.'Business Approval Stage' in _collapsedStage.Value, "Hide stage", "Expand stage")
             DisplayMode: =DisplayMode.Edit
             Height: =30
@@ -2113,7 +2116,7 @@ ApprovalDesigner As CanvasComponent:
             Y: =stageBackground_1.Y + 1
             ZIndex: =12
 
-        "icoShiftDown_1 As 'Fluent Icon (1.0.22)'":
+        "icoShiftDown_1 As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: =30
             HoverFillColor: =AppTheme.palette.themeLighter
@@ -2128,7 +2131,7 @@ ApprovalDesigner As CanvasComponent:
             Y: =stageBackground_1.Y + 1
             ZIndex: =13
 
-        "icoShiftUp_1 As 'Fluent Icon (1.0.22)'":
+        "icoShiftUp_1 As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: =30
             HoverFillColor: =AppTheme.palette.themeLighter
@@ -2256,7 +2259,7 @@ ApprovalDesigner As CanvasComponent:
             Y: =stageBackground_1.Y
             ZIndex: =18
 
-        "CommandBarOptions As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBarOptions As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =35
             Items: |-
@@ -2329,7 +2332,7 @@ ApprovalDesigner As CanvasComponent:
             Y: =stageBackground_1.Y + 1
             ZIndex: =19
 
-        "icoAddStage_1 As 'Fluent Icon (1.0.22)'":
+        "icoAddStage_1 As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             FontSize: =30
             Height: =40

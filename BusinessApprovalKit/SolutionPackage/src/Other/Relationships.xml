@@ -8,6 +8,8 @@
   <EntityRelationship Name="business_unit_cat_businessapprovalinstancelog" />
   <EntityRelationship Name="business_unit_cat_businessapprovalinstanceoverride" />
   <EntityRelationship Name="business_unit_cat_businessapprovalnode" />
+  <EntityRelationship Name="business_unit_cat_businessapprovalnodereminder" />
+  <EntityRelationship Name="business_unit_cat_businessapprovalnodereminderinstance" />
   <EntityRelationship Name="business_unit_cat_businessapprovalprocess" />
   <EntityRelationship Name="business_unit_cat_businessapprovalpublicholidays" />
   <EntityRelationship Name="business_unit_cat_businessapprovalpublishedruntimedata" />
@@ -18,6 +20,7 @@
   <EntityRelationship Name="business_unit_cat_businessapprovalruntimeinstance" />
   <EntityRelationship Name="business_unit_cat_businessapprovalruntimenode" />
   <EntityRelationship Name="business_unit_cat_businessapprovalruntimenodeinstance" />
+  <EntityRelationship Name="business_unit_cat_businessapprovalruntimenodereminder" />
   <EntityRelationship Name="business_unit_cat_businessapprovalruntimestage" />
   <EntityRelationship Name="business_unit_cat_businessapprovalruntimestageinstance" />
   <EntityRelationship Name="business_unit_cat_businessapprovalsetting" />
@@ -52,9 +55,17 @@
   <EntityRelationship Name="cat_BusinessApprovalInstanceOverride_Appr" />
   <EntityRelationship Name="cat_BusinessApprovalInstanceOverride_Over" />
   <EntityRelationship Name="cat_BusinessApprovalNode_GoToStage_cat_Bu" />
+  <EntityRelationship Name="cat_businessapprovalnode_NextReminderNode_cat" />
+  <EntityRelationship Name="cat_businessapprovalnode_NextReminderRuntimeN" />
+  <EntityRelationship Name="cat_businessapprovalnode_NodeDueDateRequestDa" />
   <EntityRelationship Name="cat_BusinessApprovalNode_Process_cat_Busi" />
   <EntityRelationship Name="cat_BusinessApprovalNode_SourceData_cat_B" />
   <EntityRelationship Name="cat_BusinessApprovalNode_Stage_cat_Busine" />
+  <EntityRelationship Name="cat_businessapprovalnodereminder_Node_cat_bus" />
+  <EntityRelationship Name="cat_businessapprovalnodereminder_Process_cat_" />
+  <EntityRelationship Name="cat_businessapprovalnodereminderinstance_Node" />
+  <EntityRelationship Name="cat_businessapprovalnodereminderinstance_Runt" />
+  <EntityRelationship Name="cat_businessapprovalnodereminderinstance_Work" />
   <EntityRelationship Name="cat_BusinessApprovalProcess_DefaultApprov" />
   <EntityRelationship Name="cat_BusinessApprovalPublicHolidays_Calend" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeCondition_Cond" />
@@ -67,12 +78,20 @@
   <EntityRelationship Name="cat_BusinessApprovalRuntimeException_Node" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeInstance_Origi" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNode_GoToStage" />
+  <EntityRelationship Name="cat_businessapprovalruntimenode_NextReminderN" />
+  <EntityRelationship Name="cat_businessapprovalruntimenode_NodeDueDateRe" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNode_ProcessVe" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNode_SourceDat" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNode_Stage_cat" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNodeInstance_N" />
+  <EntityRelationship Name="cat_businessapprovalruntimenodeinstance_NextR" />
+  <EntityRelationship Name="cat_businessapprovalruntimenodeinstance_NodeD" />
+  <EntityRelationship Name="cat_businessapprovalruntimenodeinstance_NxtRI" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNodeInstance_S" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeNodeInstance_W" />
+  <EntityRelationship Name="cat_businessapprovalruntimenodereminder_Node_" />
+  <EntityRelationship Name="cat_businessapprovalruntimenodereminder_NodeR" />
+  <EntityRelationship Name="cat_businessapprovalruntimenodereminder_Proce" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeStage_ProcessV" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeStage_SourceDa" />
   <EntityRelationship Name="cat_BusinessApprovalRuntimeStageInstance_" />
@@ -112,6 +131,10 @@
   <EntityRelationship Name="lk_cat_businessapprovalinstanceoverride_modifiedby" />
   <EntityRelationship Name="lk_cat_businessapprovalnode_createdby" />
   <EntityRelationship Name="lk_cat_businessapprovalnode_modifiedby" />
+  <EntityRelationship Name="lk_cat_businessapprovalnodereminder_createdby" />
+  <EntityRelationship Name="lk_cat_businessapprovalnodereminder_modifiedby" />
+  <EntityRelationship Name="lk_cat_businessapprovalnodereminderinstance_createdby" />
+  <EntityRelationship Name="lk_cat_businessapprovalnodereminderinstance_modifiedby" />
   <EntityRelationship Name="lk_cat_businessapprovalprocess_createdby" />
   <EntityRelationship Name="lk_cat_businessapprovalprocess_modifiedby" />
   <EntityRelationship Name="lk_cat_businessapprovalpublicholidays_createdby" />
@@ -132,6 +155,8 @@
   <EntityRelationship Name="lk_cat_businessapprovalruntimenode_modifiedby" />
   <EntityRelationship Name="lk_cat_businessapprovalruntimenodeinstance_createdby" />
   <EntityRelationship Name="lk_cat_businessapprovalruntimenodeinstance_modifiedby" />
+  <EntityRelationship Name="lk_cat_businessapprovalruntimenodereminder_createdby" />
+  <EntityRelationship Name="lk_cat_businessapprovalruntimenodereminder_modifiedby" />
   <EntityRelationship Name="lk_cat_businessapprovalruntimestage_createdby" />
   <EntityRelationship Name="lk_cat_businessapprovalruntimestage_modifiedby" />
   <EntityRelationship Name="lk_cat_businessapprovalruntimestageinstance_createdby" />
@@ -162,6 +187,8 @@
   <EntityRelationship Name="owner_cat_businessapprovalinstancelog" />
   <EntityRelationship Name="owner_cat_businessapprovalinstanceoverride" />
   <EntityRelationship Name="owner_cat_businessapprovalnode" />
+  <EntityRelationship Name="owner_cat_businessapprovalnodereminder" />
+  <EntityRelationship Name="owner_cat_businessapprovalnodereminderinstance" />
   <EntityRelationship Name="owner_cat_businessapprovalprocess" />
   <EntityRelationship Name="owner_cat_businessapprovalpublicholidays" />
   <EntityRelationship Name="owner_cat_businessapprovalpublishedruntimedata" />
@@ -172,6 +199,7 @@
   <EntityRelationship Name="owner_cat_businessapprovalruntimeinstance" />
   <EntityRelationship Name="owner_cat_businessapprovalruntimenode" />
   <EntityRelationship Name="owner_cat_businessapprovalruntimenodeinstance" />
+  <EntityRelationship Name="owner_cat_businessapprovalruntimenodereminder" />
   <EntityRelationship Name="owner_cat_businessapprovalruntimestage" />
   <EntityRelationship Name="owner_cat_businessapprovalruntimestageinstance" />
   <EntityRelationship Name="owner_cat_businessapprovalsetting" />
@@ -191,6 +219,8 @@
   <EntityRelationship Name="team_cat_businessapprovalinstancelog" />
   <EntityRelationship Name="team_cat_businessapprovalinstanceoverride" />
   <EntityRelationship Name="team_cat_businessapprovalnode" />
+  <EntityRelationship Name="team_cat_businessapprovalnodereminder" />
+  <EntityRelationship Name="team_cat_businessapprovalnodereminderinstance" />
   <EntityRelationship Name="team_cat_businessapprovalprocess" />
   <EntityRelationship Name="team_cat_businessapprovalpublicholidays" />
   <EntityRelationship Name="team_cat_businessapprovalpublishedruntimedata" />
@@ -201,6 +231,7 @@
   <EntityRelationship Name="team_cat_businessapprovalruntimeinstance" />
   <EntityRelationship Name="team_cat_businessapprovalruntimenode" />
   <EntityRelationship Name="team_cat_businessapprovalruntimenodeinstance" />
+  <EntityRelationship Name="team_cat_businessapprovalruntimenodereminder" />
   <EntityRelationship Name="team_cat_businessapprovalruntimestage" />
   <EntityRelationship Name="team_cat_businessapprovalruntimestageinstance" />
   <EntityRelationship Name="team_cat_businessapprovalsetting" />
@@ -220,6 +251,8 @@
   <EntityRelationship Name="user_cat_businessapprovalinstancelog" />
   <EntityRelationship Name="user_cat_businessapprovalinstanceoverride" />
   <EntityRelationship Name="user_cat_businessapprovalnode" />
+  <EntityRelationship Name="user_cat_businessapprovalnodereminder" />
+  <EntityRelationship Name="user_cat_businessapprovalnodereminderinstance" />
   <EntityRelationship Name="user_cat_businessapprovalprocess" />
   <EntityRelationship Name="user_cat_businessapprovalpublicholidays" />
   <EntityRelationship Name="user_cat_businessapprovalpublishedruntimedata" />
@@ -230,6 +263,7 @@
   <EntityRelationship Name="user_cat_businessapprovalruntimeinstance" />
   <EntityRelationship Name="user_cat_businessapprovalruntimenode" />
   <EntityRelationship Name="user_cat_businessapprovalruntimenodeinstance" />
+  <EntityRelationship Name="user_cat_businessapprovalruntimenodereminder" />
   <EntityRelationship Name="user_cat_businessapprovalruntimestage" />
   <EntityRelationship Name="user_cat_businessapprovalruntimestageinstance" />
   <EntityRelationship Name="user_cat_businessapprovalsetting" />

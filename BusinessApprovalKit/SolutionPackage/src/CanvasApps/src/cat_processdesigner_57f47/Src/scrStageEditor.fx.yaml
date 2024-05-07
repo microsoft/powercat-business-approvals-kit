@@ -60,7 +60,7 @@ scrStageEditor As screen:
         Width: =Parent.Width - Self.X
         ZIndex: =1
 
-        "CommandBar2 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBar2 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =40
             Items: |-
@@ -356,7 +356,7 @@ scrStageEditor As screen:
                     'Business Approval Stage Condition'.'If/Else', 
                     //if there are existing conditions, remove all except the first condition
                     Collect(_removedConditions, 
-                        ShowColumns(Filter(_conditions, Path > 1), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                        ShowColumns(Filter(_conditions, Path > 1), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                     );
                     RemoveIf(_conditions, Path > 1);
                     If(conditionsCount = 0, 
@@ -384,7 +384,7 @@ scrStageEditor As screen:
                     'Business Approval Stage Condition'.None, 
                     //if there are any existing conditions, add them to the remove list
                     If(conditionsCount > 0, 
-                        Collect(_removedConditions, ShowColumns(_conditions,  "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage"));    
+                        Collect(_removedConditions, ShowColumns(_conditions,  ConditionId, Path, Target, TargetData, StaticValue, TargetStage));    
                         Clear(_conditions)
                     )
                 );
@@ -450,7 +450,7 @@ scrStageEditor As screen:
                         //new paths is less than current - remove last n conditions
                         //push paths that are to be removed into temp stack then remove
                         Collect(_removedConditions, 
-                            ShowColumns(Filter(_conditions, Path > newCount), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                            ShowColumns(Filter(_conditions, Path > newCount), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                         );
                         RemoveIf(_conditions, Path > newCount),
                 
@@ -713,6 +713,7 @@ scrStageEditor As screen:
             ZIndex: =20
 
         galConditions As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             BorderColor: =RGBA(166, 166, 166, 1)
             Height: =120
             Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
@@ -1085,6 +1086,7 @@ scrStageEditor As screen:
             ZIndex: =26
 
             galStageDeps As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 BorderThickness: =1
                 Height: =Min(Parent.Height - Self.Y, CountRows(Self.AllItems) * Self.TemplateHeight)

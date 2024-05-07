@@ -67,6 +67,13 @@
         "User form – Business": "c2413504-7eb2-4c59-a087-95d819866114",
         "User Hierarchy Tile Form": "c68d6c09-d7a7-4959-8d0f-44b8cff9b452"
       }
+    },
+    {
+      "Kind": "default.cds_cat_businessapprovalnodereminder_forms",
+      "Namespace": "Business Approval Node Reminders (Forms)",
+      "Values": {
+        "Information": "8d4f9e71-febc-4d74-a7d5-ecfe2c0d96b7"
+      }
     }
   ]
 }

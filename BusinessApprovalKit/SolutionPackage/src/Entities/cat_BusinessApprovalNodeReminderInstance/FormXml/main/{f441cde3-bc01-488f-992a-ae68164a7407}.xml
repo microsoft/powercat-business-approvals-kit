@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{f441cde3-bc01-488f-992a-ae68164a7407}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{fa874243-2925-48c0-a33f-2a9d17d249da}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+            <label description="全般" languagecode="1041" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{cca5e8a4-1703-4bd2-98b4-9ca00ce5cacb}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                    <label description="全般" languagecode="1041" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{cebcd8b4-7e98-46c6-8d18-38643903b168}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="cat_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cat_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2b380a86-3b31-4615-bb0c-7b8e0560a165}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Workflow Instance" languagecode="1033" />
+                        </labels>
+                        <control id="cat_workflowinstance" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_workflowinstance" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0d35424c-daf9-4f7e-9b77-37de09589756}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Node" languagecode="1033" />
+                        </labels>
+                        <control id="cat_node" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_node" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{84a62816-5e31-47a9-a45d-9b55db873ef9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reminder Text" languagecode="1033" />
+                        </labels>
+                        <control id="cat_remindertext" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_remindertext" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{81aaa8a5-cb1f-4414-b5b0-fc433e4e5cd3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reminder Days" languagecode="1033" />
+                        </labels>
+                        <control id="cat_reminderdays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="cat_reminderdays" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f2bc955a-d3c2-488e-9047-32624d6a340c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reminder Datetime" languagecode="1033" />
+                        </labels>
+                        <control id="cat_reminderdatetime" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="cat_reminderdatetime" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e83ac7ff-5c20-4518-950a-7f5ba8d45b44}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reminder Sent" languagecode="1033" />
+                        </labels>
+                        <control id="cat_remindersent" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="cat_remindersent" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4807b290-2b78-42f2-b485-6d16c5cdcfde}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                          <label description="所有者" languagecode="1041" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{5f468dd9-5de5-4579-9516-6da571e7906c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{3a00197a-2882-4f2e-a936-3b191e2b0160}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{215343d3-930b-44b7-8bc4-da2777874b3f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{68462153-6dac-44da-91e6-72a6b898fc79}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{fdff3387-e2a2-4b84-a466-3d423721fb5c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{34b32b48-c5f1-47e9-a17d-d14a54dc9066}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{67946fff-4ede-4838-b44a-21b2772c8cd9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d613b065-e494-4be1-8e0b-abd3eff74906}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

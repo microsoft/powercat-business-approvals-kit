@@ -178,9 +178,9 @@
         ClearCollect( DefaultUserCollection, User() ); ClearCollect( DefaultUserCollection, Blank() );
         ClearCollect( ApproverCollection, AddColumns(
             Office365Users.SearchUser({ searchTerm: "", top: 500 }),
-            "SuggestionKey", UserPrincipalName, 
-            "SuggestionName", DisplayName, 
-            "SuggestionRole", JobTitle 
+            SuggestionKey, UserPrincipalName, 
+            SuggestionName, DisplayName, 
+            SuggestionRole, JobTitle 
         ) );
         Concurrent(
         UpdateContext(
@@ -252,7 +252,7 @@
                 RadiusTopRight: =8
                 ZIndex: =1
 
-                "iconCKBack As 'Fluent Icon (1.0.22)'":
+                "iconCKBack As 'Fluent Icon (1.1.29)'":
                     DisplayMode: =DisplayMode.Edit
                     FontSize: =0
                     Height: =35
@@ -340,7 +340,7 @@
                         Width: =Parent.Width
                         ZIndex: =8
 
-                        "ckMainCommandBar_2 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+                        "ckMainCommandBar_2 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                             DisplayMode: =DisplayMode.Edit
                             Height: =50
                             Items: |-
@@ -350,10 +350,18 @@
                                         ItemIconName: "Refresh",
                                         //March
                                         ItemVisible: ApprovalDesignerEdit_2.TotalStages > 0 //ApprovalDesignerEdit_2.TotalStages > 1
-                                    },{
+                                    },
+                                    {
                                         ItemKey: "variables",
                                         ItemDisplayName: ProcessDesignerLoc.mainCmdBarVariable,//Variables
                                         ItemIconName: "VariableGroup"
+                                    },
+                                    {
+                                        ItemKey: "reminders",
+                                        ItemDisplayName: "Reminders",//ProcessDesignerLoc.RefreshTxt,//Refresh
+                                        ItemIconName: "Ringer",
+                                        //March
+                                        ItemVisible: ApprovalDesignerEdit_2.TotalStages > 0 //ApprovalDesignerEdit_2.TotalStages > 1
                                     },
                                     {
                                         ItemKey: "versions",
@@ -666,7 +674,29 @@
                                         }
                                     );
                                     
-                                )
+                                ,"reminders",//variables
+                                    UpdateContext(
+                                        {
+                                            isPanelOpen: true,
+                                            panelHeaderText: "Set Reminders",//ProcessDesignerLoc.varPanelHeaderTxt,
+                                            //Set Variables
+                                showReminderContainer: true,
+                                            showFooterButton: true,
+                                            showSaveButton: true,
+                                            disableSaveButton: false,
+                                            disableCancelButton: false,
+                                            showCancelButton: false,
+                                            savebuttonText: ProcessDesignerLoc.Close//Close
+                                        }
+                                    );
+                                    Set(varReminderNode,Blank());
+                                    ClearCollect(colNodeReminders,
+                                    Filter(
+                                    Filter('Business Approval Node Reminders', 'Business Approval Node Reminders (Views)'.'Active Business Approval Node Reminders'),
+                                    Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                                ));
+                                    )
+                                    //SetFocus())
                             Theme: =AppThemeJson
                             Visible: =true
                             Width: |-
@@ -675,7 +705,8 @@
                             X: |-
                                 =//Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 1,445,360)
                                 //March
-                                Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 0,445,360)
+                                //Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 0,445,360)
+                                Parent.Y + Parent.Width - If(ApprovalDesignerEdit_2.TotalStages > 0,550,360)
                             Y: =0
                             ZIndex: =1
 
@@ -958,7 +989,7 @@
                     If(!IsBlank(_selectedNode),
                     //Force fetch relationship column values from 'Business Approvers'
                         //ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending));
-                        ClearCollect(_nodeApprovers, SortByColumns(DropColumns(AddColumns(_selectedNode.'Business Approvers',"TempColumn",""),"TempColumn"), "cat_name", SortOrder.Ascending));
+                        ClearCollect(_nodeApprovers, SortByColumns(DropColumns(AddColumns(_selectedNode.'Business Approvers',TempColumn,""),TempColumn), "cat_name", SortOrder.Ascending));
                     );
                     
                     //check if this is on a parallel path, disable conditional nodes if it is
@@ -1108,7 +1139,7 @@
                 Y: =70
                 ZIndex: =2
 
-            "icoAddStage As 'Fluent Icon (1.0.22)'":
+            "icoAddStage As 'Fluent Icon (1.1.29)'":
                 DisplayMode: =DisplayMode.Edit
                 FontSize: =30
                 Height: =45
@@ -1517,7 +1548,7 @@
                     If(!IsBlank(_selectedNode),
                     //Force fetch relationship column values from 'Business Approvers'
                         //ClearCollect(_nodeApprovers, SortByColumns(_selectedNode.'Business Approvers', "cat_name", SortOrder.Ascending));
-                        ClearCollect(_nodeApprovers, SortByColumns(DropColumns(AddColumns(_selectedNode.'Business Approvers',"TempColumn",""),"TempColumn"), "cat_name", SortOrder.Ascending));
+                        ClearCollect(_nodeApprovers, SortByColumns(DropColumns(AddColumns(_selectedNode.'Business Approvers',TempColumn,""),TempColumn), "cat_name", SortOrder.Ascending));
                     );
                     
                     //check if this is on a parallel path, disable conditional nodes if it is
@@ -2005,6 +2036,18 @@
                                 _nodeApprovers,
                                 Name,
                                 const.Comma//", "
+                            ),
+                            'Node Due Date Data Type':
+                                ddlNodeDueDateSource.Selected.Value,
+                            'Node Due Date Value':If(
+                                lblNodeDueDate.Visible,
+                                dtNodeDueDateValue.Value,
+                                Blank()
+                            ),
+                            'Node Due Date Request Data':If(
+                                lblNodeDueDateAppData.Visible,
+                                ddlNodeDueDateAppData.Selected,
+                                Blank()
                             )
                         }
                     )
@@ -2360,7 +2403,16 @@
                 );
                 
             //close variable configuration - ends
-            );
+            ,
+            showReminderContainer,
+            UpdateContext(
+                    {
+                        isPanelOpen: false,
+                        showReminderContainer: false,
+                        isPanelVisible: false,
+                        contentWidth: 0
+                    }
+                ););
         OnDismiss: |
             =Switch(
                 true,
@@ -2425,6 +2477,7 @@
                     showProcessVersionContainer: false,
                     showPublishProcessContainer: false,
                     showVariableContainer: false,
+                    showReminderContainer:false,
                     isPanelVisible: false,
                     _showDeleteOption: false,
                     automaticRefreshVersion:false
@@ -2466,7 +2519,7 @@
         Y: =CommandBarDelete.Y
         ZIndex: =5
 
-    "CommandBarDelete As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+    "CommandBarDelete As 'Fluent Command Bar (1.1.29)'.pcfdataset":
         DisplayMode: =DisplayMode.Edit
         Height: =25
         Items: |-
@@ -2804,7 +2857,7 @@
                             //new paths is less than current - remove last n conditions
                             //push paths that are to be removed into temp stack then remove
                             Collect(_removedConditions, 
-                                ShowColumns(Filter(_conditions, Path > newCount), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                                ShowColumns(Filter(_conditions, Path > newCount), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                             );
                             RemoveIf(_conditions, Path > newCount),
                     
@@ -3005,6 +3058,7 @@
                 ZIndex: =17
 
                 galStageDeps_2 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
                     BorderColor: =RGBA(166, 166, 166, 1)
                     BorderThickness: =1
                     Height: =Min(Parent.Height - Self.Y, CountRows(Self.AllItems) * Self.TemplateHeight)
@@ -3181,7 +3235,7 @@
                         'Business Approval Stage Condition'.'If/Else', 
                         //if there are existing conditions, remove all except the first condition
                         Collect(_removedConditions, 
-                            ShowColumns(Filter(_conditions, Path > 1), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                            ShowColumns(Filter(_conditions, Path > 1), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                         );
                         RemoveIf(_conditions, Path > 1);
                         If(conditionsCount = 0, 
@@ -3209,7 +3263,7 @@
                         'Business Approval Stage Condition'.None, 
                         //if there are any existing conditions, add them to the remove list
                         If(conditionsCount > 0, 
-                            Collect(_removedConditions, ShowColumns(_conditions,  "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage"));    
+                            Collect(_removedConditions, ShowColumns(_conditions,  ConditionId, Path, Target, TargetData, StaticValue, TargetStage));    
                             Clear(_conditions)
                         )
                     );
@@ -3472,6 +3526,7 @@
                 ZIndex: =27
 
             galConditions_1 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 Height: =120
                 Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
@@ -3858,7 +3913,7 @@
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 FocusedBorderThickness: =1
                 Font: =Font.'Segoe UI'
-                Height: =60
+                Height: =lblStageDesc_7.Height + 20
                 HoverBorderColor: =Self.BorderColor
                 HoverColor: =RGBA(51, 51, 51, 1)
                 HoverFill: =RGBA(255, 255, 255, 1)
@@ -3883,7 +3938,7 @@
                 Height: =Parent.Height - Self.Y
                 Visible: =radNodeType_4.Selected.Value = 'Business Approval Node Type'.Approval
                 Width: =Parent.Width
-                Y: =txtNodeDesc_4.Y + txtNodeDesc_4.Height + 10
+                Y: =lblNodeDueDateAppData.Y + lblNodeDueDateAppData.Height + 10
                 ZIndex: =9
 
                 lblApprovalConfiguration_2 As label:
@@ -4535,6 +4590,7 @@
                     ZIndex: =13
 
                 galApprovers_2 As gallery.galleryHorizontal:
+                    '#CopilotOverlayLabel': ="Filtered"
                     BorderColor: =RGBA(166, 166, 166, 1)
                     DelayItemLoading: =true
                     FocusedBorderThickness: =0
@@ -4667,7 +4723,7 @@
                         Y: =5
                         ZIndex: =7
 
-                "ApproverPeoplePicker As 'Fluent PeoplePicker (1.0.22) Preview'.pcfdataset":
+                "ApproverPeoplePicker As 'Fluent PeoplePicker (1.1.29) Preview'.pcfdataset":
                     DisplayMode: =DisplayMode.Edit
                     Error: =false
                     Height: =If(!IsError(Self.AutoHeight),Self.AutoHeight,35)
@@ -4694,7 +4750,7 @@
                                             top: 500
                                         }
                                     ),
-                                "SuggestionImgUrl",
+                                SuggestionImgUrl,
                                 Substitute(
                                     JSON(
                                         Office365Users.UserPhotoV2(Id),
@@ -4703,11 +4759,11 @@
                                     """",
                                     ""
                                 ),
-                                "SuggestionKey",
+                                SuggestionKey,
                                 Mail,
-                                "SuggestionName",
+                                SuggestionName,
                                 DisplayName,
-                                "SuggestionRole",
+                                SuggestionRole,
                                 JobTitle
                             )
                         )
@@ -4727,13 +4783,191 @@
                     Y: =lblNodeApprover_2.Y
                     ZIndex: =15
 
+            lblNodeDueDateSource As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =lblNode.Height
+                PaddingLeft: =12
+                Size: =10
+                Text: |-
+                    =//"Source"
+                    //ProcessDesignerLoc.nodeRuContainerLblSource
+                    "Node Due Date Source"
+                Visible: |-
+                    =//ddlNodeCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None && ddlNodeCondition_2.Visible
+                    //9Feb
+                    //ddlNodeCondition_2.DisplayMode = DisplayMode.Edit && ddlNodeCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None
+                    //
+                    true
+                Width: =lblStageName_5.Width
+                X: =lblStageName_5.X
+                Y: =txtNodeDesc_4.Y + txtNodeDesc_4.Height + 5
+                ZIndex: =10
+
+            ddlNodeDueDateSource As dropdown:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                Default: =_selectedNode.'Node Due Date Data Type'
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =lblNodeDueDateSource.Height
+                HoverBorderColor: =Self.BorderColor
+                HoverFill: =RGBA(243, 242, 241, 1)
+                Items: =Choices('Business Approval Node Due Date Data Type')
+                OnChange: |-
+                    =//Reset(dtNodeDueDateValue);
+                    //Reset(ddlNodeDueDateAppData);
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedFill: =Self.HoverFill
+                SelectionColor: =Self.Color
+                SelectionFill: =RGBA(243, 242, 241, 1)
+                Size: =10
+                Visible: |-
+                    =//lblNodeConditionSource_4.Visible
+                    true
+                Width: |-
+                    =//Parent.Width/2 - lblNodeConditionSource_4.Width
+                    (Parent.Width - Self.X) / 2
+                X: =lblNodeDueDateSource.X + lblNodeDueDateSource.Width + 10
+                Y: =lblNodeDueDateSource.Y
+                ZIndex: =11
+
+            lblNodeDueDateAppData As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                PaddingLeft: =12
+                Size: =10
+                Text: |-
+                    =//"Request Data"
+                    //ProcessDesignerLoc.nodeRuContainerLblRequestData
+                    "Node Due Date Request Data"
+                Visible: |-
+                    =
+                    ddlNodeDueDateSource.Selected.Value = 'Business Approval Node Due Date Data Type'.'Request Data' && ddlNodeDueDateSource.Visible
+                Width: =120
+                X: =lblNodeDueDateSource.X
+                Y: =lblNodeDueDateSource.Height + lblNodeDueDateSource.Y + 5
+                ZIndex: =12
+
+            ddlNodeDueDateAppData As dropdown:
+                AllowEmptySelection: |-
+                    =//false
+                    //9Feb
+                    true
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                Default: =_selectedNode.'Source Data'.Name
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =30
+                HoverBorderColor: =Self.BorderColor
+                HoverFill: =RGBA(243, 242, 241, 1)
+                Items: |-
+                    =Filter(
+                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 'Data Type' = LookUp(Choices('Business Approval Data Type'),Text(Value) = "Date").Value//809060002 //&& LookUp(Choices('Business Approval Data Type'), Text(Value) = "Date").Value
+                    )
+                        
+                OnChange: |-
+                    =UpdateIf(_conditions, true, { TargetData: Blank() }) //clear all target data value if exists
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedFill: =Self.HoverFill
+                SelectionColor: =Self.Color
+                SelectionFill: =RGBA(243, 242, 241, 1)
+                Size: =10
+                Visible: =lblNodeDueDateAppData.Visible
+                Width: =(Parent.Width - Self.X) / 2
+                X: =lblNodeDueDateSource.X + lblNodeDueDateSource.Width + 10
+                Y: =lblNodeDueDateAppData.Y
+                ZIndex: =13
+
+            "dtNodeDueDateValue As 'Date picker'":
+                DisplayMode: =txtAppDataName_2.DisplayMode
+                FillColor: =
+                Height: =lblNodeDueDateSource.Height
+                IconFill: =ColorValue(AppTheme.palette.themePrimary)
+                TextColor: =
+                Value: |-
+                    =//If(isDefaultDataClear, Blank(), varAppDataItem.'Default Value')
+                    //If(isDefaultDataClear, Blank(), If(varReminderDataItem.'Data Type' = 'Business Approval Node Due Date Data Type'.'Static value',utc,Blank()))
+                    //If(varReminderDataItem.'Data Type' = 'Business Approval Node Due Date Data Type'.'Static value',,Blank()))
+                    If(IsBlank(_selectedNode),Blank(),_selectedNode.'Node Due Date Value')
+                Visible: =ddlNodeDueDateSource.Selected.Value = 'Business Approval Node Due Date Data Type'.'Static value'
+                Width: =(Parent.Width - Self.X) / 2
+                X: =lblNodeDueDate.X + lblNodeDueDate.Width + 10
+                Y: =lblNodeDueDateAppData.Y
+                ZIndex: =14
+
+            lblNodeDueDate As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =lblStageName_5.Height - 5
+                PaddingLeft: =12
+                Size: =10
+                Text: ="Node Due Date"
+                Visible: |-
+                    =
+                    //ddlNodeConditionSource_4.Selected.Value = 'Business Approval Node Due Date Data Type'.'Request Data' && ddlNodeConditionSource_4.Visible
+                    ddlNodeDueDateSource.Selected.Value = 'Business Approval Node Due Date Data Type'.'Static value'
+                Width: =lblNodeDueDateSource.Width
+                X: =lblStageName_5.X
+                Y: =lblNodeDueDateSource.Height + lblNodeDueDateSource.Y + 5
+                ZIndex: =15
+
         NodeRuleEditorContainer As groupContainer:
             Height: =Parent.Height - Self.Y
-            Visible: =showNodeRuleEditorContainer
+            Visible: =//showNodeRuleEditorContainer
             Width: =Parent.Width - Self.X
             ZIndex: =3
 
-            "CommandBar2_14 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "CommandBar2_14 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =40
                 Items: |-
@@ -5173,7 +5407,7 @@
                             'Business Approval Stage Condition'.'If/Else', 
                             //if there are existing conditions, remove all except the first condition
                             Collect(_removedConditions, 
-                                ShowColumns(Filter(_conditions, Path > 1), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                                ShowColumns(Filter(_conditions, Path > 1), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                             );
                             RemoveIf(_conditions, Path > 1);
                             If(conditionsCount = 0, 
@@ -5197,7 +5431,7 @@
                             'Business Approval Stage Condition'.None, 
                             //if there are any existing conditions, add them to the remove list
                             If(conditionsCount > 0, 
-                                Collect(_removedConditions, ShowColumns(_conditions,  "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage"));    
+                                Collect(_removedConditions, ShowColumns(_conditions,  ConditionId, Path, Target, TargetData, StaticValue, TargetStage));    
                                 Clear(_conditions)
                             )
                         );
@@ -5290,7 +5524,7 @@
                                 //new paths is less than current - remove last n conditions
                                 //push paths that are to be removed into temp stack then remove
                                 Collect(_removedConditions, 
-                                    ShowColumns(Filter(_conditions, Path > newCount), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                                    ShowColumns(Filter(_conditions, Path > newCount), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                                 );
                                 RemoveIf(_conditions, Path > newCount),
                         
@@ -5502,6 +5736,7 @@
                     ZIndex: =13
 
                 galNodeConditions_2 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
                     BorderColor: =RGBA(166, 166, 166, 1)
                     Height: =150
                     Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
@@ -6006,6 +6241,7 @@
             ZIndex: =4
 
             Gallery4_2 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 DelayItemLoading: =true
                 Height: =CountRows(Self.AllItems) * (Self.TemplateHeight + 2 * Self.TemplatePadding)
@@ -6251,7 +6487,7 @@
                 Y: =lblActivateOnPublish_2.Y + lblActivateOnPublish_2.Height + 5
                 ZIndex: =7
 
-            "ProgressIndicator1 As 'Fluent Progress Indicator (1.0.22) Preview'":
+            "ProgressIndicator1 As 'Fluent Progress Indicator (1.1.29) Preview'":
                 DisplayMode: =DisplayMode.Edit
                 Height: =55
                 Label: |-
@@ -6271,7 +6507,7 @@
             Width: =Parent.Width - Self.X
             ZIndex: =5
 
-            "CommandBar2_15 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+            "CommandBar2_15 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
                 DisplayMode: =DisplayMode.Edit
                 Height: =40
                 Items: |-
@@ -6345,6 +6581,7 @@
                 ZIndex: =1
 
             galProcessVersion_2 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 DelayItemLoading: =true
                 Height: =CountRows(Self.AllItems) * (Self.TemplateHeight + 2 * Self.TemplatePadding)
@@ -7309,6 +7546,7 @@
                 ZIndex: =17
 
             galAppRequestData_3 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 Height: =Parent.Height - Self.Y - 20
                 Items: |-
@@ -7439,15 +7677,15 @@
                         Set(_isBusy, true);
                         Concurrent(
                             ClearCollect(_stDeps,
-                                ShowColumns(Filter('Business Approval Stages', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), "cat_name")
+                                ShowColumns(Filter('Business Approval Stages', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), Name)
                             ),
                             ClearCollect(_ndDeps, 
-                                ShowColumns(Filter('Business Approval Nodes', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), "cat_name")
+                                ShowColumns(Filter('Business Approval Nodes', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), Name)
                             ),
                             UpdateContext({cdDeps: 
                                 ShowColumns(
                                     Filter('Business Approval Conditions', 'Condition Data'.'Business Approval Data' = ThisItem.'Business Approval Data'),
-                                    "cat_stagenamevalue", "cat_nodenamevalue"
+                                    'Stage Name Value', 'Node Name Value'
                                 )
                             })
                         );
@@ -7490,7 +7728,7 @@
                     Y: =2
                     ZIndex: =6
 
-                "icoApplicationDataEdit As 'Fluent Icon (1.0.22)'":
+                "icoApplicationDataEdit As 'Fluent Icon (1.1.29)'":
                     DisplayMode: =DisplayMode.Edit
                     Height: =32
                     IconName: ="Edit"
@@ -7505,7 +7743,7 @@
                     Y: =0
                     ZIndex: =7
 
-                "iconApplicationDataDelete As 'Fluent Icon (1.0.22)'":
+                "iconApplicationDataDelete As 'Fluent Icon (1.1.29)'":
                     DisplayMode: =DisplayMode.Edit
                     Height: =32
                     IconName: ="Delete"
@@ -7518,15 +7756,15 @@
                         Set(_isBusy, true);
                         Concurrent(
                             ClearCollect(_stDeps,
-                                ShowColumns(Filter('Business Approval Stages', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), "cat_name")
+                                ShowColumns(Filter('Business Approval Stages', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), Name)
                             ),
                             ClearCollect(_ndDeps, 
-                                ShowColumns(Filter('Business Approval Nodes', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), "cat_name")
+                                ShowColumns(Filter('Business Approval Nodes', 'Source Data'.'Business Approval Data' = ThisItem.'Business Approval Data'), Name)
                             ),
                             UpdateContext({cdDeps: 
                                 ShowColumns(
                                     Filter('Business Approval Conditions', 'Condition Data'.'Business Approval Data' = ThisItem.'Business Approval Data'),
-                                    "cat_stagenamevalue", "cat_nodenamevalue"
+                                    'Stage Name Value', 'Node Name Value'
                                 )
                             })
                         );
@@ -7606,6 +7844,716 @@
                 Visible: =false
                 Width: =Parent.Width
                 ZIndex: =23
+
+        ReminderContainer As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Height: =Parent.Height - Self.Y
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Visible: =showReminderContainer
+            Width: =Parent.Width - Self.X
+            X: =40
+            Y: =40
+            ZIndex: =8
+
+            lblReminderDays As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =lblNode.Height
+                Size: =10
+                Text: ="Reminder Days"
+                Width: =lblNode.Width - 50
+                X: |-
+                    =//lblNode.X
+                    lblNode.X + lblNode.Width +5
+                Y: |-
+                    =//lblNode.Height + lblNode.Y + 5
+                    lblNode.Y
+                ZIndex: =1
+
+            "txtReminderDays As 'Text box'":
+                ColorBackground: =
+                ColorText: =
+                DisplayMode: =DisplayMode.Edit
+                Height: =lblReminderDays.Height
+                Placeholder: ="Enter Reminder Days"
+                Value: |-
+                    =//""
+                    //varReminderItem.'Reminder Days'
+                    First(seletedReminder).'Reminder Days'
+                Width: =lblReminderDays.Width
+                X: |-
+                    =//lblNode.X + lblNode.Width + 10
+                    lblReminderDays.X
+                Y: |-
+                    =//lblReminderDays.Y
+                    lblNode.Y + lblNode.Height + 5
+                ZIndex: =2
+
+            lblReminderText As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =lblNode.Height
+                Size: =10
+                Text: ="Reminder Text"
+                Width: =lblNode.Width - 50
+                X: |-
+                    =//lblNode.X
+                    //lblReminderDays.X + lblReminderDays.Width + 5
+                    lblReminderChannel.X + lblReminderChannel.Width + 5
+                Y: |-
+                    =//lblReminderDays.Height + lblReminderDays.Y + 5
+                    lblNode.Y
+                ZIndex: =3
+
+            "txtReminderText As 'Text box'":
+                ColorBackground: =
+                ColorText: =
+                DisplayMode: =DisplayMode.Edit
+                Height: =lblReminderText.Height //* 2
+                Mode: ='TextBox.Mode'.Multiline
+                Placeholder: ="Enter Reminder Text"
+                Required: =false
+                Value: |-
+                    =//If(IsBlank(varReminderItem), varReminderTxt, varReminderItem.'Reminder Text')
+                    If(CountRows(seletedReminder) = 0, varReminderTxt, First(seletedReminder).'Reminder Text')
+                Width: =ddlNode.Width + 150
+                X: |-
+                    =//lblNode.X + lblNode.Width + 10
+                    lblReminderText.X
+                Y: =lblNode.Y + lblNode.Height + 5
+                ZIndex: =4
+
+            lblNode As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                Size: =10
+                Text: |-
+                    =//"Source"
+                    //ProcessDesignerLoc.nodeRuContainerLblSource
+                    "Node"
+                Visible: |-
+                    =//ddlNodeCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None && ddlNodeCondition_2.Visible
+                    //9Feb
+                    //ddlNodeCondition_2.DisplayMode = DisplayMode.Edit && ddlNodeCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None
+                    //
+                    true
+                Width: =200
+                X: =20
+                Y: |-
+                    =//lblNodeReminderHeader.Y + lblNodeReminderHeader.Height + 5
+                    lblNodeReminderDescription.Y + lblNodeReminderDescription.Height + 5
+                ZIndex: =5
+
+            ddlNode As dropdown:
+                AllowEmptySelection: =true
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                Default: |
+                    =//_selectedNode.'Source Data Type'
+                    //varReminderNode.'Node'.Name
+                    First(seletedReminder).Node.Name
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =lblNode.Height
+                HoverBorderColor: =Self.BorderColor
+                HoverFill: =RGBA(243, 242, 241, 1)
+                Items: |-
+                    =/*Filter(
+                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 'Data Type' = LookUp(Choices('Business Approval Data Type'),Text(Value) = "Date").Value//809060002 //&& LookUp(Choices('Business Approval Data Type'), Text(Value) = "Date").Value
+                    )*/
+                    
+                    Filter(
+                        Filter('Business Approval Nodes', 'Business Approval Nodes (Views)'.'Active Business Approval Nodes'),
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process')
+                        
+                        
+                OnChange: =Reset(ddlNodeOperand_2)
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedFill: =Self.HoverFill
+                SelectionColor: =Self.Color
+                SelectionFill: =RGBA(243, 242, 241, 1)
+                Size: =10
+                Visible: |-
+                    =//lblNodeConditionSource_4.Visible
+                    true
+                Width: |-
+                    =//Parent.Width/2 - lblNode.Width
+                    lblNode.Width
+                X: |-
+                    =//lblNode.X + lblNode.Width + 10
+                    lblNode.X
+                Y: |-
+                    =//lblNode.Y
+                    lblNode.Y + lblNode.Height + 5
+                ZIndex: =6
+
+            lblNodeReminderHeader As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                PaddingLeft: =0
+                Size: =10
+                Text: |-
+                    =//"Variables (Application Data)"
+                    //ProcessDesignerLoc.varContainerLblAppDataHeaderText
+                    "Node Reminders(Business Approval Node Reminder)"
+                Width: =Parent.Width - Self.X - 20
+                Wrap: =false
+                X: =10
+                Y: =20
+                ZIndex: =7
+
+            lblReminderChannel As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =lblNode.Height
+                Size: =10
+                Text: ="Reminder Channel"
+                Width: =lblNode.Width -50
+                X: =lblReminderDays.X + lblReminderDays.Width + 5
+                Y: |-
+                    =//lblReminderText.Height*2 + lblReminderText.Y + 5
+                    lblNode.Y
+                ZIndex: =8
+
+            ddlReminderChannel As dropdown:
+                AllowEmptySelection: =true
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                Default: |-
+                    =//varReminderItem.'Reminder Channel'
+                    First(seletedReminder).'Reminder Channel'
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =lblNode.Height
+                HoverBorderColor: =Self.BorderColor
+                HoverFill: =RGBA(243, 242, 241, 1)
+                Items: |-
+                    =/*Filter(
+                        Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 'Data Type' = LookUp(Choices('Business Approval Data Type'),Text(Value) = "Date").Value//809060002 //&& LookUp(Choices('Business Approval Data Type'), Text(Value) = "Date").Value
+                    )*/
+                    
+                    Choices('Business Approval Reminder Channel')
+                        
+                        
+                OnChange: =Reset(ddlNodeOperand_2)
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedFill: =Self.HoverFill
+                SelectionColor: =Self.Color
+                SelectionFill: =RGBA(243, 242, 241, 1)
+                Size: =10
+                Visible: |-
+                    =//lblNodeConditionSource_4.Visible
+                    true
+                Width: |-
+                    =//Parent.Width/2 - lblNode.Width
+                    lblNode.Width - 50
+                X: |-
+                    =//lblNode.X + lblNode.Width + 10
+                    lblReminderChannel.X
+                Y: |-
+                    =//lblReminderChannel.Y
+                    lblNode.Y + lblNode.Height + 5
+                ZIndex: =9
+
+            btnCancelEditReminder As Button:
+                BorderColor: =ColorValue(AppTheme.palette.neutralPrimary)
+                BorderRadius: =2
+                BorderStyle: =BorderStyle.Solid
+                BorderThickness: =1
+                ButtonType: ='Button.ButtonType'.Standard
+                DisabledBorderColor: =
+                DisabledFillColor: =
+                DisabledTextColor: =
+                DisplayMode: =DisplayMode.Edit
+                FillColor: =ColorValue(AppTheme.palette.white)
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                HoverBorderColor: =
+                HoverFillColor: =
+                HoverTextColor: =
+                OnChange: =false
+                OnSelect: |-
+                    =//UpdateContext({ varReminderItem: Blank(), isDefaultDataClear: false })
+                    //UpdateContext({ varReminderItem: Blank()})
+                    ClearCollect(seletedReminder,Blank());
+                PressedBorderColor: =
+                PressedFillColor: =
+                PressedTextColor: =
+                Text: |-
+                    =//"Cancel"
+                    ProcessDesignerLoc.varContainerCancelEditVarText
+                TextColor: =
+                Visible: |-
+                    =//!IsBlank(seletedReminder)
+                    CountRows(seletedReminder) > 0
+                Width: =80
+                X: =btnAddReminder.X + btnAddReminder.Width + 8
+                Y: =lblNode.Y + lblNode.Height + 5
+                ZIndex: =10
+
+            btnAddReminder As Button:
+                BorderColor: =
+                BorderRadius: =2
+                ButtonType: ='Button.ButtonType'.Primary
+                DisabledBorderColor: =
+                DisabledFillColor: =
+                DisabledTextColor: =
+                DisplayMode: |+
+                    =If(!IsBlank(_selectedProcess) && !IsBlank(ddlNode.Selected) && !IsBlank(ddlReminderChannel.Selected.Value) && !IsBlank(txtReminderDays) && !IsBlank(txtReminderText),DisplayMode.Edit,DisplayMode.Disabled)
+                    
+                FillColor: =ColorValue(AppTheme.palette.themePrimary)
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                HoverBorderColor: =
+                HoverFillColor: =ColorFade(ColorValue(AppTheme.palette.themePrimary),10%)
+                HoverTextColor: =
+                OnChange: =false
+                OnSelect: |
+                    =/*If(
+                        //variable already exist. Please select another name.
+                        variableExist, Notify(txtAppDataName_2.Text & " " & ProcessDesignerLoc.varContainerSaveAppDataVariableExistsText,NotificationType.Error),
+                        Patch(
+                            'Business Approval Data',
+                            If(
+                                IsBlank(varAppDataItem),
+                                Defaults('Business Approval Data'),
+                                varAppDataItem
+                            ),
+                            {
+                                Name: txtAppDataName_2.Text,
+                                'Data Type': ddlDataType_3.Selected.Value,
+                                'Default Value': Switch(
+                                    ddlDataType_3.Selected.Value,
+                                    'Business Approval Data Type'.Boolean,
+                                    ddlAppDataDefault_2.Selected.ItemDisplayName,
+                                    'Business Approval Data Type'.Date,
+                                    Text(
+                                        dtAppDataDefault_3.Value,
+                                       ProcessDesignerLoc.varContBtnSaveAppDataDateFormat//dd mmm yyyy
+                                    ),
+                                    txtAppDataDefault_2.Text
+                                ),
+                                Description: txtAppDataDesc_2.Text,
+                                Process: _selectedProcess
+                            }
+                        );
+                        UpdateContext(
+                            {
+                                varAppDataItem: Blank(),
+                                isDefaultDataClear: false
+                            }
+                        );
+                        Reset(txtAppDataName_2);
+                        Reset(ddlDataType_3);
+                        Reset(txtAppDataDefault_2);
+                        Reset(txtAppDataDesc_2);
+                        Reset(ddlAppDataDefault_2);
+                    );
+                    */
+                    
+                    /*If(
+                        //variable already exist. Please select another name.
+                        variableExist, Notify(txtAppDataName_2.Text & " " & ProcessDesignerLoc.varContainerSaveAppDataVariableExistsText,NotificationType.Error),
+                        Patch(
+                            'Business Approval Node Reminders',
+                            If(
+                                IsBlank(varReminderNode),
+                                Defaults('Business Approval Node Reminders'),
+                                varReminderNode
+                            ),
+                            {
+                                //Node:ddlNode.Selected.Value,
+                                'Reminder Days':txtReminderDays.Value,
+                                'Reminder Text': txtReminderText.Value,
+                                'Reminder Channel':ddlReminderChannel.Selected.Value
+                            }
+                        );
+                        UpdateContext(
+                            {
+                                varReminderNode: Blank(),
+                                isDefaultDataClear: false
+                            }
+                        );
+                        //Reset(txtAppDataName_2);
+                       // Reset(ddlDataType_3);
+                       // Reset(txtAppDataDefault_2);
+                       // Reset(txtAppDataDesc_2);
+                       // Reset(ddlAppDataDefault_2);
+                    );*/
+                    
+                    
+                     /*Patch(
+                            'Business Approval Node Reminders',        
+                                Defaults('Business Approval Node Reminders'),
+                            {
+                                Node:ddlNode.Selected,
+                                'Reminder Days':Value(txtReminderDays.Value),
+                                'Reminder Text': txtReminderText.Value,
+                                'Reminder Channel':ddlReminderChannel.Selected.Value,
+                                Process:_selectedProcess
+                            }
+                        );
+                        Set(varReminderTxt,Blank());
+                        Reset(ddlNode);
+                        Reset(txtReminderDays);
+                        Reset(ddlReminderChannel);
+                        Reset(txtReminderText);*/
+                    
+                       /* Patch(
+                            colNodeReminders,        
+                                Defaults('Business Approval Node Reminders'),
+                            {
+                                'Node':ddlNode.Selected,
+                                'Reminder Days':Value(txtReminderDays.Value),
+                                'Reminder Text': txtReminderText.Value,
+                                'Reminder Channel':ddlReminderChannel.Selected.Value,
+                                Process:_selectedProcess
+                            }
+                        );*/
+                        Patch(
+                            'Business Approval Node Reminders',
+                            If(
+                                CountRows(seletedReminder) = 0,
+                                Defaults('Business Approval Node Reminders'),
+                                First(seletedReminder)
+                            ),
+                           {
+                                Node:ddlNode.Selected,
+                                'Reminder Days':Value(txtReminderDays.Value),
+                                'Reminder Text': txtReminderText.Value,
+                                'Reminder Channel':ddlReminderChannel.Selected.Value,
+                                Process:_selectedProcess
+                            }
+                        );
+                       /* UpdateContext(
+                            {
+                                varReminderItem: Blank()//,
+                                //isDefaultDataClear: false
+                            }
+                        );*/
+                    
+                        Set(varReminderTxt,Blank());
+                        ClearCollect(seletedReminder,Blank());
+                        Reset(ddlNode);
+                        Reset(txtReminderDays);
+                        Reset(ddlReminderChannel);
+                        Reset(txtReminderText);
+                PressedBorderColor: =
+                PressedFillColor: =
+                PressedTextColor: =
+                Text: |
+                    =//If(IsBlank(varReminderItem), "+ Add", "Update")
+                    If(CountRows(seletedReminder) = 0, ProcessDesignerLoc.varContainerBtnSaveAppDataAddText, ProcessDesignerLoc.varContainerBtnSaveAppDataUpdateText)
+                TextColor: =
+                Tooltip: |-
+                    =//If(Self.DisplayMode = DisplayMode.Disabled,"Enter the Field Name and Date Type")
+                    If(Self.DisplayMode = DisplayMode.Disabled,ProcessDesignerLoc.varContainerBtnSaveAppDataTooltip)
+                Visible: =true
+                Width: =80
+                X: =btnAddReminderText.X + btnAddReminderText.Width + 8
+                Y: =lblNode.Y + lblNode.Height + 5
+                ZIndex: =11
+
+            lblNodeReminderDescription As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                PaddingLeft: =0
+                Size: =10
+                Text: ="Define node reminders for the nodes of the current process."
+                Width: =lblAppDataHeader_3.Width
+                Wrap: =false
+                X: =20
+                Y: =lblNodeReminderHeader.Y + lblNodeReminderHeader.Height 
+                ZIndex: =12
+
+            galNodeReminders As gallery.variableTemplateHeightGallery:
+                '#CopilotOverlayLabel': ="Filtered"
+                BorderColor: =RGBA(166, 166, 166, 1)
+                DelayItemLoading: =true
+                FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                FocusedBorderThickness: =2
+                Height: =407
+                Items: |-
+                    =Filter(
+                        Filter('Business Approval Node Reminders', 'Business Approval Node Reminders (Views)'.'Active Business Approval Node Reminders'),
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process'
+                    )
+                    //colNodeReminders
+                Layout: =Layout.Vertical
+                LoadingSpinner: =LoadingSpinner.Data
+                TemplatePadding: =0
+                TemplateSize: =lblNode.Height +10
+                Width: =Parent.Width -30
+                Y: =ddlNode.Height + ddlNode.Y+ 10
+                ZIndex: =13
+
+                lblNodeData As label:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Fill: =RGBA(243, 242, 241, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =12
+                    Size: =10
+                    Text: =ThisItem.Node.Name
+                    Width: =lblNode.Width
+                    X: =lblNode.X
+                    Y: =5
+                    ZIndex: =5
+
+                lblReminderDaysData As label:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Fill: =RGBA(243, 242, 241, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =lblNode.Height
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =12
+                    Size: =10
+                    Text: =ThisItem.'Reminder Days'
+                    Width: =lblNode.Width - 50
+                    X: =lblReminderDays.X
+                    Y: =5
+                    ZIndex: =6
+
+                lblReminderTextData As label:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Fill: =RGBA(243, 242, 241, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =lblNode.Height
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =12
+                    Size: =10
+                    Text: =ThisItem.'Reminder Text'
+                    Width: =ddlNode.Width + 150
+                    X: =lblReminderText.X
+                    Y: =5
+                    ZIndex: =7
+
+                lblReminderChannelData As label:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =2
+                    Color: =RGBA(51, 51, 51, 1)
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    Fill: =RGBA(243, 242, 241, 1)
+                    FocusedBorderThickness: =4
+                    Font: =Font.'Segoe UI'
+                    Height: =lblNode.Height
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =12
+                    Size: =10
+                    Text: =ThisItem.'Reminder Channel'
+                    Width: =lblReminderChannel.Width
+                    X: =lblReminderChannel.X
+                    Y: =5
+                    ZIndex: =8
+
+                icoEditReminder As icon.Edit:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =RGBA(0, 120, 212, 1)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(220, 220, 220, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.Edit
+                    OnSelect: |-
+                        =//UpdateContext({ varReminderItem: ThisItem })
+                        //Set(varReminderItem,ThisItem);
+                        ClearCollect(seletedReminder,ThisItem);
+                    PaddingBottom: =3
+                    PaddingLeft: =3
+                    PaddingRight: =3
+                    PaddingTop: =3
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =32
+                    X: |-
+                        =//txtReminderText.X + txtReminderText.Width + 35
+                        btnAddReminderText.X
+                    Y: =8
+                    ZIndex: =9
+
+                icoDeleteReminder As icon.Edit:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =RGBA(0, 120, 212, 1)
+                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                    DisabledColor: =RGBA(220, 220, 220, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.Trash
+                    OnSelect: |+
+                        =//Reset(ConfirmDialog_7);
+                        //UpdateContext({ busyMessage: ProcessDesignerLoc.varContainerAppDataDeleteBusyMessage});//Checking dependencies...
+                        Set(_isBusy, true);
+                        ClearCollect(seletedReminder, ThisItem);
+                        UpdateContext({ confirmMode: "DeleteReminder",
+                                confirmMessageDeleteReminder: "This will delete Node Reminder from Node" & ThisItem.Node.Name &  " " & ProcessDesignerLoc.varContainerDeleteVariableTextPostfix
+                                } );
+                        Set(_showConfirmDeleteReminder, true);
+                        Set(_isBusy, false); 
+                        
+                    PaddingBottom: =3
+                    PaddingLeft: =3
+                    PaddingRight: =3
+                    PaddingTop: =3
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =32
+                    X: |-
+                        =//txtReminderText.X + txtReminderText.Width + 35
+                        icoEditReminder.X + icoEditReminder.Width + 10
+                    Y: =8
+                    ZIndex: =10
+
+            btnAddReminderText As Button:
+                Appearance: ='ButtonCanvas.Appearance'.Secondary
+                BasePaletteColor: =
+                DisplayMode: |+
+                    =If(!IsBlank(_selectedProcess) && !IsBlank(ddlNode.Selected) && !IsBlank(ddlReminderChannel.Selected.Value) && !IsBlank(txtReminderDays),DisplayMode.Edit,DisplayMode.Disabled)
+                    
+                Font: =Font.'Lato Black'
+                FontColor: =
+                FontWeight: =FontWeight.Bold
+                Height: =btnAddReminder.Height
+                OnSelect: |+
+                    =//false
+                    //Set(varReminderTxt,txtReminderText.Value);
+                    /*Patch(varReminderItem,
+                                        {
+                                        'Reminder Text':txtReminderText.Value
+                                        }
+                    );*/
+                    /*If(IsBlank(varReminderItem), 
+                            Set(varReminderTxt,txtReminderText.Value), 
+                    
+                            Patch(varReminderItem,
+                                                {
+                                                'Reminder Text':txtReminderText.Value
+                                                }
+                            )
+                    );*/
+                    
+                    If(CountRows(seletedReminder) = 0, 
+                            Set(varReminderTxt,txtReminderText.Value), 
+                    
+                            Patch(seletedReminder,First(seletedReminder),
+                                                {
+                                                'Reminder Text':txtReminderText.Value
+                                                }
+                            )
+                    );
+                    
+                    Set(_showReminderDialog, true);
+                    
+                Text: ="..."
+                Width: =btnAddReminder.Width/2
+                X: =txtReminderText.X + txtReminderText.Width + 10
+                Y: =lblNode.Y + lblNode.Height + 5
+                ZIndex: =14
 
     ConfirmDialogDelete As ConfirmDialog:
         ConfirmText: =confirmMessageDeteleStage
@@ -7858,4 +8806,121 @@
             X: =0
             Y: =0
             ZIndex: =1
+
+    ReminderTextDialogContainer As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Height: =Parent.Height
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Visible: =_showReminderDialog
+        Width: =Parent.Width
+        ZIndex: =12
+
+        Rectangle2_1 As rectangle:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            DisabledFill: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(255, 255, 255, 0.8)
+            FocusedBorderColor: =RGBA(0, 120, 212, 1)
+            Height: =Parent.Height
+            HoverFill: =RGBA(255, 255, 255, 0.8)
+            PressedFill: =RGBA(255, 255, 255, 0.8)
+            Width: =Parent.Width
+            X: =Parent.X
+            Y: =Parent.Y
+            ZIndex: =1
+
+        "txtReminderTxt As 'Text box'":
+            ColorBackground: =
+            ColorText: =
+            DisplayMode: =DisplayMode.Edit
+            Height: =250
+            Mode: ='TextBox.Mode'.Multiline
+            Value: |-
+                =//varReminderItem.'Reminder Text'
+                If(CountRows(seletedReminder) = 0, varReminderTxt, First(seletedReminder).'Reminder Text')
+            Width: =lblEnterReminderTxt_1.Width*2
+            X: =lblEnterReminderTxt_1.X + lblEnterReminderTxt_1.Width
+            Y: =lblEnterReminderTxt_1.Y
+            ZIndex: =2
+
+        lblEnterReminderTxt_1 As Label:
+            Color: =
+            DisplayMode: =DisplayMode.Edit
+            FontSize: =11
+            Height: =30
+            OnChange: =false
+            Text: ="Enter Reminder Text"
+            Width: =180
+            X: =Parent.Width/2-Self.Width - 200
+            Y: =Parent.Height/3-Self.Height
+            ZIndex: =3
+
+        btnOkay As Button:
+            BasePaletteColor: =
+            DisplayMode: =DisplayMode.Edit
+            FontColor: =
+            Height: =32
+            OnSelect: |-
+                =//Set(varReminderTxt,txtReminderTxt.Value);
+                
+                If(CountRows(seletedReminder) = 0, 
+                        Set(varReminderTxt,txtReminderTxt.Value), 
+                
+                        Patch(seletedReminder,First(seletedReminder),
+                                            {
+                                            'Reminder Text':txtReminderTxt.Value
+                                            }
+                        )
+                );
+                
+                Set(_showReminderDialog, false);
+                Reset(txtReminderTxt);
+            Text: ="Ok"
+            Width: =96
+            X: |-
+                =//txtReminderTxt.X + txtReminderTxt.Width/3
+                txtReminderTxt.X + Self.Width
+            Y: =txtReminderTxt.Y + txtReminderTxt.Height + Self.Height
+            ZIndex: =6
+
+        btnCancel_1 As Button:
+            Appearance: ='ButtonCanvas.Appearance'.Primary
+            BasePaletteColor: =
+            DisplayMode: =DisplayMode.Edit
+            FontColor: =
+            Height: =32
+            OnSelect: |
+                =Set(_showReminderDialog,false);
+            Text: ="Cancel"
+            Width: =96
+            X: =txtReminderTxt.X + txtReminderTxt.Width - Self.Width
+            Y: =txtReminderTxt.Y + txtReminderTxt.Height + Self.Height
+            ZIndex: =7
+
+    ConfirmDeleteReminderDialog As ConfirmDialog:
+        ConfirmText: =confirmMessageDeleteReminder
+        Height: =Parent.Height
+        OnClick: |
+            =If(IsConfirmed,
+                Switch(confirmMode,     
+                    "DeleteReminder",
+                    //Deleting node reminder
+                        UpdateContext({ busyMessage: "Deleting Node Reminder from Node" & " " });
+                        Set(_isBusy, true);
+                        Remove('Business Approval Node Reminders', First(seletedReminder));
+                        ClearCollect(seletedReminder, Blank());
+                        Set(_isBusy, false)
+                    
+            
+                );,
+                ClearCollect(seletedReminder, Blank());
+            );
+            Set(_showConfirmDeleteReminder, false);
+        Visible: =_showConfirmDeleteReminder
+        Width: =Parent.Width
+        ZIndex: =13
 

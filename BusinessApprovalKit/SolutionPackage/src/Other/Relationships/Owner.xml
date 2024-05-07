@@ -160,6 +160,48 @@
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
+  <EntityRelationship Name="owner_cat_businessapprovalnodereminder">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>cat_BusinessApprovalNodeReminder</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeArchive>NoCascade</CascadeArchive>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="所有者 ID" languagecode="1041" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="owner_cat_businessapprovalnodereminderinstance">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>cat_BusinessApprovalNodeReminderInstance</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeArchive>NoCascade</CascadeArchive>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="所有者 ID" languagecode="1041" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
   <EntityRelationship Name="owner_cat_businessapprovalprocess">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
@@ -357,6 +399,27 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+      </Descriptions>
+    </RelationshipDescription>
+  </EntityRelationship>
+  <EntityRelationship Name="owner_cat_businessapprovalruntimenodereminder">
+    <EntityRelationshipType>OneToMany</EntityRelationshipType>
+    <IsCustomizable>1</IsCustomizable>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <IsHierarchical>0</IsHierarchical>
+    <ReferencingEntityName>cat_BusinessApprovalRuntimeNodeReminder</ReferencingEntityName>
+    <ReferencedEntityName>Owner</ReferencedEntityName>
+    <CascadeAssign>NoCascade</CascadeAssign>
+    <CascadeDelete>NoCascade</CascadeDelete>
+    <CascadeArchive>NoCascade</CascadeArchive>
+    <CascadeReparent>NoCascade</CascadeReparent>
+    <CascadeShare>NoCascade</CascadeShare>
+    <CascadeUnshare>NoCascade</CascadeUnshare>
+    <ReferencingAttributeName>OwnerId</ReferencingAttributeName>
+    <RelationshipDescription>
+      <Descriptions>
+        <Description description="Owner Id" languagecode="1033" />
+        <Description description="所有者 ID" languagecode="1041" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
