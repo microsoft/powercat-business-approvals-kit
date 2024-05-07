@@ -26,12 +26,6 @@
                         </labels>
                         <control id="cat_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cat_name" />
                       </cell>
-                      <cell id="{b83ac6f0-518e-4f7d-9de3-e7a5997b423f}" locklevel="0" colspan="1" rowspan="1">
-                        <labels>
-                          <label description="Stage" languagecode="1033" />
-                        </labels>
-                        <control id="cat_stage" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_stage" disabled="false" />
-                      </cell>
                     </row>
                     <row>
                       <cell id="{6ed8277f-e533-4884-bf24-384fc8112276}" locklevel="0" colspan="1" rowspan="1">
@@ -39,12 +33,6 @@
                           <label description="Description" languagecode="1033" />
                         </labels>
                         <control id="cat_description" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_description" disabled="false" />
-                      </cell>
-                      <cell id="{6535df06-3af3-44ba-b6df-15ec15a53117}" locklevel="0" colspan="1" rowspan="1">
-                        <labels>
-                          <label description="Approval Type" languagecode="1033" />
-                        </labels>
-                        <control id="cat_approvaltype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_approvaltype" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -110,34 +98,52 @@
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
-                      <cell locklevel="0" id="{2c789d6e-770b-4f57-bbb3-328423f7dbd9}">
+                      <cell id="{b12d39d7-2772-4864-8567-abd6630ebedf}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Node Due Date Data Type" languagecode="1033" />
                         </labels>
+                        <control id="cat_nodeduedatedatatype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_nodeduedatedatatype" disabled="false" />
                       </cell>
                     </row>
                     <row>
-                      <cell locklevel="0" id="{df6ad3ae-7a67-4537-90af-375fdec1692d}">
+                      <cell id="{b83ac6f0-518e-4f7d-9de3-e7a5997b423f}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Stage" languagecode="1033" />
                         </labels>
+                        <control id="cat_stage" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_stage" disabled="false" />
                       </cell>
-                      <cell locklevel="0" id="{942dcf2d-02f7-4453-8a4f-5c70b3cfb4dc}">
+                      <cell id="{1398a1e0-ac78-4040-8103-668930f1b04b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Node Due Date Value" languagecode="1033" />
                         </labels>
+                        <control id="cat_nodeduedatevalue" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="cat_nodeduedatevalue" disabled="false" />
                       </cell>
                     </row>
                     <row>
-                      <cell locklevel="0" id="{2007b44a-3a45-432e-8c17-cb76cc52604a}">
+                      <cell id="{6535df06-3af3-44ba-b6df-15ec15a53117}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Approval Type" languagecode="1033" />
+                        </labels>
+                        <control id="cat_approvaltype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_approvaltype" disabled="false" />
+                      </cell>
+                      <cell id="{0898d42d-b5ca-4d30-b942-4a5eaf17a6a5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Node Due Date Request Data" languagecode="1033" />
+                        </labels>
+                        <control id="cat_nodeduedaterequestdata" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_nodeduedaterequestdata" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{e433a759-2227-4255-bc80-677b5025f68a}">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                       </cell>
-                      <cell locklevel="0" id="{8f4f0270-4d86-469d-aef1-e2cc052e36dd}">
+                      <cell id="{3dc29eb7-a42a-4584-8196-173c5f10815b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Next Reminder Node" languagecode="1033" />
                         </labels>
+                        <control id="cat_nextremindernode" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_nextremindernode" disabled="false" />
                       </cell>
                     </row>
                   </rows>
@@ -195,7 +201,7 @@
                   </labels>
                   <rows>
                     <row>
-                      <cell locklevel="0" id="{53cc5a42-d784-4ea8-86a8-c7f1d166e36f}" rowspan="1" colspan="1">
+                      <cell locklevel="0" id="{53cc5a42-d784-4ea8-86a8-c7f1d166e36f}" rowspan="1" colspan="1" showlabel="false">
                         <labels>
                           <label description="New SG control 1632705516364" languagecode="1033" />
                         </labels>
@@ -210,6 +216,38 @@
                         </control>
                       </cell>
                     </row>
+                  </rows>
+                </section>
+                <section name="node_reminders" id="e07d55cb-6d08-485c-8c2d-27a3f7c1a732" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Node Reminders" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{c14ae2eb-bdaa-46a5-833a-e1a2b8d92619}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1714393800206" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_3" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>10</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>cat_businessapprovalnodereminder</TargetEntityType>
+                            <ViewId>{BBD51EF9-17D4-457C-85D2-2643DBD0E6B9}</ViewId>
+                            <ViewIds>{BBD51EF9-17D4-457C-85D2-2643DBD0E6B9}</ViewIds>
+                            <RelationshipName>cat_businessapprovalnodereminder_Node_cat_bus</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
               </sections>

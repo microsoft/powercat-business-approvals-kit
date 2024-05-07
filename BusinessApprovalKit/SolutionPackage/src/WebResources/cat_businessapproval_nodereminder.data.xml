@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{9d8447be-160c-ef11-9f89-7c1e520bcf92}</WebResourceId>
+  <Name>cat_businessapproval_nodereminder</Name>
+  <DisplayName>Business Approval Node Reminder</DisplayName>
+  <LanguageCode>0</LanguageCode>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.1.0.14</IntroducedVersion>
+  <IsEnabledForMobileClient>1</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>1</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/cat_businessapproval_nodereminder9D8447BE-160C-EF11-9F89-7C1E520BCF92</FileName>
+</WebResource>

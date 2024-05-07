@@ -10,7 +10,7 @@ scrWorkflowEditor As screen:
         Width: =App.Width
         ZIndex: =3
 
-        "CommandBar1 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBar1 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =40
             Items: |-

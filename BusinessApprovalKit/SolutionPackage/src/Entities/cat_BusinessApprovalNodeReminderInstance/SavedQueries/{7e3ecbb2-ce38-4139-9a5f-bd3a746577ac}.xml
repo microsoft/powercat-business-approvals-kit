@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{7e3ecbb2-ce38-4139-9a5f-bd3a746577ac}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_businessapprovalnodereminderinstanceid">
+          <cell name="cat_name" width="300" />
+          <cell name="cat_node" width="100" />
+          <cell name="cat_reminderdatetime" width="151" />
+          <cell name="cat_remindertext" width="124" />
+          <cell name="cat_reminderdays" width="128" />
+          <cell name="cat_remindersent" width="124" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cat_businessapprovalnodereminderinstance">
+          <attribute name="cat_businessapprovalnodereminderinstanceid" />
+          <attribute name="cat_name" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="cat_node" />
+          <attribute name="cat_reminderdays" />
+          <attribute name="cat_remindertext" />
+          <attribute name="cat_reminderdatetime" />
+          <attribute name="cat_remindersent" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Business Approval Node Reminder Instances" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

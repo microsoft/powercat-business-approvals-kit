@@ -31,7 +31,7 @@ scrRuntimeProcessView As screen:
                 DisplayName: ="Default Approver"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_defaultapproverdisplayname")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_defaultapproverdisplayname)
                 Required: =false
                 Update: =
                 Width: =383
@@ -85,7 +85,7 @@ scrRuntimeProcessView As screen:
                 DataField: ="cat_version"
                 Default: =ThisItem.Version
                 DisplayMode: =Parent.DisplayMode
-                DisplayName: =DataSourceInfo([@'Business Approval Versions'],DataSourceInfo.DisplayName,"cat_version")
+                DisplayName: =DataSourceInfo([@'Business Approval Versions'],DataSourceInfo.DisplayName,cat_version)
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
                 Required: =true
@@ -322,7 +322,7 @@ scrRuntimeProcessView As screen:
                 DisplayName: ="Name"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =70
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_name")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_name)
                 Required: =true
                 Update: =DataCardValue1_1.Text
                 Width: =383
@@ -392,7 +392,7 @@ scrRuntimeProcessView As screen:
                 DisplayName: ="Category"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =70
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_category")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_category)
                 Required: =false
                 Update: =DataCardValue2_1.Text
                 Width: =383
@@ -623,7 +623,7 @@ scrRuntimeProcessView As screen:
                 DisplayName: ="Business Owner"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =70
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_businessowner")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_businessowner)
                 Required: =false
                 Update: =
                 Width: =383
@@ -680,7 +680,7 @@ scrRuntimeProcessView As screen:
                 DisplayName: ="Secondary Owner"
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =70
-                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, "cat_secondaryowner")
+                MaxLength: =DataSourceInfo([@'Business Approval Processes'], DataSourceInfo.MaxLength, cat_secondaryowner)
                 Required: =false
                 Update: =
                 Width: =383
@@ -903,6 +903,7 @@ scrRuntimeProcessView As screen:
             ZIndex: =5
 
         galAppRequestData_1 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             BorderColor: =RGBA(166, 166, 166, 1)
             Height: =Parent.Height - Self.Y - 20
             Items: |-
@@ -1009,7 +1010,7 @@ scrRuntimeProcessView As screen:
                 X: =lblAppDataDesc_1.X + lblAppDataDesc_1.Width + 6
                 ZIndex: =5
 
-        "CommandBar2_5 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBar2_5 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =40
             Items: |-

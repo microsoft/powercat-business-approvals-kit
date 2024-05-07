@@ -23,13 +23,19 @@
       "cat_businessapprovalnode_ProcessSession": "Process Sessions",
       "cat_businessapprovalnode_SyncErrors": "Sync Errors",
       "cat_businessapprovalnodeid": "Business Approval Node",
+      "cat_businessapprovalnodereminder_Node_cat_bus": "Business Approval Node Reminders",
       "cat_customresponses": "Custom Responses",
       "cat_delegationrule": "Delegation Rule",
       "cat_description": "Description",
       "cat_gotopaths": "Go To Paths",
       "cat_GoToStage": "Go To Stage",
       "cat_name": "Name",
+      "cat_NextReminderNode": "Next Reminder Node",
+      "cat_NextReminderRuntimeNode": "Next Reminder Runtime Node",
       "cat_nodecondition": "Node Condition",
+      "cat_nodeduedatedatatype": "Node Due Date Data Type",
+      "cat_NodeDueDateRequestData": "Node Due Date Request Data",
+      "cat_nodeduedatevalue": "Node Due Date Value",
       "cat_nodetype": "Node Type",
       "cat_notificationtype": "Notification Type",
       "cat_operand": "Operand",
@@ -199,6 +205,26 @@
     },
     "OptionSetTypeKey": "StatusType",
     "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Business Approval Nodes",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Business Approval Node Due Date Data Type",
+    "Name": "cat_businessapprovalnodeduedatedatatype",
+    "OptionSetInfoNameMapping": {
+      "809060000": "Request Data",
+      "809060001": "Static value"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cat_nodeduedatedatatype",
+        "OptionSetReferenceEntityName": "Business Approval Nodes"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cat_nodeduedatedatatype",
     "RelatedEntityName": "Business Approval Nodes",
     "Type": "OptionSetInfo"
   },

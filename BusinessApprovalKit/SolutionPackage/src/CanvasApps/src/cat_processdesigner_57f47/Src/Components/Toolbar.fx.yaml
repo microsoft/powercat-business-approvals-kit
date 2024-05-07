@@ -19,6 +19,7 @@ Toolbar As CanvasComponent:
     ZIndex: =2
 
     Gallery1 As gallery.galleryHorizontal:
+        '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Toolbar menu"
         BorderColor: =RGBA(166, 166, 166, 1)
         Height: =Parent.Height
