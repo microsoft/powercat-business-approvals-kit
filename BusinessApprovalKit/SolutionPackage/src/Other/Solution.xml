@@ -302,10 +302,6 @@
         <Dependent type="68" id="{227a813e-01cd-4a3c-8f52-96b5bafbdb0b}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="connectionreference" displayName="contoso_sharedcommondataserviceforapps_b6a8a" solution="Active" id.connectionreferencelogicalname="contoso_sharedcommondataserviceforapps_b6a8a" />
-        <Dependent type="29" displayName="BACore | Runtime - Start Stage" id="{fb00d840-ca8c-ec11-8d20-000d3a09d351}" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="SettingDefinition" displayName="FluentThemingPreview" solution="msdyn_PowerAppsThemingSettings (1.0.0.11)" id.uniquename="FluentThemingPreview" />
         <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=cat_BusinessApprovalManagement,settingdefinitionid.uniquename=FluentThemingPreview" id.parentappmoduleid.uniquename="cat_BusinessApprovalManagement" id.settingdefinitionid.uniquename="FluentThemingPreview" />
       </MissingDependency>
