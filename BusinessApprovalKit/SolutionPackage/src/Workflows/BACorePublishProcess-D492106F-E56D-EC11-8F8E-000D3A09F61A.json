@@ -434,7 +434,7 @@
                             },
                             "Create_Runtime_Node": {
                               "runAfter": {
-                                "Get_Condition_Data_ID_if_exists_for_Node": [
+                                "Get_Node_Due_Date_Request_Data_ID_if_exists_for_Node": [
                                   "Succeeded"
                                 ]
                               },
@@ -463,6 +463,9 @@
                                   "item/cat_GoToStage@odata.bind": "@if(greater(length(body('Get_Go_To_Stage_ID_if_exists_for_Node')), 0), concat('cat_businessapprovalruntimestages(', body('Get_Go_To_Stage_ID_if_exists_for_Node')[0]['new'], ')'), null)",
                                   "item/cat_name": "@items('Each_Node')?['cat_name']",
                                   "item/cat_nodecondition": "@items('Each_Node')?['cat_nodecondition']",
+                                  "item/cat_nodeduedatedatatype": "@items('Each_Node')?['cat_nodeduedatedatatype']",
+                                  "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(items('Each_Node')?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovalruntimedatas(',body('Get_Node_Due_Date_Request_Data_ID_if_exists_for_Node')[0]['new'],')'),null)",
+                                  "item/cat_nodeduedatevalue": "@if(equals(items('Each_Node')?['cat_nodeduedatedatatype'],809060001),items('Each_Node')?['cat_nodeduedatevalue'],null)",
                                   "item/cat_nodetype": "@items('Each_Node')?['cat_nodetype']",
                                   "item/cat_notificationtype": "@items('Each_Node')?['cat_notificationtype']",
                                   "item/cat_operand": "@items('Each_Node')?['cat_operand']",
@@ -787,6 +790,109 @@
                                 "concurrency": {
                                   "repetitions": 50
                                 }
+                              }
+                            },
+                            "Copy_Reminders": {
+                              "actions": {
+                                "Get_Node_Reminders": {
+                                  "runAfter": {},
+                                  "metadata": {
+                                    "operationMetadataId": "e2967bd1-5ee3-45f7-96d7-344a3c4e7084"
+                                  },
+                                  "type": "OpenApiConnection",
+                                  "inputs": {
+                                    "host": {
+                                      "connectionName": "shared_commondataserviceforapps_1",
+                                      "operationId": "ListRecords",
+                                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                    },
+                                    "parameters": {
+                                      "entityName": "cat_businessapprovalnodereminders",
+                                      "$filter": "_cat_node_value eq '@{items('Each_Node')?['cat_businessapprovalnodeid']}'"
+                                    },
+                                    "authentication": "@parameters('$authentication')"
+                                  }
+                                },
+                                "Each_Node_Reminder": {
+                                  "foreach": "@outputs('Get_Node_Reminders')?['body/value']",
+                                  "actions": {
+                                    "Get_New_Node_ID_2": {
+                                      "runAfter": {},
+                                      "metadata": {
+                                        "operationMetadataId": "0cf04768-9d25-4537-af68-fd7836b541c2"
+                                      },
+                                      "type": "Query",
+                                      "inputs": {
+                                        "from": "@variables('varNodeIDs')",
+                                        "where": "@equals(item()['old'], items('Each_Node_Reminder')?['_cat_node_value'])"
+                                      }
+                                    },
+                                    "Create_Runtime_Node_Reminders": {
+                                      "runAfter": {
+                                        "Get_New_Node_ID_2": [
+                                          "Succeeded"
+                                        ]
+                                      },
+                                      "metadata": {
+                                        "operationMetadataId": "3ec92b74-b9c0-4a2e-ae34-9f95bc427881"
+                                      },
+                                      "type": "OpenApiConnection",
+                                      "inputs": {
+                                        "host": {
+                                          "connectionName": "shared_commondataserviceforapps_1",
+                                          "operationId": "CreateRecord",
+                                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                        },
+                                        "parameters": {
+                                          "entityName": "cat_businessapprovalruntimenodereminders",
+                                          "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodes(@{body('Get_New_Node_ID_2')[0]['new']})",
+                                          "item/cat_ProcessVersion@odata.bind": "cat_businessapprovalversions(@{triggerOutputs()?['body/cat_businessapprovalversionid']})",
+                                          "item/cat_reminderdays": "@items('Each_Node_Reminder')?['cat_reminderdays']",
+                                          "item/cat_NodeReminder@odata.bind": "cat_businessapprovalnodereminders(@{items('Each_Node_Reminder')?['cat_businessapprovalnodereminderid']})",
+                                          "item/cat_reminderchannel": "@items('Each_Node_Reminder')?['cat_reminderchannel']",
+                                          "item/cat_remindertext": "@items('Each_Node_Reminder')?['cat_remindertext']"
+                                        },
+                                        "authentication": "@parameters('$authentication')"
+                                      }
+                                    }
+                                  },
+                                  "runAfter": {
+                                    "Get_Node_Reminders": [
+                                      "Succeeded"
+                                    ]
+                                  },
+                                  "metadata": {
+                                    "operationMetadataId": "c67dda38-fe5f-4fe0-8334-a4e10174d107"
+                                  },
+                                  "type": "Foreach"
+                                }
+                              },
+                              "runAfter": {
+                                "Copy_Node_Conditions": [
+                                  "Succeeded"
+                                ],
+                                "Each_Approver": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "78cca702-da70-4f37-a08f-253a85e829b9"
+                              },
+                              "type": "Scope"
+                            },
+                            "Get_Node_Due_Date_Request_Data_ID_if_exists_for_Node": {
+                              "runAfter": {
+                                "Get_Condition_Data_ID_if_exists_for_Node": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "0cf04768-9d25-4537-af68-fd7836b541c2"
+                              },
+                              "type": "Query",
+                              "inputs": {
+                                "from": "@variables('varDataIDs')",
+                                "where": "@equals(item()['old'], items('Each_Node')?['_cat_nodeduedaterequestdata_value'])"
                               }
                             }
                           },

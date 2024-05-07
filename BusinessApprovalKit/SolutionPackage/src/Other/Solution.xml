@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.24024.216" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.24034.300" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>BusinessApprovalKit</UniqueName>
     <LocalizedNames>
@@ -88,6 +88,8 @@
       <RootComponent type="1" schemaName="cat_businessapprovalinstancelog" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalinstanceoverride" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalnode" behavior="0" />
+      <RootComponent type="1" schemaName="cat_businessapprovalnodereminder" behavior="0" />
+      <RootComponent type="1" schemaName="cat_businessapprovalnodereminderinstance" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalprocess" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalpublicholidays" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalpublishedruntimedata" behavior="0" />
@@ -98,6 +100,7 @@
       <RootComponent type="1" schemaName="cat_businessapprovalruntimeinstance" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalruntimenode" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalruntimenodeinstance" behavior="0" />
+      <RootComponent type="1" schemaName="cat_businessapprovalruntimenodereminder" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalruntimestage" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalruntimestageinstance" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapprovalsetting" behavior="0" />
@@ -109,6 +112,7 @@
       <RootComponent type="1" schemaName="cat_businessapprover" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapproverdynamicdatamap" behavior="0" />
       <RootComponent type="1" schemaName="cat_businessapproveroof" behavior="0" />
+      <RootComponent type="29" id="{0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5}" behavior="0" />
       <RootComponent type="29" id="{0cc362b4-1e53-ec11-8f8e-0022486dc855}" behavior="0" />
       <RootComponent type="29" id="{0d3a2e2c-a78d-ec11-8d20-000d3a09d351}" behavior="0" />
       <RootComponent type="29" id="{27678b1c-da6f-ed11-81ac-000d3a09cf6c}" behavior="0" />
@@ -149,10 +153,13 @@
       <RootComponent type="61" schemaName="cat_businessapproval_log" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_node" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_nodeinstance" behavior="0" />
+      <RootComponent type="61" schemaName="cat_businessapproval_nodereminder" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_override" behavior="0" />
+      <RootComponent type="61" schemaName="cat_businessapproval_reminderinstance" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_runtimecondition" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_runtimedata" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_runtimenode" behavior="0" />
+      <RootComponent type="61" schemaName="cat_businessapproval_runtimenodereminder" behavior="0" />
       <RootComponent type="61" schemaName="cat_BusinessApproval_RuntimeStage" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_runtimeworkflow" behavior="0" />
       <RootComponent type="61" schemaName="cat_businessapproval_setting" behavior="0" />
@@ -191,7 +198,9 @@
       <RootComponent type="9" schemaName="cat_bizappr_targetdata" behavior="0" />
       <RootComponent type="9" schemaName="cat_bizappr_timeoutmode" behavior="0" />
       <RootComponent type="9" schemaName="cat_businessapprovaldatatype" behavior="0" />
+      <RootComponent type="9" schemaName="cat_businessapprovalnodeduedatedatatype" behavior="0" />
       <RootComponent type="9" schemaName="cat_businessapprovalnodetype" behavior="0" />
+      <RootComponent type="9" schemaName="cat_businessapprovalreminderchannel" behavior="0" />
       <RootComponent type="91" id="{0f7e7ca0-8279-4ba8-8c45-482a09b36b72}" schemaName="CreateBusinessApprovalWF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d45e5ea3a3459213" behavior="0" />
       <RootComponent type="91" id="{c18776e1-befa-444f-8467-03a8ddf8da6c}" schemaName="RetrieveProcessMetadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d45e5ea3a3459213" behavior="0" />
     </RootComponents>
@@ -273,23 +282,23 @@
         <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2402.4013)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2403.4024)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Instance Override" id="{3e0b29a6-5594-4248-99e0-b082a4520571}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2402.4013)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2403.4024)" />
         <Dependent type="60" displayName="Business Approval Instance Override quick create form" parentDisplayName="Business Approval Instance Override" id="{45ce6ace-a8a5-ec11-b3fe-0022486e17cc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2402.4013)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2403.4024)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Work Profile" id="{8f99d74f-efa9-43fc-a2e5-4f6cbac8789f}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2402.4013)" />
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2403.4024)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Holiday Calendar" id="{22204bf0-25b0-4c88-92b9-1d2d751ffd2d}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2402.4013)" />
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2403.4024)" />
         <Dependent type="68" id="{227a813e-01cd-4a3c-8f52-96b5bafbdb0b}" />
       </MissingDependency>
       <MissingDependency>

@@ -3884,6 +3884,96 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.txtReminderTxt.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.txtReminderTxt.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.txtReminderTxt"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.btnOkay.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.btnOkay.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.btnOkay"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.btnCancel_1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.btnCancel_1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.ReminderTextDialogContainer.btnCancel_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.StageContainer.txtStageName_2.AccessibleLabel"
                 }
               ],
@@ -4407,6 +4497,96 @@
                 "member": "AccessibleLabel",
                 "module": "scrWorkflowDesignerScreen",
                 "type": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.txtNodeDesc_4"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.ddlNodeDueDateSource.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.ddlNodeDueDateSource.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.ddlNodeDueDateSource"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.ddlNodeDueDateAppData.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.ddlNodeDueDateAppData.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.ddlNodeDueDateAppData"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.dtNodeDueDateValue.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.dtNodeDueDateValue.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.NodeContainer.dtNodeDueDateValue"
               }
             }
           ],
@@ -6284,6 +6464,396 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.ddlNode.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.ddlNode.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.ddlNode"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.txtReminderDays.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.txtReminderDays.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.txtReminderDays"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.ddlReminderChannel.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.ddlReminderChannel.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.ddlReminderChannel"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.txtReminderText.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.txtReminderText.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.txtReminderText"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnAddReminderText.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnAddReminderText.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnAddReminderText"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnAddReminder.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnAddReminder.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnAddReminder"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnCancelEditReminder.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnCancelEditReminder.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.btnCancelEditReminder"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoEditReminder.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoEditReminder.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoEditReminder"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoEditReminder.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoEditReminder.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoEditReminder"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoDeleteReminder.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoDeleteReminder.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoDeleteReminder"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoDeleteReminder.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoDeleteReminder.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "scrWorkflowDesignerScreen",
+                "type": "scrWorkflowDesignerScreen.PanelContainer.ReminderContainer.galNodeReminders.icoDeleteReminder"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "scrWorkflowDesignerScreen.ToggleModernDesigner.AccessibleLabel"
                 }
               ],
@@ -6308,6 +6878,36 @@
           },
           "ruleId": "acc-AccessibleLabelNeeded",
           "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "App.varReminderNode"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "App.varReminderNode",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "varReminderNode",
+                "module": "App",
+                "type": "App"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -6850,7 +7450,7 @@
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"scrWorkflowDesignerScreen\" is 422, which exceeds the maximum threshold recommended (300)."
+                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"scrWorkflowDesignerScreen\" is 485, which exceeds the maximum threshold recommended (300)."
               }
             },
             {
@@ -6871,7 +7471,7 @@
               }
             }
           ],
-          "version": "1.337"
+          "version": "1.341"
         }
       }
     }

@@ -431,7 +431,7 @@
       "MetaDataIDKey": "",
       "Name": "btnAddFirstNode_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 16,
+      "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -5001,7 +5001,7 @@
       "MetaDataIDKey": "",
       "Name": "conFalsePath_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 20,
+      "ParentIndex": 19,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7378,7 +7378,9 @@
           "IsLockable": false,
           "NameMapSourceSchema": "?"
         },
-        "MaxTemplateSize"
+        "MaxTemplateSize",
+        "#CopilotOverlayLabel",
+        "#CopilotOverlayVisible"
       ],
       "GalleryTemplateChildName": "galleryTemplate5_3",
       "HasDynamicProperties": false,
@@ -7549,6 +7551,16 @@
           "Category": "Design",
           "PropertyName": "MaxTemplateSize",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "#CopilotOverlayLabel",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "#CopilotOverlayVisible",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "defaultGalleryStyle",
@@ -7676,7 +7688,9 @@
           "IsLockable": false,
           "NameMapSourceSchema": "?"
         },
-        "MaxTemplateSize"
+        "MaxTemplateSize",
+        "#CopilotOverlayLabel",
+        "#CopilotOverlayVisible"
       ],
       "GalleryTemplateChildName": "galleryTemplate8_5",
       "HasDynamicProperties": false,
@@ -7690,7 +7704,7 @@
       "MetaDataIDKey": "",
       "Name": "galStageConditions_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 17,
+      "ParentIndex": 16,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7837,6 +7851,16 @@
           "Category": "Design",
           "PropertyName": "MaxTemplateSize",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "#CopilotOverlayLabel",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "#CopilotOverlayVisible",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "defaultGalleryStyle",
@@ -7979,7 +8003,9 @@
           "IsLockable": false,
           "NameMapSourceSchema": "?"
         },
-        "MaxTemplateSize"
+        "MaxTemplateSize",
+        "#CopilotOverlayLabel",
+        "#CopilotOverlayVisible"
       ],
       "GalleryTemplateChildName": "galleryTemplate6_11",
       "HasDynamicProperties": false,
@@ -8144,6 +8170,16 @@
         {
           "Category": "Design",
           "PropertyName": "MaxTemplateSize",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "#CopilotOverlayLabel",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "#CopilotOverlayVisible",
           "RuleProviderType": "Unknown"
         }
       ],
@@ -18036,7 +18072,7 @@
       "MetaDataIDKey": "",
       "Name": "lblNoNodeInStage_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 18,
+      "ParentIndex": 20,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -18360,7 +18396,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageConditionText_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 19,
+      "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

@@ -43,6 +43,20 @@
       <statecode>0</statecode>
       <statuscode>1</statuscode>
     </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitMicrosoftTeams">
+      <connectionreferencedisplayname>Business Approval Kit | Microsoft Teams</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_teams</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitO365Outlook">
+      <connectionreferencedisplayname>Business Approval Kit | O365 Outlook</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
     <connectionreference connectionreferencelogicalname="cat_BusinessApprovalKitO365Users">
       <connectionreferencedisplayname>Business Approval Kit | O365 Users</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365users</connectorid>

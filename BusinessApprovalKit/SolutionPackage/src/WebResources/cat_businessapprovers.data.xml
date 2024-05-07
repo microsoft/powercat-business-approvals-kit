@@ -3,6 +3,7 @@
   <WebResourceId>{88c7f53a-1adb-ec11-a7b5-0022486dca48}</WebResourceId>
   <Name>cat_businessapprovers</Name>
   <DisplayName>Business Approvers</DisplayName>
+  <LanguageCode>0</LanguageCode>
   <WebResourceType>11</WebResourceType>
   <IntroducedVersion>1.0.0.11</IntroducedVersion>
   <IsEnabledForMobileClient>1</IsEnabledForMobileClient>

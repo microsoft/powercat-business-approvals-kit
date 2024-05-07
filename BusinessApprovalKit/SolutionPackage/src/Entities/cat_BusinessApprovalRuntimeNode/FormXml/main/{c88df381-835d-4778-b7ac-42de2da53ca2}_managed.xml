@@ -68,10 +68,11 @@
                         </labels>
                         <control id="cat_nodetype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_nodetype" disabled="false" />
                       </cell>
-                      <cell locklevel="0" id="{07a50429-dcb7-490f-a570-89ac65f30a2a}">
+                      <cell id="{47956db7-226c-46e2-9ecd-f8dbff58900b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
+                        <control id="cat_nodeduedatedatatype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cat_nodeduedatedatatype" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -81,10 +82,11 @@
                         </labels>
                         <control id="cat_description" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="cat_description" disabled="false" />
                       </cell>
-                      <cell locklevel="0" id="{168344fe-3f68-46ca-8138-8d635c826d72}">
+                      <cell id="{cdbb2fcd-4daf-40ca-974a-e83a7c61fbf2}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
+                        <control id="cat_nodeduedaterequestdata" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_nodeduedaterequestdata" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -94,10 +96,11 @@
                         </labels>
                         <control id="cat_rowindex" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="cat_rowindex" disabled="false" />
                       </cell>
-                      <cell locklevel="0" id="{9d91eb19-d7c5-45e5-9011-12aca0dd80e6}">
+                      <cell id="{8ca39a2f-6821-40f5-ae52-70b4d06b56c0}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
+                        <control id="cat_nodeduedatevalue" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="cat_nodeduedatevalue" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -107,10 +110,11 @@
                         </labels>
                         <control id="cat_pathindex" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="cat_pathindex" disabled="false" />
                       </cell>
-                      <cell locklevel="0" id="{03cbdcc6-0f6c-4b95-ab51-f615b8728de8}">
+                      <cell id="{31e39c31-1b8c-4883-b671-ffe80497f453}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
+                        <control id="cat_nextremindernode" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cat_nextremindernode" disabled="false" />
                       </cell>
                     </row>
                   </rows>
@@ -186,6 +190,38 @@
                         </control>
                       </cell>
                     </row>
+                  </rows>
+                </section>
+                <section name="runtime_reminders" id="d056d575-d67c-4592-a7de-953fdf250147" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Reminders" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{b97fb64a-60cd-4315-8196-d6c03ea5932d}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1714394474567" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_3" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>cat_businessapprovalruntimenodereminder</TargetEntityType>
+                            <ViewId>{C0698DFE-0F86-4816-A6EA-9A422E1E1DAF}</ViewId>
+                            <ViewIds>{C0698DFE-0F86-4816-A6EA-9A422E1E1DAF}</ViewIds>
+                            <RelationshipName>cat_businessapprovalruntimenodereminder_Node_</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
               </sections>

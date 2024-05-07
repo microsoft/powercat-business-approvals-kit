@@ -29,6 +29,7 @@ TableHeader_7 As CanvasComponent:
     ZIndex: =3
 
     Gallery2_4 As gallery.galleryHorizontal:
+        '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Table headers"
         BorderColor: =RGBA(166, 166, 166, 1)
         Height: =Parent.Height - Rectangle1_4.Height

@@ -13,6 +13,7 @@
       "cat_BusinessApprovalCondition_Process_cat": "Business Approval Conditions",
       "cat_BusinessApprovalData_Process_cat_Busi": "Business Approval Data",
       "cat_BusinessApprovalNode_Process_cat_Busi": "Business Approval Nodes",
+      "cat_businessapprovalnodereminder_Process_cat_": "Business Approval Node Reminders",
       "cat_businessapprovalprocess_AsyncOperations": "System Jobs",
       "cat_businessapprovalprocess_BulkDeleteFailures": "Bulk Delete Failures",
       "cat_businessapprovalprocess_DuplicateBaseRecord": "Duplicate Records (cat_businessapprovalprocess_DuplicateBaseRecord)",

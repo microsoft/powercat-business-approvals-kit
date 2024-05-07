@@ -58,7 +58,7 @@ scrNodeRule As screen:
         Width: =Parent.Width - Self.X
         ZIndex: =1
 
-        "CommandBar2_2 As 'Fluent Command Bar (1.0.22)'.pcfdataset":
+        "CommandBar2_2 As 'Fluent Command Bar (1.1.29)'.pcfdataset":
             DisplayMode: =DisplayMode.Edit
             Height: =40
             Items: |-
@@ -465,7 +465,7 @@ scrNodeRule As screen:
                         'Business Approval Stage Condition'.'If/Else', 
                         //if there are existing conditions, remove all except the first condition
                         Collect(_removedConditions, 
-                            ShowColumns(Filter(_conditions, Path > 1), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                            ShowColumns(Filter(_conditions, Path > 1), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                         );
                         RemoveIf(_conditions, Path > 1);
                         If(conditionsCount = 0, 
@@ -489,7 +489,7 @@ scrNodeRule As screen:
                         'Business Approval Stage Condition'.None, 
                         //if there are any existing conditions, add them to the remove list
                         If(conditionsCount > 0, 
-                            Collect(_removedConditions, ShowColumns(_conditions,  "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage"));    
+                            Collect(_removedConditions, ShowColumns(_conditions,  ConditionId, Path, Target, TargetData, StaticValue, TargetStage));    
                             Clear(_conditions)
                         )
                     );
@@ -555,7 +555,7 @@ scrNodeRule As screen:
                             //new paths is less than current - remove last n conditions
                             //push paths that are to be removed into temp stack then remove
                             Collect(_removedConditions, 
-                                ShowColumns(Filter(_conditions, Path > newCount), "ConditionId", "Path", "Target", "TargetData", "StaticValue", "TargetStage")
+                                ShowColumns(Filter(_conditions, Path > newCount), ConditionId, Path, Target, TargetData, StaticValue, TargetStage)
                             );
                             RemoveIf(_conditions, Path > newCount),
                     
@@ -751,6 +751,7 @@ scrNodeRule As screen:
                 ZIndex: =13
 
             galNodeConditions As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 Height: =150
                 Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)

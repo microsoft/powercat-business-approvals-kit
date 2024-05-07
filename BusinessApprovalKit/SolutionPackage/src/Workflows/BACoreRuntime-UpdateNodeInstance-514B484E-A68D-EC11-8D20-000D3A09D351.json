@@ -190,6 +190,9 @@
                             "item/cat_start": "@utcNow()",
                             "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
                             "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                            "item/cat_nodeduedatedatatype": "@first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype']",
+                            "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovalruntimedatas(',first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value'],')'),null)",
+                            "item/cat_nodeduedatevalue": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060001),first(body('Get_Next_Node')['value'])?['cat_nodeduedatevalue'],null)",
                             "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
                           },
                           "authentication": "@parameters('$authentication')"

@@ -15,6 +15,7 @@
       "cat_BusinessApprovalRuntimeCondition_Proc": "Business Approval Runtime Conditions",
       "cat_BusinessApprovalRuntimeData_ProcessVe": "Business Approval Runtime Data",
       "cat_BusinessApprovalRuntimeNode_ProcessVe": "Business Approval Runtime Nodes",
+      "cat_businessapprovalruntimenodereminder_Proce": "Business Approval Runtime Node Reminders",
       "cat_BusinessApprovalRuntimeStage_ProcessV": "Business Approval Runtime Stages",
       "cat_businessapprovalversion_AsyncOperations": "System Jobs",
       "cat_businessapprovalversion_BulkDeleteFailures": "Bulk Delete Failures",

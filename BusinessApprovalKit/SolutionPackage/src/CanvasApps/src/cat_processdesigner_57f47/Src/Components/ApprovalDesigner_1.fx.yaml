@@ -40,6 +40,7 @@ ApprovalDesigner_1 As CanvasComponent:
     ZIndex: =1
 
     galProcessStages_2 As gallery.variableTemplateHeightGallery:
+        '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Process stages"
         BorderColor: =RGBA(166, 166, 166, 1)
         DelayItemLoading: =true
@@ -61,7 +62,7 @@ ApprovalDesigner_1 As CanvasComponent:
         Y: =5
         ZIndex: =2
 
-        "stageBGElevation As 'Fluent Elevation (1.0.22)'":
+        "stageBGElevation As 'Fluent Elevation (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: |-
                 =Max(
@@ -359,6 +360,7 @@ ApprovalDesigner_1 As CanvasComponent:
             ZIndex: =11
 
         galStageNodes_1 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             AccessibleLabel: ="Stage nodes"
             BorderColor: =RGBA(255, 0, 0, 1)
             DelayItemLoading: =true
@@ -369,8 +371,8 @@ ApprovalDesigner_1 As CanvasComponent:
                         SortByColumns(
                             Filter('Business Approval Nodes', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage'), 
                             "cat_rowindex"
-                        ), "cat_rowindex", "Nodes"
-                    ), "Paths", ThisItem.Paths
+                        ), 'Row Index', Nodes
+                    ), Paths, ThisItem.Paths
                 )
             Layout: =Layout.Vertical
             LoadingSpinner: =LoadingSpinner.Data
@@ -697,7 +699,7 @@ ApprovalDesigner_1 As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate_1.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -736,7 +738,7 @@ ApprovalDesigner_1 As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate_1.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -775,7 +777,7 @@ ApprovalDesigner_1 As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate_1.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -814,7 +816,7 @@ ApprovalDesigner_1 As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate_1.Text & If(Len(cat_conditionvaluedisplay) > 0, "<b>" & cat_conditionvaluedisplay & "</b><br/>") & "Go to <br/><b>" & 
                                     cat_GoToStage.Name & "</b></span></div>"
@@ -856,7 +858,7 @@ ApprovalDesigner_1 As CanvasComponent:
                                 Concat(
                                     ShowColumns(
                                         Filter('Business Approval Conditions', Node.'Business Approval Node' = nodeId),
-                                        "cat_conditionvaluedisplay", "cat_GoToStage"
+                                        cat_conditionvaluedisplay, cat_GoToStage
                                     ), 
                                     divStartTemplate_1.Text & If(Len(cat_conditionvaluedisplay) > 0, $"<b>{ cat_conditionvaluedisplay }</b><br/>") & $"Go to <br/><b>{ cat_GoToStage.Name }</b></span></div>"
                                 )    
@@ -1166,6 +1168,7 @@ ApprovalDesigner_1 As CanvasComponent:
                 ZIndex: =26
 
         galStageConditions_2 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
             AccessibleLabel: ="Conditions"
             BorderColor: =RGBA(166, 166, 166, 1)
             Height: =If(Self.Visible, 62, 0)
@@ -1176,7 +1179,7 @@ ApprovalDesigner_1 As CanvasComponent:
                         //Filter('Business Approval Conditions', Stage.'Business Approval Stage' = ThisItem.'Business Approval Stage'), 
                         "cat_pathindex"
                     ),
-                   "StageSelection", ThisItem
+                   StageSelection, ThisItem
                 )
             Layout: =Layout.Vertical
             OnSelect: =
@@ -1379,7 +1382,7 @@ ApprovalDesigner_1 As CanvasComponent:
                 Y: =Label3_4.Y + Label3_4.Height
                 ZIndex: =6
 
-        "icoEdit As 'Fluent Icon (1.0.22)'":
+        "icoEdit As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: =30
             IconName: ="Edit"
@@ -1392,7 +1395,7 @@ ApprovalDesigner_1 As CanvasComponent:
             Y: =stageBackground_2.Y + 1
             ZIndex: =15
 
-        "icoToggle As 'Fluent Icon (1.0.22)'":
+        "icoToggle As 'Fluent Icon (1.1.29)'":
             AccessibilityLabel: =If(ThisItem.'Business Approval Stage' in _collapsedStage.Value, "Hide stage", "Expand stage")
             DisplayMode: =DisplayMode.Edit
             Height: =30
@@ -1410,7 +1413,7 @@ ApprovalDesigner_1 As CanvasComponent:
             Y: =stageBackground_2.Y + 1
             ZIndex: =16
 
-        "icoShiftDown As 'Fluent Icon (1.0.22)'":
+        "icoShiftDown As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: =30
             IconName: ="Down"
@@ -1423,7 +1426,7 @@ ApprovalDesigner_1 As CanvasComponent:
             Y: =stageBackground_2.Y + 1
             ZIndex: =17
 
-        "icoShiftUp As 'Fluent Icon (1.0.22)'":
+        "icoShiftUp As 'Fluent Icon (1.1.29)'":
             DisplayMode: =DisplayMode.Edit
             Height: =30
             IconName: ="Up"
