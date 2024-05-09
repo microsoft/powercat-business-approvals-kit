@@ -242,28 +242,9 @@
                     }
                   }
                 },
-                "Get_Node_Due_Date_Request_Data": {
-                  "runAfter": {},
-                  "metadata": {
-                    "operationMetadataId": "b6c2ddca-9635-4c45-b3bd-5f95420f3a8c"
-                  },
-                  "type": "OpenApiConnection",
-                  "inputs": {
-                    "host": {
-                      "connectionName": "shared_commondataserviceforapps_1",
-                      "operationId": "ListRecords",
-                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                    },
-                    "parameters": {
-                      "entityName": "cat_businessapprovaldatainstances",
-                      "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_First_Node_in_Stage')['value'])?['_cat_nodeduedaterequestdata_value']}"
-                    },
-                    "authentication": "@parameters('$authentication')"
-                  }
-                },
                 "Initialize_Node_Instance": {
                   "runAfter": {
-                    "Get_Node_Due_Date_Request_Data": [
+                    "Condition": [
                       "Succeeded"
                     ]
                   },
@@ -299,6 +280,42 @@
                       "name": "Initialize_Node_Instance0"
                     }
                   }
+                },
+                "Condition": {
+                  "actions": {
+                    "Get_Node_Due_Date_Request_Data": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "b6c2ddca-9635-4c45-b3bd-5f95420f3a8c"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "ListRecords",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovaldatainstances",
+                          "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_First_Node_in_Stage')['value'])?['_cat_nodeduedaterequestdata_value']}"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "expression": {
+                    "not": {
+                      "equals": [
+                        "@first(body('Get_First_Node_in_Stage')['value'])?['_cat_nodeduedaterequestdata_value']",
+                        "@null"
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "32ea1ad9-5f03-4b43-b34d-09c21b29fea1"
+                  },
+                  "type": "If"
                 }
               },
               "runAfter": {

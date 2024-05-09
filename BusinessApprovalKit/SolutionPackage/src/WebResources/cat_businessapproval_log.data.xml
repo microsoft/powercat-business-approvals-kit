@@ -3,6 +3,7 @@
   <WebResourceId>{7f5c53b5-19db-ec11-a7b5-0022486dca48}</WebResourceId>
   <Name>cat_businessapproval_log</Name>
   <DisplayName>Business Approval Logs</DisplayName>
+  <LanguageCode>0</LanguageCode>
   <WebResourceType>11</WebResourceType>
   <IntroducedVersion>1.0.0.11</IntroducedVersion>
   <IsEnabledForMobileClient>1</IsEnabledForMobileClient>

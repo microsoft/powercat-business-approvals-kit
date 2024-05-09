@@ -224,36 +224,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "ApprovalDesigner",
-                "type": "ApprovalDesigner.galProcessStages_1.galStageConditions_1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageNodes.TabIndex"
                 }
               ],
@@ -417,6 +387,36 @@
                 "member": "TabIndex",
                 "module": "ApprovalDesigner",
                 "type": "ApprovalDesigner.galProcessStages_1.galStageNodes.icoEditNodePath2"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "ApprovalDesigner.galProcessStages_1.galStageConditions_1.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "ApprovalDesigner",
+                "type": "ApprovalDesigner.galProcessStages_1.galStageConditions_1"
               }
             }
           ],
