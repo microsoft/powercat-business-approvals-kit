@@ -431,7 +431,7 @@
       "MetaDataIDKey": "",
       "Name": "btnAddFirstNode_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 18,
+      "ParentIndex": 16,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -7704,7 +7704,7 @@
       "MetaDataIDKey": "",
       "Name": "galStageConditions_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 16,
+      "ParentIndex": 18,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -8019,7 +8019,7 @@
       "MetaDataIDKey": "",
       "Name": "galStageNodes",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 15,
+      "ParentIndex": 20,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -18072,7 +18072,7 @@
       "MetaDataIDKey": "",
       "Name": "lblNoNodeInStage_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 20,
+      "ParentIndex": 17,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -18396,7 +18396,7 @@
       "MetaDataIDKey": "",
       "Name": "lblStageConditionText_1",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 17,
+      "ParentIndex": 15,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

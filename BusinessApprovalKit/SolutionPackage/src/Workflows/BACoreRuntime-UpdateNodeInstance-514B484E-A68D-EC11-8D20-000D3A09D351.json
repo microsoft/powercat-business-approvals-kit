@@ -143,28 +143,9 @@
                   },
                   "else": {
                     "actions": {
-                      "Get_Node_Due_Date_Request_Data": {
-                        "runAfter": {},
-                        "metadata": {
-                          "operationMetadataId": "e8d2ebca-a774-4fd3-b241-fd6b2e298ea4"
-                        },
-                        "type": "OpenApiConnection",
-                        "inputs": {
-                          "host": {
-                            "connectionName": "shared_commondataserviceforapps_1",
-                            "operationId": "ListRecords",
-                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                          },
-                          "parameters": {
-                            "entityName": "cat_businessapprovaldatainstances",
-                            "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']}"
-                          },
-                          "authentication": "@parameters('$authentication')"
-                        }
-                      },
                       "Create_new_Node_Instance": {
                         "runAfter": {
-                          "Get_Node_Due_Date_Request_Data": [
+                          "Condition": [
                             "Succeeded"
                           ]
                         },
@@ -194,6 +175,42 @@
                           },
                           "authentication": "@parameters('$authentication')"
                         }
+                      },
+                      "Condition": {
+                        "actions": {
+                          "Get_Node_Due_Date_Request_Data": {
+                            "runAfter": {},
+                            "metadata": {
+                              "operationMetadataId": "e8d2ebca-a774-4fd3-b241-fd6b2e298ea4"
+                            },
+                            "type": "OpenApiConnection",
+                            "inputs": {
+                              "host": {
+                                "connectionName": "shared_commondataserviceforapps_1",
+                                "operationId": "ListRecords",
+                                "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                              },
+                              "parameters": {
+                                "entityName": "cat_businessapprovaldatainstances",
+                                "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']}"
+                              },
+                              "authentication": "@parameters('$authentication')"
+                            }
+                          }
+                        },
+                        "runAfter": {},
+                        "expression": {
+                          "not": {
+                            "equals": [
+                              "@first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']",
+                              "@null"
+                            ]
+                          }
+                        },
+                        "metadata": {
+                          "operationMetadataId": "1a00c0ed-9852-47e2-b33e-c31f59871939"
+                        },
+                        "type": "If"
                       }
                     }
                   },

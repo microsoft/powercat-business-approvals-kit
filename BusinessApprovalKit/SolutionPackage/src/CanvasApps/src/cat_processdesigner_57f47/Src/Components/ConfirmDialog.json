@@ -1713,7 +1713,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638503127262315286",
+    "LastModifiedTimestamp": "638508276090335570",
     "Name": "ConfirmDialog",
     "Rules": [
       {
@@ -1844,7 +1844,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638503127262315286",
+  "LastModifiedTimestamp": "638508276090335570",
   "Name": "29b4d38c23224cd7979258806047f1d4",
   "OverridableProperties": {},
   "TemplateOriginalName": "0219e5e1e199469da2309eecb5e19744",

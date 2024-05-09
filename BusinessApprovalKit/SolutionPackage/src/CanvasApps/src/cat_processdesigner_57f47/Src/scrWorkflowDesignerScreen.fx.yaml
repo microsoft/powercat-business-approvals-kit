@@ -4811,6 +4811,9 @@
                 ZIndex: =10
 
             ddlNodeDueDateSource As dropdown:
+                AllowEmptySelection: |-
+                    =//false
+                    true
                 BorderColor: =RGBA(166, 166, 166, 1)
                 BorderThickness: =1
                 ChevronBackground: =RGBA(255, 255, 255, 1)
@@ -4902,7 +4905,7 @@
                 Items: |-
                     =Filter(
                         Filter('Business Approval Data', 'Business Approval Data (Views)'.'Active Business Approval Data'),
-                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 'Data Type' = LookUp(Choices('Business Approval Data Type'),Text(Value) = "Date").Value//809060002 //&& LookUp(Choices('Business Approval Data Type'), Text(Value) = "Date").Value
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 'Data Type' = LookUp(Choices('Business Approval Data Type'),Text(Value) = "Date").Value
                     )
                         
                 OnChange: |-
@@ -8000,7 +8003,9 @@
                     
                     Filter(
                         Filter('Business Approval Nodes', 'Business Approval Nodes (Views)'.'Active Business Approval Nodes'),
-                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process')
+                        Process.'Business Approval Process' = _selectedProcess.'Business Approval Process' && 'Node Due Date Data Type' in Choices('Business Approval Nodes'.'Node Due Date Data Type'
+                        )
+                        )
                         
                         
                 OnChange: =Reset(ddlNodeOperand_2)
@@ -8450,7 +8455,7 @@
                     DisabledBorderColor: =RGBA(166, 166, 166, 1)
                     DisabledColor: =RGBA(220, 220, 220, 1)
                     DisabledFill: =RGBA(0, 0, 0, 0)
-                    Height: =32
+                    Height: =30
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
                     HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
                     HoverFill: =RGBA(0, 0, 0, 0)
@@ -8466,7 +8471,7 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
                     PressedFill: =RGBA(0, 0, 0, 0)
-                    Width: =32
+                    Width: =30
                     X: |-
                         =//txtReminderText.X + txtReminderText.Width + 35
                         btnAddReminderText.X
@@ -8479,7 +8484,7 @@
                     DisabledBorderColor: =RGBA(166, 166, 166, 1)
                     DisabledColor: =RGBA(220, 220, 220, 1)
                     DisabledFill: =RGBA(0, 0, 0, 0)
-                    Height: =32
+                    Height: =30
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
                     HoverColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
                     HoverFill: =RGBA(0, 0, 0, 0)
@@ -8490,7 +8495,7 @@
                         Set(_isBusy, true);
                         ClearCollect(seletedReminder, ThisItem);
                         UpdateContext({ confirmMode: "DeleteReminder",
-                                confirmMessageDeleteReminder: "This will delete Node Reminder from Node" & ThisItem.Node.Name &  " " & ProcessDesignerLoc.varContainerDeleteVariableTextPostfix
+                                confirmMessageDeleteReminder: "This will delete Node Reminder from Node" &  " " & ThisItem.Node.Name &  " " & ProcessDesignerLoc.varContainerDeleteVariableTextPostfix
                                 } );
                         Set(_showConfirmDeleteReminder, true);
                         Set(_isBusy, false); 
@@ -8502,7 +8507,7 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     PressedColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
                     PressedFill: =RGBA(0, 0, 0, 0)
-                    Width: =32
+                    Width: =30
                     X: |-
                         =//txtReminderText.X + txtReminderText.Width + 35
                         icoEditReminder.X + icoEditReminder.Width + 10
