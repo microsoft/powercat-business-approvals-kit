@@ -2,7 +2,8 @@
   "environmentvariablevalues": {
     "environmentvariablevalue": {
       "@environmentvariablevalueid": "b0baba0c-79f5-ed11-8848-0022482a91f4",
-      "iscustomizable": "1"
+      "iscustomizable": "1",
+      "value": "orgc08dc7f0.crm.dynamics.com"
     }
   }
 }

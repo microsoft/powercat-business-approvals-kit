@@ -29,6 +29,7 @@
       "cat_description": "Description",
       "cat_gotopaths": "Go To Paths",
       "cat_GoToStage": "Go To Stage",
+      "cat_message": "Message",
       "cat_name": "Name",
       "cat_NextReminderNode": "Next Reminder Node",
       "cat_NextReminderRuntimeNode": "Next Reminder Runtime Node",

@@ -25,6 +25,14 @@
         "$authentication": {
           "defaultValue": {},
           "type": "SecureObject"
+        },
+        "Enable PowerFx Dataverse Integration (cat_EnablePowerFxDataverseIntegration)": {
+          "defaultValue": false,
+          "type": "Bool",
+          "metadata": {
+            "schemaName": "cat_EnablePowerFxDataverseIntegration",
+            "description": "Activate this feature by setting it to 'Yes' to enable PowerFx Dataverse integration"
+          }
         }
       },
       "staticResults": {
@@ -204,7 +212,7 @@
                 },
                 "parameters": {
                   "entityName": "cat_businessapprovalruntimenodes",
-                  "$select": "cat_businessapprovalruntimenodeid, cat_nodeduedatedatatype, cat_nodeduedatevalue, _cat_nodeduedaterequestdata_value",
+                  "$select": "cat_businessapprovalruntimenodeid, cat_nodeduedatedatatype, cat_nodeduedatevalue, _cat_nodeduedaterequestdata_value,cat_message",
                   "$filter": "cat_pathindex eq @{item()} and cat_rowindex eq 1 and _cat_stage_value eq '@{triggerOutputs()?['body/_cat_stage_value']}'"
                 },
                 "authentication": "@parameters('$authentication')"
@@ -244,7 +252,7 @@
                 },
                 "Initialize_Node_Instance": {
                   "runAfter": {
-                    "Condition": [
+                    "Perform_an_unbound_action_to_Evaluate_Node_Message": [
                       "Succeeded"
                     ]
                   },
@@ -267,6 +275,7 @@
                       "item/cat_start": "@utcNow()",
                       "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
                       "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                      "item/cat_message": "@outputs('Perform_an_unbound_action_to_Evaluate_Node_Message')?['body/Message']",
                       "item/cat_nodeduedatedatatype": "@first(body('Get_First_Node_in_Stage')['value'])?['cat_nodeduedatedatatype']",
                       "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(first(body('Get_First_Node_in_Stage')['value'])?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovaldatainstances(',first(outputs('Get_Node_Due_Date_Request_Data')?['body/value'])?['cat_businessapprovaldatainstanceid'],')'),null)",
                       "item/cat_nodeduedatevalue": "@if(equals(first(body('Get_First_Node_in_Stage')['value'])?['cat_nodeduedatedatatype'],809060001),first(body('Get_First_Node_in_Stage')['value'])?['cat_nodeduedatevalue'],null)",
@@ -316,6 +325,33 @@
                     "operationMetadataId": "32ea1ad9-5f03-4b43-b34d-09c21b29fea1"
                   },
                   "type": "If"
+                },
+                "Perform_an_unbound_action_to_Evaluate_Node_Message": {
+                  "runAfter": {
+                    "Condition": [
+                      "Succeeded",
+                      "Failed",
+                      "TimedOut"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "662ab23e-663f-49d9-84ab-3b763dff9d76"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "PerformUnboundAction",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "actionName": "cat_EvaluateNodeMessage",
+                      "item/NodeId": "@first(body('Get_First_Node_in_Stage')['value'])?['cat_businessapprovalruntimenodeid']",
+                      "item/WorkflowId": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
+                      "item/EnableDataverse": "@parameters('Enable PowerFx Dataverse Integration (cat_EnablePowerFxDataverseIntegration)')"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
                 }
               },
               "runAfter": {
@@ -392,7 +428,7 @@
               "text_2": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
               "text_3": "Information",
               "text_5": "@workflow()['tags']['flowDisplayName']",
-              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/@{workflow()['run/name']}"
+              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/runs/@{workflow()['run/name']}"
             },
             "retryPolicy": {
               "type": "none"

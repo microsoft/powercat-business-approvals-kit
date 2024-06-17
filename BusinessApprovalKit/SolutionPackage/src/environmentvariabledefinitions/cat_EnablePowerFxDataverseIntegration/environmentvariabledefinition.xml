@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="cat_EnablePowerFxDataverseIntegration">
+  <defaultvalue>no</defaultvalue>
+  <description default="Activate this feature by setting it to 'Yes' to enable PowerFx Dataverse integration">
+    <label description="Activate this feature by setting it to 'Yes' to enable PowerFx Dataverse integration" languagecode="1033" />
+  </description>
+  <displayname default="Enable PowerFx Dataverse Integration">
+    <label description="Enable PowerFx Dataverse Integration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.1.0.16</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000002</type>
+</environmentvariabledefinition>

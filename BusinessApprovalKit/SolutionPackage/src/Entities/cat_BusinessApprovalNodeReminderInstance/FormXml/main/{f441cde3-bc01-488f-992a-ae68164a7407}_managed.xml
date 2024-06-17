@@ -81,6 +81,7 @@
                       <cell id="{4807b290-2b78-42f2-b485-6d16c5cdcfde}">
                         <labels>
                           <label description="Owner" languagecode="1033" />
+                          <label description="所有者" languagecode="1041" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
