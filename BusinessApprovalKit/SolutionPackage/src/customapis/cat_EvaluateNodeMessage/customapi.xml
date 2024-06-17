@@ -1,0 +1,18 @@
+<customapi uniquename="cat_EvaluateNodeMessage">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="API to get evaluated node message from runtime node message table">
+    <label description="API to get evaluated node message from runtime node message table" languagecode="1033" />
+  </description>
+  <displayname default="EvaluateNodeMessage">
+    <label description="EvaluateNodeMessage" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>cat_EvaluateNodeMessage</name>
+  <plugintypeid>
+    <plugintypeexportkey>fdcf052e-b04a-440c-8a48-f54538238ffc</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

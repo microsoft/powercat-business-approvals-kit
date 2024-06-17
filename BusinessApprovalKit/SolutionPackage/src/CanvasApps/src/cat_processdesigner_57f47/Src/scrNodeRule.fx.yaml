@@ -753,6 +753,7 @@ scrNodeRule As screen:
             galNodeConditions As gallery.galleryVertical:
                 '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =2
                 Height: =150
                 Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
                 Layout: =Layout.Vertical

@@ -94,8 +94,13 @@ ConfirmDialog As CanvasComponent:
             ZIndex: =2
 
         btnYes As Button:
+            Align: =""
             BasePaletteColor: =
+            BorderColor: =""
+            BorderStyle: =""
+            DisabledBorderColor: =""
             DisplayMode: =DisplayMode.Edit
+            FocusedBorderColor: =""
             Font: =""
             FontColor: =
             FontItalic: =false
@@ -104,17 +109,29 @@ ConfirmDialog As CanvasComponent:
             FontUnderline: =false
             FontWeight: =""
             Height: =32
+            HoverBorderColor: =""
+            Icon: =""
+            IconRotation: =0
+            IconStyle: ="Outline"
+            Layout: ="Icon before"
             OnSelect: =ConfirmDialog.OnClick(true)
+            PressedBorderColor: =""
             Text: =If(ConfirmDialog.OkOnly, "Ok", "Yes")
+            VerticalAlign: =""
             Width: =96
             X: =0
             Y: =0
             ZIndex: =3
 
         btnNo As Button:
+            Align: =""
             Appearance: ='ButtonCanvas.Appearance'.Secondary
             BasePaletteColor: =
+            BorderColor: =""
+            BorderStyle: =""
+            DisabledBorderColor: =""
             DisplayMode: =DisplayMode.Edit
+            FocusedBorderColor: =""
             Font: =""
             FontColor: =
             FontItalic: =false
@@ -123,8 +140,15 @@ ConfirmDialog As CanvasComponent:
             FontUnderline: =false
             FontWeight: =""
             Height: =32
+            HoverBorderColor: =""
+            Icon: =""
+            IconRotation: =0
+            IconStyle: ="Outline"
+            Layout: ="Icon before"
             OnSelect: =ConfirmDialog.OnClick(false)
+            PressedBorderColor: =""
             Text: ="No"
+            VerticalAlign: =""
             Visible: =!ConfirmDialog.OkOnly
             Width: =96
             X: =btnYes.Width + 10

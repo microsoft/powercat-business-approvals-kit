@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="EvaluateRuntimeNodeMessage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e45f353c8c43eb" PluginAssemblyId="fc02885b-ef53-4362-8449-0eb587855e3e" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/EvaluateRuntimeNodeMessage-FC02885B-EF53-4362-8449-0EB587855E3E/EvaluateRuntimeNodeMessage.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="EvaluateRuntimeNodeMessage.EvaluateNodeMessage, EvaluateRuntimeNodeMessage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e45f353c8c43eb" PluginTypeId="fdcf052e-b04a-440c-8a48-f54538238ffc" Name="EvaluateRuntimeNodeMessage.EvaluateNodeMessage">
+      <FriendlyName>dfd0732e-276f-47f0-86e6-436a603055c6</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

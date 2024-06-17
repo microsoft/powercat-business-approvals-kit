@@ -27,7 +27,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 713,
+            "PublishOrderIndex": 715,
             "Rules": [
               {
                 "Category": "Design",
@@ -241,7 +241,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 714,
+            "PublishOrderIndex": 716,
             "Rules": [
               {
                 "Category": "Data",
@@ -600,7 +600,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "Gallery2_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 715,
+            "PublishOrderIndex": 717,
             "Rules": [
               {
                 "Category": "Design",
@@ -885,7 +885,8 @@
           },
           "MaxTemplateSize",
           "#CopilotOverlayLabel",
-          "#CopilotOverlayVisible"
+          "#CopilotOverlayVisible",
+          "FocusedBorderThickness"
         ],
         "ControlUniqueId": "142",
         "HasDynamicProperties": false,
@@ -901,7 +902,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "TableHeader_4",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 712,
+        "PublishOrderIndex": 714,
         "Rules": [
           {
             "Category": "Data",
@@ -1070,6 +1071,12 @@
             "InvariantScript": "false",
             "Property": "#CopilotOverlayVisible",
             "RuleProviderType": "Unknown"
+          },
+          {
+            "Category": "Design",
+            "InvariantScript": "2",
+            "Property": "FocusedBorderThickness",
+            "RuleProviderType": "Unknown"
           }
         ],
         "StyleName": "defaultGalleryStyle",
@@ -1171,7 +1178,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "TableHeader_4",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 716,
+        "PublishOrderIndex": 718,
         "Rules": [
           {
             "Category": "Design",
@@ -1334,7 +1341,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638508276090353735",
+    "LastModifiedTimestamp": "638536121567899153",
     "Name": "TableHeader_4",
     "Rules": [
       {
@@ -1577,7 +1584,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638508276090353735",
+  "LastModifiedTimestamp": "638536121567899153",
   "Name": "4f3f6dfbd9644a58be8fa71ef1e00f61",
   "OverridableProperties": {},
   "TemplateOriginalName": "aa0875a670a94270be8812d8637fbaba",

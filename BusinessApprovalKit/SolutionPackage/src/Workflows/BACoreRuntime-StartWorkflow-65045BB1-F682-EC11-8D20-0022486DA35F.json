@@ -156,7 +156,7 @@
               "text_2": "@triggerOutputs()?['body/cat_businessapprovalworkflowid']",
               "text_3": "Information",
               "text_5": "@workflow()['tags']['flowDisplayName']",
-              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/@{workflow()['run/name']}"
+              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/runs/@{workflow()['run/name']}"
             },
             "retryPolicy": {
               "type": "none"

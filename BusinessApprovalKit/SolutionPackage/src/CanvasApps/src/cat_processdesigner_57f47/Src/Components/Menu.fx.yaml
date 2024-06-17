@@ -46,6 +46,7 @@ Menu As CanvasComponent:
         '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Main menu"
         BorderColor: =RGBA(0, 18, 107, 1)
+        FocusedBorderThickness: =2
         Height: =Parent.Height - Self.Y
         Items: =Parent.MenuItems
         Layout: =Layout.Vertical
