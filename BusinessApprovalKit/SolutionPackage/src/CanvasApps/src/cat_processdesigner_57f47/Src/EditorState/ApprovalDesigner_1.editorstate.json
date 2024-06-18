@@ -3645,7 +3645,7 @@
           "RuleProviderType": "Unknown"
         }
       ],
-      "StyleName": "",
+      "StyleName": "defaultGroupContainerStyle",
       "Type": "ControlInfo"
     },
     "divStartTemplate_1": {
@@ -4203,7 +4203,8 @@
         },
         "MaxTemplateSize",
         "#CopilotOverlayLabel",
-        "#CopilotOverlayVisible"
+        "#CopilotOverlayVisible",
+        "FocusedBorderThickness"
       ],
       "GalleryTemplateChildName": "galleryTemplate5_4",
       "HasDynamicProperties": false,
@@ -4384,6 +4385,11 @@
           "Category": "Design",
           "PropertyName": "#CopilotOverlayVisible",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "FocusedBorderThickness",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "defaultGalleryStyle",
@@ -4513,7 +4519,8 @@
         },
         "MaxTemplateSize",
         "#CopilotOverlayLabel",
-        "#CopilotOverlayVisible"
+        "#CopilotOverlayVisible",
+        "FocusedBorderThickness"
       ],
       "GalleryTemplateChildName": "galleryTemplate8_6",
       "HasDynamicProperties": false,
@@ -4684,6 +4691,11 @@
           "Category": "Design",
           "PropertyName": "#CopilotOverlayVisible",
           "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "FocusedBorderThickness",
+          "RuleProviderType": "Unknown"
         }
       ],
       "StyleName": "defaultGalleryStyle",
@@ -4828,7 +4840,8 @@
         },
         "MaxTemplateSize",
         "#CopilotOverlayLabel",
-        "#CopilotOverlayVisible"
+        "#CopilotOverlayVisible",
+        "FocusedBorderThickness"
       ],
       "GalleryTemplateChildName": "galleryTemplate6_12",
       "HasDynamicProperties": false,
@@ -5003,6 +5016,11 @@
         {
           "Category": "Design",
           "PropertyName": "#CopilotOverlayVisible",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "FocusedBorderThickness",
           "RuleProviderType": "Unknown"
         }
       ],

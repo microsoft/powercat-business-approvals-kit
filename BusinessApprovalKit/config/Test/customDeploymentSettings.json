@@ -137,6 +137,18 @@
                                           "solutionComponentUniqueName":  "27678b1c-da6f-ed11-81ac-000d3a09cf6c",
                                           "sortOrder":  "#{activateflow.order.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#",
                                           "activate":  "#{activateflow.activate.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|Child|GetUserMailboxSettings",
+                                          "solutionComponentUniqueName":  "a68e0a7e-37ec-ee11-904d-000d3a8edea8",
+                                          "sortOrder":  "#{activateflow.order.BACore|Child|GetUserMailboxSettings.a68e0a7e-37ec-ee11-904d-000d3a8edea8}#",
+                                          "activate":  "#{activateflow.activate.BACore|Child|GetUserMailboxSettings.a68e0a7e-37ec-ee11-904d-000d3a8edea8}#"
+                                      },
+                                      {
+                                          "solutionComponentName":  "BACore|SendReminder",
+                                          "solutionComponentUniqueName":  "0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5",
+                                          "sortOrder":  "#{activateflow.order.BACore|SendReminder.0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5}#",
+                                          "activate":  "#{activateflow.activate.BACore|SendReminder.0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5}#"
                                       }
                                   ],
     "ConnectorShareWithGroupTeamConfiguration":  [
@@ -284,6 +296,18 @@
                                                         "solutionComponentName":  "BACore|UpdateActivePublishedWorkflow",
                                                         "solutionComponentUniqueName":  "27678b1c-da6f-ed11-81ac-000d3a09cf6c",
                                                         "ownerEmail":  "#{owner.ownerEmail.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|Child|GetUserMailboxSettings",
+                                                        "solutionComponentUniqueName":  "a68e0a7e-37ec-ee11-904d-000d3a8edea8",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|Child|GetUserMailboxSettings.a68e0a7e-37ec-ee11-904d-000d3a8edea8}#"
+                                                    },
+                                                    {
+                                                        "solutionComponentType":  29,
+                                                        "solutionComponentName":  "BACore|SendReminder",
+                                                        "solutionComponentUniqueName":  "0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5",
+                                                        "ownerEmail":  "#{owner.ownerEmail.BACore|SendReminder.0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5}#"
                                                     }
                                                 ],
     "FlowShareWithGroupTeamConfiguration":  [
@@ -401,6 +425,16 @@
                                                     "solutionComponentName":  "BACore|UpdateActivePublishedWorkflow",
                                                     "solutionComponentUniqueName":  "27678b1c-da6f-ed11-81ac-000d3a09cf6c",
                                                     "aadGroupTeamName":  "#{flow.sharing.BACore|UpdateActivePublishedWorkflow.27678b1c-da6f-ed11-81ac-000d3a09cf6c}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|Child|GetUserMailboxSettings",
+                                                    "solutionComponentUniqueName":  "a68e0a7e-37ec-ee11-904d-000d3a8edea8",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|Child|GetUserMailboxSettings.a68e0a7e-37ec-ee11-904d-000d3a8edea8}#"
+                                                },
+                                                {
+                                                    "solutionComponentName":  "BACore|SendReminder",
+                                                    "solutionComponentUniqueName":  "0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5",
+                                                    "aadGroupTeamName":  "#{flow.sharing.BACore|SendReminder.0bc0b71b-0bfd-ee11-a1fe-000d3a16bed5}#"
                                                 }
                                             ],
     "AadGroupCanvasConfiguration":  [

@@ -461,6 +461,7 @@
                                   "item/cat_description": "@items('Each_Node')?['cat_description']",
                                   "item/cat_gotopaths": "@items('Each_Node')?['cat_gotopaths']",
                                   "item/cat_GoToStage@odata.bind": "@if(greater(length(body('Get_Go_To_Stage_ID_if_exists_for_Node')), 0), concat('cat_businessapprovalruntimestages(', body('Get_Go_To_Stage_ID_if_exists_for_Node')[0]['new'], ')'), null)",
+                                  "item/cat_message": "@items('Each_Node')?['cat_message']",
                                   "item/cat_name": "@items('Each_Node')?['cat_name']",
                                   "item/cat_nodecondition": "@items('Each_Node')?['cat_nodecondition']",
                                   "item/cat_nodeduedatedatatype": "@items('Each_Node')?['cat_nodeduedatedatatype']",

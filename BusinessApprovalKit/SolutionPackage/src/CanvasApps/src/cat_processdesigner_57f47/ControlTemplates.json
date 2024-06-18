@@ -84,7 +84,7 @@
     "Name": "PowerApps_CoreControls_ComboboxCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Combobox",
-    "Version": "0.0.27"
+    "Version": "0.0.30"
   },
   "Date picker": {
     "CustomGroupControlTemplateName": "",
@@ -310,7 +310,7 @@
     "LastModifiedTimestamp": "0",
     "Name": "form",
     "OverridableProperties": {},
-    "Version": "2.4.1"
+    "Version": "2.4.2"
   },
   "gallery": {
     "CustomGroupControlTemplateName": "",
@@ -583,7 +583,7 @@
     "Name": "PowerApps_CoreControls_TextCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Text",
-    "Version": "0.0.25"
+    "Version": "0.0.30"
   },
   "Text box": {
     "CustomGroupControlTemplateName": "",
@@ -613,7 +613,7 @@
     "Name": "PowerApps_CoreControls_TextInputCanvas",
     "OverridableProperties": {},
     "TemplateDisplayName": "Text input",
-    "Version": "0.0.26"
+    "Version": "0.0.29"
   },
   "timer": {
     "CustomGroupControlTemplateName": "",

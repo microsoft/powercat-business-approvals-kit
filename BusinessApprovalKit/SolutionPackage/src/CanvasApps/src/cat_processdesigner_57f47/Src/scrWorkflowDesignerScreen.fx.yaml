@@ -275,8 +275,13 @@
                     Align: |-
                         =//"Start"
                         const.Start
+                    Appearance: ="FilledDarker"
                     BasePaletteColor: =
+                    BorderColor: =""
+                    BorderStyle: =""
+                    DisabledBorderColor: =""
                     DisplayMode: =DisplayMode.Edit
+                    FocusedBorderColor: =""
                     Font: =""
                     FontColor: =
                     FontItalic: =false
@@ -285,8 +290,10 @@
                     FontUnderline: =false
                     FontWeight: =""
                     Height: =32
+                    HoverBorderColor: =""
                     LayoutMinHeight: =32
                     LayoutMinWidth: =320
+                    PressedBorderColor: =""
                     ValidationState: |-
                         =//"None"
                         const.None
@@ -2048,7 +2055,8 @@
                                 lblNodeDueDateAppData.Visible,
                                 ddlNodeDueDateAppData.Selected,
                                 Blank()
-                            )
+                            ),
+                            Message: txtNodeMessage.Text
                         }
                     )
                 );
@@ -2157,6 +2165,10 @@
                 Reset(cboApproverUsers_2);
                 Reset(ddlNodeApprovalType_2);
                 Reset(galApprovers_2);
+                Reset(txtNodeMessage);
+                Reset(ddlNodeDueDateSource);
+                Reset(ddlNodeDueDateAppData);
+                Reset(dtNodeDueDateValue);
                 ,
                 //save node configuration - ends
                 showNodeRuleEditorContainer,
@@ -3061,6 +3073,7 @@
                     '#CopilotOverlayLabel': ="Filtered"
                     BorderColor: =RGBA(166, 166, 166, 1)
                     BorderThickness: =1
+                    FocusedBorderThickness: =2
                     Height: =Min(Parent.Height - Self.Y, CountRows(Self.AllItems) * Self.TemplateHeight)
                     Items: =_selectedStage.'Business Approval Conditions (cat_BusinessApprovalCondition_GoToStage_c)'
                     Layout: =Layout.Vertical
@@ -3171,9 +3184,14 @@
                     ZIndex: =3
 
             btnResetConditions_2 As Button:
+                Align: =""
                 Appearance: ='ButtonCanvas.Appearance'.Secondary
                 BasePaletteColor: =
+                BorderColor: =""
+                BorderStyle: =""
+                DisabledBorderColor: =""
                 DisplayMode: =DisplayMode.Edit
+                FocusedBorderColor: =""
                 Font: =""
                 FontColor: =
                 FontItalic: =false
@@ -3182,6 +3200,11 @@
                 FontUnderline: =false
                 FontWeight: =""
                 Height: =32
+                HoverBorderColor: =""
+                Icon: =""
+                IconRotation: =0
+                IconStyle: ="Outline"
+                Layout: ="Icon before"
                 OnSelect: |-
                     =If(!isCleared,
                         //saves current condition in memory
@@ -3197,9 +3220,11 @@
                         Reset(ddlStageConditionSource_2);
                         UpdateContext({ allowUpdateConditionType: false, isCleared: false })
                     )
+                PressedBorderColor: =""
                 Text: |-
                     =//If(isCleared, "Reset", "Edit")
                     If(isCleared, ProcessDesignerLoc.stgContBtnReset, ProcessDesignerLoc.stgContBtnResetEditText)
+                VerticalAlign: =""
                 Visible: |-
                     =//(!allowUpdateConditionType || isCleared) && _currentStageIndex > 1
                     //March
@@ -3290,10 +3315,15 @@
                     ZIndex: =39
 
             ddlStageConditionSource_2 As Combobox.pcfdataset:
+                Appearance: ="FilledDarker"
                 BasePaletteColor: =
+                BorderColor: =""
+                BorderStyle: =""
                 DefaultSelectedItems: |
                     =[If(!IsBlankOrError(_selectedStage.'Source Data Type'),LookUp(Choices('Business Approval Condition Source Data'),Value = _selectedStage.'Source Data Type'),LookUp(Choices('Business Approval Condition Source Data'),Value = 'Business Approval Condition Source Data'.'Request Data'))]
+                DisabledBorderColor: =""
                 DisplayMode: =DisplayMode.Edit
+                FocusedBorderColor: =""
                 Font: =""
                 FontItalic: =false
                 FontSize: =0
@@ -3301,6 +3331,7 @@
                 FontUnderline: =false
                 FontWeight: =""
                 Height: =32
+                HoverBorderColor: =""
                 InputTextPlaceholder: |-
                     =//"Choose source"
                     ProcessDesignerLoc.stgContDdlStgCondnSourceTxt
@@ -3309,6 +3340,7 @@
                     //March
                     If(_currentStageIndex >1,Choices('Business Approval Condition Source Data'),['Business Approval Condition Source Data'.'Request Data'])
                 OnChange: =Reset(ddlStageOperand_2)
+                PressedBorderColor: =""
                 ValidationState: |
                     =//"None"
                     const.None
@@ -3385,6 +3417,8 @@
                 ZIndex: =22
 
             txtLabelInfo As Text:
+                BorderColor: =""
+                BorderStyle: =""
                 DisplayMode: =DisplayMode.Edit
                 Font: =""
                 FontColor: =
@@ -3528,6 +3562,7 @@
             galConditions_1 As gallery.galleryVertical:
                 '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =2
                 Height: =120
                 Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
                 Layout: =Layout.Vertical
@@ -3831,7 +3866,7 @@
                 Y: =lblNodeType_4.Y
                 ZIndex: =4
 
-            lblStageName_5 As label:
+            lblNodeName As label:
                 BorderColor: =RGBA(0, 0, 0, 0)
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =2
@@ -3879,7 +3914,7 @@
                 Size: =10
                 Width: =(Parent.Width - Self.X) / 2
                 X: =radNodeType_4.X
-                Y: =lblStageName_5.Y
+                Y: =lblNodeName.Y
                 ZIndex: =6
 
             lblStageDesc_7 As label:
@@ -3898,8 +3933,8 @@
                     =//"Description"
                     ProcessDesignerLoc.nodeContLblDescription
                 Width: =120
-                X: =lblStageName_5.X
-                Y: =lblStageName_5.Y + lblStageName_5.Height + 5
+                X: =lblNodeName.X
+                Y: =lblNodeName.Y + lblNodeName.Height + 5
                 ZIndex: =7
 
             txtNodeDesc_4 As text:
@@ -3938,7 +3973,9 @@
                 Height: =Parent.Height - Self.Y
                 Visible: =radNodeType_4.Selected.Value = 'Business Approval Node Type'.Approval
                 Width: =Parent.Width
-                Y: =lblNodeDueDateAppData.Y + lblNodeDueDateAppData.Height + 10
+                Y: |-
+                    =//lblNodeDueDateAppData.Y + lblNodeDueDateAppData.Height + 10
+                    lblNodeMessage.Y + lblNodeMessage.Height + 20
                 ZIndex: =9
 
                 lblApprovalConfiguration_2 As label:
@@ -4221,6 +4258,7 @@
                     IsSearchable: =false
                     Items: |-
                         =Office365Users.SearchUser({ searchTerm: Self.SearchText })
+                    PaddingLeft: =12
                     PressedBorderColor: =Self.BorderColor
                     PressedColor: =RGBA(0, 0, 0, 1)
                     PressedFill: =RGBA(243, 242, 241, 1)
@@ -4353,7 +4391,7 @@
                             If(ddlDelegationRule_2.Selected.Value = 'Business Approval Delegation Rule'.'Time-out' || ddlDelegationRule_2.Selected.Value = 'Business Approval Delegation Rule'.'Time-out or Out of Office',true, false)
                         Width: =lblNodeApprovalType_2.Width
                         X: =lblNodeApprovalType_2.X
-                        Y: =lblDelegationRuleDescription_2.Y + lblDelegationRuleDescription_2.Height+ 10
+                        Y: =lblDelegationRuleDescription_2.Y + lblDelegationRuleDescription_2.Height+ 5
                         ZIndex: =3
 
                     txtTimeout_2 As text:
@@ -4443,7 +4481,7 @@
                             ProcessDesignerLoc.nodeContLblDelegationRuleDesc
                         Width: =Parent.Width - Self.X - 10
                         X: =lblDelegationRule_2.X
-                        Y: =lblDelegationRule_2.Y + lblDelegationRule_2.Height + 20
+                        Y: =lblDelegationRule_2.Y + lblDelegationRule_2.Height + 5
                         ZIndex: =6
 
                     lblTimeOutDescription_2 As label:
@@ -4805,8 +4843,8 @@
                     //ddlNodeCondition_2.DisplayMode = DisplayMode.Edit && ddlNodeCondition_2.Selected.Value <> 'Business Approval Stage Condition'.None
                     //
                     true
-                Width: =lblStageName_5.Width
-                X: =lblStageName_5.X
+                Width: =lblNodeName.Width
+                X: =lblNodeName.X
                 Y: =txtNodeDesc_4.Y + txtNodeDesc_4.Height + 5
                 ZIndex: =10
 
@@ -4864,7 +4902,13 @@
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
-                Height: =30
+                Height: |-
+                    =If(
+                        
+                        Not(IsBlank(ddlNodeDueDateSource.Selected.Value)),
+                        lblNodeName.Height,
+                        0
+                    )
                 PaddingLeft: =12
                 Size: =10
                 Text: |-
@@ -4875,7 +4919,8 @@
                     =
                     ddlNodeDueDateSource.Selected.Value = 'Business Approval Node Due Date Data Type'.'Request Data' && ddlNodeDueDateSource.Visible
                 Width: =120
-                X: =lblNodeDueDateSource.X
+                X: |
+                    =lblNodeDueDateSource.X
                 Y: =lblNodeDueDateSource.Height + lblNodeDueDateSource.Y + 5
                 ZIndex: =12
 
@@ -4893,13 +4938,13 @@
                 ChevronHoverBackground: =RGBA(212, 212, 212, 1)
                 ChevronHoverFill: =RGBA(33, 33, 33, 1)
                 Color: =RGBA(51, 51, 51, 1)
-                Default: =_selectedNode.'Source Data'.Name
+                Default: =_selectedNode.'Node Due Date Request Data'.Name
                 DisabledBorderColor: =RGBA(0, 0, 0, 0)
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 FocusedBorderThickness: =1
                 Font: =Font.'Segoe UI'
-                Height: =30
+                Height: =lblNodeDueDateAppData.Height
                 HoverBorderColor: =Self.BorderColor
                 HoverFill: =RGBA(243, 242, 241, 1)
                 Items: |-
@@ -4928,7 +4973,7 @@
             "dtNodeDueDateValue As 'Date picker'":
                 DisplayMode: =txtAppDataName_2.DisplayMode
                 FillColor: =
-                Height: =lblNodeDueDateSource.Height
+                Height: =lblNodeDueDate.Height
                 IconFill: =ColorValue(AppTheme.palette.themePrimary)
                 TextColor: =
                 Value: |-
@@ -4951,7 +4996,13 @@
                 DisabledColor: =RGBA(166, 166, 166, 1)
                 FocusedBorderThickness: =4
                 Font: =Font.'Segoe UI'
-                Height: =lblStageName_5.Height - 5
+                Height: |-
+                    =If(
+                        
+                        Not(IsBlank(ddlNodeDueDateSource.Selected.Value)),
+                        lblNodeName.Height,
+                        0
+                    )
                 PaddingLeft: =12
                 Size: =10
                 Text: ="Node Due Date"
@@ -4960,13 +5011,68 @@
                     //ddlNodeConditionSource_4.Selected.Value = 'Business Approval Node Due Date Data Type'.'Request Data' && ddlNodeConditionSource_4.Visible
                     ddlNodeDueDateSource.Selected.Value = 'Business Approval Node Due Date Data Type'.'Static value'
                 Width: =lblNodeDueDateSource.Width
-                X: =lblStageName_5.X
+                X: =lblNodeName.X
                 Y: =lblNodeDueDateSource.Height + lblNodeDueDateSource.Y + 5
                 ZIndex: =15
 
+            lblNodeMessage As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(51, 51, 51, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =30
+                PaddingLeft: =12
+                Size: =10
+                Text: |-
+                    =//"Description"
+                    "Message"
+                    //ProcessDesignerLoc.nodeContLblDescription
+                Width: =120
+                X: =lblNodeName.X
+                Y: |-
+                    =//lblNodeName.Y + lblNodeName.Height + 5
+                    lblNodeDueDate.Y + lblNodeDueDate.Height +5
+                ZIndex: =16
+
+            txtNodeMessage As text:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                Clear: =true
+                Color: =RGBA(51, 51, 51, 1)
+                Default: =_selectedNode.Message
+                DelayOutput: =true
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =lblStageDesc_7.Height + 20
+                HoverBorderColor: =Self.BorderColor
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                MaxLength: =4000
+                Mode: =TextMode.MultiLine
+                OnChange: =
+                PaddingLeft: =5
+                PressedBorderColor: =Self.BorderColor
+                PressedColor: =RGBA(51, 51, 51, 1)
+                PressedFill: =RGBA(255, 255, 255, 1)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =10
+                Width: =(Parent.Width - Self.X) / 2
+                X: =txtNodeName_4.X
+                Y: =lblNodeMessage.Y
+                ZIndex: =17
+
         NodeRuleEditorContainer As groupContainer:
             Height: =Parent.Height - Self.Y
-            Visible: =//showNodeRuleEditorContainer
+            Visible: =showNodeRuleEditorContainer
             Width: =Parent.Width - Self.X
             ZIndex: =3
 
@@ -5741,6 +5847,7 @@
                 galNodeConditions_2 As gallery.galleryVertical:
                     '#CopilotOverlayLabel': ="Filtered"
                     BorderColor: =RGBA(166, 166, 166, 1)
+                    FocusedBorderThickness: =2
                     Height: =150
                     Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
                     Layout: =Layout.Vertical
@@ -6178,9 +6285,14 @@
                     ZIndex: =18
 
                 btnResetConditions_3 As Button:
+                    Align: =""
                     Appearance: ='ButtonCanvas.Appearance'.Secondary
                     BasePaletteColor: =
+                    BorderColor: =""
+                    BorderStyle: =""
+                    DisabledBorderColor: =""
                     DisplayMode: =DisplayMode.Edit
+                    FocusedBorderColor: =""
                     Font: =""
                     FontColor: =
                     FontItalic: =false
@@ -6189,6 +6301,11 @@
                     FontUnderline: =false
                     FontWeight: =""
                     Height: =32
+                    HoverBorderColor: =""
+                    Icon: =""
+                    IconRotation: =0
+                    IconStyle: ="Outline"
+                    Layout: ="Icon before"
                     OnSelect: |-
                         =/*If(Self.Text = ProcessDesignerLoc.nodeRuContainerBtnResetEdit,//Edit
                             //saves current condition in memory
@@ -6221,9 +6338,11 @@
                         
                         
                         //
+                    PressedBorderColor: =""
                     Text: |-
                         =//If(isCleared, "Reset", "Edit")
                         If(isCleared, ProcessDesignerLoc.nodeRuContainerBtnReset, ProcessDesignerLoc.nodeRuContainerBtnResetEdit)
+                    VerticalAlign: =""
                     Visible: |+
                         =
                         //(!allowUpdateConditionType || isCleared) && _currentNodeIndex > 1
@@ -6247,6 +6366,7 @@
                 '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 DelayItemLoading: =true
+                FocusedBorderThickness: =2
                 Height: =CountRows(Self.AllItems) * (Self.TemplateHeight + 2 * Self.TemplatePadding)
                 Items: =_validationChecks
                 Layout: =Layout.Vertical
@@ -6587,6 +6707,7 @@
                 '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 DelayItemLoading: =true
+                FocusedBorderThickness: =2
                 Height: =CountRows(Self.AllItems) * (Self.TemplateHeight + 2 * Self.TemplatePadding)
                 Items: =_colPublishedVersions
                 Layout: =Layout.Vertical
@@ -7551,6 +7672,7 @@
             galAppRequestData_3 As gallery.galleryVertical:
                 '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
+                FocusedBorderThickness: =2
                 Height: =Parent.Height - Self.Y - 20
                 Items: |-
                     =Filter(
@@ -8515,15 +8637,25 @@
                     ZIndex: =10
 
             btnAddReminderText As Button:
+                Align: =""
                 Appearance: ='ButtonCanvas.Appearance'.Secondary
                 BasePaletteColor: =
+                BorderColor: =""
+                BorderStyle: =""
+                DisabledBorderColor: =""
                 DisplayMode: |+
                     =If(!IsBlank(_selectedProcess) && !IsBlank(ddlNode.Selected) && !IsBlank(ddlReminderChannel.Selected.Value) && !IsBlank(txtReminderDays),DisplayMode.Edit,DisplayMode.Disabled)
                     
+                FocusedBorderColor: =""
                 Font: =Font.'Lato Black'
                 FontColor: =
                 FontWeight: =FontWeight.Bold
                 Height: =btnAddReminder.Height
+                HoverBorderColor: =""
+                Icon: =""
+                IconRotation: =0
+                IconStyle: ="Outline"
+                Layout: ="Icon before"
                 OnSelect: |+
                     =//false
                     //Set(varReminderTxt,txtReminderText.Value);
@@ -8554,7 +8686,9 @@
                     
                     Set(_showReminderDialog, true);
                     
+                PressedBorderColor: =""
                 Text: ="..."
+                VerticalAlign: =""
                 Width: =btnAddReminder.Width/2
                 X: =txtReminderText.X + txtReminderText.Width + 10
                 Y: =lblNode.Y + lblNode.Height + 5
@@ -8865,10 +8999,20 @@
             ZIndex: =3
 
         btnOkay As Button:
+            Align: =""
             BasePaletteColor: =
+            BorderColor: =""
+            BorderStyle: =""
+            DisabledBorderColor: =""
             DisplayMode: =DisplayMode.Edit
+            FocusedBorderColor: =""
             FontColor: =
             Height: =32
+            HoverBorderColor: =""
+            Icon: =""
+            IconRotation: =0
+            IconStyle: ="Outline"
+            Layout: ="Icon before"
             OnSelect: |-
                 =//Set(varReminderTxt,txtReminderTxt.Value);
                 
@@ -8884,7 +9028,9 @@
                 
                 Set(_showReminderDialog, false);
                 Reset(txtReminderTxt);
+            PressedBorderColor: =""
             Text: ="Ok"
+            VerticalAlign: =""
             Width: =96
             X: |-
                 =//txtReminderTxt.X + txtReminderTxt.Width/3
@@ -8893,14 +9039,26 @@
             ZIndex: =6
 
         btnCancel_1 As Button:
+            Align: =""
             Appearance: ='ButtonCanvas.Appearance'.Primary
             BasePaletteColor: =
+            BorderColor: =""
+            BorderStyle: =""
+            DisabledBorderColor: =""
             DisplayMode: =DisplayMode.Edit
+            FocusedBorderColor: =""
             FontColor: =
             Height: =32
+            HoverBorderColor: =""
+            Icon: =""
+            IconRotation: =0
+            IconStyle: ="Outline"
+            Layout: ="Icon before"
             OnSelect: |
                 =Set(_showReminderDialog,false);
+            PressedBorderColor: =""
             Text: ="Cancel"
+            VerticalAlign: =""
             Width: =96
             X: =txtReminderTxt.X + txtReminderTxt.Width - Self.Width
             Y: =txtReminderTxt.Y + txtReminderTxt.Height + Self.Height

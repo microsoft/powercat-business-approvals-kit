@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="NodeId">
+  <description default="Record ID of the Records in Business Approval Runtime Node">
+    <label description="Record ID of the Records in Business Approval Runtime Node" languagecode="1033" />
+  </description>
+  <displayname default="NodeId">
+    <label description="NodeId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>NodeId</name>
+  <type>10</type>
+</customapirequestparameter>

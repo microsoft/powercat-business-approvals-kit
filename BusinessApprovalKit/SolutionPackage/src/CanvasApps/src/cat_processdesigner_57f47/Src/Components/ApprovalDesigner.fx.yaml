@@ -71,6 +71,7 @@ ApprovalDesigner As CanvasComponent:
         AccessibleLabel: ="Process stages"
         BorderColor: =RGBA(166, 166, 166, 1)
         DelayItemLoading: =false//true
+        FocusedBorderThickness: =2
         Height: |-
             =//755
             ApprovalDesigner.AssignedHeight
@@ -283,6 +284,7 @@ ApprovalDesigner As CanvasComponent:
             AccessibleLabel: ="Stage nodes"
             BorderColor: =RGBA(255, 0, 0, 1)
             DelayItemLoading: =true
+            FocusedBorderThickness: =2
             Height: =If(Self.Visible, CountRows(Self.AllItems) * (Self.TemplateHeight + (2*Self.TemplatePadding)), 0)
             Items: |-
                 =AddColumns(
@@ -1761,6 +1763,7 @@ ApprovalDesigner As CanvasComponent:
             '#CopilotOverlayLabel': ="Filtered"
             AccessibleLabel: ="Conditions"
             BorderColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =2
             Height: =If(ThisItem.'Stage Condition' <> 'Business Approval Stage Condition'.None, 62, 0)
             Items: |-
                 =AddColumns(
@@ -2349,6 +2352,8 @@ ApprovalDesigner As CanvasComponent:
             ZIndex: =20
 
     textProcessDesigner As Text:
+        BorderColor: =""
+        BorderStyle: =""
         DisplayMode: =DisplayMode.Edit
         Font: =""
         FontColor: =

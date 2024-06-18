@@ -190,7 +190,7 @@
                       "inputs": {
                         "name": "varSourceData",
                         "value": {
-                          "value": "@if(equals(body('Get_Dynamic_Data')?['type'], 809060001),body('Get_Dynamic_Data')?['value'],concat('''', body('Get_Dynamic_Data')?['value'],''''))",
+                          "value": "@if(equals(body('Get_Dynamic_Data')?['type'], '809060001'),body('Get_Dynamic_Data')?['value'],concat('''', body('Get_Dynamic_Data')?['value'],''''))",
                           "raw": "@{body('Get_Dynamic_Data')?['raw']}",
                           "default": "@{body('Get_Dynamic_Data')?['default']}",
                           "type": "@body('Get_Dynamic_Data')?['type']"
@@ -456,19 +456,19 @@
                   },
                   {
                     "id": 809060001,
-                    "op": ">="
-                  },
-                  {
-                    "id": 809060002,
                     "op": ">"
                   },
                   {
+                    "id": 809060002,
+                    "op": ">="
+                  },
+                  {
                     "id": 809060003,
-                    "op": "<="
+                    "op": "<"
                   },
                   {
                     "id": 809060004,
-                    "op": "<"
+                    "op": "<="
                   },
                   {
                     "id": 809060005,
@@ -599,11 +599,11 @@
                     "inputs": {
                       "from": "@outputs('Get_Node_or_Stage_Conditions')?['body/value']",
                       "select": {
-                        "_809060006": "@startsWith(variables('varSourceData')['raw'],item()['cat_conditionvalue'])",
-                        "_809060007": "@endsWith(variables('varSourceData')['raw'],item()['cat_conditionvalue'])",
-                        "_809060008": "@contains(variables('varSourceData')['raw'],item()['cat_conditionvalue'])",
-                        "_809060009": "@equals(variables('varSourceData')['raw'], null)",
-                        "_809060010": "@not(equals(variables('varSourceData')['raw'], null))",
+                        "_809060006": "@startsWith(variables('varSourceData')['raw'], coalesce(item()?['cat_conditionvalue'], ''))",
+                        "_809060007": "@endsWith(variables('varSourceData')['raw'], coalesce(item()?['cat_conditionvalue'], ''))",
+                        "_809060008": "@contains(variables('varSourceData')['raw'],coalesce(item()?['cat_conditionvalue'], ''))",
+                        "_809060009": "@equals(variables('varSourceData')['raw'], '')",
+                        "_809060010": "@not(equals(variables('varSourceData')['raw'], ''))",
                         "stageid": "@item()?['_cat_gotostage_value']",
                         "path": "@item()?['cat_pathindex']"
                       }

@@ -16,6 +16,24 @@
                                      "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitDataverse}#"
                                  },
                                  {
+                                     "LogicalName":  "cat_BusinessApprovalKitMicrosoftGraphMailboxSetting",
+                                     "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitMicrosoftGraphMailboxSetting}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_cat-5fmicrosoft-20graph-20mailboxsetting-5f21dec655d73f3a8c",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitMicrosoftGraphMailboxSetting}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_BusinessApprovalKitMicrosoftTeams",
+                                     "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitMicrosoftTeams}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_teams",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitMicrosoftTeams}#"
+                                 },
+                                 {
+                                     "LogicalName":  "cat_BusinessApprovalKitO365Outlook",
+                                     "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitO365Outlook}#",
+                                     "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+                                     "ConnectionOwner":  "#{connectionreference.user.cat_BusinessApprovalKitO365Outlook}#"
+                                 },
+                                 {
                                      "LogicalName":  "cat_BusinessApprovalKitO365Users",
                                      "ConnectionId":  "#{connectionreference.cat_BusinessApprovalKitO365Users}#",
                                      "ConnectorId":  "/providers/Microsoft.PowerApps/apis/shared_office365users",

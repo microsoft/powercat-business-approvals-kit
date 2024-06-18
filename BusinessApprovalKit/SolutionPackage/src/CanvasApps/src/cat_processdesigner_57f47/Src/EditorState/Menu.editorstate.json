@@ -471,7 +471,8 @@
         },
         "MaxTemplateSize",
         "#CopilotOverlayLabel",
-        "#CopilotOverlayVisible"
+        "#CopilotOverlayVisible",
+        "FocusedBorderThickness"
       ],
       "GalleryTemplateChildName": "galleryTemplate1",
       "HasDynamicProperties": false,
@@ -631,6 +632,11 @@
         {
           "Category": "Design",
           "PropertyName": "#CopilotOverlayVisible",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "FocusedBorderThickness",
           "RuleProviderType": "Unknown"
         }
       ],

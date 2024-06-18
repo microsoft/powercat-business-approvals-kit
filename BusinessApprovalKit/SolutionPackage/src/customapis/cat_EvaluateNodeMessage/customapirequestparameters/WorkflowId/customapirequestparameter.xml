@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="WorkflowId">
+  <description default="Record ID of the Business Approval Workflow Instance table">
+    <label description="Record ID of the Business Approval Workflow Instance table" languagecode="1033" />
+  </description>
+  <displayname default="WorkflowId">
+    <label description="WorkflowId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>WorkflowId</name>
+  <type>10</type>
+</customapirequestparameter>

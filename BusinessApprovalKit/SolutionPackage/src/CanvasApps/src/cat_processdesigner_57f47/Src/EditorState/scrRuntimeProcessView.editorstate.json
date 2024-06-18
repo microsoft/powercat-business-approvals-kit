@@ -763,7 +763,7 @@
           "RuleProviderType": "Unknown"
         }
       ],
-      "StyleName": "",
+      "StyleName": "defaultGroupContainerStyle",
       "Type": "ControlInfo"
     },
     "Created On_DataCard1_1": {
@@ -8288,7 +8288,8 @@
         "ZIndex",
         "MaxTemplateSize",
         "#CopilotOverlayLabel",
-        "#CopilotOverlayVisible"
+        "#CopilotOverlayVisible",
+        "FocusedBorderThickness"
       ],
       "GalleryTemplateChildName": "galleryTemplate4_2",
       "HasDynamicProperties": false,
@@ -8438,6 +8439,11 @@
         {
           "Category": "Design",
           "PropertyName": "#CopilotOverlayVisible",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "FocusedBorderThickness",
           "RuleProviderType": "Unknown"
         }
       ],

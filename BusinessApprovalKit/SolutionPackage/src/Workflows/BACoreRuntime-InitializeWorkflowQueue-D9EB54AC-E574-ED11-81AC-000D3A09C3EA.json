@@ -79,85 +79,6 @@
           },
           "description": "This Runtime data is of Workflow queue table"
         },
-        "Apply_to_each": {
-          "foreach": "@body('Parse_RuntimeData_JSON_WFQueueTable')",
-          "actions": {
-            "Condition": {
-              "actions": {
-                "Apply_to_each_-_Iterate_through_parameters": {
-                  "foreach": "@body('Parse_JSON_-_Runtime_Data_-_Published_WF_Table')",
-                  "actions": {
-                    "Condition_-_If_Runtime_ID_is_equal_to_ID": {
-                      "actions": {
-                        "Create_Workflow_Parameters": {
-                          "runAfter": {},
-                          "metadata": {
-                            "operationMetadataId": "461d2827-78bf-4321-806e-8ff818c3a6bd"
-                          },
-                          "type": "OpenApiConnection",
-                          "inputs": {
-                            "host": {
-                              "connectionName": "shared_commondataserviceforapps_1",
-                              "operationId": "CreateRecord",
-                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                            },
-                            "parameters": {
-                              "entityName": "cat_businessapprovaldatainstances",
-                              "item/cat_datavalue": "@items('Apply_to_each')['value']",
-                              "item/cat_RuntimeData@odata.bind": "cat_businessapprovalruntimedatas(@{items('Apply_to_each_-_Iterate_through_parameters')['runtimeId']})",
-                              "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Create_new_Workflow_Instance')?['body/cat_businessapprovalworkflowid']})"
-                            },
-                            "authentication": "@parameters('$authentication')"
-                          }
-                        }
-                      },
-                      "runAfter": {},
-                      "expression": {
-                        "equals": [
-                          "@items('Apply_to_each_-_Iterate_through_parameters')['name']",
-                          "@items('Apply_to_each')['id']"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "96009c3c-ee2d-40da-83aa-1ace029c207e"
-                      },
-                      "type": "If",
-                      "description": "Here 'name' is the Application Data(Variable), ID is also the same which is passed from custom connector. "
-                    }
-                  },
-                  "runAfter": {},
-                  "metadata": {
-                    "operationMetadataId": "1ad02e6f-8f5f-4feb-a50d-6ce72d46e53f"
-                  },
-                  "type": "Foreach"
-                }
-              },
-              "runAfter": {},
-              "expression": {
-                "not": {
-                  "equals": [
-                    "@items('Apply_to_each')['id']",
-                    "additionalinformation"
-                  ]
-                }
-              },
-              "metadata": {
-                "operationMetadataId": "b06c5520-4384-4c0c-9958-71969bbc3723"
-              },
-              "type": "If"
-            }
-          },
-          "runAfter": {
-            "Parse_JSON_-_Runtime_Data_-_Published_WF_Table": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "afbeae88-2f33-4232-ba47-1464b3482f38"
-          },
-          "type": "Foreach",
-          "description": "Iterate through each process field data and create data instance"
-        },
         "Create_new_Workflow_Instance": {
           "runAfter": {
             "Apply_to_each_": [
@@ -427,6 +348,68 @@
               }
             ]
           }
+        },
+        "Apply_to_each_2": {
+          "foreach": "@body('Parse_JSON_-_Runtime_Data_-_Published_WF_Table')",
+          "actions": {
+            "Filter_array": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "4a0ae5eb-aee8-4a12-a7c1-6cdaffe308d8"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": "@body('Parse_RuntimeData_JSON_WFQueueTable')",
+                "where": "@equals(item()?['id'], items('Apply_to_each_2')['name'])"
+              },
+              "description": "Here 'name' is the Application Data(Variable), ID is also the same which is passed from custom connector. "
+            },
+            "Apply_to_each_3": {
+              "foreach": "@body('Filter_array')",
+              "actions": {
+                "Create_Workflow_Parameters_2": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "461d2827-78bf-4321-806e-8ff818c3a6bd"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps_1",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "cat_businessapprovaldatainstances",
+                      "item/cat_datavalue": "@items('Apply_to_each_3')?['value']",
+                      "item/cat_RuntimeData@odata.bind": "cat_businessapprovalruntimedatas(@{items('Apply_to_each_2')['runtimeId']})",
+                      "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{outputs('Create_new_Workflow_Instance')?['body/cat_businessapprovalworkflowid']})"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "Filter_array": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "42d7a7a6-ab3a-4764-86bc-d82a4b882d39"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Parse_JSON_-_Runtime_Data_-_Published_WF_Table": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "69c7cbc5-b2dc-4c15-bee0-e3a6a8dea542"
+          },
+          "type": "Foreach",
+          "description": "Filter each variables from create data instance records with values"
         }
       }
     },
