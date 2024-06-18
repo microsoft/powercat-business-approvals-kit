@@ -12,11 +12,16 @@ IgnoreProperties:
   - Image
   - FieldName
   - FieldType
+  - Column
+  - FieldVariantName
+  - OnSearch
 
 IgnoreValues:
   - SuggestionKey
   - SuggestionName
   - SuggestionRole
+  - SuggestionImgUrl
+  
 
 IgnoreFunctions:
   - SortByColumns
