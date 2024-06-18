@@ -6,7 +6,7 @@ Generally, you use the PowerFX and put them in curly braces and after equals to 
 
 This guide explain how to customize messages to include dynamic content using examples. We'll use the provided table mappings to demonstrate how to insert dynamic values into your messages. This guide is designed for users without technical knowledge, so each step will be explained clearly.
 
-## Table and Column Mappings
+## Business Approval Runtime Node Table and Column Mappings
 
 Below are the tables and their corresponding columns, which can be used to access dynamic data from current runtime node record:
 
@@ -187,10 +187,10 @@ Syntax:{=Parameters.VariableName}
 ```
 If a process has two variables defined 
 
-| Name                        | Description                                          | ColumnsMapping               | Example                        |
-|------------------------------|------------------------------------------------------|----------------------------|-------------------------|------------------------------|--------------------------------|
-| Price |                      Variable which stores asset price                     | Price   |                     {=Parameters.Price}         |                                |
-| Asset Type                   | Variable which stores asset type information       | Asset Type                         | {=Parameters.'Asset Type'}      |
+| Name                        | Description                                          | ColumnsMapping             | Example                     |
+|-----------------------------|------------------------------------------------------|----------------------------|-----------------------------|
+| Price                       | Variable which stores asset price                    | Price                      | {=Parameters.Price}         |
+| Asset Type                  | Variable which stores asset type information         | Asset Type                 | {=Parameters.'Asset Type'}  |
 
 ## Examples and Explanations
 
@@ -244,21 +244,21 @@ Past Approvals:
 
 | ApproverUPN                                | Name           | Node     | Outcome | Stage |
 |--------------------------------------------|----------------|----------|---------|-------|
-| shrikants@powercattools.onmicrosoft.com    | 20240603-001249 | Node-1 S1 | Approve | S1    |
-| shrikants@powercattools.onmicrosoft.com    | 20240603-001250 | N2 S1    | Approve | S1    |
-| shrikants@powercattools.onmicrosoft.com    | 20240603-001251 | N1 s2    | Approve | S2    |
+| user1@testorg.onmicrosoft.com    | 20240603-001249 | Node-1 S1 | Approve | S1    |
+| user4@testorg.onmicrosoft.com    | 20240603-001250 | N2 S1    | Approve | S1    |
+| user6@testorg.onmicrosoft.com    | 20240603-001251 | N1 s2    | Approve | S2    |
 
 ```
 
 ## Using some common PowerFx functions in the message
 
-You can also pass common string, date, etc. functions in curly brace after equals.
+You can also pass common string, date, etc. PowerFx functions in curly brace after equals which can be evaluated.
 
 ## Examples and Explanations
 
 ### Example 1: Accessing Current date time using Now().
 
-To include the Price variable value in your message, you can use the following format:
+To include the get the current datetime, you can use the following format:
 
 **Example:**
 ```plaintext
@@ -271,9 +271,9 @@ The current datetime is 07/11/2021 20:58:00.
 **Explanation:**
 {=Now()}: This placeholder will be replaced by the current time when the message is processed.
 
-### Example 2: Accessing upper case value of string 'powerfx' using Upper().
+### Example 2: Accessing upper case value of string Requestor using Upper() function.
 
-To include the Price variable value in your message, you can use the following format:
+To get the Requestor in upper case in your message, you can use the following format:
 
 **Example:**
 ```plaintext
@@ -281,7 +281,7 @@ Message:
 Requested By: {=Upper(Workflow.RequestedBy)}.
 
 Output:
-Requested By: SHRIKANTS@TESTORG.ONMICROSOFT.COM.
+Requested By: USER6@TESTORG.ONMICROSOFT.COM.
 ```
 **Explanation:**
 {=Upper(Workflow.RequestedBy)}: This placeholder will be replaced by the upper case value of requested by when the message is processed.
@@ -313,7 +313,7 @@ Past Approvals:
 
 Output:
 ```
-The current approval requested by shrikants@testorg.onmicrosoft.com is pending for stage S2 on node N2 s2.Please make sure to approve this request by 6/19/2024 6:30:00 PM.
+The current approval requested by contoso@testorg.onmicrosoft.com is pending for stage S2 on node N2 s2.Please make sure to approve this request by 6/19/2024 6:30:00 PM.
 List of approvers for current node: Shrikant Singh
 Process Name: Process test
 Process Version: 1
@@ -324,13 +324,13 @@ Additional Information: addn info
 Stage Desc: stg desc
 Node Desc: n2 s2 desc
 Reminders: 4
-Requested By: SHRIKANTS@TESTORG.ONMICROSOFT.COM
+Requested By: CONTOSO@TESTORG.ONMICROSOFT.COM
 Time: 6/18/2024 11:36:42 AM
 
 Past Approvals:
 
 ApproverUPN	Name	Node	Outcome	Stage
-shrikants@powercattools.onmicrosoft.com	20240603-001249	Node-1 S1	Approve	S1
-shrikants@powercattools.onmicrosoft.com	20240603-001250	N2 S1	Approve	S1
-shrikants@powercattools.onmicrosoft.com	20240603-001251	N1 s2	Approve	S2
+user1@testorg.onmicrosoft.com	20240603-001249	Node-1 S1	Approve	S1
+user4@testorg.onmicrosoft.com	20240603-001250	N2 S1	Approve	S1
+user7@testorg.onmicrosoft.com	20240603-001251	N1 s2	Approve	S2
 ```
