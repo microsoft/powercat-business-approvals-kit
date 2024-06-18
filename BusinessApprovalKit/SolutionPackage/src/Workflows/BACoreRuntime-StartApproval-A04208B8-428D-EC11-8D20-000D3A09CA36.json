@@ -77,7 +77,7 @@
                   "approvalType": "Basic",
                   "ApprovalCreationInput/title": "@triggerOutputs()?['body/cat_title']",
                   "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
-                  "ApprovalCreationInput/details": "@triggerOutputs()?['body/cat_additionalinformation']",
+                  "ApprovalCreationInput/details": "@outputs('Get_runtime_node_instance_record')?['body/cat_message']",
                   "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
                   "ApprovalCreationInput/requestor": "@{triggerOutputs()?['body/cat_requestedby']};",
                   "ApprovalCreationInput/enableNotifications": "@equals(triggerOutputs()?['body/cat_notification'],'809060000')",
@@ -88,7 +88,7 @@
             }
           },
           "runAfter": {
-            "varApprovalCompleted": [
+            "Get_runtime_node_instance_record": [
               "Succeeded"
             ]
           },
@@ -108,12 +108,10 @@
                   },
                   "parameters": {
                     "approvalType": "CustomResponse",
-                    "ApprovalCreationInput/responseOptions": [
-                      "@triggerOutputs()?['body/cat_customresponses']"
-                    ],
+                    "ApprovalCreationInput/responseOptions": "@split(triggerOutputs()?['body/cat_customresponses'],',')",
                     "ApprovalCreationInput/title": "@triggerOutputs()?['body/cat_title']",
                     "ApprovalCreationInput/assignedTo": "@{triggerOutputs()?['body/cat_approverupn']};",
-                    "ApprovalCreationInput/details": "@triggerOutputs()?['body/cat_additionalinformation']",
+                    "ApprovalCreationInput/details": "@outputs('Get_runtime_node_instance_record')?['body/cat_message']",
                     "ApprovalCreationInput/itemLink": "@triggerOutputs()?['body/cat_itemlink']",
                     "ApprovalCreationInput/requestor": "@{triggerOutputs()?['body/cat_requestedby']};",
                     "ApprovalCreationInput/enableNotifications": "@equals(triggerOutputs()?['body/cat_notification'],'809060000')",
@@ -498,6 +496,29 @@
             "operationMetadataId": "348ec275-0af6-4980-bd12-fff837e454cc"
           },
           "type": "If"
+        },
+        "Get_runtime_node_instance_record": {
+          "runAfter": {
+            "varApprovalCompleted": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "288bb8b8-9e3c-45d4-a2fe-f12bfbe886c9"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_1",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "cat_businessapprovalruntimenodeinstances",
+              "recordId": "@triggerOutputs()?['body/_cat_nodeinstance_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
         }
       }
     },

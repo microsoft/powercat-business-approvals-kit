@@ -596,6 +596,7 @@ scrNodeEditor As screen:
                 IsSearchable: =false
                 Items: |-
                     =Office365Users.SearchUser({ searchTerm: Self.SearchText })
+                PaddingLeft: =12
                 PressedBorderColor: =Self.BorderColor
                 PressedColor: =RGBA(0, 0, 0, 1)
                 PressedFill: =RGBA(243, 242, 241, 1)

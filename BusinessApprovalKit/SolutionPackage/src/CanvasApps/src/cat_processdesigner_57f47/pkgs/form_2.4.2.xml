@@ -1,4 +1,4 @@
-<widget xmlns="http://openajax.org/metadata" spec="1.0" id="http://microsoft.com/appmagic/form" name="form" jsClass="AppMagic.Controls.Form.FormControl" version="2.4.1" styleable="true" runtimeCost="1" xmlns:appMagic="http://schemas.microsoft.com/appMagic">
+<widget xmlns="http://openajax.org/metadata" spec="1.0" id="http://microsoft.com/appmagic/form" name="form" jsClass="AppMagic.Controls.Form.FormControl" version="2.4.2" styleable="true" runtimeCost="1" xmlns:appMagic="http://schemas.microsoft.com/appMagic">
   <author name="Microsoft AppMagic" />
   <license type="text/html"><![CDATA[<p>TODO:  Need license text here.</p>]]></license>
   <description><![CDATA[Form
@@ -155,8 +155,8 @@
       <appMagic:configureFields propertyInvariantName="ShowFields" dataSourcePropertyName="DataSource" supportsCollection="false" isEditable="true" displayFormat="PropertiesDisplayOrder" generateFieldSelectionConfig="true" addCustomFieldType="blankCard" fieldOrderingType="XYProperty" />
     </appMagic:section>
     <appMagic:section>
-      <appMagic:property name="SnapToColumns" showOnlyInPropertyPanel="true" hideInRecordingMode="true" promptUserBeforeChanging="true" promptUserTitle="##ControlSidebar_PropertiesPanel_ConfirmDialogMessage_SnapToColumns_Title##" promptUserBody="##ControlSidebar_PropertiesPanel_ConfirmDialogMessage_SnapToColumns_Body##" promptUserOkButtonText="##ControlSidebar_PropertiesPanel_ConfirmDialogMessage_SnapToColumns_OkButtonText##" promptUserOnValue="true" />
-      <appMagic:property name="NumberOfColumns" showOnlyInPropertyPanel="true" hideInRecordingMode="true" displayType="NumberOfColumnsEnum" />
+      <appMagic:property name="SnapToColumns" showOnlyInPropertyPanel="true" promptUserBeforeChanging="true" promptUserTitle="##ControlSidebar_PropertiesPanel_ConfirmDialogMessage_SnapToColumns_Title##" promptUserBody="##ControlSidebar_PropertiesPanel_ConfirmDialogMessage_SnapToColumns_Body##" promptUserOkButtonText="##ControlSidebar_PropertiesPanel_ConfirmDialogMessage_SnapToColumns_OkButtonText##" promptUserOnValue="true" />
+      <appMagic:property name="NumberOfColumns" showOnlyInPropertyPanel="true" displayType="NumberOfColumnsEnum" />
       <appMagic:serverProperty name="ControlLayout" label="##ControlSidebar_PropertiesPanel_Layout_DisplayName##" serverProvidesValue="true" computedValueType="ControlLayout" propertyInvariantName="ControlLayout" showInCanvasInlineActionBar="true" />
     </appMagic:section>
     <appMagic:section>
@@ -229,5 +229,8 @@
   </appMagic:conversion>
   <appMagic:conversion from="2.4.0" to="2.4.1">
     <!-- Adding showInCanvasInlineActionBar flag-->
+  </appMagic:conversion>
+  <appMagic:conversion from="2.4.1" to="2.4.2">
+    <!-- Removing hideInRecordingMode property attribute -->
   </appMagic:conversion>
 </widget>

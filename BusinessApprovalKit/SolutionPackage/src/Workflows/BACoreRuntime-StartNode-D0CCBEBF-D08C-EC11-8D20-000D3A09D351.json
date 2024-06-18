@@ -2037,7 +2037,7 @@
               "text_2": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
               "text_3": "Information",
               "text_5": "@workflow()['tags']['flowDisplayName']",
-              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/@{workflow()['run/name']}"
+              "text_4": "https://make.powerautomate.com/environments/@{workflow()['tags/environmentName']}/flows/@{workflow()['name']}/runs/@{workflow()['run/name']}"
             }
           }
         },

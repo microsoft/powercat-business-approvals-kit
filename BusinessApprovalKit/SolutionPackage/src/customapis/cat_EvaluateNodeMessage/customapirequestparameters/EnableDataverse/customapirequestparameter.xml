@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="EnableDataverse">
+  <description default="Flag which contains information of enable dataverse integration environment variable">
+    <label description="Flag which contains information of enable dataverse integration environment variable" languagecode="1033" />
+  </description>
+  <displayname default="EnableDataverse">
+    <label description="EnableDataverse" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>EnableDataverse</name>
+  <type>0</type>
+</customapirequestparameter>

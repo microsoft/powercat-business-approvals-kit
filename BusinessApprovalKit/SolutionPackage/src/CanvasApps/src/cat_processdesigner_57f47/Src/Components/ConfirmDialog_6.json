@@ -112,7 +112,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ConfirmDialog_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 730,
+        "PublishOrderIndex": 732,
         "Rules": [
           {
             "Category": "Data",
@@ -485,7 +485,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "conConfirmButtons_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 732,
+            "PublishOrderIndex": 734,
             "Rules": [
               {
                 "Category": "Data",
@@ -832,7 +832,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "conConfirmButtons_2",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 733,
+            "PublishOrderIndex": 735,
             "Rules": [
               {
                 "Category": "Data",
@@ -1138,7 +1138,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ConfirmDialog_6",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 731,
+        "PublishOrderIndex": 733,
         "Rules": [
           {
             "Category": "Design",
@@ -1261,7 +1261,7 @@
             "RuleProviderType": "Unknown"
           }
         ],
-        "StyleName": "",
+        "StyleName": "defaultGroupContainerStyle",
         "Template": {
           "CustomGroupControlTemplateName": "",
           "FirstParty": true,
@@ -1311,7 +1311,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638508276090375830",
+    "LastModifiedTimestamp": "638536121567919079",
     "Name": "ConfirmDialog_6",
     "Rules": [
       {
@@ -1442,7 +1442,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638508276090375830",
+  "LastModifiedTimestamp": "638536121567919079",
   "Name": "cbb468bacf8f4bfeb2655fa55313fbdf",
   "OverridableProperties": {},
   "TemplateOriginalName": "7b1eab7f21764779b658df214f56f16c",

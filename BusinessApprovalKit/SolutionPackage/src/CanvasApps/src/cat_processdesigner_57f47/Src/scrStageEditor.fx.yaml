@@ -715,6 +715,7 @@ scrStageEditor As screen:
         galConditions As gallery.galleryVertical:
             '#CopilotOverlayLabel': ="Filtered"
             BorderColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =2
             Height: =120
             Items: =SortByColumns(_conditions, "Path", SortOrder.Ascending)
             Layout: =Layout.Vertical
@@ -1089,6 +1090,7 @@ scrStageEditor As screen:
                 '#CopilotOverlayLabel': ="Filtered"
                 BorderColor: =RGBA(166, 166, 166, 1)
                 BorderThickness: =1
+                FocusedBorderThickness: =2
                 Height: =Min(Parent.Height - Self.Y, CountRows(Self.AllItems) * Self.TemplateHeight)
                 Items: =_selectedStage.'Business Approval Conditions (cat_BusinessApprovalCondition_GoToStage_c)'
                 Layout: =Layout.Vertical

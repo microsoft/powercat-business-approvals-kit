@@ -22,6 +22,7 @@ Toolbar_1 As CanvasComponent:
         '#CopilotOverlayLabel': ="Filtered"
         AccessibleLabel: ="Toolbar menu"
         BorderColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =2
         Height: =Parent.Height
         Items: =Parent.ToolbarItems
         ShowScrollbar: =false

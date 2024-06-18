@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>cat_businessapprovalmanagementdefaultcommandlibrary_94e11</Name>
-  <AppVersion>2024-05-06T04:07:28Z</AppVersion>
+  <AppVersion>2024-06-03T09:02:11Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.23113.30.0</CreatedByClientVersion>
   <MinClientVersion>0.0.0.0</MinClientVersion>
@@ -26,6 +26,6 @@
   <IntroducedVersion>1.0</IntroducedVersion>
   <CdsDependencies>{"cdsdependencies":[{"componenttype":1,"logicalname":"cat_businessapprovalinstance"},{"componenttype":1,"logicalname":"cat_businessapprovalprocess"}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
-  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl98195_BackgroundImageUri</BackgroundImageUri>
-  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl08863_DocumentUri.msapp</DocumentUri>
+  <BackgroundImageUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl14855_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cat_businessapprovalmanagementdefaultcommandl47933_DocumentUri.msapp</DocumentUri>
 </CanvasApp>

@@ -89,7 +89,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ApprovalDesigner",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 531,
+        "PublishOrderIndex": 533,
         "Rules": [
           {
             "Category": "Data",
@@ -264,7 +264,9 @@
           "FontColor",
           "FontItalic",
           "FontStrikethrough",
-          "FontUnderline"
+          "FontUnderline",
+          "BorderStyle",
+          "BorderColor"
         ],
         "ControlUniqueId": "11",
         "HasDynamicProperties": false,
@@ -280,7 +282,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ApprovalDesigner",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 532,
+        "PublishOrderIndex": 534,
         "Rules": [
           {
             "Category": "Data",
@@ -331,6 +333,18 @@
             "RuleProviderType": "Unknown"
           },
           {
+            "Category": "Data",
+            "InvariantScript": "\"\"",
+            "Property": "BorderColor",
+            "RuleProviderType": "Unknown"
+          },
+          {
+            "Category": "Data",
+            "InvariantScript": "\"\"",
+            "Property": "BorderStyle",
+            "RuleProviderType": "Unknown"
+          },
+          {
             "Category": "Design",
             "InvariantScript": "4",
             "Property": "ZIndex",
@@ -370,7 +384,7 @@
         "StyleName": "",
         "Template": {
           "CustomGroupControlTemplateName": "",
-          "DynamicControlDefinitionJson": "{\"ControlNamespace\":\"PowerApps.CoreControls\",\"ControlConstructor\":\"TextCanvas\",\"DisplayNameKey\":\"TextCanvas\",\"Resources\":\"[{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/prop-types.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":1,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/react-fela.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":2,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/fela.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":3,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/fela-dom.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":4,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/ctrllib/common/js/container.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":5,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/ctrllib/PCFControls/js/PCFControlWrapper.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":6,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":7,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"ManifestTemplate\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"ConstructorName\\\\\\\":\\\\\\\"PowerApps.CoreControls.TextCanvas\\\\\\\",\\\\\\\"CustomControlId\\\\\\\":\\\\\\\"PowerApps.CoreControls.TextCanvas\\\\\\\",\\\\\\\"IsVirtual\\\\\\\":true,\\\\\\\"Properties\\\\\\\":{\\\\\\\"Resources\\\\\\\":[{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/prop-types.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":1,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/react-fela.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":2,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/fela.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":3,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/fela-dom.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":4,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/ctrllib/common/js/container.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":5,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/ctrllib/PCFControls/js/PCFControlWrapper.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":6,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":7,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null}],\\\\\\\"GroupDefinitions\\\\\\\":null,\\\\\\\"DataSetDefinitions\\\\\\\":{},\\\\\\\"Properties\\\\\\\":{\\\\\\\"Text\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Text\\\\\\\"},\\\\\\\"Size\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"14\\\\\\\"},\\\\\\\"Weight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Regular\\\\\\\"},\\\\\\\"Align\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Start\\\\\\\"},\\\\\\\"VerticalAlign\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Middle\\\\\\\"},\\\\\\\"AutoHeight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"Height\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"32\\\\\\\"},\\\\\\\"Font\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"FontColor\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"FontItalic\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"FontStrikethrough\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"FontUnderline\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"Wrap\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"true\\\\\\\"},\\\\\\\"TabIndex\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"Tooltip\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"}},\\\\\\\"FeatureUsage\\\\\\\":[{\\\\\\\"IsRequired\\\\\\\":true,\\\\\\\"Name\\\\\\\":\\\\\\\"ExplicitCommonEvents\\\\\\\"}]},\\\\\\\"Events\\\\\\\":null,\\\\\\\"CommonEvents\\\\\\\":null,\\\\\\\"DesignMap\\\\\\\":null,\\\\\\\"PropertyDependencies\\\\\\\":[],\\\\\\\"Children\\\\\\\":null}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":8,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"ManifestPropertyTypes\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"Properties\\\\\\\":[{\\\\\\\"Name\\\\\\\":\\\\\\\"Text\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":true,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Size\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Weight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Enum\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Align\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Enum\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"VerticalAlign\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Enum\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"AutoHeight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Height\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Font\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Font\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontColor\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"FontColor\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontItalic\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Italics\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontStrikethrough\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Strikethrough\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontUnderline\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Underline\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Wrap\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"TabIndex\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Tooltip\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"PCFTeamsTheme\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"String\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"X\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Number\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"Y\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Number\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"Width\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Number\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"Visible\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Boolean\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"DisplayMode\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"DisplayMode\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true}]}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":9,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"PowerAppsControlInfo\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"TemplateVersion\\\\\\\":1,\\\\\\\"Version\\\\\\\":\\\\\\\"0.0.25\\\\\\\",\\\\\\\"IsFirstParty\\\\\\\":true}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":10,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/TextCanvas.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":11,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":2,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1033.resx\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":10,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1025.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1026.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1027.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1028.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1029.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1030.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1031.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1032.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1033.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1035.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1036.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1037.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1038.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1040.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1041.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1042.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1043.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1044.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1045.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1046.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1048.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1049.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1050.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1051.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1053.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1054.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1055.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1057.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1058.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1060.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1061.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1062.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1063.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1066.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1069.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1081.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1086.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1087.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1110.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2052.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2070.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2074.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3076.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3082.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3098.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"LocalizedStrings\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"LocStrings\\\\\\\":{\\\\\\\"TextCanvas\\\\\\\":\\\\\\\"Text\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign\\\\\\\":\\\\\\\"Vertical align\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Desc\\\\\\\":\\\\\\\"Display text using the selected text verlitcal alignment.\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Top\\\\\\\":\\\\\\\"Top\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Middle\\\\\\\":\\\\\\\"Middle\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Bottom\\\\\\\":\\\\\\\"Bottom\\\\\\\",\\\\\\\"TextCanvas_Height\\\\\\\":\\\\\\\"Text height\\\\\\\",\\\\\\\"TextCanvas_Height_Desc\\\\\\\":\\\\\\\"The height of the control.\\\\\\\",\\\\\\\"TextCanvas_Align\\\\\\\":\\\\\\\"Align\\\\\\\",\\\\\\\"TextCanvas_Align_Desc\\\\\\\":\\\\\\\"Display text using the selected text alignment.\\\\\\\",\\\\\\\"TextCanvas_Align_Start\\\\\\\":\\\\\\\"Start\\\\\\\",\\\\\\\"TextCanvas_Align_End\\\\\\\":\\\\\\\"End\\\\\\\",\\\\\\\"TextCanvas_Align_Center\\\\\\\":\\\\\\\"Center\\\\\\\",\\\\\\\"TextCanvas_Align_Justify\\\\\\\":\\\\\\\"Justify\\\\\\\",\\\\\\\"TextCanvas_Desc\\\\\\\":\\\\\\\"Display text\\\\\\\",\\\\\\\"TextCanvas_AutoHeight\\\\\\\":\\\\\\\"Auto height\\\\\\\",\\\\\\\"TextCanvas_AutoHeight_Desc\\\\\\\":\\\\\\\"Container height will adjust to text content.\\\\\\\",\\\\\\\"TextCanvas_Italic\\\\\\\":\\\\\\\"Italic\\\\\\\",\\\\\\\"TextCanvas_Italic_Desc\\\\\\\":\\\\\\\"Display text using the italic font style.\\\\\\\",\\\\\\\"TextCanvas_Size\\\\\\\":\\\\\\\"Font size\\\\\\\",\\\\\\\"TextCanvas_Size_Desc\\\\\\\":\\\\\\\"Display text using the selected font sizes.\\\\\\\",\\\\\\\"TextCanvas_Strikethrough\\\\\\\":\\\\\\\"Strikethrough\\\\\\\",\\\\\\\"TextCanvas_Strikethrough_Desc\\\\\\\":\\\\\\\"Display text using the strikethrough font style.\\\\\\\",\\\\\\\"TextCanvas_Text\\\\\\\":\\\\\\\"Text\\\\\\\",\\\\\\\"TextCanvas_Text_Desc\\\\\\\":\\\\\\\"Text that appears on a control.\\\\\\\",\\\\\\\"TextCanvas_Underline\\\\\\\":\\\\\\\"Underline\\\\\\\",\\\\\\\"TextCanvas_Underline_Desc\\\\\\\":\\\\\\\"Display text using the underline font style.\\\\\\\",\\\\\\\"TextCanvas_Weight\\\\\\\":\\\\\\\"Font weight\\\\\\\",\\\\\\\"TextCanvas_Weight_Desc\\\\\\\":\\\\\\\"Display text using the selected font weights.\\\\\\\",\\\\\\\"TextCanvas_Weight_Medium\\\\\\\":\\\\\\\"Medium\\\\\\\",\\\\\\\"TextCanvas_Weight_Regular\\\\\\\":\\\\\\\"Regular\\\\\\\",\\\\\\\"TextCanvas_Weight_Semibold\\\\\\\":\\\\\\\"Semibold\\\\\\\",\\\\\\\"TextCanvas_Weight_Bold\\\\\\\":\\\\\\\"Bold\\\\\\\",\\\\\\\"TextCanvas_Wrap\\\\\\\":\\\\\\\"Wrap\\\\\\\",\\\\\\\"TextCanvas_Wrap_Desc\\\\\\\":\\\\\\\"Display overflow text as wrapped.\\\\\\\",\\\\\\\"Font\\\\\\\":\\\\\\\"Font\\\\\\\",\\\\\\\"Font_description\\\\\\\":\\\\\\\"The name of the family of fonts in which text appears\\\\\\\",\\\\\\\"Font_Color\\\\\\\":\\\\\\\"Font color\\\\\\\",\\\\\\\"Font_Color_description\\\\\\\":\\\\\\\"The color of text in the control\\\\\\\"}}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/fluentui-react.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":5,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":4,\\\"Path\\\":\\\"Fluent/9.4.0/9.4.0\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":0,\\\"IsControlSpecific\\\":false}]\",\"Properties\":\"[{\\\"Name\\\":\\\"Text\\\",\\\"DisplayName\\\":\\\"Text\\\",\\\"Description\\\":\\\"Text that appears on a control.\\\",\\\"Type\\\":6,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Text\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":true,\\\"IsPrimaryOutput\\\":true,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":true,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Text\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Text_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Size\\\",\\\"DisplayName\\\":\\\"Font size\\\",\\\"Description\\\":\\\"Display text using the selected font sizes.\\\",\\\"Type\\\":16,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"14\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Size\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Size_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Weight\\\",\\\"DisplayName\\\":\\\"Font weight\\\",\\\"Description\\\":\\\"Display text using the selected font weights.\\\",\\\"Type\\\":1,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Regular\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"Regular\\\",\\\"WebDefaultValue\\\":\\\"Regular\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[{\\\"Name\\\":\\\"Medium\\\",\\\"DisplayName\\\":\\\"Medium\\\",\\\"Description\\\":\\\"Medium\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Medium\\\"},{\\\"Name\\\":\\\"Regular\\\",\\\"DisplayName\\\":\\\"Regular\\\",\\\"Description\\\":\\\"Regular\\\",\\\"IsDefaultValue\\\":true,\\\"Value\\\":\\\"Regular\\\"},{\\\"Name\\\":\\\"Semibold\\\",\\\"DisplayName\\\":\\\"Semibold\\\",\\\"Description\\\":\\\"Semibold\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Semibold\\\"},{\\\"Name\\\":\\\"Bold\\\",\\\"DisplayName\\\":\\\"Bold\\\",\\\"Description\\\":\\\"Bold\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Bold\\\"}],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Weight\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Weight_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Align\\\",\\\"DisplayName\\\":\\\"Align\\\",\\\"Description\\\":\\\"Display text using the selected text alignment.\\\",\\\"Type\\\":1,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Start\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"Start\\\",\\\"WebDefaultValue\\\":\\\"Start\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[{\\\"Name\\\":\\\"Start\\\",\\\"DisplayName\\\":\\\"Start\\\",\\\"Description\\\":\\\"Start\\\",\\\"IsDefaultValue\\\":true,\\\"Value\\\":\\\"Start\\\"},{\\\"Name\\\":\\\"End\\\",\\\"DisplayName\\\":\\\"End\\\",\\\"Description\\\":\\\"End\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"End\\\"},{\\\"Name\\\":\\\"Center\\\",\\\"DisplayName\\\":\\\"Center\\\",\\\"Description\\\":\\\"Center\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Center\\\"},{\\\"Name\\\":\\\"Justify\\\",\\\"DisplayName\\\":\\\"Justify\\\",\\\"Description\\\":\\\"Justify\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Justify\\\"}],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Align\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Align_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"VerticalAlign\\\",\\\"DisplayName\\\":\\\"Vertical align\\\",\\\"Description\\\":\\\"Display text using the selected text verlitcal alignment.\\\",\\\"Type\\\":1,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Middle\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"Middle\\\",\\\"WebDefaultValue\\\":\\\"Middle\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[{\\\"Name\\\":\\\"Top\\\",\\\"DisplayName\\\":\\\"Top\\\",\\\"Description\\\":\\\"Top\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Top\\\"},{\\\"Name\\\":\\\"Middle\\\",\\\"DisplayName\\\":\\\"Middle\\\",\\\"Description\\\":\\\"Middle\\\",\\\"IsDefaultValue\\\":true,\\\"Value\\\":\\\"Middle\\\"},{\\\"Name\\\":\\\"Bottom\\\",\\\"DisplayName\\\":\\\"Bottom\\\",\\\"Description\\\":\\\"Bottom\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Bottom\\\"}],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_VerticalAlign\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_VerticalAlign_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"AutoHeight\\\",\\\"DisplayName\\\":\\\"Auto height\\\",\\\"Description\\\":\\\"Container height will adjust to text content.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_AutoHeight\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_AutoHeight_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Height\\\",\\\"DisplayName\\\":\\\"Text height\\\",\\\"Description\\\":\\\"The height of the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"32\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Height\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Height_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Font\\\",\\\"DisplayName\\\":\\\"Font\\\",\\\"Description\\\":\\\"The name of the family of fonts in which text appears\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Font\\\",\\\"DescriptionResourceString\\\":\\\"Font_description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"FontColor\\\",\\\"DisplayName\\\":\\\"Font color\\\",\\\"Description\\\":\\\"The color of text in the control\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"color\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Font_Color\\\",\\\"DescriptionResourceString\\\":\\\"Font_Color_description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"FontItalic\\\",\\\"DisplayName\\\":\\\"Italic\\\",\\\"Description\\\":\\\"Display text using the italic font style.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Italic\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Italic_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"FontStrikethrough\\\",\\\"DisplayName\\\":\\\"Strikethrough\\\",\\\"Description\\\":\\\"Display text using the strikethrough font style.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Strikethrough\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Strikethrough_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"FontUnderline\\\",\\\"DisplayName\\\":\\\"Underline\\\",\\\"Description\\\":\\\"Display text using the underline font style.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Underline\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Underline_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Wrap\\\",\\\"DisplayName\\\":\\\"Wrap\\\",\\\"Description\\\":\\\"Display overflow text as wrapped.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"true\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Wrap\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Wrap_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"TabIndex\\\",\\\"DisplayName\\\":\\\"NA\\\",\\\"Description\\\":\\\"NA\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"NA\\\",\\\"DescriptionResourceString\\\":\\\"NA\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Tooltip\\\",\\\"DisplayName\\\":\\\"NA\\\",\\\"Description\\\":\\\"NA\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"NA\\\",\\\"DescriptionResourceString\\\":\\\"NA\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"PCFTeamsTheme\\\",\\\"DisplayName\\\":\\\"PCFTeamsTheme\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":3,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false}]\",\"IncludedProperties\":\"[{\\\"Name\\\":\\\"X\\\",\\\"DisplayName\\\":\\\"CC_X\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":2,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"CC_X\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Y\\\",\\\"DisplayName\\\":\\\"CC_Y\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":2,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"CC_Y\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Width\\\",\\\"DisplayName\\\":\\\"Width\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":2,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"96\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"96\\\",\\\"WebDefaultValue\\\":\\\"96\\\",\\\"NullDefaultValue\\\":\\\"0\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Width\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Visible\\\",\\\"DisplayName\\\":\\\"Visible\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":4,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"true\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Visible\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"DisplayMode\\\",\\\"DisplayName\\\":\\\"DisplayMode\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":27,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"DisplayMode\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false}]\",\"AuthConfigProperties\":\"[{\\\"Text\\\":{\\\"SectionIndex\\\":0,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"GeneralSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Visible\\\":{\\\"SectionIndex\\\":0,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"GeneralSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Wrap\\\":{\\\"SectionIndex\\\":1,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"BehaviorSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Align\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"VerticalAlign\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"AutoHeight\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"X\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Position\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Y\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Position\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Width\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Size\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Height\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Size\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Font\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":33,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Size\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontColor\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":\\\"color\\\",\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":31,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Weight\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontItalic\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Style\\\",\\\"SectionName\\\":null,\\\"Type\\\":35,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontUnderline\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Style\\\",\\\"SectionName\\\":null,\\\"Type\\\":36,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontStrikethrough\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Style\\\",\\\"SectionName\\\":null,\\\"Type\\\":37,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false}}]\"}",
+          "DynamicControlDefinitionJson": "{\"ControlNamespace\":\"PowerApps.CoreControls\",\"ControlConstructor\":\"TextCanvas\",\"DisplayNameKey\":\"TextCanvas\",\"Resources\":\"[{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/prop-types.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":1,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/react-fela.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":2,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/fela.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":3,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/fela-dom.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":4,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/ctrllib/common/js/container.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":5,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/ctrllib/PCFControls/js/PCFControlWrapper.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":6,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":7,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"ManifestTemplate\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"ConstructorName\\\\\\\":\\\\\\\"PowerApps.CoreControls.TextCanvas\\\\\\\",\\\\\\\"CustomControlId\\\\\\\":\\\\\\\"PowerApps.CoreControls.TextCanvas\\\\\\\",\\\\\\\"IsVirtual\\\\\\\":true,\\\\\\\"Properties\\\\\\\":{\\\\\\\"Resources\\\\\\\":[{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/prop-types.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":1,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/react-fela.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":2,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/fela.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":3,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/PCF/fela-dom.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":4,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/ctrllib/common/js/container.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":5,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/ctrllib/PCFControls/js/PCFControlWrapper.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":6,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null},{\\\\\\\"Name\\\\\\\":\\\\\\\"/ctrllib/PcfControlProxy/js/PcfControlProxy.js\\\\\\\",\\\\\\\"LoadOrder\\\\\\\":7,\\\\\\\"Type\\\\\\\":0,\\\\\\\"LibraryName\\\\\\\":null}],\\\\\\\"GroupDefinitions\\\\\\\":null,\\\\\\\"DataSetDefinitions\\\\\\\":{},\\\\\\\"Properties\\\\\\\":{\\\\\\\"Text\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Text\\\\\\\"},\\\\\\\"Size\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"14\\\\\\\"},\\\\\\\"Weight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Regular\\\\\\\"},\\\\\\\"Align\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Start\\\\\\\"},\\\\\\\"VerticalAlign\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"Middle\\\\\\\"},\\\\\\\"AutoHeight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"Height\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"32\\\\\\\"},\\\\\\\"Font\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"FontColor\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"FontItalic\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"FontStrikethrough\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"FontUnderline\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"false\\\\\\\"},\\\\\\\"Wrap\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":0,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"true\\\\\\\"},\\\\\\\"Fill\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderStyle\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderThickness\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderColor\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderRadiusTopLeft\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderRadiusTopRight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderRadiusBottomRight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"BorderRadiusBottomLeft\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"PaddingTop\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"PaddingRight\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"PaddingBottom\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"PaddingLeft\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"TabIndex\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"},\\\\\\\"Tooltip\\\\\\\":{\\\\\\\"Required\\\\\\\":true,\\\\\\\"Usage\\\\\\\":1,\\\\\\\"DefaultValue\\\\\\\":\\\\\\\"\\\\\\\"}},\\\\\\\"FeatureUsage\\\\\\\":[{\\\\\\\"IsRequired\\\\\\\":true,\\\\\\\"Name\\\\\\\":\\\\\\\"ExplicitCommonEvents\\\\\\\"}]},\\\\\\\"Events\\\\\\\":null,\\\\\\\"CommonEvents\\\\\\\":null,\\\\\\\"DesignMap\\\\\\\":null,\\\\\\\"PropertyDependencies\\\\\\\":[],\\\\\\\"Children\\\\\\\":null}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":8,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"ManifestPropertyTypes\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"Properties\\\\\\\":[{\\\\\\\"Name\\\\\\\":\\\\\\\"Text\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":true,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Size\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Weight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Enum\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Align\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Enum\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"VerticalAlign\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Enum\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"AutoHeight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Height\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Font\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Font\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontColor\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"FontColor\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontItalic\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Italics\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontStrikethrough\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Strikethrough\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"FontUnderline\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"Underline\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Wrap\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"TwoOptions\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Fill\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"ColorPalette\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderStyle\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderThickness\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderColor\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderRadiusTopLeft\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderRadiusTopRight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderRadiusBottomRight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"BorderRadiusBottomLeft\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"PaddingTop\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"PaddingRight\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"PaddingBottom\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"PaddingLeft\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"TabIndex\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Whole_None\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"Tooltip\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"SingleLine_Text\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":false},{\\\\\\\"Name\\\\\\\":\\\\\\\"PCFTeamsTheme\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"String\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"X\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Number\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"Y\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Number\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"Width\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Number\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"Visible\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"Boolean\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true},{\\\\\\\"Name\\\\\\\":\\\\\\\"DisplayMode\\\\\\\",\\\\\\\"Type\\\\\\\":\\\\\\\"DisplayMode\\\\\\\",\\\\\\\"ComplexType\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"IsPrimary\\\\\\\":false,\\\\\\\"IsIncluded\\\\\\\":true}]}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":9,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"PowerAppsControlInfo\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"TemplateVersion\\\\\\\":1,\\\\\\\"Version\\\\\\\":\\\\\\\"0.0.30\\\\\\\",\\\\\\\"IsFirstParty\\\\\\\":true}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":10,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/TextCanvas.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":11,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":2,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1033.resx\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":10,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1025.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1026.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1027.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1028.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1029.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1030.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1031.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1032.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1033.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1035.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1036.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1037.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1038.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1040.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1041.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1042.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1043.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1044.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1045.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1046.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1048.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1049.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1050.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1051.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1053.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1054.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1055.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1057.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1058.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1060.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1061.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1062.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1063.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1066.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1069.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1081.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1086.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1087.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.1110.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2052.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2070.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.2074.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3076.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3082.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":5,\\\"Path\\\":\\\"/PCFControls/PowerApps_CoreControls_TextCanvas/strings/TextCanvas.3098.json\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":true},{\\\"Type\\\":3,\\\"Path\\\":\\\"{\\\\\\\"Id\\\\\\\":\\\\\\\"LocalizedStrings\\\\\\\",\\\\\\\"Data\\\\\\\":{\\\\\\\"LocStrings\\\\\\\":{\\\\\\\"TextCanvas\\\\\\\":\\\\\\\"Text\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign\\\\\\\":\\\\\\\"Vertical align\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Desc\\\\\\\":\\\\\\\"Display text using the selected text verlitcal alignment.\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Top\\\\\\\":\\\\\\\"Top\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Middle\\\\\\\":\\\\\\\"Middle\\\\\\\",\\\\\\\"TextCanvas_VerticalAlign_Bottom\\\\\\\":\\\\\\\"Bottom\\\\\\\",\\\\\\\"TextCanvas_Height\\\\\\\":\\\\\\\"Text height\\\\\\\",\\\\\\\"TextCanvas_Height_Desc\\\\\\\":\\\\\\\"The height of the control.\\\\\\\",\\\\\\\"TextCanvas_Align\\\\\\\":\\\\\\\"Align\\\\\\\",\\\\\\\"TextCanvas_Align_Desc\\\\\\\":\\\\\\\"Display text using the selected text alignment.\\\\\\\",\\\\\\\"TextCanvas_Align_Start\\\\\\\":\\\\\\\"Start\\\\\\\",\\\\\\\"TextCanvas_Align_End\\\\\\\":\\\\\\\"End\\\\\\\",\\\\\\\"TextCanvas_Align_Center\\\\\\\":\\\\\\\"Center\\\\\\\",\\\\\\\"TextCanvas_Align_Justify\\\\\\\":\\\\\\\"Justify\\\\\\\",\\\\\\\"TextCanvas_Desc\\\\\\\":\\\\\\\"Display text\\\\\\\",\\\\\\\"TextCanvas_AutoHeight\\\\\\\":\\\\\\\"Auto height\\\\\\\",\\\\\\\"TextCanvas_AutoHeight_Desc\\\\\\\":\\\\\\\"Container height will adjust to text content.\\\\\\\",\\\\\\\"TextCanvas_Italic\\\\\\\":\\\\\\\"Italic\\\\\\\",\\\\\\\"TextCanvas_Italic_Desc\\\\\\\":\\\\\\\"Display text using the italic font style.\\\\\\\",\\\\\\\"TextCanvas_Size\\\\\\\":\\\\\\\"Font size\\\\\\\",\\\\\\\"TextCanvas_Size_Desc\\\\\\\":\\\\\\\"Display text using the selected font sizes.\\\\\\\",\\\\\\\"TextCanvas_Strikethrough\\\\\\\":\\\\\\\"Strikethrough\\\\\\\",\\\\\\\"TextCanvas_Strikethrough_Desc\\\\\\\":\\\\\\\"Display text using the strikethrough font style.\\\\\\\",\\\\\\\"TextCanvas_Text\\\\\\\":\\\\\\\"Text\\\\\\\",\\\\\\\"TextCanvas_Text_Desc\\\\\\\":\\\\\\\"Text that appears on a control.\\\\\\\",\\\\\\\"TextCanvas_Underline\\\\\\\":\\\\\\\"Underline\\\\\\\",\\\\\\\"TextCanvas_Underline_Desc\\\\\\\":\\\\\\\"Display text using the underline font style.\\\\\\\",\\\\\\\"TextCanvas_Weight\\\\\\\":\\\\\\\"Font weight\\\\\\\",\\\\\\\"TextCanvas_Weight_Desc\\\\\\\":\\\\\\\"Display text using the selected font weights.\\\\\\\",\\\\\\\"TextCanvas_Weight_Medium\\\\\\\":\\\\\\\"Medium\\\\\\\",\\\\\\\"TextCanvas_Weight_Regular\\\\\\\":\\\\\\\"Regular\\\\\\\",\\\\\\\"TextCanvas_Weight_Semibold\\\\\\\":\\\\\\\"Semibold\\\\\\\",\\\\\\\"TextCanvas_Weight_Bold\\\\\\\":\\\\\\\"Bold\\\\\\\",\\\\\\\"TextCanvas_Wrap\\\\\\\":\\\\\\\"Wrap\\\\\\\",\\\\\\\"TextCanvas_Wrap_Desc\\\\\\\":\\\\\\\"Display overflow text as wrapped.\\\\\\\",\\\\\\\"Font\\\\\\\":\\\\\\\"Font\\\\\\\",\\\\\\\"Font_description\\\\\\\":\\\\\\\"The name of the family of fonts in which text appears\\\\\\\",\\\\\\\"Font_Color\\\\\\\":\\\\\\\"Font color\\\\\\\",\\\\\\\"Font_Color_description\\\\\\\":\\\\\\\"The color of text in the control\\\\\\\",\\\\\\\"Fill\\\\\\\":\\\\\\\"Fill\\\\\\\",\\\\\\\"Fill_Description\\\\\\\":\\\\\\\"Background color fo the control.\\\\\\\",\\\\\\\"BorderStyle\\\\\\\":\\\\\\\"Border style\\\\\\\",\\\\\\\"BorderStyle_Description\\\\\\\":\\\\\\\"Style of borders around the control\\\\\\\",\\\\\\\"BorderStyle_Dashed\\\\\\\":\\\\\\\"Dashed\\\\\\\",\\\\\\\"BorderStyle_Dotted\\\\\\\":\\\\\\\"Dotted\\\\\\\",\\\\\\\"BorderStyle_None\\\\\\\":\\\\\\\"None\\\\\\\",\\\\\\\"BorderStyle_Solid\\\\\\\":\\\\\\\"Solid\\\\\\\",\\\\\\\"BorderThickness\\\\\\\":\\\\\\\"Border thickness\\\\\\\",\\\\\\\"BorderThickness_Description\\\\\\\":\\\\\\\"Thickness or width of borders around the control.\\\\\\\",\\\\\\\"BorderColor\\\\\\\":\\\\\\\"Border color\\\\\\\",\\\\\\\"BorderColor_Description\\\\\\\":\\\\\\\"Color of borders around the control.\\\\\\\",\\\\\\\"BorderRadiusTopLeft\\\\\\\":\\\\\\\"Top left border radius\\\\\\\",\\\\\\\"BorderRadiusTopLeft_Description\\\\\\\":\\\\\\\"Roundedness of the control's top left corner. A value of 0 is perfectly square.\\\\\\\",\\\\\\\"BorderRadiusTopRight\\\\\\\":\\\\\\\"Top right border radius\\\\\\\",\\\\\\\"BorderRadiusTopRight_Description\\\\\\\":\\\\\\\"Roundedness of the control's top right corner. A value of 0 is perfectly square.\\\\\\\",\\\\\\\"BorderRadiusBottomRight\\\\\\\":\\\\\\\"Bottom right border radius\\\\\\\",\\\\\\\"BorderRadiusBottomRight_Description\\\\\\\":\\\\\\\"Roundedness of the control's bottom right corner. A value of 0 is perfectly square.\\\\\\\",\\\\\\\"BorderRadiusBottomLeft\\\\\\\":\\\\\\\"Bottom left border radius\\\\\\\",\\\\\\\"BorderRadiusBottomLeft_Description\\\\\\\":\\\\\\\"Roundedness of the control's bottom left corner. A value of 0 is perfectly square.\\\\\\\",\\\\\\\"PaddingTop\\\\\\\":\\\\\\\"Padding top\\\\\\\",\\\\\\\"PaddingTop_Description\\\\\\\":\\\\\\\"Padding to apply to the top of the control.\\\\\\\",\\\\\\\"PaddingBottom\\\\\\\":\\\\\\\"Padding bottom\\\\\\\",\\\\\\\"PaddingBottom_Description\\\\\\\":\\\\\\\"Padding to apply to the bottom of the control.\\\\\\\",\\\\\\\"PaddingLeft\\\\\\\":\\\\\\\"Padding left\\\\\\\",\\\\\\\"PaddingLeft_Description\\\\\\\":\\\\\\\"Padding to apply to the left of the control.\\\\\\\",\\\\\\\"PaddingRight\\\\\\\":\\\\\\\"Padding right\\\\\\\",\\\\\\\"PaddingRight_Description\\\\\\\":\\\\\\\"Padding to apply to the right of the control.\\\\\\\"}}}\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":13,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":0,\\\"Path\\\":\\\"/PCF/fluentui-react.js\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":5,\\\"IsControlSpecific\\\":false},{\\\"Type\\\":4,\\\"Path\\\":\\\"Fluent/9.4.0/9.4.0\\\",\\\"ModifiedPath\\\":\\\"\\\",\\\"LoadingOrder\\\":0,\\\"IsControlSpecific\\\":false}]\",\"Properties\":\"[{\\\"Name\\\":\\\"Text\\\",\\\"DisplayName\\\":\\\"Text\\\",\\\"Description\\\":\\\"Text that appears on a control.\\\",\\\"Type\\\":6,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Text\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":true,\\\"IsPrimaryOutput\\\":true,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":true,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Text\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Text_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Size\\\",\\\"DisplayName\\\":\\\"Font size\\\",\\\"Description\\\":\\\"Display text using the selected font sizes.\\\",\\\"Type\\\":16,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"14\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Size\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Size_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Weight\\\",\\\"DisplayName\\\":\\\"Font weight\\\",\\\"Description\\\":\\\"Display text using the selected font weights.\\\",\\\"Type\\\":1,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Regular\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"Regular\\\",\\\"WebDefaultValue\\\":\\\"Regular\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[{\\\"Name\\\":\\\"Medium\\\",\\\"DisplayName\\\":\\\"Medium\\\",\\\"Description\\\":\\\"Medium\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Medium\\\"},{\\\"Name\\\":\\\"Regular\\\",\\\"DisplayName\\\":\\\"Regular\\\",\\\"Description\\\":\\\"Regular\\\",\\\"IsDefaultValue\\\":true,\\\"Value\\\":\\\"Regular\\\"},{\\\"Name\\\":\\\"Semibold\\\",\\\"DisplayName\\\":\\\"Semibold\\\",\\\"Description\\\":\\\"Semibold\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Semibold\\\"},{\\\"Name\\\":\\\"Bold\\\",\\\"DisplayName\\\":\\\"Bold\\\",\\\"Description\\\":\\\"Bold\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Bold\\\"}],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Weight\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Weight_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Align\\\",\\\"DisplayName\\\":\\\"Align\\\",\\\"Description\\\":\\\"Display text using the selected text alignment.\\\",\\\"Type\\\":1,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Start\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"Start\\\",\\\"WebDefaultValue\\\":\\\"Start\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[{\\\"Name\\\":\\\"Start\\\",\\\"DisplayName\\\":\\\"Start\\\",\\\"Description\\\":\\\"Start\\\",\\\"IsDefaultValue\\\":true,\\\"Value\\\":\\\"Start\\\"},{\\\"Name\\\":\\\"End\\\",\\\"DisplayName\\\":\\\"End\\\",\\\"Description\\\":\\\"End\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"End\\\"},{\\\"Name\\\":\\\"Center\\\",\\\"DisplayName\\\":\\\"Center\\\",\\\"Description\\\":\\\"Center\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Center\\\"},{\\\"Name\\\":\\\"Justify\\\",\\\"DisplayName\\\":\\\"Justify\\\",\\\"Description\\\":\\\"Justify\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Justify\\\"}],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Align\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Align_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"VerticalAlign\\\",\\\"DisplayName\\\":\\\"Vertical align\\\",\\\"Description\\\":\\\"Display text using the selected text verlitcal alignment.\\\",\\\"Type\\\":1,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"Middle\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"Middle\\\",\\\"WebDefaultValue\\\":\\\"Middle\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[{\\\"Name\\\":\\\"Top\\\",\\\"DisplayName\\\":\\\"Top\\\",\\\"Description\\\":\\\"Top\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Top\\\"},{\\\"Name\\\":\\\"Middle\\\",\\\"DisplayName\\\":\\\"Middle\\\",\\\"Description\\\":\\\"Middle\\\",\\\"IsDefaultValue\\\":true,\\\"Value\\\":\\\"Middle\\\"},{\\\"Name\\\":\\\"Bottom\\\",\\\"DisplayName\\\":\\\"Bottom\\\",\\\"Description\\\":\\\"Bottom\\\",\\\"IsDefaultValue\\\":false,\\\"Value\\\":\\\"Bottom\\\"}],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_VerticalAlign\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_VerticalAlign_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"AutoHeight\\\",\\\"DisplayName\\\":\\\"Auto height\\\",\\\"Description\\\":\\\"Container height will adjust to text content.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_AutoHeight\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_AutoHeight_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Height\\\",\\\"DisplayName\\\":\\\"Text height\\\",\\\"Description\\\":\\\"The height of the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"32\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Height\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Height_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Font\\\",\\\"DisplayName\\\":\\\"Font\\\",\\\"Description\\\":\\\"The name of the family of fonts in which text appears\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Font\\\",\\\"DescriptionResourceString\\\":\\\"Font_description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"FontColor\\\",\\\"DisplayName\\\":\\\"Font color\\\",\\\"Description\\\":\\\"The color of text in the control\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"color\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Font_Color\\\",\\\"DescriptionResourceString\\\":\\\"Font_Color_description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"FontItalic\\\",\\\"DisplayName\\\":\\\"Italic\\\",\\\"Description\\\":\\\"Display text using the italic font style.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Italic\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Italic_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"FontStrikethrough\\\",\\\"DisplayName\\\":\\\"Strikethrough\\\",\\\"Description\\\":\\\"Display text using the strikethrough font style.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Strikethrough\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Strikethrough_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"FontUnderline\\\",\\\"DisplayName\\\":\\\"Underline\\\",\\\"Description\\\":\\\"Display text using the underline font style.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"false\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Underline\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Underline_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Wrap\\\",\\\"DisplayName\\\":\\\"Wrap\\\",\\\"Description\\\":\\\"Display overflow text as wrapped.\\\",\\\"Type\\\":20,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"true\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"TextCanvas_Wrap\\\",\\\"DescriptionResourceString\\\":\\\"TextCanvas_Wrap_Desc\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Fill\\\",\\\"DisplayName\\\":\\\"Fill\\\",\\\"Description\\\":\\\"Background color fo the control.\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":null,\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Fill\\\",\\\"DescriptionResourceString\\\":\\\"Fill_Description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"BorderStyle\\\",\\\"DisplayName\\\":\\\"Border style\\\",\\\"Description\\\":\\\"Style of borders around the control\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderStyle\\\",\\\"DescriptionResourceString\\\":\\\"BorderStyle_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"BorderThickness\\\",\\\"DisplayName\\\":\\\"Border thickness\\\",\\\"Description\\\":\\\"Thickness or width of borders around the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderThickness\\\",\\\"DescriptionResourceString\\\":\\\"BorderThickness_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"BorderColor\\\",\\\"DisplayName\\\":\\\"Border color\\\",\\\"Description\\\":\\\"Color of borders around the control.\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderColor\\\",\\\"DescriptionResourceString\\\":\\\"BorderColor_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"BorderRadiusTopLeft\\\",\\\"DisplayName\\\":\\\"Top left border radius\\\",\\\"Description\\\":\\\"Roundedness of the control's top left corner. A value of 0 is perfectly square.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderRadiusTopLeft\\\",\\\"DescriptionResourceString\\\":\\\"BorderRadiusTopLeft_Description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"BorderRadiusTopRight\\\",\\\"DisplayName\\\":\\\"Top right border radius\\\",\\\"Description\\\":\\\"Roundedness of the control's top right corner. A value of 0 is perfectly square.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderRadiusTopRight\\\",\\\"DescriptionResourceString\\\":\\\"BorderRadiusTopRight_Description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"BorderRadiusBottomRight\\\",\\\"DisplayName\\\":\\\"Bottom right border radius\\\",\\\"Description\\\":\\\"Roundedness of the control's bottom right corner. A value of 0 is perfectly square.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderRadiusBottomRight\\\",\\\"DescriptionResourceString\\\":\\\"BorderRadiusBottomRight_Description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"BorderRadiusBottomLeft\\\",\\\"DisplayName\\\":\\\"Bottom left border radius\\\",\\\"Description\\\":\\\"Roundedness of the control's bottom left corner. A value of 0 is perfectly square.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"BorderRadiusBottomLeft\\\",\\\"DescriptionResourceString\\\":\\\"BorderRadiusBottomLeft_Description\\\",\\\"IsResettableToManifestDefault\\\":true,\\\"IsLinkableToParentTheme\\\":true},{\\\"Name\\\":\\\"PaddingTop\\\",\\\"DisplayName\\\":\\\"Padding top\\\",\\\"Description\\\":\\\"Padding to apply to the top of the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"PaddingTop\\\",\\\"DescriptionResourceString\\\":\\\"PaddingTop_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"PaddingRight\\\",\\\"DisplayName\\\":\\\"Padding right\\\",\\\"Description\\\":\\\"Padding to apply to the right of the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"PaddingRight\\\",\\\"DescriptionResourceString\\\":\\\"PaddingRight_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"PaddingBottom\\\",\\\"DisplayName\\\":\\\"Padding bottom\\\",\\\"Description\\\":\\\"Padding to apply to the bottom of the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"PaddingBottom\\\",\\\"DescriptionResourceString\\\":\\\"PaddingBottom_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"PaddingLeft\\\",\\\"DisplayName\\\":\\\"Padding left\\\",\\\"Description\\\":\\\"Padding to apply to the left of the control.\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"data\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"PaddingLeft\\\",\\\"DescriptionResourceString\\\":\\\"PaddingLeft_Description\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"TabIndex\\\",\\\"DisplayName\\\":\\\"NA\\\",\\\"Description\\\":\\\"NA\\\",\\\"Type\\\":16,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"NA\\\",\\\"DescriptionResourceString\\\":\\\"NA\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Tooltip\\\",\\\"DisplayName\\\":\\\"NA\\\",\\\"Description\\\":\\\"NA\\\",\\\"Type\\\":6,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":null,\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":[],\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"NA\\\",\\\"DescriptionResourceString\\\":\\\"NA\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"PCFTeamsTheme\\\",\\\"DisplayName\\\":\\\"PCFTeamsTheme\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":3,\\\"Usage\\\":0,\\\"Hidden\\\":true,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":\\\"\\\",\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false}]\",\"IncludedProperties\":\"[{\\\"Name\\\":\\\"X\\\",\\\"DisplayName\\\":\\\"CC_X\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":2,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"CC_X\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Y\\\",\\\"DisplayName\\\":\\\"CC_Y\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":2,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"CC_Y\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Width\\\",\\\"DisplayName\\\":\\\"Width\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":2,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"96\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"96\\\",\\\"WebDefaultValue\\\":\\\"96\\\",\\\"NullDefaultValue\\\":\\\"0\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Width\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"Visible\\\",\\\"DisplayName\\\":\\\"Visible\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":4,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"true\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"Visible\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false},{\\\"Name\\\":\\\"DisplayMode\\\",\\\"DisplayName\\\":\\\"DisplayMode\\\",\\\"Description\\\":\\\"\\\",\\\"Type\\\":27,\\\"Usage\\\":2,\\\"Hidden\\\":false,\\\"DefaultValue\\\":\\\"\\\",\\\"PfxDefaultValue\\\":null,\\\"PhoneDefaultValue\\\":\\\"\\\",\\\"WebDefaultValue\\\":\\\"\\\",\\\"NullDefaultValue\\\":\\\"\\\",\\\"HelperUI\\\":\\\"\\\",\\\"Category\\\":\\\"design\\\",\\\"IsPrimaryBehavioral\\\":false,\\\"IsPrimaryInput\\\":false,\\\"IsPrimaryOutput\\\":false,\\\"IsResettable\\\":false,\\\"EnumValues\\\":null,\\\"Required\\\":false,\\\"IsDataSourceProperty\\\":false,\\\"PassThroughProperty\\\":\\\"\\\",\\\"ShouldAutoBind\\\":false,\\\"ParentDataSetName\\\":\\\"\\\",\\\"DisplayNameResourceString\\\":\\\"DisplayMode\\\",\\\"DescriptionResourceString\\\":\\\"\\\",\\\"IsResettableToManifestDefault\\\":false,\\\"IsLinkableToParentTheme\\\":false}]\",\"AuthConfigProperties\":\"[{\\\"Text\\\":{\\\"SectionIndex\\\":0,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"GeneralSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Visible\\\":{\\\"SectionIndex\\\":0,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"GeneralSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Wrap\\\":{\\\"SectionIndex\\\":1,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"BehaviorSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Align\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"VerticalAlign\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"AutoHeight\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"X\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Position\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Y\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Position\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Width\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Size\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Height\\\":{\\\"SectionIndex\\\":2,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Size\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"SizeAndPositioningSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Fill\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":53,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Font\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":33,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Size\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontColor\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":\\\"color\\\",\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":31,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"Weight\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"\\\",\\\"SectionName\\\":null,\\\"Type\\\":0,\\\"PropertyKind\\\":1,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontItalic\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Style\\\",\\\"SectionName\\\":null,\\\"Type\\\":35,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontUnderline\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Style\\\",\\\"SectionName\\\":null,\\\"Type\\\":36,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false},\\\"FontStrikethrough\\\":{\\\"SectionIndex\\\":3,\\\"HelperUI\\\":null,\\\"PropertyGroupName\\\":\\\"Style\\\",\\\"SectionName\\\":null,\\\"Type\\\":37,\\\"PropertyKind\\\":2,\\\"WizardStep\\\":null,\\\"EnabledForFlyout\\\":false,\\\"Hidden\\\":false,\\\"SectionType\\\":\\\"StyleAndThemeSection\\\",\\\"ShowInCanvasInlineActionBar\\\":false}}]\"}",
           "FirstParty": true,
           "Id": "http://microsoft.com/appmagic/powercontrol/PowerApps_CoreControls_TextCanvas",
           "IsComponentDefinition": false,
@@ -380,7 +394,7 @@
           "Name": "PowerApps_CoreControls_TextCanvas",
           "OverridableProperties": {},
           "TemplateDisplayName": "Text",
-          "Version": "0.0.25"
+          "Version": "0.0.30"
         },
         "Type": "ControlInfo",
         "VariantName": ""
@@ -408,7 +422,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 534,
+            "PublishOrderIndex": 536,
             "Rules": [
               {
                 "Category": "Design",
@@ -550,7 +564,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 535,
+            "PublishOrderIndex": 537,
             "Rules": [
               {
                 "Category": "Data",
@@ -783,7 +797,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 536,
+            "PublishOrderIndex": 538,
             "Rules": [
               {
                 "Category": "Data",
@@ -1034,7 +1048,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 537,
+            "PublishOrderIndex": 539,
             "Rules": [
               {
                 "Category": "Data",
@@ -1403,7 +1417,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 538,
+            "PublishOrderIndex": 540,
             "Rules": [
               {
                 "Category": "Design",
@@ -1629,7 +1643,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 539,
+            "PublishOrderIndex": 541,
             "Rules": [
               {
                 "Category": "Data",
@@ -1846,7 +1860,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 540,
+            "PublishOrderIndex": 542,
             "Rules": [
               {
                 "Category": "Data",
@@ -2192,7 +2206,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 541,
+            "PublishOrderIndex": 543,
             "Rules": [
               {
                 "Category": "Data",
@@ -2523,7 +2537,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 542,
+            "PublishOrderIndex": 544,
             "Rules": [
               {
                 "Category": "Data",
@@ -2848,7 +2862,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 543,
+            "PublishOrderIndex": 545,
             "Rules": [
               {
                 "Category": "Data",
@@ -3156,7 +3170,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 544,
+            "PublishOrderIndex": 546,
             "Rules": [
               {
                 "Category": "Data",
@@ -3364,7 +3378,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 545,
+            "PublishOrderIndex": 547,
             "Rules": [
               {
                 "Category": "Data",
@@ -3597,7 +3611,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 546,
+            "PublishOrderIndex": 548,
             "Rules": [
               {
                 "Category": "Data",
@@ -3805,7 +3819,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 547,
+            "PublishOrderIndex": 549,
             "Rules": [
               {
                 "Category": "Data",
@@ -4003,7 +4017,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 548,
+            "PublishOrderIndex": 550,
             "Rules": [
               {
                 "Category": "Data",
@@ -4224,7 +4238,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 549,
+            "PublishOrderIndex": 551,
             "Rules": [
               {
                 "Category": "Data",
@@ -4717,7 +4731,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 550,
+            "PublishOrderIndex": 552,
             "Rules": [
               {
                 "Category": "Data",
@@ -5098,7 +5112,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 551,
+            "PublishOrderIndex": 553,
             "Rules": [
               {
                 "Category": "Data",
@@ -5394,7 +5408,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 553,
+                "PublishOrderIndex": 555,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -5545,7 +5559,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 554,
+                "PublishOrderIndex": 556,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -5779,7 +5793,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 555,
+                "PublishOrderIndex": 557,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -6013,7 +6027,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 556,
+                "PublishOrderIndex": 558,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -6293,7 +6307,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 557,
+                "PublishOrderIndex": 559,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -6733,7 +6747,7 @@
                     "OptimizeForDevices": "Off",
                     "Parent": "conConditionLabel",
                     "PersistMetaDataIDKey": false,
-                    "PublishOrderIndex": 559,
+                    "PublishOrderIndex": 561,
                     "Rules": [
                       {
                         "Category": "Data",
@@ -7113,7 +7127,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 558,
+                "PublishOrderIndex": 560,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -7373,7 +7387,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 560,
+                "PublishOrderIndex": 562,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -7672,7 +7686,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageConditions_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 561,
+                "PublishOrderIndex": 563,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -8060,7 +8074,8 @@
               },
               "MaxTemplateSize",
               "#CopilotOverlayLabel",
-              "#CopilotOverlayVisible"
+              "#CopilotOverlayVisible",
+              "FocusedBorderThickness"
             ],
             "ControlUniqueId": "76",
             "HasDynamicProperties": false,
@@ -8076,7 +8091,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 552,
+            "PublishOrderIndex": 554,
             "Rules": [
               {
                 "Category": "Data",
@@ -8263,6 +8278,12 @@
                 "InvariantScript": "false",
                 "Property": "#CopilotOverlayVisible",
                 "RuleProviderType": "Unknown"
+              },
+              {
+                "Category": "Design",
+                "InvariantScript": "2",
+                "Property": "FocusedBorderThickness",
+                "RuleProviderType": "Unknown"
               }
             ],
             "StyleName": "defaultGalleryStyle",
@@ -8404,7 +8425,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "conFalsePath_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 563,
+                "PublishOrderIndex": 565,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -8638,7 +8659,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "conFalsePath_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 564,
+                "PublishOrderIndex": 566,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -8899,7 +8920,7 @@
                     "OptimizeForDevices": "Off",
                     "Parent": "conConditionLabelFalse",
                     "PersistMetaDataIDKey": false,
-                    "PublishOrderIndex": 566,
+                    "PublishOrderIndex": 568,
                     "Rules": [
                       {
                         "Category": "Data",
@@ -9266,7 +9287,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "conFalsePath_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 565,
+                "PublishOrderIndex": 567,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -9631,7 +9652,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "conFalsePath_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 567,
+                "PublishOrderIndex": 569,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -10005,7 +10026,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "conFalsePath_1",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 568,
+                "PublishOrderIndex": 570,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -10199,7 +10220,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 562,
+            "PublishOrderIndex": 564,
             "Rules": [
               {
                 "Category": "Design",
@@ -10334,7 +10355,7 @@
                 "RuleProviderType": "Unknown"
               }
             ],
-            "StyleName": "",
+            "StyleName": "defaultGroupContainerStyle",
             "Template": {
               "CustomGroupControlTemplateName": "",
               "FirstParty": true,
@@ -10487,7 +10508,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 570,
+                "PublishOrderIndex": 572,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -10826,7 +10847,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 571,
+                "PublishOrderIndex": 573,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -11165,7 +11186,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 572,
+                "PublishOrderIndex": 574,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -11504,7 +11525,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 573,
+                "PublishOrderIndex": 575,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -11843,7 +11864,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 574,
+                "PublishOrderIndex": 576,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -12068,7 +12089,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 575,
+                "PublishOrderIndex": 577,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -12170,7 +12191,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 576,
+                "PublishOrderIndex": 578,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -12358,7 +12379,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 577,
+                "PublishOrderIndex": 579,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -12571,7 +12592,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 578,
+                "PublishOrderIndex": 580,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -12908,7 +12929,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 579,
+                "PublishOrderIndex": 581,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -13298,7 +13319,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 580,
+                "PublishOrderIndex": 582,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -13532,7 +13553,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 581,
+                "PublishOrderIndex": 583,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -13766,7 +13787,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 582,
+                "PublishOrderIndex": 584,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -14000,7 +14021,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 583,
+                "PublishOrderIndex": 585,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -14198,7 +14219,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 584,
+                "PublishOrderIndex": 586,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -14372,7 +14393,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 585,
+                "PublishOrderIndex": 587,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -14709,7 +14730,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 586,
+                "PublishOrderIndex": 588,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -15160,7 +15181,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 587,
+                "PublishOrderIndex": 589,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -15507,7 +15528,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 588,
+                "PublishOrderIndex": 590,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -15681,7 +15702,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 589,
+                "PublishOrderIndex": 591,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -16018,7 +16039,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 590,
+                "PublishOrderIndex": 592,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -16365,7 +16386,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 591,
+                "PublishOrderIndex": 593,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -16539,7 +16560,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 592,
+                "PublishOrderIndex": 594,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -16876,7 +16897,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 593,
+                "PublishOrderIndex": 595,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -17223,7 +17244,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 594,
+                "PublishOrderIndex": 596,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -17397,7 +17418,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 595,
+                "PublishOrderIndex": 597,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -17653,7 +17674,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 596,
+                "PublishOrderIndex": 598,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -17849,7 +17870,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 597,
+                "PublishOrderIndex": 599,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -18041,7 +18062,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 598,
+                "PublishOrderIndex": 600,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -18237,7 +18258,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 599,
+                "PublishOrderIndex": 601,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -18429,7 +18450,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 600,
+                "PublishOrderIndex": 602,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -18625,7 +18646,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 601,
+                "PublishOrderIndex": 603,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -18817,7 +18838,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 602,
+                "PublishOrderIndex": 604,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -19013,7 +19034,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 603,
+                "PublishOrderIndex": 605,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -19205,7 +19226,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 604,
+                "PublishOrderIndex": 606,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -19401,7 +19422,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 605,
+                "PublishOrderIndex": 607,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -19655,7 +19676,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 606,
+                "PublishOrderIndex": 608,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -19973,7 +19994,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 607,
+                "PublishOrderIndex": 609,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -20291,7 +20312,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 608,
+                "PublishOrderIndex": 610,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -20609,7 +20630,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 609,
+                "PublishOrderIndex": 611,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -20927,7 +20948,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 610,
+                "PublishOrderIndex": 612,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -21175,7 +21196,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 611,
+                "PublishOrderIndex": 613,
                 "Rules": [
                   {
                     "Category": "Design",
@@ -21518,7 +21539,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 612,
+                "PublishOrderIndex": 614,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -21997,7 +22018,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 613,
+                "PublishOrderIndex": 615,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -22475,7 +22496,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 614,
+                "PublishOrderIndex": 616,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -22947,7 +22968,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 615,
+                "PublishOrderIndex": 617,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -23419,7 +23440,7 @@
                 "OptimizeForDevices": "Off",
                 "Parent": "galStageNodes",
                 "PersistMetaDataIDKey": false,
-                "PublishOrderIndex": 616,
+                "PublishOrderIndex": 618,
                 "Rules": [
                   {
                     "Category": "Data",
@@ -23822,7 +23843,8 @@
               },
               "MaxTemplateSize",
               "#CopilotOverlayLabel",
-              "#CopilotOverlayVisible"
+              "#CopilotOverlayVisible",
+              "FocusedBorderThickness"
             ],
             "ControlUniqueId": "28",
             "HasDynamicProperties": false,
@@ -23838,7 +23860,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galProcessStages_1",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 569,
+            "PublishOrderIndex": 571,
             "Rules": [
               {
                 "Category": "Data",
@@ -24031,6 +24053,12 @@
                 "InvariantScript": "false",
                 "Property": "#CopilotOverlayVisible",
                 "RuleProviderType": "Unknown"
+              },
+              {
+                "Category": "Design",
+                "InvariantScript": "2",
+                "Property": "FocusedBorderThickness",
+                "RuleProviderType": "Unknown"
               }
             ],
             "StyleName": "defaultGalleryStyle",
@@ -24174,7 +24202,8 @@
           },
           "MaxTemplateSize",
           "#CopilotOverlayLabel",
-          "#CopilotOverlayVisible"
+          "#CopilotOverlayVisible",
+          "FocusedBorderThickness"
         ],
         "ControlUniqueId": "12",
         "HasDynamicProperties": false,
@@ -24190,7 +24219,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ApprovalDesigner",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 533,
+        "PublishOrderIndex": 535,
         "Rules": [
           {
             "Category": "Data",
@@ -24389,6 +24418,12 @@
             "InvariantScript": "false",
             "Property": "#CopilotOverlayVisible",
             "RuleProviderType": "Unknown"
+          },
+          {
+            "Category": "Design",
+            "InvariantScript": "2",
+            "Property": "FocusedBorderThickness",
+            "RuleProviderType": "Unknown"
           }
         ],
         "StyleName": "defaultGalleryStyle",
@@ -24536,7 +24571,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "ApprovalDesigner",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 617,
+        "PublishOrderIndex": 619,
         "Rules": [
           {
             "Category": "Data",
@@ -24864,7 +24899,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638508276090284355",
+    "LastModifiedTimestamp": "638536121567832156",
     "Name": "ApprovalDesigner",
     "Rules": [
       {
@@ -25272,7 +25307,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638508276090284355",
+  "LastModifiedTimestamp": "638536121567832156",
   "Name": "b1c1ad98802640e590b1d3b9408cefd7",
   "OverridableProperties": {},
   "TemplateOriginalName": "e6a32f2a3e834827bef5904672754f9a",
