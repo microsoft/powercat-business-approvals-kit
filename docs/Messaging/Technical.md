@@ -1,10 +1,10 @@
 
-# Technical Document: EvaluateRuntimeNodeMessage Plugin
+# Technical Document of Messaging
 
 ## Overview
 This document provides an explaination of how the messaging works. This documentation aims to provide a comprehensive understanding of how Node messages are evaluated within the system and replaced by dynamic values. How the expressions are evaluated and replaced by dynamic values.
 
-This document explains the functionality of the `EvaluateNodeMessage` plugin and its integration with Dynamics 365 to handle custom messaging and dynamic value evaluation. 
+This document explains the functionality of the `EvaluateNodeMessage` plugin and its integration with Dynamics 365 to handle custom messaging and dynamic value evaluation using PowerFx nuget package.
 
 ### Custom API Integration
 We have implemented a Custom API named `EvaluateNodeMessage` within Dynamics 365. This API is invoked before creating a node instance record in Power Automate through an unbound action. The Custom API facilitates the execution of a dataverse plugin `EvaluateRuntimeNodeMessage` registered on the custom message `cat_EvaluateNodeMessage`.
@@ -26,7 +26,7 @@ Upon receiving the input parameters, the plugin retrieves data from Dynamics 365
 
 3. **Expression Evaluation:** Utilize the PowerFx Engine to evaluate expressions embedded within the node message in curly braces dynamically and return the result.
 
-  An example of what informations can be given in Node Message and what it will look like after processing.
+  An example of what informations can be passed in the Node Message and what it will look like after the plugin processes it and returns the result.
 
 Message:
 ```
