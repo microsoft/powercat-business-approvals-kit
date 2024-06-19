@@ -27,7 +27,7 @@ Below are the tables and their corresponding columns, which can be used to acces
 |                              | To access current node Approvers info comma separated |               |        |        | Approvers       | {=CurrentNode.Approvers}   |
 
 
-## Examples and Explanations
+## Examples and Explainations
 
 ### Business Approval Runtime Node
 
@@ -80,7 +80,7 @@ Below are the columns from the Business Approval Workflow table, which can be us
 |                             | To access workflow Id (GUID)                         | cat_businessapprovalworkflowid | Id                   | Id                           | {=Workflow.Id}                 |
 
 
-## Examples and Explanations
+## Examples and Explainations
 
 ### Example 1: Accessing the Requested By Column
 
@@ -94,7 +94,7 @@ This request was made by {=Workflow.RequestedBy}.
 Output:
 This request was made by user1@testorg.onmicrosoft.com.
 ```
-**Explanation:** 
+**Explaination:** 
 {=Workflow.RequestedBy}: This placeholder will be replaced by the actual value from the "Requested By" column when the message is processed.
 
 ### Example 2: Accessing the External Reference Column
@@ -110,7 +110,7 @@ The external reference is {=Workflow.ExternalReference}.
 Output:
 The external reference is aka.ms/ppac.com.
 ```
-**Explanation:** 
+**Explaination:** 
 {=Workflow.ExternalReference}: This placeholder will be replaced by the actual external reference when the message is processed.
 
 ## Business Approval Runtime Stage Table and Column Mappings
@@ -130,7 +130,7 @@ Below are the columns from the Business Approval Runtime Stage table, which can 
 |                              | To access source data type of runtime stage          | cat_sourcedatatype         | Source Data Type        | SourceDataType               | {=CurrentStage.SourceDataType} |
 |                              | To access Operand of runtime stage                   | cat_operand                | Operand                 | Operand                      | {=CurrentStage.Operand}        |
 
-## Examples and Explanations
+## Examples and Explainations
 
 ### Example 1: Accessing the Stage Name
 
@@ -144,7 +144,7 @@ The stage name is {=CurrentStage.Name}.
 Output:
 The stage name is Self-Approval-Stage.
 ```
-**Explanation:**
+**Explaination:**
 {=CurrentStage.Name}: This placeholder will be replaced by the actual name of the current stage when the message is processed.
 
 
@@ -159,7 +159,7 @@ Below are the columns from the Business Approval Runtime Stage table, which can 
 |                              | To access first reminder text                        | cat_remindertext| Reminder Text         | ReminderText                      | {=First(Reminders).'ReminderText'}        |
 
 
-## Examples and Explanations
+## Examples and Explainations
 
 ### Example 1: Accessing first reminder Reminder Days from reminders collection.
 
@@ -173,7 +173,7 @@ The reminder days is {=First(Reminders).'ReminderDays'}.
 Output:
 The reminder days is 4.
 ```
-**Explanation:**
+**Explaination:**
 {=First(Reminders).'ReminderDays'}: This placeholder will be replaced by the actual reminder days value of the first reminder from the collection when the message is processed.
 
 
@@ -192,7 +192,7 @@ If a process has two variables defined
 | Price                       | Variable which stores asset price                    | Price                      | {=Parameters.Price}         |
 | Asset Type                  | Variable which stores asset type information         | Asset Type                 | {=Parameters.'Asset Type'}  |
 
-## Examples and Explanations
+## Examples and Explainations
 
 ### Example 1: Accessing Price variable value.
 
@@ -206,7 +206,7 @@ The asset price is {=Parameters.Price}.
 Output:
 The asset price is 2500.
 ```
-**Explanation:**
+**Explaination:**
 {=Parameters.Price}: This placeholder will be replaced by the actual Price passed when the message is processed.
 
 ### Example 2: Accessing Asset Type variable value.
@@ -221,7 +221,7 @@ The asset type is {=Parameters.'Asset Type'}.
 Output:
 The asset type is Laptop.
 ```
-**Explanation:**
+**Explaination:**
 {=Parameters.Price}: This placeholder will be replaced by the actual value of the Asset Type variable when the message is processed.
 
 
@@ -254,7 +254,7 @@ Past Approvals:
 
 You can also pass common string, date, etc. PowerFx functions in curly brace after equals which can be evaluated.
 
-## Examples and Explanations
+## Examples and Explainations
 
 ### Example 1: Accessing Current date time using Now().
 
@@ -268,7 +268,7 @@ The current datetime is {=Now()}.
 Output:
 The current datetime is 07/11/2021 20:58:00.
 ```
-**Explanation:**
+**Explaination:**
 {=Now()}: This placeholder will be replaced by the current time when the message is processed.
 
 ### Example 2: Accessing upper case value of string Requestor using Upper() function.
@@ -283,7 +283,7 @@ Requested By: {=Upper(Workflow.RequestedBy)}.
 Output:
 Requested By: USER6@TESTORG.ONMICROSOFT.COM.
 ```
-**Explanation:**
+**Explaination:**
 {=Upper(Workflow.RequestedBy)}: This placeholder will be replaced by the upper case value of requested by when the message is processed.
 
 
