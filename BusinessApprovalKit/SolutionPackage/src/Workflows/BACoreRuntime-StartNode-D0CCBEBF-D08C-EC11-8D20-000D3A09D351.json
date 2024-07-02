@@ -122,7 +122,7 @@
             "parameters": {
               "entityName": "cat_businessapprovalruntimenodes",
               "recordId": "@triggerOutputs()?['body/_cat_node_value']",
-              "$select": "cat_name, cat_approvaltype,cat_businessapprovalruntimenodeid, _cat_stage_value, cat_delegationrule, cat_nodetype, cat_notificationtype, cat_nodecondition, cat_approvaltype, cat_operand, cat_timeout, cat_timeoutmode, cat_GoToStage, cat_bizappr_runtimenodeapprover,cat_customresponses,_cat_sourcedata_value,cat_sourcedatatype,_cat_gotostage_value, cat_nodeduedatedatatype, cat_nodeduedatevalue,_cat_nodeduedaterequestdata_value",
+              "$select": "cat_name, cat_approvaltype,cat_businessapprovalruntimenodeid, _cat_stage_value, cat_delegationrule, cat_nodetype, cat_notificationtype, cat_nodecondition, cat_approvaltype, cat_operand, cat_timeout, cat_timeoutmode, cat_GoToStage, cat_bizappr_runtimenodeapprover,cat_customresponses,_cat_sourcedata_value,cat_sourcedatatype,_cat_gotostage_value, cat_nodeduedatedatatype, cat_nodeduedatevalue,_cat_nodeduedaterequestdata_value,cat_instancestatus",
               "$expand": "cat_bizappr_runtimenodeapprover($select=cat_approverid, cat_approvertype,_cat_requestdata_value,_cat_workprofile_value,cat_notificationtype,_cat_delegate_value, cat_delegateid, _cat_backupdelegate_value, cat_backupdelegateid, cat_isoutofoffice,cat_dynamicapprovertype), cat_ProcessVersion($select=cat_name,cat_businessapprovalversionid;$expand=cat_DefaultApprover($select=cat_businessapproverid,cat_approverid, cat_isoutofoffice, cat_notificationtype)),cat_GoToStage"
             },
             "authentication": "@parameters('$authentication')"
@@ -1948,6 +1948,82 @@
                         "operationMetadataId": "417a0c62-0c88-4111-ba05-98969826326f"
                       },
                       "type": "Scope"
+                    }
+                  }
+                },
+                "End_Workflow": {
+                  "case": 809060002,
+                  "actions": {
+                    "Update_Node_Instance_with_selected_Instance_Status": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "52610bb5-971b-40ac-a047-f12106ac3966"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "UpdateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovalruntimenodeinstances",
+                          "recordId": "@triggerOutputs()?['body/cat_businessapprovalruntimenodeinstanceid']",
+                          "item/cat_instancestatus": "@outputs('Get_Runtime_Node_Definition')?['body/cat_instancestatus']",
+                          "item/cat_end": "@utcNow()"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Update_Stage_Instance_with_selected_Instance_Status": {
+                      "runAfter": {
+                        "Update_Node_Instance_with_selected_Instance_Status": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "cf2f758a-2ac6-4356-9d26-6c1ed4e6492a"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "UpdateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovalruntimestageinstances",
+                          "recordId": "@outputs('Update_Node_Instance_with_selected_Instance_Status')?['body/_cat_stageinstance_value']",
+                          "item/cat_end": "@utcNow()",
+                          "item/cat_endworkflow": true,
+                          "item/cat_instancestatus": "@outputs('Get_Runtime_Node_Definition')?['body/cat_instancestatus']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Update_Workflow_Instance_with_selected_Instance_Status": {
+                      "runAfter": {
+                        "Update_Stage_Instance_with_selected_Instance_Status": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "57e184be-a5f3-49fc-bea7-dae02932bdcb"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps_1",
+                          "operationId": "UpdateRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "cat_businessapprovalworkflows",
+                          "recordId": "@outputs('Update_Node_Instance_with_selected_Instance_Status')?['body/_cat_workflowinstance_value']",
+                          "item/cat_instancestatus": "@outputs('Get_Runtime_Node_Definition')?['body/cat_instancestatus']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
                     }
                   }
                 }
