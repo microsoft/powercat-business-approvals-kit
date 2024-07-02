@@ -2,7 +2,7 @@
   "basePath": "/",
   "consumes": [],
   "definitions": {},
-  "host": "orgc08dc7f0.crm.dynamics.com",
+  "host": "biz-approvals-dev.crm.dynamics.com",
   "info": {
     "description": "Custom connector for business approvals kit",
     "title": "Approvals kit Connector",
