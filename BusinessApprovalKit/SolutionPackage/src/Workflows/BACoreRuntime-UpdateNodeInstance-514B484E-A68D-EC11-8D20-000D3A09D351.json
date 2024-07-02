@@ -70,6 +70,22 @@
         }
       },
       "actions": {
+        "varStageCompleted": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "b2041fd0-f463-48cf-a904-8f796f48b74f"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varStageCompleted",
+                "type": "boolean",
+                "value": "@false"
+              }
+            ]
+          }
+        },
         "Check_Instance_Status_Type": {
           "runAfter": {
             "varStageCompleted": [
@@ -151,57 +167,101 @@
                   },
                   "else": {
                     "actions": {
-                      "Create_new_Node_Instance": {
-                        "runAfter": {
-                          "Perform_an_unbound_action_to_Evaluate_Node_Message": [
-                            "Succeeded"
-                          ]
-                        },
-                        "metadata": {
-                          "operationMetadataId": "5e796899-63ec-4e72-9c01-f52253016805"
-                        },
-                        "type": "OpenApiConnection",
-                        "inputs": {
-                          "host": {
-                            "connectionName": "shared_commondataserviceforapps_1",
-                            "operationId": "CreateRecord",
-                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                          },
-                          "parameters": {
-                            "entityName": "cat_businessapprovalruntimenodeinstances",
-                            "item/cat_instancestatus": 809060000,
-                            "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodes(@{first(body('Get_Next_Node')['value'])['cat_businessapprovalruntimenodeid']})",
-                            "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{triggerOutputs()?['body/_cat_stage_value']})",
-                            "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stageinstance_value']})",
-                            "item/cat_start": "@utcNow()",
-                            "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
-                            "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
-                            "item/cat_message": "@outputs('Perform_an_unbound_action_to_Evaluate_Node_Message')?['body/Message']",
-                            "item/cat_nodeduedatedatatype": "@first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype']",
-                            "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovaldatainstances(',first(outputs('Get_Node_Due_Date_Request_Data')?['body/value'])?['cat_businessapprovaldatainstanceid'],')'),null)",
-                            "item/cat_nodeduedatevalue": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060001),first(body('Get_Next_Node')['value'])?['cat_nodeduedatevalue'],null)",
-                            "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
-                          },
-                          "authentication": "@parameters('$authentication')"
-                        }
-                      },
-                      "Condition": {
+                      "If_Node_Type_is_not_equal_End_Workflow_2": {
                         "actions": {
-                          "Get_Node_Due_Date_Request_Data": {
+                          "Condition": {
+                            "actions": {
+                              "Get_Node_Due_Date_Request_Data": {
+                                "runAfter": {},
+                                "metadata": {
+                                  "operationMetadataId": "e8d2ebca-a774-4fd3-b241-fd6b2e298ea4"
+                                },
+                                "type": "OpenApiConnection",
+                                "inputs": {
+                                  "host": {
+                                    "connectionName": "shared_commondataserviceforapps_1",
+                                    "operationId": "ListRecords",
+                                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                  },
+                                  "parameters": {
+                                    "entityName": "cat_businessapprovaldatainstances",
+                                    "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']}"
+                                  },
+                                  "authentication": "@parameters('$authentication')"
+                                }
+                              }
+                            },
                             "runAfter": {},
+                            "expression": {
+                              "not": {
+                                "equals": [
+                                  "@first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']",
+                                  "@null"
+                                ]
+                              }
+                            },
                             "metadata": {
-                              "operationMetadataId": "e8d2ebca-a774-4fd3-b241-fd6b2e298ea4"
+                              "operationMetadataId": "1a00c0ed-9852-47e2-b33e-c31f59871939"
+                            },
+                            "type": "If"
+                          },
+                          "Create_new_Node_Instance": {
+                            "runAfter": {
+                              "Perform_an_unbound_action_to_Evaluate_Node_Message": [
+                                "Succeeded"
+                              ]
+                            },
+                            "metadata": {
+                              "operationMetadataId": "5e796899-63ec-4e72-9c01-f52253016805"
                             },
                             "type": "OpenApiConnection",
                             "inputs": {
                               "host": {
                                 "connectionName": "shared_commondataserviceforapps_1",
-                                "operationId": "ListRecords",
+                                "operationId": "CreateRecord",
                                 "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
                               },
                               "parameters": {
-                                "entityName": "cat_businessapprovaldatainstances",
-                                "$filter": "_cat_workflowinstance_value eq @{triggerOutputs()?['body/_cat_workflowinstance_value']} and _cat_runtimedata_value eq @{first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']}"
+                                "entityName": "cat_businessapprovalruntimenodeinstances",
+                                "item/cat_instancestatus": 809060000,
+                                "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodes(@{first(body('Get_Next_Node')['value'])['cat_businessapprovalruntimenodeid']})",
+                                "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{triggerOutputs()?['body/_cat_stage_value']})",
+                                "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stageinstance_value']})",
+                                "item/cat_start": "@utcNow()",
+                                "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
+                                "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                                "item/cat_message": "@outputs('Perform_an_unbound_action_to_Evaluate_Node_Message')?['body/Message']",
+                                "item/cat_nodeduedatedatatype": "@first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype']",
+                                "item/cat_NodeDueDateRequestData@odata.bind": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060000),concat('cat_businessapprovaldatainstances(',first(outputs('Get_Node_Due_Date_Request_Data')?['body/value'])?['cat_businessapprovaldatainstanceid'],')'),null)",
+                                "item/cat_nodeduedatevalue": "@if(equals(first(body('Get_Next_Node')['value'])?['cat_nodeduedatedatatype'],809060001),first(body('Get_Next_Node')['value'])?['cat_nodeduedatevalue'],null)",
+                                "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
+                              },
+                              "authentication": "@parameters('$authentication')"
+                            }
+                          },
+                          "Perform_an_unbound_action_to_Evaluate_Node_Message": {
+                            "runAfter": {
+                              "Condition": [
+                                "Succeeded",
+                                "TimedOut",
+                                "Failed"
+                              ]
+                            },
+                            "metadata": {
+                              "operationMetadataId": "662ab23e-663f-49d9-84ab-3b763dff9d76"
+                            },
+                            "type": "OpenApiConnection",
+                            "inputs": {
+                              "host": {
+                                "connectionName": "shared_commondataserviceforapps_1",
+                                "operationId": "PerformUnboundAction",
+                                "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                              },
+                              "parameters": {
+                                "actionName": "cat_EvaluateNodeMessage",
+                                "item/NodeId": "@first(body('Get_Next_Node')['value'])?['cat_businessapprovalruntimenodeid']",
+                                "item/EnableDataverse": "@parameters('Enable PowerFx Dataverse Integration (cat_EnablePowerFxDataverseIntegration)')",
+                                "item/WorkflowId": "@triggerOutputs()?['body/_cat_workflowinstance_value']"
                               },
                               "authentication": "@parameters('$authentication')"
                             }
@@ -211,42 +271,15 @@
                         "expression": {
                           "not": {
                             "equals": [
-                              "@first(body('Get_Next_Node')['value'])?['_cat_nodeduedaterequestdata_value']",
-                              "@null"
+                              "@triggerOutputs()?['body/cat_nodetype']",
+                              809060002
                             ]
                           }
                         },
                         "metadata": {
-                          "operationMetadataId": "1a00c0ed-9852-47e2-b33e-c31f59871939"
+                          "operationMetadataId": "00101c70-2979-4003-ac7c-cf75d15034ff"
                         },
                         "type": "If"
-                      },
-                      "Perform_an_unbound_action_to_Evaluate_Node_Message": {
-                        "runAfter": {
-                          "Condition": [
-                            "Succeeded",
-                            "Failed",
-                            "TimedOut"
-                          ]
-                        },
-                        "metadata": {
-                          "operationMetadataId": "662ab23e-663f-49d9-84ab-3b763dff9d76"
-                        },
-                        "type": "OpenApiConnection",
-                        "inputs": {
-                          "host": {
-                            "connectionName": "shared_commondataserviceforapps_1",
-                            "operationId": "PerformUnboundAction",
-                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                          },
-                          "parameters": {
-                            "actionName": "cat_EvaluateNodeMessage",
-                            "item/NodeId": "@first(body('Get_Next_Node')['value'])?['cat_businessapprovalruntimenodeid']",
-                            "item/WorkflowId": "@triggerOutputs()?['body/_cat_workflowinstance_value']",
-                            "item/EnableDataverse": "@parameters('Enable PowerFx Dataverse Integration (cat_EnablePowerFxDataverseIntegration)')"
-                          },
-                          "authentication": "@parameters('$authentication')"
-                        }
                       }
                     }
                   },
@@ -387,31 +420,48 @@
                     "actions": {
                       "If_next_node_NodeType_is_GoToStage": {
                         "actions": {
-                          "Create_new_Node_Instance_2": {
-                            "runAfter": {},
-                            "metadata": {
-                              "operationMetadataId": "5e796899-63ec-4e72-9c01-f52253016805"
+                          "If_Node_Type_is_not_equal_End_Workflow": {
+                            "actions": {
+                              "Create_new_Node_Instance_2": {
+                                "runAfter": {},
+                                "metadata": {
+                                  "operationMetadataId": "5e796899-63ec-4e72-9c01-f52253016805"
+                                },
+                                "type": "OpenApiConnection",
+                                "inputs": {
+                                  "host": {
+                                    "connectionName": "shared_commondataserviceforapps_1",
+                                    "operationId": "CreateRecord",
+                                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                  },
+                                  "parameters": {
+                                    "entityName": "cat_businessapprovalruntimenodeinstances",
+                                    "item/cat_instancestatus": 809060000,
+                                    "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodes(@{first(body('Get_Next_Node_2')['value'])['cat_businessapprovalruntimenodeid']})",
+                                    "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{triggerOutputs()?['body/_cat_stage_value']})",
+                                    "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stageinstance_value']})",
+                                    "item/cat_start": "@utcNow()",
+                                    "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
+                                    "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
+                                    "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
+                                  },
+                                  "authentication": "@parameters('$authentication')"
+                                }
+                              }
                             },
-                            "type": "OpenApiConnection",
-                            "inputs": {
-                              "host": {
-                                "connectionName": "shared_commondataserviceforapps_1",
-                                "operationId": "CreateRecord",
-                                "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                              },
-                              "parameters": {
-                                "entityName": "cat_businessapprovalruntimenodeinstances",
-                                "item/cat_instancestatus": 809060000,
-                                "item/cat_Node@odata.bind": "cat_businessapprovalruntimenodes(@{first(body('Get_Next_Node_2')['value'])['cat_businessapprovalruntimenodeid']})",
-                                "item/cat_Stage@odata.bind": "cat_businessapprovalruntimestages(@{triggerOutputs()?['body/_cat_stage_value']})",
-                                "item/cat_StageInstance@odata.bind": "cat_businessapprovalruntimestageinstances(@{triggerOutputs()?['body/_cat_stageinstance_value']})",
-                                "item/cat_start": "@utcNow()",
-                                "item/cat_WorkflowInstance@odata.bind": "cat_businessapprovalworkflows(@{triggerOutputs()?['body/_cat_workflowinstance_value']})",
-                                "item/cat_additionalinformation": "@triggerOutputs()?['body/cat_additionalinformation']",
-                                "item/cat_requestedby": "@triggerOutputs()?['body/cat_requestedby']"
-                              },
-                              "authentication": "@parameters('$authentication')"
-                            }
+                            "runAfter": {},
+                            "expression": {
+                              "not": {
+                                "equals": [
+                                  "@triggerOutputs()?['body/cat_nodetype']",
+                                  809060002
+                                ]
+                              }
+                            },
+                            "metadata": {
+                              "operationMetadataId": "00101c70-2979-4003-ac7c-cf75d15034ff"
+                            },
+                            "type": "If"
                           }
                         },
                         "runAfter": {},
@@ -527,22 +577,6 @@
           },
           "type": "Switch",
           "description": "Completed (809,060,002), Suspended (809,060,003), Canceled (809,060,004), Timed Out (809,060,005), Error (809,060,006)"
-        },
-        "varStageCompleted": {
-          "runAfter": {},
-          "metadata": {
-            "operationMetadataId": "b2041fd0-f463-48cf-a904-8f796f48b74f"
-          },
-          "type": "InitializeVariable",
-          "inputs": {
-            "variables": [
-              {
-                "name": "varStageCompleted",
-                "type": "boolean",
-                "value": "@false"
-              }
-            ]
-          }
         }
       }
     },

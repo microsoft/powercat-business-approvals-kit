@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.24052.212" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.24053.198" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>BusinessApprovalKit</UniqueName>
     <LocalizedNames>
@@ -282,24 +282,28 @@
         <Dependent type="300" schemaName="cat_homepagereimagined_709bf" displayName="Home page" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2405.2024)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2405.3013)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Instance Override" id="{3e0b29a6-5594-4248-99e0-b082a4520571}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2405.2024)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2405.3013)" />
         <Dependent type="60" displayName="Business Approval Instance Override quick create form" parentDisplayName="Business Approval Instance Override" id="{45ce6ace-a8a5-ec11-b3fe-0022486e17cc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2405.2024)" />
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2405.3013)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Work Profile" id="{8f99d74f-efa9-43fc-a2e5-4f6cbac8789f}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2405.2024)" />
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2405.3013)" />
         <Dependent type="60" displayName="Information" parentDisplayName="Business Approval Holiday Calendar" id="{22204bf0-25b0-4c88-92b9-1d2d751ffd2d}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2405.2024)" />
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2405.3013)" />
         <Dependent type="68" id="{227a813e-01cd-4a3c-8f52-96b5bafbdb0b}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="contoso_sharedcommondataserviceforapps_b6a8a" solution="Active" id.connectionreferencelogicalname="contoso_sharedcommondataserviceforapps_b6a8a" />
+        <Dependent type="29" displayName="BACore | Runtime - Start Node" id="{d0ccbebf-d08c-ec11-8d20-000d3a09d351}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="SettingDefinition" displayName="FluentThemingPreview" solution="msdyn_PowerAppsThemingSettings (1.0.0.11)" id.uniquename="FluentThemingPreview" />
