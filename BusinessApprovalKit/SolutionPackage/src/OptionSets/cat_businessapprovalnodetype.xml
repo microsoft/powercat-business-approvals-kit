@@ -18,5 +18,13 @@
         <label description="Go to Stage" languagecode="1033" />
       </labels>
     </option>
+    <option value="809060002">
+      <labels>
+        <label description="End Workflow" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
   </options>
 </optionset>
